@@ -1,0 +1,62 @@
+
+wxFreeChart version 1.0 alpha.
+
+Copyright (c) 2008 Moskvichev Andrey V.
+
+							Contents.
+I.   About.
+II.  Requirments.
+III. Chart types.
+IV.  Basic concepts.
+V.   Known issues.
+
+							I. About.
+	wxFreeChart is the free crossplatform chart library based on wxWidgets.
+
+	wxFreeChart licensed under wxWindows library license.
+
+							II. Requirments.
+	wxFreeChart requires wxWindows library version 2.8.0 or later (work with wxWidgets 2.6.x not tested).
+
+							III. Chart types.
+	wxFreeChart supports following types of charts:
+	1. Line or histogram charts based on xy coordinates.
+	2. Histogram category charts.
+	3. OHLC (Open-High-Low-Close) financial charts
+	4. Pie charts.
+	5. Date/Time based line or histogram charts.
+	6. Bubble charts, based on zyz coordinates.
+	7. Layered bar charts.
+	8. Stacked bar charts.
+	9. Statistical charts with std-deviations, etc.
+	10. Gantt charts.
+
+							IV. Basic concepts.
+		wxFreeChart is object-oriented charting library with model-controller-view design.
+	First class that you need is Chart. It contains plot, chart title, and other attributes. Chart
+	delegates drawing operations to Plot, Plot delegates to dataset renderers.
+	Plot class glues axes (if any), datasets, legend, data markers, etc.
+	Dataset classes contains data to be drawn. There are XY datasets, OHLC datasets, date/time datasets
+	(for data linked with date/time values), category datasets. They are only interface to get data values.
+	Data drawing performed by dataset renderers, like XYRenderers, OHLC renderers (Bars or candlesticks),
+	histogram renderers.
+		wxChartPanel is wxWidgets window containing chart.
+		Other classes include Legend, Marker, AreaBackground, ColorScheme, Symbol.
+	Legend performs legend drawing, contains attributes like, legend position, font, etc.
+	Marker is base class for data markers, like point markers, line markers, range markers. It is still
+	work in progress.
+	AreaBackground is helper class for drawing rectangular areas. It is used to draw chart, plot backgrounds,
+	bars in bar charts. GradientAreaBackground can be used to create gradient effects.
+	ColorScheme is colours collection for pie plots, etc.
+	Symbol is base class for symbols drawn on legends and xy points.
+
+	FIXME: write more.
+							V. Known issues.
+	- Work with wxWidgets 2.6.x not tested.
+	- I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
+	- Antialiasing doesn't works.
+	- Pie plots is very ugly, and must be cleaned up or rewritten.
+	- Transparency not implemented. Needed for area/histogram charts with overlaying areas/histograms, etc.
+	- Too much header files.
+
+	FIXME: write more.
