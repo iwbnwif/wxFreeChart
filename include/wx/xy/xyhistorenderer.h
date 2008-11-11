@@ -30,21 +30,21 @@ public:
 
 	virtual void DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
-	void SetBarArea(AreaBackground *_barArea)
+	void SetBarArea(AreaBackground *barArea)
 	{
-		SAFE_REPLACE(barArea, _barArea);
+		SAFE_REPLACE(m_barArea, barArea);
 		FireNeedRedraw();
 	}
 
 private:
 	void DrawBar(wxDC &dc, wxRect rcData, wxCoord x, wxCoord y);
 
-	int barWidth;
-	bool vertical;
+	int m_barWidth;
+	bool m_vertical;
 
-	wxCoord serieShift;
+	wxCoord m_serieShift;
 
-	AreaBackground *barArea;
+	AreaBackground *m_barArea;
 };
 
 #endif /*XYHISTORENDERER_H_*/

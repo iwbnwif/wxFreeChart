@@ -23,11 +23,11 @@ class XYLineRenderer : public XYRenderer
 public:
 	/**
 	 * Constructs new line renderer.
-	 * @param _drawSymbols specifies whether to draw symbols at line points
-	 * @param _defaultWidth specifies default width for lines
-	 * @param _defaultStyle specifies default style for lines
+	 * @param drawSymbols specifies whether to draw symbols at line points
+	 * @param defaultWidth specifies default width for lines
+	 * @param defaultStyle specifies default style for lines
 	 */
-	XYLineRenderer(bool _drawSymbols = false, int _defaultWidth = 1, int _defaultStyle = wxSOLID);
+	XYLineRenderer(bool drawSymbols = false, int defaultWidth = 1, int defaultStyle = wxSOLID);
 	virtual ~XYLineRenderer();
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
@@ -36,22 +36,22 @@ public:
 
 	void SetSerieSymbol(int serie, Symbol *symbol);
 
-private:
 	wxPen *GetSeriePen(int serie);
 
 	wxColour GetSerieColor(int serie);
 
 	Symbol *GetSerieSymbol(int serie);
 
+private:
 	void DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
-	bool drawSymbols;
+	bool m_drawSymbols;
 
-	PenMap seriePens;
-	SymbolMap serieSymbols;
+	PenMap m_seriePens;
+	SymbolMap m_serieSymbols;
 
-	int defaultWidth;
-	int defaultStyle;
+	int m_defaultPenWidth;
+	int m_defaultPenStyle;
 };
 
 #endif /*XYLINERENDERER_H_*/

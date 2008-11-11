@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	marker.h
 // Purpose:
@@ -22,7 +21,6 @@ public:
 
 	virtual void Draw(wxDC &dc, wxRect rcData) = 0;
 };
-
 
 class LineMarker
 {

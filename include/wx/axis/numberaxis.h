@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	numberaxis.h
-// Purpose:
+// Purpose: Number axis declaration.
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -29,9 +28,9 @@ public:
 	 * Sets format for tick marks.
 	 * @param _tickFormat tick format
 	 */
-	void SetTickFormat(const wxString &_tickFormat)
+	void SetTickFormat(const wxString &tickFormat)
 	{
-		tickFormat = _tickFormat;
+		m_tickFormat = tickFormat;
 		FireNeedRedraw();
 	}
 
@@ -39,19 +38,19 @@ public:
 	 * Set whether to use integer values instead of doubles.
 	 * @param _intValues if true than use integer values, false - double values
 	 */
-	void IntegerValues(bool _intValues = true)
+	void IntegerValues(bool intValues = true)
 	{
-		intValues = _intValues;
+		m_intValues = intValues;
 		// TODO recalc tick steps
 		FireNeedRedraw();
 	}
 
 	/**
 	 * Make data bounds fixed.
-	 * @param min minimal data value
-	 * @param max maximal data value
+	 * @param minValue minimal data value
+	 * @param maxValue maximal data value
 	 */
-	void FixedBounds(double _minValue, double _maxValue);
+	void SetFixedBounds(double minValue, double maxValue);
 
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);
@@ -65,29 +64,29 @@ protected:
 
 	virtual bool IsEnd(int step);
 
-	virtual bool HasTicks();
+	virtual bool HasLabels();
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
 
 private:
-	void DrawTicks(wxDC &dc, wxRect &rc);
-	void DrawBorderLine(wxDC &dc, wxRect &rc);
+	void UpdateTickValues();
 
-	wxString tickFormat;
+	wxString m_tickFormat;
 
-	double minValue;
-	double maxValue;
+	double m_minValue;
+	double m_maxValue;
 
-	double minorTick;
-	double majorTick;
+	double m_minorTick;
+	double m_majorTick;
 
-	bool intValues;
+	int m_stepCount;
+	bool m_intValues;
 
-	bool hasTicks;
+	bool m_hasTicks;
 
-	bool fixedBounds;
+	bool m_fixedBounds;
 };
 
 #endif /*NUMBERAXIS_H_*/

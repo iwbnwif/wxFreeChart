@@ -65,9 +65,9 @@ public:
 	 * Sets plot background.
 	 * @param _background new background for plot
 	 */
-	void SetBackground(AreaBackground *_background)
+	void SetBackground(AreaBackground *background)
 	{
-		background = _background;
+		m_background = background;
 		FirePlotNeedRedraw();
 	}
 
@@ -90,10 +90,10 @@ protected:
 	FIRE_WITH_THIS(PlotNeedRedraw);
 
 private:
-	wxFont textNoDataFont;
-	wxString textNoData;
+	wxFont m_textNoDataFont;
+	wxString m_textNoData;
 
-	AreaBackground *background;
+	AreaBackground *m_background;
 };
 
 #endif /*PLOT_H_*/

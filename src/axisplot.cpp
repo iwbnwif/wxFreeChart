@@ -22,31 +22,31 @@
 
 AxisPlot::AxisPlot()
 {
-	horizontalAxes.NotOwns();
-	verticalAxes.NotOwns();
+	m_horizontalAxes.NotOwns();
+	m_verticalAxes.NotOwns();
 
-	drawGridVertical = true;
-	drawGridHorizontal = true;
+	m_drawGridVertical = true;
+	m_drawGridHorizontal = true;
 
-	legend = NULL;
-	dataBackground = NULL;
+	m_legend = NULL;
+	m_dataBackground = NULL;
 	SetDataBackground(new FillAreaBackground());
 }
 
 AxisPlot::~AxisPlot()
 {
-	for (int n = 0; n < datasets.GetSize(); n++) {
-		datasets[n]->RemoveObserver(this);
+	for (int n = 0; n < m_datasets.GetSize(); n++) {
+		m_datasets[n]->RemoveObserver(this);
 	}
 
-	SAFE_REMOVE_OBSERVER(this, dataBackground);
-	SAFE_DELETE(dataBackground);
+	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
+	SAFE_DELETE(m_dataBackground);
 }
 
-void AxisPlot::SetDataBackground(AreaBackground *_dataBackground)
+void AxisPlot::SetDataBackground(AreaBackground *dataBackground)
 {
-	SAFE_REPLACE_OBSERVER(this, dataBackground, _dataBackground);
-	SAFE_REPLACE(dataBackground, _dataBackground);
+	SAFE_REPLACE_OBSERVER(this, m_dataBackground, dataBackground);
+	SAFE_REPLACE(m_dataBackground, dataBackground);
 }
 
 void AxisPlot::AddAxis(Axis *axis)
@@ -58,20 +58,20 @@ void AxisPlot::AddAxis(Axis *axis)
 
 	switch (axis->GetLocation()) {
 	case AXIS_LEFT:
-		leftAxes.Add(axis);
-		verticalAxes.Add(axis);
+		m_leftAxes.Add(axis);
+		m_verticalAxes.Add(axis);
 		break;
 	case AXIS_RIGHT:
-		rightAxes.Add(axis);
-		verticalAxes.Add(axis);
+		m_rightAxes.Add(axis);
+		m_verticalAxes.Add(axis);
 		break;
 	case AXIS_TOP:
-		topAxes.Add(axis);
-		horizontalAxes.Add(axis);
+		m_topAxes.Add(axis);
+		m_horizontalAxes.Add(axis);
 		break;
 	case AXIS_BOTTOM:
-		bottomAxes.Add(axis);
-		horizontalAxes.Add(axis);
+		m_bottomAxes.Add(axis);
+		m_horizontalAxes.Add(axis);
 		break;
 	default:
 		// BUG!
@@ -84,7 +84,7 @@ void AxisPlot::AddAxis(Axis *axis)
 
 bool AxisPlot::HasData()
 {
-	return datasets.GetSize() != 0;
+	return m_datasets.GetSize() != 0;
 }
 
 void AxisPlot::AddDataset(Dataset *dataset)
@@ -94,55 +94,61 @@ void AxisPlot::AddDataset(Dataset *dataset)
 		return ;
 	}
 
-	datasets.Add(dataset);
+	m_datasets.Add(dataset);
 	dataset->AddObserver(this);
 	FirePlotNeedRedraw();
 }
 
 int AxisPlot::GetDatasetCount()
 {
-	return datasets.GetSize();
+	return m_datasets.GetSize();
 }
 
 Dataset *AxisPlot::GetDataset(int index)
 {
-	return datasets[index];
+	return m_datasets[index];
 }
 
 void AxisPlot::LinkDataHorizontalAxis(int nData, int nAxis)
 {
-	CHECK_INDEX(wxT("data"), nData, datasets);
-	CHECK_INDEX(wxT("horizontal axis"), nAxis, horizontalAxes);
+	CHECK_INDEX(wxT("data"), nData, m_datasets);
+	CHECK_INDEX(wxT("horizontal axis"), nAxis, m_horizontalAxes);
 
-	links.Add(new DataAxisLink(datasets[nData], horizontalAxes[nAxis]));
-	horizontalAxes[nAxis]->AddDataset(datasets[nData]);
+	m_links.Add(new DataAxisLink(m_datasets[nData], m_horizontalAxes[nAxis]));
+	m_horizontalAxes[nAxis]->AddDataset(m_datasets[nData]);
 
-	UpdateAxis(datasets[nData]);
-	FirePlotNeedRedraw();
+	//UpdateAxis(m_datasets[nData]);
+	m_horizontalAxes[nAxis]->UpdateBounds();
+
+	// redundant
+	//FirePlotNeedRedraw();
 }
 
 void AxisPlot::LinkDataVerticalAxis(int nData, int nAxis)
 {
-	CHECK_INDEX(wxT("data"), nData, datasets);
-	CHECK_INDEX(wxT("vertical axis"), nAxis, verticalAxes);
+	CHECK_INDEX(wxT("data"), nData, m_datasets);
+	CHECK_INDEX(wxT("vertical axis"), nAxis, m_verticalAxes);
 
-	links.Add(new DataAxisLink(datasets[nData], verticalAxes[nAxis]));
-	verticalAxes[nAxis]->AddDataset(datasets[nData]);
+	m_links.Add(new DataAxisLink(m_datasets[nData], m_verticalAxes[nAxis]));
+	m_verticalAxes[nAxis]->AddDataset(m_datasets[nData]);
 
-	UpdateAxis(datasets[nData]);
-	FirePlotNeedRedraw();
+	//UpdateAxis(m_datasets[nData]);
+	m_verticalAxes[nAxis]->UpdateBounds();
+
+	// redundant
+	//FirePlotNeedRedraw();
 }
 
-void AxisPlot::SetLegend(Legend *_legend)
+void AxisPlot::SetLegend(Legend *legend)
 {
-	SAFE_REPLACE(legend, _legend);
+	SAFE_REPLACE(m_legend, legend);
 	FirePlotNeedRedraw();
 }
 
 void AxisPlot::UpdateAxis(Dataset *dataset)
 {
-	for (int nLink = 0; nLink < links.GetSize(); nLink++) {
-		DataAxisLink *link = links[nLink];
+	for (int nLink = 0; nLink < m_links.GetSize(); nLink++) {
+		DataAxisLink *link = m_links[nLink];
 
 		if (dataset == NULL || link->dataset == dataset) {
 			link->axis->UpdateBounds();
@@ -155,25 +161,25 @@ void AxisPlot::NeedRedraw(DrawObject *obj)
 	FirePlotNeedRedraw();
 }
 
-void AxisPlot::SetDrawGrid(bool _drawGridVertical, bool _drawGridHorizontal)
+void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
 {
-	drawGridVertical = _drawGridVertical;
-	drawGridHorizontal = _drawGridHorizontal;
+	m_drawGridVertical = drawGridVertical;
+	m_drawGridHorizontal = drawGridHorizontal;
 
 	FirePlotNeedRedraw();
 }
 
 void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
 {
-	if (drawGridVertical) {
-		for (int nAxis = 0; nAxis < verticalAxes.GetSize(); nAxis++) {
-			verticalAxes[nAxis]->DrawGridLines(dc, rc);
+	if (m_drawGridVertical) {
+		for (int nAxis = 0; nAxis < m_verticalAxes.GetSize(); nAxis++) {
+			m_verticalAxes[nAxis]->DrawGridLines(dc, rc);
 		}
 	}
 
-	if (drawGridHorizontal) {
-		for (int nAxis = 0; nAxis < horizontalAxes.GetSize(); nAxis++) {
-			horizontalAxes[nAxis]->DrawGridLines(dc, rc);
+	if (m_drawGridHorizontal) {
+		for (int nAxis = 0; nAxis < m_horizontalAxes.GetSize(); nAxis++) {
+			m_horizontalAxes[nAxis]->DrawGridLines(dc, rc);
 		}
 	}
 }
@@ -181,8 +187,8 @@ void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
 Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
 {
 	// TODO deprecated - don't use DataAxisLink
-	for (int nLink = 0; nLink < links.GetSize(); nLink++) {
-		DataAxisLink *link = links[nLink];
+	for (int nLink = 0; nLink < m_links.GetSize(); nLink++) {
+		DataAxisLink *link = m_links[nLink];
 
 		if (link->dataset == dataset) {
 			if (vertical == link->axis->IsVertical()) {
@@ -212,33 +218,33 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 {
 	rcData = rc;
 
-	if (leftAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &leftAxes);
+	if (m_leftAxes.GetSize() != 0) {
+		wxCoord ext = CountAxesExtent(dc, &m_leftAxes);
 
 		rcData.x += ext;
 		rcData.width -= ext;
 	}
-	if (rightAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &rightAxes);
+	if (m_rightAxes.GetSize() != 0) {
+		wxCoord ext = CountAxesExtent(dc, &m_rightAxes);
 
 		rcData.width -= ext;
 	}
-	if (topAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &topAxes);
+	if (m_topAxes.GetSize() != 0) {
+		wxCoord ext = CountAxesExtent(dc, &m_topAxes);
 
 		rcData.y += ext;
 		rcData.height -= ext;
 	}
-	if (bottomAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &bottomAxes);
+	if (m_bottomAxes.GetSize() != 0) {
+		wxCoord ext = CountAxesExtent(dc, &m_bottomAxes);
 
 		rcData.height -= ext;
 	}
 
-	if (legend != NULL) {
-		wxSize legendExtent = legend->GetExtent(dc, datasets);
+	if (m_legend != NULL) {
+		wxSize legendExtent = m_legend->GetExtent(dc, m_datasets);
 
-		switch (legend->GetHorizPosition()) {
+		switch (m_legend->GetHorizPosition()) {
 		case wxLEFT:
 			rcLegend.x = rcData.x;
 
@@ -259,7 +265,7 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 		}
 
 
-		switch (legend->GetVertPosition()) {
+		switch (m_legend->GetVertPosition()) {
 		case wxTOP:
 			rcLegend.y = rcData.y;
 
@@ -316,28 +322,28 @@ void AxisPlot::DrawAxesArray(Array<Axis, 1> *axes, bool vertical, wxDC &dc, wxRe
 
 void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
 {
-	if (leftAxes.GetSize() != 0) {
+	if (m_leftAxes.GetSize() != 0) {
 		wxRect rcLeftAxes(rc.x, rcData.y, (rcData.x - rc.x), rcData.height);
-		DrawAxesArray(&leftAxes, true, dc, rcLeftAxes);
+		DrawAxesArray(&m_leftAxes, true, dc, rcLeftAxes);
 	}
-	if (rightAxes.GetSize() != 0) {
+	if (m_rightAxes.GetSize() != 0) {
 		wxRect rcRightAxes(rcData.x + rcData.width, rcData.y, (rc.x + rc.width - rcData.x - rcData.width), rcData.height);
-		DrawAxesArray(&rightAxes, true, dc, rcRightAxes);
+		DrawAxesArray(&m_rightAxes, true, dc, rcRightAxes);
 	}
-	if (topAxes.GetSize() != 0) {
+	if (m_topAxes.GetSize() != 0) {
 		wxRect rcTopAxes(rcData.x, rc.y, rcData.width, (rcData.y - rc.y));
-		DrawAxesArray(&topAxes, false, dc, rcTopAxes);
+		DrawAxesArray(&m_topAxes, false, dc, rcTopAxes);
 	}
-	if (bottomAxes.GetSize() != 0) {
+	if (m_bottomAxes.GetSize() != 0) {
 		wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height, rcData.width, (rc.y + rc.height - rcData.y - rcData.height));
-		DrawAxesArray(&bottomAxes, false, dc, rcBottomAxes);
+		DrawAxesArray(&m_bottomAxes, false, dc, rcBottomAxes);
 	}
 }
 
 void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
 {
-	if (legend != NULL) {
-		legend->Draw(dc, rcLegend, datasets);
+	if (m_legend != NULL) {
+		m_legend->Draw(dc, rcLegend, m_datasets);
 	}
 }
 
@@ -356,7 +362,7 @@ void AxisPlot::DrawData(wxDC &dc, wxRect rc)
 
 	CalcDataArea(dc, rc, rcData, rcLegend);
 
-	dataBackground->Draw(dc, rcData);
+	m_dataBackground->Draw(dc, rcData);
 
 	DrawAxes(dc, rc, rcData);
 

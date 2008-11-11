@@ -15,12 +15,12 @@
 LabelAxis::LabelAxis(AXIS_LOCATION location)
 : Axis(location)
 {
-	tickLabelsColor = *wxBLACK; // defaults
-	tickFont = *wxSMALL_FONT;
-	tickPen = *wxBLACK_PEN;
-
-	marginMin = 5;
-	marginMax = 5;
+	// defaults
+	m_labelColour = *wxBLACK;
+	m_labelFont = *wxSMALL_FONT;
+	m_labelPen = *wxBLACK_PEN;
+	m_marginMin = 5;
+	m_marginMax = 5;
 }
 
 LabelAxis::~LabelAxis()
@@ -30,61 +30,86 @@ LabelAxis::~LabelAxis()
 wxCoord LabelAxis::GetExtent(wxDC &dc)
 {
 	wxSize maxTextExtent = GetLongestLabelExtent(dc);
+	wxCoord extent = labelLineSize + labelGap;
+
 	if (IsVertical()) {
-		return tickSize + tickLabelGap + maxTextExtent.x;
+		extent += maxTextExtent.x;
 	}
 	else {
-		return tickSize + tickLabelGap + maxTextExtent.y;
+		extent += maxTextExtent.y;
 	}
+	return extent;
 }
 
-void LabelAxis::DrawTick(wxDC &dc, wxRect rc, wxString label, double value)
+void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double value)
 {
 	wxSize labelExtent = dc.GetTextExtent(label);
 
+	wxCoord x, y;
+	wxCoord textX, textY;
+	wxCoord lineX1, lineY1;
+	wxCoord lineX2, lineY2;
+
 	if (IsVertical()) {
-		wxCoord y = ToGraphics(dc, rc.y, rc.height, value);
+		y = ToGraphics(dc, rc.y, rc.height, value);
+		textY = y - labelExtent.GetHeight() / 2;
+
+		lineY1 = lineY2 = y;
 
 		switch (GetLocation()) {
 		case AXIS_LEFT:
-			dc.DrawLine(rc.x + rc.width - tickSize, y, rc.x + rc.width, y);
-			dc.DrawText(label, rc.x + rc.width - tickSize - labelExtent.GetWidth() - tickLabelGap, y - labelExtent.GetHeight() / 2);
+			lineX1 = rc.x + rc.width - labelLineSize;
+			lineX2 = rc.x + rc.width;
+
+			textX = rc.x + rc.width - labelLineSize - labelExtent.GetWidth() - labelGap;
 			break;
 		case AXIS_RIGHT:
-			dc.DrawLine(rc.x, y, rc.x + tickSize, y);
-			dc.DrawText(label, rc.x + tickSize + tickLabelGap, y - labelExtent.GetHeight() / 2);
+			lineX1 = rc.x;
+			lineX2 = rc.x + labelLineSize;
+
+			textX = rc.x + labelLineSize + labelGap;
 			break;
 		default:
-			break;
+			return ; // BUG
 		}
 	}
 	else {
-		wxCoord x = ToGraphics(dc, rc.x, rc.width, value);
+		x = ToGraphics(dc, rc.x, rc.width, value);
+
+		textX = x - labelExtent.GetWidth() / 2;
+		lineY1 = lineY2 = y;
 
 		switch (GetLocation()) {
 		case AXIS_TOP:
-			dc.DrawLine(x, rc.y + rc.height - tickSize, x, rc.y + rc.height);
-			dc.DrawText(label, x - labelExtent.GetWidth() / 2, rc.y + rc.height - tickSize - labelExtent.GetHeight() - tickLabelGap);
+			lineY1 = rc.y + rc.height - labelLineSize;
+			lineY2 = rc.y + rc.height;
+
+			textY = rc.y + rc.height - labelLineSize - labelExtent.GetHeight() - labelGap;
 			break;
 		case AXIS_BOTTOM:
-			dc.DrawLine(x, rc.y, x, rc.y + tickSize);
-			dc.DrawText(label, x - labelExtent.GetWidth() / 2, rc.y + tickSize + tickLabelGap);
+			lineY1 = rc.y;
+			lineY2 = rc.y + labelLineSize;
+
+			textY = rc.y + labelLineSize + labelGap;
 			break;
 		default:
-			break;
+			return ; // BUG
 		}
 	}
+
+	dc.DrawLine(lineX1, lineY1, lineX2, lineY2);
+	dc.DrawText(label, textX, textY);
 }
 
-void LabelAxis::DrawTicks(wxDC &dc, wxRect rc)
+void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 {
-	if (!HasTicks())
+	if (!HasLabels())
 		return ;
 
 	// setup dc objects for tick labels and lines
-	dc.SetFont(tickFont);
-	dc.SetPen(tickPen);
-	dc.SetTextForeground(tickLabelsColor);
+	dc.SetFont(m_labelFont);
+	dc.SetPen(m_labelPen);
+	dc.SetTextForeground(m_labelColour);
 
 	wxString label;
 	for (int nStep = 0; ; nStep++) {
@@ -95,31 +120,47 @@ void LabelAxis::DrawTicks(wxDC &dc, wxRect rc)
 		GetLabel(nStep, label);
 
 		double value = GetValue(nStep);
-		DrawTick(dc, rc, label, value);
+		DrawLabel(dc, rc, label, value);
 	}
 }
 
 void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
 {
+	wxCoord x1, y1;
+	wxCoord x2, y2;
+
 	switch (GetLocation()) {
 		case AXIS_LEFT:
-			dc.DrawLine(rc.x + rc.width, rc.y, rc.x + rc.width, rc.y + rc.height);
+			x1 = x2 = rc.x + rc.width;
+			y1 = rc.y;
+			y2 = rc.y + rc.height;
 			break;
 		case AXIS_RIGHT:
-			dc.DrawLine(rc.x, rc.y, rc.x, rc.y + rc.height);
+			x1 = x2 = rc.x;
+			y1 = rc.y;
+			y2 = rc.y + rc.height;
 			break;
 		case AXIS_TOP:
-			dc.DrawLine(rc.x, rc.y + rc.height, rc.x + rc.width, rc.y + rc.height);
+			x1 = rc.x;
+			x2 = rc.x + rc.width;
+			y1 = y2 = rc.y + rc.height;
 			break;
 		case AXIS_BOTTOM:
-			dc.DrawLine(rc.x, rc.y, rc.x + rc.width, rc.y);
+			x1 = rc.x;
+			x2 = rc.x + rc.width;
+			y1 = y2 = rc.y;
 			break;
+		default:
+			return ; // BUG
 	}
+
+	dc.DrawLine(x1, y1, x2, y2);
 }
+
 wxCoord LabelAxis::ToGraphics(wxDC &dc, int minG, int range, double value)
 {
-	minG += marginMin;
-	range -= (marginMin + marginMax);
+	minG += m_marginMin;
+	range -= (m_marginMin + m_marginMax);
 	if (range < 0)
 		range = 0;
 
@@ -128,10 +169,10 @@ wxCoord LabelAxis::ToGraphics(wxDC &dc, int minG, int range, double value)
 
 void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 {
-	if (!HasTicks())
+	if (!HasLabels())
 		return ;
 
-	dc.SetPen(gridLinesPen);
+	dc.SetPen(m_gridLinesPen);
 
 	for (int nStep = 0; ; nStep++) {
 		if (IsEnd(nStep))
@@ -154,11 +195,11 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 
 void LabelAxis::Draw(wxDC &dc, wxRect rc)
 {
-	DrawTicks(dc, rc);
+	DrawLabels(dc, rc);
 	DrawBorderLine(dc, rc);
 }
 
-bool LabelAxis::HasTicks()
+bool LabelAxis::HasLabels()
 {
 	return true;
 }

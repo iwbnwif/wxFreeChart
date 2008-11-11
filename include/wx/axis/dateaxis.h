@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	dateaxis.h
-// Purpose:
+// Purpose: Date/time axis declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -25,9 +24,13 @@ public:
 
 	virtual void UpdateBounds();
 
-	void SetDateFormat(wxString _dateFormat)
+	/**
+	 * Sets date format for date labels.
+	 * @param dateFormat date format in strftime style
+	 */
+	void SetDateFormat(const wxString &dateFormat)
 	{
-		dateFormat = _dateFormat;
+		m_dateFormat = dateFormat;
 		FireNeedRedraw();
 	}
 
@@ -48,9 +51,9 @@ protected:
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
 
 private:
-	int dateCount;
+	int m_dateCount;
 
-	wxString dateFormat;
+	wxString m_dateFormat;
 };
 
 #endif /*DATEAXIS_H_*/

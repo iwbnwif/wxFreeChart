@@ -17,10 +17,8 @@
 
 /**
  * Vector implementation of XYDataset.
+ * Where is y values specified, and X values is an index (0....Count)
  * Allows y data addition and removal.
- * Can be in auto or manual update mode.
- *
- * X values is the index (0....Count)
  */
 class VectorDataset : public XYDataset
 {

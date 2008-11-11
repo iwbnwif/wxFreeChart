@@ -53,7 +53,7 @@ public:
 class FillAreaBackground : public AreaBackground
 {
 public:
-	FillAreaBackground(wxPen _borderPen = (wxPen) *wxBLACK_PEN, wxBrush _fillBrush =  (wxBrush) *wxWHITE_BRUSH);
+	FillAreaBackground(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
 
 	virtual ~FillAreaBackground();
 
@@ -61,27 +61,27 @@ public:
 
 	/**
 	 * Sets border len.
-	 * @param _borderPen border pen
+	 * @param borderPen border pen
 	 */
-	void SetBorderPen(wxPen _borderPen)
+	void SetBorderPen(wxPen borderPen)
 	{
-		borderPen = _borderPen;
+		m_borderPen = borderPen;
 		FireNeedRedraw();
 	}
 
 	/**
 	 * Sets fill brush.
-	 * @param _fillBrush fill brush
+	 * @param fillBrush fill brush
 	 */
-	void SetFillBrush(wxBrush _fillBrush)
+	void SetFillBrush(wxBrush fillBrush)
 	{
-		fillBrush = _fillBrush;
+		m_fillBrush = fillBrush;
 		FireNeedRedraw();
 	}
 
 private:
-	wxBrush fillBrush;
-	wxPen borderPen;
+	wxBrush m_fillBrush;
+	wxPen m_borderPen;
 };
 
 /**
@@ -92,15 +92,15 @@ class GradientAreaBackground : public AreaBackground
 public:
 	/**
 	 * Constructs new gradient area background.
-	 * @param _borderPen pen to draw border
-	 * @param _colour1 first gradient fill color
-	 * @param _colour2 second gradient fill color
-	 * @param _dir gradient fill direction
+	 * @param borderPen pen to draw border
+	 * @param colour1 first gradient fill color
+	 * @param colour2 second gradient fill color
+	 * @param dir gradient fill direction
 	 */
-	GradientAreaBackground(wxPen _borderPen = *wxBLACK_PEN,
-			wxColour _colour1 = wxColour(200, 220, 250),
-			wxColour _colour2 = wxColour(255, 255, 255),
-			wxDirection _dir = wxEAST);
+	GradientAreaBackground(wxPen borderPen = *wxBLACK_PEN,
+			wxColour colour1 = wxColour(200, 220, 250),
+			wxColour colour2 = wxColour(255, 255, 255),
+			wxDirection dir = wxEAST);
 
 	virtual ~GradientAreaBackground();
 
@@ -108,11 +108,11 @@ public:
 
 	/**
 	 * Sets gradient fill first color.
-	 * @param _colour1 first color
+	 * @param colour1 first color
 	 */
-	void SetColour1(wxColour _colour1)
+	void SetColour1(wxColour colour1)
 	{
-		colour1 = _colour1;
+		m_colour1 = colour1;
 		FireNeedRedraw();
 	}
 
@@ -120,9 +120,9 @@ public:
 	 * Sets gradient fill second color.
 	 * @param _colour2 second color
 	 */
-	void SetColour2(wxColour _colour2)
+	void SetColour2(wxColour colour2)
 	{
-		colour2 = _colour2;
+		m_colour2 = colour2;
 		FireNeedRedraw();
 	}
 
@@ -130,18 +130,18 @@ public:
 	 * Sets gradient fill direction.
 	 * @param _dir direction
 	 */
-	void SetDirection(wxDirection _dir)
+	void SetDirection(wxDirection dir)
 	{
-		dir = _dir;
+		m_dir = dir;
 		FireNeedRedraw();
 	}
 
 private:
-	wxPen borderPen;
+	wxPen m_borderPen;
 
-	wxColour colour1;
-	wxColour colour2;
-	wxDirection dir;
+	wxColour m_colour1;
+	wxColour m_colour2;
+	wxDirection m_dir;
 };
 
 #endif /*AREABACKGROUND_H_*/

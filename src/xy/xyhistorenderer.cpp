@@ -11,38 +11,38 @@
 
 #include <wx/xy/xyhistorenderer.h>
 
-XYHistoRenderer::XYHistoRenderer(int _barWidth, bool _vertical)
+XYHistoRenderer::XYHistoRenderer(int barWidth, bool vertical)
 {
-	barWidth = _barWidth;
-	vertical = _vertical;
-	serieShift = barWidth + 2; // XXX temporary!
+	m_barWidth = barWidth;
+	m_vertical = vertical;
+	m_serieShift = barWidth + 2; // XXX temporary!
 
-	barArea = new FillAreaBackground(*wxBLACK_PEN, *wxRED_BRUSH);
+	m_barArea = new FillAreaBackground(*wxBLACK_PEN, *wxRED_BRUSH);
 }
 
 XYHistoRenderer::~XYHistoRenderer()
 {
-	SAFE_DELETE(barArea);
+	SAFE_DELETE(m_barArea);
 }
 
 void XYHistoRenderer::DrawBar(wxDC &dc, wxRect rcData, wxCoord x, wxCoord y)
 {
 	wxRect rcBar;
 
-	if (vertical) {
-		rcBar.x = x - barWidth / 2;
+	if (m_vertical) {
+		rcBar.x = x - m_barWidth / 2;
 		rcBar.y = y;
-		rcBar.width = barWidth;
+		rcBar.width = m_barWidth;
 		rcBar.height = rcData.height - y + rcData.y;
 	}
 	else {
 		rcBar.x = rcData.x;
-		rcBar.y = y - barWidth / 2;
+		rcBar.y = y - m_barWidth / 2;
 		rcBar.width = x - rcData.x;
-		rcBar.height = barWidth;
+		rcBar.height = m_barWidth;
 	}
 
-	barArea->Draw(dc, rcBar);
+	m_barArea->Draw(dc, rcBar);
 }
 
 void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
@@ -52,8 +52,8 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 	wxCoord xShift = 0;
 	wxCoord yShift = 0;
 
-	wxCoord c0 = (serieShift - 1) * serieCount / 2 - barWidth / 2;
-	if (vertical) {
+	wxCoord c0 = (m_serieShift - 1) * serieCount / 2 - m_barWidth / 2;
+	if (m_vertical) {
 		xShift -= c0;
 	}
 	else {
@@ -66,7 +66,7 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 			double xVal;
 			double yVal;
 
-			if (vertical) {
+			if (m_vertical) {
 				xVal = dataset->GetX(n, serie);
 				yVal = dataset->GetY(n, serie);
 			}
@@ -84,11 +84,11 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 			DrawBar(dc, rc, x, y);
 		}
 
-		if (vertical) {
-			xShift += serieShift;
+		if (m_vertical) {
+			xShift += m_serieShift;
 		}
 		else {
-			yShift += serieShift;
+			yShift += m_serieShift;
 		}
 	}
 }

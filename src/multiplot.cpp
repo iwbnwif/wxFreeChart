@@ -11,47 +11,47 @@
 
 #include <wx/multiplot.h>
 
-MultiPlot::MultiPlot(int _rows, int _cols, wxCoord _horizGap, wxCoord _vertGap)
+#define FOREACH_SUBPLOT(index, subPlots) \
+	for (int index = 0; n < subPlots.GetSize(); n++)
+
+MultiPlot::MultiPlot(int rows, int cols, wxCoord horizGap, wxCoord vertGap)
 {
-	rows = _rows;
-	cols = _cols;
-	horizGap = _horizGap;
-	vertGap = _vertGap;
+	m_rows = rows;
+	m_cols = cols;
+	m_horizGap = horizGap;
+	m_vertGap = vertGap;
 }
 
 MultiPlot::~MultiPlot()
 {
 }
 
-void MultiPlot::PlotNeedRedraw(Plot *_plot)
+void MultiPlot::PlotNeedRedraw(Plot *plot)
 {
 	FirePlotNeedRedraw();
 }
 
 bool MultiPlot::HasData()
 {
-	return (subPlots.GetSize() != 0);
+	return (m_subPlots.GetSize() != 0);
 }
 
 void MultiPlot::DrawData(wxDC &dc, wxRect rc)
 {
-	wxCHECK_RET(rows != 0 || cols != 0, wxT("row and column count = 0"));
+	wxCHECK_RET(m_rows != 0 || m_cols != 0, wxT("row and column count = 0"));
 
-	int row = 0;
-	int col = 0;
-
-	int _rows = rows;
-	int _cols = cols;
+	int rows = m_rows;
+	int cols = m_cols;
 	bool vertical = false;
 
-	if (_cols == 0) {
-		_cols = 1;
+	if (cols == 0) {
+		cols = 1;
 
 		int row = 0;
-		for (int n = 0; n < subPlots.GetSize(); n++) {
-			if (row >= _rows) {
+		FOREACH_SUBPLOT(n, m_subPlots) {
+			if (row >= rows) {
 				row = 0;
-				_cols++;
+				cols++;
 			}
 			row++;
 		}
@@ -59,61 +59,63 @@ void MultiPlot::DrawData(wxDC &dc, wxRect rc)
 		vertical = true;
 	}
 	if (rows == 0) {
-		_rows = 1;
+		rows = 1;
 
 		int col = 0;
-		for (int n = 0; n < subPlots.GetSize(); n++) {
-			if (col >= _cols) {
+		FOREACH_SUBPLOT(n, m_subPlots) {
+			if (col >= cols) {
 				col = 0;
 
-				_rows++;
+				rows++;
 			}
 			col++;
 		}
 	}
 
-	wxCoord subWidth = (rc.width - (_cols - 1) * horizGap) / _cols;
-	wxCoord subHeight = (rc.height - (_rows - 1) * vertGap) / _rows;
+	wxCoord subWidth = (rc.width - (cols - 1) * m_horizGap) / cols;
+	wxCoord subHeight = (rc.height - (rows - 1) * m_vertGap) / rows;
 
 	wxCoord x = rc.x;
 	wxCoord y = rc.y;
 
-	for (int n = 0; n < subPlots.GetSize(); n++) {
+	int row = 0;
+	int col = 0;
+	FOREACH_SUBPLOT(n, m_subPlots) {
 		// TODO untested!
 		if (vertical) {
-			if (row >= _rows) {
+			if (row >= rows) {
 				row = 0;
 				y = rc.y;
-				x += subWidth + horizGap;
+				x += subWidth + m_horizGap;
 
 				col++;
-				if (col >= _cols)
+				if (col >= cols)
 					break;
 			}
 		}
 		else {
-			if (col >= _cols) {
+			if (col >= cols) {
 				col = 0;
 				x = rc.x;
-				y += subHeight + vertGap;
+				y += subHeight + m_vertGap;
 
 				row++;
-				if (row >= _rows)
+				if (row >= rows)
 					break;
 			}
 		}
 
 		wxRect subRc(x, y, subWidth, subHeight);
 
-		subPlots[n]->Draw(dc, subRc);
+		m_subPlots[n]->Draw(dc, subRc);
 
 		if (vertical) {
 			row++;
-			y += subHeight + vertGap;
+			y += subHeight + m_vertGap;
 		}
 		else {
 			col++;
-			x += subWidth + horizGap;
+			x += subWidth + m_horizGap;
 		}
 	}
 }

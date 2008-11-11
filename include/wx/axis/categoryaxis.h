@@ -42,8 +42,8 @@ protected:
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
 
 private:
-	int categoryCount;
-	wxString longestCategory;
+	int m_categoryCount;
+	wxString m_longestCategory;
 };
 
 #endif /*CATEGORYAXIS_H_*/

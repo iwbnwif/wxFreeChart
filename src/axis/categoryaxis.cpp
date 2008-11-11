@@ -28,19 +28,19 @@ bool CategoryAxis::AcceptDataset(Dataset *dataset)
 	// dataset
 	//
 	return ((dynamic_cast<CategoryDataset *>(dataset) != 0)
-		&& datasets.GetSize() == 0);
+		&& m_datasets.GetSize() == 0);
 }
 
 wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)
 {
-	return dc.GetTextExtent(longestCategory);
+	return dc.GetTextExtent(m_longestCategory);
 }
 
 wxCoord CategoryAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 {
-	wxSize maxTextExtent = dc.GetTextExtent(longestCategory);
+	wxSize maxTextExtent = dc.GetTextExtent(m_longestCategory);
 
-	double maxValue = categoryCount - 1;
+	double maxValue = m_categoryCount - 1;
 
 	// XXX!!! bug doesn't work with category datasets with only one category
 	if (IsVertical()) {
@@ -61,34 +61,32 @@ wxCoord CategoryAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 
 void CategoryAxis::UpdateBounds()
 {
-	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(datasets[0]);
+	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(m_datasets[0]);
 	if (dataset == NULL) {
 		wxLogError(wxT("CategoryAxis::DataChanged: BUG dataset is not CategoryDataset")); // BUG!
 		return ;
 	}
 
-	categoryCount = dataset->GetCount();
+	m_categoryCount = dataset->GetCount();
 
-	for (int nCat = 0; nCat < categoryCount; nCat++) {
-		if (nCat == 0) {
-			longestCategory = dataset->GetName(nCat);
-		}
-		else {
-			if (longestCategory.Length() < dataset->GetName(nCat).Length()) {
-				longestCategory = dataset->GetName(nCat);
-			}
+	m_longestCategory = dataset->GetName(0);
+	for (int nCat = 1; nCat < m_categoryCount; nCat++) {
+		wxString catName = dataset->GetName(nCat);
+
+		if (m_longestCategory.Length() < catName.Length()) {
+			m_longestCategory = catName;
 		}
 	}
 }
 
 double CategoryAxis::GetValue(int step)
 {
-	return step; // TODO temporary
+	return step;
 }
 
 void CategoryAxis::GetLabel(int step, wxString &label)
 {
-	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(datasets[0]);
+	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(m_datasets[0]);
 	if (dataset == NULL) {
 		return ; // BUG
 	}
@@ -98,5 +96,5 @@ void CategoryAxis::GetLabel(int step, wxString &label)
 
 bool CategoryAxis::IsEnd(int step)
 {
-	return step >= categoryCount;
+	return step >= m_categoryCount;
 }

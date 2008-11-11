@@ -28,28 +28,28 @@ public:
 	ColorScheme();
 	virtual ~ColorScheme();
 
-	void operator = (ColorScheme &cs)
+	void operator = (const ColorScheme &cs)
 	{
-		colours = cs.colours;
+		m_colours = cs.m_colours;
 	}
 
 	void AddColour(wxColour colour)
 	{
-		colours.Add(colour);
+		m_colours.Add(colour);
 	}
 
-	int GetCount()
+	size_t GetCount()
 	{
-		return (int) colours.GetCount();
+		return m_colours.GetCount();
 	}
 
-	wxColour GetColor(int index)
+	wxColour GetColor(size_t index)
 	{
-		return colours[index];
+		return m_colours[index];
 	}
 
 private:
-	wxColourArray colours;
+	wxColourArray m_colours;
 };
 
 #endif /*COLORSCHEME_H_*/

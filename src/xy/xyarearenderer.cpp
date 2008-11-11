@@ -13,8 +13,8 @@
 
 XYAreaRenderer::XYAreaRenderer()
 {
-	outlinePen = *wxBLACK_PEN;
-	areaBrush = *wxGREY_BRUSH;
+	m_outlinePen = *wxBLACK_PEN;
+	m_areaBrush = *wxGREY_BRUSH;
 }
 
 XYAreaRenderer::~XYAreaRenderer()
@@ -41,10 +41,10 @@ void XYAreaRenderer::Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoo
 	pts[3] = wxPoint(x1, rcData.y + rcData.height);
 
 	dc.SetPen(noPen);
-	dc.SetBrush(areaBrush);
+	dc.SetBrush(m_areaBrush);
 	dc.DrawPolygon(4, pts);
 
-	dc.SetPen(outlinePen);
+	dc.SetPen(m_outlinePen);
 	//dc.DrawLine(pts[0], pts[1]);
 	dc.DrawLine(pts[1], pts[2]);
 	//dc.DrawLine(pts[3], pts[3]);

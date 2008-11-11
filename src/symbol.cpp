@@ -24,12 +24,12 @@ void Symbol::SetColor(wxColour _color)
 	// default behaviour - do nothing
 }
 
-MaskedSymbol::MaskedSymbol(const char **maskData, wxCoord _size)
+MaskedSymbol::MaskedSymbol(const char **maskData, wxCoord size)
 {
-	maskBmp = wxBitmap(maskData);
-	size = _size;
+	m_maskBmp = wxBitmap(maskData);
+	m_size = size;
 
-	initialized = false;
+	m_initialized = false;
 }
 
 MaskedSymbol::~MaskedSymbol()
@@ -38,27 +38,27 @@ MaskedSymbol::~MaskedSymbol()
 
 void MaskedSymbol::SetColor(wxColour color)
 {
-	wxImage tmpImage = maskBmp.ConvertToImage();
+	wxImage tmpImage = m_maskBmp.ConvertToImage();
 	tmpImage.Replace((unsigned char) -1, (unsigned char) -1, (unsigned char)  -1, color.Red(), color.Green(), color.Blue());
-	tmpImage.Rescale(size, size, wxIMAGE_QUALITY_HIGH);
+	tmpImage.Rescale(m_size, m_size, wxIMAGE_QUALITY_HIGH);
 
-	symbolBitmap = wxBitmap(tmpImage);
-	symbolBitmap.SetMask(new wxMask(wxBitmap(tmpImage), *wxBLACK));
-	initialized = true;
+	m_symbolBitmap = wxBitmap(tmpImage);
+	m_symbolBitmap.SetMask(new wxMask(wxBitmap(tmpImage), *wxBLACK));
+	m_initialized = true;
 }
 
 wxSize MaskedSymbol::GetExtent()
 {
-	return wxSize(size, size);
+	return wxSize(m_size, m_size);
 }
 
 void MaskedSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
 {
-	if (!initialized)
+	if (!m_initialized)
 		return ;
 
 	wxSize extent = GetExtent();
-	wxMemoryDC symbolDC(symbolBitmap);
+	wxMemoryDC symbolDC(m_symbolBitmap);
 
 	dc.Blit(x - extent.x / 2, y - extent.y / 2, extent.x, extent.y, &symbolDC, 0, 0, wxCOPY, true);
 }

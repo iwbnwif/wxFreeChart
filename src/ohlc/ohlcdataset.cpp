@@ -13,6 +13,7 @@
 
 OHLCDataset::OHLCDataset()
 {
+	m_serieName = wxT("OHLC");
 }
 
 OHLCDataset::~OHLCDataset()
@@ -73,5 +74,5 @@ int OHLCDataset::GetSerieCount()
 
 wxString OHLCDataset::GetSerieName(int serie)
 {
-	return wxString(wxT("OHLC"));
+	return m_serieName;
 }

@@ -27,8 +27,6 @@ public:
 	OHLCPlot();
 	virtual ~OHLCPlot();
 
-	//void AddDataset(OHLCDataset *dataset);
-
 protected:
 	virtual bool AcceptAxis(Axis *axis);
 

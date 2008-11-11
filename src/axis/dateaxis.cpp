@@ -15,7 +15,7 @@
 DateAxis::DateAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
-	dateFormat = wxT("%d %m");
+	m_dateFormat = wxT("%d %m");
 }
 
 DateAxis::~DateAxis()
@@ -27,26 +27,18 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 	// Accepts only date/time dataset
 	// and only one dataset
 	return (dynamic_cast<DateTimeDataset *>(dataset) != NULL)
-		&& (datasets.GetSize() == 0);
+		&& (m_datasets.GetSize() == 0);
 }
 
 void DateAxis::UpdateBounds()
 {
-	dateCount = 0;
+	m_dateCount = 0;
 
-	for (int n = 0; n < datasets.GetSize(); n++) {
-		DateTimeDataset *dataset = dynamic_cast<DateTimeDataset *>(datasets[n]);
-		if (dataset == NULL) {
-			wxLogError(wxT("DateAxis::UpdateBounds: BUG dataset is not DateTimeDataset")); // BUG!
-			return ;
-		}
+	for (int n = 0; n < m_datasets.GetSize(); n++) {
+		DateTimeDataset *dataset = (DateTimeDataset *) m_datasets[n];
 
 		int count = dataset->GetCount();
-		if (n == 0)
-			dateCount = count;
-		else {
-			dateCount = MAX(dateCount, count);
-		}
+		m_dateCount = MAX(m_dateCount, count);
 	}
 }
 
@@ -57,9 +49,9 @@ wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 
 wxCoord DateAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 {
-	wxSize maxTextExtent(0, 0);// = dc.GetTextExtent(longestCategory);
+	wxSize maxTextExtent = GetLongestLabelExtent(dc);
 
-	double maxValue = dateCount - 1;
+	double maxValue = m_dateCount - 1;
 
 	if (IsVertical()) {
 		wxCoord y0 = minG + maxTextExtent.GetHeight() / 2;
@@ -84,18 +76,18 @@ double DateAxis::GetValue(int step)
 
 void DateAxis::GetLabel(int step, wxString &label)
 {
-	DateTimeDataset *dataset = dynamic_cast<DateTimeDataset *>(datasets[0]);
+	DateTimeDataset *dataset = dynamic_cast<DateTimeDataset *>(m_datasets[0]);
 	if (dataset == NULL) {
 		return ; // BUG
 	}
 
 	wxDateTime dt;
-	dt.Set(dataset->GetDate(step)); // TODO temporary
-	label = dt.Format(dateFormat);
+	dt.Set(dataset->GetDate(step));
+	label = dt.Format(m_dateFormat);
 }
 
 bool DateAxis::IsEnd(int step)
 {
-	return step >= dateCount;
+	return step >= m_dateCount;
 }
 

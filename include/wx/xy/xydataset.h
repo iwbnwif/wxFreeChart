@@ -14,7 +14,6 @@
 
 #include <wx/dataset.h>
 #include <wx/axis/axis.h>
-#include <wx/valuerange.h>
 
 class XYRenderer;
 

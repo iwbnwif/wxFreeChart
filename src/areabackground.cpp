@@ -33,10 +33,10 @@ void NoAreaBackground::Draw(wxDC &dc, wxRect rc)
 }
 
 
-FillAreaBackground::FillAreaBackground(wxPen _borderPen, wxBrush _fillBrush)
+FillAreaBackground::FillAreaBackground(wxPen borderPen, wxBrush fillBrush)
 {
-	fillBrush = _fillBrush;
-	borderPen = _borderPen;
+	m_fillBrush = fillBrush;
+	m_borderPen = borderPen;
 }
 
 FillAreaBackground::~FillAreaBackground()
@@ -45,17 +45,17 @@ FillAreaBackground::~FillAreaBackground()
 
 void FillAreaBackground::Draw(wxDC &dc, wxRect rc)
 {
-	dc.SetPen(borderPen);
-	dc.SetBrush(fillBrush);
+	dc.SetPen(m_borderPen);
+	dc.SetBrush(m_fillBrush);
 	dc.DrawRectangle(rc);
 }
 
-GradientAreaBackground::GradientAreaBackground(wxPen _borderPen, wxColour _colour1, wxColour _colour2, wxDirection _dir)
+GradientAreaBackground::GradientAreaBackground(wxPen borderPen, wxColour colour1, wxColour colour2, wxDirection dir)
 {
-	borderPen = _borderPen;
-	colour1 = _colour1;
-	colour2 = _colour2;
-	dir = _dir;
+	m_borderPen = borderPen;
+	m_colour1 = colour1;
+	m_colour2 = colour2;
+	m_dir = dir;
 }
 
 GradientAreaBackground::~GradientAreaBackground()
@@ -64,9 +64,9 @@ GradientAreaBackground::~GradientAreaBackground()
 
 void GradientAreaBackground::Draw(wxDC &dc, wxRect rc)
 {
-	dc.GradientFillLinear(rc, colour1, colour2, dir);
+	dc.GradientFillLinear(rc, m_colour1, m_colour2, m_dir);
 
-	dc.SetPen(borderPen);
+	dc.SetPen(m_borderPen);
 	dc.SetBrush(noBrush);
 	dc.DrawRectangle(rc);
 }

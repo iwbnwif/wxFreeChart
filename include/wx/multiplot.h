@@ -18,12 +18,12 @@
 class MultiPlot : public Plot, public PlotObserver
 {
 public:
-	MultiPlot(int _rows, int _cols, wxCoord _horizGap, wxCoord _vertGap);
+	MultiPlot(int rows, int cols, wxCoord horizGap, wxCoord vertGap);
 	virtual ~MultiPlot();
 
 	void AddPlot(Plot *subPlot)
 	{
-		subPlots.Add(subPlot);
+		m_subPlots.Add(subPlot);
 
 		subPlot->AddObserver(this);
 		FirePlotNeedRedraw();
@@ -40,12 +40,12 @@ protected:
 	virtual void DrawData(wxDC &dc, wxRect rc);
 
 private:
-	Array<Plot, 1> subPlots;
+	Array<Plot, 1> m_subPlots;
 
-	int rows;
-	int cols;
-	wxCoord horizGap;
-	wxCoord vertGap;
+	int m_rows;
+	int m_cols;
+	wxCoord m_horizGap;
+	wxCoord m_vertGap;
 };
 
 #endif /*MULTIPLOT_H_*/

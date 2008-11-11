@@ -31,6 +31,10 @@ class Axis : public DrawObject
 {
 	friend class Plot;
 public:
+	/**
+	 * Constructs new axis.
+	 * @param location axis location (cannot be changed after axis created)
+	 */
 	Axis(AXIS_LOCATION location);
 	virtual ~Axis();
 
@@ -40,7 +44,7 @@ public:
 	 */
 	AXIS_LOCATION GetLocation()
 	{
-		return location;
+		return m_location;
 	}
 
 	/**
@@ -48,7 +52,7 @@ public:
 	 */
 	bool IsVertical()
 	{
-		return (location == AXIS_LEFT) || (location == AXIS_RIGHT);
+		return (m_location == AXIS_LEFT) || (m_location == AXIS_RIGHT);
 	}
 
 	/**
@@ -65,17 +69,17 @@ public:
 	void AddDataset(Dataset *dataset)
 	{
 		if (AcceptDataset(dataset)) {
-			datasets.Add(dataset);
+			m_datasets.Add(dataset);
 		}
 	}
 
 	/**
 	 * Sets label for this axis.
-	 * @param _label label
+	 * @param label label
 	 */
-	void SetAxisLabel(wxString _label)
+	void SetAxisLabel(const wxString &label)
 	{
-		axisLabel = _label;
+		m_axisLabel = label;
 		FireNeedRedraw();
 	}
 
@@ -83,9 +87,9 @@ public:
 	 * Returns label for this axis.
 	 * @return label
 	 */
-	wxString GetAxisLabel()
+	const wxString &GetAxisLabel()
 	{
-		return axisLabel;
+		return m_axisLabel;
 	}
 
 	/**
@@ -124,23 +128,22 @@ public:
 	 */
 	virtual void DrawGridLines(wxDC &dc, wxRect rcData) = 0;
 
-private:
-	AXIS_LOCATION location;
-
-	wxString axisLabel;
-
 protected:
 	/**
 	 * Checks whether dataset can be accepted by this axis.
 	 * Must be implemented by derivative classes.
+	 * XXX: maybe remove this method later.
 	 * @param dataset dataset to be checked
 	 * @return true - if dataset can be accepted, false overwise
 	 */
 	virtual bool AcceptDataset(Dataset *dataset) = 0;
 
-	Array<Dataset, 1, true> datasets;
+	Array<Dataset, 1, true> m_datasets;
+	wxPen m_gridLinesPen;
 
-	wxPen gridLinesPen;
+private:
+	AXIS_LOCATION m_location;
+	wxString m_axisLabel;
 };
 
 #endif /*AXIS_H_*/

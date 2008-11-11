@@ -172,7 +172,7 @@ private:
 	void DrawLegend(wxDC &dc, wxRect rcLegend);
 
 	/**
-	 * TODO deprecated
+	 * TODO deprecated, must be removed.
 	 */
 	class DataAxisLink
 	{
@@ -192,24 +192,24 @@ private:
 		Axis *axis;
 	};
 
-	bool drawGridVertical;
-	bool drawGridHorizontal;
+	bool m_drawGridVertical;
+	bool m_drawGridHorizontal;
 
-	Array<Axis, 1> leftAxes;
-	Array<Axis, 1> rightAxes;
-	Array<Axis, 1> topAxes;
-	Array<Axis, 1> bottomAxes;
+	Array<Axis, 1> m_leftAxes;
+	Array<Axis, 1> m_rightAxes;
+	Array<Axis, 1> m_topAxes;
+	Array<Axis, 1> m_bottomAxes;
 
-	Array<Axis, 1> horizontalAxes;
-	Array<Axis, 1> verticalAxes;
+	Array<Axis, 1> m_horizontalAxes;
+	Array<Axis, 1> m_verticalAxes;
 
 	// TODO deprecated - use Axis::AddDataset
-	Array<DataAxisLink, 1> links;
+	Array<DataAxisLink, 1> m_links;
 
-	Array<Dataset, 1> datasets;
-	AreaBackground *dataBackground;
+	Array<Dataset, 1> m_datasets;
+	AreaBackground *m_dataBackground;
 
-	Legend *legend;
+	Legend *m_legend;
 };
 
 #endif /*AXISPLOT_H_*/

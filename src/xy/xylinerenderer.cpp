@@ -1,7 +1,7 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xylinerenderer.cpp
-// Purpose:
+// Purpose: XY line renderer implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -11,9 +11,17 @@
 
 #include <wx/xy/xylinerenderer.h>
 
-XYLineRenderer::XYLineRenderer(bool _drawSymbols, int _defaultWidth, int _defaultStyle)
-: drawSymbols(_drawSymbols), defaultWidth(_defaultWidth), defaultStyle(_defaultStyle)
+inline static void GetCoords(wxCoord &x, wxCoord &y, wxDC &dc, wxRect &rc, Axis *horizAxis, Axis *vertAxis, double value)
 {
+	x = horizAxis->ToGraphics(dc, rc.x, rc.width, value);
+	y = vertAxis->ToGraphics(dc, rc.y, rc.height, value);
+}
+
+XYLineRenderer::XYLineRenderer(bool drawSymbols, int defaultPenWidth, int defaultPenStyle)
+{
+	m_drawSymbols = drawSymbols;
+	m_defaultPenWidth = defaultPenWidth;
+	m_defaultPenStyle = defaultPenStyle;
 }
 
 XYLineRenderer::~XYLineRenderer()
@@ -24,26 +32,24 @@ void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, 
 {
 	for (int serie = 0; serie < dataset->GetSerieCount(); serie++) {
 		for (int n = 0; n < dataset->GetCount(serie) - 1; n++) {
-			wxCoord x0 = horizAxis->ToGraphics(dc, rc.x, rc.width, dataset->GetX(n, serie));
-			wxCoord y0 = vertAxis->ToGraphics(dc, rc.y, rc.height, dataset->GetY(n, serie));
+			wxCoord x0, y0;
+			wxCoord x1, y1;
 
-			wxCoord x1 = horizAxis->ToGraphics(dc, rc.x, rc.width, dataset->GetX(n + 1, serie));
-			wxCoord y1 = vertAxis->ToGraphics(dc, rc.y, rc.height, dataset->GetY(n + 1, serie));
+			GetCoords(x0, y0, dc, rc, horizAxis, vertAxis, dataset->GetX(n, serie));
+			GetCoords(x1, y1, dc, rc, horizAxis, vertAxis, dataset->GetX(n + 1, serie));
 
 			DrawSegment(dc, serie, x0, y0, x1, y1);
 		}
 	}
 }
 
-
 void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
 {
-
 	wxPen *pen = GetSeriePen(serie);
 	dc.SetPen(*pen);
 	dc.DrawLine(x0, y0, x1, y1);
 
-	if (drawSymbols) {
+	if (m_drawSymbols) {
 		Symbol *symbol = GetSerieSymbol(serie);
 
 		symbol->SetColor(GetSerieColor(serie));
@@ -54,36 +60,36 @@ void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wx
 
 void XYLineRenderer::SetSeriePen(int serie, wxPen *pen)
 {
-	seriePens[serie] = *pen;
+	m_seriePens[serie] = *pen;
 	FireNeedRedraw();
 }
 
 void XYLineRenderer::SetSerieSymbol(int serie, Symbol *symbol)
 {
-	serieSymbols[serie] = symbol;
+	m_serieSymbols[serie] = symbol;
 	FireNeedRedraw();
 }
 
 wxColour XYLineRenderer::GetSerieColor(int serie)
 {
-	if (seriePens.find(serie) == seriePens.end()) {
+	if (m_seriePens.find(serie) == m_seriePens.end()) {
 		return GetDefaultColour(serie);
 	}
-	return seriePens[serie].GetColour();
+	return m_seriePens[serie].GetColour();
 }
 
 wxPen *XYLineRenderer::GetSeriePen(int serie)
 {
-	if (seriePens.find(serie) == seriePens.end()) {
-		return wxThePenList->FindOrCreatePen(GetDefaultColour(serie), defaultWidth, defaultStyle);
+	if (m_seriePens.find(serie) == m_seriePens.end()) {
+		return wxThePenList->FindOrCreatePen(GetDefaultColour(serie), m_defaultPenWidth, m_defaultPenStyle);
 	}
-	return &seriePens[serie];
+	return &m_seriePens[serie];
 }
 
 Symbol *XYLineRenderer::GetSerieSymbol(int serie)
 {
-	if (serieSymbols.find(serie) == serieSymbols.end()) {
+	if (m_serieSymbols.find(serie) == m_serieSymbols.end()) {
 		return GetDefaultSymbol(serie);
 	}
-	return serieSymbols[serie];
+	return m_serieSymbols[serie];
 }

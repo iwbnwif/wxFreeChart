@@ -41,12 +41,12 @@ public:
 	virtual wxSize GetExtent();
 
 private:
-	wxBitmap maskBmp;
-	wxBitmap symbolBitmap;
+	wxBitmap m_maskBmp;
+	wxBitmap m_symbolBitmap;
 
-	bool initialized;
+	bool m_initialized;
 
-	wxCoord size;
+	wxCoord m_size;
 };
 
 #endif /*SYMBOL_H_*/
