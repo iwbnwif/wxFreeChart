@@ -13,7 +13,6 @@
 #define CATEGORYDATASET_H_
 
 #include <wx/dataset.h>
-#include <wx/valuerange.h>
 #include <wx/xy/xyrenderer.h>
 
 /**

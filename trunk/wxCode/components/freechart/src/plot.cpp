@@ -23,20 +23,20 @@ PlotObserver::~PlotObserver()
 
 Plot::Plot()
 {
-	textNoDataFont = *wxNORMAL_FONT;
-	textNoData = wxT("No data");
+	m_textNoDataFont = *wxNORMAL_FONT;
+	m_textNoData = wxT("No data");
 
-	background = new NoAreaBackground();
+	m_background = new NoAreaBackground();
 }
 
 Plot::~Plot()
 {
-	SAFE_DELETE(background);
+	SAFE_DELETE(m_background);
 }
 
 void Plot::Draw(wxDC &dc, wxRect rc)
 {
-	background->Draw(dc, rc);
+	m_background->Draw(dc, rc);
 
 	if (HasData()) {
 		DrawData(dc, rc);
@@ -48,7 +48,6 @@ void Plot::Draw(wxDC &dc, wxRect rc)
 
 void Plot::DrawNoDataMessage(wxDC &dc, wxRect rc)
 {
-	dc.SetFont(textNoDataFont);
-
-	DrawTextCenter(dc, rc, textNoData);
+	dc.SetFont(m_textNoDataFont);
+	DrawTextCenter(dc, rc, m_textNoData);
 }

@@ -39,7 +39,7 @@
 <option id="gnu.cpp.compiler.option.preprocessor.def.280335060" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def"/>
 <option id="gnu.cpp.compiler.option.preprocessor.undef.370465505" name="Undefined symbols (-U)" superClass="gnu.cpp.compiler.option.preprocessor.undef"/>
 <option id="gnu.cpp.compiler.option.include.paths.2004505009" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="/home/mab/Projects/wxFreeChart/include"/>
+<listOptionValue builtIn="false" value="../include"/>
 </option>
 <option id="gnu.cpp.compiler.option.optimization.flags.1278204144" name="Other optimization flags" superClass="gnu.cpp.compiler.option.optimization.flags"/>
 <option id="gnu.cpp.compiler.option.debugging.other.1664719711" name="Other debugging flags" superClass="gnu.cpp.compiler.option.debugging.other"/>
@@ -50,7 +50,7 @@
 <option id="gnu.cpp.compiler.option.warnings.pedantic.error.583681836" name="Pedantic warnings as errors (-pedantic-errors)" superClass="gnu.cpp.compiler.option.warnings.pedantic.error"/>
 <option id="gnu.cpp.compiler.option.warnings.nowarn.1258168717" name="Inhibit all warnings (-w)" superClass="gnu.cpp.compiler.option.warnings.nowarn"/>
 <option id="gnu.cpp.compiler.option.warnings.allwarn.723637481" name="All warnings (-Wall)" superClass="gnu.cpp.compiler.option.warnings.allwarn"/>
-<option id="gnu.cpp.compiler.option.warnings.toerrors.1842416806" name="Warnings as errors (-Werror)" superClass="gnu.cpp.compiler.option.warnings.toerrors"/>
+<option id="gnu.cpp.compiler.option.warnings.toerrors.1842416806" name="Warnings as errors (-Werror)" superClass="gnu.cpp.compiler.option.warnings.toerrors" value="true" valueType="boolean"/>
 <option id="gnu.cpp.compiler.option.other.other.1682682111" name="Other flags" superClass="gnu.cpp.compiler.option.other.other"/>
 <option id="gnu.cpp.compiler.option.other.verbose.1070206803" name="Verbose (-v)" superClass="gnu.cpp.compiler.option.other.verbose"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1644537044" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>

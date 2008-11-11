@@ -25,8 +25,8 @@ public:
 	virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
 private:
-	wxPen outlinePen;
-	wxBrush areaBrush;
+	wxPen m_outlinePen;
+	wxBrush m_areaBrush;
 };
 
 #endif /*XYAREARENDERER_H_*/

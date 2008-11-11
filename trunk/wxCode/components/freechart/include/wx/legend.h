@@ -21,7 +21,7 @@ const wxCoord labelsSpacing = 2;
 
 /**
  * Legend.
- * TODO: initial quick and dirty, must be rewritten.
+ * TODO: initial quick and dirty.
  */
 class Legend
 {

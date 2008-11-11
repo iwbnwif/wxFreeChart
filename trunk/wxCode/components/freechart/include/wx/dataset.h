@@ -120,4 +120,23 @@ private:
 	FIRE_WITH_THIS(DatasetChanged);
 };
 
+/**
+ * Single value range.
+ */
+class ValueRange
+{
+public:
+	ValueRange()
+	{
+	}
+
+	virtual ~ValueRange()
+	{
+	}
+
+	virtual double GetMinValue(bool vertical) = 0;
+
+	virtual double GetMaxValue(bool vertical) = 0;
+};
+
 #endif /*DATASET_H_*/

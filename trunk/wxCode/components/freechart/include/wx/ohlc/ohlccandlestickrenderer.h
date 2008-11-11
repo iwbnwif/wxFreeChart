@@ -26,11 +26,11 @@ public:
 	void DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close);
 
 private:
-	wxCoord candleWidth;
+	wxCoord m_candleRadius;
 
-	wxPen pen;
-	wxBrush lowerBrush;
-	wxBrush higherBrush;
+	wxPen m_outlinePen;
+	wxBrush m_lowerBrush;
+	wxBrush m_higherBrush;
 };
 
 #endif /*OHLCCANDDLESTICKRENDERER_H_*/

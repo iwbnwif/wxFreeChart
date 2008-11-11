@@ -41,7 +41,7 @@ public:
 };
 
 /**
- * Chart
+ * Chart. Contains plot, title and chart attributes.
  */
 class Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver
 {
@@ -51,7 +51,7 @@ public:
 	 * @param _plot plot
 	 * @param _title chart title (empty string - no title)
 	 */
-	Chart(Plot *_plot, const wxString &_title = wxEmptyString);
+	Chart(Plot *plot, const wxString &title = wxEmptyString);
 	virtual ~Chart();
 
 	/**
@@ -65,9 +65,9 @@ public:
 	 * Sets chart background.
 	 * @param _background chart background
 	 */
-	void SetBackground(AreaBackground *_background)
+	void SetBackground(AreaBackground *background)
 	{
-		SAFE_REPLACE(background, _background);
+		SAFE_REPLACE(m_background, background);
 		FireChartChanged();
 	}
 
@@ -75,9 +75,9 @@ public:
 	 * Sets chart title.
 	 * @param _title chart title
 	 */
-	void SetTitle(wxString _title)
+	void SetTitle(wxString title)
 	{
-		title = _title;
+		m_title = title;
 		FireChartChanged();
 	}
 
@@ -85,9 +85,9 @@ public:
 	 * Sets font for chart title.
 	 * @param _font font for chart title
 	 */
-	void SetTitleFont(wxFont _font)
+	void SetTitleFont(wxFont font)
 	{
-		titleFont = _font;
+		m_titleFont = font;
 		FireChartChanged();
 	}
 
@@ -97,12 +97,10 @@ public:
 	virtual void PlotNeedRedraw(Plot *_plot);
 
 private:
-	Plot *plot;
-
-	AreaBackground *background;
-
-	wxString title;
-	wxFont titleFont;
+	Plot *m_plot;
+	AreaBackground *m_background;
+	wxString m_title;
+	wxFont m_titleFont;
 
 	FIRE_WITH_THIS(ChartChanged);
 };

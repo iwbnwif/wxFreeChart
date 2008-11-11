@@ -21,52 +21,47 @@ ChartObserver::~ChartObserver()
 
 }
 
-Chart::Chart(Plot *_plot, const wxString &_title)
+Chart::Chart(Plot *plot, const wxString &title)
 {
-	plot = _plot;
-	plot->AddObserver(this);
+	// defaults
+	m_background = new FillAreaBackground(*wxLIGHT_GREY_PEN, *wxLIGHT_GREY_BRUSH);
+	m_titleFont = *wxNORMAL_FONT;
 
-	title = _title;
-
-	background = new FillAreaBackground(*wxLIGHT_GREY_PEN, *wxLIGHT_GREY_BRUSH);
-
-	titleFont = *wxNORMAL_FONT;
+	m_plot = plot;
+	m_plot->AddObserver(this);
+	m_title = title;
 }
 
 Chart::~Chart()
 {
-	SAFE_REMOVE_OBSERVER(this, plot);
-	SAFE_DELETE(background);
+	SAFE_REMOVE_OBSERVER(this, m_plot);
+	SAFE_DELETE(m_background);
 }
 
-void Chart::PlotNeedRedraw(Plot *_plot)
+void Chart::PlotNeedRedraw(Plot *plot)
 {
-	if (plot != _plot) {
-		return ;
-	}
-
 	FireChartChanged();
 }
 
 void Chart::Draw(wxDC &dc, wxRect &rc)
 {
-	background->Draw(dc, rc);
+	m_background->Draw(dc, rc);
 
 	int topMargin = 5;
 
-	if (title.Length() != 0) {
-		dc.SetFont(titleFont);
+	if (m_title.Length() != 0) {
+		dc.SetFont(m_titleFont);
 
-		wxSize textExtent = dc.GetTextExtent(title);
+		wxSize textExtent = dc.GetTextExtent(m_title);
 
 		wxRect titleRect = rc;
 		titleRect.height = textExtent.y + 2;
 
-		DrawTextCenter(dc, titleRect, title);
+		DrawTextCenter(dc, titleRect, m_title);
 
 		topMargin += titleRect.height;
 	}
 
 	Margins(rc, 5, topMargin, 5, 5); // TODO temporary!
-	plot->Draw(dc, rc);
+	m_plot->Draw(dc, rc);
 }

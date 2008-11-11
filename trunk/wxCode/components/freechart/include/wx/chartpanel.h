@@ -22,7 +22,7 @@
 class wxChartPanel : public wxScrolledWindow, public ChartObserver
 {
 public:
-	wxChartPanel(wxWindow *parent, Chart *_chart = NULL,
+	wxChartPanel(wxWindow *parent, Chart *chart = NULL,
 		const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize);
 	virtual ~wxChartPanel();
 
@@ -30,11 +30,11 @@ public:
 	 * Sets chart.
 	 * @param chart new chart
 	 */
-	void SetChart(Chart *_chart);
+	void SetChart(Chart *chart);
 
 	Chart *GetChart()
 	{
-		return chart;
+		return m_chart;
 	}
 
 	//
@@ -49,9 +49,9 @@ private:
 	void OnPaint(wxPaintEvent &ev);
 	void OnSize(wxSizeEvent &ev);
 
-	Chart *chart;
+	Chart *m_chart;
 
-	wxBitmap backBitmap;
+	wxBitmap m_backBitmap;
 
 	DECLARE_EVENT_TABLE()
 };

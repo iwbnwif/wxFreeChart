@@ -11,10 +11,11 @@
 
 #include <wx/axis/axis.h>
 
-Axis::Axis(AXIS_LOCATION _location)
-: gridLinesPen(*wxLIGHT_GREY, 1, wxSHORT_DASH)
+Axis::Axis(AXIS_LOCATION location)
 {
-	location = _location;
+	m_location = location;
+
+	m_gridLinesPen = wxPen(*wxLIGHT_GREY, 1, wxSHORT_DASH);
 }
 
 Axis::~Axis()

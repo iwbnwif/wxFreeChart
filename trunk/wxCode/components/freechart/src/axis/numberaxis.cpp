@@ -49,17 +49,19 @@ NumberAxis::NumberAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
 	// default values
-	tickFormat = wxT("%.2f");
+	m_tickFormat = wxT("%.2f");
 
-	minValue = 0;
-	maxValue = 100;
+	m_minValue = 0;
+	m_maxValue = 100;
 
-	minorTick = 1;
-	majorTick = 10;
+	m_minorTick = 1;
+	m_majorTick = 10;
 
-	intValues = false;
-	hasTicks = false;
-	fixedBounds = false;
+	m_stepCount = 5;
+
+	m_intValues = false;
+	m_hasTicks = false;
+	m_fixedBounds = false;
 }
 
 NumberAxis::~NumberAxis()
@@ -77,74 +79,64 @@ bool NumberAxis::AcceptDataset(Dataset *dataset)
 	}
 }
 
-void NumberAxis::FixedBounds(double _minValue, double _maxValue)
+void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 {
-	minValue = _minValue;
-	maxValue = _maxValue;
+	m_minValue = minValue;
+	m_maxValue = maxValue;
+	m_fixedBounds = true;
 
-	majorTick = (maxValue - minValue) / 5.0; //XXX temporary TODO if using intValues - make integer step
-	hasTicks = true;
-	fixedBounds = true;
-
-	FireNeedRedraw();
+	UpdateTickValues();
 }
 
 void NumberAxis::UpdateBounds()
 {
-	if (fixedBounds)
+	if (m_fixedBounds)
 		return ; // bounds are fixed, so don't update
 
-	hasTicks = false;
+	m_hasTicks = false;
 
-	for (int n = 0; n < datasets.GetSize(); n++) {
-		Dataset *dataset = datasets[n];
-		double _minValue, _maxValue;
-
+	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		bool verticalAxis = IsVertical();
-		if (dynamic_cast<ValueRange *>(dataset) != NULL) {
-			ValueRange *valueDataset = dynamic_cast<ValueRange *>(dataset);
+		ValueRange *valueDataset = (ValueRange *) m_datasets[n];
 
-			_minValue = valueDataset->GetMinValue(verticalAxis);
-			_maxValue = valueDataset->GetMaxValue(verticalAxis);
-		}
-		else {
-			wxLogError(wxT("NumberAxis::DataChanged: BUG invalid dataset class")); // BUG!
-			return ;
-		}
+		double minValue = valueDataset->GetMinValue(verticalAxis);
+		double maxValue = valueDataset->GetMaxValue(verticalAxis);
 
 		if (n == 0) {
-			minValue = _minValue;
-			maxValue = _maxValue;
+			m_minValue = minValue;
+			m_maxValue = maxValue;
 		}
 		else {
-			minValue = MIN(minValue, _minValue);
-			maxValue = MAX(maxValue, _maxValue);
+			m_minValue = MIN(m_minValue, minValue);
+			m_maxValue = MAX(m_maxValue, maxValue);
 		}
 	}
 
-	majorTick = (maxValue - minValue) / 5.0; //XXX temporary TODO if using intValues - make integer step
+	UpdateTickValues();
+}
 
+void NumberAxis::UpdateTickValues()
+{
+	m_hasTicks = false;
+	m_majorTick = (m_maxValue - m_minValue) / ((double) m_stepCount);
 
-	if (!IsNormalValue(majorTick)) {
-		// XXX overflow condition bugfix
-		minValue = 0;
-		maxValue = 0;
-		majorTick = 0;
-
-		hasTicks = false;
+	if (!IsNormalValue(m_majorTick)) {
+		// overflow condition bugfix
+		m_minValue = 0;
+		m_maxValue = 0;
+		m_majorTick = 0;
 	}
 	else {
-		if (ABS(maxValue - minValue) > 0.000000001)
-			hasTicks = true;
+		if (ABS(m_maxValue - m_minValue) > 0.000000001)
+			m_hasTicks = true;
 	}
-
 	FireNeedRedraw();
 }
 
 wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
 {
-	wxSize sizeMinValue = dc.GetTextExtent(wxString::Format(tickFormat, minValue));
-	wxSize sizeMaxValue = dc.GetTextExtent(wxString::Format(tickFormat, maxValue));
+	wxSize sizeMinValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_minValue));
+	wxSize sizeMaxValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_maxValue));
 
 	if (sizeMinValue.x > sizeMaxValue.x) {
 		return sizeMinValue;
@@ -161,17 +153,19 @@ wxCoord NumberAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 	wxCoord coord;
 	double gRange, k;
 
+	double valueRange = m_maxValue - m_minValue;
+
 	if (IsVertical()) {
 		coord = minG + maxTextExtent.GetHeight() / 2;
 		gRange = range - maxTextExtent.GetHeight();
 
-		k = (maxValue - value) / (maxValue - minValue);
+		k = (m_maxValue - value) / valueRange;
 	}
 	else {
 		coord = minG + maxTextExtent.GetWidth() / 2;
 		gRange = range - maxTextExtent.GetWidth();
 
-		k = (value - minValue) / (maxValue - minValue);
+		k = (value - m_minValue) / valueRange;
 	}
 
 	if (gRange < 0)
@@ -182,28 +176,28 @@ wxCoord NumberAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 
 double NumberAxis::GetValue(int step)
 {
-	return minValue + step * majorTick;
+	return m_minValue + step * m_majorTick;
 }
 
 void NumberAxis::GetLabel(int step, wxString &label)
 {
 	double value = GetValue(step);
 
-	if (intValues) {
+	if (m_intValues) {
 		label = wxString::Format(wxT("%i"), (int) value);
 	}
 	else {
-		label = wxString::Format(tickFormat, value);
+		label = wxString::Format(m_tickFormat, value);
 	}
 }
 
 bool NumberAxis::IsEnd(int step)
 {
 	double value = GetValue(step);
-	return value > maxValue;
+	return value > m_maxValue;
 }
 
-bool NumberAxis::HasTicks()
+bool NumberAxis::HasLabels()
 {
-	return hasTicks;
+	return m_hasTicks;
 }

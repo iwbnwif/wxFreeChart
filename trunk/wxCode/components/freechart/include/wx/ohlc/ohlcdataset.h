@@ -13,10 +13,7 @@
 #define OHLCDATASET_H_
 
 #include <wx/xy/xydataset.h>
-
 #include <wx/datetimedataset.h>
-#include <wx/valuerange.h>
-
 #include <wx/ohlc/ohlcrenderer.h>
 
 struct OHLCItem
@@ -43,6 +40,12 @@ public:
 	OHLCRenderer *GetRenderer()
 	{
 		return (OHLCRenderer *) renderer;
+	}
+
+	void SetSerieName(const wxString &serieName)
+	{
+		m_serieName = serieName;
+		DatasetChanged();
 	}
 
 	/**
@@ -76,6 +79,8 @@ public:
 
 protected:
 	virtual bool AcceptRenderer(Renderer *r);
+
+	wxString m_serieName;
 };
 
 #endif /*OHLCDATASET_H_*/

@@ -14,8 +14,8 @@
 
 #include <wx/axis/axis.h>
 
-const wxCoord tickSize = 5; // TODO temporary
-const wxCoord tickLabelGap = 2;
+const wxCoord labelLineSize = 5;
+const wxCoord labelGap = 2;
 
 /**
  * Base class for axes for displaying data labels.
@@ -37,43 +37,43 @@ public:
 	/**
 	 * Sets minimal/maximal margins for axis.
 	 * Eg bottom/top for vertical axes, left/right for horizontal.
-	 * @param _marginMin new minimal margin
-	 * @param _marginMax new maximal margin
+	 * @param marginMin new minimal margin
+	 * @param marginMax new maximal margin
 	 */
-	void SetMargins(wxCoord _marginMin, wxCoord _marginMax)
+	void SetMargins(wxCoord marginMin, wxCoord marginMax)
 	{
-		marginMin = _marginMin;
-		marginMax = _marginMax;
+		m_marginMin = marginMin;
+		m_marginMax = marginMax;
 		FireNeedRedraw();
 	}
 
 	/**
-	 * Sets pen for tick marks.
-	 * @param pen for tick marks
+	 * Sets pen for label lines.
+	 * @param labelPen pen for label lines
 	 */
-	void SetTickPen(wxPen _tickPen)
+	void SetLabelPen(wxPen labelPen)
 	{
-		tickPen = _tickPen;
+		m_labelPen = labelPen;
 		FireNeedRedraw();
 	}
 
 	/**
-	 * Sets color for tick labels.
-	 * @param _tickLabelsColor color for tick labels
+	 * Sets colour for labels.
+	 * @param labelColour color for labels
 	 */
-	void SetTickLabelsColor(wxColour _tickLabelsColor)
+	void SetLabelColour(wxColour labelColour)
 	{
-		tickLabelsColor = _tickLabelsColor;
+		m_labelColour = labelColour;
 		FireNeedRedraw();
 	}
 
 	/**
-	 * Sets font for tick labels.
-	 * @param _tickFont font for tick labels
+	 * Sets font for labels text.
+	 * @param labelFont font for labels text
 	 */
-	void SetTickLabelsFont(wxFont _tickFont)
+	void SetLabelFont(wxFont labelFont)
 	{
-		tickFont = _tickFont;
+		m_labelFont = labelFont;
 		FireNeedRedraw();
 	}
 
@@ -102,21 +102,21 @@ protected:
 
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value) = 0;
 
-	virtual bool HasTicks();
+	virtual bool HasLabels();
 
 private:
-	void DrawTicks(wxDC &dc, wxRect rc);
+	void DrawLabels(wxDC &dc, wxRect rc);
 
-	void DrawTick(wxDC &dc, wxRect rc, wxString label, double value);
+	void DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double value);
 
 	void DrawBorderLine(wxDC &dc, wxRect rc);
 
-	wxCoord marginMin;
-	wxCoord marginMax;
+	wxCoord m_marginMin;
+	wxCoord m_marginMax;
 
-	wxFont tickFont;
-	wxPen tickPen;
-	wxColour tickLabelsColor;
+	wxFont m_labelFont;
+	wxPen m_labelPen;
+	wxColour m_labelColour;
 };
 
 #endif /*LABELAXIS_H_*/
