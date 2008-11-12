@@ -205,7 +205,7 @@ void AxisPlot::DatasetChanged(Dataset *dataset)
 	FirePlotNeedRedraw();
 }
 
-wxCoord AxisPlot::CountAxesExtent(wxDC &dc, Array<Axis, 1> *axes)
+wxCoord AxisPlot::GetAxesExtent(wxDC &dc, Array<Axis, 1> *axes)
 {
 	wxCoord ext = 0;
 	for (int nAxis = 0; nAxis < axes->GetSize(); nAxis++) {
@@ -219,24 +219,24 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 	rcData = rc;
 
 	if (m_leftAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &m_leftAxes);
+		wxCoord ext = GetAxesExtent(dc, &m_leftAxes);
 
 		rcData.x += ext;
 		rcData.width -= ext;
 	}
 	if (m_rightAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &m_rightAxes);
+		wxCoord ext = GetAxesExtent(dc, &m_rightAxes);
 
 		rcData.width -= ext;
 	}
 	if (m_topAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &m_topAxes);
+		wxCoord ext = GetAxesExtent(dc, &m_topAxes);
 
 		rcData.y += ext;
 		rcData.height -= ext;
 	}
 	if (m_bottomAxes.GetSize() != 0) {
-		wxCoord ext = CountAxesExtent(dc, &m_bottomAxes);
+		wxCoord ext = GetAxesExtent(dc, &m_bottomAxes);
 
 		rcData.height -= ext;
 	}

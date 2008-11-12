@@ -97,7 +97,7 @@ void NumberAxis::UpdateBounds()
 
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		bool verticalAxis = IsVertical();
-		ValueRange *valueDataset = (ValueRange *) m_datasets[n];
+		ValueRange *valueDataset = dynamic_cast<ValueRange *>(m_datasets[n]);
 
 		double minValue = valueDataset->GetMinValue(verticalAxis);
 		double maxValue = valueDataset->GetMaxValue(verticalAxis);
