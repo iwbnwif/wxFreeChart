@@ -10,22 +10,24 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/xy/xyhistorenderer.h>
+#include <wx/art.h>
 
 XYHistoRenderer::XYHistoRenderer(int barWidth, bool vertical)
 {
 	m_barWidth = barWidth;
 	m_vertical = vertical;
 	m_serieShift = barWidth + 2; // XXX temporary!
-
-	m_barArea = new FillAreaBackground(*wxBLACK_PEN, *wxRED_BRUSH);
 }
 
 XYHistoRenderer::~XYHistoRenderer()
 {
-	SAFE_DELETE(m_barArea);
+	AreaBackgroundMap::iterator it;
+	for (it = m_barAreas.begin(); it != m_barAreas.end(); it++) {
+		delete it->second;
+	}
 }
 
-void XYHistoRenderer::DrawBar(wxDC &dc, wxRect rcData, wxCoord x, wxCoord y)
+void XYHistoRenderer::DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxCoord y)
 {
 	wxRect rcBar;
 
@@ -42,7 +44,12 @@ void XYHistoRenderer::DrawBar(wxDC &dc, wxRect rcData, wxCoord x, wxCoord y)
 		rcBar.height = m_barWidth;
 	}
 
-	m_barArea->Draw(dc, rcBar);
+	AreaBackground *barArea = GetBarArea(serie);
+	if (barArea == NULL) {
+		m_defaultBarArea.SetFillBrush(GetDefaultColour(serie));
+		barArea = &m_defaultBarArea;
+	}
+	barArea->Draw(dc, rcBar);
 }
 
 void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
@@ -81,7 +88,7 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 			x += xShift;
 			y += yShift;
 
-			DrawBar(dc, rc, x, y);
+			DrawBar(serie, dc, rc, x, y);
 		}
 
 		if (m_vertical) {
@@ -102,4 +109,29 @@ void XYHistoRenderer::DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord
 // TODO
 	//dc.SetPen(symbolPen);
 	dc.DrawLine(x0, (y0 + y1) / 2, x1, (y0 + y1) / 2);
+}
+
+void XYHistoRenderer::SetBarArea(int serie, AreaBackground *barArea)
+{
+	AreaBackground *oldBarArea = GetBarArea(serie);
+	if (oldBarArea != NULL) {
+		oldBarArea->RemoveObserver(this);
+		delete oldBarArea;
+	}
+
+	m_barAreas[serie] = barArea;
+	FireNeedRedraw();
+}
+
+AreaBackground *XYHistoRenderer::GetBarArea(int serie)
+{
+	if (m_barAreas.find(serie) != m_barAreas.end()) {
+		return m_barAreas[serie];
+	}
+	return NULL;
+}
+
+void XYHistoRenderer::NeedRedraw(DrawObject *obj)
+{
+	FireNeedRedraw();
 }

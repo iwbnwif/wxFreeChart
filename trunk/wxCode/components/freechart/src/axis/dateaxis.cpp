@@ -10,7 +10,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/dateaxis.h>
-#include <wx/datetimedataset.h>
 
 DateAxis::DateAxis(AXIS_LOCATION location)
 : LabelAxis(location)
