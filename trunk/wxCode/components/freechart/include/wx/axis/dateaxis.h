@@ -15,6 +15,8 @@
 
 /**
  * An axis for displaying date/time values.
+ * TODO:
+ * - draw date/time intervals.
  */
 class DateAxis : public LabelAxis
 {

@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	dataset.h
 // Purpose:
@@ -14,6 +13,7 @@
 
 #include <wx/wxfreechartdefs.h>
 
+#include <time.h>
 #include <wx/refobject.h>
 #include <wx/observable.h>
 #include <wx/renderer.h>
@@ -27,13 +27,8 @@ class Dataset;
 class DatasetObserver
 {
 public:
-	DatasetObserver()
-	{
-	}
-
-	virtual ~DatasetObserver()
-	{
-	}
+	DatasetObserver();
+	virtual ~DatasetObserver();
 
 	virtual void DatasetChanged(Dataset *dataset) = 0;
 };
@@ -42,37 +37,17 @@ public:
  * Base class for all datasets (XYDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
-class Dataset : public RefObject, public Observable<DatasetObserver>//, public DrawObjectObserver
+class Dataset : public RefObject, public Observable<DatasetObserver>, public DrawObserver
 {
 public:
-	Dataset()
-	{
-		renderer = NULL;
-		updating = false;
-		changed = false;
-	}
+	Dataset();
+	virtual ~Dataset();
 
-	virtual ~Dataset()
-	{
-		SAFE_UNREF(renderer);
-	}
+	void SetRenderer(Renderer *renderer);
 
-	void SetRenderer(Renderer *_renderer)
-	{
-		SAFE_REPLACE_UNREF(renderer, _renderer);
-		FireDatasetChanged();
-	}
+	void BeginUpdate();
 
-	void BeginUpdate()
-	{
-		updating = true;
-	}
-
-	void EndUpdate()
-	{
-		updating = false;
-		FireDatasetChanged();
-	}
+	void EndUpdate();
 
 	/**
 	 * Returns serie count in this dataset.
@@ -94,6 +69,12 @@ public:
 	 */
 	virtual wxString GetSerieName(int serie) = 0;
 
+	//
+	// DrawObjectObserver
+	//
+	// Received from renderer
+	virtual void NeedRedraw(DrawObject *obj);
+
 protected:
 	/**
 	 * Checks whether renderer is acceptable by this dataset.
@@ -101,20 +82,11 @@ protected:
 	 */
 	virtual bool AcceptRenderer(Renderer *r) = 0;
 
-	void DatasetChanged()
-	{
-		if (updating) {
-			changed = true;
-		}
-		else {
-			changed = false;
-			FireDatasetChanged();
-		}
-	}
+	void DatasetChanged();
 
-	Renderer *renderer;
-	bool updating;
-	bool changed;
+	Renderer *m_renderer;
+	bool m_updating;
+	bool m_changed;
 
 private:
 	FIRE_WITH_THIS(DatasetChanged);
@@ -126,17 +98,23 @@ private:
 class ValueRange
 {
 public:
-	ValueRange()
-	{
-	}
-
-	virtual ~ValueRange()
-	{
-	}
+	ValueRange();
+	virtual ~ValueRange();
 
 	virtual double GetMinValue(bool vertical) = 0;
 
 	virtual double GetMaxValue(bool vertical) = 0;
+};
+
+class DateTimeDataset
+{
+public:
+	DateTimeDataset();
+	virtual ~DateTimeDataset();
+
+	virtual time_t GetDate(int index) = 0;
+
+	virtual int GetCount() = 0;
 };
 
 #endif /*DATASET_H_*/
