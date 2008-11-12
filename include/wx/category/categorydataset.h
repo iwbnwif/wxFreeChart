@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	categorydataset.h
 // Purpose:
@@ -18,7 +17,7 @@
 /**
  * Dataset for data values in form [category name, value].
  */
-class CategoryDataset : public XYDataset
+class CategoryDataset : public XYDataset//, public ValueRange
 {
 public:
 	CategoryDataset();
@@ -49,7 +48,7 @@ public:
 	virtual bool HasValue(int index, int serie);
 
 	//
-	// ValueDataset
+	// ValueRange
 	//
 	virtual double GetMinValue(bool verticalAxis);
 
@@ -68,7 +67,7 @@ public:
 	// TODO: need separate renderer class for rendering cetegory datasets
 	XYRenderer *GetRenderer()
 	{
-		return (XYRenderer *) renderer;
+		return (XYRenderer *) m_renderer;
 	}
 
 protected:

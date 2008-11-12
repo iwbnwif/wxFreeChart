@@ -15,10 +15,14 @@
 #include <wx/xy/xyrenderer.h>
 #include <wx/areabackground.h>
 
+#include <wx/hashmap.h>
+
+WX_DECLARE_HASH_MAP(int, AreaBackground *, wxIntegerHash, wxIntegerEqual, AreaBackgroundMap);
+
 /**
  * Renderer for displaying XY data as histograms.
  */
-class XYHistoRenderer : public XYRenderer
+class XYHistoRenderer : public XYRenderer, public DrawObserver
 {
 public:
 	XYHistoRenderer(int _barWidth = 10, bool _vertical = true);
@@ -30,21 +34,32 @@ public:
 
 	virtual void DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
-	void SetBarArea(AreaBackground *barArea)
-	{
-		SAFE_REPLACE(m_barArea, barArea);
-		FireNeedRedraw();
-	}
+	/**
+	 * Set area fill to draw specified serie.
+	 * XYHistoRenderer takes ownership over barArea.
+	 * @param serie serie index
+	 * @param barArea area background object to draw bars
+	 */
+	void SetBarArea(int serie, AreaBackground *barArea);
+
+	AreaBackground *GetBarArea(int serie);
+
+	//
+	// DrawObserver
+	//
+	virtual void NeedRedraw(DrawObject *obj);
 
 private:
-	void DrawBar(wxDC &dc, wxRect rcData, wxCoord x, wxCoord y);
+	void DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxCoord y);
 
 	int m_barWidth;
 	bool m_vertical;
 
 	wxCoord m_serieShift;
 
-	AreaBackground *m_barArea;
+	AreaBackgroundMap m_barAreas;
+
+	FillAreaBackground m_defaultBarArea;
 };
 
 #endif /*XYHISTORENDERER_H_*/

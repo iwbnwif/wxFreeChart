@@ -91,6 +91,10 @@ public:
 	virtual void DatasetChanged(Dataset *dataset);
 
 protected:
+	//
+	// Methods to be implemented by derivative classes
+	//
+
 	/**
 	 * Checks whether axis is acceptable with this plot.
 	 * @param axis axis to be checked
@@ -104,6 +108,8 @@ protected:
 	 * @return true if dataset can be accepted, false overwise
 	 */
 	virtual bool AcceptDataset(Dataset *dataset) = 0;
+
+	//virtual bool CheckPlotConfiguration() = 0;
 
 	virtual void DrawDatasets(wxDC &dc, wxRect rc) = 0;
 
@@ -128,7 +134,7 @@ protected:
 		return GetDatasetAxis(dataset, false);
 	}
 
-	wxCoord CountAxesExtent(wxDC &dc, Array<Axis, 1> *axes);
+	wxCoord GetAxesExtent(wxDC &dc, Array<Axis, 1> *axes);
 
 private:
 	//
@@ -210,6 +216,8 @@ private:
 	AreaBackground *m_dataBackground;
 
 	Legend *m_legend;
+
+	//bool m_plotConfigurationOk;
 };
 
 #endif /*AXISPLOT_H_*/

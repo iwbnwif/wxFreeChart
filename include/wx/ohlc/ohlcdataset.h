@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	ohlcdataset.h
-// Purpose:
+// Purpose: OHLC datasets base class declaration.
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -13,7 +12,6 @@
 #define OHLCDATASET_H_
 
 #include <wx/xy/xydataset.h>
-#include <wx/datetimedataset.h>
 #include <wx/ohlc/ohlcrenderer.h>
 
 struct OHLCItem
@@ -29,7 +27,7 @@ struct OHLCItem
 };
 
 /**
- * Open-High-Low-Close dataset for quotes.
+ * Open-High-Low-Close datasets base class.
  */
 class OHLCDataset : public Dataset, public ValueRange, public DateTimeDataset
 {
@@ -39,7 +37,7 @@ public:
 
 	OHLCRenderer *GetRenderer()
 	{
-		return (OHLCRenderer *) renderer;
+		return (OHLCRenderer *) m_renderer;
 	}
 
 	void SetSerieName(const wxString &serieName)

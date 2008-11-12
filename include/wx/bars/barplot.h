@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	barplot.h
 // Purpose:
@@ -13,9 +12,6 @@
 #define BARPLOT_H_
 
 #include <wx/axisplot.h>
-
-#include <wx/axis/categoryaxis.h>
-#include <wx/axis/numberaxis.h>
 
 #include <wx/category/categorydataset.h>
 

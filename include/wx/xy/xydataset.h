@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xydataset.h
 // Purpose:
@@ -28,7 +27,7 @@ public:
 
 	XYRenderer *GetRenderer()
 	{
-		return (XYRenderer *) renderer;
+		return (XYRenderer *) m_renderer;
 	}
 
 	/**
@@ -81,6 +80,16 @@ protected:
 	virtual bool AcceptRenderer(Renderer *r);
 
 private:
+};
+
+/**
+ * Base class for step datasets.
+ * Data specified by xy step, not by xy coordinate as in XYDataset.
+ */
+class XYStepDataset : public XYDataset
+{
+public:
+
 };
 
 #endif /*XYDATASET_H_*/
