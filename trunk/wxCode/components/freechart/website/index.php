@@ -43,26 +43,9 @@
 	<br/><?php write_h1("Screenshots"); ?>
 	<p>Description</p>
   <div class="center">
-    <?php writeScreenshotLink("myshot.png", "description goes here"); ?>
+    <?php writeScreenshotLink("bars1.png", "bar chart"); ?>
+    <?php writeScreenshotLink("bars2.png", "horizontal bar chart"); ?>
   </div>
-
-
-
-  <!-- NOTE ON THE SECTIONS TO INSERT HERE: you are free to add anything you think
-       that will make your component more appealing: some sample snippet of code,
-       docs, bugs & feature requests... -->
-  <br/><?php write_h1("Usage sample"); ?>
-  <?php writeSnippet('
-// sample CPP snippet which shows how to use this component:
-myComp *newcomp = new myComp();
-newcomp->SetAAAA("aaa");
-newcomp->SetBBBB("bbb");
-
-// inside this section we can use any character we want except
-// for the single quote char: if you need to use it you should
-// escape it in this way: \'
-newcomp->Show();
-'); ?>
 
 
   <!-- NOTE TO THE DOCUMENTATION: for uploading you component docs in the website,
