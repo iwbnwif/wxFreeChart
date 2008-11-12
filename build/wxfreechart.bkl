@@ -124,6 +124,21 @@
 	    wx/axisplot.h
     </set>
 
+    <set var="COMP_SAMPLE_SRC">
+		democollection.cpp
+		xydemos.cpp
+		demo.cpp
+		bardemos.cpp
+	</set>
+	
+    <set var="COMP_SAMPLE_HDR">
+		xysample.h
+		ohlcsample.h
+		democollection.h
+		demo.h
+    </set>
+
+     
     <lib id="wxfreechart_lib" template="wxcode-lib" cond="WX_SHARED=='0'">
 	<!-- here you can use any standard Bakefile tag. E.g. you may want to
 	     use <include> tag to add additional compiler include paths.
@@ -148,16 +163,8 @@
     <!-- For wxCode samples, don't use a simple <exe> tag but rather the more
 	 specific <wxcode-sample> tag: -->
 
-    <wxcode-sample id="MYSAMPLE_NAME">
-	<!-- Inside a <wxcode-sample> tag you _must_ use the <dir> tag
-	     to tell Bakefile in which directory is placed this sample.
-
-	     NOTE: the directory you reference must be relative to the root
-		   of your component. In the sample <dir> below we assume
-		   you have placed this sample's files in
-		      yourCompFolder/samples/sample1
-	-->
-	<dir>samples/sample1</dir>
+    <wxcode-sample id="wxFreeChartDemo">
+	<dir>sample</dir>
 
 	<!-- if you use win32 resources for your sample and you are lazy and
 	     don't want to use the <win32-res>myresfile.rc</win32-res> tag,
