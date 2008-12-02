@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	sinefunction.h
 // Purpose:
@@ -17,7 +16,7 @@
 /**
  * Sine function of type: y = a * sin(x)
  */
-class SineFunction : public XYDataset
+class WXDLLEXPORT SineFunction : public XYDataset
 {
 public:
 	/**

@@ -26,7 +26,7 @@ NoAreaBackground::~NoAreaBackground()
 {
 }
 
-void NoAreaBackground::Draw(wxDC &dc, wxRect rc)
+void NoAreaBackground::Draw(wxDC &WXUNUSED(dc), wxRect WXUNUSED(rc))
 {
 	// do nothing
 }
@@ -68,4 +68,36 @@ void GradientAreaBackground::Draw(wxDC &dc, wxRect rc)
 	dc.SetPen(m_borderPen);
 	dc.SetBrush(noBrush);
 	dc.DrawRectangle(rc);
+}
+
+AreaBackgroundCollection::AreaBackgroundCollection()
+{
+}
+
+AreaBackgroundCollection::~AreaBackgroundCollection()
+{
+	AreaBackgroundMap::iterator it;
+	for (it = m_areas.begin(); it != m_areas.end(); it++) {
+		delete it->second;
+	}
+}
+
+void AreaBackgroundCollection::SetAreaBackground(int serie, AreaBackground *barArea)
+{
+	if (m_areas.find(serie) != m_areas.end()) {
+		AreaBackground *oldBarArea = m_areas[serie];
+		//oldBarArea->RemoveObserver(this);
+		delete oldBarArea;
+	}
+
+	m_areas[serie] = barArea;
+	//FireNeedRedraw();
+}
+
+AreaBackground *AreaBackgroundCollection::GetAreaBackground(int serie)
+{
+	if (m_areas.find(serie) != m_areas.end()) {
+		return m_areas[serie];
+	}
+	return NULL;
 }

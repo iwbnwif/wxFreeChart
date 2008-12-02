@@ -16,15 +16,21 @@
 #include <time.h>
 #include <wx/refobject.h>
 #include <wx/observable.h>
-#include <wx/renderer.h>
+#include <wx/chartrenderer.h>
 
 class Dataset;
+
+#define FOREACH_SERIE(index, dataset) \
+	for (int index = 0; index < dataset->GetSerieCount(); index++)
+
+#define FOREACH_DATAITEM(index, serie, dataset) \
+	for (int index = 0; index < dataset->GetCount(serie); index++)
 
 /**
  * Class that receives notifications about dataset changes.
  *
  */
-class DatasetObserver
+class WXDLLEXPORT DatasetObserver
 {
 public:
 	DatasetObserver();
@@ -37,7 +43,7 @@ public:
  * Base class for all datasets (XYDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
-class Dataset : public RefObject, public Observable<DatasetObserver>, public DrawObserver
+class WXDLLEXPORT Dataset : public RefObject, public Observable<DatasetObserver>, public DrawObserver
 {
 public:
 	Dataset();
@@ -95,7 +101,7 @@ private:
 /**
  * Single value range.
  */
-class ValueRange
+class WXDLLEXPORT ValueRange
 {
 public:
 	ValueRange();
@@ -106,7 +112,7 @@ public:
 	virtual double GetMaxValue(bool vertical) = 0;
 };
 
-class DateTimeDataset
+class WXDLLEXPORT DateTimeDataset
 {
 public:
 	DateTimeDataset();

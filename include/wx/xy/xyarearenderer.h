@@ -13,7 +13,7 @@
 
 #include <wx/xy/xyrenderer.h>
 
-class XYAreaRenderer : public XYRenderer
+class WXDLLEXPORT XYAreaRenderer : public XYRenderer
 {
 public:
 	XYAreaRenderer();

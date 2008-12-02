@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	bubbleplot.h
 // Purpose:
@@ -14,7 +13,7 @@
 
 #include <wx/axisplot.h>
 
-class BubblePlot : public AxisPlot
+class WXDLLEXPORT BubblePlot : public AxisPlot
 {
 public:
 	BubblePlot();

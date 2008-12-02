@@ -11,12 +11,12 @@
 #ifndef OHLCRENDERER_H_
 #define OHLCRENDERER_H_
 
-#include <wx/renderer.h>
+#include <wx/chartrenderer.h>
 
 /**
  * Base class for displaying OHLC data.
  */
-class OHLCRenderer : public Renderer
+class WXDLLEXPORT OHLCRenderer : public Renderer
 {
 public:
 	OHLCRenderer();

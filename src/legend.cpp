@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	legend.cpp
 // Purpose:
@@ -11,24 +10,27 @@
 
 #include <wx/legend.h>
 
-Legend::Legend(int _vertPosition, int _horizPosition, AreaBackground *_background)
-: vertPosition(_vertPosition), horizPosition(_horizPosition), background(_background)
+Legend::Legend(int vertPosition, int horizPosition, AreaBackground *background)
 {
-	if (background == NULL) {
-		background = new FillAreaBackground();
+	m_vertPosition = vertPosition;
+	m_horizPosition = horizPosition;
+	m_background = background;
+
+	if (m_background == NULL) {
+		m_background = new FillAreaBackground();
 	}
 }
 
 Legend::~Legend()
 {
-	SAFE_DELETE(background)
+	SAFE_DELETE(m_background);
 }
 
 void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 {
-	dc.SetFont(font);
+	dc.SetFont(m_font);
 
-	background->Draw(dc, rc);
+	m_background->Draw(dc, rc);
 
 	wxCoord x = rc.x;
 	wxCoord y = rc.y;
@@ -52,7 +54,7 @@ wxSize Legend::GetExtent(wxDC &dc, Array<Dataset, 1> &datasets)
 {
 	wxSize extent(0, 0);
 
-	dc.SetFont(font);
+	dc.SetFont(m_font);
 
 	for (int n = 0; n < datasets.GetSize(); n++) {
 		Dataset *dataset = datasets[n];

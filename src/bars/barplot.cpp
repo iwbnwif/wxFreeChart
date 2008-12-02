@@ -32,15 +32,15 @@ bool BarPlot::AcceptAxis(Axis *axis)
 
 bool BarPlot::AcceptDataset(Dataset *dataset)
 {
-	return (dynamic_cast<CategoryDataset *>(dataset) != NULL ||
-			dynamic_cast<DateTimeDataset *>(dataset));
+	return (dynamic_cast<CategoryDataset *>(dataset) != NULL);// ||
+			//dynamic_cast<DateTimeDataset *>(dataset));
 }
 
 void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
 	for (int nData = 0; nData < GetDatasetCount(); nData++) {
 		CategoryDataset *dataset = (CategoryDataset *) GetDataset(nData);
-		XYRenderer *renderer = dataset->GetRenderer();
+		BarRenderer *renderer = dataset->GetRenderer();
 		wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
 
 		Axis *vertAxis = GetDatasetVerticalAxis(dataset);
@@ -63,7 +63,8 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 			return ;
 		}
 
-		renderer->Draw(dc, rc, horizAxis, vertAxis, dataset);
+		renderer->Draw(dc, rc, horizAxis, vertAxis, verticalBars, dataset);
+
+		//renderer->Draw(dc, rc, horizAxis, vertAxis, dataset);
 	}
 }
-

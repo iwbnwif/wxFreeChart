@@ -82,4 +82,25 @@ inline static void Margins(wxRect &rc, wxCoord left, wxCoord top, wxCoord right,
 	CheckFixRect(rc);
 }
 
+inline static void SetupRect(wxRect &rc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
+{
+	if (x0 < x1) {
+		rc.x = x0;
+		rc.width = x1 - x0;
+	}
+	else {
+		rc.x = x1;
+		rc.width = x0 - x1;
+	}
+
+	if (y0 < y1) {
+		rc.y = y0;
+		rc.height = y1 - y0;
+	}
+	else {
+		rc.y = y1;
+		rc.height = y0 - y1;
+	}
+}
+
 #endif /*DRAWUTILS_H_*/

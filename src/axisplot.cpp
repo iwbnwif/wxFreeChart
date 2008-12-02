@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	axisplot.cpp
-// Purpose:
+// Purpose: axis plot implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -150,13 +149,13 @@ void AxisPlot::UpdateAxis(Dataset *dataset)
 	for (int nLink = 0; nLink < m_links.GetSize(); nLink++) {
 		DataAxisLink *link = m_links[nLink];
 
-		if (dataset == NULL || link->dataset == dataset) {
-			link->axis->UpdateBounds();
+		if (dataset == NULL || link->m_dataset == dataset) {
+			link->m_axis->UpdateBounds();
 		}
 	}
 }
 
-void AxisPlot::NeedRedraw(DrawObject *obj)
+void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
 	FirePlotNeedRedraw();
 }
@@ -190,9 +189,9 @@ Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
 	for (int nLink = 0; nLink < m_links.GetSize(); nLink++) {
 		DataAxisLink *link = m_links[nLink];
 
-		if (link->dataset == dataset) {
-			if (vertical == link->axis->IsVertical()) {
-				return link->axis;
+		if (link->m_dataset == dataset) {
+			if (vertical == link->m_axis->IsVertical()) {
+				return link->m_axis;
 			}
 		}
 	}

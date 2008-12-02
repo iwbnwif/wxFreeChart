@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xyplot.h
 // Purpose: XY plot declaration
@@ -23,7 +22,7 @@
 /**
  * An plot for displaying XY data values.
  */
-class XYPlot : public AxisPlot
+class WXDLLEXPORT XYPlot : public AxisPlot
 {
 public:
 	XYPlot();

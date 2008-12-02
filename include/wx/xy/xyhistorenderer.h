@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xyhistorenderer.h
 // Purpose:
@@ -15,22 +14,16 @@
 #include <wx/xy/xyrenderer.h>
 #include <wx/areabackground.h>
 
-#include <wx/hashmap.h>
-
-WX_DECLARE_HASH_MAP(int, AreaBackground *, wxIntegerHash, wxIntegerEqual, AreaBackgroundMap);
-
 /**
  * Renderer for displaying XY data as histograms.
  */
-class XYHistoRenderer : public XYRenderer, public DrawObserver
+class WXDLLEXPORT XYHistoRenderer : public XYRenderer, public DrawObserver
 {
 public:
-	XYHistoRenderer(int _barWidth = 10, bool _vertical = true);
+	XYHistoRenderer(int barWidth = 10, bool vertical = true);
 	virtual ~XYHistoRenderer();
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
-
-	virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
 	virtual void DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
@@ -57,9 +50,7 @@ private:
 
 	wxCoord m_serieShift;
 
-	AreaBackgroundMap m_barAreas;
-
-	FillAreaBackground m_defaultBarArea;
+	AreaBackgroundCollection m_barAreas;
 };
 
 #endif /*XYHISTORENDERER_H_*/

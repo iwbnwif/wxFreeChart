@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xyhistorenderer.cpp
 // Purpose:
@@ -21,10 +20,6 @@ XYHistoRenderer::XYHistoRenderer(int barWidth, bool vertical)
 
 XYHistoRenderer::~XYHistoRenderer()
 {
-	AreaBackgroundMap::iterator it;
-	for (it = m_barAreas.begin(); it != m_barAreas.end(); it++) {
-		delete it->second;
-	}
 }
 
 void XYHistoRenderer::DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxCoord y)
@@ -45,31 +40,13 @@ void XYHistoRenderer::DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxC
 	}
 
 	AreaBackground *barArea = GetBarArea(serie);
-	if (barArea == NULL) {
-		m_defaultBarArea.SetFillBrush(GetDefaultColour(serie));
-		barArea = &m_defaultBarArea;
-	}
 	barArea->Draw(dc, rcBar);
 }
 
 void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
 {
-	const int serieCount = dataset->GetSerieCount();
-
-	wxCoord xShift = 0;
-	wxCoord yShift = 0;
-
-	wxCoord c0 = (m_serieShift - 1) * serieCount / 2 - m_barWidth / 2;
-	if (m_vertical) {
-		xShift -= c0;
-	}
-	else {
-		yShift -= c0;
-	}
-
-	PrepareDC(dc);
-	for (int serie = 0; serie < serieCount; serie++) {
-		for (int n = 0; n < dataset->GetCount(serie); n++) {
+	FOREACH_SERIE(serie, dataset) {
+		FOREACH_DATAITEM(n, serie, dataset) {
 			double xVal;
 			double yVal;
 
@@ -85,23 +62,9 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 			wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
 			wxCoord y = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
 
-			x += xShift;
-			y += yShift;
-
 			DrawBar(serie, dc, rc, x, y);
 		}
-
-		if (m_vertical) {
-			xShift += m_serieShift;
-		}
-		else {
-			yShift += m_serieShift;
-		}
 	}
-}
-
-void XYHistoRenderer::Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
-{
 }
 
 void XYHistoRenderer::DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
@@ -113,25 +76,16 @@ void XYHistoRenderer::DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord
 
 void XYHistoRenderer::SetBarArea(int serie, AreaBackground *barArea)
 {
-	AreaBackground *oldBarArea = GetBarArea(serie);
-	if (oldBarArea != NULL) {
-		oldBarArea->RemoveObserver(this);
-		delete oldBarArea;
-	}
-
-	m_barAreas[serie] = barArea;
+	m_barAreas.SetAreaBackground(serie, barArea);
 	FireNeedRedraw();
 }
 
 AreaBackground *XYHistoRenderer::GetBarArea(int serie)
 {
-	if (m_barAreas.find(serie) != m_barAreas.end()) {
-		return m_barAreas[serie];
-	}
-	return NULL;
+	return m_barAreas.GetAreaBackground(serie);
 }
 
-void XYHistoRenderer::NeedRedraw(DrawObject *obj)
+void XYHistoRenderer::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
 	FireNeedRedraw();
 }

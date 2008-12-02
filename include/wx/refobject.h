@@ -1,4 +1,3 @@
-
 #ifndef REFOBJECT_H_
 #define REFOBJECT_H_
 
@@ -6,7 +5,7 @@
  * Object with reference counter.
  * DEPRECATED: use wxWidgets reference counting.
  */
-class RefObject
+class WXDLLEXPORT RefObject
 {
 public:
 	RefObject()

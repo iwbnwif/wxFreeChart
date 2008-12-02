@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	axis.h
 // Purpose:
@@ -12,6 +11,7 @@
 #ifndef AXIS_H_
 #define AXIS_H_
 
+#include <wx/wxfreechartdefs.h>
 #include <wx/dataset.h>
 #include <wx/array.h>
 
@@ -27,7 +27,7 @@ enum AXIS_LOCATION {
 /**
  * Base class for all axes.
  */
-class Axis : public DrawObject
+class WXDLLEXPORT Axis : public DrawObject
 {
 	friend class Plot;
 public:
@@ -145,5 +145,11 @@ private:
 	AXIS_LOCATION m_location;
 	wxString m_axisLabel;
 };
+
+inline static void TranslateCoords(wxCoord &xCoord, wxCoord &yCoord, wxDC &dc, wxRect &rc, Axis *horizAxis, Axis *vertAxis, double x, double y)
+{
+	xCoord = horizAxis->ToGraphics(dc, rc.x, rc.width, x);
+	yCoord = vertAxis->ToGraphics(dc, rc.y, rc.height, y);
+}
 
 #endif /*AXIS_H_*/

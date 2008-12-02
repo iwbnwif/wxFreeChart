@@ -13,7 +13,7 @@
 
 #include <wx/wxfreechartdefs.h>
 
-class Marker
+class WXDLLEXPORT Marker
 {
 public:
 	Marker();
@@ -22,19 +22,19 @@ public:
 	virtual void Draw(wxDC &dc, wxRect rcData) = 0;
 };
 
-class LineMarker
+class WXDLLEXPORT LineMarker
 {
 public:
-	LineMarker(wxPen _linePen);
+	LineMarker(wxPen linePen);
 	virtual ~LineMarker();
 
 	virtual void Draw(wxDC &dc, wxRect rcData);
 };
 
-class RangeMarker
+class WXDLLEXPORT RangeMarker
 {
 public:
-	RangeMarker(wxBrush _brush, wxPen _pen);
+	RangeMarker(wxBrush brush, wxPen pen);
 	virtual ~RangeMarker();
 
 	virtual void Draw(wxDC &dc, wxRect rcData);

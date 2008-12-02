@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	symbol.cpp
 // Purpose:
@@ -61,4 +60,97 @@ void MaskedSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
 	wxMemoryDC symbolDC(m_symbolBitmap);
 
 	dc.Blit(x - extent.x / 2, y - extent.y / 2, extent.x, extent.y, &symbolDC, 0, 0, wxCOPY, true);
+}
+
+ShapeSymbol::ShapeSymbol(wxCoord size)
+{
+	m_size = size;
+}
+
+ShapeSymbol::~ShapeSymbol()
+{
+}
+
+void ShapeSymbol::SetColor(wxColour color)
+{
+	m_color = color;
+}
+
+wxSize ShapeSymbol::GetExtent()
+{
+	return wxSize(m_size, m_size);
+}
+
+CircleSymbol::CircleSymbol(wxCoord size)
+: ShapeSymbol(size)
+{
+}
+
+CircleSymbol::~CircleSymbol()
+{
+}
+
+void CircleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+{
+	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_color));
+	dc.DrawCircle(x, y, m_size);
+}
+
+
+SquareSymbol::SquareSymbol(wxCoord size)
+: ShapeSymbol(size)
+{
+}
+
+SquareSymbol::~SquareSymbol()
+{
+}
+
+void SquareSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+{
+	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_color));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(m_color, 1, wxSOLID));
+
+	dc.DrawRectangle(x - m_size / 2, y - m_size / 2, m_size, m_size);
+}
+
+CrossSymbol::CrossSymbol(wxCoord size)
+: ShapeSymbol(size)
+{
+}
+
+CrossSymbol::~CrossSymbol()
+{
+}
+
+void CrossSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+{
+	dc.SetPen(*wxThePenList->FindOrCreatePen(m_color, 1, wxSOLID));
+
+	dc.DrawLine(x - m_size / 2, y, x + m_size / 2, y);
+	dc.DrawLine(x, y - m_size / 2, x, y + m_size / 2);
+}
+
+TriangleSymbol::TriangleSymbol(wxCoord size)
+: ShapeSymbol(size)
+{
+}
+
+TriangleSymbol::~TriangleSymbol()
+{
+}
+
+void TriangleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+{
+	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_color));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(m_color, 1, wxSOLID));
+
+	wxCoord r = m_size / 2;
+	wxPoint pts[] = {
+		wxPoint(x - r, (int) (y + r / 3.48)),
+		wxPoint(x, (int) (y - r / 1.74)),
+		wxPoint(x + r, (int) (y + r / 3.48)),
+	};
+
+	dc.DrawPolygon(3, pts);
 }

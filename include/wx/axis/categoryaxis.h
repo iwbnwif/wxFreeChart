@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	categoryaxis.h
 // Purpose:
@@ -17,7 +16,7 @@
 /**
  * An axis for displaying category names.
  */
-class CategoryAxis : public LabelAxis
+class WXDLLEXPORT CategoryAxis : public LabelAxis
 {
 public:
 	CategoryAxis(AXIS_LOCATION location);

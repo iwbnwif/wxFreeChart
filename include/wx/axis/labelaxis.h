@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	labelaxis.h
-// Purpose:
+// Purpose:	label axis declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -20,7 +19,7 @@ const wxCoord labelGap = 2;
 /**
  * Base class for axes for displaying data labels.
  */
-class LabelAxis : public Axis
+class WXDLLEXPORT LabelAxis : public Axis
 {
 public:
 	LabelAxis(AXIS_LOCATION location);

@@ -19,7 +19,7 @@ class XYRenderer;
 /**
  * Base class for XY datasets.
  */
-class XYDataset : public Dataset, public ValueRange
+class WXDLLEXPORT XYDataset : public Dataset, public ValueRange
 {
 public:
 	XYDataset();

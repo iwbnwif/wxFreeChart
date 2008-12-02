@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xylinerenderer.h
 // Purpose:
@@ -18,21 +17,24 @@
 /**
  * Renderer for drawing lines from xy datasets. Can also draw symbols at line points.
  */
-class XYLineRenderer : public XYRenderer
+class WXDLLEXPORT XYLineRenderer : public XYRenderer
 {
 public:
 	/**
 	 * Constructs new line renderer.
 	 * @param drawSymbols specifies whether to draw symbols at line points
+	 * @param drawLinex specifies whether to draw lines
 	 * @param defaultWidth specifies default width for lines
 	 * @param defaultStyle specifies default style for lines
 	 */
-	XYLineRenderer(bool drawSymbols = false, int defaultWidth = 1, int defaultStyle = wxSOLID);
+	XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 1, int defaultStyle = wxSOLID);
 	virtual ~XYLineRenderer();
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
 	void SetSeriePen(int serie, wxPen *pen);
+	
+	void SetSerieColor(int serie, wxColour *color);
 
 	void SetSerieSymbol(int serie, Symbol *symbol);
 
@@ -46,6 +48,7 @@ private:
 	void DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
 	bool m_drawSymbols;
+	bool m_drawLines;
 
 	PenMap m_seriePens;
 	SymbolMap m_serieSymbols;

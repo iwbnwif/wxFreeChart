@@ -8,7 +8,7 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/renderer.h>
+#include <wx/chartrenderer.h>
 
 Renderer::Renderer()
 {
@@ -16,9 +16,4 @@ Renderer::Renderer()
 
 Renderer::~Renderer()
 {
-}
-
-void Renderer::PrepareDC(wxDC &dc)
-{
-	// do noting - default behavior - method used for optimization
 }

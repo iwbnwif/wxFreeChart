@@ -18,7 +18,7 @@
  * TODO:
  * - draw date/time intervals.
  */
-class DateAxis : public LabelAxis
+class WXDLLEXPORT DateAxis : public LabelAxis
 {
 public:
 	DateAxis(AXIS_LOCATION location);
@@ -35,6 +35,10 @@ public:
 		m_dateFormat = dateFormat;
 		FireNeedRedraw();
 	}
+
+	void AddInterval(const wxDateSpan &interval);
+
+	void AddInterval(const wxTimeSpan &interval);
 
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);

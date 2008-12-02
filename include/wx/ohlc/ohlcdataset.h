@@ -29,7 +29,7 @@ struct OHLCItem
 /**
  * Open-High-Low-Close datasets base class.
  */
-class OHLCDataset : public Dataset, public ValueRange, public DateTimeDataset
+class WXDLLEXPORT OHLCDataset : public Dataset, public ValueRange, public DateTimeDataset
 {
 public:
 	OHLCDataset();

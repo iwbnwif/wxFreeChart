@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	drawobject.h
 // Purpose:
@@ -21,7 +20,7 @@ static wxPen noPen(*wxBLACK, 1, wxTRANSPARENT);
 
 class DrawObject;
 
-class DrawObserver
+class WXDLLEXPORT DrawObserver
 {
 public:
 	DrawObserver()
@@ -35,7 +34,7 @@ public:
 	virtual void NeedRedraw(DrawObject *obj) = 0;
 };
 
-class DrawObject : public Observable<DrawObserver>
+class WXDLLEXPORT DrawObject : public Observable<DrawObserver>
 {
 public:
 	DrawObject()

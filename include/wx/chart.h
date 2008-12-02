@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chart.h
 // Purpose:
@@ -25,7 +24,7 @@ class Chart;
 /**
  * Interface for receiving chart events.
  */
-class ChartObserver
+class WXDLLEXPORT ChartObserver
 {
 public:
 	ChartObserver();
@@ -43,7 +42,7 @@ public:
 /**
  * Chart. Contains plot, title and chart attributes.
  */
-class Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver
+class WXDLLEXPORT Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver
 {
 public:
 	/**

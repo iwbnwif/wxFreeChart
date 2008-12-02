@@ -11,14 +11,16 @@
 #ifndef AREABACKGROUND_H_
 #define AREABACKGROUND_H_
 
-#include <wx/wx.h>
+#include <wx/wxfreechartdefs.h>
+#include <wx/hashmap.h>
+
 #include <wx/drawobject.h>
 
 /**
  * Base class for drawing area background.
  * Areas can be data area in Plot, chart background, etc...
  */
-class AreaBackground : public DrawObject
+class WXDLLEXPORT AreaBackground : public DrawObject
 {
 public:
 	AreaBackground();
@@ -36,7 +38,7 @@ public:
 /**
  * Doing nothing.
  */
-class NoAreaBackground : public AreaBackground
+class WXDLLEXPORT NoAreaBackground : public AreaBackground
 {
 public:
 	NoAreaBackground();
@@ -50,7 +52,7 @@ public:
  * Fills area with specified brush and draw outline of area
  * with specified pen.
  */
-class FillAreaBackground : public AreaBackground
+class WXDLLEXPORT FillAreaBackground : public AreaBackground
 {
 public:
 	FillAreaBackground(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
@@ -87,7 +89,7 @@ private:
 /**
  * Gradient fill area.
  */
-class GradientAreaBackground : public AreaBackground
+class WXDLLEXPORT GradientAreaBackground : public AreaBackground
 {
 public:
 	/**
@@ -142,6 +144,23 @@ private:
 	wxColour m_colour1;
 	wxColour m_colour2;
 	wxDirection m_dir;
+};
+
+WX_DECLARE_HASH_MAP(int, AreaBackground *, wxIntegerHash, wxIntegerEqual, AreaBackgroundMap);
+class WXDLLEXPORT AreaBackgroundMap;
+
+class WXDLLEXPORT AreaBackgroundCollection
+{
+public:
+	AreaBackgroundCollection();
+	virtual ~AreaBackgroundCollection();
+
+	void SetAreaBackground(int serie, AreaBackground *barArea);
+
+	AreaBackground *GetAreaBackground(int serie);
+
+private:
+	AreaBackgroundMap m_areas;
 };
 
 #endif /*AREABACKGROUND_H_*/

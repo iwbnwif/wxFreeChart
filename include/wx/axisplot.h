@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	axisplot.h
 // Purpose:
@@ -21,7 +20,7 @@
 /**
  * Base class plots that supports axes.
  */
-class AxisPlot : public Plot, public DrawObserver, public DatasetObserver
+class WXDLLEXPORT AxisPlot : public Plot, public DrawObserver, public DatasetObserver
 {
 public:
 	AxisPlot();
@@ -70,15 +69,15 @@ public:
 	 * Set whether to draw grid lines.
 	 * @param _drawGrid if true - plot will draw grid lines
 	 */
-	void SetDrawGrid(bool _drawGridVertical, bool _drawGridHorizontal);
+	void SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal);
 
 	/**
 	 * Sets background for data area.
 	 * @param _dataBackground background for data area
 	 */
-	void SetDataBackground(AreaBackground *_dataBackground);
+	void SetDataBackground(AreaBackground *dataBackground);
 
-	void SetLegend(Legend *_legend);
+	void SetLegend(Legend *legend);
 
 	//
 	// DrawObserver
@@ -183,10 +182,10 @@ private:
 	class DataAxisLink
 	{
 	public:
-		DataAxisLink(Dataset *_dataset, Axis *_axis)
+		DataAxisLink(Dataset *dataset, Axis *axis)
 		{
-			dataset = _dataset;
-			axis = _axis;
+			m_dataset = dataset;
+			m_axis = axis;
 		}
 
 		~DataAxisLink()
@@ -194,8 +193,8 @@ private:
 
 		}
 
-		Dataset *dataset;
-		Axis *axis;
+		Dataset *m_dataset;
+		Axis *m_axis;
 	};
 
 	bool m_drawGridVertical;
