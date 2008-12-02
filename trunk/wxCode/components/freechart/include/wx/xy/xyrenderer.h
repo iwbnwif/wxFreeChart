@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xyrenderer.h
 // Purpose: xy renderer base class declaration
@@ -12,14 +11,14 @@
 #ifndef XYRENDERER_H_
 #define XYRENDERER_H_
 
-#include <wx/renderer.h>
+#include <wx/chartrenderer.h>
 #include <wx/axis/axis.h>
 #include <wx/xy/xydataset.h>
 
 /**
  * Base class for all XYDataset renderers.
  */
-class XYRenderer : public Renderer
+class WXDLLEXPORT XYRenderer : public Renderer
 {
 public:
 	XYRenderer();

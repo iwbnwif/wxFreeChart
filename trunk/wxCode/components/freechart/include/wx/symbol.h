@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	symbol.h
 // Purpose:
@@ -14,27 +13,27 @@
 
 #include <wx/wxfreechartdefs.h>
 
-class Symbol
+class WXDLLEXPORT Symbol
 {
 public:
 	Symbol();
 	virtual ~Symbol();
 
-	virtual void SetColor(wxColour _color);
+	virtual void SetColor(wxColour color);
 
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y) = 0;
 
 	virtual wxSize GetExtent() = 0;
 };
 
-class MaskedSymbol : public Symbol
+class WXDLLEXPORT MaskedSymbol : public Symbol
 {
 public:
-	MaskedSymbol(const char **maskData, wxCoord _size = 9);
+	MaskedSymbol(const char **maskData, wxCoord size = 9);
 
 	virtual ~MaskedSymbol();
 
-	virtual void SetColor(wxColour _color);
+	virtual void SetColor(wxColour color);
 
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
 
@@ -47,6 +46,58 @@ private:
 	bool m_initialized;
 
 	wxCoord m_size;
+};
+
+class WXDLLEXPORT ShapeSymbol : public Symbol
+{
+public:
+	ShapeSymbol(wxCoord size);
+	virtual ~ShapeSymbol();
+
+	virtual void SetColor(wxColour color);
+
+	virtual wxSize GetExtent();
+
+protected:
+	wxColour m_color;
+	wxCoord m_size;
+};
+
+
+class WXDLLEXPORT CircleSymbol : public ShapeSymbol
+{
+public:
+	CircleSymbol(wxCoord size = 5);
+	virtual ~CircleSymbol();
+
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+};
+
+class WXDLLEXPORT SquareSymbol : public ShapeSymbol
+{
+public:
+	SquareSymbol(wxCoord size = 5);
+	virtual ~SquareSymbol();
+
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+};
+
+class WXDLLEXPORT CrossSymbol : public ShapeSymbol
+{
+public:
+	CrossSymbol(wxCoord size = 5);
+	virtual ~CrossSymbol();
+
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+};
+
+class WXDLLEXPORT TriangleSymbol : public ShapeSymbol
+{
+public:
+	TriangleSymbol(wxCoord size = 5);
+	virtual ~TriangleSymbol();
+
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
 };
 
 #endif /*SYMBOL_H_*/

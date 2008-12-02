@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	colorscheme.h
 // Purpose:
@@ -20,7 +19,7 @@ WX_DECLARE_OBJARRAY(wxColour, wxColourArray);
 /**
  * Defines set of colors for use by PiePlots, etc...
  */
-class ColorScheme
+class WXDLLEXPORT ColorScheme
 {
 public:
 	ColorScheme(wxColour *colours, int count);

@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	numberaxis.cpp
-// Purpose:
+// Purpose: number axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -118,7 +117,7 @@ void NumberAxis::UpdateBounds()
 void NumberAxis::UpdateTickValues()
 {
 	m_hasTicks = false;
-	m_majorTick = (m_maxValue - m_minValue) / ((double) m_stepCount);
+	m_majorTick = (m_maxValue - m_minValue) / (double) (m_stepCount - 1);
 
 	if (!IsNormalValue(m_majorTick)) {
 		// overflow condition bugfix

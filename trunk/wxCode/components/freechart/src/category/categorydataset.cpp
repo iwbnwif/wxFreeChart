@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	categorydataset.cpp
 // Purpose:
@@ -10,7 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/category/categorydataset.h>
-#include <wx/xy/xyhistorenderer.h>
 
 CategoryDataset::CategoryDataset()
 {
@@ -22,7 +20,7 @@ CategoryDataset::~CategoryDataset()
 
 bool CategoryDataset::AcceptRenderer(Renderer *r)
 {
-	return (dynamic_cast<XYHistoRenderer *>(r) != NULL);
+	return (dynamic_cast<BarRenderer *>(r) != NULL);
 }
 
 bool CategoryDataset::HasValue(int index, int serie)
@@ -60,6 +58,8 @@ double CategoryDataset::GetMaxValue(bool verticalAxis)
 	return maxValue;
 }
 
+// TODO deprecated functions.
+//
 double CategoryDataset::GetX(int index, int serie)
 {
 	return index;

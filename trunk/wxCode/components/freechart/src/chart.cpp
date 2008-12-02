@@ -38,7 +38,7 @@ Chart::~Chart()
 	SAFE_DELETE(m_background);
 }
 
-void Chart::PlotNeedRedraw(Plot *plot)
+void Chart::PlotNeedRedraw(Plot *WXUNUSED(plot))
 {
 	FireChartChanged();
 }
@@ -62,6 +62,6 @@ void Chart::Draw(wxDC &dc, wxRect &rc)
 		topMargin += titleRect.height;
 	}
 
-	Margins(rc, 5, topMargin, 5, 5); // TODO temporary!
+	Margins(rc, 5, topMargin, 5, 5);
 	m_plot->Draw(dc, rc);
 }

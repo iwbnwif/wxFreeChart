@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	ohlcbarrenderer.h
 // Purpose:
@@ -17,7 +16,7 @@
 /**
  * OHLC renderer for displaying bars.
  */
-class OHLCBarRenderer : public OHLCRenderer
+class WXDLLEXPORT OHLCBarRenderer : public OHLCRenderer
 {
 public:
 	OHLCBarRenderer();

@@ -1,6 +1,6 @@
 
-#ifndef __WX_H
-#define __WX_H
+#ifndef WXFREECHARTDEFS_H
+#define WXFREECHARTDEFS_H
 
 #include <wx/wxprec.h>
 
@@ -39,7 +39,7 @@
 	}													\
 } while (0)
 
-#define SAFE_REPLACE(dst, src) do {						\
+#define SAFE_REPLACE(dst, src) do {					\
 	SAFE_DELETE(dst);									\
 	dst = src;											\
 } while (0)
@@ -79,4 +79,4 @@ static inline int maxV(int count, int first, ...)
 	return maxValue;
 }
 
-#endif /* __WX_H */
+#endif /* WXFREECHARTDEFS_H */

@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	labelaxis.cpp
-// Purpose:
+// Purpose: label axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -77,7 +76,7 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 		x = ToGraphics(dc, rc.x, rc.width, value);
 
 		textX = x - labelExtent.GetWidth() / 2;
-		lineY1 = lineY2 = y;
+		lineX1 = lineX2 = x;
 
 		switch (GetLocation()) {
 		case AXIS_TOP:

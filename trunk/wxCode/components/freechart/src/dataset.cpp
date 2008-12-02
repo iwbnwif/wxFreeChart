@@ -38,7 +38,7 @@ void Dataset::SetRenderer(Renderer *renderer)
 	DatasetChanged();
 }
 
-void Dataset::NeedRedraw(DrawObject *obj)
+void Dataset::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
 	FireDatasetChanged();
 }

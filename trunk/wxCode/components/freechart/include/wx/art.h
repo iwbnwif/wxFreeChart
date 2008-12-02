@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	art.h
 // Purpose:
@@ -22,8 +21,8 @@ WX_DECLARE_HASH_MAP(int, wxPen, wxIntegerHash, wxIntegerEqual, PenMap);
 WX_DECLARE_HASH_MAP(int, Symbol *, wxIntegerHash, wxIntegerEqual, SymbolMap);
 
 
-wxColour GetDefaultColour(size_t index);
+wxColour WXDLLEXPORT GetDefaultColour(size_t index);
 
-Symbol *GetDefaultSymbol(size_t index);
+Symbol WXDLLEXPORT *GetDefaultSymbol(size_t index);
 
 #endif /*ART_H_*/

@@ -92,7 +92,7 @@ private:
 };
 
 /**
- * Simple sample with one dataset, and one left, right and bottom axes.
+ * Simple demo with one dataset, and left and bottom axes.
  */
 class BarDemo1 : public ChartDemo
 {
@@ -124,8 +124,11 @@ public:
 		// Create dataset
 		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
 
+		BarType *barType = new NormalBarType(10);
+		barType->SetBarArea(0, new FillAreaBackground(*wxBLACK_PEN, *wxRED_BRUSH));
+
 		// Set histogram renderer for it
-		dataset->SetRenderer(new XYHistoRenderer());
+		dataset->SetRenderer(new BarRenderer(barType));
 
 		// Create bar plot
 		BarPlot *plot = new BarPlot();
@@ -146,12 +149,13 @@ public:
 		plot->LinkDataVerticalAxis(0, 0);
 
 		// and finally construct and return chart
-		return new Chart(plot, wxT("Bar demo 1"));
+		return new Chart(plot, GetName());
 	}
 };
 
 /**
- * Simple sample with one dataset, and one left, right and bottom axes.
+ * Simple demo with one dataset having 2 series, and left and bottom axes.
+ * Bars are horizontal.
  */
 class BarDemo2 : public ChartDemo
 {
@@ -190,66 +194,15 @@ public:
 		// Create dataset
 		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
 
-		// Set histogram renderer for it, with horizontal bars
-		dataset->SetRenderer(new XYHistoRenderer(10, true));
+		BarType *barType = new NormalBarType(10);
+		// some eyes-candy: gradient bars
+		barType->SetBarArea(0, new GradientAreaBackground(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarArea(1, new GradientAreaBackground(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
-		// Create bar plot
-		BarPlot *plot = new BarPlot();
+		// Set bar renderer for it, with normal bars
+		BarRenderer *renderer = new BarRenderer(barType);
 
-		// Add bottom category axis
-		plot->AddAxis(new CategoryAxis(AXIS_BOTTOM));
-
-		// Add left number axis
-		plot->AddAxis(new NumberAxis(AXIS_LEFT));
-
-		// Add dataset to plot
-		plot->AddDataset(dataset);
-
-		// Link first dataset with first horizontal axis
-		plot->LinkDataHorizontalAxis(0, 0);
-
-		// Link first dataset with first vertical axis
-		plot->LinkDataVerticalAxis(0, 0);
-
-		// and finally construct and return chart
-		return new Chart(plot, wxT("Bar demo 2"));
-	}
-};
-
-class BarDemo3 : public ChartDemo
-{
-public:
-	BarDemo3()
-	: ChartDemo(wxT("Bar demo 3"))
-	{
-	}
-
-	virtual Chart *Create()
-	{
-		wxString names[] = { // category names
-				wxT("Cat 1"),
-				wxT("Cat 2"),
-				wxT("Cat 3"),
-				wxT("Cat 4"),
-				wxT("Cat 5"),
-		};
-		double values[][5] = {
-			{ // serie 1 values - we have only one serie
-				10,
-				20,
-				5,
-				50,
-				25,
-			}
-		};
-
-		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
-
-		// Set histogram renderer for it, with horizontal bars
-		XYHistoRenderer *renderer = new XYHistoRenderer(10, false);
-		renderer->SetBarArea(0, new GradientAreaBackground(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-
+		// assign renderer to dataset - necessary step
 		dataset->SetRenderer(renderer);
 
 		// Create bar plot
@@ -271,12 +224,238 @@ public:
 		plot->LinkDataVerticalAxis(0, 0);
 
 		// and finally construct and return chart
-		return new Chart(plot, wxT("Bar demo 3"));
+		return new Chart(plot, GetName());
 	}
 };
 
-static ChartDemo *barDemos[] = {
+/**
+ * Stacked bars demo.
+ */
+class BarDemo3 : public ChartDemo
+{
+public:
+	BarDemo3()
+	: ChartDemo(wxT("Bar demo 3 - stacked bars"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		wxString names[] = { // category names
+				wxT("Cat 1"),
+				wxT("Cat 2"),
+				wxT("Cat 3"),
+				wxT("Cat 4"),
+				wxT("Cat 5"),
+		};
+		double values[][5] = {
+			{ // serie 1 values
+				10,
+				20,
+				5,
+				50,
+				25,
+			},
+			{ // serie 2 values
+				16,
+				10,
+				15,
+				30,
+				45,
+			},
+		};
+
+		// Create dataset
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+
+
+		BarType *barType = new StackedBarType(10, 0);
+		// some eyes-candy: gradient bars
+		barType->SetBarArea(0, new GradientAreaBackground(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarArea(1, new GradientAreaBackground(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+
+		// Set bar renderer for it, with stacked bar type
+		BarRenderer *renderer = new BarRenderer(barType);
+
+		// assign renderer to dataset - necessary step
+		dataset->SetRenderer(renderer);
+
+		// Create bar plot
+		BarPlot *plot = new BarPlot();
+
+		// Add left category axis
+		plot->AddAxis(new CategoryAxis(AXIS_LEFT));
+
+		// Add bottom number axis
+		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
+
+		// Add dataset to plot
+		plot->AddDataset(dataset);
+
+		// Link first dataset with first horizontal axis
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// Link first dataset with first vertical axis
+		plot->LinkDataVerticalAxis(0, 0);
+
+		// and finally construct and return chart
+		return new Chart(plot, GetName());
+	}
+};
+
+/**
+ * Layered bars demo.
+ */
+class BarDemo4 : public ChartDemo
+{
+public:
+	BarDemo4()
+	: ChartDemo(wxT("Bar demo 4 - layered bars"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		wxString names[] = { // category names
+				wxT("Cat 1"),
+				wxT("Cat 2"),
+				wxT("Cat 3"),
+				wxT("Cat 4"),
+				wxT("Cat 5"),
+		};
+		double values[][5] = {
+			{ // serie 1 values
+				10,
+				20,
+				5,
+				50,
+				25,
+			},
+			{ // serie 2 values
+				16,
+				10,
+				15,
+				30,
+				45,
+			},
+		};
+
+		// Create dataset
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+
+		// create layered bar type with width=20 and base=0
+		BarType *barType = new LayeredBarType(20, 0);
+
+		// some eyes-candy: gradient bars
+		barType->SetBarArea(0, new GradientAreaBackground(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarArea(1, new GradientAreaBackground(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+
+		// Set bar renderer for it, with layered bar type
+		BarRenderer *renderer = new BarRenderer(barType);
+
+		// assign renderer to dataset
+		dataset->SetRenderer(renderer);
+
+		// Create bar plot
+		BarPlot *plot = new BarPlot();
+
+		// Add left category axis
+		plot->AddAxis(new CategoryAxis(AXIS_LEFT));
+
+		// Add bottom number axis
+		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
+
+		// Add dataset to plot
+		plot->AddDataset(dataset);
+
+		// Link first dataset with first horizontal axis
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// Link first dataset with first vertical axis
+		plot->LinkDataVerticalAxis(0, 0);
+
+		// and finally construct and return chart
+		return new Chart(plot, GetName());
+	}
+};
+
+/**
+ * Layered date bars demo.
+ */
+class BarDemo5 : public ChartDemo
+{
+public:
+	BarDemo5()
+	: ChartDemo(wxT("Bar demo 5 - layered date bars"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// TODO: !!! remake this demo to use dates, not string representation of years!
+		wxString names[] = { // category names
+				wxT("2000"),
+				wxT("2001"),
+				wxT("2002"),
+				wxT("2003"),
+				wxT("2004"),
+				wxT("2005"),
+				wxT("2006"),
+				wxT("2007"),
+		};
+		double values[][8] = {
+			{ // serie 1 values
+					771994,	718712,	682422,	713415,	807516,	894631,	1023109, 1148481,
+			},
+			{ // serie 2 values
+					298603,	286184,	292299,	304342,	353072,	389122,	433905,	497245,
+			},
+		};
+
+		// Create dataset
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+
+		// create layered bar type with width=20 and base=0
+		BarType *barType = new LayeredBarType(20, 0);
+
+		// some eyes-candy: gradient bars
+		barType->SetBarArea(0, new GradientAreaBackground(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarArea(1, new GradientAreaBackground(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+
+		// Set bar renderer for it, with layered bar type
+		BarRenderer *renderer = new BarRenderer(barType);
+
+		// assign renderer to dataset
+		dataset->SetRenderer(renderer);
+
+		// Create bar plot
+		BarPlot *plot = new BarPlot();
+
+		// Add left category axis
+		plot->AddAxis(new CategoryAxis(AXIS_BOTTOM));
+
+		// Add bottom number axis
+		plot->AddAxis(new NumberAxis(AXIS_LEFT));
+
+		// Add dataset to plot
+		plot->AddDataset(dataset);
+
+		// Link first dataset with first horizontal axis
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// Link first dataset with first vertical axis
+		plot->LinkDataVerticalAxis(0, 0);
+
+		// and finally construct and return chart
+		return new Chart(plot, wxT("USA export goods/services"));
+	}
+};
+
+ChartDemo *barDemos[] = {
 		new BarDemo1(),
 		new BarDemo2(),
 		new BarDemo3(),
+		new BarDemo4(),
+		new BarDemo5(),
 };
+int barDemosCount = N(barDemos);

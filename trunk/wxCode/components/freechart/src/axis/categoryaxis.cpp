@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	categoryaxis.cpp
-// Purpose:
+// Purpose: category axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -28,7 +27,7 @@ bool CategoryAxis::AcceptDataset(Dataset *dataset)
 	// dataset
 	//
 	return ((dynamic_cast<CategoryDataset *>(dataset) != 0)
-		&& m_datasets.GetSize() == 0);
+		&& m_datasets.GetSize() == 0); // TODO don't use dynamic_cast and RTTI!
 }
 
 wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)

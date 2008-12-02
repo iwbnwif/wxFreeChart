@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xyzdataset.h
 // Purpose:
@@ -17,7 +16,7 @@
 /**
  * Dataset with (x,y,z) coordinate data.
  */
-class XYZDataset : public XYDataset
+class WXDLLEXPORT XYZDataset : public XYDataset
 {
 public:
 	XYZDataset();

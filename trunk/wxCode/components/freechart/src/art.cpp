@@ -16,10 +16,10 @@
 WX_DECLARE_OBJARRAY(Symbol *, SymbolArray);
 WX_DEFINE_OBJARRAY(SymbolArray);
 
-#include "symbols/cross.xpm"
-#include "symbols/cyrcle.xpm"
-#include "symbols/emptysquare.xpm"
-#include "symbols/triangle.xpm"
+//#include "symbols/cross.xpm"
+//#include "symbols/cyrcle.xpm"
+//#include "symbols/emptysquare.xpm"
+//#include "symbols/triangle.xpm"
 
 SymbolArray defaultSymbols;
 
@@ -34,10 +34,10 @@ wxColour defaultColours[] = {
 
 void InitDefaultSymbols()
 {
-	defaultSymbols.Add(new MaskedSymbol((const char **) cyrcle));
-	defaultSymbols.Add(new MaskedSymbol((const char **) triangle));
-	defaultSymbols.Add(new MaskedSymbol((const char **) cross));
-	defaultSymbols.Add(new MaskedSymbol((const char **) emptysquare));
+	defaultSymbols.Add(new SquareSymbol());
+	defaultSymbols.Add(new TriangleSymbol());
+	defaultSymbols.Add(new CircleSymbol());
+	defaultSymbols.Add(new CrossSymbol());
 }
 
 wxColour GetDefaultColour(size_t index)

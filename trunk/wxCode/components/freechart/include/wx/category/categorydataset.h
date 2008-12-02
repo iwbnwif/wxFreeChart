@@ -12,12 +12,12 @@
 #define CATEGORYDATASET_H_
 
 #include <wx/dataset.h>
-#include <wx/xy/xyrenderer.h>
+#include <wx/bars/barrenderer.h>
 
 /**
  * Dataset for data values in form [category name, value].
  */
-class CategoryDataset : public XYDataset//, public ValueRange
+class WXDLLEXPORT CategoryDataset : public XYDataset//, public ValueRange
 {
 public:
 	CategoryDataset();
@@ -63,11 +63,9 @@ public:
 
 	virtual int GetCount(int serie);
 
-
-	// TODO: need separate renderer class for rendering cetegory datasets
-	XYRenderer *GetRenderer()
+	BarRenderer *GetRenderer()
 	{
-		return (XYRenderer *) m_renderer;
+		return (BarRenderer *) m_renderer;
 	}
 
 protected:

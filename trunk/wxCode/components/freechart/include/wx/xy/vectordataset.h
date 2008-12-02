@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	vectordataset.h
 // Purpose:
@@ -20,7 +19,7 @@
  * Where is y values specified, and X values is an index (0....Count)
  * Allows y data addition and removal.
  */
-class VectorDataset : public XYDataset
+class WXDLLEXPORT VectorDataset : public XYDataset
 {
 public:
 	/**

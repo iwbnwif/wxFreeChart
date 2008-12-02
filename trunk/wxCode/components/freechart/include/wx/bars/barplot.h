@@ -11,7 +11,8 @@
 #ifndef BARPLOT_H_
 #define BARPLOT_H_
 
-#include <wx/axisplot.h>
+//#include <wx/axisplot.h>
+#include <wx/xy/xyplot.h>
 
 #include <wx/category/categorydataset.h>
 
@@ -19,7 +20,7 @@
  * Plot for displaying histograms with values at one axis and
  * category names at other.
  */
-class BarPlot : public AxisPlot
+class WXDLLEXPORT BarPlot : public XYPlot//AxisPlot
 {
 public:
 	BarPlot();

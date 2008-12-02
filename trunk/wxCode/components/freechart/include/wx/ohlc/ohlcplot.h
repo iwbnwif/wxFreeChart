@@ -20,7 +20,7 @@
 /**
  * Open-High-Low-Close plot.
  */
-class OHLCPlot : public AxisPlot
+class WXDLLEXPORT OHLCPlot : public AxisPlot
 {
 public:
 	OHLCPlot();

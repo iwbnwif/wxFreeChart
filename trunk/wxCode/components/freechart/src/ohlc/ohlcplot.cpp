@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	ohlcplot.cpp
 // Purpose:
@@ -47,7 +46,6 @@ void OHLCPlot::DrawDatasets(wxDC &dc, wxRect rc)
 		wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
 		wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
 
-		renderer->PrepareDC(dc);
 		for (int n = 0; n < dataset->GetCount(0); n++) {
 			OHLCItem *item = dataset->GetItem(n);
 

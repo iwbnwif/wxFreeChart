@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	legend.h
 // Purpose:
@@ -23,27 +22,28 @@ const wxCoord labelsSpacing = 2;
  * Legend.
  * TODO: initial quick and dirty.
  */
-class Legend
+class WXDLLEXPORT Legend
 {
 public:
 	/**
 	 * Constructs new legend.
-	 * @param _vertPosition vertical position, can be wxTOP, wxCENTER, wxBOTTOM
-	 * @param _horizPosition horizontal position, can be wxLEFT, wxCENTER, wxRIGHT
+	 * @param vertPosition vertical position, can be wxTOP, wxCENTER, wxBOTTOM
+	 * @param horizPosition horizontal position, can be wxLEFT, wxCENTER, wxRIGHT
+	 * @param background background for legend area
 	 */
-	Legend(int _vertPosition, int _horizPosition, AreaBackground *_background = NULL);
+	Legend(int vertPosition, int horizPosition, AreaBackground *background = NULL);
 	virtual ~Legend();
 
 	void Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets);
 
 	int GetVertPosition()
 	{
-		return vertPosition;
+		return m_vertPosition;
 	}
 
 	int GetHorizPosition()
 	{
-		return horizPosition;
+		return m_horizPosition;
 	}
 
 	/**
@@ -52,12 +52,12 @@ public:
 	wxSize GetExtent(wxDC &dc, Array<Dataset, 1> &datasets);
 
 private:
-	int vertPosition;
-	int horizPosition;
+	int m_vertPosition;
+	int m_horizPosition;
 
-	wxFont font;
+	wxFont m_font;
 
-	AreaBackground *background;
+	AreaBackground *m_background;
 };
 
 #endif /*LEGEND_H_*/

@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	multiplot.h
 // Purpose:
@@ -15,7 +14,7 @@
 #include <wx/array.h>
 #include <wx/plot.h>
 
-class MultiPlot : public Plot, public PlotObserver
+class WXDLLEXPORT MultiPlot : public Plot, public PlotObserver
 {
 public:
 	MultiPlot(int rows, int cols, wxCoord horizGap, wxCoord vertGap);

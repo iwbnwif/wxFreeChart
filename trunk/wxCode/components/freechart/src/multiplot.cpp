@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	multiplot.cpp
 // Purpose:
@@ -26,7 +25,7 @@ MultiPlot::~MultiPlot()
 {
 }
 
-void MultiPlot::PlotNeedRedraw(Plot *plot)
+void MultiPlot::PlotNeedRedraw(Plot *WXUNUSED(plot))
 {
 	FirePlotNeedRedraw();
 }

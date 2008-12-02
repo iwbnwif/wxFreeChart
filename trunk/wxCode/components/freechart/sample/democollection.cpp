@@ -9,11 +9,9 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "democollection.h"
-//#include "cutils.h"
 
-//#include "xydemos.cpp"
-//#include "piedemos.cpp"
-//#include "ohlcdemos.cpp"
+#include "xydemos.cpp"
+#include "ohlcdemos.cpp"
 #include "bardemos.cpp"
 
 static DemoCollection instance;
@@ -55,10 +53,9 @@ private:
 };
 
 static Category *cats[] = {
-	//new Category(wxT("XY Charts"), xyDemos, N(xyDemos)),
-	//new Category(wxT("Pie Charts"), pieDemos, N(pieDemos)),
-	//new Category(wxT("OHLC Charts"), ohlcDemos, N(ohlcDemos)),
-	new Category(wxT("Bar Charts"), barDemos, N(barDemos)),
+	new Category(wxT("OHLC Charts"), ohlcDemos, ohlcDemosCount),
+	new Category(wxT("Bar Charts"), barDemos, barDemosCount),
+	new Category(wxT("XY Charts"), xyDemos, xyDemosCount),
 };
 
 DemoCollection::DemoCollection()

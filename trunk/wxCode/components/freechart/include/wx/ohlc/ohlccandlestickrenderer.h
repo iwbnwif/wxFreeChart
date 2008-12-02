@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	ohlccandlestickrenderer.h
 // Purpose:
@@ -17,7 +16,7 @@
 /**
  * OHLC renderer for displaying jananese candles.
  */
-class OHLCCandlestickRenderer : public OHLCRenderer
+class WXDLLEXPORT OHLCCandlestickRenderer : public OHLCRenderer
 {
 public:
 	OHLCCandlestickRenderer();

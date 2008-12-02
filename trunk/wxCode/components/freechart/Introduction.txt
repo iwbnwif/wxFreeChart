@@ -21,23 +21,23 @@ V.   Known issues.
 				III. Chart types.
 	wxFreeChart supports following types of charts:
 1. Line or histogram charts based on xy coordinates.
-2. Histogram category charts.
-3. OHLC (Open-High-Low-Close) financial charts
-4. Pie charts.
-5. Date/Time based line or histogram charts.
-6. Bubble charts, based on zyz coordinates.
-7. Layered bar charts.
-8. Stacked bar charts.
+2. Bar charts.
+3. Layered bar charts.
+4. Stacked bar charts.
+5. OHLC (Open-High-Low-Close) financial charts
+6. Pie charts.
+7. Date/Time based line or histogram charts.
+8. Bubble charts, based on zyz coordinates.
 9. Statistical charts with std-deviations, etc.
 10. Gantt charts.
 
 				IV. Basic concepts.
 	wxFreeChart is object-oriented charting library with 
 model-controller-view design.
-First class that you need is Chart. It contains plot, chart title, and other
+First class that you need is Chart. It contains plot, chart title, and various
 attributes. Chart delegates drawing operations to Plot, Plot delegates to
 dataset renderers, axes and other graphical objects (like legend, 
-markers, etc). 
+markers, area backgrounds, etc). 
 Plot class glues axes (if any), datasets, legend, data markers, etc.
 Dataset classes contains data to be drawn. There are XY datasets,
 OHLC datasets, date/time datasets (for data linked with date/time values),
@@ -58,17 +58,13 @@ Symbol is base class for symbols drawn on legends and xy points.
 
 FIXME: write more.
 
-		Valid combinations of Plot - Axes - Dataset - Renderer.
-	- XYPlot - XYDataset/s - NumberAxes
-	- 
 				V. Known issues.
 - Work with wxWidgets 2.6.x not tested.
 - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
 - Antialiasing doesn't works.
 - Pie plots is very ugly, and must be cleaned up or rewritten.
 - Transparency not implemented. Needed for area/histogram charts with
-overlaying areas/histograms, etc.
-- Too much header files.
+  overlaying areas/histograms, etc.
 - Replace dynamic_cast with appropriate wxWidgets macros.
 
 FIXME: write more.

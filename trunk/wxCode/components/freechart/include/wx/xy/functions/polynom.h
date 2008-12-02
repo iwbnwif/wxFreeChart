@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	polynom.h
 // Purpose:
@@ -18,7 +17,7 @@
  * Polynom function of type: y = c0 * x^n + c1 * x^(n-1) + ... + c(n-1) * x + cn
  * where: c0 ... cn - coefficients
  */
-class Polynom : public XYDataset
+class WXDLLEXPORT Polynom : public XYDataset
 {
 public:
 	/**

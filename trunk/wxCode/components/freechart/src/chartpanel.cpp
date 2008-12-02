@@ -17,8 +17,8 @@ BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
 	EVT_SIZE(wxChartPanel::OnSize)
 END_EVENT_TABLE()
 
-wxChartPanel::wxChartPanel(wxWindow *parent, Chart *chart, const wxPoint &pos, const wxSize &_size)
-: wxScrolledWindow(parent, wxID_ANY, pos, _size)//, wxFULL_REPAINT_ON_RESIZE)
+wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &_size)
+: wxScrolledWindow(parent, id, pos, _size)//, wxFULL_REPAINT_ON_RESIZE)
 {
 	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 
@@ -45,13 +45,13 @@ void wxChartPanel::SetChart(Chart *chart)
 	Refresh(false);
 }
 
-void wxChartPanel::ChartChanged(Chart *chart)
+void wxChartPanel::ChartChanged(Chart *WXUNUSED(chart))
 {
 	RedrawBackBitmap();
 	Refresh(false);
 }
 
-void wxChartPanel::OnPaint(wxPaintEvent &ev)
+void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
 {
 	wxPaintDC dc(this);
 	const wxRect &rc = GetClientRect();
@@ -72,6 +72,7 @@ void wxChartPanel::OnSize(wxSizeEvent &ev)
 	ResizeBackBitmap(size);
 
 	RedrawBackBitmap();
+	Refresh();
 }
 
 void wxChartPanel::RedrawBackBitmap()

@@ -1,6 +1,5 @@
-
 /////////////////////////////////////////////////////////////////////////////
-// Name:	renderer.h
+// Name:	chartrenderer.h
 // Purpose:
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
@@ -19,20 +18,11 @@
 /**
  * Base class for all renderers.
  */
-class Renderer : public DrawObject, public RefObject
+class WXDLLEXPORT Renderer : public DrawObject, public RefObject
 {
 public:
 	Renderer();
 	virtual ~Renderer();
-
-	/**
-	 * Prepare device context.
-	 * This method called before any renderings begin,
-	 * so derivative classes can override it to perform some
-	 * one-time initialization.
-	 * @param dc device context
-	 */
-	virtual void PrepareDC(wxDC &dc);
 };
 
 #endif /*RENDERER_H_*/

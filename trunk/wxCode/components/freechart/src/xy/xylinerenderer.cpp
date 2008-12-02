@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xylinerenderer.cpp
 // Purpose: XY line renderer implementation
@@ -11,15 +10,10 @@
 
 #include <wx/xy/xylinerenderer.h>
 
-inline static void GetCoords(wxCoord &x, wxCoord &y, wxDC &dc, wxRect &rc, Axis *horizAxis, Axis *vertAxis, double value)
-{
-	x = horizAxis->ToGraphics(dc, rc.x, rc.width, value);
-	y = vertAxis->ToGraphics(dc, rc.y, rc.height, value);
-}
-
-XYLineRenderer::XYLineRenderer(bool drawSymbols, int defaultPenWidth, int defaultPenStyle)
+XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
 {
 	m_drawSymbols = drawSymbols;
+	m_drawLines = drawLines;
 	m_defaultPenWidth = defaultPenWidth;
 	m_defaultPenStyle = defaultPenStyle;
 }
@@ -30,13 +24,13 @@ XYLineRenderer::~XYLineRenderer()
 
 void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
 {
-	for (int serie = 0; serie < dataset->GetSerieCount(); serie++) {
+	FOREACH_SERIE(serie, dataset) {
 		for (int n = 0; n < dataset->GetCount(serie) - 1; n++) {
 			wxCoord x0, y0;
 			wxCoord x1, y1;
 
-			GetCoords(x0, y0, dc, rc, horizAxis, vertAxis, dataset->GetX(n, serie));
-			GetCoords(x1, y1, dc, rc, horizAxis, vertAxis, dataset->GetX(n + 1, serie));
+			TranslateCoords(x0, y0, dc, rc, horizAxis, vertAxis, dataset->GetX(n, serie), dataset->GetY(n, serie));
+			TranslateCoords(x1, y1, dc, rc, horizAxis, vertAxis, dataset->GetX(n + 1, serie), dataset->GetY(n + 1, serie));
 
 			DrawSegment(dc, serie, x0, y0, x1, y1);
 		}
@@ -45,9 +39,11 @@ void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, 
 
 void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
 {
-	wxPen *pen = GetSeriePen(serie);
-	dc.SetPen(*pen);
-	dc.DrawLine(x0, y0, x1, y1);
+	if (m_drawLines) {
+		wxPen *pen = GetSeriePen(serie);
+		dc.SetPen(*pen);
+		dc.DrawLine(x0, y0, x1, y1);
+	}
 
 	if (m_drawSymbols) {
 		Symbol *symbol = GetSerieSymbol(serie);
@@ -62,6 +58,11 @@ void XYLineRenderer::SetSeriePen(int serie, wxPen *pen)
 {
 	m_seriePens[serie] = *pen;
 	FireNeedRedraw();
+}
+
+void XYLineRenderer::SetSerieColor(int serie, wxColour *color)
+{
+	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, 1, wxSOLID));
 }
 
 void XYLineRenderer::SetSerieSymbol(int serie, Symbol *symbol)

@@ -16,7 +16,7 @@
 /**
  * An axis for displaying and scaling numerical data.
  */
-class NumberAxis : public LabelAxis
+class WXDLLEXPORT NumberAxis : public LabelAxis
 {
 public:
 	NumberAxis(AXIS_LOCATION location);

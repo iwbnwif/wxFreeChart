@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chartpanel.h
 // Purpose:
@@ -19,10 +18,10 @@
  * ChartPanel is wxWidgets panel for displaying chart.
  *
  */
-class wxChartPanel : public wxScrolledWindow, public ChartObserver
+class WXDLLEXPORT wxChartPanel : public wxScrolledWindow, public ChartObserver
 {
 public:
-	wxChartPanel(wxWindow *parent, Chart *chart = NULL,
+	wxChartPanel(wxWindow *parent, wxWindowID = wxID_ANY, Chart *chart = NULL,
 		const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize);
 	virtual ~wxChartPanel();
 

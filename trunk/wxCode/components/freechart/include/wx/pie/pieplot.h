@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	pieplot.h
 // Purpose:
@@ -22,7 +21,7 @@ const int shift3D = 20;
 /**
  * Pie plot.
  */
-class PiePlot : public Plot, public DatasetObserver
+class WXDLLEXPORT PiePlot : public Plot, public DatasetObserver
 {
 public:
 	PiePlot();

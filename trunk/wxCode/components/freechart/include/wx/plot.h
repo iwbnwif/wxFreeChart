@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	plot.h
 // Purpose:
@@ -22,7 +21,7 @@ class Plot;
 /**
  * Interface that receives Plot events, such as need redraw condition.
  */
-class PlotObserver
+class WXDLLEXPORT PlotObserver
 {
 public:
 	PlotObserver();
@@ -40,7 +39,7 @@ public:
  * Base class for all plots.
  *
  */
-class Plot : public Observable<PlotObserver>
+class WXDLLEXPORT Plot : public Observable<PlotObserver>
 {
 public:
 	Plot();
