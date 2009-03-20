@@ -74,25 +74,6 @@ public:
 	}
 
 	/**
-	 * Sets label for this axis.
-	 * @param label label
-	 */
-	void SetAxisLabel(const wxString &label)
-	{
-		m_axisLabel = label;
-		FireNeedRedraw();
-	}
-
-	/**
-	 * Returns label for this axis.
-	 * @return label
-	 */
-	const wxString &GetAxisLabel()
-	{
-		return m_axisLabel;
-	}
-
-	/**
 	 * Used to determine minimal size needed to draw axis contents,
 	 * minimal width for vertical axes, minimal height for horizontal.
 	 * @return extent
@@ -108,6 +89,16 @@ public:
 	 * @return value in graphics space
 	 */
 	virtual wxCoord ToGraphics(wxDC &dc, int minG, int range, double value) = 0;
+
+	/**
+	 * Transforms coordinate from graphics space to data space.
+	 * @param dc device context
+	 * @param minG minimal graphics space coordinate
+	 * @param range graphics space range
+	 * @param value value in data space
+	 * @return coordinate in data space
+	 */
+	virtual double ToData(wxDC &dc, int minG, int range, wxCoord g) = 0;
 
 	/**
 	 * Performs axis bounds update after dataset/s change.
@@ -143,7 +134,6 @@ protected:
 
 private:
 	AXIS_LOCATION m_location;
-	wxString m_axisLabel;
 };
 
 inline static void TranslateCoords(wxCoord &xCoord, wxCoord &yCoord, wxDC &dc, wxRect &rc, Axis *horizAxis, Axis *vertAxis, double x, double y)

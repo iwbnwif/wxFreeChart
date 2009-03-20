@@ -26,7 +26,7 @@ public:
 
 	/**
 	 * Sets format for tick marks.
-	 * @param _tickFormat tick format
+	 * @param tickFormat tick format
 	 */
 	void SetTickFormat(const wxString &tickFormat)
 	{
@@ -69,6 +69,8 @@ protected:
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
+
+	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g);
 
 private:
 	void UpdateTickValues();

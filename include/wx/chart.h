@@ -53,6 +53,11 @@ public:
 	Chart(Plot *plot, const wxString &title = wxEmptyString);
 	virtual ~Chart();
 
+	Plot *GetPlot()
+	{
+		return m_plot;
+	}
+
 	/**
 	 * Draws chart.
 	 * @param dc device context
@@ -70,6 +75,8 @@ public:
 		FireChartChanged();
 	}
 
+	wxRect CalcPlotRect(wxDC &dc, wxRect rc);
+
 	/**
 	 * Sets chart title.
 	 * @param _title chart title
@@ -78,6 +85,15 @@ public:
 	{
 		m_title = title;
 		FireChartChanged();
+	}
+
+	/**
+	 * Returns chart title.
+	 * @return chart title string
+	 */
+	const wxString &GetTitle()
+	{
+		return m_title;
 	}
 
 	/**

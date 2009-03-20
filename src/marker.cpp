@@ -17,3 +17,17 @@ Marker::Marker()
 Marker::~Marker()
 {
 }
+
+PointMarker::PointMarker()
+{
+}
+
+PointMarker::~PointMarker()
+{
+}
+
+void PointMarker::Draw(wxDC &dc, wxRect rcData)
+{
+
+}
+
