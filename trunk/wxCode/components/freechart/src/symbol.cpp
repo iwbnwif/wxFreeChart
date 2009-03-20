@@ -147,9 +147,9 @@ void TriangleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
 
 	wxCoord r = m_size / 2;
 	wxPoint pts[] = {
-		wxPoint(x - r, (int) (y + r / 3.48)),
-		wxPoint(x, (int) (y - r / 1.74)),
-		wxPoint(x + r, (int) (y + r / 3.48)),
+		wxPoint(x - r, (wxCoord) ( y + r / 3.48)),
+		wxPoint(x, (wxCoord) (y - r / 1.74)),
+		wxPoint(x + r, (wxCoord) (y + r / 3.48)),
 	};
 
 	dc.DrawPolygon(3, pts);

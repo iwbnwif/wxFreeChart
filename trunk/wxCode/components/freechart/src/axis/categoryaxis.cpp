@@ -58,6 +58,35 @@ wxCoord CategoryAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 	}
 }
 
+double CategoryAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
+{
+	wxSize maxTextExtent = GetLongestLabelExtent(dc);
+
+	wxCoord minCoord;
+	double gRange;
+
+	double maxValue = m_categoryCount - 1;
+
+	if (IsVertical()) {
+		minCoord = minG + maxTextExtent.GetHeight() / 2;
+		gRange = range - maxTextExtent.GetHeight();
+		if (gRange <= 0) {
+			return 0;
+		}
+
+		return maxValue - ((g - minCoord) * maxValue / gRange);
+	}
+	else {
+		minCoord = minG + maxTextExtent.GetWidth() / 2;
+		gRange = range - maxTextExtent.GetWidth();
+		if (gRange <= 0) {
+			return 0;
+		}
+
+		return ((g - minCoord) * maxValue / gRange);
+	}
+}
+
 void CategoryAxis::UpdateBounds()
 {
 	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(m_datasets[0]);

@@ -67,6 +67,35 @@ wxCoord DateAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 	}
 }
 
+double DateAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
+{
+	wxSize maxTextExtent = GetLongestLabelExtent(dc);
+
+	wxCoord minCoord;
+	double gRange;
+
+	double maxValue = m_dateCount - 1;
+
+	if (IsVertical()) {
+		minCoord = minG + maxTextExtent.GetHeight() / 2;
+		gRange = range - maxTextExtent.GetHeight();
+		if (gRange <= 0) {
+			return 0;
+		}
+
+		return maxValue - ((g - minCoord) * maxValue / gRange);
+	}
+	else {
+		minCoord = minG + maxTextExtent.GetWidth() / 2;
+		gRange = range - maxTextExtent.GetWidth();
+		if (gRange <= 0) {
+			return 0;
+		}
+
+		return ((g - minCoord) * maxValue / gRange);
+	}
+}
+
 double DateAxis::GetValue(int step)
 {
 	return step; // TODO temporary
@@ -89,3 +118,12 @@ bool DateAxis::IsEnd(int step)
 	return step >= m_dateCount;
 }
 
+void DateAxis::AddInterval(const wxDateSpan &interval)
+{
+
+}
+
+void DateAxis::AddInterval(const wxTimeSpan &interval)
+{
+
+}

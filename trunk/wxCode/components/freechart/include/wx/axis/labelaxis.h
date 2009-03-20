@@ -31,7 +31,91 @@ public:
 
 	virtual wxCoord ToGraphics(wxDC &dc, int minG, int range, double value);
 
+	virtual double ToData(wxDC &dc, int minG, int range, wxCoord g);
+
 	virtual wxCoord GetExtent(wxDC &dc);
+
+	/**
+	 * Sets axis title.
+	 * @param new axis title
+	 */
+	void SetTitle(const wxString &title)
+	{
+		m_title = title;
+		FireNeedRedraw();
+	}
+
+	/**
+	 * Returns axis title.
+	 * @return axis title
+	 */
+	const wxString &GetTitle()
+	{
+		return m_title;
+	}
+
+	/**
+	 * Sets axis title location.
+	 * @param location new location for axis title,
+	 * acceptable values wxLEFT, wxCENTER, wxRIGHT for horizontal axes,
+	 * wxTOP, wxCENTER, wxBOTTOM for vertical axes.
+	 */
+	void SetTitleLocation(int location)
+	{
+		if (m_titleLocation != location) {
+			m_titleLocation = location;
+			FireNeedRedraw();
+		}
+	}
+
+	/**
+	 * Returns axis title location.
+	 * @return axis title location
+	 */
+	int GetTitleLocation()
+	{
+		return m_titleLocation;
+	}
+
+	/**
+	 * Sets axis title font.
+	 * @param axis title font
+	 */
+	void SetTitleFont(wxFont &font)
+	{
+		m_titleFont = font;
+		FireNeedRedraw();
+	}
+
+	/**
+	 * Returns axis title font.
+	 * @return axis title font
+	 */
+	const wxFont &GetTitleFont()
+	{
+		return m_titleFont;
+	}
+
+	/**
+	 * Sets axis title colour.
+	 * @param new axis title colour
+	 */
+	void SetTitleColour(wxColour &colour)
+	{
+		if (m_titleColour != colour) {
+			m_titleColour = colour;
+			FireNeedRedraw();
+		}
+	}
+
+	/**
+	 * Returns axis title colour.
+	 * @return axis title colour
+	 */
+	wxColour GetTitleColour()
+	{
+		return m_titleColour;
+	}
 
 	/**
 	 * Sets minimal/maximal margins for axis.
@@ -101,6 +185,8 @@ protected:
 
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value) = 0;
 
+	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g) = 0;
+
 	virtual bool HasLabels();
 
 private:
@@ -116,6 +202,11 @@ private:
 	wxFont m_labelFont;
 	wxPen m_labelPen;
 	wxColour m_labelColour;
+
+	wxString m_title;
+	wxFont m_titleFont;
+	wxColour m_titleColour;
+	int m_titleLocation;
 };
 
 #endif /*LABELAXIS_H_*/

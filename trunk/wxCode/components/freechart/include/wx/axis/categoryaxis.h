@@ -40,6 +40,8 @@ protected:
 
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
 
+	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g);
+
 private:
 	int m_categoryCount;
 	wxString m_longestCategory;

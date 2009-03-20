@@ -149,19 +149,19 @@ wxCoord NumberAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 {
 	wxSize maxTextExtent = GetLongestLabelExtent(dc);
 
-	wxCoord coord;
+	wxCoord minCoord;
 	double gRange, k;
 
 	double valueRange = m_maxValue - m_minValue;
 
 	if (IsVertical()) {
-		coord = minG + maxTextExtent.GetHeight() / 2;
+		minCoord = minG + maxTextExtent.GetHeight() / 2;
 		gRange = range - maxTextExtent.GetHeight();
 
 		k = (m_maxValue - value) / valueRange;
 	}
 	else {
-		coord = minG + maxTextExtent.GetWidth() / 2;
+		minCoord = minG + maxTextExtent.GetWidth() / 2;
 		gRange = range - maxTextExtent.GetWidth();
 
 		k = (value - m_minValue) / valueRange;
@@ -170,7 +170,36 @@ wxCoord NumberAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
 	if (gRange < 0)
 		gRange = 0;
 
-	return (wxCoord) (k * gRange + coord);
+	return (wxCoord) (k * gRange + minCoord);
+}
+
+double NumberAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
+{
+	wxSize maxTextExtent = GetLongestLabelExtent(dc);
+
+	wxCoord minCoord;
+	double gRange;
+
+	double valueRange = m_maxValue - m_minValue;
+
+	if (IsVertical()) {
+		minCoord = minG + maxTextExtent.GetHeight() / 2;
+		gRange = range - maxTextExtent.GetHeight();
+		if (gRange <= 0) {
+			return 0;
+		}
+
+		return m_maxValue - ((g - minCoord) * valueRange / gRange);
+	}
+	else {
+		minCoord = minG + maxTextExtent.GetWidth() / 2;
+		gRange = range - maxTextExtent.GetWidth();
+		if (gRange <= 0) {
+			return 0;
+		}
+
+		return m_minValue + ((g - minCoord) * valueRange / gRange);
+	}
 }
 
 double NumberAxis::GetValue(int step)

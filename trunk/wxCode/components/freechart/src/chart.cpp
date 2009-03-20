@@ -43,12 +43,25 @@ void Chart::PlotNeedRedraw(Plot *WXUNUSED(plot))
 	FireChartChanged();
 }
 
+wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
+{
+	int topMargin = 5;
+	if (m_title.Length() != 0) {
+		dc.SetFont(m_titleFont);
+
+		wxSize textExtent = dc.GetTextExtent(m_title);
+		topMargin += textExtent.y + 2; 
+	}
+
+	Margins(rc, 5, topMargin, 5, 5);
+	return rc;
+}
+
 void Chart::Draw(wxDC &dc, wxRect &rc)
 {
 	m_background->Draw(dc, rc);
 
 	int topMargin = 5;
-
 	if (m_title.Length() != 0) {
 		dc.SetFont(m_titleFont);
 

@@ -18,6 +18,9 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 	m_labelColour = *wxBLACK;
 	m_labelFont = *wxSMALL_FONT;
 	m_labelPen = *wxBLACK_PEN;
+	m_titleFont = *wxNORMAL_FONT;
+	m_titleColour = *wxBLACK;
+	m_titleLocation = wxCENTER;
 	m_marginMin = 5;
 	m_marginMax = 5;
 }
@@ -31,11 +34,20 @@ wxCoord LabelAxis::GetExtent(wxDC &dc)
 	wxSize maxTextExtent = GetLongestLabelExtent(dc);
 	wxCoord extent = labelLineSize + labelGap;
 
+	wxSize titleExtent;
+
+	if (m_title.Length() != 0) {
+		dc.SetFont(m_titleFont);
+		titleExtent = dc.GetTextExtent(m_title);
+	}
+
 	if (IsVertical()) {
 		extent += maxTextExtent.x;
+		extent += titleExtent.y;
 	}
 	else {
 		extent += maxTextExtent.y;
+		extent += titleExtent.x;
 	}
 	return extent;
 }
@@ -166,6 +178,16 @@ wxCoord LabelAxis::ToGraphics(wxDC &dc, int minG, int range, double value)
 	return DoToGraphics(dc, minG, range, value);
 }
 
+double LabelAxis::ToData(wxDC &dc, int minG, int range, wxCoord g)
+{
+	minG += m_marginMin;
+	range -= (m_marginMin + m_marginMax);
+	if (range < 0)
+		range = 0;
+
+	return DoToData(dc, minG, range, g);	
+}
+
 void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 {
 	if (!HasLabels())
@@ -194,6 +216,55 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 
 void LabelAxis::Draw(wxDC &dc, wxRect rc)
 {
+	if (m_title.Length() != 0) {
+		wxSize titleExtent = dc.GetTextExtent(m_title);
+
+		dc.SetFont(m_titleFont);
+		dc.SetTextForeground(m_titleColour);
+
+		if (IsVertical()) {
+			wxCoord y;
+			switch (m_titleLocation) {
+				case wxTOP:
+					y = rc.y + titleExtent.x;
+					break;
+				case wxCENTER:
+					y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
+					break;
+				case wxBOTTOM:	
+					y = rc.y + rc.height;
+					break;
+				default:
+					// fallback to center
+					y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
+			}
+
+			dc.DrawRotatedText(m_title, rc.x, y, 90);
+			rc.x += titleExtent.y;
+			rc.width -= titleExtent.y;
+		}
+		else {
+			wxCoord x;
+			switch (m_titleLocation) {
+				case wxLEFT:
+					x = rc.x;
+					break;
+				case wxCENTER:
+					x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
+					break;
+				case wxRIGHT:	
+					x = rc.x + rc.width - titleExtent.x;
+					break;
+				default:
+					// fallback to center
+					x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
+			}
+
+			dc.DrawText(m_title, x, rc.y + rc.height - titleExtent.y);
+			rc.height -= titleExtent.y;
+		}
+	}
+
 	DrawLabels(dc, rc);
 	DrawBorderLine(dc, rc);
 }

@@ -12,8 +12,9 @@
 #define MARKER_H_
 
 #include <wx/wxfreechartdefs.h>
+#include <wx/drawobject.h>
 
-class WXDLLEXPORT Marker
+class WXDLLEXPORT Marker : public DrawObject
 {
 public:
 	Marker();
@@ -21,6 +22,27 @@ public:
 
 	virtual void Draw(wxDC &dc, wxRect rcData) = 0;
 };
+
+class WXDLLEXPORT PointMarker : public Marker
+{
+public:
+	PointMarker();
+	virtual ~PointMarker();
+
+	virtual void Draw(wxDC &dc, wxRect rcData);
+
+	void SetText(const wxString &text)
+	{
+		m_text = text;
+		FireNeedRedraw();
+	}
+
+private:
+	wxString m_text;
+	wxFont m_textFont;
+	wxColour m_textColour;
+};
+
 
 class WXDLLEXPORT LineMarker
 {

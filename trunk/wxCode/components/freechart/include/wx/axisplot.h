@@ -79,6 +79,8 @@ public:
 
 	void SetLegend(Legend *legend);
 
+	bool ToDataCoords(int nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y);
+
 	//
 	// DrawObserver
 	//

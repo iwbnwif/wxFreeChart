@@ -36,6 +36,7 @@ AxisPlot::~AxisPlot()
 {
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		m_datasets[n]->RemoveObserver(this);
+//		delete m_datasets[n];
 	}
 
 	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
@@ -213,6 +214,29 @@ wxCoord AxisPlot::GetAxesExtent(wxDC &dc, Array<Axis, 1> *axes)
 	return ext;
 }
 
+bool AxisPlot::ToDataCoords(int nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y)
+{
+	Dataset *dataset = GetDataset(nData);
+	wxCHECK_MSG(dataset != NULL, false, wxT("AxisPlot::ToDataCoords: Invalid dataset index"));
+
+	Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
+	Axis *vertAxis = GetDatasetVerticalAxis(dataset);
+
+	wxCHECK_MSG(horizAxis != NULL && vertAxis != NULL, false, wxT("AxisPlot::ToDataCoords: dataset not linked with horizontal or vertical axis"));
+
+	wxRect rcData;
+	wxRect rcLegend;
+
+	CalcDataArea(dc, rc, rcData, rcLegend);
+	if (!rcData.Contains(gx, gy)) {
+		return false;
+	}
+
+	*x = horizAxis->ToData(dc, rcData.x, rcData.width, gx);
+	*y = vertAxis->ToData(dc, rcData.y, rcData.height, gy);
+	return true;
+}
+
 void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegend)
 {
 	rcData = rc;
@@ -243,17 +267,19 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 	if (m_legend != NULL) {
 		wxSize legendExtent = m_legend->GetExtent(dc, m_datasets);
 
+		const int legendGap = 2; // TODO temporary here!
+
 		switch (m_legend->GetHorizPosition()) {
 		case wxLEFT:
 			rcLegend.x = rcData.x;
 
-			rcData.x += legendExtent.x;
-			rcData.width -= legendExtent.x;
+			rcData.x += legendExtent.x + legendGap;
+			rcData.width -= legendExtent.x + legendGap;
 			break;
 		case wxRIGHT:
-			rcLegend.x = rcData.x + rcData.width - legendExtent.x;
+			rcLegend.x = rcData.x + rcData.width - legendExtent.x + legendGap;
 
-			rcData.width -= legendExtent.x;
+			rcData.width -= legendExtent.x + legendGap;
 			break;
 		case wxCENTER:
 			rcLegend.x = rcData.x + rcData.width / 2 - legendExtent.x / 2;
@@ -268,13 +294,13 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 		case wxTOP:
 			rcLegend.y = rcData.y;
 
-			rcData.y += legendExtent.y;
-			rcData.height -= legendExtent.y;
+			rcData.y += legendExtent.y + legendGap;
+			rcData.height -= legendExtent.y + legendGap;
 			break;
 		case wxBOTTOM:
-			rcLegend.y = rcData.y + rcData.height - legendExtent.y;
+			rcLegend.y = rcData.y + rcData.height - legendExtent.y + legendGap;
 
-			rcData.height -= legendExtent.y;
+			rcData.height -= legendExtent.y + legendGap;
 			break;
 		case wxCENTER:
 			rcLegend.y = rcData.y + rcData.height / 2 - legendExtent.y / 2;

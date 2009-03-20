@@ -49,13 +49,18 @@ public:
 
 	const wxString &GetName()
 	{
-		return name;
+		return m_name;
+	}
+
+	void SetName(const wxString &name)
+	{
+		m_name = name;;
 	}
 
 private:
 	double *m_data;
 	int m_count;
-	wxString name;
+	wxString m_name;
 };
 
 WX_DECLARE_OBJARRAY(XYSerie *, XYSerieArray);
@@ -105,6 +110,12 @@ public:
 	{
 		return m_series[serie]->GetName();
 		//return wxString::Format(wxT("serie %i"), serie);
+	}
+
+	void SetSerieName(int serie, const wxString &name)
+	{
+		m_series[serie]->SetName(name);
+		DatasetChanged();
 	}
 
 private:
@@ -205,7 +216,8 @@ public:
 };
 
 /**
- * The same as XYDemo2, but draws symbols instead of lines
+ * The same as XYDemo2, but draws symbols instead of lines.
+ * With legend.
  */
 class XYDemo3 : public ChartDemo
 {
@@ -251,6 +263,13 @@ public:
 		// link axes and dataset
 		plot->LinkDataVerticalAxis(0, 0);
 		plot->LinkDataHorizontalAxis(0, 0);
+
+		// set serie names to be displayed on legend
+		dataset->SetSerieName(0, wxT("Serie 0"));
+		dataset->SetSerieName(1, wxT("Serie 1"));
+
+		// set legend to plot
+		plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
 		// and finally create chart
 		return new Chart(plot, GetName());

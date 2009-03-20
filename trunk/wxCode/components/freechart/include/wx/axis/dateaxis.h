@@ -13,6 +13,7 @@
 
 #include <wx/axis/labelaxis.h>
 
+
 /**
  * An axis for displaying date/time values.
  * TODO:
@@ -55,6 +56,8 @@ protected:
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
 	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
+
+	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g);
 
 private:
 	int m_dateCount;
