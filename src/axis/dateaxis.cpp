@@ -120,10 +120,10 @@ bool DateAxis::IsEnd(int step)
 
 void DateAxis::AddInterval(const wxDateSpan &interval)
 {
-
+	// TODO not implemented
 }
 
 void DateAxis::AddInterval(const wxTimeSpan &interval)
 {
-
+	// TODO not implemented
 }

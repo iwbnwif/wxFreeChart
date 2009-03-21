@@ -17,3 +17,31 @@ Renderer::Renderer()
 Renderer::~Renderer()
 {
 }
+
+void Renderer::SetSerieColor(int serie, wxColour *color)
+{
+	m_serieColors[serie] = *color;
+	//SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, 1, wxSOLID));
+}
+
+wxColour Renderer::GetSerieColor(int serie)
+{
+	if (m_serieColors.find(serie) == m_serieColors.end()) {
+		return GetDefaultColour(serie);
+	}
+	return m_serieColors[serie];
+}
+
+void Renderer::SetSerieSymbol(int serie, Symbol *symbol)
+{
+	m_serieSymbols[serie] = symbol;
+	FireNeedRedraw();
+}
+
+Symbol *Renderer::GetSerieSymbol(int serie)
+{
+	if (m_serieSymbols.find(serie) == m_serieSymbols.end()) {
+		return GetDefaultSymbol(serie);
+	}
+	return m_serieSymbols[serie];
+}

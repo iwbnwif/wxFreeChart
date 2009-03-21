@@ -39,7 +39,7 @@ public:
 	//
 	// ChartObserver
 	//
-	virtual void ChartChanged(Chart *_chart);
+	virtual void ChartChanged(Chart *chart);
 
 private:
 	void ResizeBackBitmap(wxSize size);

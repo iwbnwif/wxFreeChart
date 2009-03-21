@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	legend.h
-// Purpose:
+// Purpose: Legend declaration.
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -20,7 +20,6 @@ const wxCoord labelsSpacing = 2;
 
 /**
  * Legend.
- * TODO: initial quick and dirty.
  */
 class WXDLLEXPORT Legend
 {
@@ -44,6 +43,16 @@ public:
 	int GetHorizPosition()
 	{
 		return m_horizPosition;
+	}
+
+	void SetTextFont(wxFont font)
+	{
+		m_font = font;
+	}
+
+	wxFont GetTextFont()
+	{
+		return m_font;
 	}
 
 	/**

@@ -49,7 +49,13 @@ public:
 	Dataset();
 	virtual ~Dataset();
 
+	/**
+	 * Sets renderer for this dataset.
+	 * @param renderer new renderer
+	 */
 	void SetRenderer(Renderer *renderer);
+
+	Renderer *GetBaseRenderer();
 
 	void BeginUpdate();
 
