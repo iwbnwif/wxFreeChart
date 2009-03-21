@@ -151,8 +151,15 @@ public:
 		plot->AddDataset(dataset);
 
 		// add left and bottom number axes
-		plot->AddAxis(new NumberAxis(AXIS_LEFT));
-		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// optional: set axis titles
+		leftAxis->SetTitle(wxT("X"));
+		bottomAxis->SetTitle(wxT("Y"));
+
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
 
 		// link axes and dataset
 		plot->LinkDataVerticalAxis(0, 0);

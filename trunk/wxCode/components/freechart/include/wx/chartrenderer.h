@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chartrenderer.h
-// Purpose:
+// Purpose: Dataset renderer base class declaration.
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -14,6 +14,7 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/drawobject.h>
 #include <wx/refobject.h>
+#include <wx/art.h>
 
 /**
  * Base class for all renderers.
@@ -23,6 +24,18 @@ class WXDLLEXPORT Renderer : public DrawObject, public RefObject
 public:
 	Renderer();
 	virtual ~Renderer();
+
+	virtual void SetSerieColor(int serie, wxColour *color);
+
+	virtual wxColour GetSerieColor(int serie);
+
+	virtual void SetSerieSymbol(int serie, Symbol *symbol);
+
+	virtual Symbol *GetSerieSymbol(int serie);
+
+private:
+	ColorMap m_serieColors;
+	SymbolMap m_serieSymbols;
 };
 
 #endif /*RENDERER_H_*/

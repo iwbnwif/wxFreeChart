@@ -43,11 +43,11 @@ wxCoord LabelAxis::GetExtent(wxDC &dc)
 
 	if (IsVertical()) {
 		extent += maxTextExtent.x;
-		extent += titleExtent.y;
+		extent += titleExtent.x;
 	}
 	else {
 		extent += maxTextExtent.y;
-		extent += titleExtent.x;
+		extent += titleExtent.y;
 	}
 	return extent;
 }
@@ -185,7 +185,7 @@ double LabelAxis::ToData(wxDC &dc, int minG, int range, wxCoord g)
 	if (range < 0)
 		range = 0;
 
-	return DoToData(dc, minG, range, g);	
+	return DoToData(dc, minG, range, g);
 }
 
 void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
@@ -231,7 +231,7 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 				case wxCENTER:
 					y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
 					break;
-				case wxBOTTOM:	
+				case wxBOTTOM:
 					y = rc.y + rc.height;
 					break;
 				default:
@@ -252,7 +252,7 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 				case wxCENTER:
 					x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
 					break;
-				case wxRIGHT:	
+				case wxRIGHT:
 					x = rc.x + rc.width - titleExtent.x;
 					break;
 				default:

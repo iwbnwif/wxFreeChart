@@ -61,6 +61,7 @@ FIXME: write more.
 				V. Known issues.
 - Work with wxWidgets 2.6.x not tested.
 - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
+  Other ports are not tested.
 - Antialiasing doesn't works.
 - Pie plots is very ugly, and must be cleaned up or rewritten.
 - Transparency not implemented. Needed for area/histogram charts with

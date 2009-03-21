@@ -75,6 +75,12 @@ public:
 		FireChartChanged();
 	}
 
+	/**
+	 * Calcalate plot area rectangle.
+	 * @param dc device context
+	 * @param rc entire chart rectangle
+	 * @return plot area rectangle
+	 */
 	wxRect CalcPlotRect(wxDC &dc, wxRect rc);
 
 	/**

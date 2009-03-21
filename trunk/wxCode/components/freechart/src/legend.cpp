@@ -10,6 +10,9 @@
 
 #include <wx/legend.h>
 
+const int symbolTextGap = 2;
+const int margin = 2;
+
 Legend::Legend(int vertPosition, int horizPosition, AreaBackground *background)
 {
 	m_vertPosition = vertPosition;
@@ -32,7 +35,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 
 	m_background->Draw(dc, rc);
 
-	wxCoord x = rc.x;
+	wxCoord x = rc.x + margin;
 	wxCoord y = rc.y;
 
 	for (int n = 0; n < datasets.GetSize(); n++) {
@@ -42,8 +45,15 @@ void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 			wxString serieName = dataset->GetSerieName(nSerie);
 			wxSize textExtent = dc.GetTextExtent(serieName);
 
+			Renderer *renderer = dataset->GetBaseRenderer();
+			Symbol *symbol = renderer->GetSerieSymbol(nSerie);
 
-			dc.DrawText(serieName, x, y);
+			wxSize symbolExtent = symbol->GetExtent();
+			symbol->Draw(dc, x + symbolExtent.x / 2, y + symbolExtent.y / 2 + textExtent.y / 2);
+
+			wxCoord textX = x + symbolExtent.x + symbolTextGap;
+
+			dc.DrawText(serieName, textX, y);
 
 			y += textExtent.y + labelsSpacing;
 		}
@@ -62,8 +72,15 @@ wxSize Legend::GetExtent(wxDC &dc, Array<Dataset, 1> &datasets)
 		for (int nSerie = 0; nSerie < dataset->GetSerieCount(); nSerie++) {
 			wxSize textExtent = dc.GetTextExtent(dataset->GetSerieName(nSerie));
 
+			Renderer *renderer = dataset->GetBaseRenderer();
+			Symbol *symbol = renderer->GetSerieSymbol(nSerie);
+
+			wxSize symbolExtent = symbol->GetExtent();
+
+			wxCoord width = textExtent.x + symbolExtent.x + symbolTextGap + 2 * margin;
+
 			extent.y += textExtent.y + labelsSpacing;
-			extent.x = MAX(extent.x, textExtent.x);
+			extent.x = MAX(extent.x, width);
 		}
 	}
 	return extent;

@@ -3,7 +3,7 @@
 
 /**
  * Object with reference counter.
- * DEPRECATED: use wxWidgets reference counting.
+ * TODO DEPRECATED: use wxWidgets reference counting.
  */
 class WXDLLEXPORT RefObject
 {

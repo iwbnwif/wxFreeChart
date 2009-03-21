@@ -32,17 +32,17 @@ public:
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
-	void SetSeriePen(int serie, wxPen *pen);
-	
-	void SetSerieColor(int serie, wxColour *color);
+	virtual void SetSerieColor(int serie, wxColour *color);
+	virtual wxColour GetSerieColor(int serie);
 
-	void SetSerieSymbol(int serie, Symbol *symbol);
+	/**
+	 * Sets pen to draw serie lines.
+	 * @param serie serie index
+	 * @param pen pen for serie
+	 */
+	void SetSeriePen(int serie, wxPen *pen);
 
 	wxPen *GetSeriePen(int serie);
-
-	wxColour GetSerieColor(int serie);
-
-	Symbol *GetSerieSymbol(int serie);
 
 private:
 	void DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
@@ -51,7 +51,6 @@ private:
 	bool m_drawLines;
 
 	PenMap m_seriePens;
-	SymbolMap m_serieSymbols;
 
 	int m_defaultPenWidth;
 	int m_defaultPenStyle;

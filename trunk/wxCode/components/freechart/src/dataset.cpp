@@ -38,6 +38,11 @@ void Dataset::SetRenderer(Renderer *renderer)
 	DatasetChanged();
 }
 
+Renderer *Dataset::GetBaseRenderer()
+{
+	return m_renderer;
+}
+
 void Dataset::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
 	FireDatasetChanged();
@@ -50,8 +55,10 @@ void Dataset::BeginUpdate()
 
 void Dataset::EndUpdate()
 {
-	m_updating = false;
-	FireDatasetChanged();
+	if (m_updating) {
+		m_updating = false;
+		FireDatasetChanged();
+	}
 }
 
 void Dataset::DatasetChanged()

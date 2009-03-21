@@ -65,12 +65,6 @@ void XYLineRenderer::SetSerieColor(int serie, wxColour *color)
 	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, 1, wxSOLID));
 }
 
-void XYLineRenderer::SetSerieSymbol(int serie, Symbol *symbol)
-{
-	m_serieSymbols[serie] = symbol;
-	FireNeedRedraw();
-}
-
 wxColour XYLineRenderer::GetSerieColor(int serie)
 {
 	if (m_seriePens.find(serie) == m_seriePens.end()) {
@@ -87,10 +81,3 @@ wxPen *XYLineRenderer::GetSeriePen(int serie)
 	return &m_seriePens[serie];
 }
 
-Symbol *XYLineRenderer::GetSerieSymbol(int serie)
-{
-	if (m_serieSymbols.find(serie) == m_serieSymbols.end()) {
-		return GetDefaultSymbol(serie);
-	}
-	return m_serieSymbols[serie];
-}
