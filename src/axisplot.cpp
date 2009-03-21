@@ -29,7 +29,7 @@ AxisPlot::AxisPlot()
 
 	m_legend = NULL;
 	m_dataBackground = NULL;
-	SetDataBackground(new FillAreaBackground());
+	SetDataBackground(new FillAreaDraw());
 }
 
 AxisPlot::~AxisPlot()
@@ -43,7 +43,7 @@ AxisPlot::~AxisPlot()
 	SAFE_DELETE(m_dataBackground);
 }
 
-void AxisPlot::SetDataBackground(AreaBackground *dataBackground)
+void AxisPlot::SetDataBackground(AreaDraw *dataBackground)
 {
 	SAFE_REPLACE_OBSERVER(this, m_dataBackground, dataBackground);
 	SAFE_REPLACE(m_dataBackground, dataBackground);
@@ -288,7 +288,6 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 			//(wxT("Invalid legend horizontal position"));
 			return ;
 		}
-
 
 		switch (m_legend->GetVertPosition()) {
 		case wxTOP:

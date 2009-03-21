@@ -17,7 +17,7 @@
 #include <wx/observable.h>
 #include <wx/plot.h>
 
-#include <wx/areabackground.h>
+#include <wx/areadraw.h>
 
 class Chart;
 
@@ -51,6 +51,7 @@ public:
 	 * @param _title chart title (empty string - no title)
 	 */
 	Chart(Plot *plot, const wxString &title = wxEmptyString);
+
 	virtual ~Chart();
 
 	Plot *GetPlot()
@@ -69,7 +70,7 @@ public:
 	 * Sets chart background.
 	 * @param _background chart background
 	 */
-	void SetBackground(AreaBackground *background)
+	void SetBackground(AreaDraw *background)
 	{
 		SAFE_REPLACE(m_background, background);
 		FireChartChanged();
@@ -119,7 +120,7 @@ public:
 
 private:
 	Plot *m_plot;
-	AreaBackground *m_background;
+	AreaDraw *m_background;
 	wxString m_title;
 	wxFont m_titleFont;
 

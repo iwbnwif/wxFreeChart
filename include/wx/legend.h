@@ -14,7 +14,7 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/array.h>
 #include <wx/dataset.h>
-#include <wx/areabackground.h>
+#include <wx/areadraw.h>
 
 const wxCoord labelsSpacing = 2;
 
@@ -30,7 +30,7 @@ public:
 	 * @param horizPosition horizontal position, can be wxLEFT, wxCENTER, wxRIGHT
 	 * @param background background for legend area
 	 */
-	Legend(int vertPosition, int horizPosition, AreaBackground *background = NULL);
+	Legend(int vertPosition, int horizPosition, AreaDraw *background = new FillAreaDraw());
 	virtual ~Legend();
 
 	void Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets);
@@ -66,7 +66,7 @@ private:
 
 	wxFont m_font;
 
-	AreaBackground *m_background;
+	AreaDraw *m_background;
 };
 
 #endif /*LEGEND_H_*/

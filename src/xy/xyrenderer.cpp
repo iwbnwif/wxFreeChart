@@ -10,6 +10,8 @@
 
 #include <wx/xy/xyrenderer.h>
 
+IMPLEMENT_CLASS(XYRenderer, Renderer)
+
 XYRenderer::XYRenderer()
 {
 }

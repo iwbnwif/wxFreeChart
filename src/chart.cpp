@@ -24,7 +24,7 @@ ChartObserver::~ChartObserver()
 Chart::Chart(Plot *plot, const wxString &title)
 {
 	// defaults
-	m_background = new FillAreaBackground(*wxLIGHT_GREY_PEN, *wxLIGHT_GREY_BRUSH);
+	m_background = new FillAreaDraw(*wxLIGHT_GREY_PEN, *wxLIGHT_GREY_BRUSH);
 	m_titleFont = *wxNORMAL_FONT;
 
 	m_plot = plot;
@@ -50,7 +50,7 @@ wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
 		dc.SetFont(m_titleFont);
 
 		wxSize textExtent = dc.GetTextExtent(m_title);
-		topMargin += textExtent.y + 2; 
+		topMargin += textExtent.y + 2;
 	}
 
 	Margins(rc, 5, topMargin, 5, 5);

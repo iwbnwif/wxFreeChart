@@ -11,6 +11,8 @@
 #include <wx/xy/xyhistorenderer.h>
 #include <wx/art.h>
 
+IMPLEMENT_CLASS(XYHistoRenderer, XYRenderer)
+
 XYHistoRenderer::XYHistoRenderer(int barWidth, bool vertical)
 {
 	m_barWidth = barWidth;
@@ -39,7 +41,7 @@ void XYHistoRenderer::DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxC
 		rcBar.height = m_barWidth;
 	}
 
-	AreaBackground *barArea = GetBarArea(serie);
+	AreaDraw *barArea = GetBarArea(serie);
 	barArea->Draw(dc, rcBar);
 }
 
@@ -67,22 +69,15 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 	}
 }
 
-void XYHistoRenderer::DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
+void XYHistoRenderer::SetBarArea(int serie, AreaDraw *barArea)
 {
-// TODO
-	//dc.SetPen(symbolPen);
-	dc.DrawLine(x0, (y0 + y1) / 2, x1, (y0 + y1) / 2);
-}
-
-void XYHistoRenderer::SetBarArea(int serie, AreaBackground *barArea)
-{
-	m_barAreas.SetAreaBackground(serie, barArea);
+	m_barAreas.SetAreaDraw(serie, barArea);
 	FireNeedRedraw();
 }
 
-AreaBackground *XYHistoRenderer::GetBarArea(int serie)
+AreaDraw *XYHistoRenderer::GetBarArea(int serie)
 {
-	return m_barAreas.GetAreaBackground(serie);
+	return m_barAreas.GetAreaDraw(serie);
 }
 
 void XYHistoRenderer::NeedRedraw(DrawObject *WXUNUSED(obj))

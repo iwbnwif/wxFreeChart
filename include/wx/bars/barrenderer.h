@@ -12,11 +12,14 @@
 #define BARRENDERER_H_
 
 #include "wx/xy/xyrenderer.h"
-#include "wx/areabackground.h"
+#include "wx/areadraw.h"
 
 class CategoryDataset;
 
-class BarType
+/**
+ *
+ */
+class WXDLLEXPORT BarType
 {
 public:
 	BarType();
@@ -24,10 +27,21 @@ public:
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, int item, CategoryDataset *dataset);
 
-	void SetBarArea(int serie, AreaBackground *ab)
+	/**
+	 * Sets area draw object to draw specified serie.
+	 * @param serie serie index
+	 * @param ad area draw for serie
+	 */
+	void SetBarArea(int serie, AreaDraw *ad)
 	{
-		m_barAreas.SetAreaBackground(serie, ab);
+		m_barAreas.SetAreaDraw(serie, ad);
 	}
+
+	//
+	// Called from BarRenderer
+	//
+	virtual double GetMinValue(CategoryDataset *dataset);
+	virtual double GetMaxValue(CategoryDataset *dataset);
 
 protected:
 	virtual void GetBar(int item, int serie, CategoryDataset *dataset,
@@ -35,10 +49,13 @@ protected:
 
 	double m_base;
 
-	AreaBackgroundCollection m_barAreas;
+	AreaDrawCollection m_barAreas;
 };
 
-class NormalBarType : public BarType
+/**
+ * Standard bar type. Draws series parallel to each other.
+ */
+class WXDLLEXPORT NormalBarType : public BarType
 {
 public:
 	NormalBarType(int barWidth, int serieGap = 1, double base = 0.0);
@@ -51,15 +68,19 @@ protected:
 private:
 	int m_barWidth;
 	int m_serieGap;
-
-	double base;
 };
 
-class StackedBarType : public BarType
+/**
+ * Draws series in stack, after each other.
+ */
+class WXDLLEXPORT StackedBarType : public BarType
 {
 public:
 	StackedBarType(int barWidth, double base);
 	virtual ~StackedBarType();
+
+	virtual double GetMinValue(CategoryDataset *dataset);
+	virtual double GetMaxValue(CategoryDataset *dataset);
 
 protected:
 	virtual void GetBar(int item, int serie, CategoryDataset *dataset,
@@ -67,11 +88,12 @@ protected:
 
 private:
 	int m_barWidth;
-
-	double base;
 };
 
-class LayeredBarType : public BarType
+/**
+ * Draws series overlapped.
+ */
+class WXDLLEXPORT LayeredBarType : public BarType
 {
 public:
 	LayeredBarType(int initialBarWidth, double base);
@@ -86,22 +108,31 @@ private:
 	double m_base;
 };
 
-class BarRenderer : public Renderer
+class WXDLLEXPORT BarRenderer : public Renderer
 {
+	DECLARE_CLASS(BarRenderer)
 public:
 	BarRenderer(BarType *barType);
 	virtual ~BarRenderer();
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
 
+	/**
+	 * Sets bar type. BarRenderer owns this object.
+	 * @param barType new bar type.
+	 */
 	void SetBarType(BarType *barType);
+
+	virtual double GetMinValue(CategoryDataset *dataset);
+	virtual double GetMaxValue(CategoryDataset *dataset);
 
 protected:
 	BarType *m_barType;
 };
 
-class GanttBarRenderer : public BarRenderer
+class WXDLLEXPORT GanttBarRenderer : public BarRenderer
 {
+	DECLARE_CLASS(GanttBarRenderer)
 public:
 	GanttBarRenderer(BarType *barType);
 	virtual ~GanttBarRenderer();

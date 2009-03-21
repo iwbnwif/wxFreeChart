@@ -21,13 +21,13 @@ XYPlot::~XYPlot()
 bool XYPlot::AcceptAxis(Axis *axis)
 {
 	// TODO temporary commented
-	//return (dynamic_cast<NumberAxis *>(axis) != NULL);
+	//return (wxDynamicCase(axis, NumberAxis) != NULL);
 	return true;
 }
 
 bool XYPlot::AcceptDataset(Dataset *dataset)
 {
-	return (dynamic_cast<XYDataset *>(dataset) != NULL);
+	return (wxDynamicCast(dataset, XYDataset) != NULL);
 }
 
 void XYPlot::DrawDatasets(wxDC &dc, wxRect rc)

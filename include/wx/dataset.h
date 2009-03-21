@@ -43,8 +43,10 @@ public:
  * Base class for all datasets (XYDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
-class WXDLLEXPORT Dataset : public RefObject, public Observable<DatasetObserver>, public DrawObserver
+class WXDLLEXPORT Dataset : public wxObject,
+	public RefObject, public Observable<DatasetObserver>, public DrawObserver
 {
+	DECLARE_CLASS(Dataset)
 public:
 	Dataset();
 	virtual ~Dataset();
@@ -81,6 +83,10 @@ public:
 	 */
 	virtual wxString GetSerieName(int serie) = 0;
 
+	virtual double GetMinValue(bool vertical) = 0;
+
+	virtual double GetMaxValue(bool vertical) = 0;
+
 	//
 	// DrawObjectObserver
 	//
@@ -104,22 +110,9 @@ private:
 	FIRE_WITH_THIS(DatasetChanged);
 };
 
-/**
- * Single value range.
- */
-class WXDLLEXPORT ValueRange
+class WXDLLEXPORT DateTimeDataset : public Dataset
 {
-public:
-	ValueRange();
-	virtual ~ValueRange();
-
-	virtual double GetMinValue(bool vertical) = 0;
-
-	virtual double GetMaxValue(bool vertical) = 0;
-};
-
-class WXDLLEXPORT DateTimeDataset
-{
+	DECLARE_CLASS(DateTimeDataset)
 public:
 	DateTimeDataset();
 	virtual ~DateTimeDataset();

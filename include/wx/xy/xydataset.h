@@ -19,8 +19,9 @@ class XYRenderer;
 /**
  * Base class for XY datasets.
  */
-class WXDLLEXPORT XYDataset : public Dataset, public ValueRange
+class WXDLLEXPORT XYDataset : public Dataset
 {
+	DECLARE_CLASS(XYDataset)
 public:
 	XYDataset();
 	virtual ~XYDataset();
@@ -68,9 +69,7 @@ public:
 	 */
 	virtual double GetMinX();
 
-	//
-	// ValueDataset
-	//
+
 	virtual double GetMinValue(bool verticalAxis);
 
 	virtual double GetMaxValue(bool verticalAxis);

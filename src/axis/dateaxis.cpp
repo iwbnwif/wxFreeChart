@@ -10,6 +10,8 @@
 
 #include <wx/axis/dateaxis.h>
 
+IMPLEMENT_CLASS(DateAxis, Axis)
+
 DateAxis::DateAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
@@ -24,7 +26,7 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 {
 	// Accepts only date/time dataset
 	// and only one dataset
-	return (dynamic_cast<DateTimeDataset *>(dataset) != NULL)
+	return (wxDynamicCast(dataset, DateTimeDataset) != NULL)
 		&& (m_datasets.GetSize() == 0);
 }
 
@@ -103,7 +105,7 @@ double DateAxis::GetValue(int step)
 
 void DateAxis::GetLabel(int step, wxString &label)
 {
-	DateTimeDataset *dataset = dynamic_cast<DateTimeDataset *>(m_datasets[0]);
+	DateTimeDataset *dataset = wxDynamicCast(m_datasets[0], DateTimeDataset);
 	if (dataset == NULL) {
 		return ; // BUG
 	}

@@ -13,15 +13,11 @@
 const int symbolTextGap = 2;
 const int margin = 2;
 
-Legend::Legend(int vertPosition, int horizPosition, AreaBackground *background)
+Legend::Legend(int vertPosition, int horizPosition, AreaDraw *background)
 {
 	m_vertPosition = vertPosition;
 	m_horizPosition = horizPosition;
 	m_background = background;
-
-	if (m_background == NULL) {
-		m_background = new FillAreaBackground();
-	}
 }
 
 Legend::~Legend()

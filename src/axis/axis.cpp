@@ -10,6 +10,8 @@
 
 #include <wx/axis/axis.h>
 
+IMPLEMENT_CLASS(Axis, wxObject)
+
 Axis::Axis(AXIS_LOCATION location)
 {
 	m_location = location;

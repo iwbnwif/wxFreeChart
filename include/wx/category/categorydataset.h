@@ -17,7 +17,7 @@
 /**
  * Dataset for data values in form [category name, value].
  */
-class WXDLLEXPORT CategoryDataset : public XYDataset//, public ValueRange
+class WXDLLEXPORT CategoryDataset : public XYDataset
 {
 public:
 	CategoryDataset();
@@ -47,9 +47,6 @@ public:
 
 	virtual bool HasValue(int index, int serie);
 
-	//
-	// ValueRange
-	//
 	virtual double GetMinValue(bool verticalAxis);
 
 	virtual double GetMaxValue(bool verticalAxis);

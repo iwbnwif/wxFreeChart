@@ -15,6 +15,7 @@
 
 class WXDLLEXPORT XYAreaRenderer : public XYRenderer
 {
+	DECLARE_CLASS(XYAreaRenderer)
 public:
 	XYAreaRenderer();
 	virtual ~XYAreaRenderer();

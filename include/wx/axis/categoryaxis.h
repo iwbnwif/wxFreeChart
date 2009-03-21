@@ -18,6 +18,7 @@
  */
 class WXDLLEXPORT CategoryAxis : public LabelAxis
 {
+	DECLARE_CLASS(CategoryAxis)
 public:
 	CategoryAxis(AXIS_LOCATION location);
 	virtual ~CategoryAxis();

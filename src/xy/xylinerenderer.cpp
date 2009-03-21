@@ -10,6 +10,8 @@
 
 #include <wx/xy/xylinerenderer.h>
 
+IMPLEMENT_CLASS(XYLineRenderer, XYRenderer)
+
 XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
 {
 	m_drawSymbols = drawSymbols;

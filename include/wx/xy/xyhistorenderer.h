@@ -12,30 +12,34 @@
 #define XYHISTORENDERER_H_
 
 #include <wx/xy/xyrenderer.h>
-#include <wx/areabackground.h>
+#include <wx/areadraw.h>
 
 /**
  * Renderer for displaying XY data as histograms.
  */
 class WXDLLEXPORT XYHistoRenderer : public XYRenderer, public DrawObserver
 {
+	DECLARE_CLASS(XYHistoRenderer)
 public:
 	XYHistoRenderer(int barWidth = 10, bool vertical = true);
 	virtual ~XYHistoRenderer();
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
-	virtual void DrawLegendSymbol(wxDC &dc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
-
 	/**
 	 * Set area fill to draw specified serie.
-	 * XYHistoRenderer takes ownership over barArea.
+	 * XYHistoRenderer takes ownership of barArea.
 	 * @param serie serie index
 	 * @param barArea area background object to draw bars
 	 */
-	void SetBarArea(int serie, AreaBackground *barArea);
+	void SetBarArea(int serie, AreaDraw *barArea);
 
-	AreaBackground *GetBarArea(int serie);
+	/**
+	 * Returns area draw for specified serie.
+	 * @param serie serie index
+	 * @return area draw for specified serie
+	 */
+	AreaDraw *GetBarArea(int serie);
 
 	//
 	// DrawObserver
@@ -50,7 +54,7 @@ private:
 
 	wxCoord m_serieShift;
 
-	AreaBackgroundCollection m_barAreas;
+	AreaDrawCollection m_barAreas;
 };
 
 #endif /*XYHISTORENDERER_H_*/

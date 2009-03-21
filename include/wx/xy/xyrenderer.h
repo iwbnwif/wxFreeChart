@@ -20,6 +20,7 @@
  */
 class WXDLLEXPORT XYRenderer : public Renderer
 {
+	DECLARE_CLASS(XYRenderer)
 public:
 	XYRenderer();
 	virtual ~XYRenderer();

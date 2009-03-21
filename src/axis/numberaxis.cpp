@@ -44,6 +44,8 @@ bool IsNormalValue(double v)
 
 #endif
 
+IMPLEMENT_CLASS(NumberAxis, Axis)
+
 NumberAxis::NumberAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
@@ -70,12 +72,7 @@ NumberAxis::~NumberAxis()
 
 bool NumberAxis::AcceptDataset(Dataset *dataset)
 {
-	if (dynamic_cast<ValueRange *>(dataset) != NULL) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	return true;
 }
 
 void NumberAxis::SetFixedBounds(double minValue, double maxValue)
@@ -96,10 +93,9 @@ void NumberAxis::UpdateBounds()
 
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		bool verticalAxis = IsVertical();
-		ValueRange *valueDataset = dynamic_cast<ValueRange *>(m_datasets[n]);
 
-		double minValue = valueDataset->GetMinValue(verticalAxis);
-		double maxValue = valueDataset->GetMaxValue(verticalAxis);
+		double minValue = m_datasets[n]->GetMinValue(verticalAxis);
+		double maxValue = m_datasets[n]->GetMaxValue(verticalAxis);
 
 		if (n == 0) {
 			m_minValue = minValue;
