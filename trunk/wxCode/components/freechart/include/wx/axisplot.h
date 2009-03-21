@@ -14,7 +14,7 @@
 #include <wx/plot.h>
 #include <wx/axis/axis.h>
 
-#include <wx/areabackground.h>
+#include <wx/areadraw.h>
 #include <wx/legend.h>
 
 /**
@@ -75,7 +75,7 @@ public:
 	 * Sets background for data area.
 	 * @param _dataBackground background for data area
 	 */
-	void SetDataBackground(AreaBackground *dataBackground);
+	void SetDataBackground(AreaDraw *dataBackground);
 
 	void SetLegend(Legend *legend);
 
@@ -214,7 +214,7 @@ private:
 	Array<DataAxisLink, 1> m_links;
 
 	Array<Dataset, 1> m_datasets;
-	AreaBackground *m_dataBackground;
+	AreaDraw *m_dataBackground;
 
 	Legend *m_legend;
 

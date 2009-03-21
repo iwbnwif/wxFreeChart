@@ -8,7 +8,6 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-//#include "wx/drawutils.h"
 #include "wx/bars/barrenderer.h"
 #include "wx/category/categorydataset.h"
 
@@ -68,9 +67,39 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 			rcBar.height = width;
 		}
 
-		AreaBackground *barArea = m_barAreas.GetAreaBackground(serie);
+		AreaDraw *barArea = m_barAreas.GetAreaDraw(serie);
 		barArea->Draw(dc, rcBar);
 	}
+}
+
+double BarType::GetMinValue(CategoryDataset *dataset)
+{
+	if (dataset->GetCount() == 0)
+		return 0;
+
+	double minValue = dataset->GetValue(0, 0);
+
+	FOREACH_SERIE(serie, dataset) {
+		for (int n = 0; n < dataset->GetCount(); n++) {
+			minValue = MIN(minValue, dataset->GetValue(n, serie));
+		}
+	}
+	return minValue;
+}
+
+double BarType::GetMaxValue(CategoryDataset *dataset)
+{
+	if (dataset->GetCount() == 0)
+		return 0;
+
+	double maxValue = dataset->GetValue(0, 0);
+
+	FOREACH_SERIE(serie, dataset) {
+		for (int n = 0; n < dataset->GetCount(); n++) {
+			maxValue = MAX(maxValue, dataset->GetValue(n, serie));
+		}
+	}
+	return maxValue;
 }
 
 NormalBarType::NormalBarType(int barWidth, int serieGap, double base)
@@ -121,6 +150,29 @@ void StackedBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &
 	}
 }
 
+double StackedBarType::GetMinValue(CategoryDataset *dataset)
+{
+	return m_base;
+}
+
+double StackedBarType::GetMaxValue(CategoryDataset *dataset)
+{
+	if (dataset->GetCount() == 0)
+		return 0;
+
+	double maxValue = 0;
+
+	for (int n = 0; n < dataset->GetCount(); n++) {
+		double sum = m_base;
+
+		FOREACH_SERIE(serie, dataset) {
+			sum += dataset->GetValue(n, serie);
+		}
+		maxValue = MAX(maxValue, sum);
+	}
+	return maxValue;
+}
+
 LayeredBarType::LayeredBarType(int initialBarWidth,double base)
 {
 	m_initialBarWidth = initialBarWidth;
@@ -138,6 +190,8 @@ void LayeredBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &
 	base = m_base;
 	value = dataset->GetValue(item, serie);
 }
+
+IMPLEMENT_CLASS(BarRenderer, Renderer)
 
 BarRenderer::BarRenderer(BarType *barType)
 {
@@ -161,6 +215,18 @@ void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, boo
 		m_barType->Draw(dc, rc, horizAxis, vertAxis, vertical, n, dataset);
 	}
 }
+
+double BarRenderer::GetMinValue(CategoryDataset *dataset)
+{
+	return m_barType->GetMinValue(dataset);
+}
+
+double BarRenderer::GetMaxValue(CategoryDataset *dataset)
+{
+	return m_barType->GetMaxValue(dataset);
+}
+
+IMPLEMENT_CLASS(GanttBarRenderer, Renderer)
 
 GanttBarRenderer::GanttBarRenderer(BarType *barType)
 : BarRenderer(barType)

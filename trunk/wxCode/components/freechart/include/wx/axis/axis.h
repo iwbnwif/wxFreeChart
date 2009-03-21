@@ -27,8 +27,10 @@ enum AXIS_LOCATION {
 /**
  * Base class for all axes.
  */
-class WXDLLEXPORT Axis : public DrawObject
+class WXDLLEXPORT Axis : public wxObject, public DrawObject
 {
+	DECLARE_CLASS(Axis)
+
 	friend class Plot;
 public:
 	/**

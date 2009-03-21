@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	areabackground.cpp
+// Name:	areadraw.cpp
 // Purpose:
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
@@ -8,48 +8,48 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/areabackground.h>
+#include <wx/areadraw.h>
 
-AreaBackground::AreaBackground()
+AreaDraw::AreaDraw()
 {
 }
 
-AreaBackground::~AreaBackground()
+AreaDraw::~AreaDraw()
 {
 }
 
-NoAreaBackground::NoAreaBackground()
+NoAreaDraw::NoAreaDraw()
 {
 }
 
-NoAreaBackground::~NoAreaBackground()
+NoAreaDraw::~NoAreaDraw()
 {
 }
 
-void NoAreaBackground::Draw(wxDC &WXUNUSED(dc), wxRect WXUNUSED(rc))
+void NoAreaDraw::Draw(wxDC &WXUNUSED(dc), wxRect WXUNUSED(rc))
 {
 	// do nothing
 }
 
 
-FillAreaBackground::FillAreaBackground(wxPen borderPen, wxBrush fillBrush)
+FillAreaDraw::FillAreaDraw(wxPen borderPen, wxBrush fillBrush)
 {
 	m_fillBrush = fillBrush;
 	m_borderPen = borderPen;
 }
 
-FillAreaBackground::~FillAreaBackground()
+FillAreaDraw::~FillAreaDraw()
 {
 }
 
-void FillAreaBackground::Draw(wxDC &dc, wxRect rc)
+void FillAreaDraw::Draw(wxDC &dc, wxRect rc)
 {
 	dc.SetPen(m_borderPen);
 	dc.SetBrush(m_fillBrush);
 	dc.DrawRectangle(rc);
 }
 
-GradientAreaBackground::GradientAreaBackground(wxPen borderPen, wxColour colour1, wxColour colour2, wxDirection dir)
+GradientAreaDraw::GradientAreaDraw(wxPen borderPen, wxColour colour1, wxColour colour2, wxDirection dir)
 {
 	m_borderPen = borderPen;
 	m_colour1 = colour1;
@@ -57,11 +57,11 @@ GradientAreaBackground::GradientAreaBackground(wxPen borderPen, wxColour colour1
 	m_dir = dir;
 }
 
-GradientAreaBackground::~GradientAreaBackground()
+GradientAreaDraw::~GradientAreaDraw()
 {
 }
 
-void GradientAreaBackground::Draw(wxDC &dc, wxRect rc)
+void GradientAreaDraw::Draw(wxDC &dc, wxRect rc)
 {
 	dc.GradientFillLinear(rc, m_colour1, m_colour2, m_dir);
 
@@ -70,22 +70,22 @@ void GradientAreaBackground::Draw(wxDC &dc, wxRect rc)
 	dc.DrawRectangle(rc);
 }
 
-AreaBackgroundCollection::AreaBackgroundCollection()
+AreaDrawCollection::AreaDrawCollection()
 {
 }
 
-AreaBackgroundCollection::~AreaBackgroundCollection()
+AreaDrawCollection::~AreaDrawCollection()
 {
-	AreaBackgroundMap::iterator it;
+	AreaDrawMap::iterator it;
 	for (it = m_areas.begin(); it != m_areas.end(); it++) {
 		delete it->second;
 	}
 }
 
-void AreaBackgroundCollection::SetAreaBackground(int serie, AreaBackground *barArea)
+void AreaDrawCollection::SetAreaDraw(int serie, AreaDraw *barArea)
 {
 	if (m_areas.find(serie) != m_areas.end()) {
-		AreaBackground *oldBarArea = m_areas[serie];
+		AreaDraw *oldBarArea = m_areas[serie];
 		//oldBarArea->RemoveObserver(this);
 		delete oldBarArea;
 	}
@@ -94,7 +94,7 @@ void AreaBackgroundCollection::SetAreaBackground(int serie, AreaBackground *barA
 	//FireNeedRedraw();
 }
 
-AreaBackground *AreaBackgroundCollection::GetAreaBackground(int serie)
+AreaDraw *AreaDrawCollection::GetAreaDraw(int serie)
 {
 	if (m_areas.find(serie) != m_areas.end()) {
 		return m_areas[serie];

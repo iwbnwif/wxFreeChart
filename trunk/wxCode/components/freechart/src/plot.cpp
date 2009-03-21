@@ -25,7 +25,7 @@ Plot::Plot()
 	m_textNoDataFont = *wxNORMAL_FONT;
 	m_textNoData = wxT("No data");
 
-	m_background = new NoAreaBackground();
+	m_background = new NoAreaDraw();
 }
 
 Plot::~Plot()

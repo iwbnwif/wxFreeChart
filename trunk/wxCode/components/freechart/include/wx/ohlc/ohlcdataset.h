@@ -29,7 +29,7 @@ struct OHLCItem
 /**
  * Open-High-Low-Close datasets base class.
  */
-class WXDLLEXPORT OHLCDataset : public Dataset, public ValueRange, public DateTimeDataset
+class WXDLLEXPORT OHLCDataset : public DateTimeDataset
 {
 public:
 	OHLCDataset();
@@ -52,23 +52,21 @@ public:
 	 */
 	virtual OHLCItem *GetItem(int index) = 0;
 
+	/**
+	 * Returns item count.
+	 * @return item count
+	 */
 	virtual int GetCount() = 0;
 
 	//
-	// ValueDataset
+	// Dataset
 	//
 	virtual double GetMinValue(bool verticalAxis);
 
 	virtual double GetMaxValue(bool verticalAxis);
 
-	//
-	// DateTimeDataset
-	//
 	virtual time_t GetDate(int index);
 
-	//
-	// Dataset
-	//
 	virtual int GetSerieCount();
 
 	virtual wxString GetSerieName(int serie);

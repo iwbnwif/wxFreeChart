@@ -14,7 +14,7 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/observable.h>
 
-#include <wx/areabackground.h>
+#include <wx/areadraw.h>
 
 class Plot;
 
@@ -64,7 +64,7 @@ public:
 	 * Sets plot background.
 	 * @param _background new background for plot
 	 */
-	void SetBackground(AreaBackground *background)
+	void SetBackground(AreaDraw *background)
 	{
 		m_background = background;
 		FirePlotNeedRedraw();
@@ -92,7 +92,7 @@ private:
 	wxFont m_textNoDataFont;
 	wxString m_textNoData;
 
-	AreaBackground *m_background;
+	AreaDraw *m_background;
 };
 
 #endif /*PLOT_H_*/

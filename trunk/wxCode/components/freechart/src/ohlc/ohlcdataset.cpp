@@ -21,7 +21,7 @@ OHLCDataset::~OHLCDataset()
 
 bool OHLCDataset::AcceptRenderer(Renderer *_renderer)
 {
-	return (dynamic_cast<OHLCRenderer *>(_renderer) != NULL);
+	return (wxDynamicCast(_renderer, OHLCRenderer) != NULL);
 }
 
 double OHLCDataset::GetMaxValue(bool unused)

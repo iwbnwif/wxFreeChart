@@ -19,18 +19,38 @@
 /**
  * Base class for all renderers.
  */
-class WXDLLEXPORT Renderer : public DrawObject, public RefObject
+class WXDLLEXPORT Renderer : public wxObject, public DrawObject, public RefObject
 {
+	DECLARE_CLASS(Renderer)
 public:
 	Renderer();
+
 	virtual ~Renderer();
 
+	/**
+	 * Sets color for serie.
+	 * @param serie serie index
+	 * @param symbol new color for specified serie
+	 */
 	virtual void SetSerieColor(int serie, wxColour *color);
 
+	/**
+	 * Returns serie color.
+	 * @return serie color
+	 */
 	virtual wxColour GetSerieColor(int serie);
 
+	/**
+	 * Sets symbol for serie.
+	 * @param serie serie index
+	 * @param symbol new symbol for specified serie
+	 */
 	virtual void SetSerieSymbol(int serie, Symbol *symbol);
 
+	/**
+	 * returns symbol for serie.
+	 * @return symbol for specified serie
+	 */
 	virtual Symbol *GetSerieSymbol(int serie);
 
 private:

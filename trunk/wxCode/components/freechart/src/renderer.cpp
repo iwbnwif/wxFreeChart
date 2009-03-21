@@ -10,6 +10,8 @@
 
 #include <wx/chartrenderer.h>
 
+IMPLEMENT_CLASS(Renderer, wxObject)
+
 Renderer::Renderer()
 {
 }
@@ -21,7 +23,7 @@ Renderer::~Renderer()
 void Renderer::SetSerieColor(int serie, wxColour *color)
 {
 	m_serieColors[serie] = *color;
-	//SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, 1, wxSOLID));
+	FireNeedRedraw();
 }
 
 wxColour Renderer::GetSerieColor(int serie)

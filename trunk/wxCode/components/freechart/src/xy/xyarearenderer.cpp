@@ -10,6 +10,8 @@
 
 #include <wx/xy/xyarearenderer.h>
 
+IMPLEMENT_CLASS(XYAreaRenderer, XYRenderer)
+
 XYAreaRenderer::XYAreaRenderer()
 {
 	m_outlinePen = *wxBLACK_PEN;

@@ -11,6 +11,8 @@
 #include <wx/axis/categoryaxis.h>
 #include <wx/category/categorydataset.h>
 
+IMPLEMENT_CLASS(CategoryAxis, Axis)
+
 CategoryAxis::CategoryAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
@@ -26,8 +28,8 @@ bool CategoryAxis::AcceptDataset(Dataset *dataset)
 	// It must be CategoryDataset and this class supports only one
 	// dataset
 	//
-	return ((dynamic_cast<CategoryDataset *>(dataset) != 0)
-		&& m_datasets.GetSize() == 0); // TODO don't use dynamic_cast and RTTI!
+	return ((wxDynamicCast(dataset, CategoryDataset) != NULL)
+		&& m_datasets.GetSize() == 0);
 }
 
 wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)
@@ -89,7 +91,7 @@ double CategoryAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
 
 void CategoryAxis::UpdateBounds()
 {
-	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(m_datasets[0]);
+	CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
 	if (dataset == NULL) {
 		wxLogError(wxT("CategoryAxis::DataChanged: BUG dataset is not CategoryDataset")); // BUG!
 		return ;
@@ -114,7 +116,7 @@ double CategoryAxis::GetValue(int step)
 
 void CategoryAxis::GetLabel(int step, wxString &label)
 {
-	CategoryDataset *dataset = dynamic_cast<CategoryDataset *>(m_datasets[0]);
+	CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
 	if (dataset == NULL) {
 		return ; // BUG
 	}

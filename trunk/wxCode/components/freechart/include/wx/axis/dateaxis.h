@@ -21,6 +21,7 @@
  */
 class WXDLLEXPORT DateAxis : public LabelAxis
 {
+	DECLARE_CLASS(DateAxis)
 public:
 	DateAxis(AXIS_LOCATION location);
 	virtual ~DateAxis();

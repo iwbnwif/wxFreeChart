@@ -19,6 +19,7 @@
  */
 class WXDLLEXPORT XYLineRenderer : public XYRenderer
 {
+	DECLARE_CLASS(XYLineRenderer)
 public:
 	/**
 	 * Constructs new line renderer.

@@ -20,7 +20,7 @@ CategoryDataset::~CategoryDataset()
 
 bool CategoryDataset::AcceptRenderer(Renderer *r)
 {
-	return (dynamic_cast<BarRenderer *>(r) != NULL);
+	return wxDynamicCast(r, BarRenderer);
 }
 
 bool CategoryDataset::HasValue(int index, int serie)
@@ -28,34 +28,20 @@ bool CategoryDataset::HasValue(int index, int serie)
 	return true;
 }
 
-double CategoryDataset::GetMinValue(bool verticalAxis)
+double CategoryDataset::GetMinValue(bool WXUNUSED(verticalAxis))
 {
-	if (GetCount() == 0)
+	if (m_renderer == NULL) {
 		return 0;
-
-	double minValue = GetValue(0, 0);
-
-	for (int nSerie = 0; nSerie < GetSerieCount(); nSerie++) {
-		for (int n = 0; n < GetCount(); n++) {
-			minValue = MIN(minValue, GetValue(n, nSerie));
-		}
 	}
-	return minValue;
+	return ((BarRenderer *) m_renderer)->GetMinValue(this);
 }
 
-double CategoryDataset::GetMaxValue(bool verticalAxis)
+double CategoryDataset::GetMaxValue(bool WXUNUSED(verticalAxis))
 {
-	if (GetCount() == 0)
+	if (m_renderer == NULL) {
 		return 0;
-
-	double maxValue = GetValue(0, 0);
-
-	for (int nSerie = 0; nSerie < GetSerieCount(); nSerie++) {
-		for (int n = 0; n < GetCount(); n++) {
-			maxValue = MAX(maxValue, GetValue(n, nSerie));
-		}
 	}
-	return maxValue;
+	return ((BarRenderer *) m_renderer)->GetMaxValue(this);
 }
 
 // TODO deprecated functions.

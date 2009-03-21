@@ -11,6 +11,8 @@
 #include <wx/axis/labelaxis.h>
 #include <wx/drawutils.h>
 
+IMPLEMENT_CLASS(LabelAxis, Axis)
+
 LabelAxis::LabelAxis(AXIS_LOCATION location)
 : Axis(location)
 {

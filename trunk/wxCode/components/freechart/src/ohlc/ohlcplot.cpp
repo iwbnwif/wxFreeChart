@@ -21,10 +21,10 @@ OHLCPlot::~OHLCPlot()
 bool OHLCPlot::AcceptAxis(Axis *axis)
 {
 	if (axis->IsVertical()) {
-		return (dynamic_cast<NumberAxis *>(axis) != NULL);
+		return (wxDynamicCast(axis, NumberAxis) != NULL);
 	}
 	else {
-		return (dynamic_cast<DateAxis *>(axis) != NULL);
+		return (wxDynamicCast(axis, DateAxis) != NULL);
 	}
 }
 

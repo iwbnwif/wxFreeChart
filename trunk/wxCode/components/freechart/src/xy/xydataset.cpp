@@ -11,6 +11,8 @@
 #include <wx/xy/xydataset.h>
 #include <wx/xy/xyrenderer.h>
 
+IMPLEMENT_CLASS(XYDataset, Dataset)
+
 XYDataset::XYDataset()
 {
 }
@@ -21,7 +23,7 @@ XYDataset::~XYDataset()
 
 bool XYDataset::AcceptRenderer(Renderer *_renderer)
 {
-	return (dynamic_cast<XYRenderer *>(_renderer) != NULL);
+	return (wxDynamicCast(_renderer, XYRenderer) != NULL);
 }
 
 double XYDataset::GetMaxY()

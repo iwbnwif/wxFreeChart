@@ -21,6 +21,7 @@ const wxCoord labelGap = 2;
  */
 class WXDLLEXPORT LabelAxis : public Axis
 {
+	DECLARE_CLASS(LabelAxis)
 public:
 	LabelAxis(AXIS_LOCATION location);
 	virtual ~LabelAxis();

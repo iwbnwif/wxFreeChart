@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	areabackground.h
+// Name:	areadraw.h
 // Purpose:
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
@@ -8,8 +8,8 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef AREABACKGROUND_H_
-#define AREABACKGROUND_H_
+#ifndef AREADRAW_H_
+#define AREADRAW_H_
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/hashmap.h>
@@ -20,12 +20,12 @@
  * Base class for drawing area background.
  * Areas can be data area in Plot, chart background, etc...
  */
-class WXDLLEXPORT AreaBackground : public DrawObject
+class WXDLLEXPORT AreaDraw : public DrawObject
 {
 public:
-	AreaBackground();
+	AreaDraw();
 
-	virtual ~AreaBackground();
+	virtual ~AreaDraw();
 
 	/**
 	 * Draw area background.
@@ -38,12 +38,12 @@ public:
 /**
  * Doing nothing.
  */
-class WXDLLEXPORT NoAreaBackground : public AreaBackground
+class WXDLLEXPORT NoAreaDraw : public AreaDraw
 {
 public:
-	NoAreaBackground();
+	NoAreaDraw();
 
-	virtual ~NoAreaBackground();
+	virtual ~NoAreaDraw();
 
 	virtual void Draw(wxDC &dc, wxRect rc);
 };
@@ -52,12 +52,12 @@ public:
  * Fills area with specified brush and draw outline of area
  * with specified pen.
  */
-class WXDLLEXPORT FillAreaBackground : public AreaBackground
+class WXDLLEXPORT FillAreaDraw : public AreaDraw
 {
 public:
-	FillAreaBackground(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
+	FillAreaDraw(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
 
-	virtual ~FillAreaBackground();
+	virtual ~FillAreaDraw();
 
 	virtual void Draw(wxDC &dc, wxRect rc);
 
@@ -89,7 +89,7 @@ private:
 /**
  * Gradient fill area.
  */
-class WXDLLEXPORT GradientAreaBackground : public AreaBackground
+class WXDLLEXPORT GradientAreaDraw : public AreaDraw
 {
 public:
 	/**
@@ -99,12 +99,12 @@ public:
 	 * @param colour2 second gradient fill color
 	 * @param dir gradient fill direction
 	 */
-	GradientAreaBackground(wxPen borderPen = *wxBLACK_PEN,
+	GradientAreaDraw(wxPen borderPen = *wxBLACK_PEN,
 			wxColour colour1 = wxColour(200, 220, 250),
 			wxColour colour2 = wxColour(255, 255, 255),
 			wxDirection dir = wxEAST);
 
-	virtual ~GradientAreaBackground();
+	virtual ~GradientAreaDraw();
 
 	virtual void Draw(wxDC &dc, wxRect rc);
 
@@ -146,21 +146,21 @@ private:
 	wxDirection m_dir;
 };
 
-WX_DECLARE_HASH_MAP(int, AreaBackground *, wxIntegerHash, wxIntegerEqual, AreaBackgroundMap);
-class WXDLLEXPORT AreaBackgroundMap;
+WX_DECLARE_HASH_MAP(int, AreaDraw *, wxIntegerHash, wxIntegerEqual, AreaDrawMap);
+class WXDLLEXPORT AreaDrawMap;
 
-class WXDLLEXPORT AreaBackgroundCollection
+class WXDLLEXPORT AreaDrawCollection
 {
 public:
-	AreaBackgroundCollection();
-	virtual ~AreaBackgroundCollection();
+	AreaDrawCollection();
+	virtual ~AreaDrawCollection();
 
-	void SetAreaBackground(int serie, AreaBackground *barArea);
+	void SetAreaDraw(int serie, AreaDraw *areaDraw);
 
-	AreaBackground *GetAreaBackground(int serie);
+	AreaDraw *GetAreaDraw(int serie);
 
 private:
-	AreaBackgroundMap m_areas;
+	AreaDrawMap m_areas;
 };
 
 #endif /*AREABACKGROUND_H_*/

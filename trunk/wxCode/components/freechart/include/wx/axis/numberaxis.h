@@ -18,6 +18,7 @@
  */
 class WXDLLEXPORT NumberAxis : public LabelAxis
 {
+	DECLARE_CLASS(NumberAxis)
 public:
 	NumberAxis(AXIS_LOCATION location);
 	virtual ~NumberAxis();

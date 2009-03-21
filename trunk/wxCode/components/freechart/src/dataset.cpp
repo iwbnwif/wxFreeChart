@@ -11,6 +11,8 @@
 
 #include <wx/dataset.h>
 
+IMPLEMENT_CLASS(Dataset, wxObject)
+
 DatasetObserver::DatasetObserver()
 {
 }
@@ -72,15 +74,7 @@ void Dataset::DatasetChanged()
 	}
 }
 
-
-ValueRange::ValueRange()
-{
-}
-
-ValueRange::~ValueRange()
-{
-}
-
+IMPLEMENT_CLASS(DateTimeDataset, Dataset)
 
 DateTimeDataset::DateTimeDataset()
 {
