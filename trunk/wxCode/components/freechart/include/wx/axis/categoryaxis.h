@@ -39,9 +39,7 @@ protected:
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
-	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
-
-	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g);
+	virtual void GetDataBounds(double &minValue, double &maxValue);
 
 private:
 	int m_categoryCount;

@@ -1,12 +1,14 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xydemos.cpp
-// Purpose:
+// Purpose: xy demos
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/12
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
+
+#include "democollection.h"
 
 #include "wx/xy/xyplot.h"
 #include "wx/xy/xylinerenderer.h"
@@ -126,7 +128,7 @@ class XYDemo1 : public ChartDemo
 {
 public:
 	XYDemo1()
-	: ChartDemo(wxT("XY Demo 1"))
+	: ChartDemo(wxT("XY Demo 1 - simple"))
 	{
 	}
 
@@ -177,7 +179,7 @@ class XYDemo2 : public ChartDemo
 {
 public:
 	XYDemo2()
-	: ChartDemo(wxT("XY Demo 2"))
+	: ChartDemo(wxT("XY Demo 2 - multiple series"))
 	{
 	}
 
@@ -230,7 +232,7 @@ class XYDemo3 : public ChartDemo
 {
 public:
 	XYDemo3()
-	: ChartDemo(wxT("XY Demo 3"))
+	: ChartDemo(wxT("XY Demo 3 - symbols"))
 	{
 	}
 
@@ -283,9 +285,65 @@ public:
 	}
 };
 
+class XYDemo4 : public ChartDemo
+{
+public:
+	XYDemo4()
+	: ChartDemo(wxT("XY Demo 4 - window"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		double data[][2] = {
+				{ 10, 20, },
+				{ 13, 16, },
+				{ 7, 30, },
+				{ 15, 34, },
+				{ 25, 4, },
+		};
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		XYDemoDataset *dataset = new XYDemoDataset();
+		dataset->AddSerie((double *) data, N(data));
+
+		dataset->SetRenderer(new XYLineRenderer());
+
+		plot->AddDataset(dataset);
+
+		// add left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// look at this code, we setup window, so
+		// only part of data will be shown, not entire dataset as
+		// in XYDemo1.
+		bottomAxis->SetWindowPosition(10);
+		bottomAxis->SetWindowWidth(10);
+		bottomAxis->SetUseWindow(true);
+
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+
+		// set axis as scrolled, so chart panel can scroll its window.
+		chart->SetScrolledAxis(bottomAxis);
+		return chart;
+	}
+};
+
 ChartDemo *xyDemos[] = {
 	new XYDemo1(),
 	new XYDemo2(),
 	new XYDemo3(),
+	new XYDemo4(),
 };
 int xyDemosCount = N(xyDemos);

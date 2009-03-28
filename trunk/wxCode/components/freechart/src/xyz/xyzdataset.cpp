@@ -28,7 +28,7 @@ double XYZDataset::GetMinZ()
 			if (n == 0 && serie == 0)
 				minZ = z;
 			else
-				minZ = MIN(minZ, z);
+				minZ = wxMin(minZ, z);
 		}
 	}
 	return minZ;
@@ -44,7 +44,7 @@ double XYZDataset::GetMaxZ()
 			if (n == 0 && serie == 0)
 				maxZ = z;
 			else
-				maxZ = MAX(maxZ, z);
+				maxZ = wxMax(maxZ, z);
 		}
 	}
 	return maxZ;

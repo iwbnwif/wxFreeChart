@@ -10,9 +10,14 @@
 
 #include "democollection.h"
 
-#include "xydemos.cpp"
-#include "ohlcdemos.cpp"
-#include "bardemos.cpp"
+extern ChartDemo *ohlcDemos[];
+extern int ohlcDemosCount;
+
+extern ChartDemo *barDemos[];
+extern int barDemosCount;
+
+extern ChartDemo *xyDemos[];
+extern int xyDemosCount;
 
 static DemoCollection instance;
 

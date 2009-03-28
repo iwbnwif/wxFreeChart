@@ -14,7 +14,22 @@ Package=<4>
 
 ###############################################################################
 
-Project: "wxFreeChartDemo"=wxfreechart_vc6_wxFreeChartDemo.dsp - Package Owner=<4>
+Project: "wxFreeChartDemo_lib"=wxfreechart_vc6_wxFreeChartDemo_lib.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+Begin Project Dependency
+Project_Dep_Name WXFREECHART
+End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "wxFreeChartDemo_dll"=wxfreechart_vc6_wxFreeChartDemo_dll.dsp - Package Owner=<4>
 
 Package=<5>
 {{{

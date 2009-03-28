@@ -12,21 +12,40 @@
 #include <wx/chartpanel.h>
 #include <wx/dcbuffer.h>
 
+const int scrollPixelStep = 100;
+const int stepMult = 100;
+
+void GetAxisScrollParams(Axis *axis, int &noUnits, int &pos)
+{
+	double minValue, maxValue;
+	axis->GetDataBounds(minValue, maxValue);
+
+	noUnits = RoundHigh(stepMult * (maxValue - minValue - axis->GetWindowWidth())) + 10/*XXX dirty hack*/;
+	if (noUnits < 0) {
+		noUnits = 0;
+	}
+
+	pos = (int) (stepMult * (axis->GetWindowPosition() - minValue));
+}
+
 BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
 	EVT_PAINT(wxChartPanel::OnPaint)
 	EVT_SIZE(wxChartPanel::OnSize)
+	EVT_SCROLLWIN(wxChartPanel::OnScrollWin)
 END_EVENT_TABLE()
 
 wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &_size)
-: wxScrolledWindow(parent, id, pos, _size)//, wxFULL_REPAINT_ON_RESIZE)
+: wxScrolledWindow(parent, id, pos, _size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
 {
 	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
+	EnableScrolling(false, false);
 
 	m_chart = NULL;
 
 	wxSize size = GetSize();
 	ResizeBackBitmap(size);
 
+	SetScrollRate(1, 1);
 	SetChart(chart);
 }
 
@@ -41,6 +60,8 @@ void wxChartPanel::SetChart(Chart *chart)
 	SAFE_REPLACE_OBSERVER(this, m_chart, chart);
 	SAFE_REPLACE_UNREF(m_chart, chart);
 
+	RecalcScrollbars();
+
 	RedrawBackBitmap();
 	Refresh(false);
 }
@@ -49,6 +70,40 @@ void wxChartPanel::ChartChanged(Chart *WXUNUSED(chart))
 {
 	RedrawBackBitmap();
 	Refresh(false);
+}
+
+void wxChartPanel::ChartScrollsChanged(Chart *WXUNUSED(chart))
+{
+	RecalcScrollbars();
+
+	RedrawBackBitmap();
+	Refresh(false);
+}
+
+void wxChartPanel::RecalcScrollbars()
+{
+	if (m_chart == NULL) {
+		SetScrollbars(1, 1, 0, 0, 0, 0, true);
+		return ;
+	}
+
+	Axis *horizAxis = m_chart->GetHorizScrolledAxis();
+	Axis *vertAxis = m_chart->GetVertScrolledAxis();
+
+	int noUnitsX = 0;
+	int noUnitsY = 0;
+	int xPos = 0;
+	int yPos = 0;
+
+	if (horizAxis != NULL) {
+		GetAxisScrollParams(horizAxis, noUnitsX, xPos);
+	}
+
+	if (vertAxis != NULL) {
+		GetAxisScrollParams(vertAxis, noUnitsY, yPos);
+	}
+
+	SetScrollbars(scrollPixelStep, scrollPixelStep, noUnitsX, noUnitsY, xPos, yPos, true);
 }
 
 void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
@@ -73,6 +128,36 @@ void wxChartPanel::OnSize(wxSizeEvent &ev)
 
 	RedrawBackBitmap();
 	Refresh();
+}
+
+void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
+{
+	if (m_chart == NULL) {
+		return ;
+	}
+
+	Axis *axis = NULL;
+
+	switch (ev.GetOrientation()) {
+	case wxHORIZONTAL:
+		axis = m_chart->GetHorizScrolledAxis();
+		break;
+	case wxVERTICAL:
+		axis = m_chart->GetVertScrolledAxis();
+		break;
+	default: // BUG
+		return ;
+	}
+
+	if (axis != NULL) {
+		double winPos = (double) ev.GetPosition() / (double) stepMult;
+		double minValue, maxValue;
+
+		axis->GetDataBounds(minValue, maxValue);
+		winPos += minValue;
+
+		axis->SetWindowPosition(winPos);
+	}
 }
 
 void wxChartPanel::RedrawBackBitmap()

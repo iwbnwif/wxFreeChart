@@ -32,7 +32,16 @@ public:
 	void SetTickFormat(const wxString &tickFormat)
 	{
 		m_tickFormat = tickFormat;
-		FireNeedRedraw();
+		FireAxisChanged();
+	}
+
+	/**
+	 * Sets count of labels.
+	 */
+	void SetLabelCount(int labelCount)
+	{
+		m_labelCount = labelCount;
+		FireAxisChanged();
 	}
 
 	/**
@@ -43,7 +52,7 @@ public:
 	{
 		m_intValues = intValues;
 		// TODO recalc tick steps
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 	/**
@@ -69,9 +78,7 @@ protected:
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
-	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value);
-
-	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g);
+	virtual void GetDataBounds(double &minValue, double &maxValue);
 
 private:
 	void UpdateTickValues();
@@ -81,13 +88,12 @@ private:
 	double m_minValue;
 	double m_maxValue;
 
-	double m_minorTick;
-	double m_majorTick;
+	double m_labelInterval;
 
-	int m_stepCount;
+	int m_labelCount;
 	bool m_intValues;
 
-	bool m_hasTicks;
+	bool m_hasLabels;
 
 	bool m_fixedBounds;
 };

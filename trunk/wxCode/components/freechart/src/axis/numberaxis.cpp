@@ -55,13 +55,11 @@ NumberAxis::NumberAxis(AXIS_LOCATION location)
 	m_minValue = 0;
 	m_maxValue = 100;
 
-	m_minorTick = 1;
-	m_majorTick = 10;
-
-	m_stepCount = 5;
+	m_labelInterval = 10;
+	m_labelCount = 5;
 
 	m_intValues = false;
-	m_hasTicks = false;
+	m_hasLabels = false;
 	m_fixedBounds = false;
 }
 
@@ -82,14 +80,16 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 	m_fixedBounds = true;
 
 	UpdateTickValues();
+	FireBoundsChanged();
 }
 
 void NumberAxis::UpdateBounds()
 {
-	if (m_fixedBounds)
+	if (m_fixedBounds) {
 		return ; // bounds are fixed, so don't update
+	}
 
-	m_hasTicks = false;
+	m_hasLabels = false;
 
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		bool verticalAxis = IsVertical();
@@ -102,30 +102,41 @@ void NumberAxis::UpdateBounds()
 			m_maxValue = maxValue;
 		}
 		else {
-			m_minValue = MIN(m_minValue, minValue);
-			m_maxValue = MAX(m_maxValue, maxValue);
+			m_minValue = wxMin(m_minValue, minValue);
+			m_maxValue = wxMax(m_maxValue, maxValue);
+		}
+	}
+
+	if (m_minValue == m_maxValue) {
+		if (m_maxValue > 0) {
+			m_minValue = 0;
+		}
+		else {
+			m_maxValue = 0;
 		}
 	}
 
 	UpdateTickValues();
+	FireBoundsChanged();
 }
 
 void NumberAxis::UpdateTickValues()
 {
-	m_hasTicks = false;
-	m_majorTick = (m_maxValue - m_minValue) / (double) (m_stepCount - 1);
+	m_hasLabels = false;
+	m_labelInterval = (m_maxValue - m_minValue) / (double) (m_labelCount - 1);
 
-	if (!IsNormalValue(m_majorTick)) {
+	if (!IsNormalValue(m_labelInterval)) {
 		// overflow condition bugfix
 		m_minValue = 0;
 		m_maxValue = 0;
-		m_majorTick = 0;
+		m_labelInterval = 0;
 	}
 	else {
-		if (ABS(m_maxValue - m_minValue) > 0.000000001)
-			m_hasTicks = true;
+		if (ABS(m_maxValue - m_minValue) > 0.000000001) {
+			m_hasLabels = true;
+		}
 	}
-	FireNeedRedraw();
+	FireAxisChanged();
 }
 
 wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
@@ -141,66 +152,15 @@ wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
 	}
 }
 
-wxCoord NumberAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
+void NumberAxis::GetDataBounds(double &minValue, double &maxValue)
 {
-	wxSize maxTextExtent = GetLongestLabelExtent(dc);
-
-	wxCoord minCoord;
-	double gRange, k;
-
-	double valueRange = m_maxValue - m_minValue;
-
-	if (IsVertical()) {
-		minCoord = minG + maxTextExtent.GetHeight() / 2;
-		gRange = range - maxTextExtent.GetHeight();
-
-		k = (m_maxValue - value) / valueRange;
-	}
-	else {
-		minCoord = minG + maxTextExtent.GetWidth() / 2;
-		gRange = range - maxTextExtent.GetWidth();
-
-		k = (value - m_minValue) / valueRange;
-	}
-
-	if (gRange < 0)
-		gRange = 0;
-
-	return (wxCoord) (k * gRange + minCoord);
-}
-
-double NumberAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
-{
-	wxSize maxTextExtent = GetLongestLabelExtent(dc);
-
-	wxCoord minCoord;
-	double gRange;
-
-	double valueRange = m_maxValue - m_minValue;
-
-	if (IsVertical()) {
-		minCoord = minG + maxTextExtent.GetHeight() / 2;
-		gRange = range - maxTextExtent.GetHeight();
-		if (gRange <= 0) {
-			return 0;
-		}
-
-		return m_maxValue - ((g - minCoord) * valueRange / gRange);
-	}
-	else {
-		minCoord = minG + maxTextExtent.GetWidth() / 2;
-		gRange = range - maxTextExtent.GetWidth();
-		if (gRange <= 0) {
-			return 0;
-		}
-
-		return m_minValue + ((g - minCoord) * valueRange / gRange);
-	}
+	minValue = m_minValue;
+	maxValue = m_maxValue;
 }
 
 double NumberAxis::GetValue(int step)
 {
-	return m_minValue + step * m_majorTick;
+	return m_minValue + step * m_labelInterval;
 }
 
 void NumberAxis::GetLabel(int step, wxString &label)
@@ -217,11 +177,12 @@ void NumberAxis::GetLabel(int step, wxString &label)
 
 bool NumberAxis::IsEnd(int step)
 {
-	double value = GetValue(step);
-	return value > m_maxValue;
+	return step >= m_labelCount;
+	//double value = GetValue(step);
+	//return (m_maxValue - value) < 0.001;
 }
 
 bool NumberAxis::HasLabels()
 {
-	return m_hasTicks;
+	return m_hasLabels;
 }

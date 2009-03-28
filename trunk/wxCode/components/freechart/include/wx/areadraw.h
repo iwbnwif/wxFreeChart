@@ -163,4 +163,4 @@ private:
 	AreaDrawMap m_areas;
 };
 
-#endif /*AREABACKGROUND_H_*/
+#endif /*AREADRAW_H_*/

@@ -36,7 +36,7 @@ double XYDataset::GetMaxY()
 			if (n == 0 && serie == 0)
 				maxY = y;
 			else
-				maxY = MAX(maxY, y);
+				maxY = wxMax(maxY, y);
 		}
 	}
 	return maxY;
@@ -52,7 +52,7 @@ double XYDataset::GetMinY()
 			if (n == 0 && serie == 0)
 				minY = y;
 			else
-				minY = MIN(minY, y);
+				minY = wxMin(minY, y);
 		}
 	}
 	return minY;
@@ -68,7 +68,7 @@ double XYDataset::GetMaxX()
 			if (n == 0 && serie == 0)
 				maxX = x;
 			else
-				maxX = MAX(maxX, x);
+				maxX = wxMax(maxX, x);
 		}
 	}
 	return maxX;
@@ -84,7 +84,7 @@ double XYDataset::GetMinX()
 			if (n == 0 && serie == 0)
 				minX = x;
 			else
-				minX = MIN(minX, x);
+				minX = wxMin(minX, x);
 		}
 	}
 	return minX;

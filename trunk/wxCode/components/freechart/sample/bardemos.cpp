@@ -98,7 +98,7 @@ class BarDemo1 : public ChartDemo
 {
 public:
 	BarDemo1()
-	: ChartDemo(wxT("Bar demo 1"))
+	: ChartDemo(wxT("Bar demo 1 - one serie"))
 	{
 	}
 
@@ -137,7 +137,65 @@ public:
 		plot->AddAxis(new NumberAxis(AXIS_LEFT));
 
 		// Add bottom axis
-		plot->AddAxis(new CategoryAxis(AXIS_BOTTOM));
+		CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
+		bottomAxis->SetMargins(10, 10);
+		plot->AddAxis(bottomAxis);
+
+		// Add dataset to plot
+		plot->AddDataset(dataset);
+
+		// Link first dataset with first horizontal axis
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// Link first dataset with first vertical axis
+		plot->LinkDataVerticalAxis(0, 0);
+
+		// and finally construct and return chart
+		return new Chart(plot, GetName());
+	}
+};
+
+/**
+ * Simple demo with one dataset, and left and bottom axes.
+ */
+class BarDemo2 : public ChartDemo
+{
+public:
+	BarDemo2()
+	: ChartDemo(wxT("Bar demo 2 - one category"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		wxString names[] = { // category names
+				wxT("Cat 1"),
+		};
+		double values[][1] = {
+			{ // serie 1 values - we have only one serie
+				10.0,
+			},
+		};
+
+		// Create dataset
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+
+		BarType *barType = new NormalBarType(10);
+		barType->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
+
+		// Set histogram renderer for it
+		dataset->SetRenderer(new BarRenderer(barType));
+
+		// Create bar plot
+		BarPlot *plot = new BarPlot();
+
+		// Add left number axis
+		plot->AddAxis(new NumberAxis(AXIS_LEFT));
+
+		// Add bottom axis
+		CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
+		bottomAxis->SetMargins(10, 10);
+		plot->AddAxis(bottomAxis);
 
 		// Add dataset to plot
 		plot->AddDataset(dataset);
@@ -157,11 +215,11 @@ public:
  * Simple demo with one dataset having 2 series, and left and bottom axes.
  * Bars are horizontal.
  */
-class BarDemo2 : public ChartDemo
+class BarDemo3 : public ChartDemo
 {
 public:
-	BarDemo2()
-	: ChartDemo(wxT("Bar demo 2"))
+	BarDemo3()
+	: ChartDemo(wxT("Bar demo 3 - normal bars"))
 	{
 	}
 
@@ -209,10 +267,14 @@ public:
 		BarPlot *plot = new BarPlot();
 
 		// Add left category axis
-		plot->AddAxis(new CategoryAxis(AXIS_LEFT));
+		CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
+		leftAxis->SetMargins(20, 20); // setup margins, so bars will fit to plot.
+		plot->AddAxis(leftAxis);
 
 		// Add bottom number axis
-		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+		bottomAxis->SetMargins(0, 5);
+		plot->AddAxis(bottomAxis);
 
 		// Add dataset to plot
 		plot->AddDataset(dataset);
@@ -231,11 +293,11 @@ public:
 /**
  * Stacked bars demo.
  */
-class BarDemo3 : public ChartDemo
+class BarDemo4 : public ChartDemo
 {
 public:
-	BarDemo3()
-	: ChartDemo(wxT("Bar demo 3 - stacked bars"))
+	BarDemo4()
+	: ChartDemo(wxT("Bar demo 4 - stacked bars"))
 	{
 	}
 
@@ -284,10 +346,14 @@ public:
 		BarPlot *plot = new BarPlot();
 
 		// Add left category axis
-		plot->AddAxis(new CategoryAxis(AXIS_LEFT));
+		CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
+		leftAxis->SetMargins(10, 10);
+		plot->AddAxis(leftAxis);
 
 		// Add bottom number axis
-		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+		bottomAxis->SetMargins(0, 5);
+		plot->AddAxis(bottomAxis);
 
 		// Add dataset to plot
 		plot->AddDataset(dataset);
@@ -306,11 +372,11 @@ public:
 /**
  * Layered bars demo.
  */
-class BarDemo4 : public ChartDemo
+class BarDemo5 : public ChartDemo
 {
 public:
-	BarDemo4()
-	: ChartDemo(wxT("Bar demo 4 - layered bars"))
+	BarDemo5()
+	: ChartDemo(wxT("Bar demo 5 - layered bars"))
 	{
 	}
 
@@ -360,7 +426,9 @@ public:
 		BarPlot *plot = new BarPlot();
 
 		// Add left category axis
-		plot->AddAxis(new CategoryAxis(AXIS_LEFT));
+		CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
+		leftAxis->SetMargins(20, 20);
+		plot->AddAxis(leftAxis);
 
 		// Add bottom number axis
 		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
@@ -382,11 +450,11 @@ public:
 /**
  * Layered date bars demo.
  */
-class BarDemo5 : public ChartDemo
+class BarDemo6 : public ChartDemo
 {
 public:
-	BarDemo5()
-	: ChartDemo(wxT("Bar demo 5 - layered date bars"))
+	BarDemo6()
+	: ChartDemo(wxT("Bar demo 6 - layered date bars"))
 	{
 	}
 
@@ -431,10 +499,12 @@ public:
 		// Create bar plot
 		BarPlot *plot = new BarPlot();
 
-		// Add left category axis
-		plot->AddAxis(new CategoryAxis(AXIS_BOTTOM));
+		// Add bottom category axis
+		CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
+		bottomAxis->SetMargins(20, 20);
+		plot->AddAxis(bottomAxis);
 
-		// Add bottom number axis
+		// Add left number axis
 		plot->AddAxis(new NumberAxis(AXIS_LEFT));
 
 		// Add dataset to plot
@@ -453,9 +523,10 @@ public:
 
 ChartDemo *barDemos[] = {
 		new BarDemo1(),
-		new BarDemo2(),
+		//new BarDemo2(),
 		new BarDemo3(),
 		new BarDemo4(),
 		new BarDemo5(),
+		new BarDemo6(),
 };
 int barDemosCount = N(barDemos);

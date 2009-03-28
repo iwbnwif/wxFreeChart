@@ -16,11 +16,6 @@
 WX_DECLARE_OBJARRAY(Symbol *, SymbolArray);
 WX_DEFINE_OBJARRAY(SymbolArray);
 
-//#include "symbols/cross.xpm"
-//#include "symbols/cyrcle.xpm"
-//#include "symbols/emptysquare.xpm"
-//#include "symbols/triangle.xpm"
-
 SymbolArray defaultSymbols;
 
 wxColour defaultColours[] = {

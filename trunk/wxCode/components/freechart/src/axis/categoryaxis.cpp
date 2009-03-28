@@ -37,55 +37,14 @@ wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)
 	return dc.GetTextExtent(m_longestCategory);
 }
 
-wxCoord CategoryAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
+void CategoryAxis::GetDataBounds(double &minValue, double &maxValue)
 {
-	wxSize maxTextExtent = dc.GetTextExtent(m_longestCategory);
-
-	double maxValue = m_categoryCount - 1;
-
-	// XXX!!! bug doesn't work with category datasets with only one category
-	if (IsVertical()) {
-		wxCoord y0 = minG + maxTextExtent.GetHeight() / 2;
-		double height = range - maxTextExtent.GetHeight();
-
-		wxCoord y = (wxCoord) ((maxValue - value) * height / maxValue + y0);
-		return y;
+	minValue = 0;
+	if (m_categoryCount > 1) {
+		maxValue = m_categoryCount - 1;
 	}
 	else {
-		wxCoord x0 = minG + maxTextExtent.GetWidth() / 2;
-		double width = range - maxTextExtent.GetWidth();
-
-		wxCoord x = (wxCoord) ((value * width) / maxValue + x0);
-		return x;
-	}
-}
-
-double CategoryAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
-{
-	wxSize maxTextExtent = GetLongestLabelExtent(dc);
-
-	wxCoord minCoord;
-	double gRange;
-
-	double maxValue = m_categoryCount - 1;
-
-	if (IsVertical()) {
-		minCoord = minG + maxTextExtent.GetHeight() / 2;
-		gRange = range - maxTextExtent.GetHeight();
-		if (gRange <= 0) {
-			return 0;
-		}
-
-		return maxValue - ((g - minCoord) * maxValue / gRange);
-	}
-	else {
-		minCoord = minG + maxTextExtent.GetWidth() / 2;
-		gRange = range - maxTextExtent.GetWidth();
-		if (gRange <= 0) {
-			return 0;
-		}
-
-		return ((g - minCoord) * maxValue / gRange);
+		maxValue = 0;
 	}
 }
 
@@ -107,6 +66,8 @@ void CategoryAxis::UpdateBounds()
 			m_longestCategory = catName;
 		}
 	}
+
+	FireBoundsChanged();
 }
 
 double CategoryAxis::GetValue(int step)
@@ -118,6 +79,7 @@ void CategoryAxis::GetLabel(int step, wxString &label)
 {
 	CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
 	if (dataset == NULL) {
+		label = wxEmptyString;
 		return ; // BUG
 	}
 

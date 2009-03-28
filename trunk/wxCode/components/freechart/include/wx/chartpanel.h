@@ -41,12 +41,16 @@ public:
 	//
 	virtual void ChartChanged(Chart *chart);
 
+	virtual void ChartScrollsChanged(Chart *chart);
+
 private:
 	void ResizeBackBitmap(wxSize size);
 	void RedrawBackBitmap();
+	void RecalcScrollbars();
 
 	void OnPaint(wxPaintEvent &ev);
 	void OnSize(wxSizeEvent &ev);
+	void OnScrollWin(wxScrollWinEvent &ev);
 
 	Chart *m_chart;
 

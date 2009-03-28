@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	dateaxis.h
-// Purpose: Date/time axis declaration
+// Name:	categoryaxis.cpp
+// Purpose: category axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -8,35 +8,21 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef DATEAXIS_H_
-#define DATEAXIS_H_
+#ifndef COMPDATEAXIS_H_
+#define COMPDATEAXIS_H_
 
-#include <wx/axis/labelaxis.h>
+#include "wx/axis/labelaxis.h"
 
-
-/**
- * An axis for displaying date/time values.
- * TODO:
- * - draw date/time intervals.
- */
-class WXDLLEXPORT DateAxis : public LabelAxis
+class CompDateAxis : public LabelAxis
 {
-	DECLARE_CLASS(DateAxis)
+	DECLARE_CLASS(CompDateAxis)
 public:
-	DateAxis(AXIS_LOCATION location);
-	virtual ~DateAxis();
+	CompDateAxis(AXIS_LOCATION location);
+	virtual ~CompDateAxis();
 
-	virtual void UpdateBounds();
+	void AddInterval(const wxDateSpan &interval);
 
-	/**
-	 * Sets date format for date labels.
-	 * @param dateFormat date format in strftime style
-	 */
-	void SetDateFormat(const wxString &dateFormat)
-	{
-		m_dateFormat = dateFormat;
-		FireAxisChanged();
-	}
+	void AddInterval(const wxTimeSpan &interval);
 
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);
@@ -54,10 +40,6 @@ protected:
 
 	virtual void GetDataBounds(double &minValue, double &maxValue);
 
-private:
-	int m_dateCount;
-
-	wxString m_dateFormat;
 };
 
-#endif /*DATEAXIS_H_*/
+#endif /* COMPDATEAXIS_H_ */

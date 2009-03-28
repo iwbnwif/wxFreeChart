@@ -30,9 +30,9 @@ public:
 
 	virtual void DrawGridLines(wxDC &dc, wxRect rc);
 
-	virtual wxCoord ToGraphics(wxDC &dc, int minG, int range, double value);
+	virtual wxCoord ToGraphics(wxDC &dc, int minCoord, int gRange, double value);
 
-	virtual double ToData(wxDC &dc, int minG, int range, wxCoord g);
+	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g);
 
 	virtual wxCoord GetExtent(wxDC &dc);
 
@@ -43,7 +43,7 @@ public:
 	void SetTitle(const wxString &title)
 	{
 		m_title = title;
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 	/**
@@ -65,7 +65,7 @@ public:
 	{
 		if (m_titleLocation != location) {
 			m_titleLocation = location;
-			FireNeedRedraw();
+			FireAxisChanged();
 		}
 	}
 
@@ -85,7 +85,7 @@ public:
 	void SetTitleFont(wxFont &font)
 	{
 		m_titleFont = font;
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 	/**
@@ -105,7 +105,7 @@ public:
 	{
 		if (m_titleColour != colour) {
 			m_titleColour = colour;
-			FireNeedRedraw();
+			FireAxisChanged();
 		}
 	}
 
@@ -128,7 +128,7 @@ public:
 	{
 		m_marginMin = marginMin;
 		m_marginMax = marginMax;
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 	/**
@@ -138,7 +138,7 @@ public:
 	void SetLabelPen(wxPen labelPen)
 	{
 		m_labelPen = labelPen;
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 	/**
@@ -148,7 +148,7 @@ public:
 	void SetLabelColour(wxColour labelColour)
 	{
 		m_labelColour = labelColour;
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 	/**
@@ -158,7 +158,7 @@ public:
 	void SetLabelFont(wxFont labelFont)
 	{
 		m_labelFont = labelFont;
-		FireNeedRedraw();
+		FireAxisChanged();
 	}
 
 protected:
@@ -184,10 +184,6 @@ protected:
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc) = 0;
 
-	virtual wxCoord DoToGraphics(wxDC &dc, int minG, int range, double value) = 0;
-
-	virtual double DoToData(wxDC &dc, int minG, int range, wxCoord g) = 0;
-
 	virtual bool HasLabels();
 
 private:
@@ -209,5 +205,8 @@ private:
 	wxColour m_titleColour;
 	int m_titleLocation;
 };
+
+wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value);
+double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g);
 
 #endif /*LABELAXIS_H_*/

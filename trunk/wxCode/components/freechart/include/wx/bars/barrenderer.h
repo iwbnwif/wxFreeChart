@@ -108,14 +108,22 @@ private:
 	double m_base;
 };
 
+/**
+ * Bar plot renderer.
+ */
 class WXDLLEXPORT BarRenderer : public Renderer
 {
 	DECLARE_CLASS(BarRenderer)
 public:
+	/**
+	 * Constructs new bar renderer.
+	 * @param barType bar type to be drawn by this renderer
+	 */
 	BarRenderer(BarType *barType);
+
 	virtual ~BarRenderer();
 
-	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
+	void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
 
 	/**
 	 * Sets bar type. BarRenderer owns this object.
@@ -123,24 +131,11 @@ public:
 	 */
 	void SetBarType(BarType *barType);
 
-	virtual double GetMinValue(CategoryDataset *dataset);
-	virtual double GetMaxValue(CategoryDataset *dataset);
+	double GetMinValue(CategoryDataset *dataset);
+	double GetMaxValue(CategoryDataset *dataset);
 
 protected:
 	BarType *m_barType;
-};
-
-class WXDLLEXPORT GanttBarRenderer : public BarRenderer
-{
-	DECLARE_CLASS(GanttBarRenderer)
-public:
-	GanttBarRenderer(BarType *barType);
-	virtual ~GanttBarRenderer();
-
-	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
-
-private:
-
 };
 
 #endif /*BARRENDERER_H_*/

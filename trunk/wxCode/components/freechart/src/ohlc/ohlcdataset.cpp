@@ -34,7 +34,7 @@ double OHLCDataset::GetMaxValue(bool unused)
 		if (n == 0)
 			maxValue = item->high;
 		else
-			maxValue = MAX(maxValue, item->high);
+			maxValue = wxMax(maxValue, item->high);
 	}
 	return maxValue;
 }
@@ -49,7 +49,7 @@ double OHLCDataset::GetMinValue(bool unused)
 		if (n == 0)
 			minValue = item->low;
 		else
-			minValue = MIN(minValue, item->low);
+			minValue = wxMin(minValue, item->low);
 	}
 	return minValue;
 }

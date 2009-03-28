@@ -868,7 +868,7 @@ LIB32=link.exe -lib
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\src\areabackground.cpp
+SOURCE=..\src\areadraw.cpp
 # End Source File
 # Begin Source File
 
@@ -876,7 +876,31 @@ SOURCE=..\src\art.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\axis\axis.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\axisplot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\bars\barplot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\bars\barrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xyz\bubbleplot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\axis\categoryaxis.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\category\categorydataset.cpp
 # End Source File
 # Begin Source File
 
@@ -892,7 +916,31 @@ SOURCE=..\src\colorscheme.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\axis\compdateaxis.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\dataset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\axis\dateaxis.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\gantt\ganttdataset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\gantt\ganttplot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\gantt\ganttrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\axis\labelaxis.cpp
 # End Source File
 # Begin Source File
 
@@ -908,7 +956,39 @@ SOURCE=..\src\multiplot.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\axis\numberaxis.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ohlc\ohlcbarrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ohlc\ohlccandlestickrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ohlc\ohlcdataset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ohlc\ohlcplot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ohlc\ohlcrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\pie\pieplot.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\plot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\functions\polynom.cpp
 # End Source File
 # Begin Source File
 
@@ -916,7 +996,43 @@ SOURCE=..\src\renderer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\xy\functions\sinefunction.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\symbol.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\vectordataset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\xyarearenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\xydataset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\xyhistorenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\xylinerenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\xyplot.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\xyrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xyz\xyzdataset.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -924,7 +1040,7 @@ SOURCE=..\src\symbol.cpp
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=..\include\wx\areabackground.h
+SOURCE=..\include\wx\areadraw.h
 # End Source File
 # Begin Source File
 
@@ -936,7 +1052,31 @@ SOURCE=..\include\wx\art.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\axis\axis.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\axisplot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\bars\barplot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\bars\barrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xyz\bubbleplot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\axis\categoryaxis.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\category\categorydataset.h
 # End Source File
 # Begin Source File
 
@@ -956,7 +1096,15 @@ SOURCE=..\include\wx\colorscheme.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\axis\compdateaxis.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\dataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\axis\dateaxis.h
 # End Source File
 # Begin Source File
 
@@ -965,6 +1113,22 @@ SOURCE=..\include\wx\drawobject.h
 # Begin Source File
 
 SOURCE=..\include\wx\drawutils.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\gantt\ganttdataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\gantt\ganttplot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\gantt\ganttrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\axis\labelaxis.h
 # End Source File
 # Begin Source File
 
@@ -980,7 +1144,35 @@ SOURCE=..\include\wx\multiplot.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\axis\numberaxis.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\observable.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\ohlcbarrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\ohlccandlestickrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\ohlcdataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\ohlcplot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\ohlcrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\pie\pieplot.h
 # End Source File
 # Begin Source File
 
@@ -988,7 +1180,15 @@ SOURCE=..\include\wx\plot.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\xy\functions\polynom.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\refobject.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\functions\sinefunction.h
 # End Source File
 # Begin Source File
 
@@ -996,7 +1196,39 @@ SOURCE=..\include\wx\symbol.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\xy\vectordataset.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\wxfreechartdefs.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xyarearenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xydataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xyhistorenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xylinerenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xyplot.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xyrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xyz\xyzdataset.h
 # End Source File
 # End Group
 # End Target

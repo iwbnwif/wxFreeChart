@@ -2106,8 +2106,11 @@
 </tool>
 </toolChain>
 </folderInfo>
+<fileInfo id="cdt.managedbuild.config.gnu.exe.debug.1141417592.1117153816" name="xydemos.cpp" rcbsApplicability="disable" resourcePath="sample/xydemos.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1503249045.1294925671">
+<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1503249045.1294925671" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1503249045"/>
+</fileInfo>
 <sourceEntries>
-<entry excluding="sample/bardemos.cpp|sample/ohlcdemos.cpp|sample/xydemos.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>

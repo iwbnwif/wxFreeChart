@@ -25,15 +25,13 @@ BarPlot::~BarPlot()
 
 bool BarPlot::AcceptAxis(Axis *axis)
 {
-	return (dynamic_cast<NumberAxis *>(axis) != NULL) ||
-			(dynamic_cast<CategoryAxis *>(axis) != NULL) ||
-			(dynamic_cast<DateAxis *>(axis) != NULL);
+	return (wxDynamicCast(axis, NumberAxis) != NULL) ||
+			(wxDynamicCast(axis, CategoryAxis) != NULL);
 }
 
 bool BarPlot::AcceptDataset(Dataset *dataset)
 {
-	return (dynamic_cast<CategoryDataset *>(dataset) != NULL);// ||
-			//dynamic_cast<DateTimeDataset *>(dataset));
+	return (wxDynamicCast(dataset, CategoryDataset) != NULL);
 }
 
 void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
@@ -50,12 +48,12 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 		wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
 
 		bool verticalBars;
-		if (dynamic_cast<CategoryAxis *>(horizAxis) != NULL ||
-				dynamic_cast<DateAxis *>(horizAxis) != NULL) {
+		if (wxDynamicCast(horizAxis, CategoryAxis) != NULL ||
+				wxDynamicCast(horizAxis, DateAxis) != NULL) {
 			verticalBars = true;
 		}
-		else if (dynamic_cast<CategoryAxis *>(vertAxis) != NULL ||
-				dynamic_cast<DateAxis *>(vertAxis) != NULL) {
+		else if (wxDynamicCast(vertAxis, CategoryAxis) != NULL ||
+				wxDynamicCast(vertAxis, DateAxis) != NULL) {
 			verticalBars = false;
 		}
 		else {
@@ -64,7 +62,5 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 		}
 
 		renderer->Draw(dc, rc, horizAxis, vertAxis, verticalBars, dataset);
-
-		//renderer->Draw(dc, rc, horizAxis, vertAxis, dataset);
 	}
 }
