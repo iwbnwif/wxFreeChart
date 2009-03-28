@@ -61,6 +61,11 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 				yVal = dataset->GetX(n, serie);
 			}
 
+			if (!horizAxis->IsVisible(xVal) ||
+					!vertAxis->IsVisible(xVal)) {
+				continue;
+			}
+
 			wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
 			wxCoord y = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
 

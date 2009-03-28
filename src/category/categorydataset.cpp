@@ -18,9 +18,9 @@ CategoryDataset::~CategoryDataset()
 {
 }
 
-bool CategoryDataset::AcceptRenderer(Renderer *r)
+bool CategoryDataset::AcceptRenderer(Renderer *renderer)
 {
-	return wxDynamicCast(r, BarRenderer);
+	return wxDynamicCast(renderer, BarRenderer);
 }
 
 bool CategoryDataset::HasValue(int index, int serie)
@@ -30,18 +30,18 @@ bool CategoryDataset::HasValue(int index, int serie)
 
 double CategoryDataset::GetMinValue(bool WXUNUSED(verticalAxis))
 {
-	if (m_renderer == NULL) {
+	if (GetRenderer() == NULL) {
 		return 0;
 	}
-	return ((BarRenderer *) m_renderer)->GetMinValue(this);
+	return GetRenderer()->GetMinValue(this);
 }
 
 double CategoryDataset::GetMaxValue(bool WXUNUSED(verticalAxis))
 {
-	if (m_renderer == NULL) {
+	if (GetRenderer() == NULL) {
 		return 0;
 	}
-	return ((BarRenderer *) m_renderer)->GetMaxValue(this);
+	return GetRenderer()->GetMaxValue(this);
 }
 
 // TODO deprecated functions.

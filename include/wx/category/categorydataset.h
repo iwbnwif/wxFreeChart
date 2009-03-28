@@ -30,8 +30,6 @@ public:
 	 */
 	virtual double GetValue(int index, int serie) = 0;
 
-	virtual int GetSerieCount() = 0;
-
 	/**
 	 * Returns category name at index.
 	 * @param index index of category name

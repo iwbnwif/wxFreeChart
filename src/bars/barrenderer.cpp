@@ -52,8 +52,8 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 			xb += shift;
 			x += shift;
 
-			rcBar.x = MIN(xb, x);
-			rcBar.y = MIN(yb, y);
+			rcBar.x = wxMin(xb, x);
+			rcBar.y = wxMin(yb, y);
 			rcBar.width = width;
 			rcBar.height = ABS(yb - y);
 		}
@@ -61,8 +61,8 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 			yb += shift;
 			y += shift;
 
-			rcBar.x = MIN(xb, x);
-			rcBar.y = MIN(yb, y);
+			rcBar.x = wxMin(xb, x);
+			rcBar.y = wxMin(yb, y);
 			rcBar.width = ABS(xb - x);
 			rcBar.height = width;
 		}
@@ -81,10 +81,10 @@ double BarType::GetMinValue(CategoryDataset *dataset)
 
 	FOREACH_SERIE(serie, dataset) {
 		for (int n = 0; n < dataset->GetCount(); n++) {
-			minValue = MIN(minValue, dataset->GetValue(n, serie));
+			minValue = wxMin(minValue, dataset->GetValue(n, serie));
 		}
 	}
-	return minValue;
+	return wxMin(minValue, m_base);
 }
 
 double BarType::GetMaxValue(CategoryDataset *dataset)
@@ -96,7 +96,7 @@ double BarType::GetMaxValue(CategoryDataset *dataset)
 
 	FOREACH_SERIE(serie, dataset) {
 		for (int n = 0; n < dataset->GetCount(); n++) {
-			maxValue = MAX(maxValue, dataset->GetValue(n, serie));
+			maxValue = wxMax(maxValue, dataset->GetValue(n, serie));
 		}
 	}
 	return maxValue;
@@ -168,7 +168,7 @@ double StackedBarType::GetMaxValue(CategoryDataset *dataset)
 		FOREACH_SERIE(serie, dataset) {
 			sum += dataset->GetValue(n, serie);
 		}
-		maxValue = MAX(maxValue, sum);
+		maxValue = wxMax(maxValue, sum);
 	}
 	return maxValue;
 }
@@ -226,18 +226,3 @@ double BarRenderer::GetMaxValue(CategoryDataset *dataset)
 	return m_barType->GetMaxValue(dataset);
 }
 
-IMPLEMENT_CLASS(GanttBarRenderer, Renderer)
-
-GanttBarRenderer::GanttBarRenderer(BarType *barType)
-: BarRenderer(barType)
-{
-}
-
-GanttBarRenderer::~GanttBarRenderer()
-{
-}
-
-void GanttBarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset)
-{
-	// TODO
-}

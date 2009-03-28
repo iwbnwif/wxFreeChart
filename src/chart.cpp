@@ -30,6 +30,9 @@ Chart::Chart(Plot *plot, const wxString &title)
 	m_plot = plot;
 	m_plot->AddObserver(this);
 	m_title = title;
+
+	m_horizScrolledAxis = NULL;
+	m_vertScrolledAxis = NULL;
 }
 
 Chart::~Chart()
@@ -41,6 +44,48 @@ Chart::~Chart()
 void Chart::PlotNeedRedraw(Plot *WXUNUSED(plot))
 {
 	FireChartChanged();
+}
+
+void Chart::AxisChanged(Axis *WXUNUSED(axis))
+{
+
+}
+
+void Chart::BoundsChanged(Axis *axis)
+{
+	if (axis == m_horizScrolledAxis || axis == m_vertScrolledAxis) {
+		FireChartScrollsChanged();
+	}
+}
+
+void Chart::SetScrolledAxis(Axis *axis)
+{
+	if (axis->IsVertical()) {
+		if (m_vertScrolledAxis != NULL) {
+			m_vertScrolledAxis->RemoveObserver(this);
+		}
+		m_vertScrolledAxis = axis;
+	}
+	else {
+		if (m_horizScrolledAxis != NULL) {
+			m_horizScrolledAxis->RemoveObserver(this);
+		}
+		m_horizScrolledAxis = axis;
+	}
+
+	axis->AddObserver(this);
+
+	FireChartScrollsChanged();
+}
+
+Axis *Chart::GetHorizScrolledAxis()
+{
+	return m_horizScrolledAxis;
+}
+
+Axis *Chart::GetVertScrolledAxis()
+{
+	return m_vertScrolledAxis;
 }
 
 wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)

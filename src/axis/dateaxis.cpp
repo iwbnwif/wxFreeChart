@@ -32,75 +32,54 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 
 void DateAxis::UpdateBounds()
 {
-	m_dateCount = 0;
+	int dateCount = 0;
 
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		DateTimeDataset *dataset = (DateTimeDataset *) m_datasets[n];
 
 		int count = dataset->GetCount();
-		m_dateCount = MAX(m_dateCount, count);
+		dateCount = wxMax(dateCount, count);
+	}
+
+	if (dateCount != m_dateCount) {
+		m_dateCount = dateCount;
+		FireBoundsChanged();
 	}
 }
 
 wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 {
-	return wxSize(0, 0); // TODO temporary
+	wxSize maxExtent(0, 0);
+
+	for (int step = 0; ; step++) {
+		if (IsEnd(step))
+			break;
+
+		wxString label;
+		GetLabel(step, label);
+
+		wxSize labelExtent = dc.GetTextExtent(label);
+		maxExtent.x = wxMax(maxExtent.x, labelExtent.x);
+		maxExtent.y = wxMax(maxExtent.y, labelExtent.y);
+	}
+
+	return maxExtent;
 }
 
-wxCoord DateAxis::DoToGraphics(wxDC &dc, int minG, int range, double value)
+void DateAxis::GetDataBounds(double &minValue, double &maxValue)
 {
-	wxSize maxTextExtent = GetLongestLabelExtent(dc);
-
-	double maxValue = m_dateCount - 1;
-
-	if (IsVertical()) {
-		wxCoord y0 = minG + maxTextExtent.GetHeight() / 2;
-		double height = range - maxTextExtent.GetHeight();
-
-		wxCoord y = (wxCoord) ((maxValue - value) * height / maxValue + y0);
-		return y;
+	minValue = 0;
+	if (m_dateCount > 1) {
+		maxValue = m_dateCount - 1;
 	}
 	else {
-		wxCoord x0 = minG + maxTextExtent.GetWidth() / 2;
-		double width = range - maxTextExtent.GetWidth();
-
-		wxCoord x = (wxCoord) ((value * width) / maxValue + x0);
-		return x;
-	}
-}
-
-double DateAxis::DoToData(wxDC &dc, int minG, int range, wxCoord g)
-{
-	wxSize maxTextExtent = GetLongestLabelExtent(dc);
-
-	wxCoord minCoord;
-	double gRange;
-
-	double maxValue = m_dateCount - 1;
-
-	if (IsVertical()) {
-		minCoord = minG + maxTextExtent.GetHeight() / 2;
-		gRange = range - maxTextExtent.GetHeight();
-		if (gRange <= 0) {
-			return 0;
-		}
-
-		return maxValue - ((g - minCoord) * maxValue / gRange);
-	}
-	else {
-		minCoord = minG + maxTextExtent.GetWidth() / 2;
-		gRange = range - maxTextExtent.GetWidth();
-		if (gRange <= 0) {
-			return 0;
-		}
-
-		return ((g - minCoord) * maxValue / gRange);
+		maxValue = 0;
 	}
 }
 
 double DateAxis::GetValue(int step)
 {
-	return step; // TODO temporary
+	return step;
 }
 
 void DateAxis::GetLabel(int step, wxString &label)
@@ -118,14 +97,4 @@ void DateAxis::GetLabel(int step, wxString &label)
 bool DateAxis::IsEnd(int step)
 {
 	return step >= m_dateCount;
-}
-
-void DateAxis::AddInterval(const wxDateSpan &interval)
-{
-	// TODO not implemented
-}
-
-void DateAxis::AddInterval(const wxTimeSpan &interval)
-{
-	// TODO not implemented
 }

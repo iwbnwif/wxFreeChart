@@ -35,6 +35,101 @@
 	       This is because the folders you reference are always referred to
 	       the root of your component and must always be relative paths.
     -->
+    <set var="COMP_SRC">
+src/legend.cpp
+src/pie/pieplot.cpp
+src/art.cpp
+src/multiplot.cpp
+src/gantt/ganttdataset.cpp
+src/gantt/ganttplot.cpp
+src/gantt/ganttrenderer.cpp
+src/plot.cpp
+src/renderer.cpp
+src/bars/barrenderer.cpp
+src/bars/barplot.cpp
+src/marker.cpp
+src/chart.cpp
+src/axis/labelaxis.cpp
+src/axis/compdateaxis.cpp
+src/axis/axis.cpp
+src/axis/numberaxis.cpp
+src/axis/categoryaxis.cpp
+src/axis/dateaxis.cpp
+src/axisplot.cpp
+src/areadraw.cpp
+src/xyz/bubbleplot.cpp
+src/xyz/xyzdataset.cpp
+src/xy/functions/polynom.cpp
+src/xy/functions/sinefunction.cpp
+src/xy/xyplot.cpp
+src/xy/xyarearenderer.cpp
+src/xy/vectordataset.cpp
+src/xy/xyhistorenderer.cpp
+src/xy/xyrenderer.cpp
+src/xy/xydataset.cpp
+src/xy/xylinerenderer.cpp
+src/ohlc/ohlcrenderer.cpp
+src/ohlc/ohlcbarrenderer.cpp
+src/ohlc/ohlcplot.cpp
+src/ohlc/ohlccandlestickrenderer.cpp
+src/ohlc/ohlcdataset.cpp
+src/category/categorydataset.cpp
+src/symbol.cpp
+src/dataset.cpp
+src/colorscheme.cpp
+src/chartpanel.cpp
+    </set>
+
+    <set var="COMP_HDR">
+include/wx/pie/pieplot.h
+include/wx/multiplot.h
+include/wx/gantt/ganttdataset.h
+include/wx/gantt/ganttrenderer.h
+include/wx/gantt/ganttplot.h
+include/wx/chart.h
+include/wx/bars/barplot.h
+include/wx/bars/barrenderer.h
+include/wx/plot.h
+include/wx/axis/numberaxis.h
+include/wx/axis/dateaxis.h
+include/wx/axis/compdateaxis.h
+include/wx/axis/axis.h
+include/wx/axis/categoryaxis.h
+include/wx/axis/labelaxis.h
+include/wx/legend.h
+include/wx/art.h
+include/wx/areadraw.h
+include/wx/drawutils.h
+include/wx/xyz/xyzdataset.h
+include/wx/xyz/bubbleplot.h
+include/wx/refobject.h
+include/wx/symbol.h
+include/wx/chartrenderer.h
+include/wx/xy/xyplot.h
+include/wx/xy/functions/polynom.h
+include/wx/xy/functions/sinefunction.h
+include/wx/xy/xyhistorenderer.h
+include/wx/xy/xylinerenderer.h
+include/wx/xy/xydataset.h
+include/wx/xy/vectordataset.h
+include/wx/xy/xyrenderer.h
+include/wx/xy/xyarearenderer.h
+include/wx/wxfreechartdefs.h
+include/wx/ohlc/ohlcbarrenderer.h
+include/wx/ohlc/ohlcdataset.h
+include/wx/ohlc/ohlccandlestickrenderer.h
+include/wx/ohlc/ohlcrenderer.h
+include/wx/ohlc/ohlcplot.h
+include/wx/category/categorydataset.h
+include/wx/colorscheme.h
+include/wx/marker.h
+include/wx/dataset.h
+include/wx/observable.h
+include/wx/drawobject.h
+include/wx/array.h
+include/wx/chartpanel.h
+include/wx/axisplot.h
+    </set>
 
     <lib id="wxfreechart_lib" template="wxcode-lib" cond="WX_SHARED=='0'">
 	<!-- here you can use any standard Bakefile tag. E.g. you may want to
@@ -60,7 +155,7 @@
     <!-- For wxCode samples, don't use a simple <exe> tag but rather the more
 	 specific <wxcode-sample> tag: -->
 
-    <wxcode-sample id="wxFreeChartDemo">
+    <wxcode-sample id="wxFreeChartDemo_lib" cond="WX_SHARED=='0'">
 	<dir>sample</dir>
 
 	<!-- if you use win32 resources for your sample and you are lazy and
@@ -70,6 +165,21 @@
 	<has-win32-res/>
 
 	<library>wxfreechart_lib</library>
+	<wx-lib>aui</wx-lib>
+	<wx-lib>core</wx-lib>
+	<wx-lib>base</wx-lib> <!-- base must be last wx-lib -->
+    </wxcode-sample>
+
+    <wxcode-sample id="wxFreeChartDemo_dll" cond="WX_SHARED=='1'">
+	<dir>sample</dir>
+
+	<!-- if you use win32 resources for your sample and you are lazy and
+	     don't want to use the <win32-res>myresfile.rc</win32-res> tag,
+	     you can just write:
+	-->
+	<has-win32-res/>
+
+	<library>wxfreechart_dll</library>
 	<wx-lib>aui</wx-lib>
 	<wx-lib>core</wx-lib>
 	<wx-lib>base</wx-lib> <!-- base must be last wx-lib -->

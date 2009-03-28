@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	legend.cpp
-// Purpose:
+// Purpose: legend drawing implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -10,14 +10,13 @@
 
 #include <wx/legend.h>
 
-const int symbolTextGap = 2;
-const int margin = 2;
-
-Legend::Legend(int vertPosition, int horizPosition, AreaDraw *background)
+Legend::Legend(int vertPosition, int horizPosition, AreaDraw *background, int symbolTextGap, int margin)
 {
 	m_vertPosition = vertPosition;
 	m_horizPosition = horizPosition;
 	m_background = background;
+	m_symbolTextGap = symbolTextGap;
+	m_margin = margin;
 }
 
 Legend::~Legend()
@@ -31,23 +30,23 @@ void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 
 	m_background->Draw(dc, rc);
 
-	wxCoord x = rc.x + margin;
+	wxCoord x = rc.x + m_margin;
 	wxCoord y = rc.y;
 
 	for (int n = 0; n < datasets.GetSize(); n++) {
 		Dataset *dataset = datasets[n];
 
-		for (int nSerie = 0; nSerie < dataset->GetSerieCount(); nSerie++) {
-			wxString serieName = dataset->GetSerieName(nSerie);
+		FOREACH_SERIE(serie, dataset) {
+			wxString serieName = dataset->GetSerieName(serie);
 			wxSize textExtent = dc.GetTextExtent(serieName);
 
 			Renderer *renderer = dataset->GetBaseRenderer();
-			Symbol *symbol = renderer->GetSerieSymbol(nSerie);
+			Symbol *symbol = renderer->GetSerieSymbol(serie);
 
 			wxSize symbolExtent = symbol->GetExtent();
 			symbol->Draw(dc, x + symbolExtent.x / 2, y + symbolExtent.y / 2 + textExtent.y / 2);
 
-			wxCoord textX = x + symbolExtent.x + symbolTextGap;
+			wxCoord textX = x + symbolExtent.x + m_symbolTextGap;
 
 			dc.DrawText(serieName, textX, y);
 
@@ -65,18 +64,18 @@ wxSize Legend::GetExtent(wxDC &dc, Array<Dataset, 1> &datasets)
 	for (int n = 0; n < datasets.GetSize(); n++) {
 		Dataset *dataset = datasets[n];
 
-		for (int nSerie = 0; nSerie < dataset->GetSerieCount(); nSerie++) {
-			wxSize textExtent = dc.GetTextExtent(dataset->GetSerieName(nSerie));
+		FOREACH_SERIE(serie, dataset) {
+			wxSize textExtent = dc.GetTextExtent(dataset->GetSerieName(serie));
 
 			Renderer *renderer = dataset->GetBaseRenderer();
-			Symbol *symbol = renderer->GetSerieSymbol(nSerie);
+			Symbol *symbol = renderer->GetSerieSymbol(serie);
 
 			wxSize symbolExtent = symbol->GetExtent();
 
-			wxCoord width = textExtent.x + symbolExtent.x + symbolTextGap + 2 * margin;
+			wxCoord width = textExtent.x + symbolExtent.x + m_symbolTextGap + 2 * m_margin;
 
 			extent.y += textExtent.y + labelsSpacing;
-			extent.x = MAX(extent.x, width);
+			extent.x = wxMax(extent.x, width);
 		}
 	}
 	return extent;

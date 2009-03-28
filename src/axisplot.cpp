@@ -156,11 +156,6 @@ void AxisPlot::UpdateAxis(Dataset *dataset)
 	}
 }
 
-void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
-{
-	FirePlotNeedRedraw();
-}
-
 void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
 {
 	m_drawGridVertical = drawGridVertical;
@@ -199,9 +194,24 @@ Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
 	return NULL; // not found
 }
 
+void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
+{
+	FirePlotNeedRedraw();
+}
+
 void AxisPlot::DatasetChanged(Dataset *dataset)
 {
 	UpdateAxis(dataset);
+	FirePlotNeedRedraw();
+}
+
+void AxisPlot::AxisChanged(Axis *WXUNUSED(axis))
+{
+	FirePlotNeedRedraw();
+}
+
+void AxisPlot::BoundsChanged(Axis *WXUNUSED(axis))
+{
 	FirePlotNeedRedraw();
 }
 
@@ -373,7 +383,9 @@ void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
 
 void AxisPlot::DrawDataArea(wxDC &dc, wxRect rcData)
 {
-	wxDCClipper clip(dc, rcData);
+	wxRect clipRc = rcData;
+	clipRc.Deflate(1, 1);
+	wxDCClipper clip(dc, clipRc);
 
 	DrawGridLines(dc, rcData);
 	DrawDatasets(dc, rcData);

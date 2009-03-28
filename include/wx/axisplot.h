@@ -20,10 +20,11 @@
 /**
  * Base class plots that supports axes.
  */
-class WXDLLEXPORT AxisPlot : public Plot, public DrawObserver, public DatasetObserver
+class WXDLLEXPORT AxisPlot : public Plot, public DrawObserver, public DatasetObserver, public AxisObserver
 {
 public:
 	AxisPlot();
+
 	virtual ~AxisPlot();
 
 	/**
@@ -77,8 +78,23 @@ public:
 	 */
 	void SetDataBackground(AreaDraw *dataBackground);
 
+	/**
+	 * Sets legend to plot. Plot take ownership of legend.
+	 * @param legend new legend for plot
+	 */
 	void SetLegend(Legend *legend);
 
+	/**
+	 * Translate coordinate from graphics to data space.
+	 * @param nData number of dataset
+	 * @param dc device context
+	 * @param rc plot rectangle
+	 * @param gx x coordinate in graphics space
+	 * @param gy y coordinate in graphics space
+	 * @param x output for x coordinate in data space
+	 * @param y output for y coordinate in data space
+	 * @return true if coordinate was succesfully translated, false - overwise
+	 */
 	bool ToDataCoords(int nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y);
 
 	//
@@ -90,6 +106,13 @@ public:
 	// DatasetObserver
 	//
 	virtual void DatasetChanged(Dataset *dataset);
+
+	//
+	// AxisObserver
+	//
+	virtual void AxisChanged(Axis *axis);
+
+	virtual void BoundsChanged(Axis *axis);
 
 protected:
 	//

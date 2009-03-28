@@ -116,8 +116,9 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 
 void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 {
-	if (!HasLabels())
+	if (!HasLabels()) {
 		return ;
+	}
 
 	// setup dc objects for tick labels and lines
 	dc.SetFont(m_labelFont);
@@ -125,14 +126,15 @@ void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 	dc.SetTextForeground(m_labelColour);
 
 	wxString label;
-	for (int nStep = 0; ; nStep++) {
-		if (IsEnd(nStep))
-			break;
+	for (int step = 0; !IsEnd(step) ; step++) {
+		double value = GetValue(step);
+		if (!IsVisible(value)) {
+			continue;
+		}
 
 		label = wxEmptyString;
-		GetLabel(nStep, label);
+		GetLabel(step, label);
 
-		double value = GetValue(nStep);
 		DrawLabel(dc, rc, label, value);
 	}
 }
@@ -170,38 +172,19 @@ void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
 	dc.DrawLine(x1, y1, x2, y2);
 }
 
-wxCoord LabelAxis::ToGraphics(wxDC &dc, int minG, int range, double value)
-{
-	minG += m_marginMin;
-	range -= (m_marginMin + m_marginMax);
-	if (range < 0)
-		range = 0;
-
-	return DoToGraphics(dc, minG, range, value);
-}
-
-double LabelAxis::ToData(wxDC &dc, int minG, int range, wxCoord g)
-{
-	minG += m_marginMin;
-	range -= (m_marginMin + m_marginMax);
-	if (range < 0)
-		range = 0;
-
-	return DoToData(dc, minG, range, g);
-}
-
 void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 {
-	if (!HasLabels())
+	if (!HasLabels()) {
 		return ;
+	}
 
 	dc.SetPen(m_gridLinesPen);
 
-	for (int nStep = 0; ; nStep++) {
-		if (IsEnd(nStep))
-			break;
-
+	for (int nStep = 0; !IsEnd(nStep); nStep++) {
 		double value = GetValue(nStep);
+		if (!IsVisible(value)) {
+			continue;
+		}
 
 		if (IsVertical()) {
 			wxCoord y = ToGraphics(dc, rc.y, rc.height, value);
@@ -271,7 +254,87 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 	DrawBorderLine(dc, rc);
 }
 
+wxCoord LabelAxis::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
+{
+	double minValue, maxValue;
+	GetDataBounds(minValue, maxValue);
+
+	minCoord += m_marginMin;
+	gRange -= (m_marginMin + m_marginMax);
+	if (gRange < 0) {
+		gRange = 0;
+	}
+
+	if (m_useWin) {
+		minValue = m_winPos;
+		maxValue = m_winPos + m_winWidth;
+	}
+
+	return ::ToGraphics(minCoord, gRange, minValue, maxValue, 0/*textMargin*/, IsVertical(), value);
+}
+
+double LabelAxis::ToData(wxDC &dc, int minCoord, int gRange, wxCoord g)
+{
+	double minValue, maxValue;
+	GetDataBounds(minValue, maxValue);
+
+	minCoord += m_marginMin;
+	gRange -= (m_marginMin + m_marginMax);
+	if (gRange < 0) {
+		gRange = 0;
+	}
+
+	if (m_useWin) {
+		minValue = m_winPos;
+		maxValue = m_winPos + m_winWidth;
+	}
+
+	double value = ::ToData(minCoord, gRange, minValue, maxValue, 0/*textMargin*/, IsVertical(), g);
+	return value;
+}
+
 bool LabelAxis::HasLabels()
 {
 	return true;
+}
+
+wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value)
+{
+	double k;
+	double valueRange = maxValue - minValue;
+
+	minCoord += margin / 2;
+	gRange -= margin;
+
+	if (gRange <= 0) {
+		return minCoord;
+	}
+
+	if (vertical) {
+		k = (maxValue - value) / valueRange;
+	}
+	else {
+		k = (value - minValue) / valueRange;
+	}
+
+	return (wxCoord) (k * gRange + minCoord);
+}
+
+double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g)
+{
+	double valueRange = maxValue - minValue;
+
+	minCoord += margin / 2;
+	gRange -= margin;
+
+	if (gRange <= 0) {
+		return 0;
+	}
+
+	if (vertical) {
+		return maxValue - ((g - minCoord) * valueRange / gRange);
+	}
+	else {
+		return minValue + ((g - minCoord) * valueRange / gRange);
+	}
 }

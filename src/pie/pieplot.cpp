@@ -88,7 +88,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	}
 
 
-	int radHoriz = (int) (0.8 * MIN(rc.width, rc.height));
+	int radHoriz = (int) (0.8 * wxMin(rc.width, rc.height));
 	int radVert  = (int) (radHoriz * ellipticAspect);
 
 	wxCoord x0 = rc.x + (rc.width - radHoriz) / 2;

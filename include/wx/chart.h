@@ -19,6 +19,8 @@
 
 #include <wx/areadraw.h>
 
+#include <wx/axis/axis.h>
+
 class Chart;
 
 /**
@@ -37,12 +39,18 @@ public:
 	 * @param chart chart that has been changed
 	 */
 	virtual void ChartChanged(Chart *chart) = 0;
+
+	/**
+	 * Called when some of chart scrolled axes changed its bounds.
+	 * @param chart chart
+	 */
+	virtual void ChartScrollsChanged(Chart *chart) = 0;
 };
 
 /**
  * Chart. Contains plot, title and chart attributes.
  */
-class WXDLLEXPORT Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver
+class WXDLLEXPORT Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver, public AxisObserver
 {
 public:
 	/**
@@ -113,10 +121,24 @@ public:
 		FireChartChanged();
 	}
 
+	void SetScrolledAxis(Axis *axis);
+
+	Axis *GetHorizScrolledAxis();
+
+	Axis *GetVertScrolledAxis();
+
+
 	//
 	// PlotObserver
 	//
 	virtual void PlotNeedRedraw(Plot *_plot);
+
+	//
+	// AxisObserver
+	//
+	virtual void AxisChanged(Axis *axis);
+
+	virtual void BoundsChanged(Axis *axis);
 
 private:
 	Plot *m_plot;
@@ -124,7 +146,11 @@ private:
 	wxString m_title;
 	wxFont m_titleFont;
 
+	Axis *m_horizScrolledAxis;
+	Axis *m_vertScrolledAxis;
+
 	FIRE_WITH_THIS(ChartChanged);
+	FIRE_WITH_THIS(ChartScrollsChanged);
 };
 
 #endif /*CHART_H_*/

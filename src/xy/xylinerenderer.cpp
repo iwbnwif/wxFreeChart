@@ -12,6 +12,24 @@
 
 IMPLEMENT_CLASS(XYLineRenderer, XYRenderer)
 
+void TruncHoriz(Axis *axis, double &x, double &y, double x1, double y1)
+{
+	if (!axis->IsVisible(x)) {
+		double p = axis->BoundValue(x);
+		y = (y1 - y) * (p - x) / (x1 - x) + y;
+		x = p;
+	}
+}
+
+void TruncVert(Axis *axis, double &x, double &y, double x1, double y1)
+{
+	if (!axis->IsVisible(x)) {
+		double p = axis->BoundValue(x);
+		x = (p - y1) * (x1 - x) / (y1 - y) + x;
+		y = p;
+	}
+}
+
 XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
 {
 	m_drawSymbols = drawSymbols;
@@ -28,13 +46,32 @@ void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, 
 {
 	FOREACH_SERIE(serie, dataset) {
 		for (int n = 0; n < dataset->GetCount(serie) - 1; n++) {
-			wxCoord x0, y0;
-			wxCoord x1, y1;
+			double x0 = dataset->GetX(n, serie);
+			double y0 = dataset->GetY(n, serie);
+			double x1 = dataset->GetX(n + 1, serie);
+			double y1 = dataset->GetY(n + 1, serie);
 
-			TranslateCoords(x0, y0, dc, rc, horizAxis, vertAxis, dataset->GetX(n, serie), dataset->GetY(n, serie));
-			TranslateCoords(x1, y1, dc, rc, horizAxis, vertAxis, dataset->GetX(n + 1, serie), dataset->GetY(n + 1, serie));
+			// check whether segment is visible
+			if (!horizAxis->IntersectsWindow(x0, x1) &&
+					!vertAxis->IntersectsWindow(y0, y1)) {
+				continue;
+			}
 
-			DrawSegment(dc, serie, x0, y0, x1, y1);
+			TruncHoriz(horizAxis, x0, y0, x1, y1);
+			TruncHoriz(horizAxis, x1, y1, x0, y0);
+			TruncVert(vertAxis, x0, y0, x1, y1);
+			TruncVert(vertAxis, x1, y1, x0, y0);
+
+			// translate to graphics coordinates.
+			wxCoord xg0, yg0;
+			wxCoord xg1, yg1;
+
+			xg0 = horizAxis->ToGraphics(dc, rc.x, rc.width, x0);
+			yg0 = vertAxis->ToGraphics(dc, rc.y, rc.height, y0);
+			xg1 = horizAxis->ToGraphics(dc, rc.x, rc.width, x1);
+			yg1 = vertAxis->ToGraphics(dc, rc.y, rc.height, y1);
+
+			DrawSegment(dc, serie, xg0, yg0, xg1, yg1);
 		}
 	}
 }

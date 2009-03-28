@@ -29,8 +29,11 @@ public:
 	 * @param vertPosition vertical position, can be wxTOP, wxCENTER, wxBOTTOM
 	 * @param horizPosition horizontal position, can be wxLEFT, wxCENTER, wxRIGHT
 	 * @param background background for legend area
+	 * @param symbolTextGap distance between symbol and text
+	 * @param margin legend margin
 	 */
-	Legend(int vertPosition, int horizPosition, AreaDraw *background = new FillAreaDraw());
+	Legend(int vertPosition, int horizPosition, AreaDraw *background = new FillAreaDraw(), int symbolTextGap = 2, int margin = 2);
+
 	virtual ~Legend();
 
 	void Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets);
@@ -45,6 +48,10 @@ public:
 		return m_horizPosition;
 	}
 
+	/**
+	 * Sets font to draw legend labels.
+	 * @param font new font to draw legend labels
+	 */
 	void SetTextFont(wxFont font)
 	{
 		m_font = font;
@@ -57,6 +64,9 @@ public:
 
 	/**
 	 * Returns size of area to draw legend.
+	 * @param dc device context
+	 * @param datasetes dataset array
+	 * @return size needed for legend area
 	 */
 	wxSize GetExtent(wxDC &dc, Array<Dataset, 1> &datasets);
 
@@ -67,6 +77,9 @@ private:
 	wxFont m_font;
 
 	AreaDraw *m_background;
+
+	int m_symbolTextGap;
+	int m_margin;
 };
 
 #endif /*LEGEND_H_*/

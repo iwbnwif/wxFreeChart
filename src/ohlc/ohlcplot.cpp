@@ -30,7 +30,7 @@ bool OHLCPlot::AcceptAxis(Axis *axis)
 
 bool OHLCPlot::AcceptDataset(Dataset *dataset)
 {
-	return (dynamic_cast<OHLCDataset *>(dataset) != NULL);
+	return (wxDynamicCast(dataset, OHLCDataset) != NULL);
 }
 
 void OHLCPlot::DrawDatasets(wxDC &dc, wxRect rc)

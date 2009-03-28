@@ -15,14 +15,6 @@
 
 #define ABS(a) ((a) < 0) ? (-1*(a)) : (a)
 
-#ifndef MAX
-#define MAX(a,b)	    (((a) > (b)) ? (a) : (b))
-#endif
-
-#ifndef MIN
-#define MIN(a,b)	    (((a) < (b)) ? (a) : (b))
-#endif
-
 #ifndef N
 #define N(arr) sizeof(arr) / sizeof(*arr)
 #endif /* N */
@@ -73,7 +65,7 @@ static inline int maxV(int count, int first, ...)
 
 	for (n = 1; n < count; n++) {
 		int value = va_arg(args, int);
-		maxValue = MAX(maxValue, value);
+		maxValue = wxMax(maxValue, value);
 	}
 	va_end(args);
 	return maxValue;
