@@ -165,6 +165,8 @@ class DemoApp : public wxApp
 public:
 	bool OnInit()
 	{
+		wxInitAllImageHandlers();
+
 		MainFrame *mainFrame = new MainFrame();
 		SetTopWindow(mainFrame);
 		mainFrame->Show(true);
