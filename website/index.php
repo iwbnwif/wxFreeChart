@@ -44,7 +44,9 @@
 	<p>Description</p>
   <div class="center">
     <?php writeScreenshotLink("bars1.png", "bar chart"); ?>
-    <?php writeScreenshotLink("bars2.png", "horizontal bar chart"); ?>
+    <?php writeScreenshotLink("bars2.png", ""); ?>
+    <?php writeScreenshotLink("ohlc1.png", ""); ?>
+    <?php writeScreenshotLink("xy1.png", ""); ?>
   </div>
 
 
@@ -52,7 +54,7 @@
        see the ReadMe.txt file at wxCode\template... -->
   <br/><?php write_h1("Documentation"); ?>
   <p>The documentation for this component is available online
-  <a href="../../docs/MYCOMPSUBDIR/">here</a>.</p>
+  <a href="../../docs/freechart/">here</a>.</p>
 
 
 	<br/><?php write_h1("Known bugs"); ?>
