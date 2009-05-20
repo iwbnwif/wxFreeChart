@@ -11,7 +11,8 @@
 #ifndef GANTTRENDERER_H_
 #define GANTTRENDERER_H_
 
-#include <wx/axis/axis.h>
+#include <wx/axis/dateaxis.h>
+#include <wx/axis/categoryaxis.h>
 #include <wx/gantt/ganttdataset.h>
 
 class WXDLLEXPORT GanttRenderer : public Renderer
@@ -26,11 +27,30 @@ public:
 	GanttRenderer(int barWidth = 5, int serieGap = 2);
 	virtual ~GanttRenderer();
 
-	void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, GanttDataset *dataset);
+	void Draw(wxDC &dc, wxRect rc, DateAxis *horizAxis, CategoryAxis *vertAxis, GanttDataset *dataset);
+
+	/**
+	 * Sets area draw object to draw specified serie.
+	 * @param serie serie index
+	 * @param ad area draw for serie
+	 */
+	void SetSerieDraw(int serie, AreaDraw *ad)
+	{
+		m_serieDraws.SetAreaDraw(serie, ad);
+		FireNeedRedraw();
+	}
+
+	void SetBarWidth(int barWidth)
+	{
+		m_barWidth = barWidth;
+		FireNeedRedraw();
+	}
 
 private:
 	int m_barWidth;
 	int m_serieGap;
+
+	AreaDrawCollection m_serieDraws;
 };
 
 #endif /* GANTTRENDERER_H_ */

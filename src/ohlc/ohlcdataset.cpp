@@ -75,3 +75,8 @@ wxString OHLCDataset::GetSerieName(int serie)
 {
 	return m_serieName;
 }
+
+DateTimeDataset *OHLCDataset::AsDateTimeDataset()
+{
+	return this;
+}

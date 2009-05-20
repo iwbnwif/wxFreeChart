@@ -18,8 +18,8 @@
 
 WX_DECLARE_HASH_MAP(int, wxColor, wxIntegerHash, wxIntegerEqual, ColorMap);
 WX_DECLARE_HASH_MAP(int, wxPen, wxIntegerHash, wxIntegerEqual, PenMap);
+WX_DECLARE_HASH_MAP(int, wxBrush, wxIntegerHash, wxIntegerEqual, BrushMap);
 WX_DECLARE_HASH_MAP(int, Symbol *, wxIntegerHash, wxIntegerEqual, SymbolMap);
-
 
 wxColour WXDLLEXPORT GetDefaultColour(size_t index);
 

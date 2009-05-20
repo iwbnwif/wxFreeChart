@@ -14,9 +14,6 @@
 #include <wx/axisplot.h>
 #include <wx/ohlc/ohlcdataset.h>
 
-#include <wx/axis/dateaxis.h>
-#include <wx/axis/numberaxis.h>
-
 /**
  * Open-High-Low-Close plot.
  */

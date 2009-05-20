@@ -149,14 +149,28 @@ private:
 WX_DECLARE_HASH_MAP(int, AreaDraw *, wxIntegerHash, wxIntegerEqual, AreaDrawMap);
 class WXDLLEXPORT AreaDrawMap;
 
+/**
+ * Collection of areadraws for series.
+ * Used by bar charts, etc.
+ */
 class WXDLLEXPORT AreaDrawCollection
 {
 public:
 	AreaDrawCollection();
 	virtual ~AreaDrawCollection();
 
+	/**
+	 * Set areadraw for serie.
+	 * @param serie serie index
+	 * @param areaDraw areadraw for serie
+	 */
 	void SetAreaDraw(int serie, AreaDraw *areaDraw);
 
+	/**
+	 * Returns areadraw, if any, for serie.
+	 * @param serie serie index
+	 * @return areadraw
+	 */
 	AreaDraw *GetAreaDraw(int serie);
 
 private:

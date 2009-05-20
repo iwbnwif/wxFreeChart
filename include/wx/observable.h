@@ -11,7 +11,8 @@
 /**
  * This template defines Observable object pattern.
  */
-template<class O> class Observable {
+template<class O> class Observable
+{
 public:
 	typedef O Observer;
 	typename std::vector<O*>::iterator OIt;

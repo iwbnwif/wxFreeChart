@@ -109,6 +109,11 @@ Dataset *AxisPlot::GetDataset(int index)
 	return m_datasets[index];
 }
 
+void AxisPlot::AddMarker(Marker *marker)
+{
+	m_markers.Add(marker);
+}
+
 void AxisPlot::LinkDataHorizontalAxis(int nData, int nAxis)
 {
 	CHECK_INDEX(wxT("data"), nData, m_datasets);
@@ -361,16 +366,23 @@ void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
 		DrawAxesArray(&m_leftAxes, true, dc, rcLeftAxes);
 	}
 	if (m_rightAxes.GetSize() != 0) {
-		wxRect rcRightAxes(rcData.x + rcData.width, rcData.y, (rc.x + rc.width - rcData.x - rcData.width), rcData.height);
+		wxRect rcRightAxes(rcData.x + rcData.width - 1, rcData.y, (rc.x + rc.width - rcData.x - rcData.width - 1), rcData.height);
 		DrawAxesArray(&m_rightAxes, true, dc, rcRightAxes);
 	}
 	if (m_topAxes.GetSize() != 0) {
-		wxRect rcTopAxes(rcData.x, rc.y, rcData.width, (rcData.y - rc.y));
+		wxRect rcTopAxes(rcData.x, rc.y + 2, rcData.width, (rcData.y - rc.y + 2));
 		DrawAxesArray(&m_topAxes, false, dc, rcTopAxes);
 	}
 	if (m_bottomAxes.GetSize() != 0) {
-		wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height, rcData.width, (rc.y + rc.height - rcData.y - rcData.height));
+		wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height - 1, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
 		DrawAxesArray(&m_bottomAxes, false, dc, rcBottomAxes);
+	}
+}
+
+void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
+{
+	for (int n = 0; n < m_markers.GetSize(); n++) {
+
 	}
 }
 
@@ -389,6 +401,7 @@ void AxisPlot::DrawDataArea(wxDC &dc, wxRect rcData)
 
 	DrawGridLines(dc, rcData);
 	DrawDatasets(dc, rcData);
+	DrawMarkers(dc, rcData);
 }
 
 void AxisPlot::DrawData(wxDC &dc, wxRect rc)

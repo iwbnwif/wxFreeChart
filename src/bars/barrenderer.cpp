@@ -67,8 +67,8 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 			rcBar.height = width;
 		}
 
-		AreaDraw *barArea = m_barAreas.GetAreaDraw(serie);
-		barArea->Draw(dc, rcBar);
+		AreaDraw *barDraw = m_barDraws.GetAreaDraw(serie);
+		barDraw->Draw(dc, rcBar);
 	}
 }
 

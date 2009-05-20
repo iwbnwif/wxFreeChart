@@ -13,9 +13,6 @@
 
 #include <wx/axis/axis.h>
 
-const wxCoord labelLineSize = 5;
-const wxCoord labelGap = 2;
-
 /**
  * Base class for axes for displaying data labels.
  */
@@ -29,10 +26,6 @@ public:
 	virtual void Draw(wxDC &dc, wxRect rc);
 
 	virtual void DrawGridLines(wxDC &dc, wxRect rc);
-
-	virtual wxCoord ToGraphics(wxDC &dc, int minCoord, int gRange, double value);
-
-	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g);
 
 	virtual wxCoord GetExtent(wxDC &dc);
 
@@ -119,19 +112,6 @@ public:
 	}
 
 	/**
-	 * Sets minimal/maximal margins for axis.
-	 * Eg bottom/top for vertical axes, left/right for horizontal.
-	 * @param marginMin new minimal margin
-	 * @param marginMax new maximal margin
-	 */
-	void SetMargins(wxCoord marginMin, wxCoord marginMax)
-	{
-		m_marginMin = marginMin;
-		m_marginMax = marginMax;
-		FireAxisChanged();
-	}
-
-	/**
 	 * Sets pen for label lines.
 	 * @param labelPen pen for label lines
 	 */
@@ -180,6 +160,11 @@ protected:
 	 */
 	virtual void GetLabel(int step, wxString &label) = 0;
 
+	/**
+	 * Check whether step is last.
+	 * @param step step
+	 * @return true if step is last
+	 */
 	virtual bool IsEnd(int step) = 0;
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc) = 0;
@@ -193,8 +178,8 @@ private:
 
 	void DrawBorderLine(wxDC &dc, wxRect rc);
 
-	wxCoord m_marginMin;
-	wxCoord m_marginMax;
+	wxCoord m_labelLineSize;
+	wxCoord m_labelGap;
 
 	wxFont m_labelFont;
 	wxPen m_labelPen;
@@ -205,8 +190,5 @@ private:
 	wxColour m_titleColour;
 	int m_titleLocation;
 };
-
-wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value);
-double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g);
 
 #endif /*LABELAXIS_H_*/

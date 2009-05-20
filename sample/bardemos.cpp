@@ -14,12 +14,12 @@
 
 #include "democollection.h"
 
-#include "wx/bars/barplot.h"
+#include <wx/bars/barplot.h>
 
-#include "wx/axis/numberaxis.h"
-#include "wx/axis/categoryaxis.h"
+#include <wx/axis/numberaxis.h>
+#include <wx/axis/categoryaxis.h>
 
-#include "wx/xy/xyhistorenderer.h"
+#include <wx/xy/xyhistorenderer.h>
 
 #include <wx/arrstr.h>
 
@@ -125,7 +125,7 @@ public:
 		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
 
 		BarType *barType = new NormalBarType(10);
-		barType->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
+		barType->SetBarDraw(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
 
 		// Set histogram renderer for it
 		dataset->SetRenderer(new BarRenderer(barType));
@@ -181,7 +181,7 @@ public:
 		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
 
 		BarType *barType = new NormalBarType(10);
-		barType->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
+		barType->SetBarDraw(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
 
 		// Set histogram renderer for it
 		dataset->SetRenderer(new BarRenderer(barType));
@@ -254,8 +254,8 @@ public:
 
 		BarType *barType = new NormalBarType(10);
 		// some eyes-candy: gradient bars
-		barType->SetBarArea(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarArea(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// Set bar renderer for it, with normal bars
 		BarRenderer *renderer = new BarRenderer(barType);
@@ -333,8 +333,8 @@ public:
 
 		BarType *barType = new StackedBarType(10, 0);
 		// some eyes-candy: gradient bars
-		barType->SetBarArea(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarArea(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// Set bar renderer for it, with stacked bar type
 		BarRenderer *renderer = new BarRenderer(barType);
@@ -413,8 +413,8 @@ public:
 		BarType *barType = new LayeredBarType(20, 0);
 
 		// some eyes-candy: gradient bars
-		barType->SetBarArea(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarArea(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// Set bar renderer for it, with layered bar type
 		BarRenderer *renderer = new BarRenderer(barType);
@@ -487,8 +487,8 @@ public:
 		BarType *barType = new LayeredBarType(20, 0);
 
 		// some eyes-candy: gradient bars
-		barType->SetBarArea(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarArea(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// Set bar renderer for it, with layered bar type
 		BarRenderer *renderer = new BarRenderer(barType);

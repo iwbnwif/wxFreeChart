@@ -34,6 +34,7 @@ public:
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
 	virtual void SetSerieColor(int serie, wxColour *color);
+
 	virtual wxColour GetSerieColor(int serie);
 
 	/**
@@ -43,6 +44,11 @@ public:
 	 */
 	void SetSeriePen(int serie, wxPen *pen);
 
+	/**
+	 * Returns pen, used to draw specified serie lines.
+	 * @param serie serie index
+	 * @return pen
+	 */
 	wxPen *GetSeriePen(int serie);
 
 private:

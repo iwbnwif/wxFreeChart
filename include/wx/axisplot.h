@@ -16,6 +16,7 @@
 
 #include <wx/areadraw.h>
 #include <wx/legend.h>
+#include <wx/marker.h>
 
 /**
  * Base class plots that supports axes.
@@ -51,6 +52,12 @@ public:
 	 * @return dataset or NULL if index is out of bounds
 	 */
 	Dataset *GetDataset(int index);
+
+	/**
+	 * Adds marker to plot. Plot takes ownership of marker.
+	 * @param marker marker to be added
+	 */
+	void AddMarker(Marker *marker);
 
 	/**
 	 * Links dataset with horizontal axis
@@ -196,6 +203,12 @@ private:
 	 */
 	void DrawGridLines(wxDC &dc, wxRect rcData);
 
+	/**
+	 * Draws markers.
+	 * @param dc device context
+	 * @param rcData data area rectangle
+	 */
+	void DrawMarkers(wxDC &dc, wxRect rcData);
 
 	void DrawDataArea(wxDC &dc, wxRect rcData);
 
@@ -238,6 +251,8 @@ private:
 
 	Array<Dataset, 1> m_datasets;
 	AreaDraw *m_dataBackground;
+
+	Array<Marker, 1> m_markers;
 
 	Legend *m_legend;
 

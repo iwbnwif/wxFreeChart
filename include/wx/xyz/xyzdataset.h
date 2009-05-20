@@ -13,6 +13,8 @@
 
 #include <wx/xy/xydataset.h>
 
+class XYZRenderer;
+
 /**
  * Dataset with (x,y,z) coordinate data.
  */
@@ -21,6 +23,11 @@ class WXDLLEXPORT XYZDataset : public XYDataset
 public:
 	XYZDataset();
 	virtual ~XYZDataset();
+
+	XYZRenderer *GetRenderer()
+	{
+		return (XYZRenderer *) m_renderer;
+	}
 
 	virtual double GetZ(int index, int serie) = 0;
 

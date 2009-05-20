@@ -17,7 +17,7 @@
 /**
  * An axis for displaying date/time values.
  * TODO:
- * - draw date/time intervals.
+ * - works with only one dataset.
  */
 class WXDLLEXPORT DateAxis : public LabelAxis
 {

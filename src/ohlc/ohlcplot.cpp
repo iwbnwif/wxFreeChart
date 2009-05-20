@@ -10,6 +10,10 @@
 
 #include <wx/ohlc/ohlcplot.h>
 
+#include <wx/axis/dateaxis.h>
+#include <wx/axis/numberaxis.h>
+#include <wx/axis/compdateaxis.h>
+
 OHLCPlot::OHLCPlot()
 {
 }
@@ -24,7 +28,8 @@ bool OHLCPlot::AcceptAxis(Axis *axis)
 		return (wxDynamicCast(axis, NumberAxis) != NULL);
 	}
 	else {
-		return (wxDynamicCast(axis, DateAxis) != NULL);
+		return ((wxDynamicCast(axis, DateAxis) != NULL) ||
+				(wxDynamicCast(axis, CompDateAxis) != NULL));
 	}
 }
 

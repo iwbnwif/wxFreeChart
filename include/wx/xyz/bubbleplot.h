@@ -18,6 +18,13 @@ class WXDLLEXPORT BubblePlot : public AxisPlot
 public:
 	BubblePlot();
 	virtual ~BubblePlot();
+
+protected:
+	virtual bool AcceptAxis(Axis *axis);
+
+	virtual bool AcceptDataset(Dataset *dataset);
+
+	virtual void DrawDatasets(wxDC &dc, wxRect rc);
 };
 
 #endif /*BUBBLEPLOT_H_*/

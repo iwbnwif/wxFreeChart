@@ -12,23 +12,20 @@
 #include <wx/gantt/ganttdataset.h>
 #include <wx/gantt/ganttrenderer.h>
 
-#include <wx/axis/numberaxis.h>
+#include <wx/axis/dateaxis.h>
 #include <wx/axis/categoryaxis.h>
 
 GanttPlot::GanttPlot()
 {
-	// TODO Auto-generated constructor stub
-
 }
 
 GanttPlot::~GanttPlot()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool GanttPlot::AcceptAxis(Axis *axis)
 {
-	return (wxDynamicCast(axis, NumberAxis) != NULL && !axis->IsVertical()) ||
+	return (wxDynamicCast(axis, DateAxis) != NULL && !axis->IsVertical()) ||
 			(wxDynamicCast(axis, CategoryAxis) != NULL && axis->IsVertical());
 }
 
@@ -44,8 +41,8 @@ void GanttPlot::DrawDatasets(wxDC &dc, wxRect rc)
 		GanttRenderer *renderer = dataset->GetRenderer();
 		wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
 
-		Axis *vertAxis = GetDatasetVerticalAxis(dataset);
-		Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
+		CategoryAxis *vertAxis = wxDynamicCast(GetDatasetVerticalAxis(dataset), CategoryAxis);
+		DateAxis *horizAxis = wxDynamicCast(GetDatasetHorizontalAxis(dataset), DateAxis);
 
 		wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
 		wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));

@@ -26,7 +26,7 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 {
 	// Accepts only date/time dataset
 	// and only one dataset
-	return (wxDynamicCast(dataset, DateTimeDataset) != NULL)
+	return (dataset->AsDateTimeDataset() != NULL)
 		&& (m_datasets.GetSize() == 0);
 }
 
@@ -35,7 +35,7 @@ void DateAxis::UpdateBounds()
 	int dateCount = 0;
 
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
-		DateTimeDataset *dataset = (DateTimeDataset *) m_datasets[n];
+		DateTimeDataset *dataset = m_datasets[n]->AsDateTimeDataset();
 
 		int count = dataset->GetCount();
 		dateCount = wxMax(dateCount, count);
@@ -51,10 +51,7 @@ wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 {
 	wxSize maxExtent(0, 0);
 
-	for (int step = 0; ; step++) {
-		if (IsEnd(step))
-			break;
-
+	for (int step = 0; !IsEnd(step); step++) {
 		wxString label;
 		GetLabel(step, label);
 
@@ -84,7 +81,7 @@ double DateAxis::GetValue(int step)
 
 void DateAxis::GetLabel(int step, wxString &label)
 {
-	DateTimeDataset *dataset = wxDynamicCast(m_datasets[0], DateTimeDataset);
+	DateTimeDataset *dataset = m_datasets[0]->AsDateTimeDataset();
 	if (dataset == NULL) {
 		return ; // BUG
 	}
