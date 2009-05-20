@@ -23,8 +23,9 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 	m_titleFont = *wxNORMAL_FONT;
 	m_titleColour = *wxBLACK;
 	m_titleLocation = wxCENTER;
-	m_marginMin = 5;
-	m_marginMax = 5;
+
+	m_labelLineSize = 5;
+	m_labelGap = 2;
 }
 
 LabelAxis::~LabelAxis()
@@ -34,7 +35,7 @@ LabelAxis::~LabelAxis()
 wxCoord LabelAxis::GetExtent(wxDC &dc)
 {
 	wxSize maxTextExtent = GetLongestLabelExtent(dc);
-	wxCoord extent = labelLineSize + labelGap;
+	wxCoord extent = m_labelLineSize + m_labelGap;
 
 	wxSize titleExtent;
 
@@ -46,10 +47,12 @@ wxCoord LabelAxis::GetExtent(wxDC &dc)
 	if (IsVertical()) {
 		extent += maxTextExtent.x;
 		extent += titleExtent.x;
+		extent += m_labelPen.GetWidth();
 	}
 	else {
 		extent += maxTextExtent.y;
 		extent += titleExtent.y;
+		extent += m_labelPen.GetWidth();
 	}
 	return extent;
 }
@@ -71,16 +74,16 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 
 		switch (GetLocation()) {
 		case AXIS_LEFT:
-			lineX1 = rc.x + rc.width - labelLineSize;
+			lineX1 = rc.x + rc.width - m_labelLineSize;
 			lineX2 = rc.x + rc.width;
 
-			textX = rc.x + rc.width - labelLineSize - labelExtent.GetWidth() - labelGap;
+			textX = lineX1 - labelExtent.GetWidth() - m_labelGap;
 			break;
 		case AXIS_RIGHT:
 			lineX1 = rc.x;
-			lineX2 = rc.x + labelLineSize;
+			lineX2 = rc.x + m_labelLineSize;
 
-			textX = rc.x + labelLineSize + labelGap;
+			textX = lineX2 + m_labelGap;
 			break;
 		default:
 			return ; // BUG
@@ -94,16 +97,16 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 
 		switch (GetLocation()) {
 		case AXIS_TOP:
-			lineY1 = rc.y + rc.height - labelLineSize;
+			lineY1 = rc.y + rc.height - m_labelLineSize;
 			lineY2 = rc.y + rc.height;
 
-			textY = rc.y + rc.height - labelLineSize - labelExtent.GetHeight() - labelGap;
+			textY = lineY1 - labelExtent.GetHeight() - m_labelGap;
 			break;
 		case AXIS_BOTTOM:
 			lineY1 = rc.y;
-			lineY2 = rc.y + labelLineSize;
+			lineY2 = rc.y + m_labelLineSize;
 
-			textY = rc.y + labelLineSize + labelGap;
+			textY = lineY2 + m_labelGap;
 			break;
 		default:
 			return ; // BUG
@@ -120,7 +123,7 @@ void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 		return ;
 	}
 
-	// setup dc objects for tick labels and lines
+	// setup dc objects for labels and lines
 	dc.SetFont(m_labelFont);
 	dc.SetPen(m_labelPen);
 	dc.SetTextForeground(m_labelColour);
@@ -254,87 +257,8 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 	DrawBorderLine(dc, rc);
 }
 
-wxCoord LabelAxis::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
-{
-	double minValue, maxValue;
-	GetDataBounds(minValue, maxValue);
-
-	minCoord += m_marginMin;
-	gRange -= (m_marginMin + m_marginMax);
-	if (gRange < 0) {
-		gRange = 0;
-	}
-
-	if (m_useWin) {
-		minValue = m_winPos;
-		maxValue = m_winPos + m_winWidth;
-	}
-
-	return ::ToGraphics(minCoord, gRange, minValue, maxValue, 0/*textMargin*/, IsVertical(), value);
-}
-
-double LabelAxis::ToData(wxDC &dc, int minCoord, int gRange, wxCoord g)
-{
-	double minValue, maxValue;
-	GetDataBounds(minValue, maxValue);
-
-	minCoord += m_marginMin;
-	gRange -= (m_marginMin + m_marginMax);
-	if (gRange < 0) {
-		gRange = 0;
-	}
-
-	if (m_useWin) {
-		minValue = m_winPos;
-		maxValue = m_winPos + m_winWidth;
-	}
-
-	double value = ::ToData(minCoord, gRange, minValue, maxValue, 0/*textMargin*/, IsVertical(), g);
-	return value;
-}
-
 bool LabelAxis::HasLabels()
 {
 	return true;
 }
 
-wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value)
-{
-	double k;
-	double valueRange = maxValue - minValue;
-
-	minCoord += margin / 2;
-	gRange -= margin;
-
-	if (gRange <= 0) {
-		return minCoord;
-	}
-
-	if (vertical) {
-		k = (maxValue - value) / valueRange;
-	}
-	else {
-		k = (value - minValue) / valueRange;
-	}
-
-	return (wxCoord) (k * gRange + minCoord);
-}
-
-double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g)
-{
-	double valueRange = maxValue - minValue;
-
-	minCoord += margin / 2;
-	gRange -= margin;
-
-	if (gRange <= 0) {
-		return 0;
-	}
-
-	if (vertical) {
-		return maxValue - ((g - minCoord) * valueRange / gRange);
-	}
-	else {
-		return minValue + ((g - minCoord) * valueRange / gRange);
-	}
-}

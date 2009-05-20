@@ -15,28 +15,60 @@
 #include <wx/category/categorydataset.h>
 
 class GanttRenderer;
+class GanttDataset;
+
+class WXDLLEXPORT GanttDatasetDateHelper : public DateTimeDataset
+{
+public:
+	GanttDatasetDateHelper(GanttDataset *ganttDataset);
+	virtual ~GanttDatasetDateHelper();
+
+	virtual time_t GetDate(int index);
+
+	virtual int GetCount();
+
+private:
+	GanttDataset *m_ganttDataset;
+};
 
 class WXDLLEXPORT GanttDataset : public CategoryDataset
 {
 	DECLARE_CLASS(GanttDataset)
 public:
-	GanttDataset();
+	GanttDataset(int dateCount);
 	virtual ~GanttDataset();
 
+	virtual DateTimeDataset *AsDateTimeDataset();
+
+	/**
+	 * Returns task count.
+	 * @return task count
+	 */
 	virtual int GetCount() = 0;
 
-	//virtual double GetValue(int index, int serie);
+	virtual time_t GetStart(int index, int serie) = 0;
 
-	virtual time_t GetStart(int serie, int index) = 0;
-
-	virtual time_t GetEnd(int serie, int index) = 0;
+	virtual time_t GetEnd(int index, int serie) = 0;
 
 	virtual int GetCount(int serie);
+
+	virtual time_t GetMinStart();
+
+	virtual time_t GetMaxEnd();
+
+	time_t GetDateInterval();
+
+	int GetDateCount();
 
 	GanttRenderer *GetRenderer()
 	{
 		return (GanttRenderer *) m_renderer;
 	}
+
+private:
+	GanttDatasetDateHelper m_dateHelper;
+
+	int m_dateCount;
 };
 
 #endif /* GANTTDATASET_H_ */

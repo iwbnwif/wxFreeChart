@@ -19,6 +19,7 @@
 #include <wx/chartrenderer.h>
 
 class Dataset;
+class DateTimeDataset;
 
 #define FOREACH_SERIE(index, dataset) \
 	for (int index = 0; index < dataset->GetSerieCount(); index++)
@@ -87,6 +88,8 @@ public:
 
 	virtual double GetMaxValue(bool vertical) = 0;
 
+	virtual DateTimeDataset *AsDateTimeDataset();
+
 	//
 	// DrawObjectObserver
 	//
@@ -110,9 +113,8 @@ private:
 	FIRE_WITH_THIS(DatasetChanged);
 };
 
-class WXDLLEXPORT DateTimeDataset : public Dataset
+class WXDLLEXPORT DateTimeDataset
 {
-	DECLARE_CLASS(DateTimeDataset)
 public:
 	DateTimeDataset();
 	virtual ~DateTimeDataset();

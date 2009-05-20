@@ -10,8 +10,8 @@
 
 #include "democollection.h"
 
-#include "wx/xy/xyplot.h"
-#include "wx/xy/xylinerenderer.h"
+#include <wx/xy/xyplot.h>
+#include <wx/xy/xylinerenderer.h>
 
 #include <wx/dynarray.h>
 #include <wx/arrimpl.cpp>

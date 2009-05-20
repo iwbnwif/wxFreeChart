@@ -72,6 +72,9 @@ void CategoryAxis::UpdateBounds()
 
 double CategoryAxis::GetValue(int step)
 {
+	if (IsVertical()) {
+		step = m_categoryCount - 1 - step;
+	}
 	return step;
 }
 
@@ -81,6 +84,10 @@ void CategoryAxis::GetLabel(int step, wxString &label)
 	if (dataset == NULL) {
 		label = wxEmptyString;
 		return ; // BUG
+	}
+
+	if (IsVertical()) {
+		step = m_categoryCount - 1 - step;
 	}
 
 	label = dataset->GetName(step);

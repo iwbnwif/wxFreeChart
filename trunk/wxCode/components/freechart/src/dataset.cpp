@@ -74,7 +74,10 @@ void Dataset::DatasetChanged()
 	}
 }
 
-IMPLEMENT_CLASS(DateTimeDataset, Dataset)
+DateTimeDataset *Dataset::AsDateTimeDataset()
+{
+	return NULL; // dataset not supports date/times by default.
+}
 
 DateTimeDataset::DateTimeDataset()
 {

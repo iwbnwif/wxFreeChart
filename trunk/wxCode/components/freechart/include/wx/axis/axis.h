@@ -81,6 +81,19 @@ public:
 		return !IsVertical();
 	}
 
+	/**
+	 * Sets minimal/maximal margins for axis.
+	 * Eg bottom/top for vertical axes, left/right for horizontal.
+	 * @param marginMin new minimal margin
+	 * @param marginMax new maximal margin
+	 */
+	void SetMargins(wxCoord marginMin, wxCoord marginMax)
+	{
+		m_marginMin = marginMin;
+		m_marginMax = marginMax;
+		FireAxisChanged();
+	}
+
 	//
 	// Window functions.
 	//
@@ -132,6 +145,15 @@ public:
 
 	bool IntersectsWindow(double v0, double v1);
 
+	void GetWindowBounds(double &winMin, double &winMax)
+	{
+		double minValue, maxValue;
+		GetDataBounds(minValue, maxValue);
+
+		winMin = m_winPos;
+		winMax = wxMin(maxValue, winMin + m_winWidth);
+	}
+
 	/**
 	 * internal. Don't use from programs.
 	 */
@@ -178,7 +200,7 @@ public:
 	 * @param value value in data space
 	 * @return value in graphics space
 	 */
-	virtual wxCoord ToGraphics(wxDC &dc, int minCoord, int gRange, double value) = 0;
+	virtual wxCoord ToGraphics(wxDC &dc, int minCoord, int gRange, double value);
 
 	/**
 	 * Transforms coordinate from graphics space to data space.
@@ -188,7 +210,7 @@ public:
 	 * @param value value in data space
 	 * @return coordinate in data space
 	 */
-	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g) = 0;
+	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g);
 
 	/**
 	 * Performs axis bounds update after dataset/s change.
@@ -222,6 +244,9 @@ protected:
 	Array<Dataset, 1, true> m_datasets;
 	wxPen m_gridLinesPen;
 
+	wxCoord m_marginMin;
+	wxCoord m_marginMax;
+
 	double m_winPos;
 	double m_winWidth;
 	bool m_useWin;
@@ -232,5 +257,8 @@ protected:
 private:
 	AXIS_LOCATION m_location;
 };
+
+wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value);
+double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g);
 
 #endif /*AXIS_H_*/

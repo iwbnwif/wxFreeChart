@@ -22,11 +22,13 @@ GanttRenderer::~GanttRenderer()
 {
 }
 
-void GanttRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, GanttDataset *dataset)
+void GanttRenderer::Draw(wxDC &dc, wxRect rc, DateAxis *horizAxis, CategoryAxis *vertAxis, GanttDataset *dataset)
 {
 	const int serieCount = dataset->GetSerieCount();
+	const int dateCount = dataset->AsDateTimeDataset()->GetCount() - 1;
 
-//	wxCoord x = rc.x;
+	time_t minDate = dataset->GetMinStart();
+	time_t maxDate = dataset->GetMaxEnd();
 
 	FOREACH_SERIE(serie, dataset) {
 		int shift;
@@ -38,8 +40,22 @@ void GanttRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, G
 			shift = -m_barWidth / 2;
 		}
 
-		FOREACH_DATAITEM(n, serie, dataset) {
+		AreaDraw *serieDraw = m_serieDraws.GetAreaDraw(serie);
 
+		FOREACH_DATAITEM(n, serie, dataset) {
+			time_t start = dataset->GetStart(n, serie);
+			time_t end = dataset->GetEnd(n, serie);
+
+			double dstart = dateCount * (double) (start - minDate) / (double) (maxDate - minDate);
+			double dend = dateCount * (double) (end - minDate) / (double) (maxDate - minDate);
+
+			wxRect rcTask;
+			rcTask.x = horizAxis->ToGraphics(dc, rc.x, rc.width, dstart);
+			rcTask.width = horizAxis->ToGraphics(dc, rc.x, rc.width, dend) - rcTask.x;
+			rcTask.y = vertAxis->ToGraphics(dc, rc.y, rc.height, n) + shift;
+			rcTask.height = m_barWidth;
+
+			serieDraw->Draw(dc, rcTask);
 		}
 	}
 }

@@ -24,12 +24,12 @@ V.   Known issues.
 2. Bar charts.
 3. Layered bar charts.
 4. Stacked bar charts.
-5. OHLC (Open-High-Low-Close) financial charts
+5. OHLC (Open-High-Low-Close) financial charts.
 6. Pie charts. TODO
 7. Date/Time based line or histogram charts.
-8. Bubble charts, based on zyz coordinates.  TODO
+8. Bubble charts, based on zyz coordinates.
 9. Statistical charts with std-deviations, etc. TODO
-10. Gantt charts. TODO
+10. Gantt charts. 
 
 				IV. Basic concepts.
 	wxFreeChart is object-oriented charting library with 

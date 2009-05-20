@@ -101,7 +101,7 @@ void XYLineRenderer::SetSeriePen(int serie, wxPen *pen)
 
 void XYLineRenderer::SetSerieColor(int serie, wxColour *color)
 {
-	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, 1, wxSOLID));
+	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, m_defaultPenWidth, m_defaultPenStyle));
 }
 
 wxColour XYLineRenderer::GetSerieColor(int serie)

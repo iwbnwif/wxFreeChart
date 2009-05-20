@@ -30,4 +30,3 @@ void PointMarker::Draw(wxDC &dc, wxRect rcData)
 {
 
 }
-

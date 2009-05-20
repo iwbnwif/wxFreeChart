@@ -32,9 +32,9 @@ public:
 	 * @param serie serie index
 	 * @param ad area draw for serie
 	 */
-	void SetBarArea(int serie, AreaDraw *ad)
+	void SetBarDraw(int serie, AreaDraw *ad)
 	{
-		m_barAreas.SetAreaDraw(serie, ad);
+		m_barDraws.SetAreaDraw(serie, ad);
 	}
 
 	//
@@ -49,7 +49,7 @@ protected:
 
 	double m_base;
 
-	AreaDrawCollection m_barAreas;
+	AreaDrawCollection m_barDraws;
 };
 
 /**

@@ -44,7 +44,7 @@ private:
 };
 
 
-class WXDLLEXPORT LineMarker
+class WXDLLEXPORT LineMarker : public Marker
 {
 public:
 	LineMarker(wxPen linePen);
@@ -53,13 +53,29 @@ public:
 	virtual void Draw(wxDC &dc, wxRect rcData);
 };
 
-class WXDLLEXPORT RangeMarker
+class WXDLLEXPORT RangeMarker : public Marker
 {
 public:
 	RangeMarker(wxBrush brush, wxPen pen);
 	virtual ~RangeMarker();
 
 	virtual void Draw(wxDC &dc, wxRect rcData);
+
+	/**
+	 * Sets range for marker.
+	 * @param minValue range minimal value
+	 * @param maxValue range maximal value
+	 */
+	void SetRange(double minValue, double maxValue)
+	{
+		m_minValue = minValue;
+		m_maxValue = maxValue;
+		FireNeedRedraw();
+	}
+
+private:
+	double m_minValue;
+	double m_maxValue;
 };
 
 #endif /*MARKER_H_*/

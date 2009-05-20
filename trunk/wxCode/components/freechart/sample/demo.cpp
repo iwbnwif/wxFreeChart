@@ -11,8 +11,6 @@
 #include "demo.h"
 
 #include <wx/aui/aui.h>
-#include <wx/dcps.h>
-
 
 class DemoTreeItemData : public wxTreeItemData
 {
