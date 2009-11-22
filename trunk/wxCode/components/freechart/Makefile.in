@@ -74,6 +74,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_areadraw.o \
 	wxfreechart_lib_bubbleplot.o \
 	wxfreechart_lib_xyzdataset.o \
+	wxfreechart_lib_xyzrenderer.o \
 	wxfreechart_lib_polynom.o \
 	wxfreechart_lib_sinefunction.o \
 	wxfreechart_lib_xyplot.o \
@@ -114,6 +115,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/areadraw.h \
 	include/wx/drawutils.h \
 	include/wx/xyz/xyzdataset.h \
+	include/wx/xyz/xyzrenderer.h \
 	include/wx/xyz/bubbleplot.h \
 	include/wx/refobject.h \
 	include/wx/symbol.h \
@@ -168,6 +170,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_areadraw.o \
 	wxfreechart_dll_bubbleplot.o \
 	wxfreechart_dll_xyzdataset.o \
+	wxfreechart_dll_xyzrenderer.o \
 	wxfreechart_dll_polynom.o \
 	wxfreechart_dll_sinefunction.o \
 	wxfreechart_dll_xyplot.o \
@@ -208,6 +211,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/areadraw.h \
 	include/wx/drawutils.h \
 	include/wx/xyz/xyzdataset.h \
+	include/wx/xyz/xyzrenderer.h \
 	include/wx/xyz/bubbleplot.h \
 	include/wx/refobject.h \
 	include/wx/symbol.h \
@@ -240,8 +244,10 @@ WXFREECHARTDEMO_LIB_CXXFLAGS = -I$(srcdir)/include $(WX_CXXFLAGS) $(CPPFLAGS) \
 	$(CXXFLAGS)
 WXFREECHARTDEMO_LIB_OBJECTS =  \
 	wxFreeChartDemo_lib_bardemos.o \
+	wxFreeChartDemo_lib_bubbledemos.o \
 	wxFreeChartDemo_lib_demo.o \
 	wxFreeChartDemo_lib_democollection.o \
+	wxFreeChartDemo_lib_ganttdemos.o \
 	wxFreeChartDemo_lib_ohlcdemos.o \
 	wxFreeChartDemo_lib_xydemos.o \
 	$(__wxFreeChartDemo_lib___win32rc)
@@ -249,8 +255,10 @@ WXFREECHARTDEMO_DLL_CXXFLAGS = -I$(srcdir)/include $(WX_CXXFLAGS) $(CPPFLAGS) \
 	$(CXXFLAGS)
 WXFREECHARTDEMO_DLL_OBJECTS =  \
 	wxFreeChartDemo_dll_bardemos.o \
+	wxFreeChartDemo_dll_bubbledemos.o \
 	wxFreeChartDemo_dll_demo.o \
 	wxFreeChartDemo_dll_democollection.o \
+	wxFreeChartDemo_dll_ganttdemos.o \
 	wxFreeChartDemo_dll_ohlcdemos.o \
 	wxFreeChartDemo_dll_xydemos.o \
 	$(__wxFreeChartDemo_dll___win32rc)
@@ -537,6 +545,9 @@ wxfreechart_lib_bubbleplot.o: $(srcdir)/src/xyz/bubbleplot.cpp
 wxfreechart_lib_xyzdataset.o: $(srcdir)/src/xyz/xyzdataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xyz/xyzdataset.cpp
 
+wxfreechart_lib_xyzrenderer.o: $(srcdir)/src/xyz/xyzrenderer.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xyz/xyzrenderer.cpp
+
 wxfreechart_lib_polynom.o: $(srcdir)/src/xy/functions/polynom.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/functions/polynom.cpp
 
@@ -663,6 +674,9 @@ wxfreechart_dll_bubbleplot.o: $(srcdir)/src/xyz/bubbleplot.cpp
 wxfreechart_dll_xyzdataset.o: $(srcdir)/src/xyz/xyzdataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xyz/xyzdataset.cpp
 
+wxfreechart_dll_xyzrenderer.o: $(srcdir)/src/xyz/xyzrenderer.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xyz/xyzrenderer.cpp
+
 wxfreechart_dll_polynom.o: $(srcdir)/src/xy/functions/polynom.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/functions/polynom.cpp
 
@@ -723,11 +737,17 @@ wxfreechart_dll_chartpanel.o: $(srcdir)/src/chartpanel.cpp
 wxFreeChartDemo_lib_bardemos.o: $(srcdir)/sample/bardemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/bardemos.cpp
 
+wxFreeChartDemo_lib_bubbledemos.o: $(srcdir)/sample/bubbledemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/bubbledemos.cpp
+
 wxFreeChartDemo_lib_demo.o: $(srcdir)/sample/demo.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/demo.cpp
 
 wxFreeChartDemo_lib_democollection.o: $(srcdir)/sample/democollection.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/democollection.cpp
+
+wxFreeChartDemo_lib_ganttdemos.o: $(srcdir)/sample/ganttdemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/ganttdemos.cpp
 
 wxFreeChartDemo_lib_ohlcdemos.o: $(srcdir)/sample/ohlcdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/ohlcdemos.cpp
@@ -738,11 +758,17 @@ wxFreeChartDemo_lib_xydemos.o: $(srcdir)/sample/xydemos.cpp
 wxFreeChartDemo_dll_bardemos.o: $(srcdir)/sample/bardemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/bardemos.cpp
 
+wxFreeChartDemo_dll_bubbledemos.o: $(srcdir)/sample/bubbledemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/bubbledemos.cpp
+
 wxFreeChartDemo_dll_demo.o: $(srcdir)/sample/demo.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/demo.cpp
 
 wxFreeChartDemo_dll_democollection.o: $(srcdir)/sample/democollection.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/democollection.cpp
+
+wxFreeChartDemo_dll_ganttdemos.o: $(srcdir)/sample/ganttdemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/ganttdemos.cpp
 
 wxFreeChartDemo_dll_ohlcdemos.o: $(srcdir)/sample/ohlcdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/ohlcdemos.cpp

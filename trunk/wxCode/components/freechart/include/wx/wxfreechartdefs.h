@@ -1,3 +1,12 @@
+/////////////////////////////////////////////////////////////////////////////
+// Name:	wxfreechartdefs.h
+// Purpose: base declarations
+// Author:	Moskvichev Andrey V.
+// Created:	2008/11/07
+// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
+// Copyright:	(c) 2008-2009-2009 Moskvichev Andrey V.
+// Licence:	wxWidgets licence
+/////////////////////////////////////////////////////////////////////////////
 
 #ifndef WXFREECHARTDEFS_H
 #define WXFREECHARTDEFS_H
@@ -12,28 +21,24 @@
     #include <wx/wx.h>
 #endif
 
+// dll impexp macros. Thanks to Mike Sazonov
+#ifdef WXMAKINGDLL_FREECHART
+#define WXDLLIMPEXP_FREECHART WXEXPORT
+#define WXDLLIMPEXP_DATA_FREECHART(type) WXEXPORT type
+#elif defined(WXUSINGDLL) && !defined(_LOCAL_)
+#define WXDLLIMPEXP_FREECHART WXIMPORT
+#define WXDLLIMPEXP_DATA_FREECHART(type) WXIMPORT type
+#else // not making nor using DLL
+#define WXDLLIMPEXP_FREECHART
+#define WXDLLIMPEXP_DATA_FREECHART(type) type
+#endif
 
 #define ABS(a) ((a) < 0) ? (-1*(a)) : (a)
 
-#ifndef N
-#define N(arr) sizeof(arr) / sizeof(*arr)
-#endif /* N */
 
-#define SAFE_DELETE(ptr) if (ptr != NULL) { delete ptr; ptr = NULL; }
-
-#define SAFE_DELETE_WITH_ELEMENTS(arrPtr, arrSize) do { \
-	if (arrPtr != NULL) {								\
-		for (int n = 0; n < arrSize; n++) {				\
-			SAFE_DELETE(arrPtr[n]);						\
-		}												\
-		delete arrPtr;									\
-		arrPtr = NULL;									\
-	}													\
-} while (0)
-
-#define SAFE_REPLACE(dst, src) do {					\
-	SAFE_DELETE(dst);									\
-	dst = src;											\
+#define wxREPLACE(dst, src) do {					\
+	wxDELETE(dst);									\
+	dst = src;										\
 } while (0)
 
 inline static double *NewZeroDoubleArray(int size)

@@ -1999,6 +1999,9 @@
 			<File
 				RelativePath="..\src\xyz\xyzdataset.cpp">
 			</File>
+			<File
+				RelativePath="..\src\xyz\xyzrenderer.cpp">
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -2147,6 +2150,9 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\xyz\xyzdataset.h">
+			</File>
+			<File
+				RelativePath="..\include\wx\xyz\xyzrenderer.h">
 			</File>
 		</Filter>
 	</Files>

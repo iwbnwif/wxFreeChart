@@ -5,7 +5,7 @@
  * Object with reference counter.
  * TODO DEPRECATED: use wxWidgets reference counting.
  */
-class WXDLLEXPORT RefObject
+class WXDLLIMPEXP_FREECHART RefObject
 {
 public:
 	RefObject()
@@ -56,8 +56,7 @@ private:
 		for (int n = 0; n < arrSize; n++) {				\
 			SAFE_UNREF(arrPtr[n]);						\
 		}												\
-		delete arrPtr;									\
-		arrPtr = NULL;									\
+		wxDELETEA(arrPtr);								\
 	}													\
 } while (0)
 

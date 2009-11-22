@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -17,17 +17,17 @@
  * Polynom function of type: y = c0 * x^n + c1 * x^(n-1) + ... + c(n-1) * x + cn
  * where: c0 ... cn - coefficients
  */
-class WXDLLEXPORT Polynom : public XYDataset
+class WXDLLIMPEXP_FREECHART Polynom : public XYDataset
 {
 public:
 	/**
 	 * Constucts new polynom function dataset.
-	 * @param _coefs coefficients for x values
-	 * @param _min minimal x value
-	 * @param _max maximal x value
-	 * @param _step x value step
+	 * @param coefs coefficients for x values
+	 * @param min minimal x value
+	 * @param max maximal x value
+	 * @param step x value step
 	 */
-	Polynom(double *_coefs, int _coefCount, double _min, double _max, double _step);
+	Polynom(double *coefs, int coefCount, double min, double max, double step);
 
 	virtual ~Polynom();
 
@@ -44,11 +44,11 @@ public:
 private:
 	double CalcY(double x);
 
-	double *coefs;
-	int coefCount;
-	double min;
-	double max;
-	double step;
+	double *m_coefs;
+	int m_coefCount;
+	double m_min;
+	double m_max;
+	double m_step;
 };
 
 #endif /*POLYNOM_H_*/

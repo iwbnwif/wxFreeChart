@@ -31,7 +31,7 @@ public:
 
 	virtual ~OHLCDemoDataset()
 	{
-		delete m_items;
+		wxDELETEA(m_items);
 	}
 
 	virtual OHLCItem *GetItem(int index)
@@ -102,7 +102,7 @@ public:
 		};
 
 		wxDateTime dt;
-		for (size_t n = 0; n < N(data); n++) {
+		for (size_t n = 0; n < WXSIZEOF(data); n++) {
 			dt.ParseFormat(dates[n], wxT("%Y%m%d"));
 			data[n].date = dt.GetTicks();
 		}
@@ -110,7 +110,7 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, N(data));
+		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
 
 		dataset->SetRenderer(new OHLCBarRenderer());
 
@@ -192,7 +192,7 @@ public:
 		};
 
 		wxDateTime dt;
-		for (size_t n = 0; n < N(data); n++) {
+		for (size_t n = 0; n < WXSIZEOF(data); n++) {
 			dt.ParseFormat(dates[n], wxT("%Y%m%d"));
 			data[n].date = dt.GetTicks();
 		}
@@ -200,7 +200,7 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, N(data));
+		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
 
 		dataset->SetRenderer(new OHLCCandlestickRenderer());
 
@@ -282,7 +282,7 @@ public:
 		};
 
 		wxDateTime dt;
-		for (size_t n = 0; n < N(data); n++) {
+		for (size_t n = 0; n < WXSIZEOF(data); n++) {
 			dt.ParseFormat(dates[n], wxT("%Y%m%d"));
 			data[n].date = dt.GetTicks();
 		}
@@ -290,7 +290,7 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, N(data));
+		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
 
 		dataset->SetRenderer(new OHLCCandlestickRenderer());
 
@@ -330,4 +330,4 @@ ChartDemo *ohlcDemos[] = {
 	new OHLCDemo2(),
 	new OHLCDemo3(),
 };
-int ohlcDemosCount = N(ohlcDemos);
+int ohlcDemosCount = WXSIZEOF(ohlcDemos);

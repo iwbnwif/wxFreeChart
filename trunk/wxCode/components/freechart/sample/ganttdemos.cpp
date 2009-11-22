@@ -22,6 +22,9 @@ struct Task
 	time_t end;
 };
 
+/**
+ * Gantt demo dataset.
+ */
 class GanttDemoDataset : public GanttDataset
 {
 public:
@@ -42,7 +45,7 @@ public:
 
 	virtual ~GanttDemoDataset()
 	{
-		delete m_tasks;
+		wxDELETEA(m_tasks);
 	}
 
 	virtual wxString GetName(int index)
@@ -50,7 +53,7 @@ public:
 		return m_names[index];
 	}
 
-	virtual double GetValue(int index, int serie)
+	virtual double GetValue(int WXUNUSED(index), int WXUNUSED(serie))
 	{
 		return 0; // dummy
 	}
@@ -70,12 +73,12 @@ public:
 		return m_names.Count();
 	}
 
-	virtual time_t GetStart(int index, int serie)
+	virtual time_t GetStart(int index, int WXUNUSED(serie))
 	{
 		return m_tasks[index].start;
 	}
 
-	virtual time_t GetEnd(int index, int serie)
+	virtual time_t GetEnd(int index, int WXUNUSED(serie))
 	{
 		return m_tasks[index].end;
 	}
@@ -88,18 +91,26 @@ private:
 
 
 /**
- * Simple OHLC demo with bar renderer.
+ * Simple gannt demo, showing options lifetime.
  */
 class GanttDemo1 : public ChartDemo
 {
 public:
 	GanttDemo1()
-	: ChartDemo(wxT("Gannt Demo 1 - options"))
+	: ChartDemo(wxT("Gannt Demo 1 - options lifetime"))
 	{
 	}
 
 	virtual Chart *Create()
 	{
+		// start/end dates for tasks in string form.
+		const wxChar *dates[][2] = {
+			{ wxT("2009-01-01"), wxT("2009-03-14") },
+			{ wxT("2009-03-01"), wxT("2009-04-14") },
+			{ wxT("2009-04-01"), wxT("2009-05-14") },
+			{ wxT("2009-02-01"), wxT("2009-06-14") },
+		};
+
 		Task tasks[] = {
 			{ 0, 0 },
 			{ 0, 0 },
@@ -107,13 +118,7 @@ public:
 			{ 0, 0 },
 		};
 
-		const wxChar *dates[][2] = {
-			{ wxT("20090101"), wxT("20090314") },
-			{ wxT("20090301"), wxT("20090414") },
-			{ wxT("20090401"), wxT("20090514") },
-			{ wxT("20090201"), wxT("20090614") },
-		};
-
+		// task names, in this case - option names
 		const wxChar *names[] = {
 			wxT("March"),
 			wxT("April"),
@@ -121,20 +126,20 @@ public:
 			wxT("June"),
 		};
 
-		// parse dates from string
+		// parse dates from string and set to tasks start/end
 		wxDateTime dt;
-		for (size_t n = 0; n < N(tasks); n++) {
-			dt.ParseFormat(dates[n][0], wxT("%Y%m%d"));
+		for (size_t n = 0; n < WXSIZEOF(tasks); n++) {
+			dt.ParseFormat(dates[n][0], wxT("%Y-%m-%d"));
 			tasks[n].start = dt.GetTicks();
 
-			dt.ParseFormat(dates[n][1], wxT("%Y%m%d"));
+			dt.ParseFormat(dates[n][1], wxT("%Y-%m-%d"));
 			tasks[n].end = dt.GetTicks();
 		}
 
 		// first step: create plot
 		GanttPlot *plot = new GanttPlot();
 
-		GanttDemoDataset *dataset = new GanttDemoDataset(4/*date count*/, names, N(names), tasks, N(tasks));
+		GanttDemoDataset *dataset = new GanttDemoDataset(4/*date count*/, names, WXSIZEOF(names), tasks, WXSIZEOF(tasks));
 
 		GanttRenderer *renderer = new GanttRenderer(10);
 		renderer->SetSerieDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
@@ -173,4 +178,4 @@ public:
 ChartDemo *ganttDemos[] = {
 		new GanttDemo1(),
 };
-int ganttDemosCount = N(ganttDemos);
+int ganttDemosCount = WXSIZEOF(ganttDemos);

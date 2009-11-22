@@ -1034,6 +1034,10 @@ SOURCE=..\src\xy\xyrenderer.cpp
 
 SOURCE=..\src\xyz\xyzdataset.cpp
 # End Source File
+# Begin Source File
+
+SOURCE=..\src\xyz\xyzrenderer.cpp
+# End Source File
 # End Group
 # Begin Group "Header Files"
 
@@ -1229,6 +1233,10 @@ SOURCE=..\include\wx\xy\xyrenderer.h
 # Begin Source File
 
 SOURCE=..\include\wx\xyz\xyzdataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xyz\xyzrenderer.h
 # End Source File
 # End Group
 # End Target

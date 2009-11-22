@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -17,8 +17,9 @@
 /**
  * Dataset for data values in form [category name, value].
  */
-class WXDLLEXPORT CategoryDataset : public XYDataset
+class WXDLLIMPEXP_FREECHART CategoryDataset : public XYDataset
 {
+	DECLARE_CLASS(XYDataset)
 public:
 	CategoryDataset();
 	virtual ~CategoryDataset();

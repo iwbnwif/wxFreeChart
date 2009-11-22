@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ const wxCoord labelsSpacing = 2;
 /**
  * Legend.
  */
-class WXDLLEXPORT Legend
+class WXDLLIMPEXP_FREECHART Legend
 {
 public:
 	/**
@@ -57,6 +57,10 @@ public:
 		m_font = font;
 	}
 
+	/**
+	 * Returns font to draw legend labels.
+	 * @return font to draw legend labels
+	 */
 	wxFont GetTextFont()
 	{
 		return m_font;

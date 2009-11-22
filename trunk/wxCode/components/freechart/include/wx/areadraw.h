@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -20,7 +20,7 @@
  * Base class for drawing area background.
  * Areas can be data area in Plot, chart background, etc...
  */
-class WXDLLEXPORT AreaDraw : public DrawObject
+class WXDLLIMPEXP_FREECHART AreaDraw : public DrawObject
 {
 public:
 	AreaDraw();
@@ -38,7 +38,7 @@ public:
 /**
  * Doing nothing.
  */
-class WXDLLEXPORT NoAreaDraw : public AreaDraw
+class WXDLLIMPEXP_FREECHART NoAreaDraw : public AreaDraw
 {
 public:
 	NoAreaDraw();
@@ -52,7 +52,7 @@ public:
  * Fills area with specified brush and draw outline of area
  * with specified pen.
  */
-class WXDLLEXPORT FillAreaDraw : public AreaDraw
+class WXDLLIMPEXP_FREECHART FillAreaDraw : public AreaDraw
 {
 public:
 	FillAreaDraw(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
@@ -89,7 +89,7 @@ private:
 /**
  * Gradient fill area.
  */
-class WXDLLEXPORT GradientAreaDraw : public AreaDraw
+class WXDLLIMPEXP_FREECHART GradientAreaDraw : public AreaDraw
 {
 public:
 	/**
@@ -147,13 +147,13 @@ private:
 };
 
 WX_DECLARE_HASH_MAP(int, AreaDraw *, wxIntegerHash, wxIntegerEqual, AreaDrawMap);
-class WXDLLEXPORT AreaDrawMap;
+class WXDLLIMPEXP_FREECHART AreaDrawMap;
 
 /**
  * Collection of areadraws for series.
  * Used by bar charts, etc.
  */
-class WXDLLEXPORT AreaDrawCollection
+class WXDLLIMPEXP_FREECHART AreaDrawCollection
 {
 public:
 	AreaDrawCollection();

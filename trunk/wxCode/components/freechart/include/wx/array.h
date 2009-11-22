@@ -46,14 +46,14 @@ public:
 	void RemoveAll()
 	{
 		if (refs) {
-			SAFE_DELETE(array);
+			wxDELETE(array);
 		}
 		else {
 			if (owns) {
-				SAFE_DELETE_WITH_ELEMENTS(array, size);
+				wxDELETEA(array);
 			}
 			else {
-				SAFE_DELETE(array);
+				wxDELETE(array);
 			}
 		}
 

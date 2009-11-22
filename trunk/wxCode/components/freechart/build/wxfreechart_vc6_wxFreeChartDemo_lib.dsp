@@ -472,11 +472,19 @@ SOURCE=..\sample\bardemos.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\sample\bubbledemos.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\sample\demo.cpp
 # End Source File
 # Begin Source File
 
 SOURCE=..\sample\democollection.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\sample\ganttdemos.cpp
 # End Source File
 # Begin Source File
 
@@ -497,14 +505,6 @@ SOURCE=..\sample\demo.h
 # Begin Source File
 
 SOURCE=..\sample\democollection.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\sample\xydemos.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\sample\xysample.h
 # End Source File
 # End Group
 # End Target

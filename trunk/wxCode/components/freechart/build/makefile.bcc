@@ -110,6 +110,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_areadraw.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_bubbleplot.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyzdataset.obj \
+	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyzrenderer.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_polynom.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_sinefunction.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj \
@@ -157,6 +158,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_areadraw.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_bubbleplot.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyzdataset.obj \
+	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyzrenderer.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_polynom.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_sinefunction.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj \
@@ -182,8 +184,10 @@ WXFREECHARTDEMO_LIB_CXXFLAGS = -I$(BCCDIR)\include $(____WX_SHARED) \
 	$(____wx_3) -I..\include $(CPPFLAGS) $(CXXFLAGS)
 WXFREECHARTDEMO_LIB_OBJECTS =  \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bardemos.obj \
+	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bubbledemos.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_demo.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_democollection.obj \
+	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ganttdemos.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ohlcdemos.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_xydemos.obj
 WXFREECHARTDEMO_DLL_CXXFLAGS = -I$(BCCDIR)\include $(____WX_SHARED) \
@@ -192,8 +196,10 @@ WXFREECHARTDEMO_DLL_CXXFLAGS = -I$(BCCDIR)\include $(____WX_SHARED) \
 	$(____wx_3) -I..\include $(CPPFLAGS) $(CXXFLAGS)
 WXFREECHARTDEMO_DLL_OBJECTS =  \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bardemos.obj \
+	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bubbledemos.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_demo.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_democollection.obj \
+	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ganttdemos.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ohlcdemos.obj \
 	bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_xydemos.obj
 
@@ -460,6 +466,9 @@ bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_bubbleplot.obj: 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyzdataset.obj: ..\src\xyz\xyzdataset.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xyz\xyzdataset.cpp
 
+bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyzrenderer.obj: ..\src\xyz\xyzrenderer.cpp
+	$(CXX) -q -c -P -o$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xyz\xyzrenderer.cpp
+
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_polynom.obj: ..\src\xy\functions\polynom.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\functions\polynom.cpp
 
@@ -586,6 +595,9 @@ bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_bubbleplot.obj: 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyzdataset.obj: ..\src\xyz\xyzdataset.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xyz\xyzdataset.cpp
 
+bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyzrenderer.obj: ..\src\xyz\xyzrenderer.cpp
+	$(CXX) -q -c -P -o$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xyz\xyzrenderer.cpp
+
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_polynom.obj: ..\src\xy\functions\polynom.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\functions\polynom.cpp
 
@@ -646,11 +658,17 @@ bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chartpanel.obj: 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bardemos.obj: ..\sample\bardemos.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\bardemos.cpp
 
+bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bubbledemos.obj: ..\sample\bubbledemos.cpp
+	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\bubbledemos.cpp
+
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_demo.obj: ..\sample\demo.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\demo.cpp
 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_democollection.obj: ..\sample\democollection.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\democollection.cpp
+
+bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ganttdemos.obj: ..\sample\ganttdemos.cpp
+	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\ganttdemos.cpp
 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ohlcdemos.obj: ..\sample\ohlcdemos.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\ohlcdemos.cpp
@@ -661,11 +679,17 @@ bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_xydemos.obj:
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bardemos.obj: ..\sample\bardemos.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\bardemos.cpp
 
+bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bubbledemos.obj: ..\sample\bubbledemos.cpp
+	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\bubbledemos.cpp
+
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_demo.obj: ..\sample\demo.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\demo.cpp
 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_democollection.obj: ..\sample\democollection.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\democollection.cpp
+
+bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ganttdemos.obj: ..\sample\ganttdemos.cpp
+	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\ganttdemos.cpp
 
 bccmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ohlcdemos.obj: ..\sample\ohlcdemos.cpp
 	$(CXX) -q -c -P -o$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\ohlcdemos.cpp

@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	14.11.2008
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +19,7 @@ class CategoryDataset;
 /**
  *
  */
-class WXDLLEXPORT BarType
+class WXDLLIMPEXP_FREECHART BarType
 {
 public:
 	BarType();
@@ -55,7 +55,7 @@ protected:
 /**
  * Standard bar type. Draws series parallel to each other.
  */
-class WXDLLEXPORT NormalBarType : public BarType
+class WXDLLIMPEXP_FREECHART NormalBarType : public BarType
 {
 public:
 	NormalBarType(int barWidth, int serieGap = 1, double base = 0.0);
@@ -73,7 +73,7 @@ private:
 /**
  * Draws series in stack, after each other.
  */
-class WXDLLEXPORT StackedBarType : public BarType
+class WXDLLIMPEXP_FREECHART StackedBarType : public BarType
 {
 public:
 	StackedBarType(int barWidth, double base);
@@ -93,7 +93,7 @@ private:
 /**
  * Draws series overlapped.
  */
-class WXDLLEXPORT LayeredBarType : public BarType
+class WXDLLIMPEXP_FREECHART LayeredBarType : public BarType
 {
 public:
 	LayeredBarType(int initialBarWidth, double base);
@@ -111,7 +111,7 @@ private:
 /**
  * Bar plot renderer.
  */
-class WXDLLEXPORT BarRenderer : public Renderer
+class WXDLLIMPEXP_FREECHART BarRenderer : public Renderer
 {
 	DECLARE_CLASS(BarRenderer)
 public:

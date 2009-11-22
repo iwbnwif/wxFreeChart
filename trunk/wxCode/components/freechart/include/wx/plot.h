@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ class Plot;
 /**
  * Interface that receives Plot events, such as need redraw condition.
  */
-class WXDLLEXPORT PlotObserver
+class WXDLLIMPEXP_FREECHART PlotObserver
 {
 public:
 	PlotObserver();
@@ -39,7 +39,7 @@ public:
  * Base class for all plots.
  *
  */
-class WXDLLEXPORT Plot : public Observable<PlotObserver>
+class WXDLLIMPEXP_FREECHART Plot : public Observable<PlotObserver>
 {
 public:
 	Plot();
@@ -66,7 +66,17 @@ public:
 	 */
 	void SetBackground(AreaDraw *background)
 	{
-		m_background = background;
+		wxREPLACE(m_background, background);
+		FirePlotNeedRedraw();
+	}
+
+	/**
+	 * Sets text message drawn, when plot has no data to draw
+	 * @param textNoData text message drawn, when plot has no data to draw
+	 */
+	void SetTextNoData(const wxString &textNoData)
+	{
+		m_textNoData = textNoData;
 		FirePlotNeedRedraw();
 	}
 

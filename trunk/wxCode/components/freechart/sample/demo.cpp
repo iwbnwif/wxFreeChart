@@ -33,6 +33,10 @@ private:
 	ChartDemo *m_demo;
 };
 
+//
+// ChartSelector
+//
+
 BEGIN_EVENT_TABLE(ChartSelector, wxTreeCtrl)
 	EVT_TREE_ITEM_ACTIVATED(wxID_ANY, ChartSelector::OnTreeItemActivated)
 END_EVENT_TABLE()
@@ -71,6 +75,10 @@ void ChartSelector::OnTreeItemActivated(wxTreeEvent &ev)
 	}
 }
 
+//
+// MainFrame
+//
+
 enum
 {
 	MENU_FILE_EXPORT_TO_PS = 101,
@@ -84,7 +92,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame()
-: wxFrame(NULL, wxID_ANY, wxT("wxCharts demo 0.0.1"), wxDefaultPosition, wxSize(800, 445))
+: wxFrame(NULL, wxID_ANY, wxT("wxCharts demo 1.1"), wxDefaultPosition, wxSize(800, 445))
 {
 	wxAuiManager *auiMan = new wxAuiManager(this);
 

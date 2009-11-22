@@ -20,6 +20,9 @@
 #include <wx/dynarray.h>
 #include <wx/arrimpl.cpp>
 
+/**
+ * XYZ serie data.
+ */
 class XYZSerie
 {
 public:
@@ -32,7 +35,7 @@ public:
 
 	virtual ~XYZSerie()
 	{
-		delete m_data;
+		wxDELETEA(m_data);
 	}
 
 	double GetX(int index)
@@ -52,7 +55,6 @@ public:
 		wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetZ"));
 		return m_data[index * 3 + 2];
 	}
-
 
 	int GetCount()
 	{
@@ -78,6 +80,9 @@ private:
 WX_DECLARE_OBJARRAY(XYZSerie *, XYZSerieArray);
 WX_DEFINE_OBJARRAY(XYZSerieArray);
 
+/**
+ * XYZ demo dataset.
+ */
 class XYZDemoDataset : public XYZDataset
 {
 public:
@@ -88,7 +93,7 @@ public:
 	virtual ~XYZDemoDataset()
 	{
 		for (size_t n = 0; n < m_series.Count(); n++) {
-			delete m_series[n];
+			wxDELETE(m_series[n]);
 		}
 	}
 
@@ -138,6 +143,9 @@ private:
 	XYZSerieArray m_series;
 };
 
+/**
+ * Bubble demo with one xyz serie.
+ */
 class BubbleDemo1 : public ChartDemo
 {
 public:
@@ -148,6 +156,7 @@ public:
 
 	virtual Chart *Create()
 	{
+		// serie 1 values
 		double data[][3] = {
 				{ 10, 20, 10, },
 				{ 13, 16, 40, },
@@ -161,9 +170,11 @@ public:
 		// first step: create plot
 		BubblePlot *plot = new BubblePlot();
 
+		// create xyz dataset and add serie to it
 		XYZDemoDataset *dataset = new XYZDemoDataset();
-		dataset->AddSerie((double *) data, N(data));
+		dataset->AddSerie((double *) data, WXSIZEOF(data));
 
+		// minimal/maximal radius for bubbles
 		const int minRad = 5;
 		const int maxRad = 15;
 
@@ -172,13 +183,15 @@ public:
 
 		plot->AddDataset(dataset);
 
-		// add left and bottom number axes
+		// create left number axis
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		leftAxis->SetMargins(maxRad, maxRad);
 
+		// create bottom number axis
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 		bottomAxis->SetMargins(maxRad, maxRad);
 
+		// add axes to plot
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 
@@ -194,4 +207,4 @@ public:
 ChartDemo *bubbleDemos[] = {
 		new BubbleDemo1(),
 };
-int bubbleDemosCount = N(bubbleDemos);
+int bubbleDemosCount = WXSIZEOF(bubbleDemos);

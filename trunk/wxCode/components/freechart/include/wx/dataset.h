@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	dataset.h
-// Purpose:
+// Purpose: dataset base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -29,9 +29,8 @@ class DateTimeDataset;
 
 /**
  * Class that receives notifications about dataset changes.
- *
  */
-class WXDLLEXPORT DatasetObserver
+class WXDLLIMPEXP_FREECHART DatasetObserver
 {
 public:
 	DatasetObserver();
@@ -44,7 +43,7 @@ public:
  * Base class for all datasets (XYDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
-class WXDLLEXPORT Dataset : public wxObject,
+class WXDLLIMPEXP_FREECHART Dataset : public wxObject,
 	public RefObject, public Observable<DatasetObserver>, public DrawObserver
 {
 	DECLARE_CLASS(Dataset)
@@ -113,7 +112,7 @@ private:
 	FIRE_WITH_THIS(DatasetChanged);
 };
 
-class WXDLLEXPORT DateTimeDataset
+class WXDLLIMPEXP_FREECHART DateTimeDataset
 {
 public:
 	DateTimeDataset();

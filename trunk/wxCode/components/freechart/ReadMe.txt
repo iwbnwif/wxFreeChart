@@ -4,7 +4,7 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.0
+ Version: 1.1
  Description:
  wxFreeChart is free charting library based on wxWidgets. It 
  designed with flexibility in mind, and has MCV design.
@@ -36,9 +36,8 @@
  When building on a Linux/GNU-based system, type
 
   cd build
-  ./configure
-  make
-
+  make -f GNUmakefile 
+  
  to build against the default build of wxWidgets (the one listed as 'default'
  by wx-config --list). Type "./configure --help" for more info.
 
@@ -46,6 +45,14 @@
 
  ChangeLog
  ---------
+ 
+ 1.1: second version of wxFreeChart at wxCode
+ 		What's new:
+ 		 - many bugfixes
+ 		 - updated demos
+ 		 - major redesign
+ 		 - build system fixes
+ 
 
  1.0 - first version of wxFreeChart at wxCode
 

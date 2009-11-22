@@ -1532,11 +1532,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\sample\bubbledemos.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sample\demo.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\sample\democollection.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sample\ganttdemos.cpp"
 				>
 			</File>
 			<File
@@ -1559,14 +1567,6 @@
 			</File>
 			<File
 				RelativePath="..\sample\democollection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\sample\xydemos.h"
-				>
-			</File>
-			<File
-				RelativePath="..\sample\xysample.h"
 				>
 			</File>
 		</Filter>

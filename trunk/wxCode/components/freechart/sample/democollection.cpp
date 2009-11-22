@@ -30,37 +30,37 @@ static DemoCollection instance;
 class Category
 {
 public:
-	Category(wxString _name, ChartDemo **_charts, int _chartCount)
+	Category(wxString name, ChartDemo **charts, int chartCount)
 	{
-		name = _name;
-		chartDemos = _charts;
-		chartCount = _chartCount;
+		m_name = name;
+		m_chartDemos = charts;
+		m_chartCount = chartCount;
 	}
 
-	wxString GetName()
+	const wxString &GetName()
 	{
-		return name;
+		return m_name;
 	}
 
-	wxString GetChartName(int chartIndex)
+	const wxString &GetChartName(int chartIndex)
 	{
-		return chartDemos[chartIndex]->GetName();
+		return m_chartDemos[chartIndex]->GetName();
 	}
 
 	ChartDemo *GetChartDemo(int chartIndex)
 	{
-		return chartDemos[chartIndex];
+		return m_chartDemos[chartIndex];
 	}
 
 	int GetChartCount()
 	{
-		return chartCount;
+		return m_chartCount;
 	}
 
 private:
-	wxString name;
-	ChartDemo **chartDemos;
-	int chartCount;
+	wxString m_name;
+	ChartDemo **m_chartDemos;
+	int m_chartCount;
 };
 
 static Category *cats[] = {
@@ -81,10 +81,10 @@ DemoCollection::~DemoCollection()
 
 int DemoCollection::GetCategoryCount()
 {
-	return N(cats);
+	return WXSIZEOF(cats);
 }
 
-wxString DemoCollection::GetCategory(int index)
+const wxString &DemoCollection::GetCategory(int index)
 {
 	return cats[index]->GetName();
 }
