@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -13,7 +13,7 @@
 
 #include <wx/axisplot.h>
 
-class WXDLLEXPORT BubblePlot : public AxisPlot
+class WXDLLIMPEXP_FREECHART BubblePlot : public AxisPlot
 {
 public:
 	BubblePlot();

@@ -56,7 +56,7 @@ public:
 
 	virtual ~BarSampleDataset()
 	{
-		delete m_values;
+		wxDELETEA(m_values);
 	}
 
 	virtual double GetValue(int index, int serie)
@@ -122,19 +122,23 @@ public:
 		};
 
 		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values,
+				WXSIZEOF(values), WXSIZEOF(values[0]));
 
+		// create bar type
 		BarType *barType = new NormalBarType(10);
 		barType->SetBarDraw(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
 
-		// Set histogram renderer for it
+		// Set bar renderer for it
 		dataset->SetRenderer(new BarRenderer(barType));
 
 		// Create bar plot
 		BarPlot *plot = new BarPlot();
 
 		// Add left number axis
-		plot->AddAxis(new NumberAxis(AXIS_LEFT));
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		leftAxis->SetMargins(5, 0);
+		plot->AddAxis(leftAxis);
 
 		// Add bottom axis
 		CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
@@ -178,8 +182,10 @@ public:
 		};
 
 		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values,
+				WXSIZEOF(values), WXSIZEOF(values[0]));
 
+		// Create bar type
 		BarType *barType = new NormalBarType(10);
 		barType->SetBarDraw(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
 
@@ -250,9 +256,12 @@ public:
 		};
 
 		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values,
+				WXSIZEOF(values), WXSIZEOF(values[0]));
 
+		// Create bat type
 		BarType *barType = new NormalBarType(10);
+
 		// some eyes-candy: gradient bars
 		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
 		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
@@ -310,6 +319,7 @@ public:
 				wxT("Cat 4"),
 				wxT("Cat 5"),
 		};
+		// serie values
 		double values[][5] = {
 			{ // serie 1 values
 				10,
@@ -328,10 +338,13 @@ public:
 		};
 
 		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values,
+				WXSIZEOF(values), WXSIZEOF(values[0]));
 
 
+		// Create stacked bar type
 		BarType *barType = new StackedBarType(10, 0);
+
 		// some eyes-candy: gradient bars
 		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
 		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
@@ -407,7 +420,8 @@ public:
 		};
 
 		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values,
+				WXSIZEOF(values), WXSIZEOF(values[0]));
 
 		// create layered bar type with width=20 and base=0
 		BarType *barType = new LayeredBarType(20, 0);
@@ -431,7 +445,9 @@ public:
 		plot->AddAxis(leftAxis);
 
 		// Add bottom number axis
-		plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+		bottomAxis->SetMargins(0, 5);
+		plot->AddAxis(bottomAxis);
 
 		// Add dataset to plot
 		plot->AddDataset(dataset);
@@ -471,6 +487,7 @@ public:
 				wxT("2006"),
 				wxT("2007"),
 		};
+		// serie values
 		double values[][8] = {
 			{ // serie 1 values
 					771994,	718712,	682422,	713415,	807516,	894631,	1023109, 1148481,
@@ -481,7 +498,8 @@ public:
 		};
 
 		// Create dataset
-		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values, N(values), N(values[0]));
+		CategoryDataset *dataset = new BarSampleDataset(names, (double *) values,
+				WXSIZEOF(values), WXSIZEOF(values[0]));
 
 		// create layered bar type with width=20 and base=0
 		BarType *barType = new LayeredBarType(20, 0);
@@ -499,13 +517,15 @@ public:
 		// Create bar plot
 		BarPlot *plot = new BarPlot();
 
+		// Add left number axis
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		leftAxis->SetMargins(5, 0);
+		plot->AddAxis(leftAxis);
+
 		// Add bottom category axis
 		CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
 		bottomAxis->SetMargins(20, 20);
 		plot->AddAxis(bottomAxis);
-
-		// Add left number axis
-		plot->AddAxis(new NumberAxis(AXIS_LEFT));
 
 		// Add dataset to plot
 		plot->AddDataset(dataset);
@@ -523,10 +543,10 @@ public:
 
 ChartDemo *barDemos[] = {
 		new BarDemo1(),
-		//new BarDemo2(),
+		// new BarDemo2(), // demo 2 is buggy!
 		new BarDemo3(),
 		new BarDemo4(),
 		new BarDemo5(),
 		new BarDemo6(),
 };
-int barDemosCount = N(barDemos);
+int barDemosCount = WXSIZEOF(barDemos);

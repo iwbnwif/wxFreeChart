@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ const int shift3D = 20;
 /**
  * Pie plot.
  */
-class WXDLLEXPORT PiePlot : public Plot, public DatasetObserver
+class WXDLLIMPEXP_FREECHART PiePlot : public Plot, public DatasetObserver
 {
 public:
 	PiePlot();

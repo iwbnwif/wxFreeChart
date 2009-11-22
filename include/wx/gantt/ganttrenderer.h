@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2009/03/23
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2009/03/23 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -15,7 +15,10 @@
 #include <wx/axis/categoryaxis.h>
 #include <wx/gantt/ganttdataset.h>
 
-class WXDLLEXPORT GanttRenderer : public Renderer
+/**
+ * Gantt data renderer.
+ */
+class WXDLLIMPEXP_FREECHART GanttRenderer : public Renderer
 {
 	DECLARE_CLASS(GanttRenderer)
 public:

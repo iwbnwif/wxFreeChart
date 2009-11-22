@@ -59,6 +59,7 @@ src/axisplot.cpp
 src/areadraw.cpp
 src/xyz/bubbleplot.cpp
 src/xyz/xyzdataset.cpp
+src/xyz/xyzrenderer.cpp
 src/xy/functions/polynom.cpp
 src/xy/functions/sinefunction.cpp
 src/xy/xyplot.cpp
@@ -101,6 +102,7 @@ include/wx/art.h
 include/wx/areadraw.h
 include/wx/drawutils.h
 include/wx/xyz/xyzdataset.h
+include/wx/xyz/xyzrenderer.h
 include/wx/xyz/bubbleplot.h
 include/wx/refobject.h
 include/wx/symbol.h

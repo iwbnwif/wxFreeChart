@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -12,25 +12,25 @@
 
 static wxString polynomFunctionName(wxT("Polynom function"));
 
-Polynom::Polynom(double *_coefs, int _coefCount, double _min, double _max, double _step)
+Polynom::Polynom(double *coefs, int coefCount, double min, double max, double step)
 {
-	coefs = new double[_coefCount];
-	for (int n = 0; n < _coefCount; n++)
-		coefs[n] = _coefs[n];
-	coefCount = _coefCount;
-	min = _min;
-	max = _max;
-	step = _step;
+	m_coefs = new double[coefCount];
+	for (int n = 0; n < coefCount; n++)
+		m_coefs[n] = coefs[n];
+	m_coefCount = coefCount;
+	m_min = min;
+	m_max = max;
+	m_step = step;
 }
 
 Polynom::~Polynom()
 {
-	SAFE_DELETE(coefs);
+	wxDELETEA(m_coefs);
 }
 
 double Polynom::GetX(int index, int serie)
 {
-	return min + index * step;
+	return m_min + index * m_step;
 }
 
 double Polynom::GetY(int index, int serie)
@@ -40,7 +40,7 @@ double Polynom::GetY(int index, int serie)
 
 int Polynom::GetCount(int serie)
 {
-	return RoundHigh((max - min) / step);
+	return RoundHigh((m_max - m_min) / m_step);
 }
 
 int Polynom::GetSerieCount()
@@ -53,8 +53,8 @@ double Polynom::CalcY(double x)
 	double xn = 1;
 	double y = 0;
 
-	for (int n = coefCount - 1; n >= 0; n--) {
-		y += xn * coefs[n];
+	for (int n = m_coefCount - 1; n >= 0; n--) {
+		y += xn * m_coefs[n];
 		xn *= x;
 	}
 	return y;

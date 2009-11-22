@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	symbol.h
-// Purpose:
+// Purpose: symbols declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -13,20 +13,41 @@
 
 #include <wx/wxfreechartdefs.h>
 
-class WXDLLEXPORT Symbol
+/**
+ * Symbols base class.
+ */
+class WXDLLIMPEXP_FREECHART Symbol
 {
 public:
 	Symbol();
 	virtual ~Symbol();
 
+	/**
+	 * Sets symbol color.
+	 * @param color new symbol color
+	 */
 	virtual void SetColor(wxColour color);
 
+	/**
+	 * Performs symbol drawing.
+	 * @param dc device context
+	 * @param x x coordinate
+	 * @param y t coordinate
+	 */
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y) = 0;
 
+	/**
+	 * Called to calculate size required for symbol.
+	 * @return size required for symbol
+	 */
 	virtual wxSize GetExtent() = 0;
 };
 
-class WXDLLEXPORT MaskedSymbol : public Symbol
+/**
+ * Symbol class, that uses bitmap mask to draw.
+ * Masked area will be filled with specified color.
+ */
+class WXDLLIMPEXP_FREECHART MaskedSymbol : public Symbol
 {
 public:
 	MaskedSymbol(const char **maskData, wxCoord size = 9);
@@ -48,7 +69,10 @@ private:
 	wxCoord m_size;
 };
 
-class WXDLLEXPORT ShapeSymbol : public Symbol
+/**
+ * Shape symbols base class.
+ */
+class WXDLLIMPEXP_FREECHART ShapeSymbol : public Symbol
 {
 public:
 	ShapeSymbol(wxCoord size);
@@ -63,8 +87,14 @@ protected:
 	wxCoord m_size;
 };
 
+//
+// shape symbols
+// TODO: add more
 
-class WXDLLEXPORT CircleSymbol : public ShapeSymbol
+/**
+ * Circle symbol.
+ */
+class WXDLLIMPEXP_FREECHART CircleSymbol : public ShapeSymbol
 {
 public:
 	CircleSymbol(wxCoord size = 5);
@@ -73,7 +103,10 @@ public:
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
 };
 
-class WXDLLEXPORT SquareSymbol : public ShapeSymbol
+/**
+ * Square symbol.
+ */
+class WXDLLIMPEXP_FREECHART SquareSymbol : public ShapeSymbol
 {
 public:
 	SquareSymbol(wxCoord size = 5);
@@ -82,7 +115,10 @@ public:
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
 };
 
-class WXDLLEXPORT CrossSymbol : public ShapeSymbol
+/**
+ * Cross symbol.
+ */
+class WXDLLIMPEXP_FREECHART CrossSymbol : public ShapeSymbol
 {
 public:
 	CrossSymbol(wxCoord size = 5);
@@ -91,7 +127,10 @@ public:
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
 };
 
-class WXDLLEXPORT TriangleSymbol : public ShapeSymbol
+/**
+ * Triangle symbol.
+ */
+class WXDLLIMPEXP_FREECHART TriangleSymbol : public ShapeSymbol
 {
 public:
 	TriangleSymbol(wxCoord size = 5);

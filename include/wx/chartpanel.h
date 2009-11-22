@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -18,7 +18,7 @@
  * ChartPanel is wxWidgets panel for displaying chart.
  *
  */
-class WXDLLEXPORT wxChartPanel : public wxScrolledWindow, public ChartObserver
+class WXDLLIMPEXP_FREECHART wxChartPanel : public wxScrolledWindow, public ChartObserver
 {
 public:
 	wxChartPanel(wxWindow *parent, wxWindowID = wxID_ANY, Chart *chart = NULL,

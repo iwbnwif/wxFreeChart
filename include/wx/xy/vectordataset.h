@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -19,7 +19,7 @@
  * Where is y values specified, and X values is an index (0....Count)
  * Allows y data addition and removal.
  */
-class WXDLLEXPORT VectorDataset : public XYDataset
+class WXDLLIMPEXP_FREECHART VectorDataset : public XYDataset
 {
 public:
 	/**

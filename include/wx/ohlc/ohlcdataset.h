@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ struct OHLCItem
 /**
  * Open-High-Low-Close datasets base class.
  */
-class WXDLLEXPORT OHLCDataset : public Dataset, public DateTimeDataset
+class WXDLLIMPEXP_FREECHART OHLCDataset : public Dataset, public DateTimeDataset
 {
 public:
 	OHLCDataset();

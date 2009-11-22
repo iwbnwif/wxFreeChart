@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -40,13 +40,13 @@ AxisPlot::~AxisPlot()
 	}
 
 	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
-	SAFE_DELETE(m_dataBackground);
+	wxDELETE(m_dataBackground);
 }
 
 void AxisPlot::SetDataBackground(AreaDraw *dataBackground)
 {
 	SAFE_REPLACE_OBSERVER(this, m_dataBackground, dataBackground);
-	SAFE_REPLACE(m_dataBackground, dataBackground);
+	wxREPLACE(m_dataBackground, dataBackground);
 }
 
 void AxisPlot::AddAxis(Axis *axis)
@@ -146,7 +146,7 @@ void AxisPlot::LinkDataVerticalAxis(int nData, int nAxis)
 
 void AxisPlot::SetLegend(Legend *legend)
 {
-	SAFE_REPLACE(m_legend, legend);
+	wxREPLACE(m_legend, legend);
 	FirePlotNeedRedraw();
 }
 

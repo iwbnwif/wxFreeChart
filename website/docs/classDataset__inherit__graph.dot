@@ -1,0 +1,31 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  Node1 [label="Dataset",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="RefObject",height=0.2,width=0.4,color="black",URL="$classRefObject.html"];
+  Node3 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Observable\< DatasetObserver \>",height=0.2,width=0.4,color="black",URL="$classObservable.html"];
+  Node4 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node4 [label="DrawObserver",height=0.2,width=0.4,color="grey75"];
+  Node1 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="OHLCDataset",height=0.2,width=0.4,color="black",URL="$classOHLCDataset.html"];
+  Node1 -> Node6 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="XYDataset",height=0.2,width=0.4,color="black",URL="$classXYDataset.html"];
+  Node6 -> Node7 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="CategoryDataset",height=0.2,width=0.4,color="black",URL="$classCategoryDataset.html"];
+  Node7 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node8 [label="GanttDataset",height=0.2,width=0.4,color="black",URL="$classGanttDataset.html"];
+  Node6 -> Node9 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="Polynom",height=0.2,width=0.4,color="black",URL="$classPolynom.html"];
+  Node6 -> Node10 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="SineFunction",height=0.2,width=0.4,color="black",URL="$classSineFunction.html"];
+  Node6 -> Node11 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="VectorDataset",height=0.2,width=0.4,color="black",URL="$classVectorDataset.html"];
+  Node6 -> Node12 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node12 [label="XYStepDataset",height=0.2,width=0.4,color="black",URL="$classXYStepDataset.html"];
+  Node6 -> Node13 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node13 [label="XYZDataset",height=0.2,width=0.4,color="black",URL="$classXYZDataset.html"];
+}

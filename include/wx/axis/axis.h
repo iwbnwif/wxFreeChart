@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -27,21 +27,32 @@ enum AXIS_LOCATION {
 
 class Axis;
 
+/**
+ * Interface to receive axis events.
+ */
 class AxisObserver
 {
 public:
 	AxisObserver();
 	virtual ~AxisObserver();
 
+	/**
+	 * Called when axis is changed.
+	 * @param axis changed axis
+	 */
 	virtual void AxisChanged(Axis *axis) = 0;
 
+	/**
+	 * Called when axis bounds are changed.
+	 * @param axis axis that bounds are changed
+	 */
 	virtual void BoundsChanged(Axis *axis) = 0;
 };
 
 /**
  * Base class for all axes.
  */
-class WXDLLEXPORT Axis : public wxObject, public Observable<AxisObserver>
+class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>
 {
 	DECLARE_CLASS(Axis)
 

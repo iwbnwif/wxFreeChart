@@ -23,6 +23,10 @@
 
 #include "wx/chart.h"
 
+/**
+ * Base class for chart demo.
+ *
+ */
 class ChartDemo
 {
 public:
@@ -35,6 +39,10 @@ public:
 	{
 	}
 
+	/**
+	 * Called to create chart.
+	 * @return created demo chart
+	 */
 	virtual Chart *Create() = 0;
 
 	const wxString &GetName()
@@ -46,18 +54,41 @@ private:
 	wxString m_name;
 };
 
+/**
+ * Demos collection.
+ */
 class DemoCollection
 {
 public:
 	DemoCollection();
 	virtual ~DemoCollection();
 
+	/**
+	 * Returns category count.
+	 * @return category count
+	 */
 	int GetCategoryCount();
 
-	wxString GetCategory(int index);
+	/**
+	 * Returns category name at index.
+	 * @param index index of category
+	 * @return category name
+	 */
+	const wxString &GetCategory(int index);
 
+	/**
+	 * Returns demo count in category.
+	 * @param index index of category
+	 * @return demo count in category
+	 */
 	int GetCategoryDemoCount(int index);
 
+	/**
+	 * Returns demo in category.
+	 * @param catIndex index of category
+	 * @param demoIndex index of demo in category
+	 * @return demo
+	 */
 	ChartDemo *GetCategoryDemo(int catIndex, int demoIndex);
 
 	static DemoCollection *Get();

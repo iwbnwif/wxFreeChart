@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	compdateaxis.cpp
-// Purpose:
+// Purpose: composite date axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -139,7 +139,7 @@ CompDateAxis::CompDateAxis(AXIS_LOCATION location)
 
 CompDateAxis::~CompDateAxis()
 {
-	SAFE_DELETE(m_spanDraw);
+	wxDELETE(m_spanDraw);
 }
 
 bool CompDateAxis::AcceptDataset(Dataset *dataset)

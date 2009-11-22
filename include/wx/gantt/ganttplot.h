@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	ganttplot.h
-// Purpose: gantt dataset implementation
+// Purpose: gantt plot declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2009/03/23
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2009/03/23 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,10 @@
 
 #include <wx/axisplot.h>
 
-class WXDLLEXPORT GanttPlot : public AxisPlot
+/**
+ * Plot to draw gantt charts.
+ */
+class WXDLLIMPEXP_FREECHART GanttPlot : public AxisPlot
 {
 public:
 	GanttPlot();

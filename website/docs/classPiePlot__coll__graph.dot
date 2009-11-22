@@ -1,0 +1,38 @@
+digraph G
+{
+  bgcolor="transparent";
+  edge [fontname="FreeSans",fontsize="10",labelfontname="FreeSans",labelfontsize="10"];
+  node [fontname="FreeSans",fontsize="10",shape=record];
+  rankdir=LR;
+  Node1 [label="PiePlot",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node2 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node2 [label="Plot",height=0.2,width=0.4,color="black",URL="$classPlot.html"];
+  Node3 -> Node2 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node3 [label="Observable\< PlotObserver \>",height=0.2,width=0.4,color="black",URL="$classObservable.html"];
+  Node4 -> Node2 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="m_background",fontname="FreeSans"];
+  Node4 [label="AreaDraw",height=0.2,width=0.4,color="black",URL="$classAreaDraw.html"];
+  Node5 -> Node4 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node5 [label="DrawObject",height=0.2,width=0.4,color="grey75"];
+  Node6 -> Node5 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node6 [label="Observable\< DrawObserver \>",height=0.2,width=0.4,color="black",URL="$classObservable.html"];
+  Node7 -> Node1 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node7 [label="DatasetObserver",height=0.2,width=0.4,color="black",URL="$classDatasetObserver.html"];
+  Node8 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="dataset",fontname="FreeSans"];
+  Node8 [label="CategoryDataset",height=0.2,width=0.4,color="black",URL="$classCategoryDataset.html"];
+  Node9 -> Node8 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node9 [label="XYDataset",height=0.2,width=0.4,color="black",URL="$classXYDataset.html"];
+  Node10 -> Node9 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node10 [label="Dataset",height=0.2,width=0.4,color="black",URL="$classDataset.html"];
+  Node11 -> Node10 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 [label="RefObject",height=0.2,width=0.4,color="black",URL="$classRefObject.html"];
+  Node12 -> Node10 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node12 [label="Observable\< DatasetObserver \>",height=0.2,width=0.4,color="black",URL="$classObservable.html"];
+  Node13 -> Node10 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node13 [label="DrawObserver",height=0.2,width=0.4,color="grey75"];
+  Node14 -> Node10 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="m_renderer",fontname="FreeSans"];
+  Node14 [label="Renderer",height=0.2,width=0.4,color="black",URL="$classRenderer.html"];
+  Node5 -> Node14 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node11 -> Node14 [dir=back,color="midnightblue",fontsize="10",style="solid",fontname="FreeSans"];
+  Node15 -> Node1 [dir=back,color="darkorchid3",fontsize="10",style="dashed",label="colorScheme",fontname="FreeSans"];
+  Node15 [label="ColorScheme",height=0.2,width=0.4,color="black",URL="$classColorScheme.html"];
+}

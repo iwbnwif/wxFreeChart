@@ -16,7 +16,9 @@
 #include <wx/dynarray.h>
 #include <wx/arrimpl.cpp>
 
-
+/**
+ * Holds data for one XY serie.
+ */
 class XYSerie
 {
 public:
@@ -29,7 +31,7 @@ public:
 
 	virtual ~XYSerie()
 	{
-		delete m_data;
+		wxDELETEA(m_data);
 	}
 
 	double GetX(int index)
@@ -78,7 +80,7 @@ public:
 	virtual ~XYDemoDataset()
 	{
 		for (size_t n = 0; n < m_series.Count(); n++) {
-			delete m_series[n];
+			wxDELETE(m_series[n]);
 		}
 	}
 
@@ -146,7 +148,7 @@ public:
 		XYPlot *plot = new XYPlot();
 
 		XYDemoDataset *dataset = new XYDemoDataset();
-		dataset->AddSerie((double *) data, N(data));
+		dataset->AddSerie((double *) data, WXSIZEOF(data));
 
 		dataset->SetRenderer(new XYLineRenderer());
 
@@ -204,8 +206,8 @@ public:
 		XYPlot *plot = new XYPlot();
 
 		XYDemoDataset *dataset = new XYDemoDataset();
-		dataset->AddSerie((double *) data1, N(data1));
-		dataset->AddSerie((double *) data2, N(data2));
+		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
+		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
 
 		dataset->SetRenderer(new XYLineRenderer());
 
@@ -257,8 +259,8 @@ public:
 		XYPlot *plot = new XYPlot();
 
 		XYDemoDataset *dataset = new XYDemoDataset();
-		dataset->AddSerie((double *) data1, N(data1));
-		dataset->AddSerie((double *) data2, N(data2));
+		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
+		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
 
 		// set line renderer with symbols enabled and lines disabled
 		dataset->SetRenderer(new XYLineRenderer(true, false));
@@ -307,7 +309,7 @@ public:
 		XYPlot *plot = new XYPlot();
 
 		XYDemoDataset *dataset = new XYDemoDataset();
-		dataset->AddSerie((double *) data, N(data));
+		dataset->AddSerie((double *) data, WXSIZEOF(data));
 
 		dataset->SetRenderer(new XYLineRenderer());
 
@@ -346,4 +348,4 @@ ChartDemo *xyDemos[] = {
 	new XYDemo3(),
 	new XYDemo4(),
 };
-int xyDemosCount = N(xyDemos);
+int xyDemosCount = WXSIZEOF(xyDemos);

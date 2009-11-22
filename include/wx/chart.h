@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -26,7 +26,7 @@ class Chart;
 /**
  * Interface for receiving chart events.
  */
-class WXDLLEXPORT ChartObserver
+class WXDLLIMPEXP_FREECHART ChartObserver
 {
 public:
 	ChartObserver();
@@ -50,13 +50,13 @@ public:
 /**
  * Chart. Contains plot, title and chart attributes.
  */
-class WXDLLEXPORT Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver, public AxisObserver
+class WXDLLIMPEXP_FREECHART Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver, public AxisObserver
 {
 public:
 	/**
 	 * Constructs new chart.
-	 * @param _plot plot
-	 * @param _title chart title (empty string - no title)
+	 * @param plot plot
+	 * @param title chart title (empty string - no title)
 	 */
 	Chart(Plot *plot, const wxString &title = wxEmptyString);
 
@@ -76,11 +76,11 @@ public:
 
 	/**
 	 * Sets chart background.
-	 * @param _background chart background
+	 * @param background chart background
 	 */
 	void SetBackground(AreaDraw *background)
 	{
-		SAFE_REPLACE(m_background, background);
+		wxREPLACE(m_background, background);
 		FireChartChanged();
 	}
 

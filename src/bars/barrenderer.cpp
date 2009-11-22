@@ -1,15 +1,19 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	barrenderer.cpp
-// Purpose:
+// Purpose: bar renderer implementation
 // Author:	Moskvichev Andrey V.
 // Created:	14.11.2008
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/bars/barrenderer.h"
 #include "wx/category/categorydataset.h"
+
+//
+// bar types
+//
 
 BarType::BarType()
 {
@@ -191,6 +195,10 @@ void LayeredBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &
 	value = dataset->GetValue(item, serie);
 }
 
+//
+// BarRenderer
+//
+
 IMPLEMENT_CLASS(BarRenderer, Renderer)
 
 BarRenderer::BarRenderer(BarType *barType)
@@ -200,12 +208,12 @@ BarRenderer::BarRenderer(BarType *barType)
 
 BarRenderer::~BarRenderer()
 {
-	SAFE_DELETE(m_barType);
+	wxDELETE(m_barType);
 }
 
 void BarRenderer::SetBarType(BarType *barType)
 {
-	SAFE_REPLACE(m_barType, barType);
+	wxREPLACE(m_barType, barType);
 	FireNeedRedraw();
 }
 
