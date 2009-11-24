@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	ganttdemos.cpp
+// Name:	bubbledemos.cpp
 // Purpose: This file contains source code, that demonstrates how to
 //          create bubble charts.
 // Author:	Moskvichev Andrey V.
@@ -157,7 +157,7 @@ public:
 	virtual Chart *Create()
 	{
 		// serie 1 values
-		double data[][3] = {
+		double data1[][3] = {
 				{ 10, 20, 10, },
 				{ 13, 16, 40, },
 				{ 15, 26, 30, },
@@ -166,13 +166,24 @@ public:
 				{ 15, 34, 35, },
 				{ 25, 4, 20, },
 		};
+		// serie 2 values
+		double data2[][3] = {
+				{ 13, 18, 40, },
+				{ 53, 36, 20, },
+				{ 25, 23, 10, },
+				{ 76, 40, 41, },
+				{ 30, 15, 25, },
+				{ 45, 24, 45, },
+				{ 15, 4, 10, },
+		};
 
 		// first step: create plot
 		BubblePlot *plot = new BubblePlot();
 
 		// create xyz dataset and add serie to it
 		XYZDemoDataset *dataset = new XYZDemoDataset();
-		dataset->AddSerie((double *) data, WXSIZEOF(data));
+		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
+		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
 
 		// minimal/maximal radius for bubbles
 		const int minRad = 5;

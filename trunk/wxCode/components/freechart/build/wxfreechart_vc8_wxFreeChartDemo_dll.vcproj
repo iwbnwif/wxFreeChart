@@ -1536,6 +1536,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\sample\combinedaxisdemos.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sample\demo.cpp"
 				>
 			</File>
@@ -1549,6 +1553,10 @@
 			</File>
 			<File
 				RelativePath="..\sample\ohlcdemos.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\sample\timeseriesdemos.cpp"
 				>
 			</File>
 			<File

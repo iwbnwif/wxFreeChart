@@ -33,8 +33,18 @@ public:
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
+	/**
+	 * Sets serie color.
+	 * @param serie serie index
+	 * @param color color for serie
+	 */
 	virtual void SetSerieColor(int serie, wxColour *color);
 
+	/**
+	 * Returns serie color.
+	 * @param serie serie index
+	 * @return serie color
+	 */
 	virtual wxColour GetSerieColor(int serie);
 
 	/**

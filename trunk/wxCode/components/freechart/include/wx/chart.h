@@ -50,7 +50,7 @@ public:
 /**
  * Chart. Contains plot, title and chart attributes.
  */
-class WXDLLIMPEXP_FREECHART Chart : public RefObject, public Observable<ChartObserver>, public PlotObserver, public AxisObserver
+class WXDLLIMPEXP_FREECHART Chart : public Observable<ChartObserver>, public PlotObserver, public AxisObserver
 {
 public:
 	/**

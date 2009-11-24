@@ -24,7 +24,11 @@ ChartObserver::~ChartObserver()
 Chart::Chart(Plot *plot, const wxString &title)
 {
 	// defaults
-	m_background = new FillAreaDraw(*wxLIGHT_GREY_PEN, *wxLIGHT_GREY_BRUSH);
+	wxColour bgColor = wxColour(220, 220, 220);
+
+	m_background = new FillAreaDraw(
+			*wxThePenList->FindOrCreatePen(bgColor, 1, wxSOLID),
+			*wxTheBrushList->FindOrCreateBrush(bgColor));
 	m_titleFont = *wxNORMAL_FONT;
 
 	m_plot = plot;
@@ -38,6 +42,7 @@ Chart::Chart(Plot *plot, const wxString &title)
 Chart::~Chart()
 {
 	SAFE_REMOVE_OBSERVER(this, m_plot);
+	wxDELETE(m_plot);
 	wxDELETE(m_background);
 }
 

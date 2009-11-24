@@ -14,32 +14,32 @@
 
 static wxString sineFunctionName(wxT("Sine function"));
 
-SineFunction::SineFunction(double _a, double _min, double _max, double _step)
+SineFunction::SineFunction(double a, double minX, double maxX, double step)
 {
-	a = _a;
-	min = _min;
-	max = _max;
-	step = _step;
+	m_a = a;
+	m_minX = minX;
+	m_maxX = maxX;
+	m_step = step;
 }
 
 SineFunction::~SineFunction()
 {
 }
 
-double SineFunction::GetX(int index, int serie)
+double SineFunction::GetX(int index, int WXUNUSED(serie))
 {
-	return min + index * step;
+	return m_minX + index * m_step;
 }
 
-double SineFunction::GetY(int index, int serie)
+double SineFunction::GetY(int index, int WXUNUSED(serie))
 {
-	double x = min + index * step;
-	return a * sin(x);
+	double x = m_minX + index * m_step;
+	return m_a * sin(x);
 }
 
-int SineFunction::GetCount(int serie)
+int SineFunction::GetCount(int WXUNUSED(serie))
 {
-	return RoundHigh((max - min) / step) + 1;
+	return RoundHigh((m_maxX - m_minX) / m_step) + 1;
 }
 
 int SineFunction::GetSerieCount()
@@ -47,7 +47,7 @@ int SineFunction::GetSerieCount()
 	return 1;
 }
 
-wxString SineFunction::GetSerieName(int serie)
+wxString SineFunction::GetSerieName(int WXUNUSED(serie))
 {
 	return sineFunctionName;
 }

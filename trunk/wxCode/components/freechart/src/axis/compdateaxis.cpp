@@ -16,6 +16,11 @@ WX_DEFINE_EXPORTED_OBJARRAY(wxTimeSpanArray);
 
 IMPLEMENT_CLASS(CompDateAxis, Axis)
 
+//
+// TODO initial quick and dirty. Must be cleaned up.
+//
+
+
 int MonthNum(wxDateTime::Month month)
 {
 	switch (month) {
@@ -191,6 +196,7 @@ void CompDateAxis::DrawGridLines(wxDC &dc, wxRect rc)
 		return ;
 	}
 
+	// we will draw grid lines by minimal date span
 	wxDateSpan span;
 	if (!GetMinSpan(span)) {
 		return ;
@@ -338,6 +344,7 @@ void CompDateAxis::DrawSpan(wxDC &dc, wxRect rcAxis, int spanNum, wxString spanL
 		y = rcSpan.y + m_labelMargin;
 	}
 
+	// draw span labels
 	for (int n = 0; n < labelCount; n++) {
 		if (IsVertical()) {
 			dc.DrawRotatedText(spanLabel, x, y, 90);
@@ -387,6 +394,7 @@ wxString CompDateAxis::GetSpanLabel(wxDateTime date, wxDateSpan span)
 	int years = span.GetYears();
 
 	if (days != 0 && weeks == 0 && months == 0 && years == 0) {
+		// days span
 		int startDay = date.GetDay();
 		int endDay = startDay + days;
 
@@ -397,12 +405,14 @@ wxString CompDateAxis::GetSpanLabel(wxDateTime date, wxDateSpan span)
 		return FormatInterval(startDay, endDay);
 	}
 	else if (days == 0 && weeks != 0 && months == 0 && years == 0) {
+		// weeks span
 		int startWeek = date.GetWeekOfMonth();
 		int endWeek = startWeek + weeks;
 
 		return FormatInterval(startWeek, endWeek);
 	}
 	else if (days == 0 && weeks == 0 && months != 0 && years == 0) {
+		// monthes span
 		int startMonth = MonthNum(date.GetMonth());
 		int endMonth = startMonth + months;
 		if (endMonth > 12) {
@@ -419,6 +429,7 @@ wxString CompDateAxis::GetSpanLabel(wxDateTime date, wxDateSpan span)
 		}
 	}
 	else if (days == 0 && weeks == 0 && months == 0 && years != 0) {
+		// years span
 		int startYear = date.GetYear();
 		int endYear = startYear + years;
 
@@ -448,11 +459,12 @@ wxCoord CompDateAxis::GetSpanExtent(wxDC &dc)
 
 bool CompDateAxis::GetWindowDateBounds(wxDateTime &date0, wxDateTime &date1)
 {
-	double winPos = GetWindowPosition();
+	double winMin, winMax;
+	GetWindowBounds(winMin, winMax);
 
-	int firstDateIndex = (int) winPos;
-	int lastDateIndex = RoundHigh(winPos + GetWindowWidth()) - 1;
-	if (lastDateIndex < 0) {
+	int firstDateIndex = (int) winMin;
+	int lastDateIndex = RoundHigh(winMax) - 1;
+	if (lastDateIndex < firstDateIndex) {
 		lastDateIndex = firstDateIndex;
 	}
 

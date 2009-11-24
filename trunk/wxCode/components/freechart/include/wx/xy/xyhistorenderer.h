@@ -21,6 +21,11 @@ class WXDLLIMPEXP_FREECHART XYHistoRenderer : public XYRenderer, public DrawObse
 {
 	DECLARE_CLASS(XYHistoRenderer)
 public:
+	/**
+	 * Constructs new XYHistoRenderer.
+	 * @param barWidth width to histogram bars
+	 * @param vertical true to draw vertical bars, false - to horizontal
+	 */
 	XYHistoRenderer(int barWidth = 10, bool vertical = true);
 	virtual ~XYHistoRenderer();
 

@@ -14,7 +14,7 @@
 #include <wx/ohlc/ohlcrenderer.h>
 
 /**
- * OHLC renderer for displaying jananese candles.
+ * OHLC renderer for displaying japanese candles.
  */
 class WXDLLIMPEXP_FREECHART OHLCCandlestickRenderer : public OHLCRenderer
 {

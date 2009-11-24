@@ -1,0 +1,1282 @@
+m4trace:configure.ac:18: -1- AC_INIT([WXFREECHART], [1.0], [mab@smtp.ru])
+m4trace:configure.ac:18: -1- m4_pattern_forbid([^_?A[CHUM]_])
+m4trace:configure.ac:18: -1- m4_pattern_forbid([_AC_])
+m4trace:configure.ac:18: -1- m4_pattern_forbid([^LIBOBJS$], [do not use LIBOBJS directly, use AC_LIBOBJ (see section `AC_LIBOBJ vs LIBOBJS'])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^AS_FLAGS$])
+m4trace:configure.ac:18: -1- m4_pattern_forbid([^_?m4_])
+m4trace:configure.ac:18: -1- m4_pattern_forbid([^dnl$])
+m4trace:configure.ac:18: -1- m4_pattern_forbid([^_?AS_])
+m4trace:configure.ac:18: -1- AC_SUBST([SHELL], [${CONFIG_SHELL-/bin/sh}])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([SHELL])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^SHELL$])
+m4trace:configure.ac:18: -1- AC_SUBST([PATH_SEPARATOR])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([PATH_SEPARATOR])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PATH_SEPARATOR$])
+m4trace:configure.ac:18: -1- AC_SUBST([PACKAGE_NAME], [m4_ifdef([AC_PACKAGE_NAME],      ['AC_PACKAGE_NAME'])])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([PACKAGE_NAME])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_NAME$])
+m4trace:configure.ac:18: -1- AC_SUBST([PACKAGE_TARNAME], [m4_ifdef([AC_PACKAGE_TARNAME],   ['AC_PACKAGE_TARNAME'])])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([PACKAGE_TARNAME])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_TARNAME$])
+m4trace:configure.ac:18: -1- AC_SUBST([PACKAGE_VERSION], [m4_ifdef([AC_PACKAGE_VERSION],   ['AC_PACKAGE_VERSION'])])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([PACKAGE_VERSION])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_VERSION$])
+m4trace:configure.ac:18: -1- AC_SUBST([PACKAGE_STRING], [m4_ifdef([AC_PACKAGE_STRING],    ['AC_PACKAGE_STRING'])])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([PACKAGE_STRING])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_STRING$])
+m4trace:configure.ac:18: -1- AC_SUBST([PACKAGE_BUGREPORT], [m4_ifdef([AC_PACKAGE_BUGREPORT], ['AC_PACKAGE_BUGREPORT'])])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([PACKAGE_BUGREPORT])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_BUGREPORT$])
+m4trace:configure.ac:18: -1- AC_SUBST([exec_prefix], [NONE])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([exec_prefix])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^exec_prefix$])
+m4trace:configure.ac:18: -1- AC_SUBST([prefix], [NONE])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([prefix])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^prefix$])
+m4trace:configure.ac:18: -1- AC_SUBST([program_transform_name], [s,x,x,])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([program_transform_name])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^program_transform_name$])
+m4trace:configure.ac:18: -1- AC_SUBST([bindir], ['${exec_prefix}/bin'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([bindir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^bindir$])
+m4trace:configure.ac:18: -1- AC_SUBST([sbindir], ['${exec_prefix}/sbin'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([sbindir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^sbindir$])
+m4trace:configure.ac:18: -1- AC_SUBST([libexecdir], ['${exec_prefix}/libexec'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([libexecdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^libexecdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([datarootdir], ['${prefix}/share'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([datarootdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^datarootdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([datadir], ['${datarootdir}'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([datadir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^datadir$])
+m4trace:configure.ac:18: -1- AC_SUBST([sysconfdir], ['${prefix}/etc'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([sysconfdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^sysconfdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([sharedstatedir], ['${prefix}/com'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([sharedstatedir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^sharedstatedir$])
+m4trace:configure.ac:18: -1- AC_SUBST([localstatedir], ['${prefix}/var'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([localstatedir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^localstatedir$])
+m4trace:configure.ac:18: -1- AC_SUBST([includedir], ['${prefix}/include'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([includedir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^includedir$])
+m4trace:configure.ac:18: -1- AC_SUBST([oldincludedir], ['/usr/include'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([oldincludedir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^oldincludedir$])
+m4trace:configure.ac:18: -1- AC_SUBST([docdir], [m4_ifset([AC_PACKAGE_TARNAME],
+				     ['${datarootdir}/doc/${PACKAGE_TARNAME}'],
+				     ['${datarootdir}/doc/${PACKAGE}'])])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([docdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^docdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([infodir], ['${datarootdir}/info'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([infodir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^infodir$])
+m4trace:configure.ac:18: -1- AC_SUBST([htmldir], ['${docdir}'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([htmldir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^htmldir$])
+m4trace:configure.ac:18: -1- AC_SUBST([dvidir], ['${docdir}'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([dvidir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^dvidir$])
+m4trace:configure.ac:18: -1- AC_SUBST([pdfdir], ['${docdir}'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([pdfdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^pdfdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([psdir], ['${docdir}'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([psdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^psdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([libdir], ['${exec_prefix}/lib'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([libdir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^libdir$])
+m4trace:configure.ac:18: -1- AC_SUBST([localedir], ['${datarootdir}/locale'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([localedir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^localedir$])
+m4trace:configure.ac:18: -1- AC_SUBST([mandir], ['${datarootdir}/man'])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([mandir])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^mandir$])
+m4trace:configure.ac:18: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_NAME])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_NAME$])
+m4trace:configure.ac:18: -1- AH_OUTPUT([PACKAGE_NAME], [/* Define to the full name of this package. */
+#undef PACKAGE_NAME])
+m4trace:configure.ac:18: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_TARNAME])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_TARNAME$])
+m4trace:configure.ac:18: -1- AH_OUTPUT([PACKAGE_TARNAME], [/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME])
+m4trace:configure.ac:18: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_VERSION])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_VERSION$])
+m4trace:configure.ac:18: -1- AH_OUTPUT([PACKAGE_VERSION], [/* Define to the version of this package. */
+#undef PACKAGE_VERSION])
+m4trace:configure.ac:18: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_STRING])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_STRING$])
+m4trace:configure.ac:18: -1- AH_OUTPUT([PACKAGE_STRING], [/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING])
+m4trace:configure.ac:18: -1- AC_DEFINE_TRACE_LITERAL([PACKAGE_BUGREPORT])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^PACKAGE_BUGREPORT$])
+m4trace:configure.ac:18: -1- AH_OUTPUT([PACKAGE_BUGREPORT], [/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT])
+m4trace:configure.ac:18: -1- AC_SUBST([DEFS])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([DEFS])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^DEFS$])
+m4trace:configure.ac:18: -1- AC_SUBST([ECHO_C])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([ECHO_C])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^ECHO_C$])
+m4trace:configure.ac:18: -1- AC_SUBST([ECHO_N])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([ECHO_N])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^ECHO_N$])
+m4trace:configure.ac:18: -1- AC_SUBST([ECHO_T])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([ECHO_T])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^ECHO_T$])
+m4trace:configure.ac:18: -1- AC_SUBST([LIBS])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([LIBS])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^LIBS$])
+m4trace:configure.ac:18: -1- AC_SUBST([build_alias])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([build_alias])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^build_alias$])
+m4trace:configure.ac:18: -1- AC_SUBST([host_alias])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([host_alias])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^host_alias$])
+m4trace:configure.ac:18: -1- AC_SUBST([target_alias])
+m4trace:configure.ac:18: -1- AC_SUBST_TRACE([target_alias])
+m4trace:configure.ac:18: -1- m4_pattern_allow([^target_alias$])
+m4trace:configure.ac:19: -1- AC_CONFIG_AUX_DIR([build])
+m4trace:configure.ac:27: -1- m4_include([../../../build/autoconf/wxcode.m4])
+m4trace:../../../build/autoconf/wxcode.m4:21: -1- AC_DEFUN([WXCODE_INIT], [
+            AC_PREREQ([2.57])
+
+            m4_include(../../../build/autoconf/wxwin.m4)
+            AC_LANG(C++)
+
+            dnl wxCode components usually keep the install.sh and config.{guess|sub}
+            dnl scripts in the "build" folder; however we cannot add this line:
+            dnl     AC_CONFIG_AUX_DIR(build)
+            dnl inside this macro as otherwise autoconf would not get the "build"
+            dnl relative path correctly. The line above must be _directly_ written
+            dnl in the component's configure.ac!
+
+            dnl required by Bakefile:
+            AC_CANONICAL_SYSTEM
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:46: -1- AC_DEFUN([WXCODE_ARG_ENABLE], [
+          AC_ARG_ENABLE([$1],
+                        AC_HELP_STRING([--enable-$1],
+                                       [$2 (default is $3)]),,
+          [enable_$1=$3])
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:61: -1- AC_DEFUN([WXCODE_ARG_WITH], [
+          AC_ARG_WITH([$1],
+                      AC_HELP_STRING([--with-$1],
+                                     [$2 (default is $3)]),,
+          [with_$1=$3])
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:83: -1- AC_DEFUN([WXCODE_OPTIONS], [
+            WX_CONFIG_OPTIONS
+            WX_STANDARD_OPTIONS([$1])
+
+            # we want to always have DEBUG==WX_DEBUG and UNICODE==WX_UNICODE
+            WX_DEBUG=$DEBUG
+            WX_UNICODE=$UNICODE
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:100: -1- AC_DEFUN([WXCODE_CHECKS], [
+            WX_CONVERT_STANDARD_OPTIONS_TO_WXCONFIG_FLAGS
+            WX_CONFIG_CHECK([$1],,,[$2],[$WXCONFIG_FLAGS])
+            WX_DETECT_STANDARD_OPTION_VALUES
+
+            # VERY IMPORTANT: these AC_PROG_C* checks must go after WX_DEBUG
+            #                 option handling or they'll add automatically "-g -O0"
+            #                 flags to the CXXFLAGS and CPPFLAGS:
+
+            # required when compiling C files:
+            AC_PROG_CC
+
+            # required when compiling C++ files:
+            AC_PROG_CXX
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:125: -1- AC_DEFUN([WXCODE_END_PART1], [
+            dnl config output files
+            AC_BAKEFILE([m4_include(autoconf_inc.m4)])
+            AC_CONFIG_FILES([Makefile])
+            AC_OUTPUT
+
+            WX_STANDARD_OPTIONS_SUMMARY_MSG_BEGIN
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:142: -1- AC_DEFUN([WXCODE_END_PART2], [
+            WX_STANDARD_OPTIONS_SUMMARY_MSG_END
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:163: -1- AC_DEFUN([WXCODE_END], [
+            WXCODE_END_PART1
+            WXCODE_END_PART2
+        ])
+m4trace:../../../build/autoconf/wxcode.m4:171: -1- m4_include([../../../build/autoconf/wxcodecheck.m4])
+m4trace:../../../build/autoconf/wxcodecheck.m4:16: -1- AC_DEFUN([WXCODE_SAVE_COREVAR], [
+        SAVED_CPPFLAGS="$CPPFLAGS"
+        SAVED_CXXFLAGS="$CXXFLAGS"
+        SAVED_CFLAGS="$CFLAGS"
+        SAVED_LIBS="$LIBS"
+    ])
+m4trace:../../../build/autoconf/wxcodecheck.m4:31: -1- AC_DEFUN([WXCODE_RESTORE_COREVAR], [
+        CPPFLAGS="$SAVED_CPPFLAGS"
+        CXXFLAGS="$SAVED_CXXFLAGS"
+        CFLAGS="$SAVED_CFLAGS"
+        LIBS="$SAVED_LIBS"
+    ])
+m4trace:../../../build/autoconf/wxcodecheck.m4:54: -1- AC_DEFUN([WXCODE_CHECKFOR_COMPONENT], [
+            dnl save original flags into support variables
+            WXCODE_SAVE_COREVAR()
+
+            dnl add to the compilation & link flags the wxWidgets flags
+            dnl (we assume they have been set by AM_WXPRESETS)
+            dnl
+            dnl NOTE: this is very important since the test program
+            dnl       we will compile needs to be linked against wx
+            dnl       and the configure script will use these *FLAGS
+            dnl       variables and it cannot be told to use other flags.
+            dnl
+            dnl NOTE2: we don't want to put into *FLAGS variables the
+            dnl        WX_* variable values since the Makefile.in for
+            dnl        a wxpresets-based application already merges
+            dnl        the *FLAGS contents with WX_* vars
+            dnl
+            dnl NOTE3: the CXXFLAGS are merged with CPPFLAGS and
+            dnl        thus we don't need to add the WX_CPPFLAGS to both
+            CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
+            CFLAGS="$CFLAGS $WX_CFLAGS_ONLY"
+
+            dnl before WX_LIBS we want the lib of the component to check
+            LIBS="$LIBS -l$3 $WX_LIBS"
+
+            dnl check for this component presence
+            if test -z "$COMPCHECK_MSG"; then
+                dnl allow customized messages
+                COMPCHECK_MSG="if $1 is available"
+            fi
+            AC_MSG_CHECKING([$COMPCHECK_MSG])
+            AC_LINK_IFELSE([
+                            AC_LANG_PROGRAM([#include <$2>],
+                                            [$4])
+                           ],
+                            [$1_PRESENCE=1], [$1_PRESENCE=0])
+
+            if test "$$1_PRESENCE" = "1"; then
+               AC_MSG_RESULT([yes])
+               $5
+            else
+               AC_MSG_RESULT([no])
+               $6
+            fi
+
+            dnl restore the original flags
+            WXCODE_RESTORE_COREVAR()
+        ])
+m4trace:../../../build/autoconf/wxcodecheck.m4:129: -1- AC_DEFUN([WXCODE_CHECKFOR_COMPONENT_VERSION], [
+            dnl break version string in single digits
+            major=`echo $5 | sed 's/\([[0-9]]\).\([[0-9]]\).\([[0-9]]\)/\1/'`
+            minor=`echo $5 | sed 's/\([[0-9]]\).\([[0-9]]\).\([[0-9]]\)/\2/'`
+            release=`echo $5 | sed 's/\([[0-9]]\).\([[0-9]]\).\([[0-9]]\)/\3/'`
+
+            dnl cache the symbol names
+            majsym="$6""MAJOR""$7"
+            minsym="$6""MINOR""$7"
+            relsym="$6""RELEASE""$7"
+
+            dnl call our base macro adding the version check
+            COMPCHECK_MSG="if $1 (version >= $5) is available"
+            WXCODE_CHECKFOR_COMPONENT([$1], [$2], [$3],
+                [
+                    $4
+
+                    // version check
+                    #if defined($majsym) && defined($minsym) && defined($relsym)
+                        #if ($majsym > ($major) || \
+                            ($majsym == ($major) && $minsym > ($minor)) || \
+                            ($majsym == ($major) && $minsym == ($minor) && $relsym >= ($release)))
+                            // this component is recent enough
+                        #else
+                            #error $1 is too old ! At least version $5 is required
+                        #endif
+                    #else
+                        #error $1 does not define its version symbols $majsym, $minsym, $relsym
+                    #endif
+                ],
+                [$8], [$9])
+        ])
+m4trace:../../../build/autoconf/wxcodecheck.m4:168: -1- AC_DEFUN([AM_SAVE_COREVAR], [WXCODE_SAVE_COREVAR])
+m4trace:../../../build/autoconf/wxcodecheck.m4:169: -1- AC_DEFUN([AM_RESTORE_COREVAR], [WXCODE_RESTORE_COREVAR])
+m4trace:../../../build/autoconf/wxcodecheck.m4:170: -1- AC_DEFUN([AM_WXCODE_CHECKFOR_COMPONENT], [WXCODE_CHECKFOR_COMPONENT])
+m4trace:../../../build/autoconf/wxcodecheck.m4:171: -1- AC_DEFUN([AM_WXCODE_CHECKFOR_COMPONENT_VERSION], [WXCODE_CHECKFOR_COMPONENT_VERSION])
+m4trace:configure.ac:28: -1- WXCODE_INIT
+m4trace:configure.ac:28: -1- m4_include([../../../build/autoconf/wxwin.m4])
+m4trace:../../../build/autoconf/wxwin.m4:102: -1- AC_DEFUN([WX_CONFIG_OPTIONS], [
+    AC_ARG_WITH(wxdir,
+                [  --with-wxdir=PATH       Use uninstalled version of wxWidgets in PATH],
+                [ wx_config_name="$withval/wx-config"
+                  wx_config_args="--inplace"])
+    AC_ARG_WITH(wx-config,
+                [  --with-wx-config=CONFIG wx-config script to use (optional)],
+                wx_config_name="$withval" )
+    AC_ARG_WITH(wx-prefix,
+                [  --with-wx-prefix=PREFIX Prefix where wxWidgets is installed (optional)],
+                wx_config_prefix="$withval", wx_config_prefix="")
+    AC_ARG_WITH(wx-exec-prefix,
+                [  --with-wx-exec-prefix=PREFIX
+                          Exec prefix where wxWidgets is installed (optional)],
+                wx_config_exec_prefix="$withval", wx_config_exec_prefix="")
+])
+m4trace:../../../build/autoconf/wxwin.m4:122: -1- AC_DEFUN([_WX_PRIVATE_CHECK_VERSION], [
+    wx_ver_ok=""
+    if test "x$WX_VERSION" != x ; then
+      if test $wx_config_major_version -gt $1; then
+        wx_ver_ok=yes
+      else
+        if test $wx_config_major_version -eq $1; then
+           if test $wx_config_minor_version -gt $2; then
+              wx_ver_ok=yes
+           else
+              if test $wx_config_minor_version -eq $2; then
+                 if test $wx_config_micro_version -ge $3; then
+                    wx_ver_ok=yes
+                 fi
+              fi
+           fi
+        fi
+      fi
+    fi
+])
+m4trace:../../../build/autoconf/wxwin.m4:171: -1- AC_DEFUN([WX_CONFIG_CHECK], [
+  dnl do we have wx-config name: it can be wx-config or wxd-config or ...
+  if test x${WX_CONFIG_NAME+set} != xset ; then
+     WX_CONFIG_NAME=wx-config
+  fi
+
+  if test "x$wx_config_name" != x ; then
+     WX_CONFIG_NAME="$wx_config_name"
+  fi
+
+  dnl deal with optional prefixes
+  if test x$wx_config_exec_prefix != x ; then
+     wx_config_args="$wx_config_args --exec-prefix=$wx_config_exec_prefix"
+     WX_LOOKUP_PATH="$wx_config_exec_prefix/bin"
+  fi
+  if test x$wx_config_prefix != x ; then
+     wx_config_args="$wx_config_args --prefix=$wx_config_prefix"
+     WX_LOOKUP_PATH="$WX_LOOKUP_PATH:$wx_config_prefix/bin"
+  fi
+  if test "$cross_compiling" = "yes"; then
+     wx_config_args="$wx_config_args --host=$host_alias"
+  fi
+
+  dnl don't search the PATH if WX_CONFIG_NAME is absolute filename
+  if test -x "$WX_CONFIG_NAME" ; then
+     AC_MSG_CHECKING(for wx-config)
+     WX_CONFIG_PATH="$WX_CONFIG_NAME"
+     AC_MSG_RESULT($WX_CONFIG_PATH)
+  else
+     AC_PATH_PROG(WX_CONFIG_PATH, $WX_CONFIG_NAME, no, "$WX_LOOKUP_PATH:$PATH")
+  fi
+
+  if test "$WX_CONFIG_PATH" != "no" ; then
+    WX_VERSION=""
+
+    min_wx_version=ifelse([$1], ,2.2.1,$1)
+    if test -z "$5" ; then
+      AC_MSG_CHECKING([for wxWidgets version >= $min_wx_version])
+    else
+      AC_MSG_CHECKING([for wxWidgets version >= $min_wx_version ($5)])
+    fi
+
+    dnl don't add the libraries ($4) to this variable as this would result in
+    dnl an error when it's used with --version below
+    WX_CONFIG_WITH_ARGS="$WX_CONFIG_PATH $wx_config_args $5"
+
+    WX_VERSION=`$WX_CONFIG_WITH_ARGS --version 2>/dev/null`
+    wx_config_major_version=`echo $WX_VERSION | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
+    wx_config_minor_version=`echo $WX_VERSION | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
+    wx_config_micro_version=`echo $WX_VERSION | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
+
+    wx_requested_major_version=`echo $min_wx_version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\1/'`
+    wx_requested_minor_version=`echo $min_wx_version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\2/'`
+    wx_requested_micro_version=`echo $min_wx_version | \
+           sed 's/\([[0-9]]*\).\([[0-9]]*\).\([[0-9]]*\)/\3/'`
+
+    _WX_PRIVATE_CHECK_VERSION([$wx_requested_major_version],
+                              [$wx_requested_minor_version],
+                              [$wx_requested_micro_version])
+
+    if test -n "$wx_ver_ok"; then
+      AC_MSG_RESULT(yes (version $WX_VERSION))
+      WX_LIBS=`$WX_CONFIG_WITH_ARGS --libs $4`
+
+      dnl is this even still appropriate?  --static is a real option now
+      dnl and WX_CONFIG_WITH_ARGS is likely to contain it if that is
+      dnl what the user actually wants, making this redundant at best.
+      dnl For now keep it in case anyone actually used it in the past.
+      AC_MSG_CHECKING([for wxWidgets static library])
+      WX_LIBS_STATIC=`$WX_CONFIG_WITH_ARGS --static --libs $4 2>/dev/null`
+      if test "x$WX_LIBS_STATIC" = "x"; then
+        AC_MSG_RESULT(no)
+      else
+        AC_MSG_RESULT(yes)
+      fi
+
+      dnl starting with version 2.2.6 wx-config has --cppflags argument
+      wx_has_cppflags=""
+      if test $wx_config_major_version -gt 2; then
+        wx_has_cppflags=yes
+      else
+        if test $wx_config_major_version -eq 2; then
+           if test $wx_config_minor_version -gt 2; then
+              wx_has_cppflags=yes
+           else
+              if test $wx_config_minor_version -eq 2; then
+                 if test $wx_config_micro_version -ge 6; then
+                    wx_has_cppflags=yes
+                 fi
+              fi
+           fi
+        fi
+      fi
+
+      dnl starting with version 2.7.0 wx-config has --rescomp option
+      wx_has_rescomp=""
+      if test $wx_config_major_version -gt 2; then
+        wx_has_rescomp=yes
+      else
+        if test $wx_config_major_version -eq 2; then
+           if test $wx_config_minor_version -ge 7; then
+              wx_has_rescomp=yes
+           fi
+        fi
+      fi
+      if test "x$wx_has_rescomp" = x ; then
+         dnl cannot give any useful info for resource compiler
+         WX_RESCOMP=
+      else
+         WX_RESCOMP=`$WX_CONFIG_WITH_ARGS --rescomp`
+      fi
+
+      if test "x$wx_has_cppflags" = x ; then
+         dnl no choice but to define all flags like CFLAGS
+         WX_CFLAGS=`$WX_CONFIG_WITH_ARGS --cflags $4`
+         WX_CPPFLAGS=$WX_CFLAGS
+         WX_CXXFLAGS=$WX_CFLAGS
+
+         WX_CFLAGS_ONLY=$WX_CFLAGS
+         WX_CXXFLAGS_ONLY=$WX_CFLAGS
+      else
+         dnl we have CPPFLAGS included in CFLAGS included in CXXFLAGS
+         WX_CPPFLAGS=`$WX_CONFIG_WITH_ARGS --cppflags $4`
+         WX_CXXFLAGS=`$WX_CONFIG_WITH_ARGS --cxxflags $4`
+         WX_CFLAGS=`$WX_CONFIG_WITH_ARGS --cflags $4`
+
+         WX_CFLAGS_ONLY=`echo $WX_CFLAGS | sed "s@^$WX_CPPFLAGS *@@"`
+         WX_CXXFLAGS_ONLY=`echo $WX_CXXFLAGS | sed "s@^$WX_CFLAGS *@@"`
+      fi
+
+      ifelse([$2], , :, [$2])
+
+    else
+
+       if test "x$WX_VERSION" = x; then
+          dnl no wx-config at all
+          AC_MSG_RESULT(no)
+       else
+          AC_MSG_RESULT(no (version $WX_VERSION is not new enough))
+       fi
+
+       WX_CFLAGS=""
+       WX_CPPFLAGS=""
+       WX_CXXFLAGS=""
+       WX_LIBS=""
+       WX_LIBS_STATIC=""
+       WX_RESCOMP=""
+
+       if test ! -z "$5"; then
+
+          wx_error_message="
+    The configuration you asked for $PACKAGE_NAME requires a wxWidgets
+    build with the following settings:
+        $5
+    but such build is not available.
+
+    To see the wxWidgets builds available on this system, please use
+    'wx-config --list' command. To use the default build, returned by
+    'wx-config --selected-config', use the options with their 'auto'
+    default values."
+
+       fi
+
+       wx_error_message="
+    The requested wxWidgets build couldn't be found.
+    $wx_error_message
+
+    If you still get this error, then check that 'wx-config' is
+    in path, the directory where wxWidgets libraries are installed
+    (returned by 'wx-config --libs' command) is in LD_LIBRARY_PATH
+    or equivalent variable and wxWidgets version is $1 or above."
+
+       ifelse([$3], , AC_MSG_ERROR([$wx_error_message]), [$3])
+
+    fi
+  else
+
+    WX_CFLAGS=""
+    WX_CPPFLAGS=""
+    WX_CXXFLAGS=""
+    WX_LIBS=""
+    WX_LIBS_STATIC=""
+    WX_RESCOMP=""
+
+    ifelse([$3], , :, [$3])
+
+  fi
+
+  AC_SUBST(WX_CPPFLAGS)
+  AC_SUBST(WX_CFLAGS)
+  AC_SUBST(WX_CXXFLAGS)
+  AC_SUBST(WX_CFLAGS_ONLY)
+  AC_SUBST(WX_CXXFLAGS_ONLY)
+  AC_SUBST(WX_LIBS)
+  AC_SUBST(WX_LIBS_STATIC)
+  AC_SUBST(WX_VERSION)
+  AC_SUBST(WX_RESCOMP)
+
+  dnl need to export also WX_VERSION_MINOR and WX_VERSION_MAJOR symbols
+  dnl to support wxpresets bakefiles (we export also WX_VERSION_MICRO for completeness):
+  WX_VERSION_MAJOR="$wx_config_major_version"
+  WX_VERSION_MINOR="$wx_config_minor_version"
+  WX_VERSION_MICRO="$wx_config_micro_version"
+  AC_SUBST(WX_VERSION_MAJOR)
+  AC_SUBST(WX_VERSION_MINOR)
+  AC_SUBST(WX_VERSION_MICRO)
+])
+m4trace:../../../build/autoconf/wxwin.m4:437: -1- AC_DEFUN([WXRC_CHECK], [
+  AC_ARG_VAR([WXRC], [Path to wxWidget's wxrc resource compiler])
+
+  if test "x$WX_CONFIG_NAME" = x; then
+    AC_MSG_ERROR([The wxrc tests must run after wxWidgets test.])
+  else
+
+    AC_MSG_CHECKING([for wxrc])
+
+    if test "x$WXRC" = x ; then
+      dnl wx-config --utility is a new addition to wxWidgets:
+      _WX_PRIVATE_CHECK_VERSION(2,5,3)
+      if test -n "$wx_ver_ok"; then
+        WXRC=`$WX_CONFIG_WITH_ARGS --utility=wxrc`
+      fi
+    fi
+
+    if test "x$WXRC" = x ; then
+      AC_MSG_RESULT([not found])
+      ifelse([$2], , :, [$2])
+    else
+      AC_MSG_RESULT([$WXRC])
+      ifelse([$1], , :, [$1])
+    fi
+
+    AC_SUBST(WXRC)
+  fi
+])
+m4trace:../../../build/autoconf/wxwin.m4:477: -1- AC_DEFUN([WX_LIKE_LIBNAME], [
+        wx_temp="$2""_""$WX_PORT"
+
+        dnl add the [u][d] string
+        if test "$WX_UNICODE" = "1"; then
+            wx_temp="$wx_temp""u"
+        fi
+        if test "$WX_DEBUG" = "1"; then
+            wx_temp="$wx_temp""d"
+        fi
+
+        dnl complete the name of the lib
+        wx_temp="$wx_temp""_""$3""-$WX_VERSION_MAJOR.$WX_VERSION_MINOR"
+
+        dnl save it in the user's variable
+        $1=$wx_temp
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:507: -1- AC_DEFUN([WX_ARG_ENABLE_YESNOAUTO], [AC_ARG_ENABLE($1,
+            AC_HELP_STRING([--enable-$1], [$3 (default is $4)]),
+            [], [enableval="$4"])
+
+            dnl Show a message to the user about this option
+            AC_MSG_CHECKING([for the --enable-$1 option])
+            if test "$enableval" = "yes" ; then
+                AC_MSG_RESULT([yes])
+                $2=1
+                $5
+            elif test "$enableval" = "no" ; then
+                AC_MSG_RESULT([no])
+                $2=0
+            elif test "$enableval" = "auto" ; then
+                AC_MSG_RESULT([will be automatically detected])
+                $2="auto"
+            else
+                AC_MSG_ERROR([
+    Unrecognized option value (allowed values: yes, no, auto)
+                ])
+            fi
+         ])
+m4trace:../../../build/autoconf/wxwin.m4:531: -1- AC_DEFUN([WX_ARG_WITH_YESNOAUTO], [AC_ARG_WITH($1,
+            AC_HELP_STRING([--with-$1], [$3 (default is $4)]),
+            [], [withval="$4"])
+
+            dnl Show a message to the user about this option
+            AC_MSG_CHECKING([for the --with-$1 option])
+            if test "$withval" = "yes" ; then
+                AC_MSG_RESULT([yes])
+                $2=1
+                $5
+            dnl NB: by default we don't allow --with-$1=no option
+            dnl     since it does not make much sense !
+            elif test "$6" = "1" -a "$withval" = "no" ; then
+                AC_MSG_RESULT([no])
+                $2=0
+            elif test "$withval" = "auto" ; then
+                AC_MSG_RESULT([will be automatically detected])
+                $2="auto"
+            else
+                AC_MSG_ERROR([
+    Unrecognized option value (allowed values: yes, auto)
+                ])
+            fi
+         ])
+m4trace:../../../build/autoconf/wxwin.m4:572: -1- AC_DEFUN([WX_STANDARD_OPTIONS], [
+
+        dnl the following lines will expand to WX_ARG_ENABLE_YESNOAUTO calls if and only if
+        dnl the $1 argument contains respectively the debug,unicode or shared options.
+
+        dnl be careful here not to set debug flag if only "wxdebug" was specified
+        ifelse(regexp([$1], [\bdebug]), [-1],,
+               [WX_ARG_ENABLE_YESNOAUTO([debug], [DEBUG], [Build in debug mode], [auto])])
+
+        ifelse(index([$1], [unicode]), [-1],,
+               [WX_ARG_ENABLE_YESNOAUTO([unicode], [UNICODE], [Build in Unicode mode], [auto])])
+
+        ifelse(regexp([$1], [\bshared]), [-1],,
+               [WX_ARG_ENABLE_YESNOAUTO([shared], [SHARED], [Build as shared library], [auto])])
+
+        dnl WX_ARG_WITH_YESNOAUTO cannot be used for --with-toolkit since it's an option
+        dnl which must be able to accept the auto|gtk1|gtk2|msw|... values
+        ifelse(index([$1], [toolkit]), [-1],,
+               [
+                AC_ARG_WITH([toolkit],
+                            AC_HELP_STRING([--with-toolkit],
+                                           [Build against a specific wxWidgets toolkit (default is auto)]),
+                            [], [withval="auto"])
+
+                dnl Show a message to the user about this option
+                AC_MSG_CHECKING([for the --with-toolkit option])
+                if test "$withval" = "auto" ; then
+                    AC_MSG_RESULT([will be automatically detected])
+                    TOOLKIT="auto"
+                else
+                    TOOLKIT="$withval"
+
+                    dnl PORT must be one of the allowed values
+                    if test "$TOOLKIT" != "gtk1" -a "$TOOLKIT" != "gtk2" -a \
+                            "$TOOLKIT" != "msw" -a "$TOOLKIT" != "motif" -a \
+                            "$TOOLKIT" != "x11" -a "$TOOLKIT" != "mac" -a \
+                            "$TOOLKIT" != "mgl" -a "$TOOLKIT" != "dfb" ; then
+                        AC_MSG_ERROR([
+    Unrecognized option value (allowed values: auto, gtk1, gtk2, msw, motif, x11, mac, mgl, dfb)
+                        ])
+                    fi
+
+                    AC_MSG_RESULT([$TOOLKIT])
+                fi
+               ])
+
+        dnl ****** IMPORTANT *******
+        dnl   Unlike for the UNICODE setting, you can build your program in
+        dnl   shared mode against a static build of wxWidgets. Thus we have the
+        dnl   following option which allows these mixtures. E.g.
+        dnl
+        dnl      ./configure --disable-shared --with-wxshared
+        dnl
+        dnl   will build your library in static mode against the first available
+        dnl   shared build of wxWidgets.
+        dnl
+        dnl   Note that's not possible to do the viceversa:
+        dnl
+        dnl      ./configure --enable-shared --without-wxshared
+        dnl
+        dnl   Doing so you would try to build your library in shared mode against a static
+        dnl   build of wxWidgets. This is not possible (you would mix PIC and non PIC code) !
+        dnl   A check for this combination of options is in WX_DETECT_STANDARD_OPTION_VALUES
+        dnl   (where we know what 'auto' should be expanded to).
+        dnl
+        dnl   If you try to build something in ANSI mode against a UNICODE build
+        dnl   of wxWidgets or in RELEASE mode against a DEBUG build of wxWidgets,
+        dnl   then at best you'll get ton of linking errors !
+        dnl ************************
+
+        ifelse(index([$1], [wxshared]), [-1],,
+               [
+                WX_ARG_WITH_YESNOAUTO(
+                    [wxshared], [WX_SHARED],
+                    [Force building against a shared build of wxWidgets, even if --disable-shared is given],
+                    [auto], [], [1])
+               ])
+
+        dnl Just like for SHARED and WX_SHARED it may happen that some adventurous
+        dnl peoples will want to mix a wxWidgets release build with a debug build of
+        dnl his app/lib. So, we have both DEBUG and WX_DEBUG variables.
+        ifelse(index([$1], [wxdebug]), [-1],,
+               [
+                WX_ARG_WITH_YESNOAUTO(
+                    [wxdebug], [WX_DEBUG],
+                    [Force building against a debug build of wxWidgets, even if --disable-debug is given],
+                    [auto], [], [1])
+               ])
+
+        dnl WX_ARG_WITH_YESNOAUTO cannot be used for --with-wxversion since it's an option
+        dnl which accepts the "auto|2.6|2.7|2.8|2.9|3.0" etc etc values
+        ifelse(index([$1], [wxversion]), [-1],,
+               [
+                AC_ARG_WITH([wxversion],
+                            AC_HELP_STRING([--with-wxversion],
+                                           [Build against a specific version of wxWidgets (default is auto)]),
+                            [], [withval="auto"])
+
+                dnl Show a message to the user about this option
+                AC_MSG_CHECKING([for the --with-wxversion option])
+                if test "$withval" = "auto" ; then
+                    AC_MSG_RESULT([will be automatically detected])
+                    WX_RELEASE="auto"
+                else
+
+                    wx_requested_major_version=`echo $withval | \
+                        sed 's/\([[0-9]]*\).\([[0-9]]*\).*/\1/'`
+                    wx_requested_minor_version=`echo $withval | \
+                        sed 's/\([[0-9]]*\).\([[0-9]]*\).*/\2/'`
+
+                    dnl both vars above must be exactly 1 digit
+                    if test "${#wx_requested_major_version}" != "1" -o \
+                            "${#wx_requested_minor_version}" != "1" ; then
+                        AC_MSG_ERROR([
+    Unrecognized option value (allowed values: auto, 2.6, 2.7, 2.8, 2.9, 3.0)
+                        ])
+                    fi
+
+                    WX_RELEASE="$wx_requested_major_version"".""$wx_requested_minor_version"
+                    AC_MSG_RESULT([$WX_RELEASE])
+                fi
+               ])
+
+        if test "$WX_DEBUG_CONFIGURE" = "1"; then
+            echo "[[dbg]] DEBUG: $DEBUG, WX_DEBUG: $WX_DEBUG"
+            echo "[[dbg]] UNICODE: $UNICODE, WX_UNICODE: $WX_UNICODE"
+            echo "[[dbg]] SHARED: $SHARED, WX_SHARED: $WX_SHARED"
+            echo "[[dbg]] TOOLKIT: $TOOLKIT, WX_TOOLKIT: $WX_TOOLKIT"
+            echo "[[dbg]] VERSION: $VERSION, WX_RELEASE: $WX_RELEASE"
+        fi
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:713: -1- AC_DEFUN([WX_CONVERT_STANDARD_OPTIONS_TO_WXCONFIG_FLAGS], [
+        if test "$WX_SHARED" = "1" ; then
+            WXCONFIG_FLAGS="--static=no "
+        elif test "$WX_SHARED" = "0" ; then
+            WXCONFIG_FLAGS="--static=yes "
+        fi
+
+        if test "$WX_DEBUG" = "1" ; then
+            WXCONFIG_FLAGS="$WXCONFIG_FLAGS""--debug=yes "
+        elif test "$WX_DEBUG" = "0" ; then
+            WXCONFIG_FLAGS="$WXCONFIG_FLAGS""--debug=no "
+        fi
+
+        dnl The user should have set WX_UNICODE=UNICODE
+        if test "$WX_UNICODE" = "1" ; then
+            WXCONFIG_FLAGS="$WXCONFIG_FLAGS""--unicode=yes "
+        elif test "$WX_UNICODE" = "0" ; then
+            WXCONFIG_FLAGS="$WXCONFIG_FLAGS""--unicode=no "
+        fi
+
+        if test "$TOOLKIT" != "auto" ; then
+            WXCONFIG_FLAGS="$WXCONFIG_FLAGS""--toolkit=$TOOLKIT "
+        fi
+
+        if test "$WX_RELEASE" != "auto" ; then
+            WXCONFIG_FLAGS="$WXCONFIG_FLAGS""--version=$WX_RELEASE "
+        fi
+
+        dnl strip out the last space of the string
+        WXCONFIG_FLAGS=${WXCONFIG_FLAGS% }
+
+        if test "$WX_DEBUG_CONFIGURE" = "1"; then
+            echo "[[dbg]] WXCONFIG_FLAGS: $WXCONFIG_FLAGS"
+        fi
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:759: -1- AC_DEFUN([_WX_SELECTEDCONFIG_CHECKFOR], [
+        if test "$$1" = "auto" ; then
+
+            dnl The user does not have particular preferences for this option;
+            dnl so we will detect the wxWidgets relative build setting and use it
+            AC_MSG_CHECKING([$3])
+
+            dnl set WX_$1 variable to 1 if the $WX_SELECTEDCONFIG contains the $2
+            dnl string or to 0 otherwise.
+            dnl NOTE: 'expr match STRING REGEXP' cannot be used since on Mac it
+            dnl       doesn't work; we use 'expr STRING : REGEXP' instead
+            WX_$1=$(expr "$WX_SELECTEDCONFIG" : ".*$2.*")
+
+            if test "$WX_$1" != "0"; then
+                WX_$1=1
+                AC_MSG_RESULT([yes])
+                ifelse([$4], , :, [$4])
+            else
+                WX_$1=0
+                AC_MSG_RESULT([no])
+                ifelse([$5], , :, [$5])
+            fi
+        else
+
+            dnl Use the setting given by the user
+            WX_$1=$$1
+        fi
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:804: -1- AC_DEFUN([WX_DETECT_STANDARD_OPTION_VALUES], [
+        dnl IMPORTANT: WX_VERSION contains all three major.minor.micro digits,
+        dnl            while WX_RELEASE only the major.minor ones.
+        WX_RELEASE="$WX_VERSION_MAJOR""$WX_VERSION_MINOR"
+        if test $WX_RELEASE -lt 26 ; then
+
+            AC_MSG_ERROR([
+    Cannot detect the wxWidgets configuration for the selected wxWidgets build
+    since its version is $WX_VERSION < 2.6.0; please install a newer
+    version of wxWidgets.
+                         ])
+        fi
+
+        dnl The wx-config we are using understands the "--selected_config"
+        dnl option which returns an easy-parseable string !
+        WX_SELECTEDCONFIG=$($WX_CONFIG_WITH_ARGS --selected_config)
+
+        if test "$WX_DEBUG_CONFIGURE" = "1"; then
+            echo "[[dbg]] Using wx-config --selected-config"
+            echo "[[dbg]] WX_SELECTEDCONFIG: $WX_SELECTEDCONFIG"
+        fi
+
+
+        dnl we could test directly for WX_SHARED with a line like:
+        dnl    _WX_SELECTEDCONFIG_CHECKFOR([SHARED], [shared],
+        dnl                                [if wxWidgets was built in SHARED mode])
+        dnl but wx-config --selected-config DOES NOT outputs the 'shared'
+        dnl word when wx was built in shared mode; it rather outputs the
+        dnl 'static' word when built in static mode.
+        if test $WX_SHARED = "1"; then
+            STATIC=0
+        elif test $WX_SHARED = "0"; then
+            STATIC=1
+        elif test $WX_SHARED = "auto"; then
+            STATIC="auto"
+        fi
+
+        dnl Now set the WX_UNICODE, WX_DEBUG, WX_STATIC variables
+        _WX_SELECTEDCONFIG_CHECKFOR([UNICODE], [unicode],
+                                    [if wxWidgets was built with UNICODE enabled])
+        _WX_SELECTEDCONFIG_CHECKFOR([DEBUG], [debug],
+                                    [if wxWidgets was built in DEBUG mode])
+        _WX_SELECTEDCONFIG_CHECKFOR([STATIC], [static],
+                                    [if wxWidgets was built in STATIC mode])
+
+        dnl init WX_SHARED from WX_STATIC
+        if test "$WX_STATIC" != "0"; then
+            WX_SHARED=0
+        else
+            WX_SHARED=1
+        fi
+
+        AC_SUBST(WX_UNICODE)
+        AC_SUBST(WX_DEBUG)
+        AC_SUBST(WX_SHARED)
+
+        dnl detect the WX_PORT to use
+        if test "$TOOLKIT" = "auto" ; then
+
+            dnl The user does not have particular preferences for this option;
+            dnl so we will detect the wxWidgets relative build setting and use it
+            AC_MSG_CHECKING([which wxWidgets toolkit was selected])
+
+            WX_GTKPORT1=$(expr "$WX_SELECTEDCONFIG" : ".*gtk1.*")
+            WX_GTKPORT2=$(expr "$WX_SELECTEDCONFIG" : ".*gtk2.*")
+            WX_MSWPORT=$(expr "$WX_SELECTEDCONFIG" : ".*msw.*")
+            WX_MOTIFPORT=$(expr "$WX_SELECTEDCONFIG" : ".*motif.*")
+            WX_OSXCOCOAPORT=$(expr "$WX_SELECTEDCONFIG" : ".*osx_cocoa.*")
+            WX_OSXCARBONPORT=$(expr "$WX_SELECTEDCONFIG" : ".*osx_carbon.*")
+            WX_X11PORT=$(expr "$WX_SELECTEDCONFIG" : ".*x11.*")
+            WX_MGLPORT=$(expr "$WX_SELECTEDCONFIG" : ".*mgl.*")
+            WX_DFBPORT=$(expr "$WX_SELECTEDCONFIG" : ".*dfb.*")
+
+            WX_PORT="unknown"
+            if test "$WX_GTKPORT1" != "0"; then WX_PORT="gtk1"; fi
+            if test "$WX_GTKPORT2" != "0"; then WX_PORT="gtk2"; fi
+            if test "$WX_MSWPORT" != "0"; then WX_PORT="msw"; fi
+            if test "$WX_MOTIFPORT" != "0"; then WX_PORT="motif"; fi
+            if test "$WX_OSXCOCOAPORT" != "0"; then WX_PORT="osx_cocoa"; fi
+            if test "$WX_OSXCARBONPORT" != "0"; then WX_PORT="osx_carbon"; fi
+            if test "$WX_X11PORT" != "0"; then WX_PORT="x11"; fi
+            if test "$WX_MGLPORT" != "0"; then WX_PORT="mgl"; fi
+            if test "$WX_DFBPORT" != "0"; then WX_PORT="dfb"; fi
+
+            dnl NOTE: backward-compatible check for wx2.8; in wx2.9 the mac
+            dnl       ports are called 'osx_cocoa' and 'osx_carbon' (see above)
+            WX_MACPORT=$(expr "$WX_SELECTEDCONFIG" : ".*mac.*")
+            if test "$WX_MACPORT" != "0"; then WX_PORT="mac"; fi
+
+            dnl check at least one of the WX_*PORT has been set !
+
+            if test "$WX_PORT" = "unknown" ; then
+                AC_MSG_ERROR([
+        Cannot detect the currently installed wxWidgets port !
+        Please check your 'wx-config --cxxflags'...
+                            ])
+            fi
+
+            AC_MSG_RESULT([$WX_PORT])
+        else
+
+            dnl Use the setting given by the user
+            if test -z "$TOOLKIT" ; then
+                WX_PORT=$TOOLKIT
+            else
+                dnl try with PORT
+                WX_PORT=$PORT
+            fi
+        fi
+
+        AC_SUBST(WX_PORT)
+
+        if test "$WX_DEBUG_CONFIGURE" = "1"; then
+            echo "[[dbg]] Values of all WX_* options after final detection:"
+            echo "[[dbg]] WX_DEBUG: $WX_DEBUG"
+            echo "[[dbg]] WX_UNICODE: $WX_UNICODE"
+            echo "[[dbg]] WX_SHARED: $WX_SHARED"
+            echo "[[dbg]] WX_RELEASE: $WX_RELEASE"
+            echo "[[dbg]] WX_PORT: $WX_PORT"
+        fi
+
+        dnl Avoid problem described in the WX_STANDARD_OPTIONS which happens when
+        dnl the user gives the options:
+        dnl      ./configure --enable-shared --without-wxshared
+        dnl or just do
+        dnl      ./configure --enable-shared
+        dnl but there is only a static build of wxWidgets available.
+        if test "$WX_SHARED" = "0" -a "$SHARED" = "1"; then
+            AC_MSG_ERROR([
+    Cannot build shared library against a static build of wxWidgets !
+    This error happens because the wxWidgets build which was selected
+    has been detected as static while you asked to build $PACKAGE_NAME
+    as shared library and this is not possible.
+    Use the '--disable-shared' option to build $PACKAGE_NAME
+    as static library or '--with-wxshared' to use wxWidgets as shared library.
+                         ])
+        fi
+
+        dnl now we can finally update the DEBUG,UNICODE,SHARED options
+        dnl to their final values if they were set to 'auto'
+        if test "$DEBUG" = "auto"; then
+            DEBUG=$WX_DEBUG
+        fi
+        if test "$UNICODE" = "auto"; then
+            UNICODE=$WX_UNICODE
+        fi
+        if test "$SHARED" = "auto"; then
+            SHARED=$WX_SHARED
+        fi
+        if test "$TOOLKIT" = "auto"; then
+            TOOLKIT=$WX_PORT
+        fi
+
+        dnl in case the user needs a BUILD=debug/release var...
+        if test "$DEBUG" = "1"; then
+            BUILD="debug"
+        elif test "$DEBUG" = "0" -o "$DEBUG" = ""; then
+            BUILD="release"
+        fi
+
+        dnl respect the DEBUG variable adding the optimize/debug flags
+        dnl NOTE: the CXXFLAGS are merged together with the CPPFLAGS so we
+        dnl       don't need to set them, too
+        if test "$DEBUG" = "1"; then
+            CXXFLAGS="$CXXFLAGS -g -O0"
+            CFLAGS="$CFLAGS -g -O0"
+        else
+            CXXFLAGS="$CXXFLAGS -O2"
+            CFLAGS="$CFLAGS -O2"
+        fi
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:989: -1- AC_DEFUN([WX_BOOLOPT_SUMMARY], [
+        if test "x$$1" = "x1" ; then
+            echo $2
+        elif test "x$$1" = "x0" ; then
+            echo $3
+        else
+            echo "$1 is $$1"
+        fi
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:1006: -1- AC_DEFUN([WX_STANDARD_OPTIONS_SUMMARY_MSG], [
+        echo
+        echo "  The wxWidgets build which will be used by $PACKAGE_NAME $PACKAGE_VERSION"
+        echo "  has the following settings:"
+        WX_BOOLOPT_SUMMARY([WX_DEBUG],   ["  - DEBUG build"],  ["  - RELEASE build"])
+        WX_BOOLOPT_SUMMARY([WX_UNICODE], ["  - UNICODE mode"], ["  - ANSI mode"])
+        WX_BOOLOPT_SUMMARY([WX_SHARED],  ["  - SHARED mode"],  ["  - STATIC mode"])
+        echo "  - VERSION: $WX_VERSION"
+        echo "  - PORT: $WX_PORT"
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:1033: -1- AC_DEFUN([WX_STANDARD_OPTIONS_SUMMARY_MSG_BEGIN], [
+        echo
+        echo " ----------------------------------------------------------------"
+        echo "  Configuration for $PACKAGE_NAME $PACKAGE_VERSION successfully completed."
+        echo "  Summary of main configuration settings for $PACKAGE_NAME:"
+        WX_BOOLOPT_SUMMARY([DEBUG], ["  - DEBUG build"], ["  - RELEASE build"])
+        WX_BOOLOPT_SUMMARY([UNICODE], ["  - UNICODE mode"], ["  - ANSI mode"])
+        WX_BOOLOPT_SUMMARY([SHARED], ["  - SHARED mode"], ["  - STATIC mode"])
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:1044: -1- AC_DEFUN([WX_STANDARD_OPTIONS_SUMMARY_MSG_END], [
+        WX_STANDARD_OPTIONS_SUMMARY_MSG
+        echo
+        echo "  Now, just run make."
+        echo " ----------------------------------------------------------------"
+        echo
+    ])
+m4trace:../../../build/autoconf/wxwin.m4:1058: -1- AC_DEFUN([AM_OPTIONS_WXCONFIG], [WX_CONFIG_OPTIONS])
+m4trace:../../../build/autoconf/wxwin.m4:1059: -1- AC_DEFUN([AM_PATH_WXCONFIG], [
+    WX_CONFIG_CHECK([$1],[$2],[$3],[$4],[$5])
+])
+m4trace:configure.ac:28: -1- AC_CANONICAL_SYSTEM
+m4trace:configure.ac:28: -1- _m4_warn([obsolete], [The macro `AC_CANONICAL_SYSTEM' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:1819: AC_CANONICAL_SYSTEM is expanded from...
+../../../build/autoconf/wxcode.m4:21: WXCODE_INIT is expanded from...
+configure.ac:28: the top level])
+m4trace:configure.ac:28: -1- AC_CANONICAL_TARGET
+m4trace:configure.ac:28: -1- AC_CANONICAL_HOST
+m4trace:configure.ac:28: -1- AC_CANONICAL_BUILD
+m4trace:configure.ac:28: -1- AC_REQUIRE_AUX_FILE([config.sub])
+m4trace:configure.ac:28: -1- AC_REQUIRE_AUX_FILE([config.guess])
+m4trace:configure.ac:28: -1- AC_SUBST([build], [$ac_cv_build])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([build])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^build$])
+m4trace:configure.ac:28: -1- AC_SUBST([build_cpu], [$[1]])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([build_cpu])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^build_cpu$])
+m4trace:configure.ac:28: -1- AC_SUBST([build_vendor], [$[2]])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([build_vendor])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^build_vendor$])
+m4trace:configure.ac:28: -1- AC_SUBST([build_os])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([build_os])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^build_os$])
+m4trace:configure.ac:28: -1- AC_SUBST([host], [$ac_cv_host])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([host])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^host$])
+m4trace:configure.ac:28: -1- AC_SUBST([host_cpu], [$[1]])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([host_cpu])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^host_cpu$])
+m4trace:configure.ac:28: -1- AC_SUBST([host_vendor], [$[2]])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([host_vendor])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^host_vendor$])
+m4trace:configure.ac:28: -1- AC_SUBST([host_os])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([host_os])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^host_os$])
+m4trace:configure.ac:28: -1- AC_SUBST([target], [$ac_cv_target])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([target])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^target$])
+m4trace:configure.ac:28: -1- AC_SUBST([target_cpu], [$[1]])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([target_cpu])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^target_cpu$])
+m4trace:configure.ac:28: -1- AC_SUBST([target_vendor], [$[2]])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([target_vendor])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^target_vendor$])
+m4trace:configure.ac:28: -1- AC_SUBST([target_os])
+m4trace:configure.ac:28: -1- AC_SUBST_TRACE([target_os])
+m4trace:configure.ac:28: -1- m4_pattern_allow([^target_os$])
+m4trace:configure.ac:57: -1- WXCODE_OPTIONS([debug,unicode,shared,toolkit,wxshared,wxversion])
+m4trace:configure.ac:57: -1- WX_CONFIG_OPTIONS
+m4trace:configure.ac:57: -1- WX_STANDARD_OPTIONS([debug,unicode,shared,toolkit,wxshared,wxversion])
+m4trace:configure.ac:57: -1- WX_ARG_ENABLE_YESNOAUTO([debug], [DEBUG], [Build in debug mode], [auto])
+m4trace:configure.ac:57: -2- _m4_warn([obsolete], [The macro `AC_HELP_STRING' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:209: AC_HELP_STRING is expanded from...
+../../../build/autoconf/wxwin.m4:507: WX_ARG_ENABLE_YESNOAUTO is expanded from...
+../../../build/autoconf/wxwin.m4:572: WX_STANDARD_OPTIONS is expanded from...
+../../../build/autoconf/wxcode.m4:83: WXCODE_OPTIONS is expanded from...
+configure.ac:57: the top level])
+m4trace:configure.ac:57: -1- WX_ARG_ENABLE_YESNOAUTO([unicode], [UNICODE], [Build in Unicode mode], [auto])
+m4trace:configure.ac:57: -2- _m4_warn([obsolete], [The macro `AC_HELP_STRING' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:209: AC_HELP_STRING is expanded from...
+../../../build/autoconf/wxwin.m4:507: WX_ARG_ENABLE_YESNOAUTO is expanded from...
+../../../build/autoconf/wxwin.m4:572: WX_STANDARD_OPTIONS is expanded from...
+../../../build/autoconf/wxcode.m4:83: WXCODE_OPTIONS is expanded from...
+configure.ac:57: the top level])
+m4trace:configure.ac:57: -1- WX_ARG_ENABLE_YESNOAUTO([shared], [SHARED], [Build as shared library], [auto])
+m4trace:configure.ac:57: -2- _m4_warn([obsolete], [The macro `AC_HELP_STRING' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:209: AC_HELP_STRING is expanded from...
+../../../build/autoconf/wxwin.m4:507: WX_ARG_ENABLE_YESNOAUTO is expanded from...
+../../../build/autoconf/wxwin.m4:572: WX_STANDARD_OPTIONS is expanded from...
+../../../build/autoconf/wxcode.m4:83: WXCODE_OPTIONS is expanded from...
+configure.ac:57: the top level])
+m4trace:configure.ac:57: -2- _m4_warn([obsolete], [The macro `AC_HELP_STRING' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:209: AC_HELP_STRING is expanded from...
+../../../build/autoconf/wxwin.m4:572: WX_STANDARD_OPTIONS is expanded from...
+../../../build/autoconf/wxcode.m4:83: WXCODE_OPTIONS is expanded from...
+configure.ac:57: the top level])
+m4trace:configure.ac:57: -1- WX_ARG_WITH_YESNOAUTO([wxshared], [WX_SHARED], [Force building against a shared build of wxWidgets, even if --disable-shared is given], [auto], [], [1])
+m4trace:configure.ac:57: -2- _m4_warn([obsolete], [The macro `AC_HELP_STRING' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:209: AC_HELP_STRING is expanded from...
+../../../build/autoconf/wxwin.m4:531: WX_ARG_WITH_YESNOAUTO is expanded from...
+../../../build/autoconf/wxwin.m4:572: WX_STANDARD_OPTIONS is expanded from...
+../../../build/autoconf/wxcode.m4:83: WXCODE_OPTIONS is expanded from...
+configure.ac:57: the top level])
+m4trace:configure.ac:57: -2- _m4_warn([obsolete], [The macro `AC_HELP_STRING' is obsolete.
+You should run autoupdate.], [../../lib/autoconf/general.m4:209: AC_HELP_STRING is expanded from...
+../../../build/autoconf/wxwin.m4:572: WX_STANDARD_OPTIONS is expanded from...
+../../../build/autoconf/wxcode.m4:83: WXCODE_OPTIONS is expanded from...
+configure.ac:57: the top level])
+m4trace:configure.ac:80: -1- WXCODE_CHECKS([2.8.0], [core,base])
+m4trace:configure.ac:80: -1- WX_CONVERT_STANDARD_OPTIONS_TO_WXCONFIG_FLAGS
+m4trace:configure.ac:80: -1- WX_CONFIG_CHECK([2.8.0], [], [], [core,base], [$WXCONFIG_FLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_CONFIG_PATH])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_CONFIG_PATH])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_CONFIG_PATH$])
+m4trace:configure.ac:80: -1- _WX_PRIVATE_CHECK_VERSION([$wx_requested_major_version], [$wx_requested_minor_version], [$wx_requested_micro_version])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_CPPFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_CPPFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_CPPFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_CFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_CFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_CFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_CXXFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_CXXFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_CXXFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_CFLAGS_ONLY])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_CFLAGS_ONLY])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_CFLAGS_ONLY$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_CXXFLAGS_ONLY])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_CXXFLAGS_ONLY])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_CXXFLAGS_ONLY$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_LIBS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_LIBS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_LIBS$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_LIBS_STATIC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_LIBS_STATIC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_LIBS_STATIC$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_VERSION])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_VERSION])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_VERSION$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_RESCOMP])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_RESCOMP])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_RESCOMP$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_VERSION_MAJOR])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_VERSION_MAJOR])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_VERSION_MAJOR$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_VERSION_MINOR])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_VERSION_MINOR])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_VERSION_MINOR$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_VERSION_MICRO])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_VERSION_MICRO])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_VERSION_MICRO$])
+m4trace:configure.ac:80: -1- WX_DETECT_STANDARD_OPTION_VALUES
+m4trace:configure.ac:80: -1- _WX_SELECTEDCONFIG_CHECKFOR([UNICODE], [unicode], [if wxWidgets was built with UNICODE enabled])
+m4trace:configure.ac:80: -1- _WX_SELECTEDCONFIG_CHECKFOR([DEBUG], [debug], [if wxWidgets was built in DEBUG mode])
+m4trace:configure.ac:80: -1- _WX_SELECTEDCONFIG_CHECKFOR([STATIC], [static], [if wxWidgets was built in STATIC mode])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_UNICODE])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_UNICODE])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_UNICODE$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_DEBUG])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_DEBUG])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_DEBUG$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_SHARED])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_SHARED])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_SHARED$])
+m4trace:configure.ac:80: -1- AC_SUBST([WX_PORT])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([WX_PORT])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^WX_PORT$])
+m4trace:configure.ac:80: -1- AC_SUBST([CC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:80: -1- AC_SUBST([CFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([LDFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([LDFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^LDFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([LIBS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([LIBS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^LIBS$])
+m4trace:configure.ac:80: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CPPFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CPPFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([CC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:80: -1- AC_SUBST([CC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:80: -1- AC_SUBST([CC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:80: -1- AC_SUBST([CC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CC$])
+m4trace:configure.ac:80: -1- AC_SUBST([ac_ct_CC])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([ac_ct_CC])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^ac_ct_CC$])
+m4trace:configure.ac:80: -1- AC_SUBST([EXEEXT], [$ac_cv_exeext])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([EXEEXT])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^EXEEXT$])
+m4trace:configure.ac:80: -1- AC_SUBST([OBJEXT], [$ac_cv_objext])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([OBJEXT])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^OBJEXT$])
+m4trace:configure.ac:80: -1- AC_SUBST([CXX])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CXX])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CXX$])
+m4trace:configure.ac:80: -1- AC_SUBST([CXXFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CXXFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CXXFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([LDFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([LDFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^LDFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([LIBS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([LIBS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^LIBS$])
+m4trace:configure.ac:80: -1- AC_SUBST([CPPFLAGS])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CPPFLAGS])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CPPFLAGS$])
+m4trace:configure.ac:80: -1- AC_SUBST([CXX])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([CXX])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^CXX$])
+m4trace:configure.ac:80: -1- AC_SUBST([ac_ct_CXX])
+m4trace:configure.ac:80: -1- AC_SUBST_TRACE([ac_ct_CXX])
+m4trace:configure.ac:80: -1- m4_pattern_allow([^ac_ct_CXX$])
+m4trace:configure.ac:88: -1- WXCODE_END
+m4trace:configure.ac:88: -1- WXCODE_END_PART1
+m4trace:configure.ac:88: -1- AC_CONFIG_FILES([Makefile])
+m4trace:configure.ac:88: -1- AC_SUBST([LIB@&t@OBJS], [$ac_libobjs])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([LIB@&t@OBJS])
+m4trace:configure.ac:88: -1- m4_pattern_allow([^LIB@&t@OBJS$])
+m4trace:configure.ac:88: -1- AC_SUBST([LTLIBOBJS], [$ac_ltlibobjs])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([LTLIBOBJS])
+m4trace:configure.ac:88: -1- m4_pattern_allow([^LTLIBOBJS$])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([top_builddir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([top_build_prefix])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([srcdir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([abs_srcdir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([top_srcdir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([abs_top_srcdir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([builddir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([abs_builddir])
+m4trace:configure.ac:88: -1- AC_SUBST_TRACE([abs_top_builddir])
+m4trace:configure.ac:88: -1- WX_STANDARD_OPTIONS_SUMMARY_MSG_BEGIN
+m4trace:configure.ac:88: -1- WX_BOOLOPT_SUMMARY([DEBUG], ["  - DEBUG build"], ["  - RELEASE build"])
+m4trace:configure.ac:88: -1- WX_BOOLOPT_SUMMARY([UNICODE], ["  - UNICODE mode"], ["  - ANSI mode"])
+m4trace:configure.ac:88: -1- WX_BOOLOPT_SUMMARY([SHARED], ["  - SHARED mode"], ["  - STATIC mode"])
+m4trace:configure.ac:88: -1- WXCODE_END_PART2
+m4trace:configure.ac:88: -1- WX_STANDARD_OPTIONS_SUMMARY_MSG_END
+m4trace:configure.ac:88: -1- WX_STANDARD_OPTIONS_SUMMARY_MSG
+m4trace:configure.ac:88: -1- WX_BOOLOPT_SUMMARY([WX_DEBUG], ["  - DEBUG build"], ["  - RELEASE build"])
+m4trace:configure.ac:88: -1- WX_BOOLOPT_SUMMARY([WX_UNICODE], ["  - UNICODE mode"], ["  - ANSI mode"])
+m4trace:configure.ac:88: -1- WX_BOOLOPT_SUMMARY([WX_SHARED], ["  - SHARED mode"], ["  - STATIC mode"])

@@ -12,7 +12,7 @@
 
 IMPLEMENT_CLASS(XYLineRenderer, XYRenderer)
 
-void TruncHoriz(Axis *axis, double &x, double &y, double x1, double y1)
+void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1)
 {
 	if (!axis->IsVisible(x)) {
 		double p = axis->BoundValue(x);
@@ -21,7 +21,7 @@ void TruncHoriz(Axis *axis, double &x, double &y, double x1, double y1)
 	}
 }
 
-void TruncVert(Axis *axis, double &x, double &y, double x1, double y1)
+void ClipVert(Axis *axis, double &x, double &y, double x1, double y1)
 {
 	if (!axis->IsVisible(x)) {
 		double p = axis->BoundValue(x);
@@ -57,10 +57,10 @@ void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, 
 				continue;
 			}
 
-			TruncHoriz(horizAxis, x0, y0, x1, y1);
-			TruncHoriz(horizAxis, x1, y1, x0, y0);
-			TruncVert(vertAxis, x0, y0, x1, y1);
-			TruncVert(vertAxis, x1, y1, x0, y0);
+			ClipHoriz(horizAxis, x0, y0, x1, y1);
+			ClipHoriz(horizAxis, x1, y1, x0, y0);
+			ClipVert(vertAxis, x0, y0, x1, y1);
+			ClipVert(vertAxis, x1, y1, x0, y0);
 
 			// translate to graphics coordinates.
 			wxCoord xg0, yg0;
@@ -87,9 +87,9 @@ void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wx
 	if (m_drawSymbols) {
 		Symbol *symbol = GetSerieSymbol(serie);
 
-		symbol->SetColor(GetSerieColor(serie));
-		symbol->Draw(dc, x0, y0);
-		symbol->Draw(dc, x1, y1);
+		wxColour color = GetSerieColor(serie);
+		symbol->Draw(dc, x0, y0, color);
+		symbol->Draw(dc, x1, y1, color);
 	}
 }
 

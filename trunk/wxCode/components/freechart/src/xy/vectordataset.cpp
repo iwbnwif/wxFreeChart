@@ -18,17 +18,27 @@ VectorDataset::~VectorDataset()
 {
 }
 
-double VectorDataset::GetX(int index)
+double VectorDataset::GetX(int index, int WXUNUSED(serie))
 {
 	return index + 1;
 }
 
-double VectorDataset::GetY(int index)
+double VectorDataset::GetY(int index, int WXUNUSED(serie))
 {
 	return values[index];
 }
 
-int VectorDataset::GetCount()
+int VectorDataset::GetCount(int WXUNUSED(serie))
 {
 	return (int) values.size();
+}
+
+int VectorDataset::GetSerieCount()
+{
+	return 1;
+}
+
+wxString VectorDataset::GetSerieName(int serie)
+{
+	return wxEmptyString;
 }

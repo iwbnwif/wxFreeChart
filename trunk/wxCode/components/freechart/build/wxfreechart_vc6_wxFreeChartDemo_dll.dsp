@@ -476,6 +476,10 @@ SOURCE=..\sample\bubbledemos.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\sample\combinedaxisdemos.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\sample\demo.cpp
 # End Source File
 # Begin Source File
@@ -489,6 +493,10 @@ SOURCE=..\sample\ganttdemos.cpp
 # Begin Source File
 
 SOURCE=..\sample\ohlcdemos.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\sample\timeseriesdemos.cpp
 # End Source File
 # Begin Source File
 

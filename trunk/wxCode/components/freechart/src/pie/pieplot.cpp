@@ -37,39 +37,40 @@ void EllipticEgde(wxCoord x, wxCoord y, wxCoord width, wxCoord height, double an
 
 PiePlot::PiePlot()
 {
-	dataset = NULL;
+	m_dataset = NULL;
 
-	use3DView = false;
-	ellipticAspect = 1.0f;
+	m_use3DView = false;
+	m_ellipticAspect = 1.0f;
 	//colorScheme = defaultColorScheme;
-	outlinePen = *wxBLACK_PEN;
-	labelsFont = *wxSMALL_FONT;
+	m_outlinePen = *wxBLACK_PEN;
+	m_labelsFont = *wxSMALL_FONT;
 
-	serie = 0; // default behaviour - use first serie
+	m_serie = 0; // default behaviour - use first serie
 }
 
 PiePlot::~PiePlot()
 {
-	SAFE_REMOVE_OBSERVER(this, dataset);
-	SAFE_UNREF(dataset);
+	SAFE_REMOVE_OBSERVER(this, m_dataset);
+	SAFE_UNREF(m_dataset);
 }
 
-void PiePlot::SetDataset(CategoryDataset *_dataset)
+void PiePlot::SetDataset(CategoryDataset *dataset)
 {
-	SAFE_REPLACE_OBSERVER(this, dataset, _dataset);
-	SAFE_REPLACE_UNREF(dataset, _dataset);
+	SAFE_REPLACE_OBSERVER(this, m_dataset, dataset);
+	SAFE_REPLACE_UNREF(m_dataset, dataset);
 
 	FirePlotNeedRedraw();
 }
 
-void PiePlot::SetColorScheme(ColorScheme *_colorScheme)
+void PiePlot::SetColorScheme(ColorScheme *colorScheme)
 {
-	colorScheme = *_colorScheme;
+	m_colorScheme = *colorScheme;
+	FirePlotNeedRedraw();
 }
 
 bool PiePlot::HasData()
 {
-	return dataset != NULL && dataset->GetSerieCount() >= serie;
+	return m_dataset != NULL && (m_dataset->GetSerieCount() >= m_serie);
 }
 
 void PiePlot::DatasetChanged(Dataset *dataset)
@@ -83,19 +84,19 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	//
 	double sum = 0;
 
-	for (int n = 0; n < dataset->GetCount(); n++) {
-		sum += dataset->GetValue(n, serie);
+	for (int n = 0; n < m_dataset->GetCount(); n++) {
+		sum += m_dataset->GetValue(n, m_serie);
 	}
 
 
 	int radHoriz = (int) (0.8 * wxMin(rc.width, rc.height));
-	int radVert  = (int) (radHoriz * ellipticAspect);
+	int radVert  = (int) (radHoriz * m_ellipticAspect);
 
 	wxCoord x0 = rc.x + (rc.width - radHoriz) / 2;
 	wxCoord y0 = rc.y + (rc.height - radVert) / 2;
 
-	if (use3DView) {
-		dc.SetPen(outlinePen);
+	if (m_use3DView) {
+		dc.SetPen(m_outlinePen);
 		dc.SetBrush(noBrush);
 		dc.DrawEllipticArc(x0, y0 + shift3D, radHoriz, radVert, -180, 0);
 		dc.DrawLine(x0, y0 + radVert / 2, x0, y0 + radVert / 2 + shift3D + 1);
@@ -116,19 +117,19 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 				dc.DrawLine(x1, y1, x2, y2);
 			}
 
-			if (n >= dataset->GetCount())
+			if (n >= m_dataset->GetCount())
 				break;
 
-			double v = dataset->GetValue(n, serie);
+			double v = m_dataset->GetValue(n, m_serie);
 			part += v / sum;
 		}
 	}
 
-	dc.SetPen(outlinePen);
+	dc.SetPen(m_outlinePen);
 	//dc.SetFont(labelsFont);
 	double part = 0;
-	for (int n = 0; n < dataset->GetCount(); n++) {
-		double v = dataset->GetValue(n, serie);
+	for (int n = 0; n < m_dataset->GetCount(); n++) {
+		double v = m_dataset->GetValue(n, m_serie);
 
 		double angle1 = 360 * part;
 
@@ -136,17 +137,17 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 
 		double angle2 = 360 * part;
 
-		dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(colorScheme.GetColor(n)));
+		dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(n)));
 
 		dc.DrawEllipticArc(x0, y0, radHoriz, radVert, angle1, angle2);
 	}
 
 	// draw edges
-	dc.SetPen(outlinePen);
+	dc.SetPen(m_outlinePen);
 	dc.SetBrush(noBrush);
 	part = 0;
-	for (int n = 0; n < dataset->GetCount(); n++) {
-		double v = dataset->GetValue(n, serie);
+	for (int n = 0; n < m_dataset->GetCount(); n++) {
+		double v = m_dataset->GetValue(n, m_serie);
 
 		double angle = 360 * part;
 
@@ -158,11 +159,11 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	}
 
 	// fill areas
-	if (use3DView) {
+	if (m_use3DView) {
 		double part = 0;
-		for (int n = 0; n < dataset->GetCount(); n++) {
+		for (int n = 0; n < m_dataset->GetCount(); n++) {
 			double angle = 360 * part;
-			double v = dataset->GetValue(n, serie);
+			double v = m_dataset->GetValue(n, m_serie);
 			part += v / sum;
 
 			double angle2 = 360 * part;
@@ -180,8 +181,8 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 
 				EllipticEgde(x0, y0, radHoriz, radVert, a, x1, y1);
 
-				dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(colorScheme.GetColor(n)));
-				dc.FloodFill(x1, y1 + shift3D / 2, outlinePen.GetColour(), wxFLOOD_BORDER);
+				dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(n)));
+				dc.FloodFill(x1, y1 + shift3D / 2, m_outlinePen.GetColour(), wxFLOOD_BORDER);
 			}
 		}
 	}

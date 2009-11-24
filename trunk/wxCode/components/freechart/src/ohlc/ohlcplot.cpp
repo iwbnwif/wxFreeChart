@@ -35,33 +35,50 @@ bool OHLCPlot::AcceptAxis(Axis *axis)
 
 bool OHLCPlot::AcceptDataset(Dataset *dataset)
 {
-	return (wxDynamicCast(dataset, OHLCDataset) != NULL);
+	return (wxDynamicCast(dataset, OHLCDataset) != NULL ||
+			wxDynamicCast(dataset, XYDataset) != NULL);
 }
 
 void OHLCPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
 	for (int nData = 0; nData < GetDatasetCount(); nData++) {
-		OHLCDataset *dataset = (OHLCDataset *) GetDataset(nData);
-		OHLCRenderer *renderer = dataset->GetRenderer();
-		wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
+		Dataset *dataset = GetDataset(nData);
 
-		Axis *vertAxis = GetDatasetVerticalAxis(dataset);
-		Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
-
-		wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
-		wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
-
-		for (int n = 0; n < dataset->GetCount(0); n++) {
-			OHLCItem *item = dataset->GetItem(n);
-
-			wxCoord open = vertAxis->ToGraphics(dc, rc.y, rc.height, item->open);
-			wxCoord high = vertAxis->ToGraphics(dc, rc.y, rc.height, item->high);
-			wxCoord low = vertAxis->ToGraphics(dc, rc.y, rc.height, item->low);
-			wxCoord close = vertAxis->ToGraphics(dc, rc.y, rc.height, item->close);
-
-			wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, n);//item->date);
-
-			renderer->DrawItem(dc, x, open, high, low, close);
+		OHLCDataset *ohlcDataset = wxDynamicCast(dataset, OHLCDataset);
+		if (ohlcDataset != NULL) {
+			DrawOHLCDataset(dc, rc, ohlcDataset);
 		}
+		else {
+			XYDataset *xyDataset = wxDynamicCast(dataset, XYDataset);
+			if (xyDataset != NULL) {
+				DrawXYDataset(dc, rc, xyDataset);
+			}
+		}
+	}
+}
+
+void OHLCPlot::DrawOHLCDataset(wxDC &dc, wxRect rc, OHLCDataset *dataset)
+{
+	OHLCRenderer *renderer = dataset->GetRenderer();
+	wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
+
+	Axis *vertAxis = GetDatasetVerticalAxis(dataset);
+	Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
+
+	wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
+	wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
+
+	// draw OHLC items
+	for (int n = 0; n < dataset->GetCount(); n++) {
+		OHLCItem *item = dataset->GetItem(n);
+
+		wxCoord open = vertAxis->ToGraphics(dc, rc.y, rc.height, item->open);
+		wxCoord high = vertAxis->ToGraphics(dc, rc.y, rc.height, item->high);
+		wxCoord low = vertAxis->ToGraphics(dc, rc.y, rc.height, item->low);
+		wxCoord close = vertAxis->ToGraphics(dc, rc.y, rc.height, item->close);
+
+		wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, n);//item->date);
+
+		renderer->DrawItem(dc, x, open, high, low, close);
 	}
 }

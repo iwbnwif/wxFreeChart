@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chartpanel.cpp
 // Purpose:
@@ -11,6 +10,10 @@
 
 #include <wx/chartpanel.h>
 #include <wx/dcbuffer.h>
+
+#if wxUSE_GRAPHICS_CONTEXT
+#include <wx/dcgraph.h>
+#endif /* wxUSE_GRAPHICS_CONTEXT */
 
 const int scrollPixelStep = 100;
 const int stepMult = 100;
@@ -34,15 +37,14 @@ BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
 	EVT_SCROLLWIN(wxChartPanel::OnScrollWin)
 END_EVENT_TABLE()
 
-wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &_size)
-: wxScrolledWindow(parent, id, pos, _size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
+wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &size)
+: wxScrolledWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
 {
 	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
 	EnableScrolling(false, false);
 
 	m_chart = NULL;
 
-	wxSize size = GetSize();
 	ResizeBackBitmap(size);
 
 	SetScrollRate(1, 1);
@@ -52,13 +54,13 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
 wxChartPanel::~wxChartPanel()
 {
 	SAFE_REMOVE_OBSERVER(this, m_chart);
-	SAFE_UNREF(m_chart);
+	wxDELETE(m_chart);
 }
 
 void wxChartPanel::SetChart(Chart *chart)
 {
 	SAFE_REPLACE_OBSERVER(this, m_chart, chart);
-	SAFE_REPLACE_UNREF(m_chart, chart);
+	wxREPLACE(m_chart, chart);
 
 	RecalcScrollbars();
 
@@ -158,6 +160,20 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 
 		axis->SetWindowPosition(winPos);
 	}
+	ev.Skip();
+}
+
+void wxChartPanel::ScrollAxis(Axis *axis, int d)
+{
+	double delta = (double) d / (double) stepMult;
+	double minValue, maxValue;
+
+	axis->GetDataBounds(minValue, maxValue);
+
+	double winPos = axis->GetWindowPosition();
+	winPos += minValue + delta;
+
+	axis->SetWindowPosition(winPos);
 }
 
 void wxChartPanel::RedrawBackBitmap()

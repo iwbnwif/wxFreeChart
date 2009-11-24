@@ -11,13 +11,17 @@
 #ifndef OHLCPLOT_H_
 #define OHLCPLOT_H_
 
-#include <wx/axisplot.h>
+#include <wx/xy/xyplot.h>
 #include <wx/ohlc/ohlcdataset.h>
 
 /**
  * Open-High-Low-Close plot.
+ *
+ * TODO:
+ *  - technical indicators support
+ *  - grapical objects support, like levels, fibo-retracements, fractals, etc.
  */
-class WXDLLIMPEXP_FREECHART OHLCPlot : public AxisPlot
+class WXDLLIMPEXP_FREECHART OHLCPlot : public XYPlot
 {
 public:
 	OHLCPlot();
@@ -29,6 +33,14 @@ protected:
 	virtual bool AcceptDataset(Dataset *dataset);
 
 	virtual void DrawDatasets(wxDC &dc, wxRect rc);
+
+	/**
+	 * Draw single OHLC dataset.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 * @param dataset OHLC dataset to draw
+	 */
+	virtual void DrawOHLCDataset(wxDC &dc, wxRect rc, OHLCDataset *dataset);
 };
 
 #endif /*OHLCPLOT_H_*/

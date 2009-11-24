@@ -16,14 +16,18 @@
 #include <wx/dataset.h>
 #include <wx/areadraw.h>
 
-const wxCoord labelsSpacing = 2;
-
 /**
  * Legend.
+ * Performs legend drawing.
  */
 class WXDLLIMPEXP_FREECHART Legend
 {
 public:
+	/**
+	 * Space between serie labels.
+	 */
+	const static wxCoord labelsSpacing;
+
 	/**
 	 * Constructs new legend.
 	 * @param vertPosition vertical position, can be wxTOP, wxCENTER, wxBOTTOM
@@ -36,13 +40,27 @@ public:
 
 	virtual ~Legend();
 
+	/**
+	 * Draw legend.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 * @param datasets datasets array
+	 */
 	void Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets);
 
+	/**
+	 * Returns legend vertical position.
+	 * @return legend vertical position
+	 */
 	int GetVertPosition()
 	{
 		return m_vertPosition;
 	}
 
+	/**
+	 * Returns legend horizontal position.
+	 * @return legend horizontal position
+	 */
 	int GetHorizPosition()
 	{
 		return m_horizPosition;

@@ -169,10 +169,12 @@ WXFREECHARTDEMO_LIB_CXXFLAGS = /MD$(____wx_5) /DWIN32 $(____WX_SHARED) \
 WXFREECHARTDEMO_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bardemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bubbledemos.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_combinedaxisdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_demo.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_democollection.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ganttdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ohlcdemos.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_timeseriesdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_xydemos.obj
 WXFREECHARTDEMO_DLL_CXXFLAGS = /MD$(____wx_5) /DWIN32 $(____WX_SHARED) \
 	$(__WXUNICODE_DEFINE_p) $(__WXDEBUG_DEFINE_p) /D__WXMSW__ \
@@ -182,10 +184,12 @@ WXFREECHARTDEMO_DLL_CXXFLAGS = /MD$(____wx_5) /DWIN32 $(____WX_SHARED) \
 WXFREECHARTDEMO_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bardemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bubbledemos.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_combinedaxisdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_demo.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_democollection.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ganttdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ohlcdemos.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_timeseriesdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_xydemos.obj
 
 ### Conditionally set variables: ###
@@ -651,6 +655,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bardemos.obj:
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_bubbledemos.obj: ..\sample\bubbledemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\bubbledemos.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_combinedaxisdemos.obj: ..\sample\combinedaxisdemos.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\combinedaxisdemos.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_demo.obj: ..\sample\demo.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\demo.cpp
 
@@ -663,6 +670,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ganttdemos.ob
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ohlcdemos.obj: ..\sample\ohlcdemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\ohlcdemos.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_timeseriesdemos.obj: ..\sample\timeseriesdemos.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\timeseriesdemos.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_xydemos.obj: ..\sample\xydemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\xydemos.cpp
 
@@ -671,6 +681,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bardemos.obj:
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_bubbledemos.obj: ..\sample\bubbledemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\bubbledemos.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_combinedaxisdemos.obj: ..\sample\combinedaxisdemos.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\combinedaxisdemos.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_demo.obj: ..\sample\demo.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\demo.cpp
@@ -683,6 +696,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ganttdemos.ob
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ohlcdemos.obj: ..\sample\ohlcdemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\ohlcdemos.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_timeseriesdemos.obj: ..\sample\timeseriesdemos.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\timeseriesdemos.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_xydemos.obj: ..\sample\xydemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\xydemos.cpp

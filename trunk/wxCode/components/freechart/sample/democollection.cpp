@@ -25,6 +25,13 @@ extern int ganttDemosCount;
 extern ChartDemo *bubbleDemos[];
 extern int bubbleDemosCount;
 
+extern ChartDemo *combinedAxisDemos[];
+extern int combinedAxisDemosCount;
+
+extern ChartDemo *timeSeriesDemos[];
+extern int timeSeriesDemosCount;
+
+
 static DemoCollection instance;
 
 class Category
@@ -69,6 +76,8 @@ static Category *cats[] = {
 	new Category(wxT("XY Charts"), xyDemos, xyDemosCount),
 	new Category(wxT("Gantt Charts"), ganttDemos, ganttDemosCount),
 	new Category(wxT("Bubble Charts"), bubbleDemos, bubbleDemosCount),
+	new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount),
+	new Category(wxT("Time series Charts"), timeSeriesDemos, timeSeriesDemosCount),
 };
 
 DemoCollection::DemoCollection()

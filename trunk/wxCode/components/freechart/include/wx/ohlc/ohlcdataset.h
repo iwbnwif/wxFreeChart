@@ -31,6 +31,7 @@ struct OHLCItem
  */
 class WXDLLIMPEXP_FREECHART OHLCDataset : public Dataset, public DateTimeDataset
 {
+	DECLARE_CLASS(OHLCDataset)
 public:
 	OHLCDataset();
 	virtual ~OHLCDataset();
@@ -65,8 +66,6 @@ public:
 
 	virtual double GetMaxValue(bool verticalAxis);
 
-	virtual time_t GetDate(int index);
-
 	virtual int GetSerieCount();
 
 	virtual wxString GetSerieName(int serie);
@@ -74,6 +73,11 @@ public:
 	virtual int GetCount(int serie);
 
 	virtual DateTimeDataset *AsDateTimeDataset();
+
+	//
+	// DateDataset
+	//
+	virtual time_t GetDate(int index);
 
 protected:
 	virtual bool AcceptRenderer(Renderer *r);

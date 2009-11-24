@@ -32,7 +32,7 @@ public:
 	 * Adds axis to plot.
 	 * @param _axis axis to be added
 	 */
-	void AddAxis(Axis *_axis);
+	void AddAxis(Axis *axis);
 
 	/**
 	 * Adds dataset to plot.
@@ -155,11 +155,25 @@ protected:
 	 */
 	Axis *GetDatasetAxis(Dataset *dataset, bool vertical);
 
+	/**
+	 * Returns main vertical dataset axis.
+	 * NOTE: main axis is the first axis linked with dataset.
+	 * Main axis is used to scale dataset values.
+	 * @param dataset dataset
+	 * @return main axis for dataset or NULL if dataset has no main axis
+	 */
 	Axis *GetDatasetVerticalAxis(Dataset *dataset)
 	{
 		return GetDatasetAxis(dataset, true);
 	}
 
+	/**
+	 * Returns main horizontal dataset axis.
+	 * NOTE: main axis is the first axis linked with dataset.
+	 * Main axis is used to scale dataset values.
+	 * @param dataset dataset
+	 * @return main axis for dataset or NULL if dataset has no main axis
+	 */
 	Axis *GetDatasetHorizontalAxis(Dataset *dataset)
 	{
 		return GetDatasetAxis(dataset, false);
@@ -210,8 +224,18 @@ private:
 	 */
 	void DrawMarkers(wxDC &dc, wxRect rcData);
 
+	/**
+	 * Draws data.
+	 * @param dc device context
+	 * @param rcData data area rectangle
+	 */
 	void DrawDataArea(wxDC &dc, wxRect rcData);
 
+	/**
+	 * Draws legend.
+	 * @param dc device context
+	 * @param rcLegend legend area rectangle
+	 */
 	void DrawLegend(wxDC &dc, wxRect rcLegend);
 
 	/**
@@ -253,6 +277,8 @@ private:
 	AreaDraw *m_dataBackground;
 
 	Array<Marker, 1> m_markers;
+
+	wxCoord m_legendPlotGap; // distance between plot and legend
 
 	Legend *m_legend;
 

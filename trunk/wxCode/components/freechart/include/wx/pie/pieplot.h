@@ -20,6 +20,7 @@ const int shift3D = 20;
 
 /**
  * Pie plot.
+ * TODO: initial quick and dirty, must be cleaned up or rewritten.
  */
 class WXDLLIMPEXP_FREECHART PiePlot : public Plot, public DatasetObserver
 {
@@ -27,28 +28,28 @@ public:
 	PiePlot();
 	virtual ~PiePlot();
 
-	void SetDataset(CategoryDataset *_dataset);
+	void SetDataset(CategoryDataset *dataset);
 
-	void SetUsedSerie(int _serie)
+	void SetUsedSerie(int serie)
 	{
-		serie = _serie;
+		m_serie = serie;
 		FirePlotNeedRedraw();
 	}
 
-	void SetColorScheme(ColorScheme *_cs);
+	void SetColorScheme(ColorScheme *cs);
 
-	void Set3DView(bool _use3DView)
+	void Set3DView(bool use3DView)
 	{
-		if (use3DView != _use3DView) {
-			use3DView = _use3DView;
+		if (m_use3DView != use3DView) {
+			m_use3DView = use3DView;
 			FirePlotNeedRedraw();
 		}
 	}
 
-	void SetEllipticAspect(float _ellipticAspect)
+	void SetEllipticAspect(float ellipticAspect)
 	{
-		if (ellipticAspect != _ellipticAspect && _ellipticAspect > 0 && _ellipticAspect <= 1) {
-			ellipticAspect = _ellipticAspect;
+		if (m_ellipticAspect != ellipticAspect && ellipticAspect > 0 && ellipticAspect <= 1) {
+			m_ellipticAspect = ellipticAspect;
 			FirePlotNeedRedraw();
 		}
 	}
@@ -65,17 +66,17 @@ protected:
 
 private:
 
-	bool use3DView;
-	float ellipticAspect;
+	bool m_use3DView;
+	float m_ellipticAspect;
 
-	wxFont labelsFont;
-	wxPen outlinePen;
+	wxFont m_labelsFont;
+	wxPen m_outlinePen;
 
-	CategoryDataset *dataset;
+	CategoryDataset *m_dataset;
 
-	ColorScheme colorScheme;
+	ColorScheme m_colorScheme;
 
-	int serie;
+	int m_serie;
 };
 
 #endif /*PIEPLOT_H_*/
