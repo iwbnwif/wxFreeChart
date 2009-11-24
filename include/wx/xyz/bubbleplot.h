@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	bubbleplot.h
-// Purpose:
+// Purpose: bubble plot declarions
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -13,6 +13,9 @@
 
 #include <wx/axisplot.h>
 
+/**
+ * Used to draw bubble charts.
+ */
 class WXDLLIMPEXP_FREECHART BubblePlot : public AxisPlot
 {
 public:

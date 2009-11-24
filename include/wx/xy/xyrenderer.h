@@ -25,6 +25,14 @@ public:
 	XYRenderer();
 	virtual ~XYRenderer();
 
+	/**
+	 * Draws dataset.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 * @param horizAxis horizontal axis
+	 * @param vertAxis vertical axis
+	 * @param dataset dataset to be drawn
+	 */
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset) = 0;
 };
 

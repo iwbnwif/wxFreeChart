@@ -59,8 +59,18 @@ public:
 
 	Renderer *GetBaseRenderer();
 
+	/**
+	 * Called to begin dataset update.
+	 * Each call must have corresponding EndUpdate call.
+	 * Increment dataset update counter.
+	 */
 	void BeginUpdate();
 
+	/**
+	 * Called to end dataset update.
+	 * Decrement dataset update counter, and fires
+	 * DatasetChanged event when counter equal zero.
+	 */
 	void EndUpdate();
 
 	/**

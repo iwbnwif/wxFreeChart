@@ -18,11 +18,6 @@ Symbol::~Symbol()
 {
 }
 
-void Symbol::SetColor(wxColour _color)
-{
-	// default behaviour - do nothing
-}
-
 MaskedSymbol::MaskedSymbol(const char **maskData, wxCoord size)
 {
 	m_maskBmp = wxBitmap(maskData);
@@ -35,7 +30,12 @@ MaskedSymbol::~MaskedSymbol()
 {
 }
 
-void MaskedSymbol::SetColor(wxColour color)
+wxSize MaskedSymbol::GetExtent()
+{
+	return wxSize(m_size, m_size);
+}
+
+void MaskedSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
 	wxImage tmpImage = m_maskBmp.ConvertToImage();
 	tmpImage.Replace((unsigned char) -1, (unsigned char) -1, (unsigned char)  -1, color.Red(), color.Green(), color.Blue());
@@ -43,18 +43,6 @@ void MaskedSymbol::SetColor(wxColour color)
 
 	m_symbolBitmap = wxBitmap(tmpImage);
 	m_symbolBitmap.SetMask(new wxMask(wxBitmap(tmpImage), *wxBLACK));
-	m_initialized = true;
-}
-
-wxSize MaskedSymbol::GetExtent()
-{
-	return wxSize(m_size, m_size);
-}
-
-void MaskedSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
-{
-	if (!m_initialized)
-		return ;
 
 	wxSize extent = GetExtent();
 	wxMemoryDC symbolDC(m_symbolBitmap);
@@ -71,11 +59,6 @@ ShapeSymbol::~ShapeSymbol()
 {
 }
 
-void ShapeSymbol::SetColor(wxColour color)
-{
-	m_color = color;
-}
-
 wxSize ShapeSymbol::GetExtent()
 {
 	return wxSize(m_size, m_size);
@@ -90,9 +73,9 @@ CircleSymbol::~CircleSymbol()
 {
 }
 
-void CircleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+void CircleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
-	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_color));
+	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
 	dc.DrawCircle(x, y, m_size);
 }
 
@@ -106,10 +89,10 @@ SquareSymbol::~SquareSymbol()
 {
 }
 
-void SquareSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+void SquareSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
-	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_color));
-	dc.SetPen(*wxThePenList->FindOrCreatePen(m_color, 1, wxSOLID));
+	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
 
 	dc.DrawRectangle(x - m_size / 2, y - m_size / 2, m_size, m_size);
 }
@@ -123,9 +106,9 @@ CrossSymbol::~CrossSymbol()
 {
 }
 
-void CrossSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+void CrossSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
-	dc.SetPen(*wxThePenList->FindOrCreatePen(m_color, 1, wxSOLID));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
 
 	dc.DrawLine(x - m_size / 2, y, x + m_size / 2, y);
 	dc.DrawLine(x, y - m_size / 2, x, y + m_size / 2);
@@ -140,10 +123,10 @@ TriangleSymbol::~TriangleSymbol()
 {
 }
 
-void TriangleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y)
+void TriangleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
-	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_color));
-	dc.SetPen(*wxThePenList->FindOrCreatePen(m_color, 1, wxSOLID));
+	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
 
 	wxCoord r = m_size / 2;
 	wxPoint pts[] = {

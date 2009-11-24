@@ -22,7 +22,7 @@ WX_DECLARE_EXPORTED_OBJARRAY(wxTimeSpan, wxTimeSpanArray);
 /**
  * Composite date axis.
  * Draws multiple date/time spans (like day, week, month, year),
- * instead of just label as DateAxis.
+ * instead of just label as DateAxis does.
  */
 class CompDateAxis : public Axis
 {

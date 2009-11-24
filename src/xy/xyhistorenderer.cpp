@@ -42,6 +42,7 @@ void XYHistoRenderer::DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxC
 	}
 
 	AreaDraw *barArea = GetBarArea(serie);
+	wxCHECK_RET(barArea != NULL, wxT("No bar area draw"));
 	barArea->Draw(dc, rcBar);
 }
 

@@ -23,18 +23,13 @@ public:
 	virtual ~Symbol();
 
 	/**
-	 * Sets symbol color.
-	 * @param color new symbol color
-	 */
-	virtual void SetColor(wxColour color);
-
-	/**
 	 * Performs symbol drawing.
 	 * @param dc device context
 	 * @param x x coordinate
-	 * @param y t coordinate
+	 * @param y y coordinate
+	 * @param color color to draw symbol
 	 */
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y) = 0;
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color) = 0;
 
 	/**
 	 * Called to calculate size required for symbol.
@@ -54,9 +49,7 @@ public:
 
 	virtual ~MaskedSymbol();
 
-	virtual void SetColor(wxColour color);
-
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 
 	virtual wxSize GetExtent();
 
@@ -78,8 +71,6 @@ public:
 	ShapeSymbol(wxCoord size);
 	virtual ~ShapeSymbol();
 
-	virtual void SetColor(wxColour color);
-
 	virtual wxSize GetExtent();
 
 protected:
@@ -100,7 +91,7 @@ public:
 	CircleSymbol(wxCoord size = 5);
 	virtual ~CircleSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 /**
@@ -112,7 +103,7 @@ public:
 	SquareSymbol(wxCoord size = 5);
 	virtual ~SquareSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 /**
@@ -124,7 +115,7 @@ public:
 	CrossSymbol(wxCoord size = 5);
 	virtual ~CrossSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 /**
@@ -136,7 +127,7 @@ public:
 	TriangleSymbol(wxCoord size = 5);
 	virtual ~TriangleSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y);
+	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 #endif /*SYMBOL_H_*/

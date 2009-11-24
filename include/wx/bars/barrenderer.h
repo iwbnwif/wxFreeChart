@@ -123,6 +123,14 @@ public:
 
 	virtual ~BarRenderer();
 
+	/**
+	 * Draws dataset.
+	 * @param dc device context
+	 * @param horizAxis horizontal axis
+	 * @param vertAxis vertical axis
+	 * @param vertical true to draw vertical bars
+	 * @param dataset dataset to be drawn
+	 */
 	void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
 
 	/**

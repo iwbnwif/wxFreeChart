@@ -20,6 +20,9 @@ static wxPen noPen(*wxBLACK, 1, wxTRANSPARENT);
 
 class DrawObject;
 
+/**
+ * Interface to receive DrawObject events.
+ */
 class WXDLLIMPEXP_FREECHART DrawObserver
 {
 public:
@@ -34,6 +37,10 @@ public:
 	virtual void NeedRedraw(DrawObject *obj) = 0;
 };
 
+/**
+ * Base class for objects drawn on chart or perform drawing of
+ * another objects (like renderers).
+ */
 class WXDLLIMPEXP_FREECHART DrawObject : public Observable<DrawObserver>
 {
 public:

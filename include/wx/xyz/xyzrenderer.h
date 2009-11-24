@@ -16,7 +16,7 @@
 #include <wx/xyz/xyzdataset.h>
 
 /**
- *
+ * xyz renderer class.
  */
 class WXDLLIMPEXP_FREECHART XYZRenderer : public Renderer
 {

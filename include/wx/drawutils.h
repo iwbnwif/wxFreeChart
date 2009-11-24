@@ -44,6 +44,12 @@ inline static void DrawTextCenter(wxDC &dc, wxRect &rc, wxString text)
 	dc.DrawText(text, x, y);
 }
 
+/**
+ * Checks and fixes rectangle after arithmetical calculations
+ * on it's coordinates and size.
+ * It either coordinate or size is negative it will be set to zero.
+ * @param rc rectangle
+ */
 inline static void CheckFixRect(wxRect &rc)
 {
 	if (rc.x < 0)
@@ -57,13 +63,18 @@ inline static void CheckFixRect(wxRect &rc)
 }
 
 /**
- *
+ * Substracts margins from rectangle.
+ * @param rc rectangle
+ * @param left left margin
+ * @param top top margin
+ * @param right right margin
+ * @param bottom bottom margin
  */
 inline static void Margins(wxRect &rc, wxCoord left, wxCoord top, wxCoord right, wxCoord bottom)
 {
 	if ((left + right) > rc.width) {
 		rc.x = left;
-		rc.width = 0; //XXX
+		rc.width = 0;
 	}
 	else {
 		rc.x += left;
@@ -72,7 +83,7 @@ inline static void Margins(wxRect &rc, wxCoord left, wxCoord top, wxCoord right,
 
 	if ((top + bottom) > rc.height) {
 		rc.y = top;
-		rc.height = 0; //XXX
+		rc.height = 0;
 	}
 	else {
 		rc.y += top;
@@ -82,6 +93,14 @@ inline static void Margins(wxRect &rc, wxCoord left, wxCoord top, wxCoord right,
 	CheckFixRect(rc);
 }
 
+/**
+ * Sets rectangle from two points.
+ * @param rc rectangle
+ * @param x0 first point x
+ * @param y0 first point y
+ * @param x1 second point x
+ * @param y1 second point y
+ */
 inline static void SetupRect(wxRect &rc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
 {
 	if (x0 < x1) {

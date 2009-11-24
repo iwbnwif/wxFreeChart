@@ -13,8 +13,19 @@
 #include <wx/xy/xyplot.h>
 #include <wx/xy/xylinerenderer.h>
 
+// for histogram demo
+#include <wx/xy/xyhistorenderer.h>
+
+// for dynamic dataset
+#include <wx/xy/vectordataset.h>
+
+#include <wx/xy/functions/sinefunction.h>
+
 #include <wx/dynarray.h>
 #include <wx/arrimpl.cpp>
+
+
+#include <math.h>
 
 /**
  * Holds data for one XY serie.
@@ -342,10 +353,433 @@ public:
 	}
 };
 
+class DynamicDemoDataset : public VectorDataset, public wxEvtHandler
+{
+public:
+	DynamicDemoDataset();
+	virtual ~DynamicDemoDataset();
+
+	void OnTimer(wxTimerEvent &ev);
+private:
+	wxTimer m_timer;
+
+	DECLARE_EVENT_TABLE()
+};
+
+BEGIN_EVENT_TABLE(DynamicDemoDataset, wxEvtHandler)
+	EVT_TIMER(wxID_ANY, DynamicDemoDataset::OnTimer)
+END_EVENT_TABLE()
+
+DynamicDemoDataset::DynamicDemoDataset()
+{
+	// start timer, that will add new data to dataset
+	m_timer.SetOwner(this);
+	m_timer.Start(1000);
+}
+
+DynamicDemoDataset::~DynamicDemoDataset()
+{
+	m_timer.Stop();
+}
+
+void DynamicDemoDataset::OnTimer(wxTimerEvent &ev)
+{
+	double r = rand();
+	double y = 100.0 * r / (double) RAND_MAX;
+	Add(y);
+}
+
+class XYDemo5 : public ChartDemo
+{
+public:
+	XYDemo5()
+	: ChartDemo(wxT("XY Demo 5 - dynamic"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		DynamicDemoDataset *dataset = new DynamicDemoDataset();
+		dataset->SetRenderer(new XYLineRenderer());
+
+		plot->AddDataset(dataset);
+
+		// add left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// we setup window
+		//bottomAxis->SetWindow(0, 10);
+		//bottomAxis->SetUseWindow(true);
+
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+
+		// set axis as scrolled, so chart panel can scroll its window.
+		//chart->SetScrolledAxis(bottomAxis);
+		return chart;
+	}
+};
+
+/**
+ * Histogram XY chart demo
+ */
+class XYDemo6 : public ChartDemo
+{
+public:
+	XYDemo6()
+	: ChartDemo(wxT("XY Demo 6 - histogram"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		double data[][2] = {
+				{ -2.75	, 0.01 },
+				{ -2.5	, 0.02 },
+				{ -2.25	, 0.03 },
+				{ -2	, 0.05 },
+				{ -1.75	, 0.09 },
+				{ -1.5	, 0.13 },
+				{ -1.25	, 0.18 },
+				{ -1	, 0.24 },
+				{ -0.75	, 0.3 },
+				{ -0.5	, 0.35 },
+				{ -0.25	, 0.39 },
+				{ 0	, 0.4 },
+				{ 0.25	, 0.39 },
+				{ 0.5	, 0.35 },
+				{ 0.75	, 0.3 },
+				{ 1	, 0.24 },
+				{ 1.25	, 0.18 },
+				{ 1.5	, 0.13 },
+				{ 1.75	, 0.09 },
+				{ 2	, 0.05 },
+				{ 2.25	, 0.03 },
+				{ 2.5	, 0.02 },
+				{ 2.75	, 0.01 },
+		};
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		XYDemoDataset *dataset = new XYDemoDataset();
+		dataset->AddSerie((double *) data, WXSIZEOF(data));
+
+		// create histogram renderer with bar width = 10 and vertical bars
+		XYHistoRenderer *histoRenderer = new XYHistoRenderer(10, true);
+
+		histoRenderer->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxGREEN_BRUSH));
+
+		dataset->SetRenderer(histoRenderer);
+
+		plot->AddDataset(dataset);
+
+		// add left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		bottomAxis->SetMargins(15, 15);
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+
+		// set axis as scrolled, so chart panel can scroll its window.
+		return chart;
+	}
+};
+
+/**
+ * Histogram XY chart demo
+ */
+class XYDemo7 : public ChartDemo
+{
+public:
+	XYDemo7()
+	: ChartDemo(wxT("XY Demo 7 - two histograms"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// serie 1 data
+		double data1[][2] = {
+				{ -2.75	, 0.01 },
+				{ -2.5	, 0.02 },
+				{ -2.25	, 0.03 },
+				{ -2	, 0.05 },
+				{ -1.75	, 0.09 },
+				{ -1.5	, 0.13 },
+				{ -1.25	, 0.18 },
+				{ -1	, 0.24 },
+				{ -0.75	, 0.3 },
+				{ -0.5	, 0.35 },
+				{ -0.25	, 0.39 },
+				{ 0	, 0.4 },
+				{ 0.25	, 0.39 },
+				{ 0.5	, 0.35 },
+				{ 0.75	, 0.3 },
+				{ 1	, 0.24 },
+				{ 1.25	, 0.18 },
+				{ 1.5	, 0.13 },
+				{ 1.75	, 0.09 },
+				{ 2	, 0.05 },
+				{ 2.25	, 0.03 },
+				{ 2.5	, 0.02 },
+				{ 2.75	, 0.01 },
+		};
+		// serie 2 data
+		double data2[][2] = {
+				{ -3.75	, 0.01 },
+				{ -3.5	, 0.02 },
+				{ -3.25	, 0.03 },
+				{ -3	, 0.05 },
+				{ -2.75	, 0.09 },
+				{ -2.5	, 0.13 },
+				{ -2.25	, 0.18 },
+				{ -2	, 0.24 },
+				{ -1.75	, 0.3 },
+				{ -1.5	, 0.35 },
+				{ -1.25	, 0.39 },
+				{-1	, 0.4 },
+				{ -0.75	, 0.39 },
+				{ -0.5	, 0.35 },
+				{ -0.25	, 0.3 },
+				{ 0	, 0.24 },
+				{ 0.25	, 0.18 },
+				{ 0.5	, 0.13 },
+				{ 0.75	, 0.09 },
+				{ 1	, 0.05 },
+				{ 1.25	, 0.03 },
+				{ 1.5	, 0.02 },
+				{ 1.75	, 0.01 },
+		};
+
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		XYDemoDataset *dataset = new XYDemoDataset();
+
+		// add two series
+		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
+		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
+
+		// create histogram renderer with bar width = 10 and vertical bars
+		XYHistoRenderer *histoRenderer = new XYHistoRenderer(10, true);
+
+		// set bar area draw for two series
+		histoRenderer->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxBLUE_BRUSH));
+		histoRenderer->SetBarArea(1, new FillAreaDraw(*wxBLACK_PEN, *wxGREEN_BRUSH));
+
+		dataset->SetRenderer(histoRenderer);
+
+		plot->AddDataset(dataset);
+
+		// add left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		bottomAxis->SetMargins(15, 15);
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+
+		// set axis as scrolled, so chart panel can scroll its window.
+		return chart;
+	}
+};
+
+
+/**
+ * Multiseries line xy chart demo.
+ * Also it shows how to use legend.
+ */
+class XYDemo8 : public ChartDemo
+{
+public:
+	XYDemo8()
+	: ChartDemo(wxT("XY Demo 8 - multiseries"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// serie 1 data
+		double data1[][2] = {
+				{ -2.75	, 0.01 },
+				{ -2.5	, 0.02 },
+				{ -2.25	, 0.03 },
+				{ -2	, 0.05 },
+				{ -1.75	, 0.09 },
+				{ -1.5	, 0.13 },
+				{ -1.25	, 0.18 },
+				{ -1	, 0.24 },
+				{ -0.75	, 0.3 },
+				{ -0.5	, 0.35 },
+				{ -0.25	, 0.39 },
+				{ 0	, 0.4 },
+				{ 0.25	, 0.39 },
+				{ 0.5	, 0.35 },
+				{ 0.75	, 0.3 },
+				{ 1	, 0.24 },
+				{ 1.25	, 0.18 },
+				{ 1.5	, 0.13 },
+				{ 1.75	, 0.09 },
+				{ 2	, 0.05 },
+				{ 2.25	, 0.03 },
+				{ 2.5	, 0.02 },
+				{ 2.75	, 0.01 },
+		};
+		// serie 2 data
+		double data2[][2] = {
+				{ -3.75	, 0.01 },
+				{ -3.5	, 0.02 },
+				{ -3.25	, 0.03 },
+				{ -3	, 0.05 },
+				{ -2.75	, 0.09 },
+				{ -2.5	, 0.13 },
+				{ -2.25	, 0.18 },
+				{ -2	, 0.24 },
+				{ -1.75	, 0.3 },
+				{ -1.5	, 0.35 },
+				{ -1.25	, 0.39 },
+				{-1	, 0.4 },
+				{ -0.75	, 0.39 },
+				{ -0.5	, 0.35 },
+				{ -0.25	, 0.3 },
+				{ 0	, 0.24 },
+				{ 0.25	, 0.18 },
+				{ 0.5	, 0.13 },
+				{ 0.75	, 0.09 },
+				{ 1	, 0.05 },
+				{ 1.25	, 0.03 },
+				{ 1.5	, 0.02 },
+				{ 1.75	, 0.01 },
+		};
+
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		XYDemoDataset *dataset = new XYDemoDataset();
+
+		// add two series
+		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
+		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
+
+		// create line renderer
+		XYLineRenderer *renderer = new XYLineRenderer();
+		dataset->SetRenderer(renderer);
+
+		plot->AddDataset(dataset);
+
+		// add left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// set serie names to be displayed on legend
+		dataset->SetSerieName(0, wxT("Serie 0"));
+		dataset->SetSerieName(1, wxT("Serie 1"));
+
+		// set legend
+		plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+
+		// set axis as scrolled, so chart panel can scroll its window.
+		return chart;
+	}
+};
+
+/**
+ * Multiseries line xy chart demo.
+ */
+class XYDemo9 : public ChartDemo
+{
+public:
+	XYDemo9()
+	: ChartDemo(wxT("XY Demo 9 - sine"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		SineFunction *dataset = new SineFunction(1, -10, 10, 0.1);
+
+		// create line renderer
+		XYLineRenderer *renderer = new XYLineRenderer();
+		dataset->SetRenderer(renderer);
+
+		plot->AddDataset(dataset);
+
+		// add left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+
+		// set axis as scrolled, so chart panel can scroll its window.
+		return chart;
+	}
+};
+
 ChartDemo *xyDemos[] = {
 	new XYDemo1(),
 	new XYDemo2(),
 	new XYDemo3(),
 	new XYDemo4(),
+	new XYDemo5(),
+	new XYDemo6(),
+	new XYDemo7(),
+	new XYDemo8(),
+	new XYDemo9(),
 };
 int xyDemosCount = WXSIZEOF(xyDemos);

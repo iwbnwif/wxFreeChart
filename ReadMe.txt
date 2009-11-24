@@ -16,7 +16,7 @@
  - OHLC financial charts (bars or candlesticks)
  - pie charts
  - bubble charts
-
+ 
 
  Installation - win32
  --------------------
@@ -46,6 +46,13 @@
  ChangeLog
  ---------
  
+ 1.2: third version of wxFreeChart at wxCode
+ 		What's new:
+ 		 - added xy datasets support to OHLCPlot
+ 		 - axes draw when legend shown bug fixed
+ 		 - updated documentation
+ 		 - added time series and combined axis demos
+ 		 
  1.1: second version of wxFreeChart at wxCode
  		What's new:
  		 - many bugfixes
@@ -56,15 +63,28 @@
 
  1.0 - first version of wxFreeChart at wxCode
 
+ Future plans:
+ - Transparency for bubble charts, histogram charts.
+ - Markers
+ - Add levels/fractals/etc support to OHLCPlot. Make 
+   OHLCPlot suitable for technical analysis applications.
+ - Make antialiasing
+ - Logorithmic axes
+ - Make axis marks drawing more flexible.
+
+ 
  Known issues:
+ - window scrolling bugs
+ - compdateaxis bugs
+ - axes sometimes drawn not correctly in case of Gantt charts
+ - markers not implemented
  - Work with wxWidgets 2.6.x not tested.
  - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
- - Antialiasing doesn't works.
- - Pie plots is very ugly, and must be cleaned up or rewritten.
+ - Antialiasing not implemented
+ - Pie plots are very ugly, and must be cleaned up or rewritten.
  - Transparency not implemented. Needed for area/histogram charts with
    overlaying areas/histograms, etc.
- - Replace dynamic_cast with appropriate wxWidgets macros.
- 
+
  [optionally: Known bugs, Author's info, ... ]
 
  Author contact email: mab[at]smtp[dot]ru

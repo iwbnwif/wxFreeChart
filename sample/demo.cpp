@@ -58,6 +58,8 @@ ChartSelector::ChartSelector(wxWindow *parent, wxChartPanel *chartPanel, DemoCol
 			AppendItem(catId, demo->GetName(), -1, -1, new DemoTreeItemData(demo));
 		}
 	}
+
+	Expand(root);
 }
 
 ChartSelector::~ChartSelector()

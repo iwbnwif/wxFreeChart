@@ -21,6 +21,8 @@
 
 AxisPlot::AxisPlot()
 {
+	m_legendPlotGap = 2;
+
 	m_horizontalAxes.NotOwns();
 	m_verticalAxes.NotOwns();
 
@@ -36,11 +38,13 @@ AxisPlot::~AxisPlot()
 {
 	for (int n = 0; n < m_datasets.GetSize(); n++) {
 		m_datasets[n]->RemoveObserver(this);
-//		delete m_datasets[n];
+		delete m_datasets[n];
 	}
 
 	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
 	wxDELETE(m_dataBackground);
+
+	wxDELETE(m_legend);
 }
 
 void AxisPlot::SetDataBackground(AreaDraw *dataBackground)
@@ -254,8 +258,58 @@ bool AxisPlot::ToDataCoords(int nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord 
 
 void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegend)
 {
+	if (m_legend != NULL) {
+		wxSize legendExtent = m_legend->GetExtent(dc, m_datasets);
+
+		switch (m_legend->GetHorizPosition()) {
+		case wxLEFT:
+			rcLegend.x = rc.x;
+
+			rc.x += legendExtent.x + m_legendPlotGap;
+			rc.width -= legendExtent.x + m_legendPlotGap;
+			break;
+		case wxRIGHT:
+			rcLegend.x = rc.x + rc.width - legendExtent.x + m_legendPlotGap;
+
+			rc.width -= legendExtent.x + m_legendPlotGap;
+			break;
+		case wxCENTER:
+			rcLegend.x = rc.x + rc.width / 2 - legendExtent.x / 2;
+			break;
+		default:
+			//(wxT("Invalid legend horizontal position"));
+			return ;
+		}
+
+		switch (m_legend->GetVertPosition()) {
+		case wxTOP:
+			rcLegend.y = rc.y;
+
+			rc.y += legendExtent.y + m_legendPlotGap;
+			rc.height -= legendExtent.y + m_legendPlotGap;
+			break;
+		case wxBOTTOM:
+			rcLegend.y = rc.y + rc.height - legendExtent.y + m_legendPlotGap;
+
+			rc.height -= legendExtent.y + m_legendPlotGap;
+			break;
+		case wxCENTER:
+			rcLegend.y = rc.y + rc.height / 2 - legendExtent.y / 2;
+			break;
+		default:
+			//(wxT("Invalid legend vertical position"));
+			return;
+		}
+
+		rcLegend.width = legendExtent.x;
+		rcLegend.height = legendExtent.y;
+
+		CheckFixRect(rcLegend);
+	}
+
 	rcData = rc;
 
+	// substract axes areas from data rectangle
 	if (m_leftAxes.GetSize() != 0) {
 		wxCoord ext = GetAxesExtent(dc, &m_leftAxes);
 
@@ -277,57 +331,6 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 		wxCoord ext = GetAxesExtent(dc, &m_bottomAxes);
 
 		rcData.height -= ext;
-	}
-
-	if (m_legend != NULL) {
-		wxSize legendExtent = m_legend->GetExtent(dc, m_datasets);
-
-		const int legendGap = 2; // TODO temporary here!
-
-		switch (m_legend->GetHorizPosition()) {
-		case wxLEFT:
-			rcLegend.x = rcData.x;
-
-			rcData.x += legendExtent.x + legendGap;
-			rcData.width -= legendExtent.x + legendGap;
-			break;
-		case wxRIGHT:
-			rcLegend.x = rcData.x + rcData.width - legendExtent.x + legendGap;
-
-			rcData.width -= legendExtent.x + legendGap;
-			break;
-		case wxCENTER:
-			rcLegend.x = rcData.x + rcData.width / 2 - legendExtent.x / 2;
-			break;
-		default:
-			//(wxT("Invalid legend horizontal position"));
-			return ;
-		}
-
-		switch (m_legend->GetVertPosition()) {
-		case wxTOP:
-			rcLegend.y = rcData.y;
-
-			rcData.y += legendExtent.y + legendGap;
-			rcData.height -= legendExtent.y + legendGap;
-			break;
-		case wxBOTTOM:
-			rcLegend.y = rcData.y + rcData.height - legendExtent.y + legendGap;
-
-			rcData.height -= legendExtent.y + legendGap;
-			break;
-		case wxCENTER:
-			rcLegend.y = rcData.y + rcData.height / 2 - legendExtent.y / 2;
-			break;
-		default:
-			//(wxT("Invalid legend vertical position"));
-			return;
-		}
-
-		rcLegend.width = legendExtent.x;
-		rcLegend.height = legendExtent.y;
-
-		CheckFixRect(rcLegend);
 	}
 
 	CheckFixRect(rcData);
@@ -382,7 +385,7 @@ void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
 void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
 {
 	for (int n = 0; n < m_markers.GetSize(); n++) {
-
+		// TODO not implemented!
 	}
 }
 
@@ -400,8 +403,8 @@ void AxisPlot::DrawDataArea(wxDC &dc, wxRect rcData)
 	wxDCClipper clip(dc, clipRc);
 
 	DrawGridLines(dc, rcData);
-	DrawDatasets(dc, rcData);
 	DrawMarkers(dc, rcData);
+	DrawDatasets(dc, rcData);
 }
 
 void AxisPlot::DrawData(wxDC &dc, wxRect rc)

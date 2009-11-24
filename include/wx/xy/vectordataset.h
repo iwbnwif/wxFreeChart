@@ -30,11 +30,15 @@ public:
 	VectorDataset();
 	virtual ~VectorDataset();
 
-	virtual double GetX(int index);
+	virtual int GetSerieCount();
 
-	virtual double GetY(int index);
+	virtual int GetCount(int serie);
 
-	virtual int GetCount();
+	virtual wxString GetSerieName(int serie);
+
+	virtual double GetX(int index, int serie);
+
+	virtual double GetY(int index, int serie);
 
 	/**
 	 * Adds y values to dataset.
@@ -46,6 +50,11 @@ public:
 		DatasetChanged();
 	}
 
+	/**
+	 * Replaces y value at specified index.
+	 * @param index index of value
+	 * @param y new y value
+	 */
 	void Replace(unsigned int index, double y)
 	{
 		if (index < values.size()) {
@@ -56,6 +65,10 @@ public:
 		}
 	}
 
+	/**
+	 * Removes value at specified index.
+	 * @param index of value
+	 */
 	void RemoveAt(unsigned int index)
 	{
 		if (index < values.size()) {

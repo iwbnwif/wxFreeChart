@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	sinefunction.h
-// Purpose:
+// Purpose: sine function dataset declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -21,12 +21,12 @@ class WXDLLIMPEXP_FREECHART SineFunction : public XYDataset
 public:
 	/**
 	 * Construct new sine function.
-	 * @param _a y scaling coefficient
-	 * @param _min minimal x
-	 * @param _max maximal x
-	 * @param _step x step
+	 * @param a y scaling coefficient
+	 * @param min minimal x
+	 * @param max maximal x
+	 * @param step x step
 	 */
-	SineFunction(double _a, double _min, double _max, double _step);
+	SineFunction(double a, double minX, double maxX, double step);
 	virtual ~SineFunction();
 
 	virtual double GetX(int index, int serie);
@@ -40,11 +40,11 @@ public:
 	virtual wxString GetSerieName(int serie);
 
 private:
-	double a;
+	double m_a;
 
-	double min;
-	double max;
-	double step;
+	double m_minX;
+	double m_maxX;
+	double m_step;
 };
 
 #endif /*SINEFUNCTION_H_*/

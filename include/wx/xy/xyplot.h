@@ -26,7 +26,6 @@ class WXDLLIMPEXP_FREECHART XYPlot : public AxisPlot
 {
 public:
 	XYPlot();
-	virtual ~XYPlot();
 
 protected:
 	//
@@ -37,6 +36,14 @@ protected:
 	virtual bool AcceptDataset(Dataset *dataset);
 
 	virtual void DrawDatasets(wxDC &dc, wxRect rc);
+
+	/**
+	 * Draw single XY dataset.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 * @param dataset XY dataset to draw
+	 */
+	void DrawXYDataset(wxDC &dc, wxRect rc, XYDataset *dataset);
 };
 
 #endif /*XYPLOT_H_*/

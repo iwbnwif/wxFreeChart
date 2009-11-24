@@ -100,45 +100,57 @@ public:
 	 */
 	void SetMargins(wxCoord marginMin, wxCoord marginMax)
 	{
-		m_marginMin = marginMin;
-		m_marginMax = marginMax;
-		FireAxisChanged();
+		if (m_marginMin != marginMin || m_marginMax != marginMax) {
+			m_marginMin = marginMin;
+			m_marginMax = marginMax;
+			FireAxisChanged();
+		}
 	}
 
 	//
 	// Window functions.
 	//
 
+	/**
+	 * Sets window width. Window width is in data space.
+	 * @param winWidth new window width
+	 */
 	void SetWindowWidth(double winWidth)
 	{
-		if (m_winWidth != winWidth) {
-			m_winWidth = winWidth;
-			FireAxisChanged();
-		}
+		SetWindow(m_winPos, winWidth);
 	}
 
+	/**
+	 * Returns window width.
+	 * @return window width
+	 */
 	double GetWindowWidth()
 	{
 		return m_winWidth;
 	}
 
+	/**
+	 * Sets window position. Window position is in data space.
+	 * @param winPos new window position
+	 */
 	void SetWindowPosition(double winPos)
 	{
-		if (m_winPos != winPos) {
-			double minValue, maxValue;
-			GetDataBounds(minValue, maxValue);
-
-			m_winPos = wxClip(winPos, minValue, maxValue - m_winWidth);
-
-			FireAxisChanged();
-		}
+		SetWindow(winPos, m_winWidth);
 	}
 
+	/**
+	 * Returns window position.
+	 * @return window position
+	 */
 	double GetWindowPosition()
 	{
 		return m_winPos;
 	}
 
+	/**
+	 * Sets whether to use window.
+	 * @param useWin true to use window
+	 */
 	void SetUseWindow(bool useWin)
 	{
 		if (m_useWin != useWin) {
@@ -147,22 +159,47 @@ public:
 		}
 	}
 
+	/**
+	 * Sets window params (position and width). Window params are in data space.
+	 * @param winPos new window position
+	 * @param winWidth new window width
+	 */
 	void SetWindow(double winPos, double winWidth)
 	{
-		m_winPos = winPos;
-		m_winWidth = winWidth;
-		FireAxisChanged();
+		if (m_winPos != winPos || m_winWidth != winWidth) {
+			m_winPos = winPos;
+			m_winWidth = winWidth;
+			FireAxisChanged();
+		}
 	}
 
+	/**
+	 * Checks whether line in data space intersects window.
+	 * @param v0 line begin in data space
+	 * @param v0 line end in data space
+	 * @return true if line intersects window
+	 */
 	bool IntersectsWindow(double v0, double v1);
 
+	/**
+	 * Returns window bounds.
+	 * If window is not used, simply returns data bounds.
+	 * @param winMin out for window minimal
+	 * @param winMax out for window maximal
+	 */
 	void GetWindowBounds(double &winMin, double &winMax)
 	{
 		double minValue, maxValue;
 		GetDataBounds(minValue, maxValue);
 
-		winMin = m_winPos;
-		winMax = wxMin(maxValue, winMin + m_winWidth);
+		if (m_useWin) {
+			winMin = m_winPos;
+			winMax = wxMin(maxValue, winMin + m_winWidth);
+		}
+		else {
+			winMin = minValue;
+			winMax = maxValue;
+		}
 	}
 
 	/**
@@ -185,6 +222,7 @@ public:
 	/**
 	 * Used to determine minimal size needed to draw axis contents,
 	 * minimal width for vertical axes, minimal height for horizontal.
+	 * @param dc device context
 	 * @return extent
 	 */
 	virtual wxCoord GetExtent(wxDC &dc) = 0;

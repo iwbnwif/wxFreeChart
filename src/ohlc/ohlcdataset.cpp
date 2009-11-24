@@ -10,6 +10,8 @@
 
 #include <wx/ohlc/ohlcdataset.h>
 
+IMPLEMENT_CLASS(OHLCDataset, Dataset)
+
 OHLCDataset::OHLCDataset()
 {
 	m_serieName = wxT("OHLC");
@@ -24,7 +26,7 @@ bool OHLCDataset::AcceptRenderer(Renderer *renderer)
 	return (wxDynamicCast(renderer, OHLCRenderer) != NULL);
 }
 
-double OHLCDataset::GetMaxValue(bool unused)
+double OHLCDataset::GetMaxValue(bool WXUNUSED(unused))
 {
 	double maxValue = 0;
 
@@ -39,7 +41,7 @@ double OHLCDataset::GetMaxValue(bool unused)
 	return maxValue;
 }
 
-double OHLCDataset::GetMinValue(bool unused)
+double OHLCDataset::GetMinValue(bool WXUNUSED(unused))
 {
 	double minValue = 0;
 
@@ -61,7 +63,7 @@ time_t OHLCDataset::GetDate(int index)
 }
 
 
-int OHLCDataset::GetCount(int serie)
+int OHLCDataset::GetCount(int WXUNUSED(serie))
 {
 	return GetCount();
 }
@@ -71,7 +73,7 @@ int OHLCDataset::GetSerieCount()
 	return 1;
 }
 
-wxString OHLCDataset::GetSerieName(int serie)
+wxString OHLCDataset::GetSerieName(int WXUNUSED(serie))
 {
 	return m_serieName;
 }

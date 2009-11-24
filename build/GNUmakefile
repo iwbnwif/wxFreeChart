@@ -43,7 +43,7 @@ LDFLAGS ?=
 # Location and arguments of wx-config script 
 WX_CONFIG ?= wx-config
 
-# Port of the wx library to build against [gtk1,gtk2,msw,x11,motif,mgl,mac,dfb]
+# Port of the wx library to build against [gtk1,gtk2,msw,x11,motif,mgl,osx_cocoa,osx_carbon,dfb]
 WX_PORT ?= $(shell $(WX_CONFIG) --selected-config | cut -d '-' -f 1)
 
 # Use DLL build of wx library to use? [0,1]
@@ -273,20 +273,24 @@ WXFREECHARTDEMO_LIB_CXXFLAGS = $(____wx) $(____wx_3) -W -Wall -I../include \
 WXFREECHARTDEMO_LIB_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_bardemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_bubbledemos.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_combinedaxisdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_demo.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_democollection.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ganttdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ohlcdemos.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_timeseriesdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_xydemos.o
 WXFREECHARTDEMO_DLL_CXXFLAGS = $(____wx) $(____wx_3) -W -Wall -I../include \
 	`$(WX_CONFIG) --cxxflags $(WX_CONFIG_FLAGS)` $(CPPFLAGS) $(CXXFLAGS)
 WXFREECHARTDEMO_DLL_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_bardemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_bubbledemos.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_combinedaxisdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_demo.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_democollection.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ganttdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ohlcdemos.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_timeseriesdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_xydemos.o
 
 ### Conditionally set variables: ###
@@ -505,11 +509,12 @@ make_sample_dir_wxFreeChartDemo_dll:
 	@mkdir -p ../sample
 
 tarball: 
-	make clean
-	( cd ../.. && tar -cvzf freechart.tar.gz --exclude="*~" --exclude="*.log" --exclude="*.o*" --exclude="*.a" --exclude=".svn" --exclude="autom4te.cache" --exclude="website" freechart/* )
+	make distclean
+	( cd ../.. && tar -cvzf freechart.tar.gz --exclude="*~" --exclude="*.log" --exclude="*.o*" --exclude="*.a" --exclude=".svn" --exclude="autom4te.cache" freechart/* )
 
 zip: clean
-	( cd ../.. && zip -r9 freechart.zip freechart -x "*.pdb" -x "*.log" -x "*.o*" -x ".svn*" -x "website*")
+	del ../../freechart.zip
+	( cd ../.. && zip -r9 freechart.zip freechart -x "*.pdb" -x "*.log" -x "*.o*" )
 
 docs: 
 	( cd ../docs && doxygen )
@@ -778,6 +783,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_bardemos.o: ../sampl
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_bubbledemos.o: ../sample/bubbledemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
 
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_combinedaxisdemos.o: ../sample/combinedaxisdemos.cpp
+	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
+
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_demo.o: ../sample/demo.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
 
@@ -790,6 +798,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ganttdemos.o: ../sam
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ohlcdemos.o: ../sample/ohlcdemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
 
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_timeseriesdemos.o: ../sample/timeseriesdemos.cpp
+	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
+
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_xydemos.o: ../sample/xydemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
 
@@ -797,6 +808,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_bardemos.o: ../sampl
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_bubbledemos.o: ../sample/bubbledemos.cpp
+	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
+
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_combinedaxisdemos.o: ../sample/combinedaxisdemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_demo.o: ../sample/demo.cpp
@@ -809,6 +823,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ganttdemos.o: ../sam
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ohlcdemos.o: ../sample/ohlcdemos.cpp
+	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
+
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_timeseriesdemos.o: ../sample/timeseriesdemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_xydemos.o: ../sample/xydemos.cpp

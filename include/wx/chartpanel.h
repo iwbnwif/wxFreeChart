@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chartpanel.h
-// Purpose:
+// Purpose: wxChartPanel declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -48,9 +48,14 @@ private:
 	void RedrawBackBitmap();
 	void RecalcScrollbars();
 
+	//
+	// Event handlers
+	//
 	void OnPaint(wxPaintEvent &ev);
 	void OnSize(wxSizeEvent &ev);
 	void OnScrollWin(wxScrollWinEvent &ev);
+
+	void ScrollAxis(Axis *axis, int d);
 
 	Chart *m_chart;
 

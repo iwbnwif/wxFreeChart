@@ -10,6 +10,8 @@
 
 #include <wx/legend.h>
 
+const wxCoord Legend::labelsSpacing = 2;
+
 Legend::Legend(int vertPosition, int horizPosition, AreaDraw *background, int symbolTextGap, int margin)
 {
 	m_vertPosition = vertPosition;
@@ -41,10 +43,12 @@ void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 			wxSize textExtent = dc.GetTextExtent(serieName);
 
 			Renderer *renderer = dataset->GetBaseRenderer();
+
 			Symbol *symbol = renderer->GetSerieSymbol(serie);
+			wxColour color = renderer->GetSerieColor(serie);
 
 			wxSize symbolExtent = symbol->GetExtent();
-			symbol->Draw(dc, x + symbolExtent.x / 2, y + symbolExtent.y / 2 + textExtent.y / 2);
+			symbol->Draw(dc, x + symbolExtent.x / 2, y + symbolExtent.y / 2 + textExtent.y / 2, color);
 
 			wxCoord textX = x + symbolExtent.x + m_symbolTextGap;
 
