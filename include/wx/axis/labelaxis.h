@@ -23,12 +23,6 @@ public:
 	LabelAxis(AXIS_LOCATION location);
 	virtual ~LabelAxis();
 
-	virtual void Draw(wxDC &dc, wxRect rc);
-
-	virtual void DrawGridLines(wxDC &dc, wxRect rc);
-
-	virtual wxCoord GetExtent(wxDC &dc);
-
 	/**
 	 * Sets axis title.
 	 * @param new axis title
@@ -132,6 +126,15 @@ public:
 	}
 
 	/**
+	 * Returns label colour.
+	 * @return label colour
+	 */
+	wxColour GetLabelColour()
+	{
+		return m_labelColour;
+	}
+
+	/**
 	 * Sets font for labels text.
 	 * @param labelFont font for labels text
 	 */
@@ -140,6 +143,24 @@ public:
 		m_labelFont = labelFont;
 		FireAxisChanged();
 	}
+
+	/**
+	 * Returns label font.
+	 * @return label font
+	 */
+	const wxFont& GetLabelFont()
+	{
+		return m_labelFont;
+	}
+
+	//
+	// Axis
+	//
+	virtual void Draw(wxDC &dc, wxRect rc);
+
+	virtual void DrawGridLines(wxDC &dc, wxRect rc);
+
+	virtual wxCoord GetExtent(wxDC &dc);
 
 protected:
 	//
@@ -181,10 +202,12 @@ private:
 	wxCoord m_labelLineSize;
 	wxCoord m_labelGap;
 
+	// labels properties
 	wxFont m_labelFont;
 	wxPen m_labelPen;
 	wxColour m_labelColour;
 
+	// label title properties
 	wxString m_title;
 	wxFont m_titleFont;
 	wxColour m_titleColour;

@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	barplot.h
-// Purpose:
+// Purpose: bar plot declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -20,7 +20,7 @@
  * Plot for displaying histograms with values at one axis and
  * category names at other.
  */
-class WXDLLIMPEXP_FREECHART BarPlot : public XYPlot//AxisPlot
+class WXDLLIMPEXP_FREECHART BarPlot : public XYPlot
 {
 public:
 	BarPlot();

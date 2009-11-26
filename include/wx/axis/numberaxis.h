@@ -46,7 +46,7 @@ public:
 
 	/**
 	 * Set whether to use integer values instead of doubles.
-	 * @param _intValues if true than use integer values, false - double values
+	 * @param intValues if true than use integer values, false - double values
 	 */
 	void IntegerValues(bool intValues = true)
 	{

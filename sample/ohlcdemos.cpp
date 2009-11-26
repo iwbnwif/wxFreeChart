@@ -106,6 +106,7 @@ public:
 			wxT("20060407"),
 		};
 
+		// transform dates from string to time_t form
 		wxDateTime dt;
 		for (size_t n = 0; n < WXSIZEOF(data); n++) {
 			dt.ParseFormat(dates[n], wxT("%Y%m%d"));
@@ -115,21 +116,26 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
+		// create OHLC dataset
 		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
 
+		// create and set OHLC bars renderer to our dataset
 		dataset->SetRenderer(new OHLCBarRenderer());
 
+		// add our dataset to plot
 		plot->AddDataset(dataset);
 
-		// add left number (for quotes) and bottom date axes
+		// create left number (for quotes) and bottom date axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
 
-		// setup window
+		// setup window, so we will see 5 bars at once, not entire dataset
 		bottomAxis->SetWindow(0, 5);
 		bottomAxis->SetUseWindow(true);
 
 		bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
+
+		// add axes to plot
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 
@@ -140,6 +146,7 @@ public:
 		// and finally create chart
 		Chart *chart = new Chart(plot, GetName());
 
+		// set scrolling axis to chart, so it will be possible to scroll horizontally
 		chart->SetScrolledAxis(bottomAxis);
 		return chart;
 	}

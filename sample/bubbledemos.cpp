@@ -9,12 +9,12 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-
 #include "democollection.h"
 
 #include <wx/xyz/bubbleplot.h>
 #include <wx/xyz/xyzrenderer.h>
 #include <wx/xyz/xyzdataset.h>
+
 #include <wx/axis/numberaxis.h>
 
 #include <wx/dynarray.h>

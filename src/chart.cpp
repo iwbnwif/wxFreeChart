@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chart.cpp
-// Purpose:
+// Purpose: chart implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -13,12 +13,10 @@
 
 ChartObserver::ChartObserver()
 {
-
 }
 
 ChartObserver::~ChartObserver()
 {
-
 }
 
 Chart::Chart(Plot *plot, const wxString &title)
@@ -31,6 +29,8 @@ Chart::Chart(Plot *plot, const wxString &title)
 			*wxTheBrushList->FindOrCreateBrush(bgColor));
 	m_titleFont = *wxNORMAL_FONT;
 
+	m_margin = 5;
+
 	m_plot = plot;
 	m_plot->AddObserver(this);
 	m_title = title;
@@ -41,6 +41,9 @@ Chart::Chart(Plot *plot, const wxString &title)
 
 Chart::~Chart()
 {
+	SAFE_REMOVE_OBSERVER(this, m_horizScrolledAxis);
+	SAFE_REMOVE_OBSERVER(this, m_vertScrolledAxis);
+
 	SAFE_REMOVE_OBSERVER(this, m_plot);
 	wxDELETE(m_plot);
 	wxDELETE(m_background);
@@ -53,7 +56,7 @@ void Chart::PlotNeedRedraw(Plot *WXUNUSED(plot))
 
 void Chart::AxisChanged(Axis *WXUNUSED(axis))
 {
-
+	// do nothing
 }
 
 void Chart::BoundsChanged(Axis *axis)
@@ -109,9 +112,10 @@ wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
 
 void Chart::Draw(wxDC &dc, wxRect &rc)
 {
+	// draw chart background
 	m_background->Draw(dc, rc);
 
-	int topMargin = 5;
+	int topMargin = m_margin;
 	if (m_title.Length() != 0) {
 		dc.SetFont(m_titleFont);
 
@@ -125,6 +129,6 @@ void Chart::Draw(wxDC &dc, wxRect &rc)
 		topMargin += titleRect.height;
 	}
 
-	Margins(rc, 5, topMargin, 5, 5);
+	Margins(rc, m_margin, topMargin, m_margin, m_margin);
 	m_plot->Draw(dc, rc);
 }

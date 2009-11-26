@@ -46,7 +46,7 @@ public:
 	 * @param rc rectangle where to draw
 	 * @param datasets datasets array
 	 */
-	void Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets);
+	void Draw(wxDC &dc, wxRect rc, DatasetArray &datasets);
 
 	/**
 	 * Returns legend vertical position.
@@ -90,7 +90,7 @@ public:
 	 * @param datasetes dataset array
 	 * @return size needed for legend area
 	 */
-	wxSize GetExtent(wxDC &dc, Array<Dataset, 1> &datasets);
+	wxSize GetExtent(wxDC &dc, DatasetArray &datasets);
 
 private:
 	int m_vertPosition;

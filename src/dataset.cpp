@@ -1,7 +1,6 @@
-
 /////////////////////////////////////////////////////////////////////////////
 // Name:	dataset.cpp
-// Purpose:
+// Purpose: dataset implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -10,6 +9,8 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/dataset.h>
+
+#include "wx/arrimpl.cpp"
 
 IMPLEMENT_CLASS(Dataset, wxObject)
 
@@ -85,4 +86,44 @@ DateTimeDataset::DateTimeDataset()
 
 DateTimeDataset::~DateTimeDataset()
 {
+}
+
+//
+// DatasetArray
+//
+
+WX_DEFINE_EXPORTED_OBJARRAY(DatasetBaseArray)
+
+DatasetArray::DatasetArray()
+{
+}
+
+DatasetArray::~DatasetArray()
+{
+	for (size_t n = 0; n < Count(); n++) {
+		Dataset *dataset = Item(n);
+		SAFE_UNREF(dataset);
+	}
+}
+
+void DatasetArray::Add(Dataset *dataset)
+{
+	dataset->AddRef();
+	DatasetBaseArray::Add(dataset);
+}
+
+void DatasetArray::Remove(Dataset *dataset)
+{
+	SAFE_UNREF(dataset);
+	DatasetBaseArray::Remove(dataset);
+}
+
+void DatasetArray::RemoveAt(size_t index, size_t count)
+{
+	for (size_t n = index; n < index + count; n++) {
+		Dataset *dataset = Item(n);
+		SAFE_UNREF(dataset);
+	}
+
+	DatasetBaseArray::RemoveAt(index, count);
 }

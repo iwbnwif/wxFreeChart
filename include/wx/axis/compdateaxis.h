@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	categoryaxis.cpp
-// Purpose: category axis implementation
+// Name:	compdateaxis.h
+// Purpose: comp date axis declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $

@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	xydataset.h
-// Purpose:
+// Purpose: xy dataset declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -79,16 +79,6 @@ protected:
 	virtual bool AcceptRenderer(Renderer *r);
 
 private:
-};
-
-/**
- * Base class for step datasets.
- * Data specified by xy step, not by xy coordinate as in XYDataset.
- */
-class XYStepDataset : public XYDataset
-{
-public:
-	 // TODO
 };
 
 #endif /*XYDATASET_H_*/

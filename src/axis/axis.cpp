@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	axis.cpp
-// Purpose:
+// Purpose: axis base class implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -36,6 +36,15 @@ Axis::Axis(AXIS_LOCATION location)
 
 Axis::~Axis()
 {
+}
+
+void Axis::SetMargins(wxCoord marginMin, wxCoord marginMax)
+{
+	if (m_marginMin != marginMin || m_marginMax != marginMax) {
+		m_marginMin = marginMin;
+		m_marginMax = marginMax;
+		FireAxisChanged();
+	}
 }
 
 bool Axis::IsVisible(double value)

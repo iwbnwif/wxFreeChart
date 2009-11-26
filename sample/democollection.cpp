@@ -10,6 +10,7 @@
 
 #include "democollection.h"
 
+// demos
 extern ChartDemo *ohlcDemos[];
 extern int ohlcDemosCount;
 
@@ -34,6 +35,9 @@ extern int timeSeriesDemosCount;
 
 static DemoCollection instance;
 
+/**
+ * Demo category.
+ */
 class Category
 {
 public:
@@ -70,6 +74,7 @@ private:
 	int m_chartCount;
 };
 
+// demo categories
 static Category *cats[] = {
 	new Category(wxT("OHLC Charts"), ohlcDemos, ohlcDemosCount),
 	new Category(wxT("Bar Charts"), barDemos, barDemosCount),
@@ -80,6 +85,9 @@ static Category *cats[] = {
 	new Category(wxT("Time series Charts"), timeSeriesDemos, timeSeriesDemosCount),
 };
 
+//
+// DemoCollection
+//
 DemoCollection::DemoCollection()
 {
 }

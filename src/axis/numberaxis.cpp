@@ -91,7 +91,7 @@ void NumberAxis::UpdateBounds()
 
 	m_hasLabels = false;
 
-	for (int n = 0; n < m_datasets.GetSize(); n++) {
+	for (size_t n = 0; n < m_datasets.Count(); n++) {
 		bool verticalAxis = IsVertical();
 
 		double minValue = m_datasets[n]->GetMinValue(verticalAxis);
