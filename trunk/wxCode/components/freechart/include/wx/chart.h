@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chart.h
-// Purpose:
+// Purpose: chart declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -145,6 +145,8 @@ private:
 	AreaDraw *m_background;
 	wxString m_title;
 	wxFont m_titleFont;
+
+	wxCoord m_margin;
 
 	Axis *m_horizScrolledAxis;
 	Axis *m_vertScrolledAxis;

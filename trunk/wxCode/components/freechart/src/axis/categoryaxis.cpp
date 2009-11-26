@@ -29,7 +29,7 @@ bool CategoryAxis::AcceptDataset(Dataset *dataset)
 	// dataset
 	//
 	return ((wxDynamicCast(dataset, CategoryDataset) != NULL)
-		&& m_datasets.GetSize() == 0);
+		&& m_datasets.Count() == 0);
 }
 
 wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)

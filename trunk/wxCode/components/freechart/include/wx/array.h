@@ -23,7 +23,6 @@ public:
 		size = 0;
 		reservedSize = 0;
 		owns = true;
-		//refs = false;
 	}
 
 	virtual ~Array()
@@ -36,25 +35,23 @@ public:
 		owns = false;
 	}
 
-/*
-	void Refs()
-	{
-		refs = true;
-	}
-*/
-
 	void RemoveAll()
 	{
 		if (refs) {
-			wxDELETE(array);
+			for (int n = 0; n < size; n++) {
+				RefObject *refObj = (RefObject *) array[n];
+				SAFE_UNREF(refObj);
+			}
+
+			wxDELETEA(array);
 		}
 		else {
 			if (owns) {
-				wxDELETEA(array);
+				for (int n = 0; n < size; n++) {
+					wxDELETE(array[n]);
+				}
 			}
-			else {
-				wxDELETE(array);
-			}
+			wxDELETEA(array);
 		}
 
 		size = 0;
@@ -89,7 +86,10 @@ public:
 	{
 		wxCHECK_RET(index < size, wxT("Array::RemoveAt"));
 
-		if (owns) {
+		if (refs) {
+			SAFE_UNREF(array[index]);
+		}
+		else if (owns) {
 			delete array[index];
 		}
 
@@ -102,6 +102,11 @@ public:
 	}
 
 	int GetSize()
+	{
+		return size;
+	}
+
+	int Count()
 	{
 		return size;
 	}

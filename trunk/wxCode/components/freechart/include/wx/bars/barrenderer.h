@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	barrenderer.h
-// Purpose:
+// Purpose: bar renderer and bar types declarations
 // Author:	Moskvichev Andrey V.
 // Created:	14.11.2008
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -17,7 +17,7 @@
 class CategoryDataset;
 
 /**
- *
+ * Bar types base class.
  */
 class WXDLLIMPEXP_FREECHART BarType
 {
@@ -25,6 +25,16 @@ public:
 	BarType();
 	virtual ~BarType();
 
+	/**
+	 * Performs bar drawing.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 * @param horizAxis horizontal axis
+	 * @param vertAxis vertical axis
+	 * @param vertical true to draw vertical bars
+	 * @param item dataset item index
+	 * @param dataset dataset to draw bars
+	 */
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, int item, CategoryDataset *dataset);
 
 	/**
@@ -58,6 +68,12 @@ protected:
 class WXDLLIMPEXP_FREECHART NormalBarType : public BarType
 {
 public:
+	/**
+	 * Constructs new normal bar type.
+	 * @param barWidth bar width
+	 * @param serieGap distance between series bars
+	 * @param base bars base, point from bars are drawn
+	 */
 	NormalBarType(int barWidth, int serieGap = 1, double base = 0.0);
 	virtual ~NormalBarType();
 
@@ -76,6 +92,11 @@ private:
 class WXDLLIMPEXP_FREECHART StackedBarType : public BarType
 {
 public:
+	/**
+	 * Constructs new stacked bar type.
+	 * @param barWidth bar width
+	 * @param base bars base, point from bars are drawn
+	 */
 	StackedBarType(int barWidth, double base);
 	virtual ~StackedBarType();
 
@@ -96,6 +117,11 @@ private:
 class WXDLLIMPEXP_FREECHART LayeredBarType : public BarType
 {
 public:
+	/**
+	 * Constructs new layered bar type.
+	 * @param initialBarWidth maximal bar width
+	 * @param base bars base, point from bars are drawn
+	 */
 	LayeredBarType(int initialBarWidth, double base);
 	virtual ~LayeredBarType();
 

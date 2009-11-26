@@ -273,7 +273,7 @@ private:
 	// TODO deprecated - use Axis::AddDataset
 	Array<DataAxisLink, 1> m_links;
 
-	Array<Dataset, 1> m_datasets;
+	DatasetArray m_datasets;
 	AreaDraw *m_dataBackground;
 
 	Array<Marker, 1> m_markers;

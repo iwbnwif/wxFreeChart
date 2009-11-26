@@ -10,7 +10,7 @@ class WXDLLIMPEXP_FREECHART RefObject
 public:
 	RefObject()
 	{
-		refCount = 1;
+		refCount = 0;
 	}
 
 	virtual ~RefObject()
@@ -27,10 +27,17 @@ public:
 		refCount--;
 		if (refCount < 0) {
 			wxLogError(wxT("RefObject::Unref: refCount < 0\n"));
-			delete this;
+//			delete this;
+//			return ;
 		}
-		else if (refCount == 0)
-			delete this;
+//		if (refCount == 0) {
+//			delete this;
+//		}
+	}
+
+	int RefCount()
+	{
+		return refCount;
 	}
 
 private:
@@ -40,6 +47,9 @@ private:
 #define SAFE_UNREF(ptr) do {							\
 	if (ptr != NULL) {									\
 		ptr->Unref();									\
+		if (ptr->RefCount() <= 0) {						\
+			delete ptr;									\
+		}												\
 	}													\
 	ptr = NULL;											\
 } while (0)

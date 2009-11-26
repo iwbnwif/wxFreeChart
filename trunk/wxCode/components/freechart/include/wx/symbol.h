@@ -88,7 +88,7 @@ protected:
 class WXDLLIMPEXP_FREECHART CircleSymbol : public ShapeSymbol
 {
 public:
-	CircleSymbol(wxCoord size = 5);
+	CircleSymbol(wxCoord size = 9);
 	virtual ~CircleSymbol();
 
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
@@ -100,7 +100,7 @@ public:
 class WXDLLIMPEXP_FREECHART SquareSymbol : public ShapeSymbol
 {
 public:
-	SquareSymbol(wxCoord size = 5);
+	SquareSymbol(wxCoord size = 9);
 	virtual ~SquareSymbol();
 
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
@@ -112,7 +112,7 @@ public:
 class WXDLLIMPEXP_FREECHART CrossSymbol : public ShapeSymbol
 {
 public:
-	CrossSymbol(wxCoord size = 5);
+	CrossSymbol(wxCoord size = 9);
 	virtual ~CrossSymbol();
 
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
@@ -124,7 +124,7 @@ public:
 class WXDLLIMPEXP_FREECHART TriangleSymbol : public ShapeSymbol
 {
 public:
-	TriangleSymbol(wxCoord size = 5);
+	TriangleSymbol(wxCoord size = 9);
 	virtual ~TriangleSymbol();
 
 	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);

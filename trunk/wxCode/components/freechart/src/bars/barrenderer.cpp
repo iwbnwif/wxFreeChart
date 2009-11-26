@@ -30,6 +30,7 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 		wxCoord shift;
 		double base, value;
 
+		// get bar geometry
 		GetBar(item, serie, dataset, width, shift, base, value);
 
 		double xBase, yBase;
@@ -72,6 +73,7 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 		}
 
 		AreaDraw *barDraw = m_barDraws.GetAreaDraw(serie);
+		wxCHECK_RET(barDraw != NULL, wxT("No bar draw for serie"));
 		barDraw->Draw(dc, rcBar);
 	}
 }

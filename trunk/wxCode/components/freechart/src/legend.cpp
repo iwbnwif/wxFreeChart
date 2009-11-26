@@ -26,7 +26,7 @@ Legend::~Legend()
 	wxDELETE(m_background);
 }
 
-void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
+void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
 {
 	dc.SetFont(m_font);
 
@@ -35,7 +35,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 	wxCoord x = rc.x + m_margin;
 	wxCoord y = rc.y;
 
-	for (int n = 0; n < datasets.GetSize(); n++) {
+	for (size_t n = 0; n < datasets.Count(); n++) {
 		Dataset *dataset = datasets[n];
 
 		FOREACH_SERIE(serie, dataset) {
@@ -59,13 +59,13 @@ void Legend::Draw(wxDC &dc, wxRect rc, Array<Dataset, 1> &datasets)
 	}
 }
 
-wxSize Legend::GetExtent(wxDC &dc, Array<Dataset, 1> &datasets)
+wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
 {
 	wxSize extent(0, 0);
 
 	dc.SetFont(m_font);
 
-	for (int n = 0; n < datasets.GetSize(); n++) {
+	for (size_t n = 0; n < datasets.Count(); n++) {
 		Dataset *dataset = datasets[n];
 
 		FOREACH_SERIE(serie, dataset) {

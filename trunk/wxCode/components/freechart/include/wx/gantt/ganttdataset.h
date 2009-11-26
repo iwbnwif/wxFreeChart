@@ -41,6 +41,11 @@ class WXDLLIMPEXP_FREECHART GanttDataset : public CategoryDataset
 {
 	DECLARE_CLASS(GanttDataset)
 public:
+	/**
+	 * Constructs new gantt dataset.
+	 * @param dateCount count of dates for date axis. TODO: this looks bad:
+	 *   date count must be set to axis, not to dataset.
+	 */
 	GanttDataset(int dateCount);
 	virtual ~GanttDataset();
 

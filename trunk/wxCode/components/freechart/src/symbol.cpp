@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	symbol.cpp
-// Purpose:
+// Purpose: symbols implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -75,8 +75,10 @@ CircleSymbol::~CircleSymbol()
 
 void CircleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
 	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
-	dc.DrawCircle(x, y, m_size);
+
+	dc.DrawCircle(x, y, m_size / 2);
 }
 
 

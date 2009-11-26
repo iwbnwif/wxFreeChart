@@ -12,8 +12,8 @@
 #include <wx/drawutils.h>
 
 #define CHECK_INDEX(name, index, v) do {											\
-	if (index >= (int) v.GetSize()) {												\
-		wxLogError(wxT("%s index out of bounds: %i %i"), name, index, v.GetSize());	\
+	if (index >= (int) v.Count()) {													\
+		wxLogError(wxT("%s index out of bounds: %i %i"), name, index, v.Count());	\
 		return ;																	\
 	}																				\
 } while (0)
@@ -36,9 +36,9 @@ AxisPlot::AxisPlot()
 
 AxisPlot::~AxisPlot()
 {
-	for (int n = 0; n < m_datasets.GetSize(); n++) {
-		m_datasets[n]->RemoveObserver(this);
-		delete m_datasets[n];
+	for (size_t n = 0; n < m_datasets.Count(); n++) {
+		Dataset *dataset = m_datasets[n];
+		dataset->RemoveObserver(this);
 	}
 
 	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
@@ -88,7 +88,7 @@ void AxisPlot::AddAxis(Axis *axis)
 
 bool AxisPlot::HasData()
 {
-	return m_datasets.GetSize() != 0;
+	return m_datasets.Count() != 0;
 }
 
 void AxisPlot::AddDataset(Dataset *dataset)
@@ -100,12 +100,13 @@ void AxisPlot::AddDataset(Dataset *dataset)
 
 	m_datasets.Add(dataset);
 	dataset->AddObserver(this);
+	//dataset->AddRef();
 	FirePlotNeedRedraw();
 }
 
 int AxisPlot::GetDatasetCount()
 {
-	return m_datasets.GetSize();
+	return (int) m_datasets.Count();
 }
 
 Dataset *AxisPlot::GetDataset(int index)

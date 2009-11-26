@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	dateaxis.cpp
-// Purpose:
+// Purpose: date axis implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -27,14 +27,14 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 	// Accepts only date/time dataset
 	// and only one dataset
 	return (dataset->AsDateTimeDataset() != NULL)
-		&& (m_datasets.GetSize() == 0);
+		&& (m_datasets.Count() == 0);
 }
 
 void DateAxis::UpdateBounds()
 {
 	int dateCount = 0;
 
-	for (int n = 0; n < m_datasets.GetSize(); n++) {
+	for (size_t n = 0; n < m_datasets.Count(); n++) {
 		DateTimeDataset *dataset = m_datasets[n]->AsDateTimeDataset();
 
 		int count = dataset->GetCount();

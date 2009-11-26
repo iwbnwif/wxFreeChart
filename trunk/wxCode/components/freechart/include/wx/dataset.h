@@ -14,9 +14,13 @@
 #include <wx/wxfreechartdefs.h>
 
 #include <time.h>
+
 #include <wx/refobject.h>
+
 #include <wx/observable.h>
 #include <wx/chartrenderer.h>
+
+#include <wx/dynarray.h>
 
 class Dataset;
 class DateTimeDataset;
@@ -131,6 +135,21 @@ public:
 	virtual time_t GetDate(int index) = 0;
 
 	virtual int GetCount() = 0;
+};
+
+WX_DECLARE_EXPORTED_OBJARRAY(Dataset *, DatasetBaseArray);
+
+class WXDLLIMPEXP_FREECHART DatasetArray : public DatasetBaseArray
+{
+public:
+	DatasetArray();
+	virtual ~DatasetArray();
+
+	void Add(Dataset *dataset);
+
+	void Remove(Dataset *dataset);
+
+	void RemoveAt(size_t index, size_t count);
 };
 
 #endif /*DATASET_H_*/

@@ -9,86 +9,12 @@
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-
 #include "democollection.h"
 
 #include <wx/gantt/ganttplot.h>
 #include <wx/gantt/ganttrenderer.h>
-#include <wx/gantt/ganttdataset.h>
 
-struct Task
-{
-	time_t start;
-	time_t end;
-};
-
-/**
- * Gantt demo dataset.
- */
-class GanttDemoDataset : public GanttDataset
-{
-public:
-	GanttDemoDataset(int dateCount, const wxChar **names, int nameCount, Task *tasks, int taskCount)
-	: GanttDataset(dateCount)
-	{
-		m_names.Alloc(nameCount);
-		for (int n = 0; n < nameCount; n++) {
-			m_names.Add(wxString(names[n]));
-		}
-
-		m_tasks = new Task[taskCount];
-		for (int n = 0; n < taskCount; n++) {
-			m_tasks[n].start = tasks[n].start;
-			m_tasks[n].end = tasks[n].end;
-		}
-	}
-
-	virtual ~GanttDemoDataset()
-	{
-		wxDELETEA(m_tasks);
-	}
-
-	virtual wxString GetName(int index)
-	{
-		return m_names[index];
-	}
-
-	virtual double GetValue(int WXUNUSED(index), int WXUNUSED(serie))
-	{
-		return 0; // dummy
-	}
-
-	virtual int GetSerieCount()
-	{
-		return 1;
-	}
-
-	virtual wxString GetSerieName(int serie)
-	{
-		return wxEmptyString;
-	}
-
-	virtual int GetCount()
-	{
-		return m_names.Count();
-	}
-
-	virtual time_t GetStart(int index, int WXUNUSED(serie))
-	{
-		return m_tasks[index].start;
-	}
-
-	virtual time_t GetEnd(int index, int WXUNUSED(serie))
-	{
-		return m_tasks[index].end;
-	}
-
-private:
-	wxArrayString m_names;
-	Task *m_tasks;
-	int m_taskCount;
-};
-
+#include <wx/gantt/ganttsimpledataset.h>
 
 /**
  * Simple gannt demo, showing options lifetime.
@@ -111,7 +37,7 @@ public:
 			{ wxT("2009-02-01"), wxT("2009-06-14") },
 		};
 
-		Task tasks[] = {
+		GanttSerie::TaskTime taskTimes[] = {
 			{ 0, 0 },
 			{ 0, 0 },
 			{ 0, 0 },
@@ -119,7 +45,7 @@ public:
 		};
 
 		// task names, in this case - option names
-		const wxChar *names[] = {
+		const wxChar *taskNames[] = {
 			wxT("March"),
 			wxT("April"),
 			wxT("May"),
@@ -128,46 +54,176 @@ public:
 
 		// parse dates from string and set to tasks start/end
 		wxDateTime dt;
-		for (size_t n = 0; n < WXSIZEOF(tasks); n++) {
+		for (size_t n = 0; n < WXSIZEOF(taskTimes); n++) {
 			dt.ParseFormat(dates[n][0], wxT("%Y-%m-%d"));
-			tasks[n].start = dt.GetTicks();
+			taskTimes[n].start = dt.GetTicks();
 
 			dt.ParseFormat(dates[n][1], wxT("%Y-%m-%d"));
-			tasks[n].end = dt.GetTicks();
+			taskTimes[n].end = dt.GetTicks();
 		}
 
 		// first step: create plot
 		GanttPlot *plot = new GanttPlot();
 
-		GanttDemoDataset *dataset = new GanttDemoDataset(4/*date count*/, names, WXSIZEOF(names), tasks, WXSIZEOF(tasks));
+		// create gantt dataset
+		GanttSimpleDataset *dataset = new GanttSimpleDataset(4/*date count*/, taskNames, WXSIZEOF(taskNames));
 
+		// add serie to it
+		dataset->AddSerie(new GanttSerie(taskTimes, WXSIZEOF(taskTimes), wxT("")));
+
+		// create gantt renderer
 		GanttRenderer *renderer = new GanttRenderer(10);
 		renderer->SetSerieDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
 
+		// set renderer to dataset
 		dataset->SetRenderer(renderer);
 
+		// add dataset to plot
 		plot->AddDataset(dataset);
 
-		// add left number (for names) and top date axes
+		// create left axis
 		CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
 		leftAxis->SetMargins(10, 10);
 
+		// create bottom date axis
 		DateAxis *bottomAxis = new DateAxis(AXIS_TOP);
 		bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
 		bottomAxis->SetMargins(25, 25);
 
+		// add axes to plot
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 
-		CategoryAxis *rightAxis = new CategoryAxis(AXIS_RIGHT);
-		rightAxis->SetMargins(10, 10);
-		plot->AddAxis(rightAxis);
+		//CategoryAxis *rightAxis = new CategoryAxis(AXIS_RIGHT);
+		//rightAxis->SetMargins(10, 10);
+		//plot->AddAxis(rightAxis);
 
 		// link axes and dataset
 		plot->LinkDataVerticalAxis(0, 0);
 		plot->LinkDataHorizontalAxis(0, 0);
 
-		plot->LinkDataVerticalAxis(0, 1);
+		//plot->LinkDataVerticalAxis(0, 1);
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+		return chart;
+	}
+};
+
+/**
+ * gannt demo, showing tasks scheduled and actual time.
+ */
+class GanttDemo2 : public ChartDemo
+{
+public:
+	GanttDemo2()
+	: ChartDemo(wxT("Gannt Demo 2 - scheduled vs actual"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// start/end dates for scheduled task times in string form
+		const wxChar *datesScheduled[][2] = {
+			{ wxT("2009-01-01"), wxT("2009-03-14") },
+			{ wxT("2009-03-01"), wxT("2009-04-14") },
+			{ wxT("2009-04-01"), wxT("2009-06-14") },
+			{ wxT("2009-06-16"), wxT("2009-07-20") },
+		};
+
+		// start/end dates for actual task times in string form
+		const wxChar *datesActual[][2] = {
+			{ wxT("2009-01-08"), wxT("2009-03-25") },
+			{ wxT("2009-04-01"), wxT("2009-05-02") },
+			{ wxT("2009-05-04"), wxT("2009-07-14") },
+			{ wxT("2009-07-20"), wxT("2009-09-01") },
+		};
+
+		GanttSerie::TaskTime taskTimesScheduled[] = {
+			{ 0, 0 },
+			{ 0, 0 },
+			{ 0, 0 },
+			{ 0, 0 },
+		};
+
+		GanttSerie::TaskTime taskTimesActual[] = {
+			{ 0, 0 },
+			{ 0, 0 },
+			{ 0, 0 },
+			{ 0, 0 },
+		};
+
+		// task names
+		const wxChar *taskNames[] = {
+			wxT("Requirements analysis"),
+			wxT("Design phase"),
+			wxT("Implementation"),
+			wxT("Testing"),
+		};
+
+		// parse dates from string and set to tasks start/end
+		wxDateTime dt;
+		for (size_t n = 0; n < WXSIZEOF(taskTimesScheduled); n++) {
+			dt.ParseFormat(datesScheduled[n][0], wxT("%Y-%m-%d"));
+			taskTimesScheduled[n].start = dt.GetTicks();
+
+			dt.ParseFormat(datesScheduled[n][1], wxT("%Y-%m-%d"));
+			taskTimesScheduled[n].end = dt.GetTicks();
+		}
+
+		// the same for actual task times
+		for (size_t n = 0; n < WXSIZEOF(taskTimesActual); n++) {
+			dt.ParseFormat(datesActual[n][0], wxT("%Y-%m-%d"));
+			taskTimesActual[n].start = dt.GetTicks();
+
+			dt.ParseFormat(datesActual[n][1], wxT("%Y-%m-%d"));
+			taskTimesActual[n].end = dt.GetTicks();
+		}
+
+		// first step: create plot
+		GanttPlot *plot = new GanttPlot();
+
+		// create gantt dataset
+		GanttSimpleDataset *dataset = new GanttSimpleDataset(4/*date count*/, taskNames, WXSIZEOF(taskNames));
+
+		// add scheduled serie to it
+		dataset->AddSerie(new GanttSerie(taskTimesScheduled, WXSIZEOF(taskTimesScheduled), wxT("Scheduled")));
+
+		// add actual serie to it
+		dataset->AddSerie(new GanttSerie(taskTimesActual, WXSIZEOF(taskTimesActual), wxT("Actual")));
+
+		// create gantt renderer
+		GanttRenderer *renderer = new GanttRenderer(10);
+
+		// set serie draw to it
+		renderer->SetSerieDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		renderer->SetSerieDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+
+		// set renderer to dataset
+		dataset->SetRenderer(renderer);
+
+		// add dataset to plot
+		plot->AddDataset(dataset);
+
+		// create left axis
+		CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
+		leftAxis->SetMargins(20, 20);
+
+		// create bottom date axis
+		DateAxis *bottomAxis = new DateAxis(AXIS_TOP);
+		bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
+		bottomAxis->SetMargins(25, 25);
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// set legend to plot
+		plot->SetLegend(new Legend(wxBOTTOM, wxCENTER));
 
 		// and finally create chart
 		Chart *chart = new Chart(plot, GetName());
@@ -177,5 +233,6 @@ public:
 
 ChartDemo *ganttDemos[] = {
 		new GanttDemo1(),
+		new GanttDemo2(),
 };
 int ganttDemosCount = WXSIZEOF(ganttDemos);

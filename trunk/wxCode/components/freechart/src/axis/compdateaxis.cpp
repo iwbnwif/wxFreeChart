@@ -106,15 +106,22 @@ wxDateTime RoundDateToSpan(wxDateTime date, wxDateSpan span)
 	return wxDateTime(day - modDays, MonthFromNum(month - modMonths), year - modYears);
 }
 
-int NumOfSpans(wxDateTime date0, wxDateTime date1, wxDateSpan span)
+/**
+ * Calculate number of spans in date interval [first, last].
+ * @param first first interval date
+ * @param last last interval date
+ * @param span span
+ * @return number of spans in date interval
+ */
+int NumOfSpans(wxDateTime first, wxDateTime last, wxDateSpan span)
 {
 	int count = 0;
 
-	wxDateTime date = RoundDateToSpan(date0, span);
+	wxDateTime date = RoundDateToSpan(first, span);
 	do {
 		date += span;
 		count++;
-	} while (date <= date1);
+	} while (date <= last);
 
 	return count;
 }
@@ -152,7 +159,7 @@ bool CompDateAxis::AcceptDataset(Dataset *dataset)
 	// Accepts only date/time dataset
 	// and only one dataset
 	return (dataset->AsDateTimeDataset() != NULL)
-			&& (m_datasets.GetSize() == 0);
+			&& (m_datasets.Count() == 0);
 }
 
 wxCoord CompDateAxis::GetExtent(wxDC &dc)
@@ -360,7 +367,7 @@ void CompDateAxis::DrawSpan(wxDC &dc, wxRect rcAxis, int spanNum, wxString spanL
 
 wxCoord CompDateAxis::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
 {
-	if (m_datasets.GetSize() == 0) {
+	if (m_datasets.Count() == 0) {
 		return 0;
 	}
 	DateTimeDataset *dataset = m_datasets[0]->AsDateTimeDataset();
@@ -504,7 +511,7 @@ bool CompDateAxis::GetLastDate(wxDateTime &date)
 
 bool CompDateAxis::GetFirstLastDate(wxDateTime &firstDate, wxDateTime &lastDate)
 {
-	if (m_datasets.GetSize() == 0) {
+	if (m_datasets.Count() == 0) {
 		return false;
 	}
 	DateTimeDataset *dataset = m_datasets[0]->AsDateTimeDataset();

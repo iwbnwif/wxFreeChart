@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	axis.h
-// Purpose:
+// Purpose: axis base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
@@ -98,14 +98,7 @@ public:
 	 * @param marginMin new minimal margin
 	 * @param marginMax new maximal margin
 	 */
-	void SetMargins(wxCoord marginMin, wxCoord marginMax)
-	{
-		if (m_marginMin != marginMin || m_marginMax != marginMax) {
-			m_marginMin = marginMin;
-			m_marginMax = marginMax;
-			FireAxisChanged();
-		}
-	}
+	void SetMargins(wxCoord marginMin, wxCoord marginMax);
 
 	//
 	// Window functions.
@@ -290,7 +283,7 @@ protected:
 	 */
 	virtual bool AcceptDataset(Dataset *dataset) = 0;
 
-	Array<Dataset, 1, true> m_datasets;
+	DatasetArray m_datasets;
 	wxPen m_gridLinesPen;
 
 	wxCoord m_marginMin;
