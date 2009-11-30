@@ -12,7 +12,6 @@
 #define LEGEND_H_
 
 #include <wx/wxfreechartdefs.h>
-#include <wx/array.h>
 #include <wx/dataset.h>
 #include <wx/areadraw.h>
 

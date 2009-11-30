@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/12
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -60,7 +60,6 @@ public:
 
 		// create normal bar type with bar width = 10
 		BarType *barType = new NormalBarType(10);
-		barType->SetBarDraw(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
 
 		// Set bar renderer for it
 		dataset->SetRenderer(new BarRenderer(barType));
@@ -121,7 +120,6 @@ public:
 
 		// Create bar type
 		BarType *barType = new NormalBarType(10);
-		barType->SetBarDraw(0, new FillAreaDraw(*wxBLACK_PEN, *wxRED_BRUSH));
 
 		// Set histogram renderer for it
 		dataset->SetRenderer(new BarRenderer(barType));
@@ -203,12 +201,12 @@ public:
 		// Create bat type
 		BarType *barType = new NormalBarType(10);
 
-		// some eyes-candy: gradient bars
-		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
-
 		// Set bar renderer for it, with normal bars
 		BarRenderer *renderer = new BarRenderer(barType);
+
+		// some eyes-candy: gradient bars
+		renderer->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		renderer->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// assign renderer to dataset - necessary step
 		dataset->SetRenderer(renderer);
@@ -288,10 +286,6 @@ public:
 
 		// Create stacked bar type
 		BarType *barType = new StackedBarType(10, 0);
-
-		// some eyes-candy: gradient bars
-		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// Set bar renderer for it, with stacked bar type
 		BarRenderer *renderer = new BarRenderer(barType);
@@ -375,12 +369,12 @@ public:
 		// create layered bar type with width=20 and base=0
 		BarType *barType = new LayeredBarType(20, 0);
 
-		// some eyes-candy: gradient bars
-		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
-
 		// Set bar renderer for it, with layered bar type
 		BarRenderer *renderer = new BarRenderer(barType);
+
+		// some eyes-candy: gradient bars
+		renderer->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		renderer->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// assign renderer to dataset
 		dataset->SetRenderer(renderer);
@@ -419,7 +413,7 @@ class BarDemo6 : public ChartDemo
 {
 public:
 	BarDemo6()
-	: ChartDemo(wxT("Bar demo 6 - layered date bars"))
+	: ChartDemo(wxT("Bar demo 6 - date bars"))
 	{
 	}
 
@@ -457,12 +451,12 @@ public:
 		// create layered bar type with width=20 and base=0
 		BarType *barType = new LayeredBarType(20, 0);
 
-		// some eyes-candy: gradient bars
-		barType->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		barType->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
-
 		// Set bar renderer for it, with layered bar type
 		BarRenderer *renderer = new BarRenderer(barType);
+
+		// some eyes-candy: gradient bars
+		renderer->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
+		renderer->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// assign renderer to dataset
 		dataset->SetRenderer(renderer);
@@ -488,6 +482,9 @@ public:
 
 		// Link first dataset with first vertical axis
 		plot->LinkDataVerticalAxis(0, 0);
+
+		// set legend
+		plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
 		// and finally construct and return chart
 		return new Chart(plot, wxT("USA export goods/services"));

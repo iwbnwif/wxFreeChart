@@ -15,6 +15,7 @@
 #include "wx/areadraw.h"
 
 class CategoryDataset;
+class BarRenderer;
 
 /**
  * Bar types base class.
@@ -22,11 +23,12 @@ class CategoryDataset;
 class WXDLLIMPEXP_FREECHART BarType
 {
 public:
-	BarType();
+	BarType(double base);
 	virtual ~BarType();
 
 	/**
 	 * Performs bar drawing.
+	 * @param barRenderer bar renderer
 	 * @param dc device context
 	 * @param rc rectangle where to draw
 	 * @param horizAxis horizontal axis
@@ -35,35 +37,34 @@ public:
 	 * @param item dataset item index
 	 * @param dataset dataset to draw bars
 	 */
-	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, int item, CategoryDataset *dataset);
-
-	/**
-	 * Sets area draw object to draw specified serie.
-	 * @param serie serie index
-	 * @param ad area draw for serie
-	 */
-	void SetBarDraw(int serie, AreaDraw *ad)
-	{
-		m_barDraws.SetAreaDraw(serie, ad);
-	}
+	virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, int item, CategoryDataset *dataset);
 
 	//
-	// Called from BarRenderer
+	// Called from BarRenderer. Don't call from programs.
 	//
 	virtual double GetMinValue(CategoryDataset *dataset);
 	virtual double GetMaxValue(CategoryDataset *dataset);
 
 protected:
-	virtual void GetBar(int item, int serie, CategoryDataset *dataset,
+	/**
+	 * Called to calculate bar geometry params.
+	 * Must be implemented by derivate classes.
+	 * @param dataset dataset
+	 * @param item item index
+	 * @param serie serie index
+	 * @param width output for bar width
+	 * @param shift output for bar shift
+	 * @param base output for bar base
+	 * @param value output for bar value
+	 */
+	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
 			int &width, wxCoord &shift, double &base, double &value) = 0;
 
 	double m_base;
-
-	AreaDrawCollection m_barDraws;
 };
 
 /**
- * Standard bar type. Draws series parallel to each other.
+ * Normal bar type. Draws series parallel to each other.
  */
 class WXDLLIMPEXP_FREECHART NormalBarType : public BarType
 {
@@ -78,7 +79,7 @@ public:
 	virtual ~NormalBarType();
 
 protected:
-	virtual void GetBar(int item, int serie, CategoryDataset *dataset,
+	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
 			int &width, wxCoord &shift, double &base, double &value);
 
 private:
@@ -104,7 +105,7 @@ public:
 	virtual double GetMaxValue(CategoryDataset *dataset);
 
 protected:
-	virtual void GetBar(int item, int serie, CategoryDataset *dataset,
+	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
 			int &width, wxCoord &shift, double &base, double &value);
 
 private:
@@ -126,16 +127,15 @@ public:
 	virtual ~LayeredBarType();
 
 protected:
-	virtual void GetBar(int item, int serie, CategoryDataset *dataset,
+	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
 			int &width, wxCoord &shift, double &base, double &value);
 
 private:
 	int m_initialBarWidth;
-	double m_base;
 };
 
 /**
- * Bar plot renderer.
+ * Bar renderer.
  */
 class WXDLLIMPEXP_FREECHART BarRenderer : public Renderer
 {
@@ -143,11 +143,16 @@ class WXDLLIMPEXP_FREECHART BarRenderer : public Renderer
 public:
 	/**
 	 * Constructs new bar renderer.
-	 * @param barType bar type to be drawn by this renderer
+	 * @param barType bar type to be drawn by this renderer,
+	 * renderer takes ownership for bar type object
 	 */
 	BarRenderer(BarType *barType);
-
 	virtual ~BarRenderer();
+
+	//
+	// Renderer
+	//
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
 
 	/**
 	 * Draws dataset.
@@ -161,15 +166,38 @@ public:
 
 	/**
 	 * Sets bar type. BarRenderer owns this object.
-	 * @param barType new bar type.
+	 * @param barType new bar type,
+	 * renderer takes ownership for bar type object
 	 */
 	void SetBarType(BarType *barType);
+
+	/**
+	 * Returns bar type.
+	 * @return bar type
+	 */
+	BarType *GetBarType();
+
+	/**
+	 * Sets area draw object to draw specified serie.
+	 * @param serie serie index
+	 * @param ad area draw for serie
+	 */
+	void SetBarDraw(int serie, AreaDraw *areaDraw);
+
+	/**
+	 * Returns area draw object, used to draw specified serie.
+	 * @param serie serie index
+	 * @return area draw object
+	 */
+	AreaDraw *GetBarDraw(int serie);
 
 	double GetMinValue(CategoryDataset *dataset);
 	double GetMaxValue(CategoryDataset *dataset);
 
-protected:
+private:
 	BarType *m_barType;
+
+	AreaDrawCollection m_barDraws;
 };
 
 #endif /*BARRENDERER_H_*/

@@ -10,7 +10,10 @@
 
 #include <wx/axis/axis.h>
 
+#include "wx/arrimpl.cpp"
+
 IMPLEMENT_CLASS(Axis, wxObject)
+
 
 AxisObserver::AxisObserver()
 {
@@ -165,3 +168,5 @@ double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoor
 		return minValue + ((g - minCoord) * valueRange / gRange);
 	}
 }
+
+WX_DEFINE_EXPORTED_OBJARRAY(AxisArray)

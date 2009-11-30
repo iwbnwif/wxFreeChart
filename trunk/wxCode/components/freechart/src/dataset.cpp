@@ -92,7 +92,7 @@ DateTimeDataset::~DateTimeDataset()
 // DatasetArray
 //
 
-WX_DEFINE_EXPORTED_OBJARRAY(DatasetBaseArray)
+WX_DEFINE_EXPORTED_OBJARRAY(DatasetArrayBase)
 
 DatasetArray::DatasetArray()
 {
@@ -109,13 +109,13 @@ DatasetArray::~DatasetArray()
 void DatasetArray::Add(Dataset *dataset)
 {
 	dataset->AddRef();
-	DatasetBaseArray::Add(dataset);
+	DatasetArrayBase::Add(dataset);
 }
 
 void DatasetArray::Remove(Dataset *dataset)
 {
 	SAFE_UNREF(dataset);
-	DatasetBaseArray::Remove(dataset);
+	DatasetArrayBase::Remove(dataset);
 }
 
 void DatasetArray::RemoveAt(size_t index, size_t count)
@@ -125,5 +125,5 @@ void DatasetArray::RemoveAt(size_t index, size_t count)
 		SAFE_UNREF(dataset);
 	}
 
-	DatasetBaseArray::RemoveAt(index, count);
+	DatasetArrayBase::RemoveAt(index, count);
 }

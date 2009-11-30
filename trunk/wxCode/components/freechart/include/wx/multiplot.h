@@ -11,8 +11,10 @@
 #ifndef MULTIPLOT_H_
 #define MULTIPLOT_H_
 
-#include <wx/array.h>
+#include <wx/dynarray.h>
 #include <wx/plot.h>
+
+WX_DECLARE_EXPORTED_OBJARRAY(Plot *, PlotArray);
 
 class WXDLLIMPEXP_FREECHART MultiPlot : public Plot, public PlotObserver
 {
@@ -39,7 +41,7 @@ protected:
 	virtual void DrawData(wxDC &dc, wxRect rc);
 
 private:
-	Array<Plot, 1> m_subPlots;
+	PlotArray m_subPlots;
 
 	int m_rows;
 	int m_cols;

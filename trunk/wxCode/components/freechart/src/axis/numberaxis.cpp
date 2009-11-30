@@ -141,6 +141,8 @@ void NumberAxis::UpdateTickValues()
 
 wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
 {
+	dc.SetFont(GetLabelTextFont());
+
 	wxSize sizeMinValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_minValue));
 	wxSize sizeMaxValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_maxValue));
 
@@ -166,6 +168,10 @@ double NumberAxis::GetValue(int step)
 void NumberAxis::GetLabel(int step, wxString &label)
 {
 	double value = GetValue(step);
+
+	if (value == -0) {
+		value = 0;
+	}
 
 	if (m_intValues) {
 		label = wxString::Format(wxT("%i"), (int) value);

@@ -23,6 +23,9 @@ public:
 	virtual ~OHLCBarRenderer();
 
 	virtual void DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close);
+
+private:
+	wxPen m_barPen;
 };
 
 #endif /*OHLCBARRENDERER_H_*/

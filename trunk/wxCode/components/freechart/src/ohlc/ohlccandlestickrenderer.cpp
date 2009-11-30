@@ -45,5 +45,9 @@ void OHLCCandlestickRenderer::DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoor
 		dc.SetBrush(m_lowerBrush);
 	}
 
+	if (height == 0) {
+		height = 1;
+	}
+
 	dc.DrawRectangle(leftX, y, 2 * m_candleRadius, height);
 }

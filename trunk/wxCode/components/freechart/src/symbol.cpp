@@ -130,11 +130,14 @@ void TriangleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
 	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
 
-	wxCoord r = m_size / 2;
+	const double COS_30 = 0.866158094;
+	const double SIN_30 = 0.5;
+
+	double r = m_size / 2;
 	wxPoint pts[] = {
-		wxPoint(x - r, (wxCoord) ( y + r / 3.48)),
-		wxPoint(x, (wxCoord) (y - r / 1.74)),
-		wxPoint(x + r, (wxCoord) (y + r / 3.48)),
+		wxPoint(x, (wxCoord) ( y - r)),
+		wxPoint((wxCoord) (x + r * COS_30), (wxCoord) (y + r * SIN_30)),
+		wxPoint((wxCoord) (x - r * COS_30), (wxCoord) (y + r * SIN_30)),
 	};
 
 	dc.DrawPolygon(3, pts);

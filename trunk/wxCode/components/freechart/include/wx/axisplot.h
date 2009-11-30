@@ -18,19 +18,49 @@
 #include <wx/legend.h>
 #include <wx/marker.h>
 
+#include <wx/dynarray.h>
+
 /**
- * Base class plots that supports axes.
+ * Internal class, don't use in programs.
  */
-class WXDLLIMPEXP_FREECHART AxisPlot : public Plot, public DrawObserver, public DatasetObserver, public AxisObserver
+class DataAxisLink
+{
+public:
+	DataAxisLink(Dataset *dataset, Axis *axis)
+	{
+		m_dataset = dataset;
+		m_axis = axis;
+	}
+
+	DataAxisLink(const DataAxisLink &o)
+	{
+		m_dataset = o.m_dataset;
+		m_axis = o.m_axis;
+	}
+
+	~DataAxisLink()
+	{
+	}
+
+	Dataset *m_dataset;
+	Axis *m_axis;
+};
+
+WX_DECLARE_EXPORTED_OBJARRAY(DataAxisLink, DataAxisLinkArray);
+
+/**
+ * Base class for plots that supports axes.
+ */
+class WXDLLIMPEXP_FREECHART AxisPlot : public Plot,
+public DrawObserver, public DatasetObserver, public AxisObserver
 {
 public:
 	AxisPlot();
-
 	virtual ~AxisPlot();
 
 	/**
 	 * Adds axis to plot.
-	 * @param _axis axis to be added
+	 * @param axis axis to be added
 	 */
 	void AddAxis(Axis *axis);
 
@@ -75,13 +105,14 @@ public:
 
 	/**
 	 * Set whether to draw grid lines.
-	 * @param _drawGrid if true - plot will draw grid lines
+	 * @param drawGridVertical if true - plot will draw vertical grid lines
+	 * @param drawGridHorizontal if true - plot will draw horizontal grid lines
 	 */
 	void SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal);
 
 	/**
 	 * Sets background for data area.
-	 * @param _dataBackground background for data area
+	 * @param dataBackground background for data area
 	 */
 	void SetDataBackground(AreaDraw *dataBackground);
 
@@ -140,8 +171,6 @@ protected:
 	 */
 	virtual bool AcceptDataset(Dataset *dataset) = 0;
 
-	//virtual bool CheckPlotConfiguration() = 0;
-
 	virtual void DrawDatasets(wxDC &dc, wxRect rc) = 0;
 
 	/**
@@ -179,7 +208,7 @@ protected:
 		return GetDatasetAxis(dataset, false);
 	}
 
-	wxCoord GetAxesExtent(wxDC &dc, Array<Axis, 1> *axes);
+	wxCoord GetAxesExtent(wxDC &dc, AxisArray *axes);
 
 private:
 	//
@@ -189,9 +218,12 @@ private:
 
 	virtual bool HasData();
 
-	void DrawAxesArray(Array<Axis, 1> *axes, bool vertical, wxDC &dc, wxRect rc);
 
 	void UpdateAxis(Dataset *dataset = NULL);
+
+	//
+	// Draw functions
+	//
 
 	/**
 	 * Calculate data area.
@@ -209,6 +241,16 @@ private:
 	 * @param rcData data area rectangle
 	 */
 	void DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData);
+
+	/**
+	 * Draw axes array.
+	 * @param dc device context
+	 * @param rc rectangle where to draw axes
+	 * @param axes axes array
+	 * @param vertical true to draw vertical axes, false - horizontal
+	 */
+	void DrawAxesArray(wxDC &dc, wxRect rc, AxisArray *axes, bool vertical);
+
 
 	/**
 	 * Draws grid lines.
@@ -238,45 +280,23 @@ private:
 	 */
 	void DrawLegend(wxDC &dc, wxRect rcLegend);
 
-	/**
-	 * TODO deprecated, must be removed.
-	 */
-	class DataAxisLink
-	{
-	public:
-		DataAxisLink(Dataset *dataset, Axis *axis)
-		{
-			m_dataset = dataset;
-			m_axis = axis;
-		}
-
-		~DataAxisLink()
-		{
-
-		}
-
-		Dataset *m_dataset;
-		Axis *m_axis;
-	};
-
 	bool m_drawGridVertical;
 	bool m_drawGridHorizontal;
 
-	Array<Axis, 1> m_leftAxes;
-	Array<Axis, 1> m_rightAxes;
-	Array<Axis, 1> m_topAxes;
-	Array<Axis, 1> m_bottomAxes;
+	AxisArray m_leftAxes;
+	AxisArray m_rightAxes;
+	AxisArray m_topAxes;
+	AxisArray m_bottomAxes;
 
-	Array<Axis, 1> m_horizontalAxes;
-	Array<Axis, 1> m_verticalAxes;
+	AxisArray m_horizontalAxes;
+	AxisArray m_verticalAxes;
 
-	// TODO deprecated - use Axis::AddDataset
-	Array<DataAxisLink, 1> m_links;
+	DataAxisLinkArray m_links;
 
 	DatasetArray m_datasets;
-	AreaDraw *m_dataBackground;
+	AreaDraw *m_dataBackground; // data area background
 
-	Array<Marker, 1> m_markers;
+	MarkerArray m_markers;
 
 	wxCoord m_legendPlotGap; // distance between plot and legend
 

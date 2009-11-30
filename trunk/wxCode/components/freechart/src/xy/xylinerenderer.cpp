@@ -87,7 +87,7 @@ void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wx
 	if (m_drawSymbols) {
 		Symbol *symbol = GetSerieSymbol(serie);
 
-		wxColour color = GetSerieColor(serie);
+		wxColour color = GetSerieColour(serie);
 		symbol->Draw(dc, x0, y0, color);
 		symbol->Draw(dc, x1, y1, color);
 	}
@@ -99,19 +99,6 @@ void XYLineRenderer::SetSeriePen(int serie, wxPen *pen)
 	FireNeedRedraw();
 }
 
-void XYLineRenderer::SetSerieColor(int serie, wxColour *color)
-{
-	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, m_defaultPenWidth, m_defaultPenStyle));
-}
-
-wxColour XYLineRenderer::GetSerieColor(int serie)
-{
-	if (m_seriePens.find(serie) == m_seriePens.end()) {
-		return GetDefaultColour(serie);
-	}
-	return m_seriePens[serie].GetColour();
-}
-
 wxPen *XYLineRenderer::GetSeriePen(int serie)
 {
 	if (m_seriePens.find(serie) == m_seriePens.end()) {
@@ -120,3 +107,31 @@ wxPen *XYLineRenderer::GetSeriePen(int serie)
 	return &m_seriePens[serie];
 }
 
+void XYLineRenderer::SetSerieColour(int serie, wxColour *colour)
+{
+	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*colour, m_defaultPenWidth, m_defaultPenStyle));
+}
+
+wxColour XYLineRenderer::GetSerieColour(int serie)
+{
+	if (m_seriePens.find(serie) == m_seriePens.end()) {
+		return GetDefaultColour(serie);
+	}
+	return m_seriePens[serie].GetColour();
+}
+
+void XYLineRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie)
+{
+	if (m_drawLines) {
+		dc.SetPen(*GetSeriePen(serie));
+		dc.DrawLine(rcSymbol.x, rcSymbol.y + rcSymbol.height / 2,
+				rcSymbol.x + rcSymbol.width, rcSymbol.y + rcSymbol.height / 2);
+	}
+
+	if (m_drawSymbols) {
+		wxColour colour = GetSerieColour(serie);
+		Symbol *symbol = GetSerieSymbol(serie);
+
+		symbol->Draw(dc, rcSymbol.x + rcSymbol.width / 2, rcSymbol.y + rcSymbol.height / 2, colour);
+	}
+}

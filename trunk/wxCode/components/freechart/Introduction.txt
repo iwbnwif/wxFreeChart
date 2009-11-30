@@ -1,5 +1,5 @@
 
-wxFreeChart version 1.1 alpha.
+wxFreeChart version 1.2 alpha.
 
 Copyright (c) 2008-2009 Moskvichev Andrey V.
 
@@ -8,7 +8,6 @@ I.   About.
 II.  Requirments.
 III. Chart types.
 IV.  Basic concepts.
-V.   Known issues.
 
 				I. About.
 	wxFreeChart is the free crossplatform chart library based on wxWidgets.
@@ -27,48 +26,44 @@ V.   Known issues.
 5. OHLC (Open-High-Low-Close) financial charts.
 6. Pie charts. TODO
 7. Date/Time based line or histogram charts.
-8. Bubble charts, based on zyz coordinates.
+8. Bubble charts, based on xyz coordinates.
 9. Statistical charts with std-deviations, etc. TODO
 10. Gantt charts. 
 
 				IV. Basic concepts.
-	wxFreeChart is object-oriented charting library with 
+	wxFreeChart is powerful object-oriented charting library with 
 model-controller-view design.
-First class that you need is Chart. It contains plot, chart title, and various
+
+	First class that you need is Chart. It contains plot, chart title, and various
 attributes. Chart delegates drawing operations to Plot, Plot delegates to
 dataset renderers, axes and other graphical objects (like legend, 
 markers, area draws, etc). 
-Plot class glues axes (if any), datasets, legend, data markers, etc.
-Dataset classes contains data to be drawn. There are XY datasets,
+	Plot class glues axes (if any), datasets, legend, data markers, etc.
+
+	Dataset classes contains data to be drawn. There are XY datasets,
 OHLC datasets, date/time datasets (for data linked with date/time values),
-category datasets, Gantt datasets, etc. 
-Data drawing performed by dataset renderers, like XYRenderers,
+category datasets, Gantt datasets, etc.
+ 
+	Data drawing performed by dataset renderers, like XYRenderers,
 OHLC renderers (Bars or candlesticks), histogram renderers, etc.
-Axis classes performs axes drawing on plot and data scaling. They also
+
+	Axis classes performs axes drawing on plot and data scaling. They also
 support windows. Window is visible part of data. They can be used, when 
-data is too long.
+data is too long to be drawn at once.
 	wxChartPanel is wxWidgets window containing chart.
 	
 	Other classes include Legend, Marker, AreaDraw,	ColorScheme, Symbol.
 	Legend performs legend drawing, contains attributes like, legend position,
-font, etc. 
+font, etc.
+ 
 	Marker is base class for data markers, like point markers,
 line markers, range markers. It is still work in progress. 
+
 	AreaDraw is helper class for drawing rectangular areas. 
-It is used to draw chart, plot backgrounds, bars in bar charts. 
+It is used to draw chart, plot backgrounds, bars in bar charts.
+ 
 	ColorScheme is colours collection for pie plots, etc.
+	
 	Symbol is base class for symbols drawn on legends and xy points.
-
-FIXME: write more.
-
-				V. Known issues.
-- Work with wxWidgets 2.6.x not tested.
-- I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
-  Other ports are not tested.
-- Gantt charts.
-- Antialiasing doesn't works.
-- Pie plots is very ugly, and must be cleaned up or rewritten.
-- Transparency not implemented. Needed for area/histogram charts with
-  overlaying areas/histograms, etc.
 
 FIXME: write more.

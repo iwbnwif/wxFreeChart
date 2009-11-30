@@ -11,6 +11,11 @@
 #include <wx/axisplot.h>
 #include <wx/drawutils.h>
 
+#include "wx/arrimpl.cpp"
+
+WX_DEFINE_EXPORTED_OBJARRAY(DataAxisLinkArray)
+
+
 #define CHECK_INDEX(name, index, v) do {											\
 	if (index >= (int) v.Count()) {													\
 		wxLogError(wxT("%s index out of bounds: %i %i"), name, index, v.Count());	\
@@ -22,9 +27,6 @@
 AxisPlot::AxisPlot()
 {
 	m_legendPlotGap = 2;
-
-	m_horizontalAxes.NotOwns();
-	m_verticalAxes.NotOwns();
 
 	m_drawGridVertical = true;
 	m_drawGridHorizontal = true;
@@ -39,6 +41,21 @@ AxisPlot::~AxisPlot()
 	for (size_t n = 0; n < m_datasets.Count(); n++) {
 		Dataset *dataset = m_datasets[n];
 		dataset->RemoveObserver(this);
+	}
+
+	for (size_t n = 0; n < m_horizontalAxes.Count(); n++) {
+		Axis *axis = m_horizontalAxes[n];
+		wxDELETE(axis);
+	}
+
+	for (size_t n = 0; n < m_verticalAxes.Count(); n++) {
+		Axis *axis = m_verticalAxes[n];
+		wxDELETE(axis);
+	}
+
+	for (size_t n = 0; n < m_markers.Count(); n++) {
+		Marker *marker = m_markers[n];
+		wxDELETE(marker);
 	}
 
 	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
@@ -157,11 +174,11 @@ void AxisPlot::SetLegend(Legend *legend)
 
 void AxisPlot::UpdateAxis(Dataset *dataset)
 {
-	for (int nLink = 0; nLink < m_links.GetSize(); nLink++) {
-		DataAxisLink *link = m_links[nLink];
+	for (size_t nLink = 0; nLink < m_links.Count(); nLink++) {
+		DataAxisLink &link = m_links[nLink];
 
-		if (dataset == NULL || link->m_dataset == dataset) {
-			link->m_axis->UpdateBounds();
+		if (dataset == NULL || link.m_dataset == dataset) {
+			link.m_axis->UpdateBounds();
 		}
 	}
 }
@@ -177,13 +194,13 @@ void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
 void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
 {
 	if (m_drawGridVertical) {
-		for (int nAxis = 0; nAxis < m_verticalAxes.GetSize(); nAxis++) {
+		for (size_t nAxis = 0; nAxis < m_verticalAxes.Count(); nAxis++) {
 			m_verticalAxes[nAxis]->DrawGridLines(dc, rc);
 		}
 	}
 
 	if (m_drawGridHorizontal) {
-		for (int nAxis = 0; nAxis < m_horizontalAxes.GetSize(); nAxis++) {
+		for (size_t nAxis = 0; nAxis < m_horizontalAxes.Count(); nAxis++) {
 			m_horizontalAxes[nAxis]->DrawGridLines(dc, rc);
 		}
 	}
@@ -191,13 +208,12 @@ void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
 
 Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
 {
-	// TODO deprecated - don't use DataAxisLink
-	for (int nLink = 0; nLink < m_links.GetSize(); nLink++) {
-		DataAxisLink *link = m_links[nLink];
+	for (size_t nLink = 0; nLink < m_links.Count(); nLink++) {
+		DataAxisLink &link = m_links[nLink];
 
-		if (link->m_dataset == dataset) {
-			if (vertical == link->m_axis->IsVertical()) {
-				return link->m_axis;
+		if (link.m_dataset == dataset) {
+			if (vertical == link.m_axis->IsVertical()) {
+				return link.m_axis;
 			}
 		}
 	}
@@ -225,10 +241,10 @@ void AxisPlot::BoundsChanged(Axis *WXUNUSED(axis))
 	FirePlotNeedRedraw();
 }
 
-wxCoord AxisPlot::GetAxesExtent(wxDC &dc, Array<Axis, 1> *axes)
+wxCoord AxisPlot::GetAxesExtent(wxDC &dc, AxisArray *axes)
 {
 	wxCoord ext = 0;
-	for (int nAxis = 0; nAxis < axes->GetSize(); nAxis++) {
+	for (size_t nAxis = 0; nAxis < axes->Count(); nAxis++) {
 		ext += (*axes)[nAxis]->GetExtent(dc);
 	}
 	return ext;
@@ -311,24 +327,24 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 	rcData = rc;
 
 	// substract axes areas from data rectangle
-	if (m_leftAxes.GetSize() != 0) {
+	if (m_leftAxes.Count() != 0) {
 		wxCoord ext = GetAxesExtent(dc, &m_leftAxes);
 
 		rcData.x += ext;
 		rcData.width -= ext;
 	}
-	if (m_rightAxes.GetSize() != 0) {
+	if (m_rightAxes.Count() != 0) {
 		wxCoord ext = GetAxesExtent(dc, &m_rightAxes);
 
 		rcData.width -= ext;
 	}
-	if (m_topAxes.GetSize() != 0) {
+	if (m_topAxes.Count() != 0) {
 		wxCoord ext = GetAxesExtent(dc, &m_topAxes);
 
 		rcData.y += ext;
 		rcData.height -= ext;
 	}
-	if (m_bottomAxes.GetSize() != 0) {
+	if (m_bottomAxes.Count() != 0) {
 		wxCoord ext = GetAxesExtent(dc, &m_bottomAxes);
 
 		rcData.height -= ext;
@@ -337,11 +353,11 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
 	CheckFixRect(rcData);
 }
 
-void AxisPlot::DrawAxesArray(Array<Axis, 1> *axes, bool vertical, wxDC &dc, wxRect rc)
+void AxisPlot::DrawAxesArray(wxDC &dc, wxRect rc, AxisArray *axes, bool vertical)
 {
 	wxRect rcAxis(rc);
 
-	for (int nAxis = 0; nAxis < axes->GetSize(); nAxis++) {
+	for (size_t nAxis = 0; nAxis < axes->Count(); nAxis++) {
 		Axis *axis = (*axes)[nAxis];
 		wxCoord ext = axis->GetExtent(dc);
 
@@ -365,27 +381,28 @@ void AxisPlot::DrawAxesArray(Array<Axis, 1> *axes, bool vertical, wxDC &dc, wxRe
 
 void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
 {
-	if (m_leftAxes.GetSize() != 0) {
+	if (m_leftAxes.Count() != 0) {
 		wxRect rcLeftAxes(rc.x, rcData.y, (rcData.x - rc.x), rcData.height);
-		DrawAxesArray(&m_leftAxes, true, dc, rcLeftAxes);
+		DrawAxesArray(dc, rcLeftAxes, &m_leftAxes, true);
 	}
-	if (m_rightAxes.GetSize() != 0) {
+	if (m_rightAxes.Count() != 0) {
 		wxRect rcRightAxes(rcData.x + rcData.width - 1, rcData.y, (rc.x + rc.width - rcData.x - rcData.width - 1), rcData.height);
-		DrawAxesArray(&m_rightAxes, true, dc, rcRightAxes);
+		DrawAxesArray(dc, rcRightAxes, &m_rightAxes, true);
 	}
-	if (m_topAxes.GetSize() != 0) {
-		wxRect rcTopAxes(rcData.x, rc.y + 2, rcData.width, (rcData.y - rc.y + 2));
-		DrawAxesArray(&m_topAxes, false, dc, rcTopAxes);
+	if (m_topAxes.Count() != 0) {
+		wxRect rcTopAxes(rcData.x, rc.y, rcData.width, (rcData.y - rc.y));
+		//wxRect rcTopAxes(rcData.x, rc.y + 2, rcData.width, (rcData.y - rc.y + 2));
+		DrawAxesArray(dc, rcTopAxes, &m_topAxes, false);
 	}
-	if (m_bottomAxes.GetSize() != 0) {
+	if (m_bottomAxes.Count() != 0) {
 		wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height - 1, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
-		DrawAxesArray(&m_bottomAxes, false, dc, rcBottomAxes);
+		DrawAxesArray(dc, rcBottomAxes, &m_bottomAxes, false);
 	}
 }
 
 void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
 {
-	for (int n = 0; n < m_markers.GetSize(); n++) {
+	for (size_t n = 0; n < m_markers.Count(); n++) {
 		// TODO not implemented!
 	}
 }

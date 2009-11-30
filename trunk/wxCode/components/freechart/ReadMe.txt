@@ -4,19 +4,20 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.1
+ Version: 1.2 alpha
  Description:
- wxFreeChart is free charting library based on wxWidgets. It 
- designed with flexibility in mind, and has MCV design.
+ wxFreeChart is free powerful charting library based on wxWidgets. It 
+ designed with flexibility in mind, and supports many types of charts 
+ with many different configurations.
  Supported chart types are:
- - line/histogram charts base on xy coordinates
- - bar charts (vertical or horizontal)
- - stacked bar charts
- - layered bar charts
+ - Line/histogram charts base on xy coordinates
+ - Bar charts (vertical or horizontal)
+ - Stacked bar charts
+ - Layered bar charts
  - OHLC financial charts (bars or candlesticks)
- - pie charts
- - bubble charts
- 
+ - Pie charts
+ - Bubble charts
+ - Gantt charts 
 
  Installation - win32
  --------------------
@@ -49,9 +50,11 @@
  1.2: third version of wxFreeChart at wxCode
  		What's new:
  		 - added xy datasets support to OHLCPlot
- 		 - axes draw when legend shown bug fixed
+ 		 - added XYSimpleDataset, CategorySimpleDataset, GanttSimpleDataset classes
+ 		 - many refactoring changes
+ 		 - many bugfixes
  		 - updated documentation
- 		 - added time series and combined axis demos
+ 		 - added time series, multiple axis and combined axis demos
  		 
  1.1: second version of wxFreeChart at wxCode
  		What's new:
@@ -65,13 +68,14 @@
 
  Future plans:
  - Transparency for bubble charts, histogram charts.
- - Markers
+ - Markers.
  - Add levels/fractals/etc support to OHLCPlot. Make 
    OHLCPlot suitable for technical analysis applications.
- - Make antialiasing
+ - Antialiasing for lines, shapes, etc.
  - Logorithmic axes
  - Make axis marks drawing more flexible.
-
+ - Add zoom to plots.
+ - Make wxFreeChart to work on handheld wxWidgets ports.
  
  Known issues:
  - window scrolling bugs
@@ -82,8 +86,6 @@
  - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
  - Antialiasing not implemented
  - Pie plots are very ugly, and must be cleaned up or rewritten.
- - Transparency not implemented. Needed for area/histogram charts with
-   overlaying areas/histograms, etc.
 
  [optionally: Known bugs, Author's info, ... ]
 

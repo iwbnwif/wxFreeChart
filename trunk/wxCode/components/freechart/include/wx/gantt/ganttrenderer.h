@@ -30,6 +30,19 @@ public:
 	GanttRenderer(int barWidth = 5, int serieGap = 2);
 	virtual ~GanttRenderer();
 
+	//
+	// Renderer
+	//
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
+
+	/**
+	 * Drawn gantt dataset.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 * @param horizAxis horizontal axis
+	 * @param vertAxis vertical axis
+	 * @param dataset dataset to draw
+	 */
 	void Draw(wxDC &dc, wxRect rc, DateAxis *horizAxis, CategoryAxis *vertAxis, GanttDataset *dataset);
 
 	/**
@@ -37,11 +50,9 @@ public:
 	 * @param serie serie index
 	 * @param ad area draw for serie
 	 */
-	void SetSerieDraw(int serie, AreaDraw *ad)
-	{
-		m_serieDraws.SetAreaDraw(serie, ad);
-		FireNeedRedraw();
-	}
+	void SetSerieDraw(int serie, AreaDraw *areaDraw);
+
+	AreaDraw *GetSerieDraw(int serie);
 
 	void SetBarWidth(int barWidth)
 	{
@@ -50,6 +61,7 @@ public:
 	}
 
 private:
+
 	int m_barWidth;
 	int m_serieGap;
 

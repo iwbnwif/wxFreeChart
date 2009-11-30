@@ -904,6 +904,10 @@ SOURCE=..\src\category\categorydataset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\category\categorysimpledataset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\chart.cpp
 # End Source File
 # Begin Source File
@@ -937,6 +941,10 @@ SOURCE=..\src\gantt\ganttplot.cpp
 # Begin Source File
 
 SOURCE=..\src\gantt\ganttrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\gantt\ganttsimpledataset.cpp
 # End Source File
 # Begin Source File
 
@@ -1032,6 +1040,10 @@ SOURCE=..\src\xy\xyrenderer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\xy\xysimpledataset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\xyz\xyzdataset.cpp
 # End Source File
 # Begin Source File
@@ -1045,10 +1057,6 @@ SOURCE=..\src\xyz\xyzrenderer.cpp
 # Begin Source File
 
 SOURCE=..\include\wx\areadraw.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\include\wx\array.h
 # End Source File
 # Begin Source File
 
@@ -1081,6 +1089,10 @@ SOURCE=..\include\wx\axis\categoryaxis.h
 # Begin Source File
 
 SOURCE=..\include\wx\category\categorydataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\category\categorysimpledataset.h
 # End Source File
 # Begin Source File
 
@@ -1129,6 +1141,10 @@ SOURCE=..\include\wx\gantt\ganttplot.h
 # Begin Source File
 
 SOURCE=..\include\wx\gantt\ganttrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\gantt\ganttsimpledataset.h
 # End Source File
 # Begin Source File
 
@@ -1229,6 +1245,10 @@ SOURCE=..\include\wx\xy\xyplot.h
 # Begin Source File
 
 SOURCE=..\include\wx\xy\xyrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xysimpledataset.h
 # End Source File
 # Begin Source File
 

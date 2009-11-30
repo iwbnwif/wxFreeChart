@@ -31,6 +31,11 @@ public:
 	XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 1, int defaultStyle = wxSOLID);
 	virtual ~XYLineRenderer();
 
+	//
+	// Renderer
+	//
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
+
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
 	/**
@@ -38,14 +43,14 @@ public:
 	 * @param serie serie index
 	 * @param color color for serie
 	 */
-	virtual void SetSerieColor(int serie, wxColour *color);
+	virtual void SetSerieColour(int serie, wxColour *colour);
 
 	/**
 	 * Returns serie color.
 	 * @param serie serie index
 	 * @return serie color
 	 */
-	virtual wxColour GetSerieColor(int serie);
+	virtual wxColour GetSerieColour(int serie);
 
 	/**
 	 * Sets pen to draw serie lines.

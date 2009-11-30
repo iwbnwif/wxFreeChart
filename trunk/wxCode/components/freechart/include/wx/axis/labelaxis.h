@@ -119,9 +119,9 @@ public:
 	 * Sets colour for labels.
 	 * @param labelColour color for labels
 	 */
-	void SetLabelColour(wxColour labelColour)
+	void SetLabelTextColour(wxColour labelTextColour)
 	{
-		m_labelColour = labelColour;
+		m_labelTextColour = labelTextColour;
 		FireAxisChanged();
 	}
 
@@ -129,18 +129,18 @@ public:
 	 * Returns label colour.
 	 * @return label colour
 	 */
-	wxColour GetLabelColour()
+	wxColour GetLabelTextColour()
 	{
-		return m_labelColour;
+		return m_labelTextColour;
 	}
 
 	/**
 	 * Sets font for labels text.
 	 * @param labelFont font for labels text
 	 */
-	void SetLabelFont(wxFont labelFont)
+	void SetLabelTextFont(wxFont labelTextFont)
 	{
-		m_labelFont = labelFont;
+		m_labelTextFont = labelTextFont;
 		FireAxisChanged();
 	}
 
@@ -148,9 +148,9 @@ public:
 	 * Returns label font.
 	 * @return label font
 	 */
-	const wxFont& GetLabelFont()
+	const wxFont& GetLabelTextFont()
 	{
-		return m_labelFont;
+		return m_labelTextFont;
 	}
 
 	//
@@ -203,9 +203,9 @@ private:
 	wxCoord m_labelGap;
 
 	// labels properties
-	wxFont m_labelFont;
+	wxFont m_labelTextFont;
+	wxColour m_labelTextColour;
 	wxPen m_labelPen;
-	wxColour m_labelColour;
 
 	// label title properties
 	wxString m_title;

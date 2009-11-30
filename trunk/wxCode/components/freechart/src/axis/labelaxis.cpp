@@ -17,8 +17,8 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 : Axis(location)
 {
 	// defaults
-	m_labelColour = *wxBLACK;
-	m_labelFont = *wxSMALL_FONT;
+	m_labelTextColour = *wxBLACK;
+	m_labelTextFont = *wxSMALL_FONT;
 	m_labelPen = *wxBLACK_PEN;
 	m_titleFont = *wxNORMAL_FONT;
 	m_titleColour = *wxBLACK;
@@ -124,9 +124,9 @@ void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 	}
 
 	// setup dc objects for labels and lines
-	dc.SetFont(m_labelFont);
+	dc.SetFont(m_labelTextFont);
+	dc.SetTextForeground(m_labelTextColour);
 	dc.SetPen(m_labelPen);
-	dc.SetTextForeground(m_labelColour);
 
 	wxString label;
 	for (int step = 0; !IsEnd(step) ; step++) {
@@ -192,10 +192,18 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 		if (IsVertical()) {
 			wxCoord y = ToGraphics(dc, rc.y, rc.height, value);
 
+			if (y == rc.y || y == (rc.y + rc.height)) {
+				continue;
+			}
+
 			dc.DrawLine(rc.x, y, rc.x + rc.width, y);
 		}
 		else {
 			wxCoord x = ToGraphics(dc, rc.x, rc.width, value);
+
+			if (x == rc.x || x == (rc.x + rc.width)) {
+				continue;
+			}
 
 			dc.DrawLine(x, rc.y, x, rc.y + rc.height);
 		}
@@ -204,6 +212,7 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 
 void LabelAxis::Draw(wxDC &dc, wxRect rc)
 {
+	// draw title
 	if (m_title.Length() != 0) {
 		wxSize titleExtent = dc.GetTextExtent(m_title);
 

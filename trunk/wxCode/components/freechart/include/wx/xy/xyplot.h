@@ -11,8 +11,6 @@
 #ifndef XYPLOT_H_
 #define XYPLOT_H_
 
-#include <wx/array.h>
-
 #include <wx/axisplot.h>
 #include <wx/axis/numberaxis.h>
 

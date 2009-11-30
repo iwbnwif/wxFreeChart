@@ -14,6 +14,8 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/drawobject.h>
 
+#include <wx/dynarray.h>
+
 //
 // TODO: markers are not implemented!
 //
@@ -29,6 +31,8 @@ public:
 
 	virtual void Draw(wxDC &dc, wxRect rcData) = 0;
 };
+
+WX_DECLARE_EXPORTED_OBJARRAY(Marker *, MarkerArray);
 
 /**
  * Point marker.

@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008-2009-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -35,21 +35,11 @@
 
 #define ABS(a) ((a) < 0) ? (-1*(a)) : (a)
 
-
 #define wxREPLACE(dst, src) do {					\
 	wxDELETE(dst);									\
 	dst = src;										\
 } while (0)
 
-inline static double *NewZeroDoubleArray(int size)
-{
-	double *array = new double[size];
-
-	for (int n = 0; n < size; n++) {
-		array[n] = 0;
-	}
-	return array;
-}
 
 inline static int RoundHigh(double value)
 {
@@ -58,22 +48,6 @@ inline static int RoundHigh(double value)
 	if (((double) iv) > value)
 		iv++;
 	return iv;
-}
-
-static inline int maxV(int count, int first, ...)
-{
-	int maxValue = first;
-	int n;
-	va_list args;
-
-	va_start(args, first);
-
-	for (n = 1; n < count; n++) {
-		int value = va_arg(args, int);
-		maxValue = wxMax(maxValue, value);
-	}
-	va_end(args);
-	return maxValue;
 }
 
 #endif /* WXFREECHARTDEFS_H */
