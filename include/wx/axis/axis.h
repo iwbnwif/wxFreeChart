@@ -13,7 +13,8 @@
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/dataset.h>
-#include <wx/array.h>
+
+#include <wx/dynarray.h>
 
 #include <wx/drawobject.h>
 #include <wx/observable.h>
@@ -52,7 +53,7 @@ public:
 /**
  * Base class for all axes.
  */
-class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>
+class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>//, public RefObject
 {
 	DECLARE_CLASS(Axis)
 
@@ -299,6 +300,8 @@ protected:
 private:
 	AXIS_LOCATION m_location;
 };
+
+WX_DECLARE_EXPORTED_OBJARRAY(Axis *, AxisArray);
 
 wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value);
 double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g);

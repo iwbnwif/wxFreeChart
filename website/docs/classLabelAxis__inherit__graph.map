@@ -1,0 +1,5 @@
+<area shape="rect" href="$classCategoryAxis.html" title="CategoryAxis" alt="" coords="5,239,109,265">
+<area shape="rect" href="$classDateAxis.html" title="DateAxis" alt="" coords="133,239,211,265">
+<area shape="rect" href="$classNumberAxis.html" title="NumberAxis" alt="" coords="235,239,333,265">
+<area shape="rect" href="$classAxis.html" title="Axis" alt="" coords="148,84,196,111">
+<area shape="rect" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="68,7,276,33">

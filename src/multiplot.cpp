@@ -10,8 +10,13 @@
 
 #include <wx/multiplot.h>
 
+#include "wx/arrimpl.cpp"
+
 #define FOREACH_SUBPLOT(index, subPlots) \
-	for (int index = 0; n < subPlots.GetSize(); n++)
+	for (size_t index = 0; index < subPlots.Count(); index++)
+
+WX_DEFINE_EXPORTED_OBJARRAY(PlotArray)
+
 
 MultiPlot::MultiPlot(int rows, int cols, wxCoord horizGap, wxCoord vertGap)
 {
@@ -23,6 +28,10 @@ MultiPlot::MultiPlot(int rows, int cols, wxCoord horizGap, wxCoord vertGap)
 
 MultiPlot::~MultiPlot()
 {
+	FOREACH_SUBPLOT(n, m_subPlots) {
+		Plot *plot = m_subPlots[n];
+		wxDELETE(plot);
+	}
 }
 
 void MultiPlot::PlotNeedRedraw(Plot *WXUNUSED(plot))
@@ -32,7 +41,7 @@ void MultiPlot::PlotNeedRedraw(Plot *WXUNUSED(plot))
 
 bool MultiPlot::HasData()
 {
-	return (m_subPlots.GetSize() != 0);
+	return (m_subPlots.Count() != 0);
 }
 
 void MultiPlot::DrawData(wxDC &dc, wxRect rc)

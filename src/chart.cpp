@@ -98,7 +98,7 @@ Axis *Chart::GetVertScrolledAxis()
 
 wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
 {
-	int topMargin = 5;
+	int topMargin = m_margin;
 	if (m_title.Length() != 0) {
 		dc.SetFont(m_titleFont);
 
@@ -106,7 +106,7 @@ wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
 		topMargin += textExtent.y + 2;
 	}
 
-	Margins(rc, 5, topMargin, 5, 5);
+	Margins(rc, m_margin, topMargin, m_margin, m_margin);
 	return rc;
 }
 

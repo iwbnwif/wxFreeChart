@@ -19,6 +19,7 @@ class GanttDataset;
 
 /**
  * Helper used to access gantt dataset as datetime dataset.
+ * Internal class, don't use from programs.
  */
 class WXDLLIMPEXP_FREECHART GanttDatasetDateHelper : public DateTimeDataset
 {
@@ -57,10 +58,27 @@ public:
 	 */
 	virtual int GetCount() = 0;
 
+	/**
+	 * Returns task start time.
+	 * @param index task index
+	 * @param serie serie index
+	 * @return task start time
+	 */
 	virtual time_t GetStart(int index, int serie) = 0;
 
+	/**
+	 * Returns task end time.
+	 * @param index task index
+	 * @param serie serie index
+	 * @return task end time
+	 */
 	virtual time_t GetEnd(int index, int serie) = 0;
 
+	/**
+	 * Returns task count in specified serie.
+	 * @param serie serie index
+	 * @return task count
+	 */
 	virtual int GetCount(int serie);
 
 	virtual time_t GetMinStart();

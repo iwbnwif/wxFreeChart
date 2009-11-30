@@ -41,6 +41,7 @@ src/pie/pieplot.cpp
 src/art.cpp
 src/multiplot.cpp
 src/gantt/ganttdataset.cpp
+src/gantt/ganttsimpledataset.cpp
 src/gantt/ganttplot.cpp
 src/gantt/ganttrenderer.cpp
 src/plot.cpp
@@ -68,6 +69,7 @@ src/xy/vectordataset.cpp
 src/xy/xyhistorenderer.cpp
 src/xy/xyrenderer.cpp
 src/xy/xydataset.cpp
+src/xy/xysimpledataset.cpp
 src/xy/xylinerenderer.cpp
 src/ohlc/ohlcrenderer.cpp
 src/ohlc/ohlcbarrenderer.cpp
@@ -75,6 +77,7 @@ src/ohlc/ohlcplot.cpp
 src/ohlc/ohlccandlestickrenderer.cpp
 src/ohlc/ohlcdataset.cpp
 src/category/categorydataset.cpp
+src/category/categorysimpledataset.cpp
 src/symbol.cpp
 src/dataset.cpp
 src/colorscheme.cpp
@@ -87,6 +90,7 @@ include/wx/multiplot.h
 include/wx/gantt/ganttdataset.h
 include/wx/gantt/ganttrenderer.h
 include/wx/gantt/ganttplot.h
+include/wx/gantt/ganttsimpledataset.h
 include/wx/chart.h
 include/wx/bars/barplot.h
 include/wx/bars/barrenderer.h
@@ -111,6 +115,7 @@ include/wx/xy/xyplot.h
 include/wx/xy/functions/polynom.h
 include/wx/xy/functions/sinefunction.h
 include/wx/xy/xyhistorenderer.h
+include/wx/xy/xysimpledataset.h
 include/wx/xy/xylinerenderer.h
 include/wx/xy/xydataset.h
 include/wx/xy/vectordataset.h
@@ -122,13 +127,13 @@ include/wx/ohlc/ohlcdataset.h
 include/wx/ohlc/ohlccandlestickrenderer.h
 include/wx/ohlc/ohlcrenderer.h
 include/wx/ohlc/ohlcplot.h
+include/wx/category/categorysimpledataset.h
 include/wx/category/categorydataset.h
 include/wx/colorscheme.h
 include/wx/marker.h
 include/wx/dataset.h
 include/wx/observable.h
 include/wx/drawobject.h
-include/wx/array.h
 include/wx/chartpanel.h
 include/wx/axisplot.h
     </set>

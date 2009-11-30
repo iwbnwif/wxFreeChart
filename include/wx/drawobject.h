@@ -13,10 +13,8 @@
 
 #include <wx/observable.h>
 
-
-// TODO move from here
-static wxBrush noBrush(*wxBLACK, wxTRANSPARENT);
-static wxPen noPen(*wxBLACK, 1, wxTRANSPARENT);
+#define wxNoBrush *wxTheBrushList->FindOrCreateBrush(*wxBLACK, wxTRANSPARENT)
+#define wxNoPen *wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxTRANSPARENT)
 
 class DrawObject;
 

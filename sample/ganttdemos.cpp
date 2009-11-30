@@ -73,7 +73,6 @@ public:
 
 		// create gantt renderer
 		GanttRenderer *renderer = new GanttRenderer(10);
-		renderer->SetSerieDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
 
 		// set renderer to dataset
 		dataset->SetRenderer(renderer);
@@ -94,15 +93,9 @@ public:
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 
-		//CategoryAxis *rightAxis = new CategoryAxis(AXIS_RIGHT);
-		//rightAxis->SetMargins(10, 10);
-		//plot->AddAxis(rightAxis);
-
 		// link axes and dataset
 		plot->LinkDataVerticalAxis(0, 0);
 		plot->LinkDataHorizontalAxis(0, 0);
-
-		//plot->LinkDataVerticalAxis(0, 1);
 
 		// and finally create chart
 		Chart *chart = new Chart(plot, GetName());
@@ -194,10 +187,6 @@ public:
 
 		// create gantt renderer
 		GanttRenderer *renderer = new GanttRenderer(10);
-
-		// set serie draw to it
-		renderer->SetSerieDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-		renderer->SetSerieDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
 
 		// set renderer to dataset
 		dataset->SetRenderer(renderer);

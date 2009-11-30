@@ -49,6 +49,8 @@ void DateAxis::UpdateBounds()
 
 wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 {
+	dc.SetFont(GetLabelTextFont());
+
 	wxSize maxExtent(0, 0);
 
 	for (int step = 0; !IsEnd(step); step++) {

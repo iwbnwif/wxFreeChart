@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -41,12 +41,12 @@ BEGIN_EVENT_TABLE(ChartSelector, wxTreeCtrl)
 	EVT_TREE_ITEM_ACTIVATED(wxID_ANY, ChartSelector::OnTreeItemActivated)
 END_EVENT_TABLE()
 
-
 ChartSelector::ChartSelector(wxWindow *parent, wxChartPanel *chartPanel, DemoCollection *demoCollection)
 : wxTreeCtrl(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize)
 {
 	m_chartPanel = chartPanel;
 
+	// create tree items for chart demos
 	wxTreeItemId root = AddRoot(wxT("Charts"));
 
 	for (int nCat = 0; nCat < demoCollection->GetCategoryCount(); nCat++) {
@@ -94,7 +94,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame()
-: wxFrame(NULL, wxID_ANY, wxT("wxCharts demo 1.1"), wxDefaultPosition, wxSize(800, 445))
+: wxFrame(NULL, wxID_ANY, wxT("wxFreeChart demo 1.2"), wxDefaultPosition, wxSize(800, 445))
 {
 	wxAuiManager *auiMan = new wxAuiManager(this);
 
@@ -122,8 +122,6 @@ MainFrame::MainFrame()
 	menuBar->Append(menuFile, wxT("&File"));
 
 	SetMenuBar(menuBar);
-
-	//InitDefaultSymbols();
 }
 
 MainFrame::~MainFrame()
@@ -132,13 +130,11 @@ MainFrame::~MainFrame()
 
 void MainFrame::OnExportToPS(wxCommandEvent &ev)
 {
-// TODO
-
+	// TODO not implemented
 }
 
 void MainFrame::OnExportToPNG(wxCommandEvent &ev)
 {
-
 	Chart *chart = m_chartPanel->GetChart();
 	if (chart != NULL) {
 		wxFileDialog dlg(this, wxT("Choose file..."), wxEmptyString, wxEmptyString,
@@ -147,9 +143,12 @@ void MainFrame::OnExportToPNG(wxCommandEvent &ev)
 		if (dlg.ShowModal() != wxID_OK)
 			return ;
 
-		wxRect rc(0, 0, 400, 400);
+		const wxCoord width = 400;
+		const wxCoord height = 400;
 
-		wxBitmap bitmap(400, 400);
+		wxRect rc(0, 0, width, height);
+
+		wxBitmap bitmap(width, height);
 
 		wxMemoryDC dc;
 		dc.SelectObject(bitmap);
@@ -159,7 +158,7 @@ void MainFrame::OnExportToPNG(wxCommandEvent &ev)
 		bitmap.ConvertToImage().SaveFile(dlg.GetPath(), wxBITMAP_TYPE_PNG);
 	}
 	else {
-		wxLogError(wxT("No chart choosen!"));
+		wxLogError(wxT("No chart chosen!"));
 	}
 }
 
@@ -168,6 +167,9 @@ void MainFrame::OnExit(wxCommandEvent &ev)
 	Close();
 }
 
+/**
+ * Demo application.
+ */
 class DemoApp : public wxApp
 {
 public:

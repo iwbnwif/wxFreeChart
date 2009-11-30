@@ -66,7 +66,7 @@ void GradientAreaDraw::Draw(wxDC &dc, wxRect rc)
 	dc.GradientFillLinear(rc, m_colour1, m_colour2, m_dir);
 
 	dc.SetPen(m_borderPen);
-	dc.SetBrush(noBrush);
+	dc.SetBrush(wxNoBrush);
 	dc.DrawRectangle(rc);
 }
 

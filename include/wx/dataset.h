@@ -137,9 +137,9 @@ public:
 	virtual int GetCount() = 0;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(Dataset *, DatasetBaseArray);
+WX_DECLARE_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase);
 
-class WXDLLIMPEXP_FREECHART DatasetArray : public DatasetBaseArray
+class WXDLLIMPEXP_FREECHART DatasetArray : public DatasetArrayBase
 {
 public:
 	DatasetArray();
@@ -149,7 +149,7 @@ public:
 
 	void Remove(Dataset *dataset);
 
-	void RemoveAt(size_t index, size_t count);
+	void RemoveAt(size_t index, size_t count = 1);
 };
 
 #endif /*DATASET_H_*/

@@ -3,7 +3,6 @@
 
 /**
  * Object with reference counter.
- * TODO DEPRECATED: use wxWidgets reference counting.
  */
 class WXDLLIMPEXP_FREECHART RefObject
 {
@@ -15,6 +14,9 @@ public:
 
 	virtual ~RefObject()
 	{
+		if (refCount > 0) {
+			wxLogError(wxT("RefObject::~RefObject: object still have references. refCount=%i"), refCount);
+		}
 	}
 
 	void AddRef()
@@ -26,13 +28,8 @@ public:
 	{
 		refCount--;
 		if (refCount < 0) {
-			wxLogError(wxT("RefObject::Unref: refCount < 0\n"));
-//			delete this;
-//			return ;
+			wxLogError(wxT("RefObject::Unref: refCount < 0"));
 		}
-//		if (refCount == 0) {
-//			delete this;
-//		}
 	}
 
 	int RefCount()

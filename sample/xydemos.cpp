@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/12
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -47,8 +47,10 @@ public:
 		// first step: create plot
 		XYPlot *plot = new XYPlot();
 
-		// create dataset and add one serie to it
+		// create dataset
 		XYSimpleDataset *dataset = new XYSimpleDataset();
+
+		// and add serie to it
 		dataset->AddSerie((double *) data, WXSIZEOF(data));
 
 		// set line renderer to dataset
@@ -111,8 +113,10 @@ public:
 		// first step: create plot
 		XYPlot *plot = new XYPlot();
 
-		// create dataset and add two series to it
+		// create dataset
 		XYSimpleDataset *dataset = new XYSimpleDataset();
+
+		// and add two series to it
 		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
 		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
 
@@ -169,8 +173,10 @@ public:
 		// first step: create plot
 		XYPlot *plot = new XYPlot();
 
-		// create dataset and add to series to it
+		// create dataset
 		XYSimpleDataset *dataset = new XYSimpleDataset();
+
+		// and add to series to it
 		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
 		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
 
@@ -269,9 +275,10 @@ public:
 	DynamicDemoDataset();
 	virtual ~DynamicDemoDataset();
 
-	void OnTimer(wxTimerEvent &ev);
 private:
 	wxTimer m_timer;
+
+	void OnTimer(wxTimerEvent &ev);
 
 	DECLARE_EVENT_TABLE()
 };
@@ -294,8 +301,10 @@ DynamicDemoDataset::~DynamicDemoDataset()
 
 void DynamicDemoDataset::OnTimer(wxTimerEvent &ev)
 {
+	const double maxValue = 100.0;
+
 	double r = rand();
-	double y = 100.0 * r / (double) RAND_MAX;
+	double y = maxValue * r / (double) RAND_MAX;
 	Add(y);
 }
 
@@ -752,11 +761,16 @@ public:
 		// create line renderer
 		// set it to draw lines and symbols.
 		XYLineRenderer *renderer = new XYLineRenderer(true, true);
+
+		// we can change line pen for serie, for example set short-dash
+		// line style and width=2 for third serie
+		renderer->SetSeriePen(1, wxThePenList->FindOrCreatePen(*wxGREEN, 2, wxSHORT_DASH));
 		dataset->SetRenderer(renderer);
 
+		// add dataset to plot
 		plot->AddDataset(dataset);
 
-		// add left and bottom number axes
+		// create left and bottom number axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 

@@ -10,9 +10,12 @@
 
 #include <wx/marker.h>
 
+#include "wx/arrimpl.cpp"
+
 //
 // TODO: write more!
 //
+WX_DEFINE_EXPORTED_OBJARRAY(MarkerArray);
 
 Marker::Marker()
 {

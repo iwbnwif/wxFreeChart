@@ -15,23 +15,27 @@
 // bar types
 //
 
-BarType::BarType()
+BarType::BarType(double base)
 {
+	m_base = base;
 }
 
 BarType::~BarType()
 {
 }
 
-void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, int item, CategoryDataset *dataset)
+void BarType::Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc,
+		Axis *horizAxis, Axis *vertAxis,
+		bool vertical, int item, CategoryDataset *dataset)
 {
 	FOREACH_SERIE(serie, dataset) {
+		// bar geometry params
 		int width;
 		wxCoord shift;
 		double base, value;
 
 		// get bar geometry
-		GetBar(item, serie, dataset, width, shift, base, value);
+		GetBarGeometry(dataset, item, serie, width, shift, base, value);
 
 		double xBase, yBase;
 		double xVal, yVal;
@@ -47,33 +51,34 @@ void BarType::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool ve
 			xVal = value;
 		}
 
-		wxCoord xb = horizAxis->ToGraphics(dc, rc.x, rc.width, xBase);
-		wxCoord yb = vertAxis->ToGraphics(dc, rc.y, rc.height, yBase);
-		wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
-		wxCoord y = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
+		// transform base and value to graphics coordinates
+		wxCoord xBaseG = horizAxis->ToGraphics(dc, rc.x, rc.width, xBase);
+		wxCoord yBaseG = vertAxis->ToGraphics(dc, rc.y, rc.height, yBase);
+		wxCoord xG = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
+		wxCoord yG = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
 
 		wxRect rcBar;
 		if (vertical) {
-			xb += shift;
-			x += shift;
+			xBaseG += shift;
+			xG += shift;
 
-			rcBar.x = wxMin(xb, x);
-			rcBar.y = wxMin(yb, y);
+			rcBar.x = wxMin(xBaseG, xG);
+			rcBar.y = wxMin(yBaseG, yG);
 			rcBar.width = width;
-			rcBar.height = ABS(yb - y);
+			rcBar.height = ABS(yBaseG - yG);
 		}
 		else {
-			yb += shift;
-			y += shift;
+			yBaseG += shift;
+			yG += shift;
 
-			rcBar.x = wxMin(xb, x);
-			rcBar.y = wxMin(yb, y);
-			rcBar.width = ABS(xb - x);
+			rcBar.x = wxMin(xBaseG, xG);
+			rcBar.y = wxMin(yBaseG, yG);
+			rcBar.width = ABS(xBaseG - xG);
 			rcBar.height = width;
 		}
 
-		AreaDraw *barDraw = m_barDraws.GetAreaDraw(serie);
-		wxCHECK_RET(barDraw != NULL, wxT("No bar draw for serie"));
+		// draw bar
+		AreaDraw *barDraw = barRenderer->GetBarDraw(serie);
 		barDraw->Draw(dc, rcBar);
 	}
 }
@@ -108,18 +113,22 @@ double BarType::GetMaxValue(CategoryDataset *dataset)
 	return maxValue;
 }
 
+//
+// NormalBarType
+//
+
 NormalBarType::NormalBarType(int barWidth, int serieGap, double base)
+: BarType(base)
 {
 	m_barWidth = barWidth;
 	m_serieGap = serieGap;
-	m_base = base;
 }
 
 NormalBarType::~NormalBarType()
 {
 }
 
-void NormalBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &width, wxCoord &shift, double &base, double &value)
+void NormalBarType::GetBarGeometry(CategoryDataset *dataset, int item, int serie, int &width, wxCoord &shift, double &base, double &value)
 {
 	width = m_barWidth;
 
@@ -135,17 +144,21 @@ void NormalBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &w
 	value = dataset->GetValue(item, serie);
 }
 
+//
+// StackedBarType
+//
+
 StackedBarType::StackedBarType(int barWidth, double base)
+: BarType(base)
 {
 	m_barWidth = barWidth;
-	m_base = base;
 }
 
 StackedBarType::~StackedBarType()
 {
 }
 
-void StackedBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &width, wxCoord &shift, double &base, double &value)
+void StackedBarType::GetBarGeometry(CategoryDataset *dataset, int item, int serie, int &width, wxCoord &shift, double &base, double &value)
 {
 	width = m_barWidth;
 	shift = -m_barWidth / 2;
@@ -179,17 +192,21 @@ double StackedBarType::GetMaxValue(CategoryDataset *dataset)
 	return maxValue;
 }
 
-LayeredBarType::LayeredBarType(int initialBarWidth,double base)
+//
+// LayeredBarType
+//
+
+LayeredBarType::LayeredBarType(int initialBarWidth, double base)
+: BarType(base)
 {
 	m_initialBarWidth = initialBarWidth;
-	m_base = base;
 }
 
 LayeredBarType::~LayeredBarType()
 {
 }
 
-void LayeredBarType::GetBar(int item, int serie, CategoryDataset *dataset, int &width, wxCoord &shift, double &base, double &value)
+void LayeredBarType::GetBarGeometry(CategoryDataset *dataset, int item, int serie, int &width, wxCoord &shift, double &base, double &value)
 {
 	width = (int) ( m_initialBarWidth * (1 - serie / (double)dataset->GetSerieCount()));
 	shift = -width / 2;
@@ -219,10 +236,38 @@ void BarRenderer::SetBarType(BarType *barType)
 	FireNeedRedraw();
 }
 
+BarType *BarRenderer::GetBarType()
+{
+	return m_barType;
+}
+
+void BarRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie)
+{
+	AreaDraw *barDraw = GetBarDraw(serie);
+	barDraw->Draw(dc, rcSymbol);
+}
+
+void BarRenderer::SetBarDraw(int serie, AreaDraw *areaDraw)
+{
+	m_barDraws.SetAreaDraw(serie, areaDraw);
+}
+
+AreaDraw *BarRenderer::GetBarDraw(int serie)
+{
+	AreaDraw *barDraw = m_barDraws.GetAreaDraw(serie);
+	if (barDraw == NULL) {
+		barDraw = new FillAreaDraw(*wxBLACK_PEN,
+				*wxTheBrushList->FindOrCreateBrush(GetDefaultColour(serie), wxSOLID));
+
+		m_barDraws.SetAreaDraw(serie, barDraw);
+	}
+	return barDraw;
+}
+
 void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset)
 {
 	for (int n = 0; n < dataset->GetCount(); n++) {
-		m_barType->Draw(dc, rc, horizAxis, vertAxis, vertical, n, dataset);
+		m_barType->Draw(this, dc, rc, horizAxis, vertAxis, vertical, n, dataset);
 	}
 }
 
@@ -235,4 +280,3 @@ double BarRenderer::GetMaxValue(CategoryDataset *dataset)
 {
 	return m_barType->GetMaxValue(dataset);
 }
-

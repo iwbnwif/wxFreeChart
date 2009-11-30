@@ -12,6 +12,7 @@
 
 OHLCBarRenderer::OHLCBarRenderer()
 {
+	m_barPen = *wxThePenList->FindOrCreatePen(*wxBLACK, 2, wxSOLID);
 }
 
 OHLCBarRenderer::~OHLCBarRenderer()
@@ -24,7 +25,7 @@ void OHLCBarRenderer::DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, 
 	wxCoord centerX = x;
 	wxCoord rightX = x + 5;
 
-	dc.SetPen(*wxBLACK_PEN);
+	dc.SetPen(m_barPen);
 
 	dc.DrawLine(leftX, open, centerX, open);
 	dc.DrawLine(centerX, low, centerX, high);

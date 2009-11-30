@@ -40,7 +40,7 @@ void GanttRenderer::Draw(wxDC &dc, wxRect rc, DateAxis *horizAxis, CategoryAxis 
 			shift = -m_barWidth / 2;
 		}
 
-		AreaDraw *serieDraw = m_serieDraws.GetAreaDraw(serie);
+		AreaDraw *serieDraw = GetSerieDraw(serie);
 
 		FOREACH_DATAITEM(n, serie, dataset) {
 			time_t start = dataset->GetStart(n, serie);
@@ -58,4 +58,27 @@ void GanttRenderer::Draw(wxDC &dc, wxRect rc, DateAxis *horizAxis, CategoryAxis 
 			serieDraw->Draw(dc, rcTask);
 		}
 	}
+}
+
+AreaDraw *GanttRenderer::GetSerieDraw(int serie)
+{
+	AreaDraw *serieDraw = m_serieDraws.GetAreaDraw(serie);
+	if (serieDraw == NULL) {
+		serieDraw = new FillAreaDraw(*wxBLACK_PEN,
+				*wxTheBrushList->FindOrCreateBrush(GetDefaultColour(serie), wxSOLID));
+		m_serieDraws.SetAreaDraw(serie, serieDraw);
+	}
+	return serieDraw;
+}
+
+void GanttRenderer::SetSerieDraw(int serie, AreaDraw *areaDraw)
+{
+	m_serieDraws.SetAreaDraw(serie, areaDraw);
+	FireNeedRedraw();
+}
+
+void GanttRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie)
+{
+	AreaDraw *serieDraw = GetSerieDraw(serie);
+	serieDraw->Draw(dc, rcSymbol);
 }

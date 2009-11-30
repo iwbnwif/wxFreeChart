@@ -4,7 +4,7 @@
 // Author:	Moskvichev Andrey V.
 // Created:	30.11.2008
 // RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2008 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -511,7 +511,7 @@ public:
 		bottomAxis->SetWindow(0, 10);
 		bottomAxis->SetUseWindow(true);
 
-		bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
+		bottomAxis->SetDateFormat(wxT("%d-%m"));
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 
@@ -534,7 +534,7 @@ public:
 ChartDemo *ohlcDemos[] = {
 	new OHLCDemo1(),
 	new OHLCDemo2(),
-	new OHLCDemo3(),
+	//new OHLCDemo3(), // XXX: compdateaxis is broken!
 	new OHLCDemo4(),
 };
 int ohlcDemosCount = WXSIZEOF(ohlcDemos);

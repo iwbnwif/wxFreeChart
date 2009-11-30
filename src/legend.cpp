@@ -19,6 +19,8 @@ Legend::Legend(int vertPosition, int horizPosition, AreaDraw *background, int sy
 	m_background = background;
 	m_symbolTextGap = symbolTextGap;
 	m_margin = margin;
+
+	m_font = *wxNORMAL_FONT;
 }
 
 Legend::~Legend()
@@ -33,7 +35,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
 	m_background->Draw(dc, rc);
 
 	wxCoord x = rc.x + m_margin;
-	wxCoord y = rc.y;
+	wxCoord y = rc.y + m_margin;
 
 	for (size_t n = 0; n < datasets.Count(); n++) {
 		Dataset *dataset = datasets[n];
@@ -44,13 +46,10 @@ void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
 
 			Renderer *renderer = dataset->GetBaseRenderer();
 
-			Symbol *symbol = renderer->GetSerieSymbol(serie);
-			wxColour color = renderer->GetSerieColor(serie);
+			wxRect rcSymbol(x, y, textExtent.y, textExtent.y);
+			renderer->DrawLegendSymbol(dc, rcSymbol, serie);
 
-			wxSize symbolExtent = symbol->GetExtent();
-			symbol->Draw(dc, x + symbolExtent.x / 2, y + symbolExtent.y / 2 + textExtent.y / 2, color);
-
-			wxCoord textX = x + symbolExtent.x + m_symbolTextGap;
+			wxCoord textX = x + rcSymbol.width + m_symbolTextGap;
 
 			dc.DrawText(serieName, textX, y);
 
@@ -65,21 +64,24 @@ wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
 
 	dc.SetFont(m_font);
 
+	extent.y = 2 * m_margin;
+
 	for (size_t n = 0; n < datasets.Count(); n++) {
 		Dataset *dataset = datasets[n];
 
 		FOREACH_SERIE(serie, dataset) {
 			wxSize textExtent = dc.GetTextExtent(dataset->GetSerieName(serie));
 
-			Renderer *renderer = dataset->GetBaseRenderer();
-			Symbol *symbol = renderer->GetSerieSymbol(serie);
+			wxCoord symbolSize = textExtent.y; // symbol rectangle width and height
 
-			wxSize symbolExtent = symbol->GetExtent();
+			wxCoord width = textExtent.x + symbolSize + m_symbolTextGap + 2 * m_margin;
 
-			wxCoord width = textExtent.x + symbolExtent.x + m_symbolTextGap + 2 * m_margin;
-
-			extent.y += textExtent.y + labelsSpacing;
 			extent.x = wxMax(extent.x, width);
+
+			extent.y += textExtent.y;
+			if (serie < dataset->GetSerieCount() - 1) {
+				extent.y += labelsSpacing;
+			}
 		}
 	}
 	return extent;

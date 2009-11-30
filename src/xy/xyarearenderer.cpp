@@ -45,7 +45,7 @@ void XYAreaRenderer::Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoo
 	pts[2] = wxPoint(x1, y1);
 	pts[3] = wxPoint(x1, rcData.y + rcData.height);
 
-	dc.SetPen(noPen);
+	dc.SetPen(wxNoPen);
 	dc.SetBrush(m_areaBrush);
 	dc.DrawPolygon(4, pts);
 

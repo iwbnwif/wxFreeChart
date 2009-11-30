@@ -34,6 +34,7 @@ bool CategoryAxis::AcceptDataset(Dataset *dataset)
 
 wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)
 {
+	dc.SetFont(GetLabelTextFont());
 	return dc.GetTextExtent(m_longestCategory);
 }
 
