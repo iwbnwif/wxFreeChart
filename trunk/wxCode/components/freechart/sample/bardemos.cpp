@@ -472,6 +472,7 @@ public:
 		// Add bottom category axis
 		CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
 		bottomAxis->SetMargins(20, 20);
+		bottomAxis->SetVerticalLabelText(true);
 		plot->AddAxis(bottomAxis);
 
 		// Add dataset to plot

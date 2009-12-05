@@ -12,7 +12,9 @@
 #define VECTORDATASET_H_
 
 #include <wx/xy/xydataset.h>
-#include <vector>
+#include <wx/dynarray.h>
+
+WX_DECLARE_EXPORTED_OBJARRAY(double, wxDoubleArray);
 
 /**
  * Vector implementation of XYDataset.
@@ -30,15 +32,15 @@ public:
 	VectorDataset();
 	virtual ~VectorDataset();
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
-	virtual double GetX(int index, int serie);
+	virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(int index, int serie);
+	virtual double GetY(size_t index, size_t serie);
 
 	/**
 	 * Adds y values to dataset.
@@ -46,7 +48,7 @@ public:
 	 */
 	void Add(double y)
 	{
-		values.push_back(y);
+		m_values.Add(y);
 		DatasetChanged();
 	}
 
@@ -55,11 +57,10 @@ public:
 	 * @param index index of value
 	 * @param y new y value
 	 */
-	void Replace(unsigned int index, double y)
+	void Replace(size_t index, double y)
 	{
-		if (index < values.size()) {
-			values.erase(values.begin() + index);
-			values.insert(values.begin() + index, y);
+		if (index < m_values.Count()) {
+			m_values[index] = y;
 
 			DatasetChanged();
 		}
@@ -69,10 +70,10 @@ public:
 	 * Removes value at specified index.
 	 * @param index of value
 	 */
-	void RemoveAt(unsigned int index)
+	void RemoveAt(size_t index)
 	{
-		if (index < values.size()) {
-			values.erase(values.begin() + index);
+		if (index < m_values.Count()) {
+			m_values.RemoveAt(index);
 
 			DatasetChanged();
 		}
@@ -83,12 +84,12 @@ public:
 	 */
 	void Clear()
 	{
-		values.clear();
+		m_values.Clear();
 		DatasetChanged();
 	}
 
 private:
-	std::vector<double> values;
+	wxDoubleArray m_values;
 };
 
 #endif /*VECTORDATASET_H_*/

@@ -41,7 +41,7 @@ bool OHLCPlot::AcceptDataset(Dataset *dataset)
 
 void OHLCPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-	for (int nData = 0; nData < GetDatasetCount(); nData++) {
+	for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
 		Dataset *dataset = GetDataset(nData);
 
 		OHLCDataset *ohlcDataset = wxDynamicCast(dataset, OHLCDataset);
@@ -69,7 +69,7 @@ void OHLCPlot::DrawOHLCDataset(wxDC &dc, wxRect rc, OHLCDataset *dataset)
 	wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
 
 	// draw OHLC items
-	for (int n = 0; n < dataset->GetCount(); n++) {
+	for (size_t n = 0; n < dataset->GetCount(); n++) {
 		OHLCItem *item = dataset->GetItem(n);
 
 		wxCoord open = vertAxis->ToGraphics(dc, rc.y, rc.height, item->open);

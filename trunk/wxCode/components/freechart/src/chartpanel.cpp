@@ -44,6 +44,7 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
 	EnableScrolling(false, false);
 
 	m_chart = NULL;
+	m_antialias = false;
 
 	ResizeBackBitmap(size);
 
@@ -66,6 +67,25 @@ void wxChartPanel::SetChart(Chart *chart)
 
 	RedrawBackBitmap();
 	Refresh(false);
+}
+
+void wxChartPanel::SetAntialias(bool antialias)
+{
+	if (m_antialias != antialias) {
+#if wxUSE_GRAPHICS_CONTEXT
+#else
+		wxASSERT_MSG(!antialias, wxT("Cannot enable antialiasing due to missing wxUSE_GRAPHICS_CONTEXT"));
+#endif
+		m_antialias = antialias;
+
+		RedrawBackBitmap();
+		Refresh(false);
+	}
+}
+
+wxBitmap wxChartPanel::CopyBackbuffer()
+{
+	return wxBitmap(m_backBitmap);
 }
 
 void wxChartPanel::ChartChanged(Chart *WXUNUSED(chart))
@@ -112,6 +132,7 @@ void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
 {
 	wxPaintDC dc(this);
 	const wxRect &rc = GetClientRect();
+
 
 	if (m_chart != NULL) {
 		dc.DrawBitmap(m_backBitmap, 0, 0, false);
@@ -182,21 +203,24 @@ void wxChartPanel::RedrawBackBitmap()
 		wxMemoryDC mdc;
 		mdc.SelectObject(m_backBitmap);
 
-		// TODO using graphics context instead of normal DC
-		// allows antialiasing and other features,
-		// but i tested it on Linux-wxGTK-2.8.8 and on Windows(tm)-wxWidgets-2.8.8
-		// drawing was too long, and resulting chart was incorrect.
-		// If someone knows how to correctly use graphics context, please let me know.
-//#if wxUSE_GRAPHICS_CONTEXT
-#if 0
-		wxGCDC gdc(mdc);
-		wxDC &dc = (wxDC&) gdc;
-#else
-		wxDC &dc = (wxDC&) mdc;
-#endif
-
 		const wxRect &rc = GetClientRect();
-		m_chart->Draw(dc, (wxRect&) rc);
+
+		// Using graphics context instead of normal DC
+		// allows antialiasing and other features,
+		// i tested it on Linux-wxGTK-2.8.8 and on Windows(tm)-wxWidgets-2.8.8
+		// there is bug with wxSHORT_DASH pen style, it drawing hungs,
+		// when wxGCDC used
+#if wxUSE_GRAPHICS_CONTEXT
+		if (m_antialias) {
+			wxGCDC gdc(mdc);
+			m_chart->Draw((wxDC&) gdc, (wxRect&) rc);
+		}
+		else {
+			m_chart->Draw(mdc, (wxRect&) rc);
+		}
+#else
+		m_chart->Draw(mdc, (wxRect&) rc);
+#endif
 	}
 }
 

@@ -33,7 +33,7 @@ bool BubblePlot::AcceptDataset(Dataset *dataset)
 
 void BubblePlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-	for (int nData = 0; nData < GetDatasetCount(); nData++) {
+	for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
 		XYZDataset *dataset = (XYZDataset *) GetDataset(nData);
 		XYZRenderer *renderer = dataset->GetRenderer();
 		wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));

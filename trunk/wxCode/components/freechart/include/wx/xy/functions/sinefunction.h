@@ -29,15 +29,15 @@ public:
 	SineFunction(double a, double minX, double maxX, double step);
 	virtual ~SineFunction();
 
-	virtual double GetX(int index, int serie);
+	virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(int index, int serie);
+	virtual double GetY(size_t index, size_t serie);
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
 private:
 	double m_a;

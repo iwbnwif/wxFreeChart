@@ -25,15 +25,15 @@ public:
 	 * @param data double [x, y] array
 	 * @param count point count in data array
 	 */
-	XYSerie(double *data, int count);
+	XYSerie(double *data, size_t count);
 
 	virtual ~XYSerie();
 
-	double GetX(int index);
+	double GetX(size_t index);
 
-	double GetY(int index);
+	double GetY(size_t index);
 
-	int GetCount();
+	size_t GetCount();
 
 	const wxString &GetName();
 
@@ -41,7 +41,7 @@ public:
 
 private:
 	double *m_data;
-	int m_count;
+	size_t m_count;
 	wxString m_name;
 };
 
@@ -62,7 +62,7 @@ public:
 	 * @param data double [x, y] array
 	 * @param count point count in data array
 	 */
-	void AddSerie(double *data, int count);
+	void AddSerie(double *data, size_t count);
 
 	/**
 	 * Constructs new xy serie.
@@ -73,17 +73,17 @@ public:
 	//
 	// XYDataset
 	//
-	virtual double GetX(int index, int serie);
+	virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(int index, int serie);
+	virtual double GetY(size_t index, size_t serie);
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
-	void SetSerieName(int serie, const wxString &name);
+	void SetSerieName(size_t serie, const wxString &name);
 
 private:
 	XYSerieArray m_series;

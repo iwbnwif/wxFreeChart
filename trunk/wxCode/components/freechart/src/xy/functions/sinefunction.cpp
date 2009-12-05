@@ -26,28 +26,28 @@ SineFunction::~SineFunction()
 {
 }
 
-double SineFunction::GetX(int index, int WXUNUSED(serie))
+double SineFunction::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return m_minX + index * m_step;
 }
 
-double SineFunction::GetY(int index, int WXUNUSED(serie))
+double SineFunction::GetY(size_t index, size_t WXUNUSED(serie))
 {
 	double x = m_minX + index * m_step;
 	return m_a * sin(x);
 }
 
-int SineFunction::GetCount(int WXUNUSED(serie))
+size_t SineFunction::GetCount(size_t WXUNUSED(serie))
 {
 	return RoundHigh((m_maxX - m_minX) / m_step) + 1;
 }
 
-int SineFunction::GetSerieCount()
+size_t SineFunction::GetSerieCount()
 {
 	return 1;
 }
 
-wxString SineFunction::GetSerieName(int WXUNUSED(serie))
+wxString SineFunction::GetSerieName(size_t WXUNUSED(serie))
 {
 	return sineFunctionName;
 }

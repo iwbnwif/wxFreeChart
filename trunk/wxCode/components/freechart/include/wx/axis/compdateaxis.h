@@ -81,7 +81,7 @@ private:
 
 	bool GetMinSpan(wxDateSpan &span);
 
-	int m_dateCount;
+	size_t m_dateCount;
 
 	bool m_fillDateGaps;
 

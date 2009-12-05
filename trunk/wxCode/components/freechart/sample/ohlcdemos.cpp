@@ -26,7 +26,7 @@
 class OHLCDemoDataset : public OHLCDataset
 {
 public:
-	OHLCDemoDataset(OHLCItem *items, int count)
+	OHLCDemoDataset(OHLCItem *items, size_t count)
 	{
 		m_items = new OHLCItem[count];
 		memcpy(m_items, items, count * sizeof(*items));
@@ -38,20 +38,20 @@ public:
 		wxDELETEA(m_items);
 	}
 
-	virtual OHLCItem *GetItem(int index)
+	virtual OHLCItem *GetItem(size_t index)
 	{
 		wxCHECK_MSG(index < m_count, NULL, wxT("GetItem"));
 		return &m_items[index];
 	}
 
-	virtual int GetCount()
+	virtual size_t GetCount()
 	{
 		return m_count;
 	}
 
 private:
 	OHLCItem *m_items;
-	int m_count;
+	size_t m_count;
 };
 
 /**
@@ -133,6 +133,7 @@ public:
 		bottomAxis->SetWindow(0, 5);
 		bottomAxis->SetUseWindow(true);
 
+		bottomAxis->SetVerticalLabelText(true);
 		bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
 
 		// add axes to plot
@@ -226,6 +227,7 @@ public:
 		bottomAxis->SetWindow(0, 5);
 		bottomAxis->SetUseWindow(true);
 
+		bottomAxis->SetVerticalLabelText(true);
 		bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
@@ -348,15 +350,15 @@ public:
 	MovingAverage(OHLCDataset *ohlcDataset, int period);
 	virtual ~MovingAverage();
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
-	virtual double GetX(int index, int serie);
+	virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(int index, int serie);
+	virtual double GetY(size_t index, size_t serie);
 
 	//
 	// DatasetObserver
@@ -385,12 +387,12 @@ MovingAverage::~MovingAverage()
 	SAFE_UNREF(m_ohlcDataset);
 }
 
-int MovingAverage::GetSerieCount()
+size_t MovingAverage::GetSerieCount()
 {
 	return 1;
 }
 
-int MovingAverage::GetCount(int WXUNUSED(serie))
+size_t MovingAverage::GetCount(size_t WXUNUSED(serie))
 {
 	int count = m_ohlcDataset->GetCount() - m_period + 1;
 	if (count < 0) {
@@ -399,23 +401,23 @@ int MovingAverage::GetCount(int WXUNUSED(serie))
 	return count;
 }
 
-wxString MovingAverage::GetSerieName(int WXUNUSED(serie))
+wxString MovingAverage::GetSerieName(size_t WXUNUSED(serie))
 {
 	return wxT("Moving average");
 }
 
-double MovingAverage::GetX(int index, int WXUNUSED(serie))
+double MovingAverage::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return index + m_period - 1;
 }
 
-double MovingAverage::GetY(int index, int WXUNUSED(serie))
+double MovingAverage::GetY(size_t index, size_t WXUNUSED(serie))
 {
 	wxCHECK_MSG(m_period != 0, 0, wxT("MovingAverage::GetX"));
 
 	double sum = 0;
 
-	for (int n = index; n < index + m_period; n++) {
+	for (size_t n = index; n < index + m_period; n++) {
 		OHLCItem *item = m_ohlcDataset->GetItem(n);
 
 		sum += item->close;
@@ -511,6 +513,7 @@ public:
 		bottomAxis->SetWindow(0, 10);
 		bottomAxis->SetUseWindow(true);
 
+		bottomAxis->SetVerticalLabelText(true);
 		bottomAxis->SetDateFormat(wxT("%d-%m"));
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);

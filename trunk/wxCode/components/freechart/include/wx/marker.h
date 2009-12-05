@@ -14,6 +14,8 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/drawobject.h>
 
+#include <wx/axis/axis.h>
+
 #include <wx/dynarray.h>
 
 //
@@ -29,7 +31,14 @@ public:
 	Marker();
 	virtual ~Marker();
 
-	virtual void Draw(wxDC &dc, wxRect rcData) = 0;
+	/**
+	 * Performs marker drawing.
+	 * @param dc device context
+	 * @param rcData data area rectangle
+	 * @param horizAxis horizontal axis
+	 * @param vertAxis vertical axis
+	 */
+	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis) = 0;
 };
 
 WX_DECLARE_EXPORTED_OBJARRAY(Marker *, MarkerArray);
@@ -43,7 +52,7 @@ public:
 	PointMarker();
 	virtual ~PointMarker();
 
-	virtual void Draw(wxDC &dc, wxRect rcData);
+	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis);
 
 	void SetText(const wxString &text)
 	{
@@ -64,7 +73,7 @@ public:
 	LineMarker(wxPen linePen);
 	virtual ~LineMarker();
 
-	virtual void Draw(wxDC &dc, wxRect rcData);
+	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis);
 };
 
 class WXDLLIMPEXP_FREECHART RangeMarker : public Marker
@@ -73,7 +82,7 @@ public:
 	RangeMarker(wxBrush brush, wxPen pen);
 	virtual ~RangeMarker();
 
-	virtual void Draw(wxDC &dc, wxRect rcData);
+	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis);
 
 	/**
 	 * Sets range for marker.

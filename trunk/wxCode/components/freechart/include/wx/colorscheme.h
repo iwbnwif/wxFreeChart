@@ -22,7 +22,7 @@ WX_DECLARE_OBJARRAY(wxColour, wxColourArray);
 class WXDLLIMPEXP_FREECHART ColorScheme
 {
 public:
-	ColorScheme(wxColour *colours, int count);
+	ColorScheme(wxColour *colours, size_t count);
 
 	ColorScheme();
 	virtual ~ColorScheme();

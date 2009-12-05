@@ -33,7 +33,8 @@ PointMarker::~PointMarker()
 {
 }
 
-void PointMarker::Draw(wxDC &dc, wxRect rcData)
+void PointMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
 {
-
+	// TODO not implemented!
+	//wxCoord x = horizAxis->ToGraphics()
 }

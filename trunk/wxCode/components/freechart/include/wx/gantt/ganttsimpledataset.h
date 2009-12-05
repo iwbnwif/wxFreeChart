@@ -23,18 +23,18 @@ public:
 		time_t end;
 	};
 
-	GanttSerie(TaskTime *tasks, int taskCount, const wxString &name);
+	GanttSerie(TaskTime *tasks, size_t taskCount, const wxString &name);
 	virtual ~GanttSerie();
 
-	time_t GetStart(int index);
+	time_t GetStart(size_t index);
 
-	time_t GetEnd(int index);
+	time_t GetEnd(size_t index);
 
 	const wxString &GetName();
 
 private:
 	TaskTime *m_taskTimes;
-	int m_taskTimesCount;
+	size_t m_taskTimesCount;
 
 	wxString m_name;
 };
@@ -53,7 +53,7 @@ public:
 	 * @param taskNames names for tasks
 	 * @param taskNamesCount count of names
 	 */
-	GanttSimpleDataset(int dateCount, const wxChar **taskNames, int taskNamesCount);
+	GanttSimpleDataset(size_t dateCount, const wxChar **taskNames, size_t taskNamesCount);
 	virtual ~GanttSimpleDataset();
 
 	/**
@@ -62,19 +62,19 @@ public:
 	 */
 	void AddSerie(GanttSerie *serie);
 
-	virtual wxString GetName(int index);
+	virtual wxString GetName(size_t index);
 
-	virtual double GetValue(int index, int serie);
+	virtual double GetValue(size_t index, size_t serie);
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
-	virtual int GetCount();
+	virtual size_t GetCount();
 
-	virtual time_t GetStart(int index, int serie);
+	virtual time_t GetStart(size_t index, size_t serie);
 
-	virtual time_t GetEnd(int index, int serie);
+	virtual time_t GetEnd(size_t index, size_t serie);
 
 private:
 	wxArrayString m_taskNames;

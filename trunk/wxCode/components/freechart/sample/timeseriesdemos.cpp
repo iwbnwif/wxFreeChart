@@ -23,44 +23,44 @@ class TimeSeriesDataset : public XYDataset, public DateTimeDataset
 {
 	DECLARE_CLASS(TimeSeriesDataset)
 public:
-	TimeSeriesDataset(double *data, time_t *times, int count);
+	TimeSeriesDataset(double *data, time_t *times, size_t count);
 	virtual ~TimeSeriesDataset();
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
-	virtual double GetX(int index, int serie);
+	virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(int index, int serie);
+	virtual double GetY(size_t index, size_t serie);
 
 	virtual DateTimeDataset *AsDateTimeDataset();
 
 	//
 	// DateTimeDataset
 	//
-	virtual time_t GetDate(int index);
+	virtual time_t GetDate(size_t index);
 
-	virtual int GetCount();
+	virtual size_t GetCount();
 
 
 private:
 	double *m_data;
 	time_t *m_times;
-	int m_count;
+	size_t m_count;
 };
 
 IMPLEMENT_CLASS(TimeSeriesDataset, XYDataset)
 
-TimeSeriesDataset::TimeSeriesDataset(double *data, time_t *times, int count)
+TimeSeriesDataset::TimeSeriesDataset(double *data, time_t *times, size_t count)
 {
 	m_data = new double[count];
 	m_times = new time_t[count];
 	m_count = count;
 
-	for (int n = 0; n < count; n++) {
+	for (size_t n = 0; n < count; n++) {
 		m_data[n] = data[n];
 		m_times[n] = times[n];
 	}
@@ -73,37 +73,37 @@ TimeSeriesDataset::~TimeSeriesDataset()
 	wxDELETEA(m_times);
 }
 
-int TimeSeriesDataset::GetSerieCount()
+size_t TimeSeriesDataset::GetSerieCount()
 {
 	return 1;
 }
 
-int TimeSeriesDataset::GetCount(int WXUNUSED(serie))
+size_t TimeSeriesDataset::GetCount(size_t WXUNUSED(serie))
 {
 	return m_count;
 }
 
-int TimeSeriesDataset::GetCount()
+size_t TimeSeriesDataset::GetCount()
 {
 	return m_count;
 }
 
-wxString TimeSeriesDataset::GetSerieName(int WXUNUSED(serie))
+wxString TimeSeriesDataset::GetSerieName(size_t WXUNUSED(serie))
 {
 	return wxT("Time series");
 }
 
-double TimeSeriesDataset::GetX(int index, int WXUNUSED(serie))
+double TimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return index;
 }
 
-double TimeSeriesDataset::GetY(int index, int WXUNUSED(serie))
+double TimeSeriesDataset::GetY(size_t index, size_t WXUNUSED(serie))
 {
 	return m_data[index];
 }
 
-time_t TimeSeriesDataset::GetDate(int index)
+time_t TimeSeriesDataset::GetDate(size_t index)
 {
 	return m_times[index];
 }
@@ -191,6 +191,7 @@ public:
 		//bottomAxis->SetWindow(0, 10);
 		//bottomAxis->SetUseWindow(true);
 
+		bottomAxis->SetVerticalLabelText(true);
 		bottomAxis->SetDateFormat(wxT("%d-%m"));
 
 		// add axes to first plot

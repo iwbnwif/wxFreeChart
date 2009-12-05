@@ -30,7 +30,7 @@ public:
 
 	void SetDataset(CategoryDataset *dataset);
 
-	void SetUsedSerie(int serie)
+	void SetUsedSerie(size_t serie)
 	{
 		m_serie = serie;
 		FirePlotNeedRedraw();
@@ -76,7 +76,7 @@ private:
 
 	ColorScheme m_colorScheme;
 
-	int m_serie;
+	size_t m_serie;
 };
 
 #endif /*PIEPLOT_H_*/

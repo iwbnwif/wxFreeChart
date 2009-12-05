@@ -23,7 +23,7 @@
 /**
  * Internal class, don't use in programs.
  */
-class DataAxisLink
+class WXDLLIMPEXP_FREECHART DataAxisLink
 {
 public:
 	DataAxisLink(Dataset *dataset, Axis *axis)
@@ -74,14 +74,14 @@ public:
 	 * Returns dataset count.
 	 * @return dataset count
 	 */
-	int GetDatasetCount();
+	size_t GetDatasetCount();
 
 	/**
 	 * Return dataset with index
 	 * @param index index of dataset
 	 * @return dataset or NULL if index is out of bounds
 	 */
-	Dataset *GetDataset(int index);
+	Dataset *GetDataset(size_t index);
 
 	/**
 	 * Adds marker to plot. Plot takes ownership of marker.
@@ -94,14 +94,14 @@ public:
 	 * @param nData index of dataset
 	 * @param nAxis index of horizontal axis
 	 */
-	void LinkDataHorizontalAxis(int nData, int nAxis);
+	void LinkDataHorizontalAxis(size_t nData, size_t nAxis);
 
 	/**
 	 * Links dataset with vertical axis
 	 * @param nData index of dataset
 	 * @param nAxis index of vertical axis
 	 */
-	void LinkDataVerticalAxis(int nData, int nAxis);
+	void LinkDataVerticalAxis(size_t nData, size_t nAxis);
 
 	/**
 	 * Set whether to draw grid lines.
@@ -133,7 +133,7 @@ public:
 	 * @param y output for y coordinate in data space
 	 * @return true if coordinate was succesfully translated, false - overwise
 	 */
-	bool ToDataCoords(int nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y);
+	bool ToDataCoords(size_t nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y);
 
 	//
 	// DrawObserver

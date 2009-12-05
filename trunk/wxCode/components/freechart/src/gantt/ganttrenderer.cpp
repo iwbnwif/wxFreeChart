@@ -60,7 +60,7 @@ void GanttRenderer::Draw(wxDC &dc, wxRect rc, DateAxis *horizAxis, CategoryAxis 
 	}
 }
 
-AreaDraw *GanttRenderer::GetSerieDraw(int serie)
+AreaDraw *GanttRenderer::GetSerieDraw(size_t serie)
 {
 	AreaDraw *serieDraw = m_serieDraws.GetAreaDraw(serie);
 	if (serieDraw == NULL) {
@@ -71,13 +71,13 @@ AreaDraw *GanttRenderer::GetSerieDraw(int serie)
 	return serieDraw;
 }
 
-void GanttRenderer::SetSerieDraw(int serie, AreaDraw *areaDraw)
+void GanttRenderer::SetSerieDraw(size_t serie, AreaDraw *areaDraw)
 {
 	m_serieDraws.SetAreaDraw(serie, areaDraw);
 	FireNeedRedraw();
 }
 
-void GanttRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie)
+void GanttRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 {
 	AreaDraw *serieDraw = GetSerieDraw(serie);
 	serieDraw->Draw(dc, rcSymbol);

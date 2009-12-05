@@ -32,26 +32,26 @@ public:
 	 * @param serie serie index
 	 * @param symbol new color for specified serie
 	 */
-	virtual void SetSerieColour(int serie, wxColour *color);
+	virtual void SetSerieColour(size_t serie, wxColour *color);
 
 	/**
 	 * Returns serie color.
 	 * @return serie color
 	 */
-	virtual wxColour GetSerieColour(int serie);
+	virtual wxColour GetSerieColour(size_t serie);
 
 	/**
 	 * Sets symbol for serie.
 	 * @param serie serie index
 	 * @param symbol new symbol for specified serie
 	 */
-	virtual void SetSerieSymbol(int serie, Symbol *symbol);
+	virtual void SetSerieSymbol(size_t serie, Symbol *symbol);
 
 	/**
 	 * returns symbol for serie.
 	 * @return symbol for specified serie
 	 */
-	virtual Symbol *GetSerieSymbol(int serie);
+	virtual Symbol *GetSerieSymbol(size_t serie);
 
 	/**
 	 * Draws legend symbol.
@@ -59,7 +59,7 @@ public:
 	 * @param rcSymbol rectangle where to draw
 	 * @param serie serie index
 	 */
-	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
 
 private:
 	ColorMap m_serieColours;

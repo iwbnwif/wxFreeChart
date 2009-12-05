@@ -27,9 +27,9 @@ public:
 	GanttDatasetDateHelper(GanttDataset *ganttDataset);
 	virtual ~GanttDatasetDateHelper();
 
-	virtual time_t GetDate(int index);
+	virtual time_t GetDate(size_t index);
 
-	virtual int GetCount();
+	virtual size_t GetCount();
 
 private:
 	GanttDataset *m_ganttDataset;
@@ -47,7 +47,7 @@ public:
 	 * @param dateCount count of dates for date axis. TODO: this looks bad:
 	 *   date count must be set to axis, not to dataset.
 	 */
-	GanttDataset(int dateCount);
+	GanttDataset(size_t dateCount);
 	virtual ~GanttDataset();
 
 	virtual DateTimeDataset *AsDateTimeDataset();
@@ -56,7 +56,7 @@ public:
 	 * Returns task count.
 	 * @return task count
 	 */
-	virtual int GetCount() = 0;
+	virtual size_t GetCount() = 0;
 
 	/**
 	 * Returns task start time.
@@ -64,7 +64,7 @@ public:
 	 * @param serie serie index
 	 * @return task start time
 	 */
-	virtual time_t GetStart(int index, int serie) = 0;
+	virtual time_t GetStart(size_t index, size_t serie) = 0;
 
 	/**
 	 * Returns task end time.
@@ -72,14 +72,14 @@ public:
 	 * @param serie serie index
 	 * @return task end time
 	 */
-	virtual time_t GetEnd(int index, int serie) = 0;
+	virtual time_t GetEnd(size_t index, size_t serie) = 0;
 
 	/**
 	 * Returns task count in specified serie.
 	 * @param serie serie index
 	 * @return task count
 	 */
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
 	virtual time_t GetMinStart();
 
@@ -87,7 +87,7 @@ public:
 
 	time_t GetDateInterval();
 
-	int GetDateCount();
+	size_t GetDateCount();
 
 	GanttRenderer *GetRenderer()
 	{
@@ -97,7 +97,7 @@ public:
 private:
 	GanttDatasetDateHelper m_dateHelper;
 
-	int m_dateCount;
+	size_t m_dateCount;
 };
 
 #endif /* GANTTDATASET_H_ */

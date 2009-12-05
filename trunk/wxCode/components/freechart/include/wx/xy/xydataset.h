@@ -36,14 +36,14 @@ public:
 	 * @param index index
 	 * @return x value
 	 */
-	virtual double GetX(int index, int serie) = 0;
+	virtual double GetX(size_t index, size_t serie) = 0;
 
 	/**
 	 * Returns y value at index.
 	 * @param index index
 	 * @return y value
 	 */
-	virtual double GetY(int index, int serie) = 0;
+	virtual double GetY(size_t index, size_t serie) = 0;
 
 	/**
 	 * Returns maximal y value.

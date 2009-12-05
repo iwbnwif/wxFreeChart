@@ -33,7 +33,7 @@ public:
 	//
 	// Renderer
 	//
-	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
 
 	/**
 	 * Drawn gantt dataset.
@@ -50,14 +50,16 @@ public:
 	 * @param serie serie index
 	 * @param ad area draw for serie
 	 */
-	void SetSerieDraw(int serie, AreaDraw *areaDraw);
+	void SetSerieDraw(size_t serie, AreaDraw *areaDraw);
 
-	AreaDraw *GetSerieDraw(int serie);
+	AreaDraw *GetSerieDraw(size_t serie);
 
 	void SetBarWidth(int barWidth)
 	{
-		m_barWidth = barWidth;
-		FireNeedRedraw();
+		if (m_barWidth != barWidth) {
+			m_barWidth = barWidth;
+			FireNeedRedraw();
+		}
 	}
 
 private:

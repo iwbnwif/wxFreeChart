@@ -27,37 +27,37 @@ public:
 
 	void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYZDataset *dataset);
 
-	virtual void SetSerieColor(int serie, wxColour *color);
+	virtual void SetSerieColor(size_t serie, wxColour *color);
 
-	virtual wxColour GetSerieColor(int serie);
+	virtual wxColour GetSerieColor(size_t serie);
 
 	/**
 	 * Sets pen to draw serie circles.
 	 * @param serie serie index
 	 * @param pen pen for serie
 	 */
-	void SetSeriePen(int serie, wxPen *pen);
+	void SetSeriePen(size_t serie, wxPen *pen);
 
 	/**
 	 * Returns pen, used to draw specified serie lines.
 	 * @param serie serie index
 	 * @return pen
 	 */
-	wxPen *GetSeriePen(int serie);
+	wxPen *GetSeriePen(size_t serie);
 
 	/**
 	 * Sets brush to fill serie circles.
 	 * @param serie serie index
 	 * @param brush brush for serie
 	 */
-	void SetSerieBrush(int serie, wxBrush *brush);
+	void SetSerieBrush(size_t serie, wxBrush *brush);
 
 	/**
 	 * Returns brush, used to fill specified serie circles.
 	 * @param serie serie index
 	 * @return brush
 	 */
-	wxBrush *GetSerieBrush(int serie);
+	wxBrush *GetSerieBrush(size_t serie);
 
 
 private:

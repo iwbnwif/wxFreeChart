@@ -21,17 +21,17 @@ XYDataset::~XYDataset()
 {
 }
 
-bool XYDataset::AcceptRenderer(Renderer *_renderer)
+bool XYDataset::AcceptRenderer(Renderer *renderer)
 {
-	return (wxDynamicCast(_renderer, XYRenderer) != NULL);
+	return (wxDynamicCast(renderer, XYRenderer) != NULL);
 }
 
 double XYDataset::GetMaxY()
 {
 	double maxY = 0;
 
-	for (int serie = 0; serie < GetSerieCount(); serie++) {
-		for (int n = 0; n < GetCount(serie); n++) {
+	for (size_t serie = 0; serie < GetSerieCount(); serie++) {
+		for (size_t n = 0; n < GetCount(serie); n++) {
 			double y = GetY(n, serie);
 			if (n == 0 && serie == 0)
 				maxY = y;
@@ -46,8 +46,8 @@ double XYDataset::GetMinY()
 {
 	double minY = 0;
 
-	for (int serie = 0; serie < GetSerieCount(); serie++) {
-		for (int n = 0; n < GetCount(serie); n++) {
+	for (size_t serie = 0; serie < GetSerieCount(); serie++) {
+		for (size_t n = 0; n < GetCount(serie); n++) {
 			double y = GetY(n, serie);
 			if (n == 0 && serie == 0)
 				minY = y;
@@ -62,8 +62,8 @@ double XYDataset::GetMaxX()
 {
 	double maxX = 0;
 
-	for (int serie = 0; serie < GetSerieCount(); serie++) {
-		for (int n = 0; n < GetCount(serie); n++) {
+	for (size_t serie = 0; serie < GetSerieCount(); serie++) {
+		for (size_t n = 0; n < GetCount(serie); n++) {
 			double x = GetX(n, serie);
 			if (n == 0 && serie == 0)
 				maxX = x;
@@ -78,8 +78,8 @@ double XYDataset::GetMinX()
 {
 	double minX = 0;
 
-	for (int serie = 0; serie < GetSerieCount(); serie++) {
-		for (int n = 0; n < GetCount(serie); n++) {
+	for (size_t serie = 0; serie < GetSerieCount(); serie++) {
+		for (size_t n = 0; n < GetCount(serie); n++) {
 			double x = GetX(n, serie);
 			if (n == 0 && serie == 0)
 				minX = x;

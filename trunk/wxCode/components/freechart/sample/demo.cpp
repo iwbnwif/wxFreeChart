@@ -12,6 +12,8 @@
 
 #include <wx/aui/aui.h>
 
+#include <wx/aboutdlg.h>
+
 class DemoTreeItemData : public wxTreeItemData
 {
 public:
@@ -85,16 +87,19 @@ enum
 {
 	MENU_FILE_EXPORT_TO_PS = 101,
 	MENU_FILE_EXPORT_TO_PNG,
+	MENU_FILE_ENABLE_ANTIALIAS,
 };
 
 BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_MENU(MENU_FILE_EXPORT_TO_PS, MainFrame::OnExportToPS)
 	EVT_MENU(MENU_FILE_EXPORT_TO_PNG, MainFrame::OnExportToPNG)
+	EVT_MENU(MENU_FILE_ENABLE_ANTIALIAS, MainFrame::OnEnableAntialias)
+	EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
 	EVT_MENU(wxID_EXIT, MainFrame::OnExit)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame()
-: wxFrame(NULL, wxID_ANY, wxT("wxFreeChart demo 1.2"), wxDefaultPosition, wxSize(800, 445))
+: wxFrame(NULL, wxID_ANY, wxT("wxFreeChart demo 1.3"), wxDefaultPosition, wxSize(800, 445))
 {
 	wxAuiManager *auiMan = new wxAuiManager(this);
 
@@ -117,9 +122,15 @@ MainFrame::MainFrame()
 
 	menuFile->Append(MENU_FILE_EXPORT_TO_PNG, wxT("Export to PNG"));
 	menuFile->AppendSeparator();
+	menuFile->AppendCheckItem(MENU_FILE_ENABLE_ANTIALIAS, wxT("Enable antialiasing"));
+	menuFile->AppendSeparator();
 	menuFile->Append(wxID_EXIT, wxT("E&xit"));
 
+	wxMenu *menuHelp = new wxMenu();
+	menuHelp->Append(wxID_ABOUT, wxT("&About"));
+
 	menuBar->Append(menuFile, wxT("&File"));
+	menuBar->Append(menuHelp, wxT("&Help"));
 
 	SetMenuBar(menuBar);
 }
@@ -128,12 +139,12 @@ MainFrame::~MainFrame()
 {
 }
 
-void MainFrame::OnExportToPS(wxCommandEvent &ev)
+void MainFrame::OnExportToPS(wxCommandEvent &WXUNUSED(ev))
 {
 	// TODO not implemented
 }
 
-void MainFrame::OnExportToPNG(wxCommandEvent &ev)
+void MainFrame::OnExportToPNG(wxCommandEvent &WXUNUSED(ev))
 {
 	Chart *chart = m_chartPanel->GetChart();
 	if (chart != NULL) {
@@ -143,18 +154,7 @@ void MainFrame::OnExportToPNG(wxCommandEvent &ev)
 		if (dlg.ShowModal() != wxID_OK)
 			return ;
 
-		const wxCoord width = 400;
-		const wxCoord height = 400;
-
-		wxRect rc(0, 0, width, height);
-
-		wxBitmap bitmap(width, height);
-
-		wxMemoryDC dc;
-		dc.SelectObject(bitmap);
-
-		chart->Draw((wxDC &) dc, rc);
-
+		wxBitmap bitmap = m_chartPanel->CopyBackbuffer();
 		bitmap.ConvertToImage().SaveFile(dlg.GetPath(), wxBITMAP_TYPE_PNG);
 	}
 	else {
@@ -162,7 +162,24 @@ void MainFrame::OnExportToPNG(wxCommandEvent &ev)
 	}
 }
 
-void MainFrame::OnExit(wxCommandEvent &ev)
+void MainFrame::OnEnableAntialias(wxCommandEvent &ev)
+{
+	m_chartPanel->SetAntialias(ev.IsChecked());
+}
+
+void MainFrame::OnAbout(wxCommandEvent &WXUNUSED(ev))
+{
+	wxAboutDialogInfo about;
+	about.SetName(wxT("wxFreeChart demo"));
+	about.SetVersion(wxT("1.3"));
+	about.SetDescription(wxT("This is wxFreeChart demo collection. It shows various chart types."));
+	about.SetCopyright(wxT("Copyright (C) 2008-2009 Moskvichev Andrey V."));
+
+	wxAboutBox(about);
+}
+
+
+void MainFrame::OnExit(wxCommandEvent &WXUNUSED(ev))
 {
 	Close();
 }

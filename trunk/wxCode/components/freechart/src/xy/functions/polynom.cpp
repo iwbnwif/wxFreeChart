@@ -12,10 +12,10 @@
 
 static wxString polynomFunctionName(wxT("Polynom function"));
 
-Polynom::Polynom(double *coefs, int coefCount, double min, double max, double step)
+Polynom::Polynom(double *coefs, size_t coefCount, double min, double max, double step)
 {
 	m_coefs = new double[coefCount];
-	for (int n = 0; n < coefCount; n++)
+	for (size_t n = 0; n < coefCount; n++)
 		m_coefs[n] = coefs[n];
 	m_coefCount = coefCount;
 	m_min = min;
@@ -28,22 +28,22 @@ Polynom::~Polynom()
 	wxDELETEA(m_coefs);
 }
 
-double Polynom::GetX(int index, int serie)
+double Polynom::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return m_min + index * m_step;
 }
 
-double Polynom::GetY(int index, int serie)
+double Polynom::GetY(size_t index, size_t WXUNUSED(serie))
 {
 	return CalcY(GetX(index, 0));
 }
 
-int Polynom::GetCount(int serie)
+size_t Polynom::GetCount(size_t WXUNUSED(serie))
 {
 	return RoundHigh((m_max - m_min) / m_step);
 }
 
-int Polynom::GetSerieCount()
+size_t Polynom::GetSerieCount()
 {
 	return 1;
 }
@@ -53,14 +53,14 @@ double Polynom::CalcY(double x)
 	double xn = 1;
 	double y = 0;
 
-	for (int n = m_coefCount - 1; n >= 0; n--) {
+	for (size_t n = m_coefCount - 1; n >= 0; n--) {
 		y += xn * m_coefs[n];
 		xn *= x;
 	}
 	return y;
 }
 
-wxString Polynom::GetSerieName(int serie)
+wxString Polynom::GetSerieName(size_t WXUNUSED(serie))
 {
 	return polynomFunctionName;
 }

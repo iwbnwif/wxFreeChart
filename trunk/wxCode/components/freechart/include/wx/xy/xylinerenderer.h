@@ -24,7 +24,7 @@ public:
 	/**
 	 * Constructs new line renderer.
 	 * @param drawSymbols specifies whether to draw symbols at line points
-	 * @param drawLinex specifies whether to draw lines
+	 * @param drawLines specifies whether to draw lines
 	 * @param defaultWidth specifies default width for lines
 	 * @param defaultStyle specifies default style for lines
 	 */
@@ -34,7 +34,7 @@ public:
 	//
 	// Renderer
 	//
-	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
 
 	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
@@ -43,31 +43,31 @@ public:
 	 * @param serie serie index
 	 * @param color color for serie
 	 */
-	virtual void SetSerieColour(int serie, wxColour *colour);
+	virtual void SetSerieColour(size_t serie, wxColour *colour);
 
 	/**
 	 * Returns serie color.
 	 * @param serie serie index
 	 * @return serie color
 	 */
-	virtual wxColour GetSerieColour(int serie);
+	virtual wxColour GetSerieColour(size_t serie);
 
 	/**
 	 * Sets pen to draw serie lines.
 	 * @param serie serie index
 	 * @param pen pen for serie
 	 */
-	void SetSeriePen(int serie, wxPen *pen);
+	void SetSeriePen(size_t serie, wxPen *pen);
 
 	/**
 	 * Returns pen, used to draw specified serie lines.
 	 * @param serie serie index
 	 * @return pen
 	 */
-	wxPen *GetSeriePen(int serie);
+	wxPen *GetSeriePen(size_t serie);
 
 private:
-	void DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
+	void DrawSegment(wxDC &dc, size_t serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
 	bool m_drawSymbols;
 	bool m_drawLines;

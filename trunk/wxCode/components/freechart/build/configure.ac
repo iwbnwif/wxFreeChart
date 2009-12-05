@@ -77,7 +77,7 @@ WXCODE_OPTIONS([debug,unicode,shared,toolkit,wxshared,wxversion])
 #	      NOTE: the libraries should be listed in the correct order: from
 #		    the most-advanced to the basic ones (e.g. 'base' _must_
 #		    always be the last listed library).
-WXCODE_CHECKS([2.8.0], [core,base])	 # e.g. we need at least wxWidgets 2.8 to work and
+WXCODE_CHECKS([2.8.0], [core,base,aui])	 # e.g. we need at least wxWidgets 2.8 to work and
 					 # we want to link against wxCore and wxBase libs
 
 # Other things which can be useful to add here can be:

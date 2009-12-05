@@ -24,6 +24,7 @@ class WXDLLIMPEXP_FREECHART XYPlot : public AxisPlot
 {
 public:
 	XYPlot();
+	virtual ~XYPlot();
 
 protected:
 	//

@@ -58,19 +58,19 @@ void XYZRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYZ
 	}
 }
 
-void XYZRenderer::SetSeriePen(int serie, wxPen *pen)
+void XYZRenderer::SetSeriePen(size_t serie, wxPen *pen)
 {
 	m_seriePens[serie] = *pen;
 	FireNeedRedraw();
 }
 
-void XYZRenderer::SetSerieColor(int serie, wxColour *color)
+void XYZRenderer::SetSerieColor(size_t serie, wxColour *color)
 {
 	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*color, m_defaultPenWidth, m_defaultPenStyle));
 	SetSerieBrush(serie, wxTheBrushList->FindOrCreateBrush(*color, m_defaultBrushStyle));
 }
 
-wxColour XYZRenderer::GetSerieColor(int serie)
+wxColour XYZRenderer::GetSerieColor(size_t serie)
 {
 	if (m_serieBrushs.find(serie) == m_serieBrushs.end()) {
 		return GetDefaultColour(serie);
@@ -78,7 +78,7 @@ wxColour XYZRenderer::GetSerieColor(int serie)
 	return m_serieBrushs[serie].GetColour();
 }
 
-wxPen *XYZRenderer::GetSeriePen(int serie)
+wxPen *XYZRenderer::GetSeriePen(size_t serie)
 {
 	if (m_seriePens.find(serie) == m_seriePens.end()) {
 		return wxThePenList->FindOrCreatePen(GetDefaultColour(serie), m_defaultPenWidth, m_defaultPenStyle);
@@ -86,13 +86,13 @@ wxPen *XYZRenderer::GetSeriePen(int serie)
 	return &m_seriePens[serie];
 }
 
-void XYZRenderer::SetSerieBrush(int serie, wxBrush *brush)
+void XYZRenderer::SetSerieBrush(size_t serie, wxBrush *brush)
 {
 	m_serieBrushs[serie] = *brush;
 	FireNeedRedraw();
 }
 
-wxBrush *XYZRenderer::GetSerieBrush(int serie)
+wxBrush *XYZRenderer::GetSerieBrush(size_t serie)
 {
 	if (m_serieBrushs.find(serie) == m_serieBrushs.end()) {
 		return wxTheBrushList->FindOrCreateBrush(GetDefaultColour(serie), m_defaultBrushStyle);

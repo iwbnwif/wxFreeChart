@@ -17,16 +17,16 @@
 class CategorySerie
 {
 public:
-	CategorySerie(const wxString &name, double *values, int count);
+	CategorySerie(const wxString &name, double *values, size_t count);
 	virtual ~CategorySerie();
 
 	const wxString &GetName();
 
-	double GetValue(int index);
+	double GetValue(size_t index);
 
 private:
 	wxString m_name;
-	int m_count;
+	size_t m_count;
 	double *m_values;
 };
 
@@ -44,25 +44,25 @@ public:
 	 * @param names category names array
 	 * @param count names count
 	 */
-	CategorySimpleDataset(wxString *names, int count);
+	CategorySimpleDataset(wxString *names, size_t count);
 	virtual ~CategorySimpleDataset();
 
-	void AddSerie(const wxString &name, double *values, int count);
+	void AddSerie(const wxString &name, double *values, size_t count);
 
 	void AddSerie(CategorySerie *serie);
 
 	//
 	// CategoryDataset
 	//
-	virtual double GetValue(int index, int serie);
+	virtual double GetValue(size_t index, size_t serie);
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual wxString GetName(int index);
+	virtual wxString GetName(size_t index);
 
-	virtual int GetCount();
+	virtual size_t GetCount();
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
 private:
 	wxArrayString m_names;

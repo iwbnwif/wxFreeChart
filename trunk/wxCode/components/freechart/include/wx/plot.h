@@ -16,7 +16,7 @@
 
 #include <wx/areadraw.h>
 
-class Plot;
+class WXDLLIMPEXP_FREECHART Plot;
 
 /**
  * Interface that receives Plot events, such as need redraw condition.

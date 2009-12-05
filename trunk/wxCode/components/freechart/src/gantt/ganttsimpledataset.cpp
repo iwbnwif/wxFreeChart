@@ -13,10 +13,10 @@
 
 WX_DEFINE_OBJARRAY(GanttSerieArray);
 
-GanttSerie::GanttSerie(TaskTime *taskTimes, int taskTimesCount, const wxString &name)
+GanttSerie::GanttSerie(TaskTime *taskTimes, size_t taskTimesCount, const wxString &name)
 {
 	m_taskTimes = new TaskTime[taskTimesCount];
-	for (int n = 0; n < taskTimesCount; n++) {
+	for (size_t n = 0; n < taskTimesCount; n++) {
 		m_taskTimes[n].start = taskTimes[n].start;
 		m_taskTimes[n].end = taskTimes[n].end;
 	}
@@ -31,13 +31,13 @@ GanttSerie::~GanttSerie()
 	wxDELETEA(m_taskTimes);
 }
 
-time_t GanttSerie::GetStart(int index)
+time_t GanttSerie::GetStart(size_t index)
 {
 	wxCHECK(index < m_taskTimesCount, 0);
 	return m_taskTimes[index].start;
 }
 
-time_t GanttSerie::GetEnd(int index)
+time_t GanttSerie::GetEnd(size_t index)
 {
 	wxCHECK(index < m_taskTimesCount, 0);
 	return m_taskTimes[index].end;
@@ -52,11 +52,11 @@ const wxString &GanttSerie::GetName()
 // GanttSimpleDataset
 //
 
-GanttSimpleDataset::GanttSimpleDataset(int dateCount, const wxChar **taskNames, int taskNamesCount)
+GanttSimpleDataset::GanttSimpleDataset(size_t dateCount, const wxChar **taskNames, size_t taskNamesCount)
 : GanttDataset(dateCount)
 {
 	m_taskNames.Alloc(taskNamesCount);
-	for (int n = 0; n < taskNamesCount; n++) {
+	for (size_t n = 0; n < taskNamesCount; n++) {
 		m_taskNames.Add(wxString(taskNames[n]));
 	}
 }
@@ -74,40 +74,40 @@ void GanttSimpleDataset::AddSerie(GanttSerie *serie)
 	DatasetChanged();
 }
 
-wxString GanttSimpleDataset::GetName(int index)
+wxString GanttSimpleDataset::GetName(size_t index)
 {
 	return m_taskNames[index];
 }
 
-double GanttSimpleDataset::GetValue(int WXUNUSED(index), int WXUNUSED(serie))
+double GanttSimpleDataset::GetValue(size_t WXUNUSED(index), size_t WXUNUSED(serie))
 {
 	return 0; // dummy
 }
 
-int GanttSimpleDataset::GetSerieCount()
+size_t GanttSimpleDataset::GetSerieCount()
 {
 	return m_series.Count();
 }
 
-wxString GanttSimpleDataset::GetSerieName(int serie)
+wxString GanttSimpleDataset::GetSerieName(size_t serie)
 {
-	wxCHECK(serie < (int) m_series.Count(), wxEmptyString);
+	wxCHECK(serie < m_series.Count(), wxEmptyString);
 	return m_series[serie]->GetName();
 }
 
-int GanttSimpleDataset::GetCount()
+size_t GanttSimpleDataset::GetCount()
 {
 	return m_taskNames.Count();
 }
 
-time_t GanttSimpleDataset::GetStart(int index, int serie)
+time_t GanttSimpleDataset::GetStart(size_t index, size_t serie)
 {
-	wxCHECK(serie < (int) m_series.Count(), 0);
+	wxCHECK(serie < m_series.Count(), 0);
 	return m_series[serie]->GetStart(index);
 }
 
-time_t GanttSimpleDataset::GetEnd(int index, int serie)
+time_t GanttSimpleDataset::GetEnd(size_t index, size_t serie)
 {
-	wxCHECK(serie < (int) m_series.Count(), 0);
+	wxCHECK(serie < m_series.Count(), 0);
 	return m_series[serie]->GetEnd(index);
 }

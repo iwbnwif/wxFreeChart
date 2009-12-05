@@ -37,11 +37,14 @@ public:
 
 	/**
 	 * Sets count of labels.
+	 * @param labelCount count of labels
 	 */
-	void SetLabelCount(int labelCount)
+	void SetLabelCount(size_t labelCount)
 	{
-		m_labelCount = labelCount;
-		FireAxisChanged();
+		if (m_labelCount != labelCount) {
+			m_labelCount = labelCount;
+			FireAxisChanged();
+		}
 	}
 
 	/**
@@ -50,9 +53,11 @@ public:
 	 */
 	void IntegerValues(bool intValues = true)
 	{
-		m_intValues = intValues;
-		// TODO recalc tick steps
-		FireAxisChanged();
+		if (m_intValues != intValues) {
+			m_intValues = intValues;
+			// TODO recalc tick steps
+			FireAxisChanged();
+		}
 	}
 
 	/**
@@ -68,11 +73,11 @@ protected:
 	//
 	// LabelAxis
 	//
-	virtual double GetValue(int step);
+	virtual double GetValue(size_t step);
 
-	virtual void GetLabel(int step, wxString &label);
+	virtual void GetLabel(size_t step, wxString &label);
 
-	virtual bool IsEnd(int step);
+	virtual bool IsEnd(size_t step);
 
 	virtual bool HasLabels();
 
@@ -90,7 +95,7 @@ private:
 
 	double m_labelInterval;
 
-	int m_labelCount;
+	size_t m_labelCount;
 	bool m_intValues;
 
 	bool m_hasLabels;
