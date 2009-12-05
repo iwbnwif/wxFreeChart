@@ -4,7 +4,7 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.2 alpha
+ Version: 1.3 alpha
  Description:
  wxFreeChart is free powerful charting library based on wxWidgets. It 
  designed with flexibility in mind, and supports many types of charts 
@@ -36,8 +36,8 @@
 
  When building on a Linux/GNU-based system, type
 
-  cd build
-  make -f GNUmakefile 
+  ./configure
+  make
   
  to build against the default build of wxWidgets (the one listed as 'default'
  by wx-config --list). Type "./configure --help" for more info.
@@ -47,6 +47,12 @@
  ChangeLog
  ---------
  
+ 1.3: 
+ 		What's new:
+ 		 - antialiasing added
+ 		 - axis improvements (added vertical text for labels)
+ 		 - API changes: int replaced with size_t for indexes  
+ 		 
  1.2: third version of wxFreeChart at wxCode
  		What's new:
  		 - added xy datasets support to OHLCPlot
@@ -67,15 +73,18 @@
  1.0 - first version of wxFreeChart at wxCode
 
  Future plans:
- - Transparency for bubble charts, histogram charts.
- - Markers.
+ - Transparency for bubble charts, histogram charts
+ - Markers
  - Add levels/fractals/etc support to OHLCPlot. Make 
-   OHLCPlot suitable for technical analysis applications.
- - Antialiasing for lines, shapes, etc.
+   OHLCPlot suitable for technical analysis applications
+ - Antialiasing for lines, shapes, etc
  - Logorithmic axes
- - Make axis marks drawing more flexible.
- - Add zoom to plots.
- - Make wxFreeChart to work on handheld wxWidgets ports.
+ - Make axis marks drawing more flexible
+ - Add zoom to plots
+ - Composite axes
+ - Multiplot - plot, that contains many subplots
+ - Pie plots 
+ - Make wxFreeChart to work on handheld wxWidgets ports
  
  Known issues:
  - window scrolling bugs
@@ -84,10 +93,8 @@
  - markers not implemented
  - Work with wxWidgets 2.6.x not tested.
  - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
- - Antialiasing not implemented
+ - Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
  - Pie plots are very ugly, and must be cleaned up or rewritten.
-
- [optionally: Known bugs, Author's info, ... ]
 
  Author contact email: mab[at]smtp[dot]ru
 
