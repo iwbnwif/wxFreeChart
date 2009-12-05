@@ -16,7 +16,7 @@
 #define wxNoBrush *wxTheBrushList->FindOrCreateBrush(*wxBLACK, wxTRANSPARENT)
 #define wxNoPen *wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxTRANSPARENT)
 
-class DrawObject;
+class WXDLLIMPEXP_FREECHART DrawObject;
 
 /**
  * Interface to receive DrawObject events.

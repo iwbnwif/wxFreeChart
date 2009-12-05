@@ -12,9 +12,9 @@
 #include <wx/arrimpl.cpp>
 
 
-ColorScheme::ColorScheme(wxColour *colours, int count)
+ColorScheme::ColorScheme(wxColour *colours, size_t count)
 {
-	for (int n = 0; n < count; n++) {
+	for (size_t n = 0; n < count; n++) {
 		AddColour(colours[n]);
 	}
 }

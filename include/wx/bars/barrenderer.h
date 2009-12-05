@@ -37,7 +37,7 @@ public:
 	 * @param item dataset item index
 	 * @param dataset dataset to draw bars
 	 */
-	virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, int item, CategoryDataset *dataset);
+	virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, size_t item, CategoryDataset *dataset);
 
 	//
 	// Called from BarRenderer. Don't call from programs.
@@ -57,7 +57,7 @@ protected:
 	 * @param base output for bar base
 	 * @param value output for bar value
 	 */
-	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
+	virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
 			int &width, wxCoord &shift, double &base, double &value) = 0;
 
 	double m_base;
@@ -79,7 +79,7 @@ public:
 	virtual ~NormalBarType();
 
 protected:
-	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
+	virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
 			int &width, wxCoord &shift, double &base, double &value);
 
 private:
@@ -105,7 +105,7 @@ public:
 	virtual double GetMaxValue(CategoryDataset *dataset);
 
 protected:
-	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
+	virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
 			int &width, wxCoord &shift, double &base, double &value);
 
 private:
@@ -127,7 +127,7 @@ public:
 	virtual ~LayeredBarType();
 
 protected:
-	virtual void GetBarGeometry(CategoryDataset *dataset, int item, int serie,
+	virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
 			int &width, wxCoord &shift, double &base, double &value);
 
 private:
@@ -152,7 +152,7 @@ public:
 	//
 	// Renderer
 	//
-	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie);
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
 
 	/**
 	 * Draws dataset.
@@ -182,14 +182,14 @@ public:
 	 * @param serie serie index
 	 * @param ad area draw for serie
 	 */
-	void SetBarDraw(int serie, AreaDraw *areaDraw);
+	void SetBarDraw(size_t serie, AreaDraw *areaDraw);
 
 	/**
 	 * Returns area draw object, used to draw specified serie.
 	 * @param serie serie index
 	 * @return area draw object
 	 */
-	AreaDraw *GetBarDraw(int serie);
+	AreaDraw *GetBarDraw(size_t serie);
 
 	double GetMinValue(CategoryDataset *dataset);
 	double GetMaxValue(CategoryDataset *dataset);

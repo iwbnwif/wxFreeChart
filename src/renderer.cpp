@@ -20,13 +20,13 @@ Renderer::~Renderer()
 {
 }
 
-void Renderer::SetSerieColour(int serie, wxColour *colour)
+void Renderer::SetSerieColour(size_t serie, wxColour *colour)
 {
 	m_serieColours[serie] = *colour;
 	FireNeedRedraw();
 }
 
-wxColour Renderer::GetSerieColour(int serie)
+wxColour Renderer::GetSerieColour(size_t serie)
 {
 	if (m_serieColours.find(serie) == m_serieColours.end()) {
 		return GetDefaultColour(serie);
@@ -34,13 +34,13 @@ wxColour Renderer::GetSerieColour(int serie)
 	return m_serieColours[serie];
 }
 
-void Renderer::SetSerieSymbol(int serie, Symbol *symbol)
+void Renderer::SetSerieSymbol(size_t serie, Symbol *symbol)
 {
 	m_serieSymbols[serie] = symbol;
 	FireNeedRedraw();
 }
 
-Symbol *Renderer::GetSerieSymbol(int serie)
+Symbol *Renderer::GetSerieSymbol(size_t serie)
 {
 	if (m_serieSymbols.find(serie) == m_serieSymbols.end()) {
 		return GetDefaultSymbol(serie);
@@ -48,7 +48,7 @@ Symbol *Renderer::GetSerieSymbol(int serie)
 	return m_serieSymbols[serie];
 }
 
-void Renderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie)
+void Renderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 {
 	wxColour colour = GetSerieColour(serie);
 

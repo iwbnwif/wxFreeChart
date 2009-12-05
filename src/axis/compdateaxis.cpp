@@ -375,7 +375,7 @@ wxCoord CompDateAxis::ToGraphics(wxDC &dc, int minCoord, int gRange, double valu
 		return 0; // BUG
 	}
 
-	int index = (int) value;
+	size_t index = (size_t) value;
 	if (index >= dataset->GetCount()) {
 		return 0;
 	}

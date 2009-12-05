@@ -1,9 +1,0 @@
-<area shape="rect" href="$classDataset.html" title="Dataset" alt="" coords="773,105,845,132">
-<area shape="rect" href="$classRefObject.html" title="RefObject" alt="" coords="276,12,359,39">
-<area shape="rect" href="$classRenderer.html" title="Renderer" alt="" coords="492,55,572,81">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="416,105,648,132">
-<area shape="rect" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="476,156,588,183">
-<area shape="rect" href="$classDrawObject.html" title="DrawObject" alt="" coords="271,71,364,97">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="5,71,219,97">
-<area shape="rect" href="$classAxis.html" title="Axis" alt="" coords="785,207,833,233">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="428,207,636,233">

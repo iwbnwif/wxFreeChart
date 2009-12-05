@@ -26,7 +26,7 @@
 class XYZSerie
 {
 public:
-	XYZSerie(double *data, int count)
+	XYZSerie(double *data, size_t count)
 	{
 		m_data = new double[3 * count];
 		memcpy(m_data, data, 3 * count * sizeof(double));
@@ -38,25 +38,25 @@ public:
 		wxDELETEA(m_data);
 	}
 
-	double GetX(int index)
+	double GetX(size_t index)
 	{
 		wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetX"));
 		return m_data[index * 3];
 	}
 
-	double GetY(int index)
+	double GetY(size_t index)
 	{
 		wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetY"));
 		return m_data[index * 3 + 1];
 	}
 
-	double GetZ(int index)
+	double GetZ(size_t index)
 	{
 		wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetZ"));
 		return m_data[index * 3 + 2];
 	}
 
-	int GetCount()
+	size_t GetCount()
 	{
 		return m_count;
 	}
@@ -73,7 +73,7 @@ public:
 
 private:
 	double *m_data;
-	int m_count;
+	size_t m_count;
 	wxString m_name;
 };
 
@@ -97,43 +97,43 @@ public:
 		}
 	}
 
-	void AddSerie(double *data, int count)
+	void AddSerie(double *data, size_t count)
 	{
 		m_series.Add(new XYZSerie(data, count));
 		DatasetChanged();
 	}
 
-	virtual double GetX(int index, int serie)
+	virtual double GetX(size_t index, size_t serie)
 	{
 		return m_series[serie]->GetX(index);
 	}
 
-	virtual double GetY(int index, int serie)
+	virtual double GetY(size_t index, size_t serie)
 	{
 		return m_series[serie]->GetY(index);
 	}
 
-	virtual double GetZ(int index, int serie)
+	virtual double GetZ(size_t index, size_t serie)
 	{
 		return m_series[serie]->GetZ(index);
 	}
 
-	virtual int GetSerieCount()
+	virtual size_t GetSerieCount()
 	{
 		return m_series.Count();
 	}
 
-	virtual int GetCount(int serie)
+	virtual size_t GetCount(size_t serie)
 	{
 		return m_series[serie]->GetCount();
 	}
 
-	virtual wxString GetSerieName(int serie)
+	virtual wxString GetSerieName(size_t serie)
 	{
 		return m_series[serie]->GetName();
 	}
 
-	void SetSerieName(int serie, const wxString &name)
+	void SetSerieName(size_t serie, const wxString &name)
 	{
 		m_series[serie]->SetName(name);
 		DatasetChanged();

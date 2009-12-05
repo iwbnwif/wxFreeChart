@@ -19,7 +19,7 @@ IMPLEMENT_CLASS(XYSimpleDataset, XYDataset)
 // XYSerie
 //
 
-XYSerie::XYSerie(double *data, int count)
+XYSerie::XYSerie(double *data, size_t count)
 {
 	m_data = new double[2 * count];
 	memcpy(m_data, data, 2 * count * sizeof(double));
@@ -31,19 +31,19 @@ XYSerie::~XYSerie()
 	wxDELETEA(m_data);
 }
 
-double XYSerie::GetX(int index)
+double XYSerie::GetX(size_t index)
 {
 	wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetX"));
 	return m_data[index * 2];
 }
 
-double XYSerie::GetY(int index)
+double XYSerie::GetY(size_t index)
 {
 	wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetY"));
 	return m_data[index * 2 + 1];
 }
 
-int XYSerie::GetCount()
+size_t XYSerie::GetCount()
 {
 	return m_count;
 }
@@ -73,7 +73,7 @@ XYSimpleDataset::~XYSimpleDataset()
 	}
 }
 
-void XYSimpleDataset::AddSerie(double *data, int count)
+void XYSimpleDataset::AddSerie(double *data, size_t count)
 {
 	AddSerie(new XYSerie(data, count));
 }
@@ -84,35 +84,35 @@ void XYSimpleDataset::AddSerie(XYSerie *serie)
 	DatasetChanged();
 }
 
-double XYSimpleDataset::GetX(int index, int serie)
+double XYSimpleDataset::GetX(size_t index, size_t serie)
 {
-	wxCHECK(serie < (int) m_series.Count(), 0);
+	wxCHECK(serie < m_series.Count(), 0);
 	return m_series[serie]->GetX(index);
 }
 
-double XYSimpleDataset::GetY(int index, int serie)
+double XYSimpleDataset::GetY(size_t index, size_t serie)
 {
-	wxCHECK(serie < (int) m_series.Count(), 0);
+	wxCHECK(serie < m_series.Count(), 0);
 	return m_series[serie]->GetY(index);
 }
 
-int XYSimpleDataset::GetSerieCount()
+size_t XYSimpleDataset::GetSerieCount()
 {
 	return m_series.Count();
 }
 
-int XYSimpleDataset::GetCount(int serie)
+size_t XYSimpleDataset::GetCount(size_t serie)
 {
 	return m_series[serie]->GetCount();
 }
 
-wxString XYSimpleDataset::GetSerieName(int serie)
+wxString XYSimpleDataset::GetSerieName(size_t serie)
 {
-	wxCHECK(serie < (int) m_series.Count(), wxEmptyString);
+	wxCHECK(serie < m_series.Count(), wxEmptyString);
 	return m_series[serie]->GetName();
 }
 
-void XYSimpleDataset::SetSerieName(int serie, const wxString &name)
+void XYSimpleDataset::SetSerieName(size_t serie, const wxString &name)
 {
 	m_series[serie]->SetName(name);
 	DatasetChanged();

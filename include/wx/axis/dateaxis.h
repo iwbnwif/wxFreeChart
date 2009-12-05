@@ -44,18 +44,18 @@ protected:
 	//
 	// LabelAxis
 	//
-	virtual double GetValue(int step);
+	virtual double GetValue(size_t step);
 
-	virtual void GetLabel(int step, wxString &label);
+	virtual void GetLabel(size_t step, wxString &label);
 
-	virtual bool IsEnd(int step);
+	virtual bool IsEnd(size_t step);
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
 	virtual void GetDataBounds(double &minValue, double &maxValue);
 
 private:
-	int m_dateCount;
+	size_t m_dateCount;
 
 	wxString m_dateFormat;
 };

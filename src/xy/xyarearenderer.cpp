@@ -57,8 +57,8 @@ void XYAreaRenderer::Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoo
 
 void XYAreaRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
 {
-	for (int serie = 0; serie < dataset->GetSerieCount(); serie++) {
-		for (int n = 0; n < dataset->GetCount(serie) - 1; n++) {
+	for (size_t serie = 0; serie < dataset->GetSerieCount(); serie++) {
+		for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
 			wxCoord x0 = horizAxis->ToGraphics(dc, rc.x, rc.width, dataset->GetX(n, serie));
 			wxCoord y0 = vertAxis->ToGraphics(dc, rc.y, rc.height, dataset->GetY(n, serie));
 

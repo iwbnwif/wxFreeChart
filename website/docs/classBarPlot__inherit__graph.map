@@ -1,7 +1,0 @@
-<area shape="rect" href="$classXYPlot.html" title="XYPlot" alt="" coords="252,239,313,265">
-<area shape="rect" href="$classAxisPlot.html" title="AxisPlot" alt="" coords="247,161,319,188">
-<area shape="rect" href="$classPlot.html" title="Plot" alt="" coords="85,84,131,111">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; PlotObserver \&gt;" alt="" coords="5,7,211,33">
-<area shape="rect" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="155,84,267,111">
-<area shape="rect" href="$classDatasetObserver.html" title="DatasetObserver" alt="" coords="291,84,421,111">
-<area shape="rect" href="$classAxisObserver.html" title="AxisObserver" alt="" coords="445,84,549,111">

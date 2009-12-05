@@ -26,10 +26,10 @@ class Dataset;
 class DateTimeDataset;
 
 #define FOREACH_SERIE(index, dataset) \
-	for (int index = 0; index < dataset->GetSerieCount(); index++)
+	for (size_t index = 0; index < dataset->GetSerieCount(); index++)
 
 #define FOREACH_DATAITEM(index, serie, dataset) \
-	for (int index = 0; index < dataset->GetCount(serie); index++)
+	for (size_t index = 0; index < dataset->GetCount(serie); index++)
 
 /**
  * Class that receives notifications about dataset changes.
@@ -81,21 +81,21 @@ public:
 	 * Returns serie count in this dataset.
 	 * @return serie count
 	 */
-	virtual int GetSerieCount() = 0;
+	virtual size_t GetSerieCount() = 0;
 
 	/**
 	 * Returns value count in serie specified by index.
 	 * @param serie index
 	 * @return value count
 	 */
-	virtual int GetCount(int serie) = 0;
+	virtual size_t GetCount(size_t serie) = 0;
 
 	/**
 	 * Returns serie name.
 	 * @param serie index
 	 * @return serie name
 	 */
-	virtual wxString GetSerieName(int serie) = 0;
+	virtual wxString GetSerieName(size_t serie) = 0;
 
 	virtual double GetMinValue(bool vertical) = 0;
 
@@ -132,9 +132,9 @@ public:
 	DateTimeDataset();
 	virtual ~DateTimeDataset();
 
-	virtual time_t GetDate(int index) = 0;
+	virtual time_t GetDate(size_t index) = 0;
 
-	virtual int GetCount() = 0;
+	virtual size_t GetCount() = 0;
 };
 
 WX_DECLARE_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase);

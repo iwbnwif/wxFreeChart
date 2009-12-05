@@ -32,12 +32,12 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 
 void DateAxis::UpdateBounds()
 {
-	int dateCount = 0;
+	size_t dateCount = 0;
 
 	for (size_t n = 0; n < m_datasets.Count(); n++) {
 		DateTimeDataset *dataset = m_datasets[n]->AsDateTimeDataset();
 
-		int count = dataset->GetCount();
+		size_t count = dataset->GetCount();
 		dateCount = wxMax(dateCount, count);
 	}
 
@@ -76,12 +76,12 @@ void DateAxis::GetDataBounds(double &minValue, double &maxValue)
 	}
 }
 
-double DateAxis::GetValue(int step)
+double DateAxis::GetValue(size_t step)
 {
 	return step;
 }
 
-void DateAxis::GetLabel(int step, wxString &label)
+void DateAxis::GetLabel(size_t step, wxString &label)
 {
 	DateTimeDataset *dataset = m_datasets[0]->AsDateTimeDataset();
 	if (dataset == NULL) {
@@ -93,7 +93,7 @@ void DateAxis::GetLabel(int step, wxString &label)
 	label = dt.Format(m_dateFormat);
 }
 
-bool DateAxis::IsEnd(int step)
+bool DateAxis::IsEnd(size_t step)
 {
 	return step >= m_dateCount;
 }

@@ -30,7 +30,7 @@ double OHLCDataset::GetMaxValue(bool WXUNUSED(unused))
 {
 	double maxValue = 0;
 
-	for (int n = 0; n < GetCount(); n++) {
+	for (size_t n = 0; n < GetCount(); n++) {
 		OHLCItem *item = GetItem(n);
 
 		if (n == 0)
@@ -45,7 +45,7 @@ double OHLCDataset::GetMinValue(bool WXUNUSED(unused))
 {
 	double minValue = 0;
 
-	for (int n = 0; n < GetCount(); n++) {
+	for (size_t n = 0; n < GetCount(); n++) {
 		OHLCItem *item = GetItem(n);
 
 		if (n == 0)
@@ -57,23 +57,23 @@ double OHLCDataset::GetMinValue(bool WXUNUSED(unused))
 }
 
 
-time_t OHLCDataset::GetDate(int index)
+time_t OHLCDataset::GetDate(size_t index)
 {
 	return GetItem(index)->date;
 }
 
 
-int OHLCDataset::GetCount(int WXUNUSED(serie))
+size_t OHLCDataset::GetCount(size_t WXUNUSED(serie))
 {
 	return GetCount();
 }
 
-int OHLCDataset::GetSerieCount()
+size_t OHLCDataset::GetSerieCount()
 {
 	return 1;
 }
 
-wxString OHLCDataset::GetSerieName(int WXUNUSED(serie))
+wxString OHLCDataset::GetSerieName(size_t WXUNUSED(serie))
 {
 	return m_serieName;
 }

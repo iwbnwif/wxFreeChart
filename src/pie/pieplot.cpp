@@ -84,7 +84,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	//
 	double sum = 0;
 
-	for (int n = 0; n < m_dataset->GetCount(); n++) {
+	for (size_t n = 0; n < m_dataset->GetCount(); n++) {
 		sum += m_dataset->GetValue(n, m_serie);
 	}
 
@@ -103,7 +103,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 		dc.DrawLine(x0 + radHoriz, y0 + radVert / 2, x0 + radHoriz, y0 + radVert / 2 + shift3D + 1);
 
 		double part = 0;
-		for (int n = 0; ; n++) {
+		for (size_t n = 0; ; n++) {
 			double angle = 360 * part;
 
 			wxCoord x1, y1, x2, y2;
@@ -128,7 +128,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	dc.SetPen(m_outlinePen);
 	//dc.SetFont(labelsFont);
 	double part = 0;
-	for (int n = 0; n < m_dataset->GetCount(); n++) {
+	for (size_t n = 0; n < m_dataset->GetCount(); n++) {
 		double v = m_dataset->GetValue(n, m_serie);
 
 		double angle1 = 360 * part;
@@ -146,7 +146,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	dc.SetPen(m_outlinePen);
 	dc.SetBrush(wxNoBrush);
 	part = 0;
-	for (int n = 0; n < m_dataset->GetCount(); n++) {
+	for (size_t n = 0; n < m_dataset->GetCount(); n++) {
 		double v = m_dataset->GetValue(n, m_serie);
 
 		double angle = 360 * part;
@@ -161,7 +161,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 	// fill areas
 	if (m_use3DView) {
 		double part = 0;
-		for (int n = 0; n < m_dataset->GetCount(); n++) {
+		for (size_t n = 0; n < m_dataset->GetCount(); n++) {
 			double angle = 360 * part;
 			double v = m_dataset->GetValue(n, m_serie);
 			part += v / sum;

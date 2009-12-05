@@ -36,7 +36,7 @@ bool GanttPlot::AcceptDataset(Dataset *dataset)
 
 void GanttPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-	for (int nData = 0; nData < GetDatasetCount(); nData++) {
+	for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
 		GanttDataset *dataset = (GanttDataset *) GetDataset(nData);
 		GanttRenderer *renderer = dataset->GetRenderer();
 		wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));

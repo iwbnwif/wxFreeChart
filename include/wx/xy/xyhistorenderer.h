@@ -37,14 +37,14 @@ public:
 	 * @param serie serie index
 	 * @param barArea area background object to draw bars
 	 */
-	void SetBarArea(int serie, AreaDraw *barArea);
+	void SetBarArea(size_t serie, AreaDraw *barArea);
 
 	/**
 	 * Returns area draw for specified serie.
 	 * @param serie serie index
 	 * @return area draw for specified serie
 	 */
-	AreaDraw *GetBarArea(int serie);
+	AreaDraw *GetBarArea(size_t serie);
 
 	//
 	// DrawObserver

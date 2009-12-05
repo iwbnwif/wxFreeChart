@@ -25,7 +25,7 @@ bool CategoryDataset::AcceptRenderer(Renderer *renderer)
 	return wxDynamicCast(renderer, BarRenderer);
 }
 
-bool CategoryDataset::HasValue(int index, int serie)
+bool CategoryDataset::HasValue(size_t WXUNUSED(index), size_t WXUNUSED(serie))
 {
 	return true;
 }
@@ -48,17 +48,17 @@ double CategoryDataset::GetMaxValue(bool WXUNUSED(verticalAxis))
 
 // TODO deprecated functions.
 //
-double CategoryDataset::GetX(int index, int serie)
+double CategoryDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return index;
 }
 
-double CategoryDataset::GetY(int index, int serie)
+double CategoryDataset::GetY(size_t index, size_t serie)
 {
 	return GetValue(index, serie);
 }
 
-int CategoryDataset::GetCount(int serie)
+size_t CategoryDataset::GetCount(size_t WXUNUSED(serie))
 {
 	return GetCount(); // in category dataset all series has equal count of elements
 }

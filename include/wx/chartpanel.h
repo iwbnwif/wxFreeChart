@@ -36,6 +36,26 @@ public:
 		return m_chart;
 	}
 
+	/**
+	 * Turn antialiasing on/off.
+	 * Has effect only when wx wxUSE_GRAPHICS_CONTEXT is set in wxWidgets build.
+	 *
+	 * @param antialias true to turn on antialiasing.
+	 */
+	void SetAntialias(bool antialias);
+
+	bool GetAntialias()
+	{
+		return m_antialias;
+	}
+
+	/**
+	 * Returns back buffer copy as wxBitmap.
+	 * Can be used to save chart image to file.
+	 * @return back buffer copy as wxBitmap
+	 */
+	wxBitmap CopyBackbuffer();
+
 	//
 	// ChartObserver
 	//
@@ -60,6 +80,8 @@ private:
 	Chart *m_chart;
 
 	wxBitmap m_backBitmap;
+
+	bool m_antialias;
 
 	DECLARE_EVENT_TABLE()
 };

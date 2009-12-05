@@ -29,7 +29,7 @@ public:
 		return (XYZRenderer *) m_renderer;
 	}
 
-	virtual double GetZ(int index, int serie) = 0;
+	virtual double GetZ(size_t index, size_t serie) = 0;
 
 	virtual double GetMinZ();
 

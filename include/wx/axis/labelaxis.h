@@ -153,6 +153,27 @@ public:
 		return m_labelTextFont;
 	}
 
+	/**
+	 * Sets whether to draw labels text vertical.
+	 * @param verticalLabelText true to draw labels text vertical
+	 */
+	void SetVerticalLabelText(bool verticalLabelText)
+	{
+		if (m_verticalLabelText != verticalLabelText) {
+			m_verticalLabelText = verticalLabelText;
+			FireAxisChanged();
+		}
+	}
+
+	/**
+	 * Returns whether to draw labels text vertical.
+	 * @return true if labels text will be drawn vertical
+	 */
+	bool GetVerticalLabelText()
+	{
+		return m_verticalLabelText;
+	}
+
 	//
 	// Axis
 	//
@@ -172,21 +193,21 @@ protected:
 	 * @param step step index
 	 * @return value on step
 	 */
-	virtual double GetValue(int step) = 0;
+	virtual double GetValue(size_t step) = 0;
 
 	/**
 	 * Returns label on step.
 	 * @param step step index
 	 * @param label output label
 	 */
-	virtual void GetLabel(int step, wxString &label) = 0;
+	virtual void GetLabel(size_t step, wxString &label) = 0;
 
 	/**
 	 * Check whether step is last.
 	 * @param step step
 	 * @return true if step is last
 	 */
-	virtual bool IsEnd(int step) = 0;
+	virtual bool IsEnd(size_t step) = 0;
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc) = 0;
 
@@ -206,6 +227,7 @@ private:
 	wxFont m_labelTextFont;
 	wxColour m_labelTextColour;
 	wxPen m_labelPen;
+	bool m_verticalLabelText;
 
 	// label title properties
 	wxString m_title;

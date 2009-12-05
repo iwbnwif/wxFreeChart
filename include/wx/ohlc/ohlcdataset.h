@@ -51,13 +51,13 @@ public:
 	 * Returns item on index.
 	 * @param index index of item
 	 */
-	virtual OHLCItem *GetItem(int index) = 0;
+	virtual OHLCItem *GetItem(size_t index) = 0;
 
 	/**
 	 * Returns item count.
 	 * @return item count
 	 */
-	virtual int GetCount() = 0;
+	virtual size_t GetCount() = 0;
 
 	//
 	// Dataset
@@ -66,18 +66,18 @@ public:
 
 	virtual double GetMaxValue(bool verticalAxis);
 
-	virtual int GetSerieCount();
+	virtual size_t GetSerieCount();
 
-	virtual wxString GetSerieName(int serie);
+	virtual wxString GetSerieName(size_t serie);
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
 	virtual DateTimeDataset *AsDateTimeDataset();
 
 	//
 	// DateDataset
 	//
-	virtual time_t GetDate(int index);
+	virtual time_t GetDate(size_t index);
 
 protected:
 	virtual bool AcceptRenderer(Renderer *r);

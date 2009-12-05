@@ -60,7 +60,7 @@ void CategoryAxis::UpdateBounds()
 	m_categoryCount = dataset->GetCount();
 
 	m_longestCategory = dataset->GetName(0);
-	for (int nCat = 1; nCat < m_categoryCount; nCat++) {
+	for (size_t nCat = 1; nCat < m_categoryCount; nCat++) {
 		wxString catName = dataset->GetName(nCat);
 
 		if (m_longestCategory.Length() < catName.Length()) {
@@ -71,7 +71,7 @@ void CategoryAxis::UpdateBounds()
 	FireBoundsChanged();
 }
 
-double CategoryAxis::GetValue(int step)
+double CategoryAxis::GetValue(size_t step)
 {
 	if (IsVertical()) {
 		step = m_categoryCount - 1 - step;
@@ -79,7 +79,7 @@ double CategoryAxis::GetValue(int step)
 	return step;
 }
 
-void CategoryAxis::GetLabel(int step, wxString &label)
+void CategoryAxis::GetLabel(size_t step, wxString &label)
 {
 	CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
 	if (dataset == NULL) {
@@ -94,7 +94,7 @@ void CategoryAxis::GetLabel(int step, wxString &label)
 	label = dataset->GetName(step);
 }
 
-bool CategoryAxis::IsEnd(int step)
+bool CategoryAxis::IsEnd(size_t step)
 {
 	return step >= m_categoryCount;
 }

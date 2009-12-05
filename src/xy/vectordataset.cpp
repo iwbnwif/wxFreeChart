@@ -10,6 +10,11 @@
 
 #include <wx/xy/vectordataset.h>
 
+#include "wx/arrimpl.cpp"
+
+WX_DEFINE_EXPORTED_OBJARRAY(wxDoubleArray);
+
+
 VectorDataset::VectorDataset()
 {
 }
@@ -18,27 +23,27 @@ VectorDataset::~VectorDataset()
 {
 }
 
-double VectorDataset::GetX(int index, int WXUNUSED(serie))
+double VectorDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return index + 1;
 }
 
-double VectorDataset::GetY(int index, int WXUNUSED(serie))
+double VectorDataset::GetY(size_t index, size_t WXUNUSED(serie))
 {
-	return values[index];
+	return m_values[index];
 }
 
-int VectorDataset::GetCount(int WXUNUSED(serie))
+size_t VectorDataset::GetCount(size_t WXUNUSED(serie))
 {
-	return (int) values.size();
+	return m_values.Count();
 }
 
-int VectorDataset::GetSerieCount()
+size_t VectorDataset::GetSerieCount()
 {
 	return 1;
 }
 
-wxString VectorDataset::GetSerieName(int serie)
+wxString VectorDataset::GetSerieName(size_t serie)
 {
 	return wxEmptyString;
 }

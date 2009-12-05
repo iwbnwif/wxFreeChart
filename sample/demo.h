@@ -62,6 +62,8 @@ private:
 	//
 	void OnExportToPS(wxCommandEvent &ev);
 	void OnExportToPNG(wxCommandEvent &ev);
+	void OnEnableAntialias(wxCommandEvent &ev);
+	void OnAbout(wxCommandEvent &ev);
 	void OnExit(wxCommandEvent &ev);
 
 	wxChartPanel *m_chartPanel;

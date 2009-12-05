@@ -35,7 +35,7 @@ bool BarPlot::AcceptDataset(Dataset *dataset)
 
 void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-	for (int nData = 0; nData < GetDatasetCount(); nData++) {
+	for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
 		CategoryDataset *dataset = (CategoryDataset *) GetDataset(nData);
 		BarRenderer *renderer = dataset->GetRenderer();
 		wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));

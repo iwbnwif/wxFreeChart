@@ -26,12 +26,12 @@ enum AXIS_LOCATION {
 	AXIS_BOTTOM,
 };
 
-class Axis;
+class WXDLLIMPEXP_FREECHART Axis;
 
 /**
  * Interface to receive axis events.
  */
-class AxisObserver
+class WXDLLIMPEXP_FREECHART AxisObserver
 {
 public:
 	AxisObserver();

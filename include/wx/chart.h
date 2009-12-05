@@ -21,7 +21,7 @@
 
 #include <wx/axis/axis.h>
 
-class Chart;
+class WXDLLIMPEXP_FREECHART Chart;
 
 /**
  * Interface for receiving chart events.
@@ -118,6 +118,12 @@ public:
 	void SetTitleFont(wxFont font)
 	{
 		m_titleFont = font;
+		FireChartChanged();
+	}
+
+	void SetMargin(wxCoord margin)
+	{
+		m_margin = margin;
 		FireChartChanged();
 	}
 

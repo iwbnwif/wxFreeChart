@@ -27,7 +27,8 @@ Axis::Axis(AXIS_LOCATION location)
 {
 	m_location = location;
 
-	m_gridLinesPen = *wxThePenList->FindOrCreatePen(*wxLIGHT_GREY, 1, wxSHORT_DASH);
+	// XXX: short dash style drawing hungs, when wxGCDC used
+	m_gridLinesPen = *wxThePenList->FindOrCreatePen(*wxLIGHT_GREY, 1, wxDOT);//wxSHORT_DASH);
 
 	m_winPos = 0;
 	m_winWidth = 0;
@@ -89,7 +90,7 @@ double Axis::BoundValue(double value)
 	}
 }
 
-wxCoord Axis::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
+wxCoord Axis::ToGraphics(wxDC& WXUNUSED(dc), int minCoord, int gRange, double value)
 {
 	double minValue, maxValue;
 	GetDataBounds(minValue, maxValue);
@@ -108,7 +109,7 @@ wxCoord Axis::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
 	return ::ToGraphics(minCoord, gRange, minValue, maxValue, 0/*textMargin*/, IsVertical(), value);
 }
 
-double Axis::ToData(wxDC &dc, int minCoord, int gRange, wxCoord g)
+double Axis::ToData(wxDC& WXUNUSED(dc), int minCoord, int gRange, wxCoord g)
 {
 	double minValue, maxValue;
 	GetDataBounds(minValue, maxValue);

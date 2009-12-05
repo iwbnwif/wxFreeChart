@@ -14,10 +14,12 @@ XYPlot::XYPlot()
 {
 }
 
-bool XYPlot::AcceptAxis(Axis *axis)
+XYPlot::~XYPlot()
 {
-	// TODO temporary commented
-	//return (wxDynamicCase(axis, NumberAxis) != NULL);
+}
+
+bool XYPlot::AcceptAxis(Axis *WXUNUSED(axis))
+{
 	return true;
 }
 
@@ -28,7 +30,7 @@ bool XYPlot::AcceptDataset(Dataset *dataset)
 
 void XYPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-	for (int nData = 0; nData < GetDatasetCount(); nData++) {
+	for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
 		XYDataset *dataset = (XYDataset *) GetDataset(nData);
 		DrawXYDataset(dc, rc, dataset);
 	}

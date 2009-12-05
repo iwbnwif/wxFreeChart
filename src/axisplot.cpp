@@ -17,7 +17,7 @@ WX_DEFINE_EXPORTED_OBJARRAY(DataAxisLinkArray)
 
 
 #define CHECK_INDEX(name, index, v) do {											\
-	if (index >= (int) v.Count()) {													\
+	if (index >= v.Count()) {														\
 		wxLogError(wxT("%s index out of bounds: %i %i"), name, index, v.Count());	\
 		return ;																	\
 	}																				\
@@ -121,12 +121,12 @@ void AxisPlot::AddDataset(Dataset *dataset)
 	FirePlotNeedRedraw();
 }
 
-int AxisPlot::GetDatasetCount()
+size_t AxisPlot::GetDatasetCount()
 {
-	return (int) m_datasets.Count();
+	return m_datasets.Count();
 }
 
-Dataset *AxisPlot::GetDataset(int index)
+Dataset *AxisPlot::GetDataset(size_t index)
 {
 	return m_datasets[index];
 }
@@ -136,7 +136,7 @@ void AxisPlot::AddMarker(Marker *marker)
 	m_markers.Add(marker);
 }
 
-void AxisPlot::LinkDataHorizontalAxis(int nData, int nAxis)
+void AxisPlot::LinkDataHorizontalAxis(size_t nData, size_t nAxis)
 {
 	CHECK_INDEX(wxT("data"), nData, m_datasets);
 	CHECK_INDEX(wxT("horizontal axis"), nAxis, m_horizontalAxes);
@@ -151,7 +151,7 @@ void AxisPlot::LinkDataHorizontalAxis(int nData, int nAxis)
 	//FirePlotNeedRedraw();
 }
 
-void AxisPlot::LinkDataVerticalAxis(int nData, int nAxis)
+void AxisPlot::LinkDataVerticalAxis(size_t nData, size_t nAxis)
 {
 	CHECK_INDEX(wxT("data"), nData, m_datasets);
 	CHECK_INDEX(wxT("vertical axis"), nAxis, m_verticalAxes);
@@ -250,7 +250,7 @@ wxCoord AxisPlot::GetAxesExtent(wxDC &dc, AxisArray *axes)
 	return ext;
 }
 
-bool AxisPlot::ToDataCoords(int nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y)
+bool AxisPlot::ToDataCoords(size_t nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y)
 {
 	Dataset *dataset = GetDataset(nData);
 	wxCHECK_MSG(dataset != NULL, false, wxT("AxisPlot::ToDataCoords: Invalid dataset index"));

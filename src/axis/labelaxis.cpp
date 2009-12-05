@@ -18,7 +18,7 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 {
 	// defaults
 	m_labelTextColour = *wxBLACK;
-	m_labelTextFont = *wxSMALL_FONT;
+	m_labelTextFont = *wxNORMAL_FONT;//*wxSMALL_FONT;
 	m_labelPen = *wxBLACK_PEN;
 	m_titleFont = *wxNORMAL_FONT;
 	m_titleColour = *wxBLACK;
@@ -26,6 +26,7 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 
 	m_labelLineSize = 5;
 	m_labelGap = 2;
+	m_verticalLabelText = false;
 }
 
 LabelAxis::~LabelAxis()
@@ -34,7 +35,7 @@ LabelAxis::~LabelAxis()
 
 wxCoord LabelAxis::GetExtent(wxDC &dc)
 {
-	wxSize maxTextExtent = GetLongestLabelExtent(dc);
+	wxSize maxLabelExtent = GetLongestLabelExtent(dc);
 	wxCoord extent = m_labelLineSize + m_labelGap;
 
 	wxSize titleExtent;
@@ -45,12 +46,24 @@ wxCoord LabelAxis::GetExtent(wxDC &dc)
 	}
 
 	if (IsVertical()) {
-		extent += maxTextExtent.x;
+		if (m_verticalLabelText) {
+			extent += maxLabelExtent.y;
+		}
+		else {
+			extent += maxLabelExtent.x;
+		}
+
 		extent += titleExtent.x;
 		extent += m_labelPen.GetWidth();
 	}
 	else {
-		extent += maxTextExtent.y;
+		if (m_verticalLabelText) {
+			extent += maxLabelExtent.x;
+		}
+		else {
+			extent += maxLabelExtent.y;
+		}
+
 		extent += titleExtent.y;
 		extent += m_labelPen.GetWidth();
 	}
@@ -68,7 +81,6 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 
 	if (IsVertical()) {
 		y = ToGraphics(dc, rc.y, rc.height, value);
-		textY = y - labelExtent.GetHeight() / 2;
 
 		lineY1 = lineY2 = y;
 
@@ -77,7 +89,12 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 			lineX1 = rc.x + rc.width - m_labelLineSize;
 			lineX2 = rc.x + rc.width;
 
-			textX = lineX1 - labelExtent.GetWidth() - m_labelGap;
+			if (m_verticalLabelText) {
+				textX = lineX1 - labelExtent.y - m_labelGap;
+			}
+			else {
+				textX = lineX1 - labelExtent.x - m_labelGap;
+			}
 			break;
 		case AXIS_RIGHT:
 			lineX1 = rc.x;
@@ -88,11 +105,17 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 		default:
 			return ; // BUG
 		}
+
+		if (m_verticalLabelText) {
+			textY = y + labelExtent.x / 2;
+		}
+		else {
+			textY = y - labelExtent.y / 2;
+		}
 	}
 	else {
 		x = ToGraphics(dc, rc.x, rc.width, value);
 
-		textX = x - labelExtent.GetWidth() / 2;
 		lineX1 = lineX2 = x;
 
 		switch (GetLocation()) {
@@ -100,21 +123,44 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 			lineY1 = rc.y + rc.height - m_labelLineSize;
 			lineY2 = rc.y + rc.height;
 
-			textY = lineY1 - labelExtent.GetHeight() - m_labelGap;
+			if (m_verticalLabelText) {
+				textY = lineY1 - m_labelGap;
+			}
+			else {
+				textY = lineY1 - labelExtent.y - m_labelGap;
+			}
 			break;
 		case AXIS_BOTTOM:
 			lineY1 = rc.y;
 			lineY2 = rc.y + m_labelLineSize;
 
-			textY = lineY2 + m_labelGap;
+			if (m_verticalLabelText) {
+				textY = lineY2 + m_labelGap + labelExtent.x;
+			}
+			else {
+				textY = lineY2 + m_labelGap;
+			}
 			break;
 		default:
 			return ; // BUG
 		}
+
+		if (m_verticalLabelText) {
+			textX = x - labelExtent.y / 2;
+		}
+		else {
+			textX = x - labelExtent.x / 2;
+		}
 	}
 
 	dc.DrawLine(lineX1, lineY1, lineX2, lineY2);
-	dc.DrawText(label, textX, textY);
+
+	if (m_verticalLabelText) {
+		dc.DrawRotatedText(label, textX, textY, 90);
+	}
+	else {
+		dc.DrawText(label, textX, textY);
+	}
 }
 
 void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)

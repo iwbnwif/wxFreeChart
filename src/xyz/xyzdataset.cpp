@@ -22,8 +22,8 @@ double XYZDataset::GetMinZ()
 {
 	double minZ = 0;
 
-	for (int serie = 0; serie < GetSerieCount(); serie++) {
-		for (int n = 0; n < GetCount(serie); n++) {
+	for (size_t serie = 0; serie < GetSerieCount(); serie++) {
+		for (size_t n = 0; n < GetCount(serie); n++) {
 			double z = GetZ(n, serie);
 			if (n == 0 && serie == 0)
 				minZ = z;
@@ -38,8 +38,8 @@ double XYZDataset::GetMaxZ()
 {
 	double maxZ = 0;
 
-	for (int serie = 0; serie < GetSerieCount(); serie++) {
-		for (int n = 0; n < GetCount(serie); n++) {
+	for (size_t serie = 0; serie < GetSerieCount(); serie++) {
+		for (size_t n = 0; n < GetCount(serie); n++) {
 			double z = GetZ(n, serie);
 			if (n == 0 && serie == 0)
 				maxZ = z;

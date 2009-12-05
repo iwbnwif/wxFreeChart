@@ -29,22 +29,22 @@ public:
 	 * @param index value associated with category
 	 * @return value associated with category
 	 */
-	virtual double GetValue(int index, int serie) = 0;
+	virtual double GetValue(size_t index, size_t serie) = 0;
 
 	/**
 	 * Returns category name at index.
 	 * @param index index of category name
 	 * @return category name
 	 */
-	virtual wxString GetName(int index) = 0;
+	virtual wxString GetName(size_t index) = 0;
 
 	/**
 	 * Returns category count.
 	 * @return category count
 	 */
-	virtual int GetCount() = 0;
+	virtual size_t GetCount() = 0;
 
-	virtual bool HasValue(int index, int serie);
+	virtual bool HasValue(size_t index, size_t serie);
 
 	virtual double GetMinValue(bool verticalAxis);
 
@@ -53,11 +53,11 @@ public:
 	//
 	// XYDataset
 	//
-	virtual double GetX(int index, int serie);
+	virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(int index, int serie);
+	virtual double GetY(size_t index, size_t serie);
 
-	virtual int GetCount(int serie);
+	virtual size_t GetCount(size_t serie);
 
 	BarRenderer *GetRenderer()
 	{

@@ -68,7 +68,7 @@ NumberAxis::~NumberAxis()
 }
 
 
-bool NumberAxis::AcceptDataset(Dataset *dataset)
+bool NumberAxis::AcceptDataset(Dataset *WXUNUSED(dataset))
 {
 	return true;
 }
@@ -160,12 +160,12 @@ void NumberAxis::GetDataBounds(double &minValue, double &maxValue)
 	maxValue = m_maxValue;
 }
 
-double NumberAxis::GetValue(int step)
+double NumberAxis::GetValue(size_t step)
 {
 	return m_minValue + step * m_labelInterval;
 }
 
-void NumberAxis::GetLabel(int step, wxString &label)
+void NumberAxis::GetLabel(size_t step, wxString &label)
 {
 	double value = GetValue(step);
 
@@ -181,7 +181,7 @@ void NumberAxis::GetLabel(int step, wxString &label)
 	}
 }
 
-bool NumberAxis::IsEnd(int step)
+bool NumberAxis::IsEnd(size_t step)
 {
 	return step >= m_labelCount;
 }

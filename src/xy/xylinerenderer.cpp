@@ -45,7 +45,11 @@ XYLineRenderer::~XYLineRenderer()
 void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
 {
 	FOREACH_SERIE(serie, dataset) {
-		for (int n = 0; n < dataset->GetCount(serie) - 1; n++) {
+		if (dataset->GetCount(serie) < 2) {
+			continue;
+		}
+
+		for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
 			double x0 = dataset->GetX(n, serie);
 			double y0 = dataset->GetY(n, serie);
 			double x1 = dataset->GetX(n + 1, serie);
@@ -76,7 +80,7 @@ void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, 
 	}
 }
 
-void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
+void XYLineRenderer::DrawSegment(wxDC &dc, size_t serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
 {
 	if (m_drawLines) {
 		wxPen *pen = GetSeriePen(serie);
@@ -93,13 +97,13 @@ void XYLineRenderer::DrawSegment(wxDC &dc, int serie, wxCoord x0, wxCoord y0, wx
 	}
 }
 
-void XYLineRenderer::SetSeriePen(int serie, wxPen *pen)
+void XYLineRenderer::SetSeriePen(size_t serie, wxPen *pen)
 {
 	m_seriePens[serie] = *pen;
 	FireNeedRedraw();
 }
 
-wxPen *XYLineRenderer::GetSeriePen(int serie)
+wxPen *XYLineRenderer::GetSeriePen(size_t serie)
 {
 	if (m_seriePens.find(serie) == m_seriePens.end()) {
 		return wxThePenList->FindOrCreatePen(GetDefaultColour(serie), m_defaultPenWidth, m_defaultPenStyle);
@@ -107,12 +111,12 @@ wxPen *XYLineRenderer::GetSeriePen(int serie)
 	return &m_seriePens[serie];
 }
 
-void XYLineRenderer::SetSerieColour(int serie, wxColour *colour)
+void XYLineRenderer::SetSerieColour(size_t serie, wxColour *colour)
 {
 	SetSeriePen(serie, wxThePenList->FindOrCreatePen(*colour, m_defaultPenWidth, m_defaultPenStyle));
 }
 
-wxColour XYLineRenderer::GetSerieColour(int serie)
+wxColour XYLineRenderer::GetSerieColour(size_t serie)
 {
 	if (m_seriePens.find(serie) == m_seriePens.end()) {
 		return GetDefaultColour(serie);
@@ -120,7 +124,7 @@ wxColour XYLineRenderer::GetSerieColour(int serie)
 	return m_seriePens[serie].GetColour();
 }
 
-void XYLineRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, int serie)
+void XYLineRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 {
 	if (m_drawLines) {
 		dc.SetPen(*GetSeriePen(serie));

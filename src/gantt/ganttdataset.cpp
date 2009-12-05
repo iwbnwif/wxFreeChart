@@ -21,18 +21,18 @@ GanttDatasetDateHelper::~GanttDatasetDateHelper()
 {
 }
 
-time_t GanttDatasetDateHelper::GetDate(int index)
+time_t GanttDatasetDateHelper::GetDate(size_t index)
 {
 	return m_ganttDataset->GetMinStart() + index * m_ganttDataset->GetDateInterval();
 }
 
-int GanttDatasetDateHelper::GetCount()
+size_t GanttDatasetDateHelper::GetCount()
 {
 	return m_ganttDataset->GetDateCount();
 }
 
 
-GanttDataset::GanttDataset(int dateCount)
+GanttDataset::GanttDataset(size_t dateCount)
 : m_dateHelper(this)
 {
 	m_dateCount = dateCount;
@@ -42,7 +42,7 @@ GanttDataset::~GanttDataset()
 {
 }
 
-int GanttDataset::GetCount(int WXUNUSED(serie))
+size_t GanttDataset::GetCount(size_t WXUNUSED(serie))
 {
 	// Gannt Dataset has equal number of elements in all series.
 	return GetCount();
@@ -53,7 +53,7 @@ time_t GanttDataset::GetMinStart()
 	time_t minStart = 0;
 
 	FOREACH_SERIE(serie, this) {
-		for (int index = 0; index < GetCount(); index++) {
+		for (size_t index = 0; index < GetCount(); index++) {
 			time_t start = GetStart(index, serie);
 
 			if (serie == 0 && index == 0) {
@@ -72,7 +72,7 @@ time_t GanttDataset::GetMaxEnd()
 	time_t maxEnd = 0;
 
 	FOREACH_SERIE(serie, this) {
-		for (int index = 0; index < GetCount(); index++) {
+		for (size_t index = 0; index < GetCount(); index++) {
 			time_t end = GetEnd(index, serie);
 
 			if (serie == 0 && index == 0) {
@@ -94,7 +94,7 @@ time_t GanttDataset::GetDateInterval()
 	return (maxEnd - minStart) / m_dateCount;
 }
 
-int GanttDataset::GetDateCount()
+size_t GanttDataset::GetDateCount()
 {
 	return m_dateCount;
 }
