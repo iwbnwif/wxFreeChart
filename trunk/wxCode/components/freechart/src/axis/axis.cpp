@@ -51,13 +51,26 @@ void Axis::SetMargins(wxCoord marginMin, wxCoord marginMax)
 	}
 }
 
+size_t Axis::GetDatasetCount()
+{
+	return m_datasets.Count();
+}
+
+Dataset *Axis::GetDataset(size_t index)
+{
+	return m_datasets[index];
+}
+
 bool Axis::IsVisible(double value)
 {
 	if (m_useWin) {
 		return (value >= m_winPos && value <= (m_winPos + m_winWidth));
 	}
 	else {
-		return true;
+		double minValue, maxValue;
+		GetDataBounds(minValue, maxValue);
+
+		return (value >= minValue && value <= maxValue);
 	}
 }
 

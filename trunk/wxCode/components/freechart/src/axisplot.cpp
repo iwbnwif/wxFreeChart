@@ -206,18 +206,28 @@ void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
 	}
 }
 
-Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
+Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, size_t index, bool vertical)
 {
+	size_t axisIndex = 0;
+
 	for (size_t nLink = 0; nLink < m_links.Count(); nLink++) {
 		DataAxisLink &link = m_links[nLink];
 
 		if (link.m_dataset == dataset) {
 			if (vertical == link.m_axis->IsVertical()) {
-				return link.m_axis;
+				if (axisIndex == index) {
+					return link.m_axis;
+				}
+				axisIndex++;
 			}
 		}
 	}
 	return NULL; // not found
+}
+
+Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
+{
+	return GetDatasetAxis(dataset, 0, vertical);
 }
 
 void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
