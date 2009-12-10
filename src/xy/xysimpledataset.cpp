@@ -55,7 +55,7 @@ const wxString &XYSerie::GetName()
 
 void XYSerie::SetName(const wxString &name)
 {
-	m_name = name;;
+	m_name = name;
 }
 
 //

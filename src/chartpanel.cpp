@@ -11,6 +11,9 @@
 #include <wx/chartpanel.h>
 #include <wx/dcbuffer.h>
 
+#undef wxUSE_GRAPHICS_CONTEXT
+#define wxUSE_GRAPHICS_CONTEXT 1
+
 #if wxUSE_GRAPHICS_CONTEXT
 #include <wx/dcgraph.h>
 #endif /* wxUSE_GRAPHICS_CONTEXT */

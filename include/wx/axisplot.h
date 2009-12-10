@@ -104,6 +104,61 @@ public:
 	void LinkDataVerticalAxis(size_t nData, size_t nAxis);
 
 	/**
+	 * Returns dataset axis.
+	 * @param dataset dataset
+	 * @param index axis index, 0 - for main axis
+	 * @param vertical true if you want to get vertical axis, false - horizontal
+	 * @return main axis for dataset or NULL if dataset has no main axis
+	 */
+	Axis *GetDatasetAxis(Dataset *dataset, size_t index, bool vertical);
+
+	/**
+	 * Returns main dataset axis.
+	 * NOTE: main axis is the first axis linked with dataset.
+	 * Main axis is used to scale dataset values.
+	 *
+	 * @param dataset dataset
+	 * @param vertical true if you want to get vertical axis, false - horizontal
+	 * @return main axis for dataset or NULL if dataset has no main axis
+	 */
+	Axis *GetDatasetAxis(Dataset *dataset, bool vertical);
+
+	/**
+	 * Returns main vertical dataset axis.
+	 * NOTE: main axis is the first axis linked with dataset.
+	 * Main axis is used to scale dataset values.
+	 * @param dataset dataset
+	 * @return main axis for dataset or NULL if dataset has no main axis
+	 */
+	Axis *GetDatasetVerticalAxis(Dataset *dataset)
+	{
+		return GetDatasetAxis(dataset, true);
+	}
+
+	/**
+	 * Returns main horizontal dataset axis.
+	 * NOTE: main axis is the first axis linked with dataset.
+	 * Main axis is used to scale dataset values.
+	 * @param dataset dataset
+	 * @return main axis for dataset or NULL if dataset has no main axis
+	 */
+	Axis *GetDatasetHorizontalAxis(Dataset *dataset)
+	{
+		return GetDatasetAxis(dataset, false);
+	}
+
+	/**
+	 * Returns dataset, linked with axis at specified index.
+	 * @param axis axis
+	 * @param index dataset index
+	 * @return dataset at index
+	 */
+	Dataset *GetAxisDataset(Axis *axis, size_t index)
+	{
+		return axis->GetDataset(index);
+	}
+
+	/**
 	 * Set whether to draw grid lines.
 	 * @param drawGridVertical if true - plot will draw vertical grid lines
 	 * @param drawGridHorizontal if true - plot will draw horizontal grid lines
@@ -171,42 +226,12 @@ protected:
 	 */
 	virtual bool AcceptDataset(Dataset *dataset) = 0;
 
+	/**
+	 * Called to draw all datasets.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 */
 	virtual void DrawDatasets(wxDC &dc, wxRect rc) = 0;
-
-	/**
-	 * Returns main dataset axis.
-	 * NOTE: main axis is the first axis linked with dataset.
-	 * Main axis is used to scale dataset values.
-	 *
-	 * @param dataset dataset
-	 * @param vertical true if you want to get vertical axis, false - horizontal
-	 * @return main axis for dataset or NULL if dataset has no main axis
-	 */
-	Axis *GetDatasetAxis(Dataset *dataset, bool vertical);
-
-	/**
-	 * Returns main vertical dataset axis.
-	 * NOTE: main axis is the first axis linked with dataset.
-	 * Main axis is used to scale dataset values.
-	 * @param dataset dataset
-	 * @return main axis for dataset or NULL if dataset has no main axis
-	 */
-	Axis *GetDatasetVerticalAxis(Dataset *dataset)
-	{
-		return GetDatasetAxis(dataset, true);
-	}
-
-	/**
-	 * Returns main horizontal dataset axis.
-	 * NOTE: main axis is the first axis linked with dataset.
-	 * Main axis is used to scale dataset values.
-	 * @param dataset dataset
-	 * @return main axis for dataset or NULL if dataset has no main axis
-	 */
-	Axis *GetDatasetHorizontalAxis(Dataset *dataset)
-	{
-		return GetDatasetAxis(dataset, false);
-	}
 
 	wxCoord GetAxesExtent(wxDC &dc, AxisArray *axes);
 

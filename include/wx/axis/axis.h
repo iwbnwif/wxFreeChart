@@ -102,6 +102,22 @@ public:
 	void SetMargins(wxCoord marginMin, wxCoord marginMax);
 
 	//
+	// Dataset functions.
+	//
+	/**
+	 * Returns dataset counts, linked with this axis.
+	 * @return dataset counts, linked with this axis
+	 */
+	size_t GetDatasetCount();
+
+	/**
+	 * Returns dataset, linked with this axis at specified index.
+	 * @param index dataset index
+	 * @return dataset at index
+	 */
+	Dataset *GetDataset(size_t index);
+
+	//
 	// Window functions.
 	//
 

@@ -23,8 +23,8 @@ void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1)
 
 void ClipVert(Axis *axis, double &x, double &y, double x1, double y1)
 {
-	if (!axis->IsVisible(x)) {
-		double p = axis->BoundValue(x);
+	if (!axis->IsVisible(y)) {
+		double p = axis->BoundValue(y);
 		x = (p - y1) * (x1 - x) / (y1 - y) + x;
 		y = p;
 	}

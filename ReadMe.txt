@@ -47,6 +47,11 @@
  ChangeLog
  ---------
  
+ 1.4:
+ 		What's new:
+ 		 - added methods to access axis-dataset links to AxisPlot and Axis
+ 		 - xylinerenderer optimizations
+ 		 
  1.3: 
  		What's new:
  		 - antialiasing added
