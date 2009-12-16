@@ -47,8 +47,7 @@ Collaboration diagram for OHLCPlot:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCPlot.html#9fda4738968b260b4012d03ca9ebf7f9">AcceptDataset</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="dbbe25267a357e62c58f271bb3f8ba61"></a><!-- doxytag: member="OHLCPlot::DrawDatasets" ref="dbbe25267a357e62c58f271bb3f8ba61" args="(wxDC &amp;dc, wxRect rc)" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>DrawDatasets</b> (wxDC &amp;dc, wxRect rc)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCPlot.html#dbbe25267a357e62c58f271bb3f8ba61">DrawDatasets</a> (wxDC &amp;dc, wxRect rc)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCPlot.html#d669561282a22fc9c74a8fa99c27a08b">DrawOHLCDataset</a> (wxDC &amp;dc, wxRect rc, <a class="el" href="classOHLCDataset.html">OHLCDataset</a> *dataset)</td></tr>
 
@@ -114,6 +113,43 @@ Checks whether dataset is acceptable with this plot. <dl compact><dt><b>Paramete
 
 </div>
 </div><p>
+<a class="anchor" name="dbbe25267a357e62c58f271bb3f8ba61"></a><!-- doxytag: member="OHLCPlot::DrawDatasets" ref="dbbe25267a357e62c58f271bb3f8ba61" args="(wxDC &amp;dc, wxRect rc)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void OHLCPlot::DrawDatasets           </td>
+          <td>(</td>
+          <td class="paramtype">wxDC &amp;&nbsp;</td>
+          <td class="paramname"> <em>dc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxRect&nbsp;</td>
+          <td class="paramname"> <em>rc</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Called to draw all datasets. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>dc</em>&nbsp;</td><td>device context </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>rc</em>&nbsp;</td><td>rectangle where to draw </td></tr>
+  </table>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classXYPlot.html#bccb15087c015c7806e9784f68eb841f">XYPlot</a>.</p>
+
+</div>
+</div><p>
 <a class="anchor" name="d669561282a22fc9c74a8fa99c27a08b"></a><!-- doxytag: member="OHLCPlot::DrawOHLCDataset" ref="d669561282a22fc9c74a8fa99c27a08b" args="(wxDC &amp;dc, wxRect rc, OHLCDataset *dataset)" -->
 <div class="memitem">
 <div class="memproto">
@@ -159,7 +195,7 @@ Draw single OHLC dataset. <dl compact><dt><b>Parameters:</b></dt><dd>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/ohlc/<a class="el" href="ohlcplot_8h-source.html">ohlcplot.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:14 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

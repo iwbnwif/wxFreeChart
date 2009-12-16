@@ -47,8 +47,7 @@ Collaboration diagram for XYPlot:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYPlot.html#765af691dec9ca9060630fabce64a84a">AcceptDataset</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="bccb15087c015c7806e9784f68eb841f"></a><!-- doxytag: member="XYPlot::DrawDatasets" ref="bccb15087c015c7806e9784f68eb841f" args="(wxDC &amp;dc, wxRect rc)" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>DrawDatasets</b> (wxDC &amp;dc, wxRect rc)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYPlot.html#bccb15087c015c7806e9784f68eb841f">DrawDatasets</a> (wxDC &amp;dc, wxRect rc)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYPlot.html#ec55ca9c9fa04573f297c6e87f7e7cdc">DrawXYDataset</a> (wxDC &amp;dc, wxRect rc, <a class="el" href="classXYDataset.html">XYDataset</a> *dataset)</td></tr>
 
@@ -115,6 +114,45 @@ Checks whether dataset is acceptable with this plot. <dl compact><dt><b>Paramete
 
 </div>
 </div><p>
+<a class="anchor" name="bccb15087c015c7806e9784f68eb841f"></a><!-- doxytag: member="XYPlot::DrawDatasets" ref="bccb15087c015c7806e9784f68eb841f" args="(wxDC &amp;dc, wxRect rc)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void XYPlot::DrawDatasets           </td>
+          <td>(</td>
+          <td class="paramtype">wxDC &amp;&nbsp;</td>
+          <td class="paramname"> <em>dc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxRect&nbsp;</td>
+          <td class="paramname"> <em>rc</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Called to draw all datasets. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>dc</em>&nbsp;</td><td>device context </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>rc</em>&nbsp;</td><td>rectangle where to draw </td></tr>
+  </table>
+</dl>
+
+<p>Implements <a class="el" href="classAxisPlot.html#6f52961c4f3203210dbf394df4daf45e">AxisPlot</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classBarPlot.html#bc55f8e88e0758c1a167887d4254d0ac">BarPlot</a>, and <a class="el" href="classOHLCPlot.html#dbbe25267a357e62c58f271bb3f8ba61">OHLCPlot</a>.</p>
+
+</div>
+</div><p>
 <a class="anchor" name="ec55ca9c9fa04573f297c6e87f7e7cdc"></a><!-- doxytag: member="XYPlot::DrawXYDataset" ref="ec55ca9c9fa04573f297c6e87f7e7cdc" args="(wxDC &amp;dc, wxRect rc, XYDataset *dataset)" -->
 <div class="memitem">
 <div class="memproto">
@@ -160,7 +198,7 @@ Draw single XY dataset. <dl compact><dt><b>Parameters:</b></dt><dd>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/xy/<a class="el" href="xyplot_8h-source.html">xyplot.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:16 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

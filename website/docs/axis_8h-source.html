@@ -23,178 +23,222 @@
 <a name="l00003"></a>00003 <span class="comment">// Purpose: axis base class declarations</span>
 <a name="l00004"></a>00004 <span class="comment">// Author:      Moskvichev Andrey V.</span>
 <a name="l00005"></a>00005 <span class="comment">// Created:     2008/11/07</span>
-<a name="l00006"></a>00006 <span class="comment">// RCS-ID:      $Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $</span>
-<a name="l00007"></a>00007 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
-<a name="l00008"></a>00008 <span class="comment">// Licence:     wxWidgets licence</span>
-<a name="l00010"></a>00010 <span class="comment"></span>
-<a name="l00011"></a>00011 <span class="preprocessor">#ifndef AXIS_H_</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define AXIS_H_</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;wx/wxfreechartdefs.h&gt;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;wx/dataset.h&gt;</span>
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="preprocessor">#include &lt;wx/dynarray.h&gt;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;wx/drawobject.h&gt;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &lt;wx/observable.h&gt;</span>
-<a name="l00021"></a>00021 
-<a name="l00022"></a>00022 <span class="keyword">enum</span> AXIS_LOCATION {
-<a name="l00023"></a>00023         AXIS_LEFT = 1,
-<a name="l00024"></a>00024         AXIS_RIGHT,
-<a name="l00025"></a>00025         AXIS_TOP,
-<a name="l00026"></a>00026         AXIS_BOTTOM,
-<a name="l00027"></a>00027 };
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029 <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxis.html">Axis</a>;
-<a name="l00030"></a>00030 
-<a name="l00034"></a><a class="code" href="classAxisObserver.html">00034</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxisObserver.html">AxisObserver</a>
-<a name="l00035"></a>00035 {
-<a name="l00036"></a>00036 <span class="keyword">public</span>:
-<a name="l00037"></a>00037         <a class="code" href="classAxisObserver.html">AxisObserver</a>();
-<a name="l00038"></a>00038         <span class="keyword">virtual</span> ~<a class="code" href="classAxisObserver.html">AxisObserver</a>();
-<a name="l00039"></a>00039 
-<a name="l00044"></a>00044         <span class="keyword">virtual</span> <span class="keywordtype">void</span> AxisChanged(<a class="code" href="classAxis.html">Axis</a> *axis) = 0;
-<a name="l00045"></a>00045 
-<a name="l00050"></a>00050         <span class="keyword">virtual</span> <span class="keywordtype">void</span> BoundsChanged(<a class="code" href="classAxis.html">Axis</a> *axis) = 0;
-<a name="l00051"></a>00051 };
-<a name="l00052"></a>00052 
-<a name="l00056"></a><a class="code" href="classAxis.html">00056</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxis.html">Axis</a> : <span class="keyword">public</span> wxObject, <span class="keyword">public</span> <a class="code" href="classObservable.html">Observable</a>&lt;AxisObserver&gt;<span class="comment">//, public RefObject</span>
-<a name="l00057"></a>00057 {
-<a name="l00058"></a>00058         DECLARE_CLASS(<a class="code" href="classAxis.html">Axis</a>)
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classPlot.html">Plot</a>;
+<a name="l00006"></a>00006 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
+<a name="l00007"></a>00007 <span class="comment">// Licence:     wxWidgets licence</span>
+<a name="l00009"></a>00009 <span class="comment"></span>
+<a name="l00010"></a>00010 <span class="preprocessor">#ifndef AXIS_H_</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define AXIS_H_</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;wx/wxfreechartdefs.h&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;wx/dataset.h&gt;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="preprocessor">#include &lt;wx/dynarray.h&gt;</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="preprocessor">#include &lt;wx/drawobject.h&gt;</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;wx/observable.h&gt;</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="keyword">enum</span> AXIS_LOCATION {
+<a name="l00022"></a>00022         AXIS_LEFT = 1,
+<a name="l00023"></a>00023         AXIS_RIGHT,
+<a name="l00024"></a>00024         AXIS_TOP,
+<a name="l00025"></a>00025         AXIS_BOTTOM,
+<a name="l00026"></a>00026 };
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxis.html">Axis</a>;
+<a name="l00029"></a>00029 
+<a name="l00033"></a><a class="code" href="classAxisObserver.html">00033</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxisObserver.html">AxisObserver</a>
+<a name="l00034"></a>00034 {
+<a name="l00035"></a>00035 <span class="keyword">public</span>:
+<a name="l00036"></a>00036         <a class="code" href="classAxisObserver.html">AxisObserver</a>();
+<a name="l00037"></a>00037         <span class="keyword">virtual</span> ~<a class="code" href="classAxisObserver.html">AxisObserver</a>();
+<a name="l00038"></a>00038 
+<a name="l00043"></a>00043         <span class="keyword">virtual</span> <span class="keywordtype">void</span> AxisChanged(<a class="code" href="classAxis.html">Axis</a> *axis) = 0;
+<a name="l00044"></a>00044 
+<a name="l00049"></a>00049         <span class="keyword">virtual</span> <span class="keywordtype">void</span> BoundsChanged(<a class="code" href="classAxis.html">Axis</a> *axis) = 0;
+<a name="l00050"></a>00050 };
+<a name="l00051"></a>00051 
+<a name="l00055"></a><a class="code" href="classAxis.html">00055</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxis.html">Axis</a> : <span class="keyword">public</span> wxObject, <span class="keyword">public</span> <a class="code" href="classObservable.html">Observable</a>&lt;AxisObserver&gt;<span class="comment">//, public RefObject</span>
+<a name="l00056"></a>00056 {
+<a name="l00057"></a>00057         DECLARE_CLASS(<a class="code" href="classAxis.html">Axis</a>)
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classPlot.html">Plot</a>;
+<a name="l00060"></a>00060         <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classAxisShare.html">AxisShare</a>;
 <a name="l00061"></a>00061 <span class="keyword">public</span>:
-<a name="l00066"></a>00066         <a class="code" href="classAxis.html">Axis</a>(AXIS_LOCATION location);
+<a name="l00066"></a>00066         <a class="code" href="classAxis.html#3c54eea130525c1aa20b3a6dad7b5c99">Axis</a>(AXIS_LOCATION location);
 <a name="l00067"></a>00067         <span class="keyword">virtual</span> ~<a class="code" href="classAxis.html">Axis</a>();
 <a name="l00068"></a>00068 
-<a name="l00073"></a><a class="code" href="classAxis.html#5fb9bb1c558fe521b656af7f06cbd353">00073</a>         AXIS_LOCATION GetLocation()
+<a name="l00073"></a><a class="code" href="classAxis.html#5fb9bb1c558fe521b656af7f06cbd353">00073</a>         AXIS_LOCATION <a class="code" href="classAxis.html#5fb9bb1c558fe521b656af7f06cbd353">GetLocation</a>()
 <a name="l00074"></a>00074         {
 <a name="l00075"></a>00075                 <span class="keywordflow">return</span> m_location;
 <a name="l00076"></a>00076         }
 <a name="l00077"></a>00077 
-<a name="l00082"></a><a class="code" href="classAxis.html#ca33bbc1b3b93f097ec831769fbbc579">00082</a>         <span class="keywordtype">bool</span> IsVertical()
+<a name="l00082"></a><a class="code" href="classAxis.html#ca33bbc1b3b93f097ec831769fbbc579">00082</a>         <span class="keywordtype">bool</span> <a class="code" href="classAxis.html#ca33bbc1b3b93f097ec831769fbbc579">IsVertical</a>()
 <a name="l00083"></a>00083         {
 <a name="l00084"></a>00084                 <span class="keywordflow">return</span> (m_location == AXIS_LEFT) || (m_location == AXIS_RIGHT);
 <a name="l00085"></a>00085         }
 <a name="l00086"></a>00086 
-<a name="l00091"></a><a class="code" href="classAxis.html#5ab04eb8f44bc7d2c323415aace8d13c">00091</a>         <span class="keywordtype">bool</span> IsHorizontal()
+<a name="l00091"></a><a class="code" href="classAxis.html#5ab04eb8f44bc7d2c323415aace8d13c">00091</a>         <span class="keywordtype">bool</span> <a class="code" href="classAxis.html#5ab04eb8f44bc7d2c323415aace8d13c">IsHorizontal</a>()
 <a name="l00092"></a>00092         {
-<a name="l00093"></a>00093                 <span class="keywordflow">return</span> !IsVertical();
+<a name="l00093"></a>00093                 <span class="keywordflow">return</span> !<a class="code" href="classAxis.html#ca33bbc1b3b93f097ec831769fbbc579">IsVertical</a>();
 <a name="l00094"></a>00094         }
 <a name="l00095"></a>00095 
-<a name="l00102"></a>00102         <span class="keywordtype">void</span> SetMargins(wxCoord marginMin, wxCoord marginMax);
+<a name="l00102"></a>00102         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#d8ea6ae5bdff9e1c1d229eb18b437cdb">SetMargins</a>(wxCoord marginMin, wxCoord marginMax);
 <a name="l00103"></a>00103 
 <a name="l00104"></a>00104         <span class="comment">//</span>
-<a name="l00105"></a>00105         <span class="comment">// Window functions.</span>
+<a name="l00105"></a>00105         <span class="comment">// Dataset functions.</span>
 <a name="l00106"></a>00106         <span class="comment">//</span>
-<a name="l00107"></a>00107 
-<a name="l00112"></a><a class="code" href="classAxis.html#d268bde98397466b9510e323c7744f82">00112</a>         <span class="keywordtype">void</span> SetWindowWidth(<span class="keywordtype">double</span> winWidth)
-<a name="l00113"></a>00113         {
-<a name="l00114"></a>00114                 SetWindow(m_winPos, winWidth);
-<a name="l00115"></a>00115         }
-<a name="l00116"></a>00116 
-<a name="l00121"></a><a class="code" href="classAxis.html#bcc9c1b6798b83c37eb4f43e9eae1fb8">00121</a>         <span class="keywordtype">double</span> GetWindowWidth()
-<a name="l00122"></a>00122         {
-<a name="l00123"></a>00123                 <span class="keywordflow">return</span> m_winWidth;
-<a name="l00124"></a>00124         }
-<a name="l00125"></a>00125 
-<a name="l00130"></a><a class="code" href="classAxis.html#3caebac23e670ce51da56051229811bb">00130</a>         <span class="keywordtype">void</span> SetWindowPosition(<span class="keywordtype">double</span> winPos)
-<a name="l00131"></a>00131         {
-<a name="l00132"></a>00132                 SetWindow(winPos, m_winWidth);
-<a name="l00133"></a>00133         }
-<a name="l00134"></a>00134 
-<a name="l00139"></a><a class="code" href="classAxis.html#31f7f8954947ef557f2d95d75c9dead0">00139</a>         <span class="keywordtype">double</span> GetWindowPosition()
-<a name="l00140"></a>00140         {
-<a name="l00141"></a>00141                 <span class="keywordflow">return</span> m_winPos;
-<a name="l00142"></a>00142         }
-<a name="l00143"></a>00143 
-<a name="l00148"></a><a class="code" href="classAxis.html#e2cb235f7cb803c158ea1cbacc665681">00148</a>         <span class="keywordtype">void</span> SetUseWindow(<span class="keywordtype">bool</span> useWin)
-<a name="l00149"></a>00149         {
-<a name="l00150"></a>00150                 <span class="keywordflow">if</span> (m_useWin != useWin) {
-<a name="l00151"></a>00151                         m_useWin = useWin;
-<a name="l00152"></a>00152                         FireAxisChanged();
-<a name="l00153"></a>00153                 }
-<a name="l00154"></a>00154         }
-<a name="l00155"></a>00155 
-<a name="l00161"></a><a class="code" href="classAxis.html#ae0d56dded27be4544c3716d7911de54">00161</a>         <span class="keywordtype">void</span> SetWindow(<span class="keywordtype">double</span> winPos, <span class="keywordtype">double</span> winWidth)
-<a name="l00162"></a>00162         {
-<a name="l00163"></a>00163                 <span class="keywordflow">if</span> (m_winPos != winPos || m_winWidth != winWidth) {
-<a name="l00164"></a>00164                         m_winPos = winPos;
-<a name="l00165"></a>00165                         m_winWidth = winWidth;
-<a name="l00166"></a>00166                         FireAxisChanged();
-<a name="l00167"></a>00167                 }
-<a name="l00168"></a>00168         }
-<a name="l00169"></a>00169 
-<a name="l00176"></a>00176         <span class="keywordtype">bool</span> IntersectsWindow(<span class="keywordtype">double</span> v0, <span class="keywordtype">double</span> v1);
-<a name="l00177"></a>00177 
-<a name="l00184"></a><a class="code" href="classAxis.html#86fb3f4249042673db62329d802807c0">00184</a>         <span class="keywordtype">void</span> GetWindowBounds(<span class="keywordtype">double</span> &amp;winMin, <span class="keywordtype">double</span> &amp;winMax)
-<a name="l00185"></a>00185         {
-<a name="l00186"></a>00186                 <span class="keywordtype">double</span> minValue, maxValue;
-<a name="l00187"></a>00187                 GetDataBounds(minValue, maxValue);
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189                 <span class="keywordflow">if</span> (m_useWin) {
-<a name="l00190"></a>00190                         winMin = m_winPos;
-<a name="l00191"></a>00191                         winMax = wxMin(maxValue, winMin + m_winWidth);
-<a name="l00192"></a>00192                 }
-<a name="l00193"></a>00193                 <span class="keywordflow">else</span> {
-<a name="l00194"></a>00194                         winMin = minValue;
-<a name="l00195"></a>00195                         winMax = maxValue;
-<a name="l00196"></a>00196                 }
-<a name="l00197"></a>00197         }
-<a name="l00198"></a>00198 
-<a name="l00202"></a><a class="code" href="classAxis.html#f5277116cb5d341c3256770050613e9a">00202</a>         <span class="keywordtype">void</span> AddDataset(<a class="code" href="classDataset.html">Dataset</a> *dataset)
-<a name="l00203"></a>00203         {
-<a name="l00204"></a>00204                 <span class="keywordflow">if</span> (AcceptDataset(dataset)) {
-<a name="l00205"></a>00205                         m_datasets.Add(dataset);
-<a name="l00206"></a>00206                 }
-<a name="l00207"></a>00207         }
-<a name="l00208"></a>00208 
-<a name="l00214"></a>00214         <span class="keyword">virtual</span> <span class="keywordtype">void</span> GetDataBounds(<span class="keywordtype">double</span> &amp;minValue, <span class="keywordtype">double</span> &amp;maxValue) = 0;
-<a name="l00215"></a>00215 
-<a name="l00222"></a>00222         <span class="keyword">virtual</span> wxCoord GetExtent(wxDC &amp;dc) = 0;
-<a name="l00223"></a>00223 
-<a name="l00229"></a>00229         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsVisible(<span class="keywordtype">double</span> value);
-<a name="l00230"></a>00230 
-<a name="l00236"></a>00236         <span class="keyword">virtual</span> <span class="keywordtype">double</span> BoundValue(<span class="keywordtype">double</span> value);
-<a name="l00237"></a>00237 
-<a name="l00246"></a>00246         <span class="keyword">virtual</span> wxCoord ToGraphics(wxDC &amp;dc, <span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> value);
-<a name="l00247"></a>00247 
-<a name="l00256"></a>00256         <span class="keyword">virtual</span> <span class="keywordtype">double</span> ToData(wxDC &amp;dc, <span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, wxCoord g);
-<a name="l00257"></a>00257 
-<a name="l00261"></a>00261         <span class="keyword">virtual</span> <span class="keywordtype">void</span> UpdateBounds() = 0;
-<a name="l00262"></a>00262 
-<a name="l00268"></a>00268         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPlot.html#115cedadc3b4255229fe9fe9255d8b18">Draw</a>(wxDC &amp;dc, wxRect rc) = 0;
-<a name="l00269"></a>00269 
-<a name="l00275"></a>00275         <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawGridLines(wxDC &amp;dc, wxRect rcData) = 0;
-<a name="l00276"></a>00276 
-<a name="l00277"></a>00277 <span class="keyword">protected</span>:
-<a name="l00285"></a>00285         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> AcceptDataset(<a class="code" href="classDataset.html">Dataset</a> *dataset) = 0;
-<a name="l00286"></a>00286 
-<a name="l00287"></a>00287         DatasetArray m_datasets;
-<a name="l00288"></a>00288         wxPen m_gridLinesPen;
-<a name="l00289"></a>00289 
-<a name="l00290"></a>00290         wxCoord m_marginMin;
-<a name="l00291"></a>00291         wxCoord m_marginMax;
+<a name="l00111"></a>00111 <span class="comment"></span>        <span class="keywordtype">size_t</span> <a class="code" href="classAxis.html#ee6f2f72fa461e2e5c774638d5e00bed">GetDatasetCount</a>();
+<a name="l00112"></a>00112 
+<a name="l00118"></a>00118         <a class="code" href="classDataset.html">Dataset</a> *<a class="code" href="classAxis.html#7d7d04f984a6f15a94970c2870517273">GetDataset</a>(<span class="keywordtype">size_t</span> index);
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120         <span class="comment">//</span>
+<a name="l00121"></a>00121         <span class="comment">// Window functions.</span>
+<a name="l00122"></a>00122         <span class="comment">//</span>
+<a name="l00123"></a>00123 
+<a name="l00128"></a><a class="code" href="classAxis.html#d268bde98397466b9510e323c7744f82">00128</a>         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#d268bde98397466b9510e323c7744f82">SetWindowWidth</a>(<span class="keywordtype">double</span> winWidth)
+<a name="l00129"></a>00129         {
+<a name="l00130"></a>00130                 <a class="code" href="classAxis.html#ae0d56dded27be4544c3716d7911de54">SetWindow</a>(m_winPos, winWidth);
+<a name="l00131"></a>00131         }
+<a name="l00132"></a>00132 
+<a name="l00137"></a><a class="code" href="classAxis.html#bcc9c1b6798b83c37eb4f43e9eae1fb8">00137</a>         <span class="keywordtype">double</span> <a class="code" href="classAxis.html#bcc9c1b6798b83c37eb4f43e9eae1fb8">GetWindowWidth</a>()
+<a name="l00138"></a>00138         {
+<a name="l00139"></a>00139                 <span class="keywordflow">return</span> m_winWidth;
+<a name="l00140"></a>00140         }
+<a name="l00141"></a>00141 
+<a name="l00146"></a><a class="code" href="classAxis.html#3caebac23e670ce51da56051229811bb">00146</a>         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#3caebac23e670ce51da56051229811bb">SetWindowPosition</a>(<span class="keywordtype">double</span> winPos)
+<a name="l00147"></a>00147         {
+<a name="l00148"></a>00148                 <a class="code" href="classAxis.html#ae0d56dded27be4544c3716d7911de54">SetWindow</a>(winPos, m_winWidth);
+<a name="l00149"></a>00149         }
+<a name="l00150"></a>00150 
+<a name="l00155"></a><a class="code" href="classAxis.html#31f7f8954947ef557f2d95d75c9dead0">00155</a>         <span class="keywordtype">double</span> <a class="code" href="classAxis.html#31f7f8954947ef557f2d95d75c9dead0">GetWindowPosition</a>()
+<a name="l00156"></a>00156         {
+<a name="l00157"></a>00157                 <span class="keywordflow">return</span> m_winPos;
+<a name="l00158"></a>00158         }
+<a name="l00159"></a>00159 
+<a name="l00164"></a><a class="code" href="classAxis.html#e2cb235f7cb803c158ea1cbacc665681">00164</a>         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#e2cb235f7cb803c158ea1cbacc665681">SetUseWindow</a>(<span class="keywordtype">bool</span> useWin)
+<a name="l00165"></a>00165         {
+<a name="l00166"></a>00166                 <span class="keywordflow">if</span> (m_useWin != useWin) {
+<a name="l00167"></a>00167                         m_useWin = useWin;
+<a name="l00168"></a>00168                         FireAxisChanged();
+<a name="l00169"></a>00169                 }
+<a name="l00170"></a>00170         }
+<a name="l00171"></a>00171 
+<a name="l00177"></a><a class="code" href="classAxis.html#ae0d56dded27be4544c3716d7911de54">00177</a>         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#ae0d56dded27be4544c3716d7911de54">SetWindow</a>(<span class="keywordtype">double</span> winPos, <span class="keywordtype">double</span> winWidth)
+<a name="l00178"></a>00178         {
+<a name="l00179"></a>00179                 <span class="keywordflow">if</span> (m_winPos != winPos || m_winWidth != winWidth) {
+<a name="l00180"></a>00180                         m_winPos = winPos;
+<a name="l00181"></a>00181                         m_winWidth = winWidth;
+<a name="l00182"></a>00182                         FireAxisChanged();
+<a name="l00183"></a>00183                 }
+<a name="l00184"></a>00184         }
+<a name="l00185"></a>00185 
+<a name="l00192"></a>00192         <span class="keywordtype">bool</span> <a class="code" href="classAxis.html#c41f60cc1125cb3761635c65df188150">IntersectsWindow</a>(<span class="keywordtype">double</span> v0, <span class="keywordtype">double</span> v1);
+<a name="l00193"></a>00193 
+<a name="l00200"></a><a class="code" href="classAxis.html#86fb3f4249042673db62329d802807c0">00200</a>         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#86fb3f4249042673db62329d802807c0">GetWindowBounds</a>(<span class="keywordtype">double</span> &amp;winMin, <span class="keywordtype">double</span> &amp;winMax)
+<a name="l00201"></a>00201         {
+<a name="l00202"></a>00202                 <span class="keywordtype">double</span> minValue, maxValue;
+<a name="l00203"></a>00203                 <a class="code" href="classAxisShare.html#f403bb3c1988d44b3c852c79f0c032d5">GetDataBounds</a>(minValue, maxValue);
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205                 <span class="keywordflow">if</span> (m_useWin) {
+<a name="l00206"></a>00206                         winMin = m_winPos;
+<a name="l00207"></a>00207                         winMax = wxMin(maxValue, winMin + m_winWidth);
+<a name="l00208"></a>00208                 }
+<a name="l00209"></a>00209                 <span class="keywordflow">else</span> {
+<a name="l00210"></a>00210                         winMin = minValue;
+<a name="l00211"></a>00211                         winMax = maxValue;
+<a name="l00212"></a>00212                 }
+<a name="l00213"></a>00213         }
+<a name="l00214"></a>00214 
+<a name="l00218"></a><a class="code" href="classAxis.html#f5277116cb5d341c3256770050613e9a">00218</a>         <span class="keywordtype">void</span> <a class="code" href="classAxis.html#f5277116cb5d341c3256770050613e9a">AddDataset</a>(<a class="code" href="classDataset.html">Dataset</a> *dataset)
+<a name="l00219"></a>00219         {
+<a name="l00220"></a>00220                 <span class="keywordflow">if</span> (<a class="code" href="classAxisShare.html#e93329216b6b5b374734960f1efc1b3b">AcceptDataset</a>(dataset)) {
+<a name="l00221"></a>00221                         m_datasets.Add(dataset);
+<a name="l00222"></a>00222                 }
+<a name="l00223"></a>00223         }
+<a name="l00224"></a>00224 
+<a name="l00230"></a>00230         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisShare.html#f403bb3c1988d44b3c852c79f0c032d5">GetDataBounds</a>(<span class="keywordtype">double</span> &amp;minValue, <span class="keywordtype">double</span> &amp;maxValue) = 0;
+<a name="l00231"></a>00231 
+<a name="l00238"></a>00238         <span class="keyword">virtual</span> wxCoord <a class="code" href="classAxisShare.html#8c750332cc4cb1a3e6f4cfa4fd6c0859">GetExtent</a>(wxDC &amp;dc) = 0;
+<a name="l00239"></a>00239 
+<a name="l00245"></a>00245         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classAxisShare.html#e82ed9f062457be0b422aa182aeeabe9">IsVisible</a>(<span class="keywordtype">double</span> value);
+<a name="l00246"></a>00246 
+<a name="l00252"></a>00252         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classAxisShare.html#9ed4fae2b78f249b658031874b3b6748">BoundValue</a>(<span class="keywordtype">double</span> value);
+<a name="l00253"></a>00253 
+<a name="l00262"></a>00262         <span class="keyword">virtual</span> wxCoord <a class="code" href="classAxisShare.html#49fd261cfdfc8d8df1438d1f97589bca">ToGraphics</a>(wxDC &amp;dc, <span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> value);
+<a name="l00263"></a>00263 
+<a name="l00272"></a>00272         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classAxisShare.html#509fceb9bab56f4b7e58f140431543ec">ToData</a>(wxDC &amp;dc, <span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, wxCoord g);
+<a name="l00273"></a>00273 
+<a name="l00277"></a>00277         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisShare.html#00b25ae4579b817bf2b273c6c6333625">UpdateBounds</a>() = 0;
+<a name="l00278"></a>00278 
+<a name="l00284"></a>00284         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisShare.html#84515f4997f9a7af96e7f4d358d9d4de">Draw</a>(wxDC &amp;dc, wxRect rc) = 0;
+<a name="l00285"></a>00285 
+<a name="l00291"></a>00291         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisShare.html#5ccc8fecb014516c7d4e8aad0ddebb35">DrawGridLines</a>(wxDC &amp;dc, wxRect rcData) = 0;
 <a name="l00292"></a>00292 
-<a name="l00293"></a>00293         <span class="keywordtype">double</span> m_winPos;
-<a name="l00294"></a>00294         <span class="keywordtype">double</span> m_winWidth;
-<a name="l00295"></a>00295         <span class="keywordtype">bool</span> m_useWin;
-<a name="l00296"></a>00296 
-<a name="l00297"></a>00297         FIRE_WITH_THIS(AxisChanged);
-<a name="l00298"></a>00298         FIRE_WITH_THIS(BoundsChanged);
-<a name="l00299"></a>00299 
-<a name="l00300"></a>00300 <span class="keyword">private</span>:
-<a name="l00301"></a>00301         AXIS_LOCATION m_location;
-<a name="l00302"></a>00302 };
-<a name="l00303"></a>00303 
-<a name="l00304"></a>00304 WX_DECLARE_EXPORTED_OBJARRAY(<a class="code" href="classAxis.html">Axis</a> *, AxisArray);
+<a name="l00293"></a>00293 <span class="keyword">protected</span>:
+<a name="l00301"></a>00301         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classAxisShare.html#e93329216b6b5b374734960f1efc1b3b">AcceptDataset</a>(<a class="code" href="classDataset.html">Dataset</a> *dataset) = 0;
+<a name="l00302"></a>00302 
+<a name="l00303"></a>00303         DatasetArray m_datasets;
+<a name="l00304"></a>00304         wxPen m_gridLinesPen;
 <a name="l00305"></a>00305 
-<a name="l00306"></a>00306 wxCoord ToGraphics(<span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> minValue, <span class="keywordtype">double</span> maxValue, wxCoord margin, <span class="keywordtype">bool</span> vertical, <span class="keywordtype">double</span> value);
-<a name="l00307"></a>00307 <span class="keywordtype">double</span> ToData(<span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> minValue, <span class="keywordtype">double</span> maxValue, wxCoord margin, <span class="keywordtype">bool</span> vertical, wxCoord g);
+<a name="l00306"></a>00306         wxCoord m_marginMin;
+<a name="l00307"></a>00307         wxCoord m_marginMax;
 <a name="l00308"></a>00308 
-<a name="l00309"></a>00309 <span class="preprocessor">#endif </span><span class="comment">/*AXIS_H_*/</span>
+<a name="l00309"></a>00309         <span class="keywordtype">double</span> m_winPos;
+<a name="l00310"></a>00310         <span class="keywordtype">double</span> m_winWidth;
+<a name="l00311"></a>00311         <span class="keywordtype">bool</span> m_useWin;
+<a name="l00312"></a>00312 
+<a name="l00313"></a>00313         FIRE_WITH_THIS(AxisChanged);
+<a name="l00314"></a>00314         FIRE_WITH_THIS(BoundsChanged);
+<a name="l00315"></a>00315 
+<a name="l00316"></a>00316 <span class="keyword">private</span>:
+<a name="l00317"></a>00317         AXIS_LOCATION m_location;
+<a name="l00318"></a>00318 
+<a name="l00319"></a>00319         <span class="keywordtype">size_t</span> m_shareCount;
+<a name="l00320"></a>00320 };
+<a name="l00321"></a>00321 
+<a name="l00322"></a>00322 WX_DECLARE_EXPORTED_OBJARRAY(<a class="code" href="classAxis.html">Axis</a> *, AxisArray);
+<a name="l00323"></a>00323 
+<a name="l00328"></a><a class="code" href="classAxisShare.html">00328</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classAxisShare.html">AxisShare</a> : <span class="keyword">public</span> <a class="code" href="classAxis.html">Axis</a>
+<a name="l00329"></a>00329 {
+<a name="l00330"></a>00330 <span class="keyword">public</span>:
+<a name="l00331"></a>00331         <a class="code" href="classAxisShare.html">AxisShare</a>(<a class="code" href="classAxis.html">Axis</a> *axis);
+<a name="l00332"></a>00332         <span class="keyword">virtual</span> ~<a class="code" href="classAxisShare.html">AxisShare</a>();
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334         <span class="keywordtype">void</span> SetShareVisible(<span class="keywordtype">bool</span> shareVisible);
+<a name="l00335"></a>00335 
+<a name="l00336"></a>00336         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#155477c9d2f66e82a744a2893f5314ca">GetDataBounds</a>(<span class="keywordtype">double</span> &amp;minValue, <span class="keywordtype">double</span> &amp;maxValue);
+<a name="l00337"></a>00337 
+<a name="l00338"></a>00338         <span class="keyword">virtual</span> wxCoord <a class="code" href="classAxis.html#7243ac0e5ac79ee8600e823fb39850f1">GetExtent</a>(wxDC &amp;dc);
+<a name="l00339"></a>00339 
+<a name="l00340"></a>00340         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classAxis.html#298266b0e937e4790d55f73bad94ad79">IsVisible</a>(<span class="keywordtype">double</span> value);
+<a name="l00341"></a>00341 
+<a name="l00342"></a>00342         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classAxis.html#de9eadfd5e10a99c758ddb5b8dbcf666">BoundValue</a>(<span class="keywordtype">double</span> value);
+<a name="l00343"></a>00343 
+<a name="l00344"></a>00344         <span class="keyword">virtual</span> wxCoord <a class="code" href="classAxis.html#5b870c49c82f210f4c04746eca35899a">ToGraphics</a>(wxDC &amp;dc, <span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> value);
+<a name="l00345"></a>00345 
+<a name="l00346"></a>00346         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classAxis.html#72d619f1080ef4e757ea7c7659f2dee4">ToData</a>(wxDC &amp;dc, <span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, wxCoord g);
+<a name="l00347"></a>00347 
+<a name="l00348"></a>00348         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#64c6738f863b930d92fa32788408258c">UpdateBounds</a>();
+<a name="l00349"></a>00349 
+<a name="l00350"></a>00350         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#77dc5f553155fcd432f7f4503876470f">Draw</a>(wxDC &amp;dc, wxRect rc);
+<a name="l00351"></a>00351 
+<a name="l00352"></a>00352         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#1a2709ea9c0d09cb7a9346d25c6e4fd6">DrawGridLines</a>(wxDC &amp;dc, wxRect rcData);
+<a name="l00353"></a>00353 
+<a name="l00354"></a>00354 <span class="keyword">protected</span>:
+<a name="l00355"></a>00355         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classAxis.html#25b1ee49dfe072cedaad3afcc6b7e853">AcceptDataset</a>(<a class="code" href="classDataset.html">Dataset</a> *dataset);
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357 <span class="keyword">private</span>:
+<a name="l00358"></a>00358         <span class="keywordtype">bool</span> m_shareVisible;
+<a name="l00359"></a>00359 
+<a name="l00360"></a>00360         <a class="code" href="classAxis.html">Axis</a> *m_axis;
+<a name="l00361"></a>00361 };
+<a name="l00362"></a>00362 
+<a name="l00363"></a>00363 wxCoord ToGraphics(<span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> minValue, <span class="keywordtype">double</span> maxValue, wxCoord margin, <span class="keywordtype">bool</span> vertical, <span class="keywordtype">double</span> value);
+<a name="l00364"></a>00364 <span class="keywordtype">double</span> ToData(<span class="keywordtype">int</span> minCoord, <span class="keywordtype">int</span> gRange, <span class="keywordtype">double</span> minValue, <span class="keywordtype">double</span> maxValue, wxCoord margin, <span class="keywordtype">bool</span> vertical, wxCoord g);
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366 <span class="preprocessor">#endif </span><span class="comment">/*AXIS_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:09 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

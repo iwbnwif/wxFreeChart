@@ -3,7 +3,6 @@
 // Purpose: Demo collection class implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/12
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -84,7 +83,7 @@ static Category *cats[] = {
 	new Category(wxT("XY Charts"), xyDemos, xyDemosCount),
 	new Category(wxT("Gantt Charts"), ganttDemos, ganttDemosCount),
 	new Category(wxT("Bubble Charts"), bubbleDemos, bubbleDemosCount),
-	//new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount), // TODO: not implemented
+	new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount), // TODO: not implemented
 	new Category(wxT("Multiple axis"), multipleAxisDemos, multipleAxisDemosCount),
 	new Category(wxT("Time series Charts"), timeSeriesDemos, timeSeriesDemosCount),
 };

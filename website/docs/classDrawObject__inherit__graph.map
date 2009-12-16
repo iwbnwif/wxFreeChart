@@ -14,4 +14,5 @@
 <area shape="rect" href="$classOHLCBarRenderer.html" title="OHLCBarRenderer" alt="" coords="757,360,893,387">
 <area shape="rect" href="$classOHLCCandlestickRenderer.html" title="OHLCCandlestickRenderer" alt="" coords="732,411,919,437">
 <area shape="rect" href="$classXYHistoRenderer.html" title="XYHistoRenderer" alt="" coords="761,512,889,539">
-<area shape="rect" href="$classXYLineRenderer.html" title="XYLineRenderer" alt="" coords="764,563,887,589">
+<area shape="rect" href="$classXYLineRenderer.html" title="XYLineRenderer" alt="" coords="983,537,1105,564">
+<area shape="rect" href="$classXYLineStepRenderer.html" title="XYLineStepRenderer" alt="" coords="968,588,1120,615">

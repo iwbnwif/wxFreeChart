@@ -521,6 +521,7 @@ make_sample_dir_wxFreeChartDemo_dll:
 	@mkdir -p ../sample
 
 tarball: 
+	make distclean
 	( cd ../.. && tar -cvzf freechart.tar.gz --exclude="*~" --exclude="*.log" --exclude="*.o*" --exclude="*.a" --exclude=".svn" --exclude="autom4te.cache" freechart/* )
 
 zip: clean

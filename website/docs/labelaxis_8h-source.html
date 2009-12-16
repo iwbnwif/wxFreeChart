@@ -23,161 +23,160 @@
 <a name="l00003"></a>00003 <span class="comment">// Purpose:     label axis declaration</span>
 <a name="l00004"></a>00004 <span class="comment">// Author:      Moskvichev Andrey V.</span>
 <a name="l00005"></a>00005 <span class="comment">// Created:     2008/11/07</span>
-<a name="l00006"></a>00006 <span class="comment">// RCS-ID:      $Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $</span>
-<a name="l00007"></a>00007 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
-<a name="l00008"></a>00008 <span class="comment">// Licence:     wxWidgets licence</span>
-<a name="l00010"></a>00010 <span class="comment"></span>
-<a name="l00011"></a>00011 <span class="preprocessor">#ifndef LABELAXIS_H_</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define LABELAXIS_H_</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;wx/axis/axis.h&gt;</span>
-<a name="l00015"></a>00015 
-<a name="l00019"></a><a class="code" href="classLabelAxis.html">00019</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classLabelAxis.html">LabelAxis</a> : <span class="keyword">public</span> <a class="code" href="classAxis.html">Axis</a>
-<a name="l00020"></a>00020 {
-<a name="l00021"></a>00021         DECLARE_CLASS(<a class="code" href="classLabelAxis.html">LabelAxis</a>)
-<a name="l00022"></a>00022 <span class="keyword">public</span>:
-<a name="l00023"></a>00023         <a class="code" href="classLabelAxis.html">LabelAxis</a>(AXIS_LOCATION location);
-<a name="l00024"></a>00024         <span class="keyword">virtual</span> ~<a class="code" href="classLabelAxis.html">LabelAxis</a>();
-<a name="l00025"></a>00025 
-<a name="l00030"></a><a class="code" href="classLabelAxis.html#346fd1d2f1ac185ff0114c6cb25f414d">00030</a>         <span class="keywordtype">void</span> SetTitle(<span class="keyword">const</span> wxString &amp;title)
-<a name="l00031"></a>00031         {
-<a name="l00032"></a>00032                 m_title = title;
-<a name="l00033"></a>00033                 FireAxisChanged();
-<a name="l00034"></a>00034         }
-<a name="l00035"></a>00035 
-<a name="l00040"></a><a class="code" href="classLabelAxis.html#4b62dc99402c32c3baa2dba8ea5284f8">00040</a>         <span class="keyword">const</span> wxString &amp;GetTitle()
-<a name="l00041"></a>00041         {
-<a name="l00042"></a>00042                 <span class="keywordflow">return</span> m_title;
-<a name="l00043"></a>00043         }
-<a name="l00044"></a>00044 
-<a name="l00051"></a><a class="code" href="classLabelAxis.html#172e7f8166b68fb9ebb78eaf91ba2107">00051</a>         <span class="keywordtype">void</span> SetTitleLocation(<span class="keywordtype">int</span> location)
-<a name="l00052"></a>00052         {
-<a name="l00053"></a>00053                 <span class="keywordflow">if</span> (m_titleLocation != location) {
-<a name="l00054"></a>00054                         m_titleLocation = location;
-<a name="l00055"></a>00055                         FireAxisChanged();
-<a name="l00056"></a>00056                 }
-<a name="l00057"></a>00057         }
-<a name="l00058"></a>00058 
-<a name="l00063"></a><a class="code" href="classLabelAxis.html#63dba89810f904634661182469326893">00063</a>         <span class="keywordtype">int</span> GetTitleLocation()
-<a name="l00064"></a>00064         {
-<a name="l00065"></a>00065                 <span class="keywordflow">return</span> m_titleLocation;
-<a name="l00066"></a>00066         }
-<a name="l00067"></a>00067 
-<a name="l00072"></a><a class="code" href="classLabelAxis.html#e962bb7c7111e9d959803aed75afcfc0">00072</a>         <span class="keywordtype">void</span> SetTitleFont(wxFont &amp;font)
-<a name="l00073"></a>00073         {
-<a name="l00074"></a>00074                 m_titleFont = font;
-<a name="l00075"></a>00075                 FireAxisChanged();
-<a name="l00076"></a>00076         }
-<a name="l00077"></a>00077 
-<a name="l00082"></a><a class="code" href="classLabelAxis.html#5a937085e83906ddd9803d80299731de">00082</a>         <span class="keyword">const</span> wxFont &amp;GetTitleFont()
-<a name="l00083"></a>00083         {
-<a name="l00084"></a>00084                 <span class="keywordflow">return</span> m_titleFont;
-<a name="l00085"></a>00085         }
-<a name="l00086"></a>00086 
-<a name="l00091"></a><a class="code" href="classLabelAxis.html#7d00d14a6c485b6c9117258d876bed73">00091</a>         <span class="keywordtype">void</span> SetTitleColour(wxColour &amp;colour)
-<a name="l00092"></a>00092         {
-<a name="l00093"></a>00093                 <span class="keywordflow">if</span> (m_titleColour != colour) {
-<a name="l00094"></a>00094                         m_titleColour = colour;
-<a name="l00095"></a>00095                         FireAxisChanged();
-<a name="l00096"></a>00096                 }
-<a name="l00097"></a>00097         }
-<a name="l00098"></a>00098 
-<a name="l00103"></a><a class="code" href="classLabelAxis.html#55d4f477be92097687beabe81a4a45b3">00103</a>         wxColour GetTitleColour()
-<a name="l00104"></a>00104         {
-<a name="l00105"></a>00105                 <span class="keywordflow">return</span> m_titleColour;
-<a name="l00106"></a>00106         }
-<a name="l00107"></a>00107 
-<a name="l00112"></a><a class="code" href="classLabelAxis.html#f8bafebe8efef5bb2984d62837731479">00112</a>         <span class="keywordtype">void</span> SetLabelPen(wxPen labelPen)
-<a name="l00113"></a>00113         {
-<a name="l00114"></a>00114                 m_labelPen = labelPen;
-<a name="l00115"></a>00115                 FireAxisChanged();
-<a name="l00116"></a>00116         }
-<a name="l00117"></a>00117 
-<a name="l00122"></a><a class="code" href="classLabelAxis.html#b0bb21b972eda2e32b37b6f78d009c8e">00122</a>         <span class="keywordtype">void</span> SetLabelTextColour(wxColour labelTextColour)
-<a name="l00123"></a>00123         {
-<a name="l00124"></a>00124                 m_labelTextColour = labelTextColour;
-<a name="l00125"></a>00125                 FireAxisChanged();
-<a name="l00126"></a>00126         }
-<a name="l00127"></a>00127 
-<a name="l00132"></a><a class="code" href="classLabelAxis.html#8639b461c4db7624c4542e7abca79757">00132</a>         wxColour GetLabelTextColour()
-<a name="l00133"></a>00133         {
-<a name="l00134"></a>00134                 <span class="keywordflow">return</span> m_labelTextColour;
-<a name="l00135"></a>00135         }
-<a name="l00136"></a>00136 
-<a name="l00141"></a><a class="code" href="classLabelAxis.html#030b9c1283aa1c2abb6a9f0099a599b8">00141</a>         <span class="keywordtype">void</span> SetLabelTextFont(wxFont labelTextFont)
-<a name="l00142"></a>00142         {
-<a name="l00143"></a>00143                 m_labelTextFont = labelTextFont;
-<a name="l00144"></a>00144                 FireAxisChanged();
-<a name="l00145"></a>00145         }
-<a name="l00146"></a>00146 
-<a name="l00151"></a><a class="code" href="classLabelAxis.html#a2963f87476ca228e314fe5cd457e4c1">00151</a>         <span class="keyword">const</span> wxFont&amp; GetLabelTextFont()
-<a name="l00152"></a>00152         {
-<a name="l00153"></a>00153                 <span class="keywordflow">return</span> m_labelTextFont;
-<a name="l00154"></a>00154         }
-<a name="l00155"></a>00155 
-<a name="l00160"></a><a class="code" href="classLabelAxis.html#90a777d69787f354ceac0ef42012c3b7">00160</a>         <span class="keywordtype">void</span> SetVerticalLabelText(<span class="keywordtype">bool</span> verticalLabelText)
-<a name="l00161"></a>00161         {
-<a name="l00162"></a>00162                 <span class="keywordflow">if</span> (m_verticalLabelText != verticalLabelText) {
-<a name="l00163"></a>00163                         m_verticalLabelText = verticalLabelText;
-<a name="l00164"></a>00164                         FireAxisChanged();
-<a name="l00165"></a>00165                 }
-<a name="l00166"></a>00166         }
-<a name="l00167"></a>00167 
-<a name="l00172"></a><a class="code" href="classLabelAxis.html#4ae922b492ac983b4f1662479e3b4953">00172</a>         <span class="keywordtype">bool</span> GetVerticalLabelText()
-<a name="l00173"></a>00173         {
-<a name="l00174"></a>00174                 <span class="keywordflow">return</span> m_verticalLabelText;
-<a name="l00175"></a>00175         }
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177         <span class="comment">//</span>
-<a name="l00178"></a>00178         <span class="comment">// Axis</span>
-<a name="l00179"></a>00179         <span class="comment">//</span>
-<a name="l00180"></a>00180         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#77dc5f553155fcd432f7f4503876470f">Draw</a>(wxDC &amp;dc, wxRect rc);
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#1a2709ea9c0d09cb7a9346d25c6e4fd6">DrawGridLines</a>(wxDC &amp;dc, wxRect rc);
-<a name="l00183"></a>00183 
-<a name="l00184"></a>00184         <span class="keyword">virtual</span> wxCoord <a class="code" href="classAxis.html#7243ac0e5ac79ee8600e823fb39850f1">GetExtent</a>(wxDC &amp;dc);
-<a name="l00185"></a>00185 
-<a name="l00186"></a>00186 <span class="keyword">protected</span>:
-<a name="l00187"></a>00187         <span class="comment">//</span>
-<a name="l00188"></a>00188         <span class="comment">// Functions that must be implemented by derivative classes</span>
-<a name="l00189"></a>00189         <span class="comment">//</span>
-<a name="l00190"></a>00190 
-<a name="l00196"></a>00196         <span class="keyword">virtual</span> <span class="keywordtype">double</span> GetValue(<span class="keywordtype">size_t</span> step) = 0;
-<a name="l00197"></a>00197 
-<a name="l00203"></a>00203         <span class="keyword">virtual</span> <span class="keywordtype">void</span> GetLabel(<span class="keywordtype">size_t</span> step, wxString &amp;label) = 0;
-<a name="l00204"></a>00204 
-<a name="l00210"></a>00210         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsEnd(<span class="keywordtype">size_t</span> step) = 0;
-<a name="l00211"></a>00211 
-<a name="l00212"></a>00212         <span class="keyword">virtual</span> wxSize GetLongestLabelExtent(wxDC &amp;dc) = 0;
-<a name="l00213"></a>00213 
-<a name="l00214"></a>00214         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HasLabels();
-<a name="l00215"></a>00215 
-<a name="l00216"></a>00216 <span class="keyword">private</span>:
-<a name="l00217"></a>00217         <span class="keywordtype">void</span> DrawLabels(wxDC &amp;dc, wxRect rc);
-<a name="l00218"></a>00218 
-<a name="l00219"></a>00219         <span class="keywordtype">void</span> DrawLabel(wxDC &amp;dc, wxRect rc, <span class="keyword">const</span> wxString &amp;label, <span class="keywordtype">double</span> value);
-<a name="l00220"></a>00220 
-<a name="l00221"></a>00221         <span class="keywordtype">void</span> DrawBorderLine(wxDC &amp;dc, wxRect rc);
-<a name="l00222"></a>00222 
-<a name="l00223"></a>00223         wxCoord m_labelLineSize;
-<a name="l00224"></a>00224         wxCoord m_labelGap;
-<a name="l00225"></a>00225 
-<a name="l00226"></a>00226         <span class="comment">// labels properties</span>
-<a name="l00227"></a>00227         wxFont m_labelTextFont;
-<a name="l00228"></a>00228         wxColour m_labelTextColour;
-<a name="l00229"></a>00229         wxPen m_labelPen;
-<a name="l00230"></a>00230         <span class="keywordtype">bool</span> m_verticalLabelText;
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232         <span class="comment">// label title properties</span>
-<a name="l00233"></a>00233         wxString m_title;
-<a name="l00234"></a>00234         wxFont m_titleFont;
-<a name="l00235"></a>00235         wxColour m_titleColour;
-<a name="l00236"></a>00236         <span class="keywordtype">int</span> m_titleLocation;
-<a name="l00237"></a>00237 };
-<a name="l00238"></a>00238 
-<a name="l00239"></a>00239 <span class="preprocessor">#endif </span><span class="comment">/*LABELAXIS_H_*/</span>
+<a name="l00006"></a>00006 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
+<a name="l00007"></a>00007 <span class="comment">// Licence:     wxWidgets licence</span>
+<a name="l00009"></a>00009 <span class="comment"></span>
+<a name="l00010"></a>00010 <span class="preprocessor">#ifndef LABELAXIS_H_</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define LABELAXIS_H_</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;wx/axis/axis.h&gt;</span>
+<a name="l00014"></a>00014 
+<a name="l00018"></a><a class="code" href="classLabelAxis.html">00018</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classLabelAxis.html">LabelAxis</a> : <span class="keyword">public</span> <a class="code" href="classAxis.html">Axis</a>
+<a name="l00019"></a>00019 {
+<a name="l00020"></a>00020         DECLARE_CLASS(<a class="code" href="classLabelAxis.html">LabelAxis</a>)
+<a name="l00021"></a>00021 <span class="keyword">public</span>:
+<a name="l00022"></a>00022         <a class="code" href="classLabelAxis.html">LabelAxis</a>(AXIS_LOCATION location);
+<a name="l00023"></a>00023         <span class="keyword">virtual</span> ~<a class="code" href="classLabelAxis.html">LabelAxis</a>();
+<a name="l00024"></a>00024 
+<a name="l00029"></a><a class="code" href="classLabelAxis.html#346fd1d2f1ac185ff0114c6cb25f414d">00029</a>         <span class="keywordtype">void</span> SetTitle(<span class="keyword">const</span> wxString &amp;title)
+<a name="l00030"></a>00030         {
+<a name="l00031"></a>00031                 m_title = title;
+<a name="l00032"></a>00032                 FireAxisChanged();
+<a name="l00033"></a>00033         }
+<a name="l00034"></a>00034 
+<a name="l00039"></a><a class="code" href="classLabelAxis.html#4b62dc99402c32c3baa2dba8ea5284f8">00039</a>         <span class="keyword">const</span> wxString &amp;GetTitle()
+<a name="l00040"></a>00040         {
+<a name="l00041"></a>00041                 <span class="keywordflow">return</span> m_title;
+<a name="l00042"></a>00042         }
+<a name="l00043"></a>00043 
+<a name="l00050"></a><a class="code" href="classLabelAxis.html#172e7f8166b68fb9ebb78eaf91ba2107">00050</a>         <span class="keywordtype">void</span> SetTitleLocation(<span class="keywordtype">int</span> location)
+<a name="l00051"></a>00051         {
+<a name="l00052"></a>00052                 <span class="keywordflow">if</span> (m_titleLocation != location) {
+<a name="l00053"></a>00053                         m_titleLocation = location;
+<a name="l00054"></a>00054                         FireAxisChanged();
+<a name="l00055"></a>00055                 }
+<a name="l00056"></a>00056         }
+<a name="l00057"></a>00057 
+<a name="l00062"></a><a class="code" href="classLabelAxis.html#63dba89810f904634661182469326893">00062</a>         <span class="keywordtype">int</span> GetTitleLocation()
+<a name="l00063"></a>00063         {
+<a name="l00064"></a>00064                 <span class="keywordflow">return</span> m_titleLocation;
+<a name="l00065"></a>00065         }
+<a name="l00066"></a>00066 
+<a name="l00071"></a><a class="code" href="classLabelAxis.html#e962bb7c7111e9d959803aed75afcfc0">00071</a>         <span class="keywordtype">void</span> SetTitleFont(wxFont &amp;font)
+<a name="l00072"></a>00072         {
+<a name="l00073"></a>00073                 m_titleFont = font;
+<a name="l00074"></a>00074                 FireAxisChanged();
+<a name="l00075"></a>00075         }
+<a name="l00076"></a>00076 
+<a name="l00081"></a><a class="code" href="classLabelAxis.html#5a937085e83906ddd9803d80299731de">00081</a>         <span class="keyword">const</span> wxFont &amp;GetTitleFont()
+<a name="l00082"></a>00082         {
+<a name="l00083"></a>00083                 <span class="keywordflow">return</span> m_titleFont;
+<a name="l00084"></a>00084         }
+<a name="l00085"></a>00085 
+<a name="l00090"></a><a class="code" href="classLabelAxis.html#7d00d14a6c485b6c9117258d876bed73">00090</a>         <span class="keywordtype">void</span> SetTitleColour(wxColour &amp;colour)
+<a name="l00091"></a>00091         {
+<a name="l00092"></a>00092                 <span class="keywordflow">if</span> (m_titleColour != colour) {
+<a name="l00093"></a>00093                         m_titleColour = colour;
+<a name="l00094"></a>00094                         FireAxisChanged();
+<a name="l00095"></a>00095                 }
+<a name="l00096"></a>00096         }
+<a name="l00097"></a>00097 
+<a name="l00102"></a><a class="code" href="classLabelAxis.html#55d4f477be92097687beabe81a4a45b3">00102</a>         wxColour GetTitleColour()
+<a name="l00103"></a>00103         {
+<a name="l00104"></a>00104                 <span class="keywordflow">return</span> m_titleColour;
+<a name="l00105"></a>00105         }
+<a name="l00106"></a>00106 
+<a name="l00111"></a><a class="code" href="classLabelAxis.html#f8bafebe8efef5bb2984d62837731479">00111</a>         <span class="keywordtype">void</span> SetLabelPen(wxPen labelPen)
+<a name="l00112"></a>00112         {
+<a name="l00113"></a>00113                 m_labelPen = labelPen;
+<a name="l00114"></a>00114                 FireAxisChanged();
+<a name="l00115"></a>00115         }
+<a name="l00116"></a>00116 
+<a name="l00121"></a><a class="code" href="classLabelAxis.html#b0bb21b972eda2e32b37b6f78d009c8e">00121</a>         <span class="keywordtype">void</span> SetLabelTextColour(wxColour labelTextColour)
+<a name="l00122"></a>00122         {
+<a name="l00123"></a>00123                 m_labelTextColour = labelTextColour;
+<a name="l00124"></a>00124                 FireAxisChanged();
+<a name="l00125"></a>00125         }
+<a name="l00126"></a>00126 
+<a name="l00131"></a><a class="code" href="classLabelAxis.html#8639b461c4db7624c4542e7abca79757">00131</a>         wxColour GetLabelTextColour()
+<a name="l00132"></a>00132         {
+<a name="l00133"></a>00133                 <span class="keywordflow">return</span> m_labelTextColour;
+<a name="l00134"></a>00134         }
+<a name="l00135"></a>00135 
+<a name="l00140"></a><a class="code" href="classLabelAxis.html#030b9c1283aa1c2abb6a9f0099a599b8">00140</a>         <span class="keywordtype">void</span> SetLabelTextFont(wxFont labelTextFont)
+<a name="l00141"></a>00141         {
+<a name="l00142"></a>00142                 m_labelTextFont = labelTextFont;
+<a name="l00143"></a>00143                 FireAxisChanged();
+<a name="l00144"></a>00144         }
+<a name="l00145"></a>00145 
+<a name="l00150"></a><a class="code" href="classLabelAxis.html#a2963f87476ca228e314fe5cd457e4c1">00150</a>         <span class="keyword">const</span> wxFont&amp; GetLabelTextFont()
+<a name="l00151"></a>00151         {
+<a name="l00152"></a>00152                 <span class="keywordflow">return</span> m_labelTextFont;
+<a name="l00153"></a>00153         }
+<a name="l00154"></a>00154 
+<a name="l00159"></a><a class="code" href="classLabelAxis.html#90a777d69787f354ceac0ef42012c3b7">00159</a>         <span class="keywordtype">void</span> SetVerticalLabelText(<span class="keywordtype">bool</span> verticalLabelText)
+<a name="l00160"></a>00160         {
+<a name="l00161"></a>00161                 <span class="keywordflow">if</span> (m_verticalLabelText != verticalLabelText) {
+<a name="l00162"></a>00162                         m_verticalLabelText = verticalLabelText;
+<a name="l00163"></a>00163                         FireAxisChanged();
+<a name="l00164"></a>00164                 }
+<a name="l00165"></a>00165         }
+<a name="l00166"></a>00166 
+<a name="l00171"></a><a class="code" href="classLabelAxis.html#4ae922b492ac983b4f1662479e3b4953">00171</a>         <span class="keywordtype">bool</span> GetVerticalLabelText()
+<a name="l00172"></a>00172         {
+<a name="l00173"></a>00173                 <span class="keywordflow">return</span> m_verticalLabelText;
+<a name="l00174"></a>00174         }
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176         <span class="comment">//</span>
+<a name="l00177"></a>00177         <span class="comment">// Axis</span>
+<a name="l00178"></a>00178         <span class="comment">//</span>
+<a name="l00179"></a>00179         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#77dc5f553155fcd432f7f4503876470f">Draw</a>(wxDC &amp;dc, wxRect rc);
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#1a2709ea9c0d09cb7a9346d25c6e4fd6">DrawGridLines</a>(wxDC &amp;dc, wxRect rc);
+<a name="l00182"></a>00182 
+<a name="l00183"></a>00183         <span class="keyword">virtual</span> wxCoord <a class="code" href="classAxis.html#7243ac0e5ac79ee8600e823fb39850f1">GetExtent</a>(wxDC &amp;dc);
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185 <span class="keyword">protected</span>:
+<a name="l00186"></a>00186         <span class="comment">//</span>
+<a name="l00187"></a>00187         <span class="comment">// Functions that must be implemented by derivative classes</span>
+<a name="l00188"></a>00188         <span class="comment">//</span>
+<a name="l00189"></a>00189 
+<a name="l00195"></a>00195         <span class="keyword">virtual</span> <span class="keywordtype">double</span> GetValue(<span class="keywordtype">size_t</span> step) = 0;
+<a name="l00196"></a>00196 
+<a name="l00202"></a>00202         <span class="keyword">virtual</span> <span class="keywordtype">void</span> GetLabel(<span class="keywordtype">size_t</span> step, wxString &amp;label) = 0;
+<a name="l00203"></a>00203 
+<a name="l00209"></a>00209         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsEnd(<span class="keywordtype">size_t</span> step) = 0;
+<a name="l00210"></a>00210 
+<a name="l00211"></a>00211         <span class="keyword">virtual</span> wxSize GetLongestLabelExtent(wxDC &amp;dc) = 0;
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> HasLabels();
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215 <span class="keyword">private</span>:
+<a name="l00216"></a>00216         <span class="keywordtype">void</span> DrawLabels(wxDC &amp;dc, wxRect rc);
+<a name="l00217"></a>00217 
+<a name="l00218"></a>00218         <span class="keywordtype">void</span> DrawLabel(wxDC &amp;dc, wxRect rc, <span class="keyword">const</span> wxString &amp;label, <span class="keywordtype">double</span> value);
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220         <span class="keywordtype">void</span> DrawBorderLine(wxDC &amp;dc, wxRect rc);
+<a name="l00221"></a>00221 
+<a name="l00222"></a>00222         wxCoord m_labelLineSize;
+<a name="l00223"></a>00223         wxCoord m_labelGap;
+<a name="l00224"></a>00224 
+<a name="l00225"></a>00225         <span class="comment">// labels properties</span>
+<a name="l00226"></a>00226         wxFont m_labelTextFont;
+<a name="l00227"></a>00227         wxColour m_labelTextColour;
+<a name="l00228"></a>00228         wxPen m_labelPen;
+<a name="l00229"></a>00229         <span class="keywordtype">bool</span> m_verticalLabelText;
+<a name="l00230"></a>00230 
+<a name="l00231"></a>00231         <span class="comment">// label title properties</span>
+<a name="l00232"></a>00232         wxString m_title;
+<a name="l00233"></a>00233         wxFont m_titleFont;
+<a name="l00234"></a>00234         wxColour m_titleColour;
+<a name="l00235"></a>00235         <span class="keywordtype">int</span> m_titleLocation;
+<a name="l00236"></a>00236 };
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238 <span class="preprocessor">#endif </span><span class="comment">/*LABELAXIS_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:09 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

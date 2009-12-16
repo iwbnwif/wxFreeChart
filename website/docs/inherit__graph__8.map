@@ -41,7 +41,8 @@
 <area shape="rect" href="$classXYZRenderer.html" title="XYZRenderer" alt="" coords="768,613,875,640">
 <area shape="rect" href="$classOHLCBarRenderer.html" title="OHLCBarRenderer" alt="" coords="987,563,1123,589">
 <area shape="rect" href="$classOHLCCandlestickRenderer.html" title="OHLCCandlestickRenderer" alt="" coords="961,613,1148,640">
-<area shape="rect" href="$classXYLineRenderer.html" title="XYLineRenderer" alt="" coords="993,512,1116,539">
+<area shape="rect" href="$classXYLineRenderer.html" title="XYLineRenderer" alt="" coords="1224,487,1347,513">
+<area shape="rect" href="$classXYLineStepRenderer.html" title="XYLineStepRenderer" alt="" coords="1209,537,1361,564">
 <area shape="rect" href="$classObservable.html" title="Observable\&lt; PlotObserver \&gt;" alt="" coords="9,81,215,108">
 <area shape="rect" href="$classPlot.html" title="Plot" alt="" coords="360,81,405,108">
 <area shape="rect" href="$classPlotObserver.html" title="PlotObserver" alt="" coords="331,183,435,209">

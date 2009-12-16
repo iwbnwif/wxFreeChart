@@ -4,7 +4,7 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.3 alpha
+ Version: 1.4 beta
  Description:
  wxFreeChart is free powerful charting library based on wxWidgets. It 
  designed with flexibility in mind, and supports many types of charts 
@@ -50,7 +50,9 @@
  1.4:
  		What's new:
  		 - added methods to access axis-dataset links to AxisPlot and Axis
- 		 - xylinerenderer optimizations
+ 		 - XYLineRenderer and XYAreaRenderer bugfixes
+ 		 - added XYLineStepRenderer class
+ 		 - added initial combined axes support (see AxisShare class)
  		 
  1.3: 
  		What's new:
@@ -94,12 +96,20 @@
  Known issues:
  - window scrolling bugs
  - compdateaxis bugs
- - axes sometimes drawn not correctly in case of Gantt charts
  - markers not implemented
  - Work with wxWidgets 2.6.x not tested.
  - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
  - Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
  - Pie plots are very ugly, and must be cleaned up or rewritten.
 
+ Help project:
+ Unfortunately, i have not enough time to work on project. 
+ You can help project development in following ways:
+ - Test it and write bugreports/bugfixes,
+   especially test on MacOSX and WINCE ports.
+ - Write additional code and contribute it to project.
+ - Donate to support project development, 
+   click PayPal (tm) Donate button on wxFreeChart web site. 
+ 
  Author contact email: mab[at]smtp[dot]ru
 

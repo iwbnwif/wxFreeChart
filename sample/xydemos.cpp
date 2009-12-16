@@ -3,7 +3,6 @@
 // Purpose: xy demos
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/12
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -16,6 +15,9 @@
 
 // for histogram demo
 #include <wx/xy/xyhistorenderer.h>
+
+// for area demo
+#include <wx/xy/xyarearenderer.h>
 
 // for dynamic dataset
 #include <wx/xy/vectordataset.h>
@@ -291,7 +293,7 @@ DynamicDemoDataset::DynamicDemoDataset()
 {
 	// start timer, that will add new data to dataset
 	m_timer.SetOwner(this);
-	m_timer.Start(1000);
+	m_timer.Start(100);
 }
 
 DynamicDemoDataset::~DynamicDemoDataset()
@@ -325,7 +327,7 @@ public:
 		DynamicDemoDataset *dataset = new DynamicDemoDataset();
 
 		// set line renderer to it
-		dataset->SetRenderer(new XYLineRenderer());
+		dataset->SetRenderer(new XYLineStepRenderer());
 
 		// add our dataset to plot
 		plot->AddDataset(dataset);
@@ -798,6 +800,80 @@ public:
 	}
 };
 
+class XYDemo11 : public ChartDemo
+{
+public:
+	XYDemo11()
+	: ChartDemo(wxT("XY Demo 11 - areas"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// serie 1 data
+		double data1[][2] = {
+				{ 1, 1 },
+				{ 2, 4 },
+				{ 3, 3 },
+				{ 4, 5 },
+				{ 5, 5 },
+				{ 6, 7 },
+				{ 7, 7 },
+				{ 8, 8 },
+		};
+		// serie 2 data
+		double data2[][2] = {
+				{ 3, 4 },
+				{ 4, 3 },
+				{ 5, 2 },
+				{ 6, 3 },
+				{ 7, 6 },
+				{ 8, 3 },
+				{ 9, 4 },
+				{ 10, 3 },
+		};
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		// create dataset
+		XYSimpleDataset *dataset = new XYSimpleDataset();
+
+		// add two series
+		dataset->AddSerie((double *) data1, WXSIZEOF(data1));
+		dataset->AddSerie((double *) data2, WXSIZEOF(data2));
+
+		// create area renderer and set it to dataset
+		XYAreaRenderer *renderer = new XYAreaRenderer();
+		dataset->SetRenderer(renderer);
+
+		// add our dataset to plot
+		plot->AddDataset(dataset);
+
+		// create left and bottom number axes
+		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// set serie names to be displayed on legend
+		dataset->SetSerieName(0, wxT("Serie 0"));
+		dataset->SetSerieName(1, wxT("Serie 1"));
+
+		// set legend
+		plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
+
+		// and finally create chart
+		Chart *chart = new Chart(plot, GetName());
+		return chart;
+	}
+};
 
 ChartDemo *xyDemos[] = {
 	new XYDemo1(),
@@ -810,5 +886,6 @@ ChartDemo *xyDemos[] = {
 	new XYDemo8(),
 	new XYDemo9(),
 	new XYDemo10(),
+	new XYDemo11(),
 };
 int xyDemosCount = WXSIZEOF(xyDemos);

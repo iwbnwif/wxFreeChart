@@ -15,7 +15,7 @@
 # NOTE: you'll want to replace the first string in [] brackets with the name of your
 #	component, the second string with its version and third one with your mail
 #	(so that users will be able to contact you in case they have problems)
-AC_INIT([WXFREECHART], [1.2], [mab@smtp.ru])
+AC_INIT([WXFREECHART], [1.4], [mab@smtp.ru])
 AC_CONFIG_AUX_DIR(build)	# this is needed, don't touch it
 
 # ENABLES/DISABLES THE DEBUG MODE FOR THIS CONFIGURE SCRIPT
