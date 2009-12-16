@@ -3,7 +3,6 @@
 // Purpose: xy dataset declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -80,5 +79,26 @@ protected:
 
 private:
 };
+
+//
+// Helper functions.
+//
+inline static void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1)
+{
+	if (!axis->IsVisible(x)) {
+		double p = axis->BoundValue(x);
+		y = (y1 - y) * (p - x) / (x1 - x) + y;
+		x = p;
+	}
+}
+
+inline static void ClipVert(Axis *axis, double &x, double &y, double x1, double y1)
+{
+	if (!axis->IsVisible(y)) {
+		double p = axis->BoundValue(y);
+		x = (p - y1) * (x1 - x) / (y1 - y) + x;
+		y = p;
+	}
+}
 
 #endif /*XYDATASET_H_*/

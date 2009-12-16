@@ -3,7 +3,6 @@
 // Purpose: xyz renderer implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2009/04/04
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2009/04/04 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////

@@ -29,8 +29,8 @@
   <tr class="memlist"><td><a class="el" href="classXYLineRenderer.html#fcff8bcad37ef9561ed849face39c2b5">DrawLegendSymbol</a>(wxDC &amp;dc, wxRect rcSymbol, size_t serie)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>DrawObject</b>() (defined in <a class="el" href="classDrawObject.html">DrawObject</a>)</td><td><a class="el" href="classDrawObject.html">DrawObject</a></td><td><code> [inline]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>FIRE_WITH_THIS</b>(NeedRedraw) (defined in <a class="el" href="classDrawObject.html">DrawObject</a>)</td><td><a class="el" href="classDrawObject.html">DrawObject</a></td><td><code> [protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classXYLineRenderer.html#a737c8ea01da5e06cc9a5f0694dd7063">GetSerieColour</a>(size_t serie)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td><code> [virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classXYLineRenderer.html#f6dffc6e703355c2c2df72c640eeddf5">GetSeriePen</a>(size_t serie)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td></td></tr>
+  <tr bgcolor="#f0f0f0"><td><b>GetSerieColour</b>(size_t serie) (defined in <b>XYLineRendererBase</b>)</td><td><a class="el" href="classXYLineRendererBase.html">XYLineRendererBase</a></td><td><code> [virtual]</code></td></tr>
+  <tr bgcolor="#f0f0f0"><td><b>GetSeriePen</b>(size_t serie) (defined in <b>XYLineRendererBase</b>)</td><td><a class="el" href="classXYLineRendererBase.html">XYLineRendererBase</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classRenderer.html#a673060538e59b1beac3b2c3ff313996">GetSerieSymbol</a>(size_t serie)</td><td><a class="el" href="classRenderer.html">Renderer</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>Observable</b>() (defined in <a class="el" href="classObservable.html">Observable&lt; DrawObserver &gt;</a>)</td><td><a class="el" href="classObservable.html">Observable&lt; DrawObserver &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>Observer</b> typedef (defined in <a class="el" href="classObservable.html">Observable&lt; DrawObserver &gt;</a>)</td><td><a class="el" href="classObservable.html">Observable&lt; DrawObserver &gt;</a></td><td></td></tr>
@@ -40,19 +40,21 @@
   <tr bgcolor="#f0f0f0"><td><b>RefObject</b>() (defined in <a class="el" href="classRefObject.html">RefObject</a>)</td><td><a class="el" href="classRefObject.html">RefObject</a></td><td><code> [inline]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>RemoveObserver</b>(DrawObserver *_observer) (defined in <a class="el" href="classObservable.html">Observable&lt; DrawObserver &gt;</a>)</td><td><a class="el" href="classObservable.html">Observable&lt; DrawObserver &gt;</a></td><td><code> [inline]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>Renderer</b>() (defined in <a class="el" href="classRenderer.html">Renderer</a>)</td><td><a class="el" href="classRenderer.html">Renderer</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classXYLineRenderer.html#26853afbae5a6b8005e047f1180e98d2">SetSerieColour</a>(size_t serie, wxColour *colour)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td><code> [virtual]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classXYLineRenderer.html#83e6d2ccebaef791b0dbae633a26c861">SetSeriePen</a>(size_t serie, wxPen *pen)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td></td></tr>
+  <tr bgcolor="#f0f0f0"><td><b>SetSerieColour</b>(size_t serie, wxColour *colour) (defined in <b>XYLineRendererBase</b>)</td><td><a class="el" href="classXYLineRendererBase.html">XYLineRendererBase</a></td><td><code> [virtual]</code></td></tr>
+  <tr bgcolor="#f0f0f0"><td><b>SetSeriePen</b>(size_t serie, wxPen *pen) (defined in <b>XYLineRendererBase</b>)</td><td><a class="el" href="classXYLineRendererBase.html">XYLineRendererBase</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classRenderer.html#df1c1d561f504eceee256940cc57e9e1">SetSerieSymbol</a>(size_t serie, Symbol *symbol)</td><td><a class="el" href="classRenderer.html">Renderer</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>Unref</b>() (defined in <a class="el" href="classRefObject.html">RefObject</a>)</td><td><a class="el" href="classRefObject.html">RefObject</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classXYLineRenderer.html#9aeaa1e0523b9f2c7b659f278fe6958a">XYLineRenderer</a>(bool drawSymbols=false, bool drawLines=true, int defaultWidth=1, int defaultStyle=wxSOLID)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td></td></tr>
+  <tr bgcolor="#f0f0f0"><td><b>XYLineRendererBase</b>(int defaultWidth=1, int defaultStyle=wxSOLID) (defined in <b>XYLineRendererBase</b>)</td><td><a class="el" href="classXYLineRendererBase.html">XYLineRendererBase</a></td><td></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>XYRenderer</b>() (defined in <a class="el" href="classXYRenderer.html">XYRenderer</a>)</td><td><a class="el" href="classXYRenderer.html">XYRenderer</a></td><td></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>~DrawObject</b>() (defined in <a class="el" href="classDrawObject.html">DrawObject</a>)</td><td><a class="el" href="classDrawObject.html">DrawObject</a></td><td><code> [inline, virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>~RefObject</b>() (defined in <a class="el" href="classRefObject.html">RefObject</a>)</td><td><a class="el" href="classRefObject.html">RefObject</a></td><td><code> [inline, virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>~Renderer</b>() (defined in <a class="el" href="classRenderer.html">Renderer</a>)</td><td><a class="el" href="classRenderer.html">Renderer</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>~XYLineRenderer</b>() (defined in <a class="el" href="classXYLineRenderer.html">XYLineRenderer</a>)</td><td><a class="el" href="classXYLineRenderer.html">XYLineRenderer</a></td><td><code> [virtual]</code></td></tr>
+  <tr bgcolor="#f0f0f0"><td><b>~XYLineRendererBase</b>() (defined in <b>XYLineRendererBase</b>)</td><td><a class="el" href="classXYLineRendererBase.html">XYLineRendererBase</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>~XYRenderer</b>() (defined in <a class="el" href="classXYRenderer.html">XYRenderer</a>)</td><td><a class="el" href="classXYRenderer.html">XYRenderer</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:16 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

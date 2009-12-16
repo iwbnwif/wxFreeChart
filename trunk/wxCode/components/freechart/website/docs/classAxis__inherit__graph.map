@@ -1,6 +1,7 @@
-<area shape="rect" href="$classCompDateAxis.html" title="CompDateAxis" alt="" coords="5,161,120,188">
-<area shape="rect" href="$classLabelAxis.html" title="LabelAxis" alt="" coords="144,161,224,188">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="19,7,227,33">
-<area shape="rect" href="$classCategoryAxis.html" title="CategoryAxis" alt="" coords="17,239,121,265">
-<area shape="rect" href="$classDateAxis.html" title="DateAxis" alt="" coords="145,239,223,265">
-<area shape="rect" href="$classNumberAxis.html" title="NumberAxis" alt="" coords="247,239,345,265">
+<area shape="rect" href="$classAxisShare.html" title="AxisShare" alt="" coords="5,161,91,188">
+<area shape="rect" href="$classCompDateAxis.html" title="CompDateAxis" alt="" coords="115,161,229,188">
+<area shape="rect" href="$classLabelAxis.html" title="LabelAxis" alt="" coords="253,161,333,188">
+<area shape="rect" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="68,7,276,33">
+<area shape="rect" href="$classCategoryAxis.html" title="CategoryAxis" alt="" coords="127,239,231,265">
+<area shape="rect" href="$classDateAxis.html" title="DateAxis" alt="" coords="255,239,332,265">
+<area shape="rect" href="$classNumberAxis.html" title="NumberAxis" alt="" coords="356,239,455,265">

@@ -22,7 +22,7 @@
   </div>
 </div>
 <div class="contents">
-<h1>XYLineRenderer Class Reference</h1><!-- doxytag: class="XYLineRenderer" --><!-- doxytag: inherits="XYRenderer" --><code>#include &lt;<a class="el" href="xylinerenderer_8h-source.html">xylinerenderer.h</a>&gt;</code>
+<h1>XYLineRenderer Class Reference</h1><!-- doxytag: class="XYLineRenderer" --><!-- doxytag: inherits="XYLineRendererBase" --><code>#include &lt;<a class="el" href="xylinerenderer_8h-source.html">xylinerenderer.h</a>&gt;</code>
 <p>
 <div class="dynheader">
 Inheritance diagram for XYLineRenderer:</div>
@@ -48,14 +48,6 @@ Collaboration diagram for XYLineRenderer:</div>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYLineRenderer.html#fcff8bcad37ef9561ed849face39c2b5">DrawLegendSymbol</a> (wxDC &amp;dc, wxRect rcSymbol, size_t serie)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYLineRenderer.html#c29be412e8f60b74b5cca97bfe38dd93">Draw</a> (wxDC &amp;dc, wxRect rc, <a class="el" href="classAxis.html">Axis</a> *horizAxis, <a class="el" href="classAxis.html">Axis</a> *vertAxis, <a class="el" href="classXYDataset.html">XYDataset</a> *dataset)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYLineRenderer.html#26853afbae5a6b8005e047f1180e98d2">SetSerieColour</a> (size_t serie, wxColour *colour)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual wxColour&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYLineRenderer.html#a737c8ea01da5e06cc9a5f0694dd7063">GetSerieColour</a> (size_t serie)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYLineRenderer.html#83e6d2ccebaef791b0dbae633a26c861">SetSeriePen</a> (size_t serie, wxPen *pen)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">wxPen *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYLineRenderer.html#f6dffc6e703355c2c2df72c640eeddf5">GetSeriePen</a> (size_t serie)</td></tr>
 
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
@@ -212,136 +204,10 @@ Draws legend symbol. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 </div>
 </div><p>
-<a class="anchor" name="a737c8ea01da5e06cc9a5f0694dd7063"></a><!-- doxytag: member="XYLineRenderer::GetSerieColour" ref="a737c8ea01da5e06cc9a5f0694dd7063" args="(size_t serie)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual wxColour XYLineRenderer::GetSerieColour           </td>
-          <td>(</td>
-          <td class="paramtype">size_t&nbsp;</td>
-          <td class="paramname"> <em>serie</em>          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-Returns serie color. <dl compact><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>serie</em>&nbsp;</td><td>serie index </td></tr>
-  </table>
-</dl>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd>serie color </dd></dl>
-
-<p>Reimplemented from <a class="el" href="classRenderer.html#0d0b54e14d2664c275a9e88b01952488">Renderer</a>.</p>
-
-</div>
-</div><p>
-<a class="anchor" name="f6dffc6e703355c2c2df72c640eeddf5"></a><!-- doxytag: member="XYLineRenderer::GetSeriePen" ref="f6dffc6e703355c2c2df72c640eeddf5" args="(size_t serie)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">wxPen* XYLineRenderer::GetSeriePen           </td>
-          <td>(</td>
-          <td class="paramtype">size_t&nbsp;</td>
-          <td class="paramname"> <em>serie</em>          </td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-Returns pen, used to draw specified serie lines. <dl compact><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>serie</em>&nbsp;</td><td>serie index </td></tr>
-  </table>
-</dl>
-<dl class="return" compact><dt><b>Returns:</b></dt><dd>pen </dd></dl>
-
-</div>
-</div><p>
-<a class="anchor" name="26853afbae5a6b8005e047f1180e98d2"></a><!-- doxytag: member="XYLineRenderer::SetSerieColour" ref="26853afbae5a6b8005e047f1180e98d2" args="(size_t serie, wxColour *colour)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void XYLineRenderer::SetSerieColour           </td>
-          <td>(</td>
-          <td class="paramtype">size_t&nbsp;</td>
-          <td class="paramname"> <em>serie</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">wxColour *&nbsp;</td>
-          <td class="paramname"> <em>colour</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td><code> [virtual]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-Sets serie color. <dl compact><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>serie</em>&nbsp;</td><td>serie index </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>color</em>&nbsp;</td><td>color for serie </td></tr>
-  </table>
-</dl>
-
-<p>Reimplemented from <a class="el" href="classRenderer.html#6bb08cfc31770263dd176a31d2498d4c">Renderer</a>.</p>
-
-</div>
-</div><p>
-<a class="anchor" name="83e6d2ccebaef791b0dbae633a26c861"></a><!-- doxytag: member="XYLineRenderer::SetSeriePen" ref="83e6d2ccebaef791b0dbae633a26c861" args="(size_t serie, wxPen *pen)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void XYLineRenderer::SetSeriePen           </td>
-          <td>(</td>
-          <td class="paramtype">size_t&nbsp;</td>
-          <td class="paramname"> <em>serie</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">wxPen *&nbsp;</td>
-          <td class="paramname"> <em>pen</em></td><td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td><td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>
-Sets pen to draw serie lines. <dl compact><dt><b>Parameters:</b></dt><dd>
-  <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>serie</em>&nbsp;</td><td>serie index </td></tr>
-    <tr><td valign="top"></td><td valign="top"><em>pen</em>&nbsp;</td><td>pen for serie </td></tr>
-  </table>
-</dl>
-
-</div>
-</div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/xy/<a class="el" href="xylinerenderer_8h-source.html">xylinerenderer.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:16 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

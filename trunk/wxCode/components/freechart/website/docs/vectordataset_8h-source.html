@@ -23,71 +23,70 @@
 <a name="l00003"></a>00003 <span class="comment">// Purpose: vector dataset declarations</span>
 <a name="l00004"></a>00004 <span class="comment">// Author:      Moskvichev Andrey V.</span>
 <a name="l00005"></a>00005 <span class="comment">// Created:     2008/11/07</span>
-<a name="l00006"></a>00006 <span class="comment">// RCS-ID:      $Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $</span>
-<a name="l00007"></a>00007 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
-<a name="l00008"></a>00008 <span class="comment">// Licence:     wxWidgets licence</span>
-<a name="l00010"></a>00010 <span class="comment"></span>
-<a name="l00011"></a>00011 <span class="preprocessor">#ifndef VECTORDATASET_H_</span>
-<a name="l00012"></a>00012 <span class="preprocessor"></span><span class="preprocessor">#define VECTORDATASET_H_</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;wx/xy/xydataset.h&gt;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &lt;wx/dynarray.h&gt;</span>
-<a name="l00016"></a>00016 
-<a name="l00017"></a>00017 WX_DECLARE_EXPORTED_OBJARRAY(<span class="keywordtype">double</span>, wxDoubleArray);
-<a name="l00018"></a>00018 
-<a name="l00024"></a><a class="code" href="classVectorDataset.html">00024</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classVectorDataset.html">VectorDataset</a> : <span class="keyword">public</span> <a class="code" href="classXYDataset.html">XYDataset</a>
-<a name="l00025"></a>00025 {
-<a name="l00026"></a>00026 <span class="keyword">public</span>:
-<a name="l00032"></a>00032         <a class="code" href="classVectorDataset.html">VectorDataset</a>();
-<a name="l00033"></a>00033         <span class="keyword">virtual</span> ~<a class="code" href="classVectorDataset.html">VectorDataset</a>();
-<a name="l00034"></a>00034 
-<a name="l00035"></a>00035         <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classDataset.html#f622220ac28820f2fb1a5d32b713c732">GetSerieCount</a>();
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037         <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classDataset.html#2aad2d70ac9481fa842356e9d7f7114f">GetCount</a>(<span class="keywordtype">size_t</span> serie);
-<a name="l00038"></a>00038 
-<a name="l00039"></a>00039         <span class="keyword">virtual</span> wxString <a class="code" href="classDataset.html#3d01edf567e431c10e7a708930cf4aaf">GetSerieName</a>(<span class="keywordtype">size_t</span> serie);
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classXYDataset.html#557ce08bc8ebad2e96e57e5ca1b958f3">GetX</a>(<span class="keywordtype">size_t</span> index, <span class="keywordtype">size_t</span> serie);
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classXYDataset.html#7131abf96987e31911eb5b81e1f40600">GetY</a>(<span class="keywordtype">size_t</span> index, <span class="keywordtype">size_t</span> serie);
-<a name="l00044"></a>00044 
-<a name="l00049"></a><a class="code" href="classVectorDataset.html#165d83dced539fbaf4a38b15ec2e1215">00049</a>         <span class="keywordtype">void</span> Add(<span class="keywordtype">double</span> y)
-<a name="l00050"></a>00050         {
-<a name="l00051"></a>00051                 m_values.Add(y);
-<a name="l00052"></a>00052                 DatasetChanged();
-<a name="l00053"></a>00053         }
-<a name="l00054"></a>00054 
-<a name="l00060"></a><a class="code" href="classVectorDataset.html#c93027d11dc6cf99efcb961ff052b06e">00060</a>         <span class="keywordtype">void</span> Replace(<span class="keywordtype">size_t</span> index, <span class="keywordtype">double</span> y)
-<a name="l00061"></a>00061         {
-<a name="l00062"></a>00062                 <span class="keywordflow">if</span> (index &lt; m_values.Count()) {
-<a name="l00063"></a>00063                         m_values[index] = y;
-<a name="l00064"></a>00064 
-<a name="l00065"></a>00065                         DatasetChanged();
-<a name="l00066"></a>00066                 }
-<a name="l00067"></a>00067         }
-<a name="l00068"></a>00068 
-<a name="l00073"></a><a class="code" href="classVectorDataset.html#059ce3858bd512397d7156da1c238a0d">00073</a>         <span class="keywordtype">void</span> RemoveAt(<span class="keywordtype">size_t</span> index)
-<a name="l00074"></a>00074         {
-<a name="l00075"></a>00075                 <span class="keywordflow">if</span> (index &lt; m_values.Count()) {
-<a name="l00076"></a>00076                         m_values.RemoveAt(index);
-<a name="l00077"></a>00077 
-<a name="l00078"></a>00078                         DatasetChanged();
-<a name="l00079"></a>00079                 }
-<a name="l00080"></a>00080         }
-<a name="l00081"></a>00081 
-<a name="l00085"></a><a class="code" href="classVectorDataset.html#607405ed5324408edd91b607fe8f6886">00085</a>         <span class="keywordtype">void</span> Clear()
-<a name="l00086"></a>00086         {
-<a name="l00087"></a>00087                 m_values.Clear();
-<a name="l00088"></a>00088                 DatasetChanged();
-<a name="l00089"></a>00089         }
-<a name="l00090"></a>00090 
-<a name="l00091"></a>00091 <span class="keyword">private</span>:
-<a name="l00092"></a>00092         wxDoubleArray m_values;
-<a name="l00093"></a>00093 };
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095 <span class="preprocessor">#endif </span><span class="comment">/*VECTORDATASET_H_*/</span>
+<a name="l00006"></a>00006 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
+<a name="l00007"></a>00007 <span class="comment">// Licence:     wxWidgets licence</span>
+<a name="l00009"></a>00009 <span class="comment"></span>
+<a name="l00010"></a>00010 <span class="preprocessor">#ifndef VECTORDATASET_H_</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define VECTORDATASET_H_</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &lt;wx/xy/xydataset.h&gt;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &lt;wx/dynarray.h&gt;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 WX_DECLARE_EXPORTED_OBJARRAY(<span class="keywordtype">double</span>, wxDoubleArray);
+<a name="l00017"></a>00017 
+<a name="l00023"></a><a class="code" href="classVectorDataset.html">00023</a> <span class="keyword">class </span>WXDLLIMPEXP_FREECHART <a class="code" href="classVectorDataset.html">VectorDataset</a> : <span class="keyword">public</span> <a class="code" href="classXYDataset.html">XYDataset</a>
+<a name="l00024"></a>00024 {
+<a name="l00025"></a>00025 <span class="keyword">public</span>:
+<a name="l00031"></a>00031         <a class="code" href="classVectorDataset.html">VectorDataset</a>();
+<a name="l00032"></a>00032         <span class="keyword">virtual</span> ~<a class="code" href="classVectorDataset.html">VectorDataset</a>();
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034         <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classDataset.html#f622220ac28820f2fb1a5d32b713c732">GetSerieCount</a>();
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036         <span class="keyword">virtual</span> <span class="keywordtype">size_t</span> <a class="code" href="classDataset.html#2aad2d70ac9481fa842356e9d7f7114f">GetCount</a>(<span class="keywordtype">size_t</span> serie);
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038         <span class="keyword">virtual</span> wxString <a class="code" href="classDataset.html#3d01edf567e431c10e7a708930cf4aaf">GetSerieName</a>(<span class="keywordtype">size_t</span> serie);
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classXYDataset.html#557ce08bc8ebad2e96e57e5ca1b958f3">GetX</a>(<span class="keywordtype">size_t</span> index, <span class="keywordtype">size_t</span> serie);
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042         <span class="keyword">virtual</span> <span class="keywordtype">double</span> <a class="code" href="classXYDataset.html#7131abf96987e31911eb5b81e1f40600">GetY</a>(<span class="keywordtype">size_t</span> index, <span class="keywordtype">size_t</span> serie);
+<a name="l00043"></a>00043 
+<a name="l00048"></a><a class="code" href="classVectorDataset.html#165d83dced539fbaf4a38b15ec2e1215">00048</a>         <span class="keywordtype">void</span> Add(<span class="keywordtype">double</span> y)
+<a name="l00049"></a>00049         {
+<a name="l00050"></a>00050                 m_values.Add(y);
+<a name="l00051"></a>00051                 DatasetChanged();
+<a name="l00052"></a>00052         }
+<a name="l00053"></a>00053 
+<a name="l00059"></a><a class="code" href="classVectorDataset.html#c93027d11dc6cf99efcb961ff052b06e">00059</a>         <span class="keywordtype">void</span> Replace(<span class="keywordtype">size_t</span> index, <span class="keywordtype">double</span> y)
+<a name="l00060"></a>00060         {
+<a name="l00061"></a>00061                 <span class="keywordflow">if</span> (index &lt; m_values.Count()) {
+<a name="l00062"></a>00062                         m_values[index] = y;
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064                         DatasetChanged();
+<a name="l00065"></a>00065                 }
+<a name="l00066"></a>00066         }
+<a name="l00067"></a>00067 
+<a name="l00072"></a><a class="code" href="classVectorDataset.html#059ce3858bd512397d7156da1c238a0d">00072</a>         <span class="keywordtype">void</span> RemoveAt(<span class="keywordtype">size_t</span> index)
+<a name="l00073"></a>00073         {
+<a name="l00074"></a>00074                 <span class="keywordflow">if</span> (index &lt; m_values.Count()) {
+<a name="l00075"></a>00075                         m_values.RemoveAt(index);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077                         DatasetChanged();
+<a name="l00078"></a>00078                 }
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080 
+<a name="l00084"></a><a class="code" href="classVectorDataset.html#607405ed5324408edd91b607fe8f6886">00084</a>         <span class="keywordtype">void</span> Clear()
+<a name="l00085"></a>00085         {
+<a name="l00086"></a>00086                 m_values.Clear();
+<a name="l00087"></a>00087                 DatasetChanged();
+<a name="l00088"></a>00088         }
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090 <span class="keyword">private</span>:
+<a name="l00091"></a>00091         wxDoubleArray m_values;
+<a name="l00092"></a>00092 };
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094 <span class="preprocessor">#endif </span><span class="comment">/*VECTORDATASET_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:10 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

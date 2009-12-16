@@ -3,7 +3,6 @@
 // Purpose: axis base class implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -36,6 +35,8 @@ Axis::Axis(AXIS_LOCATION location)
 
 	m_marginMin = 5;
 	m_marginMax = 5;
+
+	m_shareCount = 0; // counter for AxisShare
 }
 
 Axis::~Axis()
@@ -81,7 +82,7 @@ bool Axis::IntersectsWindow(double v0, double v1)
 				|| (v0 < v1 && v1 >= m_winPos && v0 <= m_winPos));
 	}
 	else {
-		return true; // window not used, so it always intersect
+		return IsVisible(v0) || IsVisible(v1);
 	}
 }
 
@@ -141,6 +142,92 @@ double Axis::ToData(wxDC& WXUNUSED(dc), int minCoord, int gRange, wxCoord g)
 	double value = ::ToData(minCoord, gRange, minValue, maxValue, 0/*textMargin*/, IsVertical(), g);
 	return value;
 }
+
+//
+// AxisShare
+//
+AxisShare::AxisShare(Axis *axis)
+: Axis(axis->GetLocation())
+{
+	m_axis = axis;
+	m_axis->m_shareCount++;
+
+	// share is invisible by default
+	m_shareVisible = false;
+}
+
+AxisShare::~AxisShare()
+{
+	m_axis->m_shareCount--;
+
+	if (m_axis->m_shareCount <= 0) {
+		wxDELETE(m_axis);
+	}
+}
+
+void AxisShare::SetShareVisible(bool shareVisible)
+{
+	if (m_shareVisible != shareVisible) {
+		m_shareVisible = shareVisible;
+		FireAxisChanged();
+	}
+}
+
+void AxisShare::GetDataBounds(double &minValue, double &maxValue)
+{
+	m_axis->GetDataBounds(minValue, maxValue);
+}
+
+wxCoord AxisShare::GetExtent(wxDC &dc)
+{
+	if (!m_shareVisible) {
+		return 0;
+	}
+	return m_axis->GetExtent(dc);
+}
+
+bool AxisShare::IsVisible(double value)
+{
+	return m_axis->IsVisible(value);
+}
+
+double AxisShare::BoundValue(double value)
+{
+	return m_axis->BoundValue(value);
+}
+
+wxCoord AxisShare::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
+{
+	return m_axis->ToGraphics(dc, minCoord, gRange, value);
+}
+
+double AxisShare::ToData(wxDC &dc, int minCoord, int gRange, wxCoord g)
+{
+	return m_axis->ToData(dc, minCoord, gRange, g);
+}
+
+void AxisShare::UpdateBounds()
+{
+	m_axis->UpdateBounds();
+}
+
+void AxisShare::Draw(wxDC &dc, wxRect rc)
+{
+	if (m_shareVisible) {
+		m_axis->Draw(dc, rc);
+	}
+}
+
+void AxisShare::DrawGridLines(wxDC &dc, wxRect rcData)
+{
+	m_axis->DrawGridLines(dc, rcData);
+}
+
+bool AxisShare::AcceptDataset(Dataset *dataset)
+{
+	return m_axis->AcceptDataset(dataset);
+}
+
 
 wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value)
 {

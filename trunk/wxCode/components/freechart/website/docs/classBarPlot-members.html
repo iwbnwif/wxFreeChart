@@ -37,17 +37,19 @@
   <tr bgcolor="#f0f0f0"><td><b>DatasetChanged</b>(Dataset *dataset) (defined in <a class="el" href="classAxisPlot.html">AxisPlot</a>)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>DatasetObserver</b>() (defined in <a class="el" href="classDatasetObserver.html">DatasetObserver</a>)</td><td><a class="el" href="classDatasetObserver.html">DatasetObserver</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classPlot.html#115cedadc3b4255229fe9fe9255d8b18">Draw</a>(wxDC &amp;dc, wxRect rc)</td><td><a class="el" href="classPlot.html">Plot</a></td><td><code> [virtual]</code></td></tr>
-  <tr bgcolor="#f0f0f0"><td><b>DrawDatasets</b>(wxDC &amp;dc, wxRect rc) (defined in <a class="el" href="classBarPlot.html">BarPlot</a>)</td><td><a class="el" href="classBarPlot.html">BarPlot</a></td><td><code> [protected, virtual]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classBarPlot.html#bc55f8e88e0758c1a167887d4254d0ac">DrawDatasets</a>(wxDC &amp;dc, wxRect rc)</td><td><a class="el" href="classBarPlot.html">BarPlot</a></td><td><code> [protected, virtual]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classPlot.html#02195b67e4c4ac6922b7d78c394d53cb">DrawNoDataMessage</a>(wxDC &amp;dc, wxRect rc)</td><td><a class="el" href="classPlot.html">Plot</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>DrawObserver</b>() (defined in <a class="el" href="classDrawObserver.html">DrawObserver</a>)</td><td><a class="el" href="classDrawObserver.html">DrawObserver</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classXYPlot.html#ec55ca9c9fa04573f297c6e87f7e7cdc">DrawXYDataset</a>(wxDC &amp;dc, wxRect rc, XYDataset *dataset)</td><td><a class="el" href="classXYPlot.html">XYPlot</a></td><td><code> [protected]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>FIRE_WITH_THIS</b>(PlotNeedRedraw) (defined in <a class="el" href="classPlot.html">Plot</a>)</td><td><a class="el" href="classPlot.html">Plot</a></td><td><code> [protected]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>GetAxesExtent</b>(wxDC &amp;dc, AxisArray *axes) (defined in <a class="el" href="classAxisPlot.html">AxisPlot</a>)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#adb2af4211e2b7108d29aef177bc860f">GetAxisDataset</a>(Axis *axis, size_t index)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classAxisPlot.html#c75b48e680fee260011e3c708e2f412c">GetDataset</a>(size_t index)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#e3dd8c2a42e218501beffc4f336634fc">GetDatasetAxis</a>(Dataset *dataset, bool vertical)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#376b80652b0515f008c3756cf48f4cbe">GetDatasetAxis</a>(Dataset *dataset, size_t index, bool vertical)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#e3dd8c2a42e218501beffc4f336634fc">GetDatasetAxis</a>(Dataset *dataset, bool vertical)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classAxisPlot.html#f21da1afc22cd8e908ec06100f71b6f3">GetDatasetCount</a>()</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td></td></tr>
-  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#3f08583ad9653f59dd4c054bdf4b2c25">GetDatasetHorizontalAxis</a>(Dataset *dataset)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [inline, protected]</code></td></tr>
-  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#d89856f6f3c3876f1d0306b5c4879453">GetDatasetVerticalAxis</a>(Dataset *dataset)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [inline, protected]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#3f08583ad9653f59dd4c054bdf4b2c25">GetDatasetHorizontalAxis</a>(Dataset *dataset)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [inline]</code></td></tr>
+  <tr class="memlist"><td><a class="el" href="classAxisPlot.html#d89856f6f3c3876f1d0306b5c4879453">GetDatasetVerticalAxis</a>(Dataset *dataset)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [inline]</code></td></tr>
   <tr class="memlist"><td><a class="el" href="classAxisPlot.html#8952942d2942acd142bb3fe590fbc560">LinkDataHorizontalAxis</a>(size_t nData, size_t nAxis)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td></td></tr>
   <tr class="memlist"><td><a class="el" href="classAxisPlot.html#c212b8f666a1c526c3f3546147ffd5b8">LinkDataVerticalAxis</a>(size_t nData, size_t nAxis)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>NeedRedraw</b>(DrawObject *obj) (defined in <a class="el" href="classAxisPlot.html">AxisPlot</a>)</td><td><a class="el" href="classAxisPlot.html">AxisPlot</a></td><td><code> [virtual]</code></td></tr>
@@ -72,7 +74,7 @@
   <tr bgcolor="#f0f0f0"><td><b>~Plot</b>() (defined in <a class="el" href="classPlot.html">Plot</a>)</td><td><a class="el" href="classPlot.html">Plot</a></td><td><code> [virtual]</code></td></tr>
   <tr bgcolor="#f0f0f0"><td><b>~XYPlot</b>() (defined in <a class="el" href="classXYPlot.html">XYPlot</a>)</td><td><a class="el" href="classXYPlot.html">XYPlot</a></td><td><code> [virtual]</code></td></tr>
 </table></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:10 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

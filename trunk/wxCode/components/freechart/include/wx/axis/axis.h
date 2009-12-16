@@ -3,7 +3,6 @@
 // Purpose: axis base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2008-2009 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -58,6 +57,7 @@ class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserv
 	DECLARE_CLASS(Axis)
 
 	friend class Plot;
+	friend class AxisShare;
 public:
 	/**
 	 * Constructs new axis.
@@ -315,9 +315,50 @@ protected:
 
 private:
 	AXIS_LOCATION m_location;
+
+	size_t m_shareCount;
 };
 
 WX_DECLARE_EXPORTED_OBJARRAY(Axis *, AxisArray);
+
+/**
+ * Used to combine axes.
+ * Shares axis between plots.
+ */
+class WXDLLIMPEXP_FREECHART AxisShare : public Axis
+{
+public:
+	AxisShare(Axis *axis);
+	virtual ~AxisShare();
+
+	void SetShareVisible(bool shareVisible);
+
+	virtual void GetDataBounds(double &minValue, double &maxValue);
+
+	virtual wxCoord GetExtent(wxDC &dc);
+
+	virtual bool IsVisible(double value);
+
+	virtual double BoundValue(double value);
+
+	virtual wxCoord ToGraphics(wxDC &dc, int minCoord, int gRange, double value);
+
+	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g);
+
+	virtual void UpdateBounds();
+
+	virtual void Draw(wxDC &dc, wxRect rc);
+
+	virtual void DrawGridLines(wxDC &dc, wxRect rcData);
+
+protected:
+	virtual bool AcceptDataset(Dataset *dataset);
+
+private:
+	bool m_shareVisible;
+
+	Axis *m_axis;
+};
 
 wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value);
 double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, wxCoord g);

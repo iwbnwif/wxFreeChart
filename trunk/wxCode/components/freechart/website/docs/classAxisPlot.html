@@ -57,6 +57,16 @@ Collaboration diagram for AxisPlot:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#c212b8f666a1c526c3f3546147ffd5b8">LinkDataVerticalAxis</a> (size_t nData, size_t nAxis)</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#376b80652b0515f008c3756cf48f4cbe">GetDatasetAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset, size_t index, bool vertical)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#e3dd8c2a42e218501beffc4f336634fc">GetDatasetAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset, bool vertical)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#d89856f6f3c3876f1d0306b5c4879453">GetDatasetVerticalAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#3f08583ad9653f59dd4c054bdf4b2c25">GetDatasetHorizontalAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classDataset.html">Dataset</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#adb2af4211e2b7108d29aef177bc860f">GetAxisDataset</a> (<a class="el" href="classAxis.html">Axis</a> *axis, size_t index)</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#29ca72456e7a168b38e277575602e1b5">SetDrawGrid</a> (bool drawGridVertical, bool drawGridHorizontal)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#2a6f05f069c723d273bd305a4aea9d07">SetDataBackground</a> (<a class="el" href="classAreaDraw.html">AreaDraw</a> *dataBackground)</td></tr>
@@ -80,14 +90,7 @@ virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>DatasetChange
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#5d14de73ca2a6953288ed42b55a456d7">AcceptDataset</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)=0</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6f52961c4f3203210dbf394df4daf45e"></a><!-- doxytag: member="AxisPlot::DrawDatasets" ref="6f52961c4f3203210dbf394df4daf45e" args="(wxDC &amp;dc, wxRect rc)=0" -->
-virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>DrawDatasets</b> (wxDC &amp;dc, wxRect rc)=0</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#e3dd8c2a42e218501beffc4f336634fc">GetDatasetAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset, bool vertical)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#d89856f6f3c3876f1d0306b5c4879453">GetDatasetVerticalAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#3f08583ad9653f59dd4c054bdf4b2c25">GetDatasetHorizontalAxis</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#6f52961c4f3203210dbf394df4daf45e">DrawDatasets</a> (wxDC &amp;dc, wxRect rc)=0</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="8375dde71841c3ff0152cedea29ab4ca"></a><!-- doxytag: member="AxisPlot::GetAxesExtent" ref="8375dde71841c3ff0152cedea29ab4ca" args="(wxDC &amp;dc, AxisArray *axes)" -->
 wxCoord&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetAxesExtent</b> (wxDC &amp;dc, AxisArray *axes)</td></tr>
@@ -280,6 +283,81 @@ Called when axis bounds are changed. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 </div>
 </div><p>
+<a class="anchor" name="6f52961c4f3203210dbf394df4daf45e"></a><!-- doxytag: member="AxisPlot::DrawDatasets" ref="6f52961c4f3203210dbf394df4daf45e" args="(wxDC &amp;dc, wxRect rc)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void AxisPlot::DrawDatasets           </td>
+          <td>(</td>
+          <td class="paramtype">wxDC &amp;&nbsp;</td>
+          <td class="paramname"> <em>dc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxRect&nbsp;</td>
+          <td class="paramname"> <em>rc</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [protected, pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Called to draw all datasets. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>dc</em>&nbsp;</td><td>device context </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>rc</em>&nbsp;</td><td>rectangle where to draw </td></tr>
+  </table>
+</dl>
+
+<p>Implemented in <a class="el" href="classBarPlot.html#bc55f8e88e0758c1a167887d4254d0ac">BarPlot</a>, <a class="el" href="classGanttPlot.html#e2e7de3a671b18045a19320586bf9a7c">GanttPlot</a>, <a class="el" href="classOHLCPlot.html#dbbe25267a357e62c58f271bb3f8ba61">OHLCPlot</a>, <a class="el" href="classXYPlot.html#bccb15087c015c7806e9784f68eb841f">XYPlot</a>, and <a class="el" href="classBubblePlot.html#f5ab1b9d8cebe0593985f8b92459fe51">BubblePlot</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="adb2af4211e2b7108d29aef177bc860f"></a><!-- doxytag: member="AxisPlot::GetAxisDataset" ref="adb2af4211e2b7108d29aef177bc860f" args="(Axis *axis, size_t index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classDataset.html">Dataset</a>* AxisPlot::GetAxisDataset           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td>
+          <td class="paramname"> <em>axis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&nbsp;</td>
+          <td class="paramname"> <em>index</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns dataset, linked with axis at specified index. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>axis</em>&nbsp;</td><td>axis </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>index</em>&nbsp;</td><td>dataset index </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>dataset at index </dd></dl>
+
+<p>References <a class="el" href="classAxis.html#7d7d04f984a6f15a94970c2870517273">Axis::GetDataset()</a>.</p>
+
+</div>
+</div><p>
 <a class="anchor" name="c75b48e680fee260011e3c708e2f412c"></a><!-- doxytag: member="AxisPlot::GetDataset" ref="c75b48e680fee260011e3c708e2f412c" args="(size_t index)" -->
 <div class="memitem">
 <div class="memproto">
@@ -325,7 +403,7 @@ Return dataset with index <dl compact><dt><b>Parameters:</b></dt><dd>
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td><td><code> [protected]</code></td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
@@ -336,6 +414,49 @@ Returns main dataset axis. NOTE: main axis is the first axis linked with dataset
 <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>dataset</em>&nbsp;</td><td>dataset </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>true if you want to get vertical axis, false - horizontal </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>main axis for dataset or NULL if dataset has no main axis </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="376b80652b0515f008c3756cf48f4cbe"></a><!-- doxytag: member="AxisPlot::GetDatasetAxis" ref="376b80652b0515f008c3756cf48f4cbe" args="(Dataset *dataset, size_t index, bool vertical)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAxis.html">Axis</a>* AxisPlot::GetDatasetAxis           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classDataset.html">Dataset</a> *&nbsp;</td>
+          <td class="paramname"> <em>dataset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&nbsp;</td>
+          <td class="paramname"> <em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns dataset axis. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>dataset</em>&nbsp;</td><td>dataset </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>index</em>&nbsp;</td><td>axis index, 0 - for main axis </td></tr>
     <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>true if you want to get vertical axis, false - horizontal </td></tr>
   </table>
 </dl>
@@ -373,7 +494,7 @@ Returns dataset count. <dl class="return" compact><dt><b>Returns:</b></dt><dd>da
           <td class="paramtype"><a class="el" href="classDataset.html">Dataset</a> *&nbsp;</td>
           <td class="paramname"> <em>dataset</em>          </td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline, protected]</code></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -399,7 +520,7 @@ Returns main horizontal dataset axis. NOTE: main axis is the first axis linked w
           <td class="paramtype"><a class="el" href="classDataset.html">Dataset</a> *&nbsp;</td>
           <td class="paramname"> <em>dataset</em>          </td>
           <td>&nbsp;)&nbsp;</td>
-          <td><code> [inline, protected]</code></td>
+          <td><code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -644,7 +765,7 @@ Translate coordinate from graphics to data space. <dl compact><dt><b>Parameters:
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/<a class="el" href="axisplot_8h-source.html">axisplot.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Sat Dec 5 23:14:13 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:10 2009 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>
