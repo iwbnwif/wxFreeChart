@@ -83,6 +83,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_marker.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chart.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_labelaxis.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_logarithmicnumberaxis.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_compdateaxis.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_axis.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_numberaxis.obj \
@@ -136,6 +137,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_marker.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chart.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_labelaxis.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_logarithmicnumberaxis.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_compdateaxis.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_axis.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_numberaxis.obj \
@@ -468,6 +470,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chart.obj: ..\src
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_labelaxis.obj: ..\src\axis\labelaxis.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\axis\labelaxis.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_logarithmicnumberaxis.obj: ..\src\axis\logarithmicnumberaxis.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\axis\logarithmicnumberaxis.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_compdateaxis.obj: ..\src\axis\compdateaxis.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\axis\compdateaxis.cpp
 
@@ -605,6 +610,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chart.obj: ..\src
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_labelaxis.obj: ..\src\axis\labelaxis.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\axis\labelaxis.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_logarithmicnumberaxis.obj: ..\src\axis\logarithmicnumberaxis.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\axis\logarithmicnumberaxis.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_compdateaxis.obj: ..\src\axis\compdateaxis.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\axis\compdateaxis.cpp

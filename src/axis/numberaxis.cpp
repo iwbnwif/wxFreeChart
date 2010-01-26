@@ -189,3 +189,8 @@ bool NumberAxis::HasLabels()
 {
 	return m_hasLabels;
 }
+
+size_t NumberAxis::GetLabelCount() const
+{
+  return m_labelCount;
+}

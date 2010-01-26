@@ -224,6 +224,7 @@ WXFREECHART_LIB_OBJECTS =  &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_marker.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chart.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_labelaxis.obj &
+	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_logarithmicnumberaxis.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_compdateaxis.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_axis.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_numberaxis.obj &
@@ -275,6 +276,7 @@ WXFREECHART_DLL_OBJECTS =  &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_marker.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chart.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_labelaxis.obj &
+	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_logarithmicnumberaxis.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_compdateaxis.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_axis.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_numberaxis.obj &
@@ -491,6 +493,9 @@ watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chart.obj :  .AU
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_labelaxis.obj :  .AUTODEPEND ..\src\axis\labelaxis.cpp
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_LIB_CXXFLAGS) $<
 
+watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_logarithmicnumberaxis.obj :  .AUTODEPEND ..\src\axis\logarithmicnumberaxis.cpp
+	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_LIB_CXXFLAGS) $<
+
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_compdateaxis.obj :  .AUTODEPEND ..\src\axis\compdateaxis.cpp
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_LIB_CXXFLAGS) $<
 
@@ -627,6 +632,9 @@ watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chart.obj :  .AU
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_DLL_CXXFLAGS) $<
 
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_labelaxis.obj :  .AUTODEPEND ..\src\axis\labelaxis.cpp
+	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_DLL_CXXFLAGS) $<
+
+watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_logarithmicnumberaxis.obj :  .AUTODEPEND ..\src\axis\logarithmicnumberaxis.cpp
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_DLL_CXXFLAGS) $<
 
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_compdateaxis.obj :  .AUTODEPEND ..\src\axis\compdateaxis.cpp

@@ -14,7 +14,7 @@
 	 your .bkl file:
     -->
     <input>wxfreechart.bkl</input>
-
+    
     <!--
 	The wxCode's wxcode.bkgen file will enable some default formats.
 	If you don't want a format declared there to be generated for

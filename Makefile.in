@@ -66,6 +66,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_marker.o \
 	wxfreechart_lib_chart.o \
 	wxfreechart_lib_labelaxis.o \
+	wxfreechart_lib_logarithmicnumberaxis.o \
 	wxfreechart_lib_compdateaxis.o \
 	wxfreechart_lib_axis.o \
 	wxfreechart_lib_numberaxis.o \
@@ -114,6 +115,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/axis/axis.h \
 	include/wx/axis/categoryaxis.h \
 	include/wx/axis/labelaxis.h \
+	include/wx/axis/logarithmicnumberaxis.h \
 	include/wx/legend.h \
 	include/wx/art.h \
 	include/wx/areadraw.h \
@@ -167,6 +169,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_marker.o \
 	wxfreechart_dll_chart.o \
 	wxfreechart_dll_labelaxis.o \
+	wxfreechart_dll_logarithmicnumberaxis.o \
 	wxfreechart_dll_compdateaxis.o \
 	wxfreechart_dll_axis.o \
 	wxfreechart_dll_numberaxis.o \
@@ -215,6 +218,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/axis/axis.h \
 	include/wx/axis/categoryaxis.h \
 	include/wx/axis/labelaxis.h \
+	include/wx/axis/logarithmicnumberaxis.h \
 	include/wx/legend.h \
 	include/wx/art.h \
 	include/wx/areadraw.h \
@@ -555,6 +559,9 @@ wxfreechart_lib_chart.o: $(srcdir)/src/chart.cpp
 wxfreechart_lib_labelaxis.o: $(srcdir)/src/axis/labelaxis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/axis/labelaxis.cpp
 
+wxfreechart_lib_logarithmicnumberaxis.o: $(srcdir)/src/axis/logarithmicnumberaxis.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/axis/logarithmicnumberaxis.cpp
+
 wxfreechart_lib_compdateaxis.o: $(srcdir)/src/axis/compdateaxis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/axis/compdateaxis.cpp
 
@@ -692,6 +699,9 @@ wxfreechart_dll_chart.o: $(srcdir)/src/chart.cpp
 
 wxfreechart_dll_labelaxis.o: $(srcdir)/src/axis/labelaxis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/axis/labelaxis.cpp
+
+wxfreechart_dll_logarithmicnumberaxis.o: $(srcdir)/src/axis/logarithmicnumberaxis.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/axis/logarithmicnumberaxis.cpp
 
 wxfreechart_dll_compdateaxis.o: $(srcdir)/src/axis/compdateaxis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/axis/compdateaxis.cpp

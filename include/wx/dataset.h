@@ -136,7 +136,7 @@ public:
 	virtual size_t GetCount() = 0;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase, WXDLLIMPEXP_FREECHART);
 
 class WXDLLIMPEXP_FREECHART DatasetArray : public DatasetArrayBase
 {

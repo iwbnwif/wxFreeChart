@@ -4,7 +4,7 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.4 beta
+ Version: 1.5
  Description:
  wxFreeChart is free powerful charting library based on wxWidgets. It 
  designed with flexibility in mind, and supports many types of charts 
@@ -47,6 +47,13 @@
  ChangeLog
  ---------
  
+ 1.5:
+ 		What's new:
+ 		 - logarithmic axes added (thanks to Andreas Kuchler)
+ 		 - updated demo
+ 		 - dll export problems fixed
+ 		 - updated documentation
+ 		 
  1.4:
  		What's new:
  		 - added methods to access axis-dataset links to AxisPlot and Axis
@@ -84,12 +91,8 @@
  - Markers
  - Add levels/fractals/etc support to OHLCPlot. Make 
    OHLCPlot suitable for technical analysis applications
- - Antialiasing for lines, shapes, etc
- - Logorithmic axes
  - Make axis marks drawing more flexible
  - Add zoom to plots
- - Composite axes
- - Multiplot - plot, that contains many subplots
  - Pie plots 
  - Make wxFreeChart to work on handheld wxWidgets ports
  

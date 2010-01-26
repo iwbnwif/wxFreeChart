@@ -13,7 +13,7 @@
 #include <wx/dynarray.h>
 #include <wx/plot.h>
 
-WX_DECLARE_EXPORTED_OBJARRAY(Plot *, PlotArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(Plot *, PlotArray, WXDLLIMPEXP_FREECHART);
 
 class WXDLLIMPEXP_FREECHART MultiPlot : public Plot, public PlotObserver
 {

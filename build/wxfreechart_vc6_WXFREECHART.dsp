@@ -956,6 +956,10 @@ SOURCE=..\src\legend.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\axis\logarithmicnumberaxis.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\marker.cpp
 # End Source File
 # Begin Source File
@@ -1153,6 +1157,10 @@ SOURCE=..\include\wx\axis\labelaxis.h
 # Begin Source File
 
 SOURCE=..\include\wx\legend.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\axis\logarithmicnumberaxis.h
 # End Source File
 # Begin Source File
 

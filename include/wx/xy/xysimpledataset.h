@@ -45,7 +45,7 @@ private:
 	wxString m_name;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(XYSerie *, XYSerieArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(XYSerie *, XYSerieArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Simple xy dataset.

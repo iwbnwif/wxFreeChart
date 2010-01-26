@@ -45,7 +45,7 @@ public:
 	Axis *m_axis;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(DataAxisLink, DataAxisLinkArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(DataAxisLink, DataAxisLinkArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Base class for plots that supports axes.

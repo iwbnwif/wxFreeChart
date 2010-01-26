@@ -40,7 +40,7 @@ public:
 	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis) = 0;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(Marker *, MarkerArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(Marker *, MarkerArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Point marker.

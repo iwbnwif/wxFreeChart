@@ -22,7 +22,34 @@
 	 use FALSE as third arg for the first h1 tag of the page since it must
 	 not have the TOP link...
   -->
-
+  
+	<br/><?php write_h1("wxFreeChart can draw following chart types"); ?>
+	<ol>
+		<li>Line XY charts.</li>
+		<li>Histogram XY charts.</li>
+		<li>Area XY charts.</li>
+		<li>Bar charts.</li>
+		<li>Stacked bar charts.</li>
+		<li>Layered bar charts.</li>
+		<li>OHLC financial charts.</li>
+		<li>Bubble charts.</li>
+		<li>Gantt charts.</li>
+	</ol>
+	
+	<br/><?php write_h1("Features"); ?>
+	<ol>
+		<li>Easy to use: you create chart with minimal coding, only few lines to create charts with different configurations.</li>
+		<li>High flexibility: you can create different types of charts with many different configurations.</li>
+		<li>Charts scrolling.</li>
+		<li>Multiple axes with different locations (top, bottom, left, right).</li>
+		<li>Axes font, text color, grid lines, chart background - everything can be changed.</li>
+		<li>Multiplots.</li>
+		<li>Clean MCV design. You can use different renderers to draw charts content, with many different data sources.</li>
+		<li>High performance.</li>
+		<li>Dynamic charting: data change triggers chart redrawing. No additional coding is needed.</li>
+		<li>Charts can be saved as images or printed.</li>
+	</ol>
+	
 	<br/><?php write_h1("Screenshots"); ?>
 	<p>Description</p>
   <div class="center">
@@ -62,7 +89,8 @@
 
 
 	<br/><?php write_h1("Future enhancements"); ?>
-  <p>None. To submit a feature request please look at <a href="../../support.php">wxCode support page</a>.</p>
+	
+  <p> To submit a feature request please look at <a href="../../support.php">wxCode support page</a>.</p>
 
 
 	<br/><?php require("footer.inc.php"); ?>

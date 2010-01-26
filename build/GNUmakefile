@@ -93,6 +93,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_marker.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_chart.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_labelaxis.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_logarithmicnumberaxis.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_compdateaxis.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_axis.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_numberaxis.o \
@@ -141,6 +142,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/axis/axis.h \
 	include/wx/axis/categoryaxis.h \
 	include/wx/axis/labelaxis.h \
+	include/wx/axis/logarithmicnumberaxis.h \
 	include/wx/legend.h \
 	include/wx/art.h \
 	include/wx/areadraw.h \
@@ -195,6 +197,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_marker.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_chart.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_labelaxis.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_logarithmicnumberaxis.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_compdateaxis.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_axis.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_numberaxis.o \
@@ -243,6 +246,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/axis/axis.h \
 	include/wx/axis/categoryaxis.h \
 	include/wx/axis/labelaxis.h \
+	include/wx/axis/logarithmicnumberaxis.h \
 	include/wx/legend.h \
 	include/wx/art.h \
 	include/wx/areadraw.h \
@@ -576,6 +580,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_chart.o: ../src/chart.cp
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_labelaxis.o: ../src/axis/labelaxis.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
 
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_logarithmicnumberaxis.o: ../src/axis/logarithmicnumberaxis.cpp
+	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
+
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_compdateaxis.o: ../src/axis/compdateaxis.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
 
@@ -712,6 +719,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_chart.o: ../src/chart.cp
 	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_labelaxis.o: ../src/axis/labelaxis.cpp
+	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
+
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_logarithmicnumberaxis.o: ../src/axis/logarithmicnumberaxis.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_compdateaxis.o: ../src/axis/compdateaxis.cpp
