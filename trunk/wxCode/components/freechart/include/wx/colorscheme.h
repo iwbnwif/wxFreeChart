@@ -13,7 +13,7 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/dynarray.h>
 
-WX_DECLARE_OBJARRAY(wxColour, wxColourArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(wxColour, wxColourArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Defines set of colors for use by PiePlots, etc...

@@ -30,7 +30,7 @@ private:
 	double *m_values;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(CategorySerie *, CategorySerieArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(CategorySerie *, CategorySerieArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Simple category dataset implementation.

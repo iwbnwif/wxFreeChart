@@ -83,27 +83,29 @@
 <a name="l00084"></a>00084 
 <a name="l00085"></a>00085         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxis.html#155477c9d2f66e82a744a2893f5314ca">GetDataBounds</a>(<span class="keywordtype">double</span> &amp;minValue, <span class="keywordtype">double</span> &amp;maxValue);
 <a name="l00086"></a>00086 
-<a name="l00087"></a>00087 <span class="keyword">private</span>:
-<a name="l00088"></a>00088         <span class="keywordtype">void</span> UpdateTickValues();
-<a name="l00089"></a>00089 
-<a name="l00090"></a>00090         wxString m_tickFormat;
+<a name="l00087"></a>00087   <span class="keywordtype">size_t</span> GetLabelCount() <span class="keyword">const</span>;
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089 <span class="keyword">private</span>:
+<a name="l00090"></a>00090         <span class="keywordtype">void</span> UpdateTickValues();
 <a name="l00091"></a>00091 
-<a name="l00092"></a>00092         <span class="keywordtype">double</span> m_minValue;
-<a name="l00093"></a>00093         <span class="keywordtype">double</span> m_maxValue;
-<a name="l00094"></a>00094 
-<a name="l00095"></a>00095         <span class="keywordtype">double</span> m_labelInterval;
+<a name="l00092"></a>00092         wxString m_tickFormat;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094         <span class="keywordtype">double</span> m_minValue;
+<a name="l00095"></a>00095         <span class="keywordtype">double</span> m_maxValue;
 <a name="l00096"></a>00096 
-<a name="l00097"></a>00097         <span class="keywordtype">size_t</span> m_labelCount;
-<a name="l00098"></a>00098         <span class="keywordtype">bool</span> m_intValues;
-<a name="l00099"></a>00099 
-<a name="l00100"></a>00100         <span class="keywordtype">bool</span> m_hasLabels;
+<a name="l00097"></a>00097         <span class="keywordtype">double</span> m_labelInterval;
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099         <span class="keywordtype">size_t</span> m_labelCount;
+<a name="l00100"></a>00100         <span class="keywordtype">bool</span> m_intValues;
 <a name="l00101"></a>00101 
-<a name="l00102"></a>00102         <span class="keywordtype">bool</span> m_fixedBounds;
-<a name="l00103"></a>00103 };
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105 <span class="preprocessor">#endif </span><span class="comment">/*NUMBERAXIS_H_*/</span>
+<a name="l00102"></a>00102         <span class="keywordtype">bool</span> m_hasLabels;
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104         <span class="keywordtype">bool</span> m_fixedBounds;
+<a name="l00105"></a>00105 };
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 <span class="preprocessor">#endif </span><span class="comment">/*NUMBERAXIS_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:09 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:20 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

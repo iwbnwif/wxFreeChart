@@ -29,7 +29,7 @@ Inheritance diagram for NumberAxis:</div>
 <div class="dynsection">
 <p><center><img src="classNumberAxis__inherit__graph.png" border="0" usemap="#NumberAxis__inherit__map" alt="Inheritance graph"></center>
 <map name="NumberAxis__inherit__map">
-<area shape="rect" href="classLabelAxis.html" title="LabelAxis" alt="" coords="69,161,149,188"><area shape="rect" href="classAxis.html" title="Axis" alt="" coords="85,84,133,111"><area shape="rect" href="classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="5,7,213,33"></map>
+<area shape="rect" href="classLogarithmicNumberAxis.html" title="LogarithmicNumberAxis" alt="" coords="23,316,196,343"><area shape="rect" href="classLabelAxis.html" title="LabelAxis" alt="" coords="69,161,149,188"><area shape="rect" href="classAxis.html" title="Axis" alt="" coords="85,84,133,111"><area shape="rect" href="classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="5,7,213,33"></map>
 <center><font size="2">[<a href="graph_legend.html">legend</a>]</font></center></div>
 <div class="dynheader">
 Collaboration diagram for NumberAxis:</div>
@@ -72,6 +72,9 @@ virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>HasLabels</b>
 virtual wxSize&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetLongestLabelExtent</b> (wxDC &amp;dc)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNumberAxis.html#b74ae4c39a5f5a86eb4950488684b9be">GetDataBounds</a> (double &amp;minValue, double &amp;maxValue)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="85c2a3db68f49a41b507e707fa57f970"></a><!-- doxytag: member="NumberAxis::GetLabelCount" ref="85c2a3db68f49a41b507e707fa57f970" args="() const " -->
+size_t&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetLabelCount</b> () const </td></tr>
 
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
@@ -176,6 +179,8 @@ Returns label on step. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 <p>Implements <a class="el" href="classLabelAxis.html#6a5a6748b2243d66d57ec117286eafbb">LabelAxis</a>.</p>
 
+<p>Reimplemented in <a class="el" href="classLogarithmicNumberAxis.html#e80ddab7669d12edf660edc409c04607">LogarithmicNumberAxis</a>.</p>
+
 </div>
 </div><p>
 <a class="anchor" name="98c83a231b965f40da031463da7ec5e3"></a><!-- doxytag: member="NumberAxis::GetValue" ref="98c83a231b965f40da031463da7ec5e3" args="(size_t step)" -->
@@ -203,6 +208,8 @@ Returns value on step. <dl compact><dt><b>Parameters:</b></dt><dd>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>value on step </dd></dl>
 
 <p>Implements <a class="el" href="classLabelAxis.html#403504d83feec6983c4d1ec2a36373db">LabelAxis</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classLogarithmicNumberAxis.html#e3d0889307423b8be68624b5238cd818">LogarithmicNumberAxis</a>.</p>
 
 </div>
 </div><p>
@@ -368,7 +375,7 @@ Performs axis bounds update after dataset/s change.
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/axis/<a class="el" href="numberaxis_8h-source.html">numberaxis.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Fri Dec 11 20:14:14 2009 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:25 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

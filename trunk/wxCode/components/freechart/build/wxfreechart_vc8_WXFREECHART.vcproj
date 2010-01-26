@@ -2816,6 +2816,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\axis\logarithmicnumberaxis.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\marker.cpp"
 				>
 			</File>
@@ -3015,6 +3019,10 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\legend.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\axis\logarithmicnumberaxis.h"
 				>
 			</File>
 			<File

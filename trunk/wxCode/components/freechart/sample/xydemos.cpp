@@ -12,6 +12,7 @@
 #include <wx/xy/xyplot.h>
 #include <wx/xy/xylinerenderer.h>
 #include <wx/xy/xysimpledataset.h>
+#include <wx/axis/logarithmicnumberaxis.h>
 
 // for histogram demo
 #include <wx/xy/xyhistorenderer.h>
@@ -875,6 +876,121 @@ public:
 	}
 };
 
+class XYDemo12 : public ChartDemo
+{
+public:
+	XYDemo12()
+	: ChartDemo(wxT("XY Demo 12 - simple logarithmic"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// serie xy data
+		double data[][2] = {
+				{ 1, 1e-16, },
+				{ 2, 1e2, },
+				{ 3, 1e-2, },
+				{ 4, 1e-13, },
+				{ 5, 1e-5, },
+		};
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		// create dataset
+		XYSimpleDataset *dataset = new XYSimpleDataset();
+
+		// and add serie to it
+		dataset->AddSerie((double *) data, WXSIZEOF(data));
+
+		// set line renderer to dataset
+		dataset->SetRenderer(new XYLineRenderer());
+
+		// add our dataset to plot
+		plot->AddDataset(dataset);
+
+		// create left and bottom number axes
+		NumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
+		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// optional: set axis titles
+		leftAxis->SetTitle(wxT("X"));
+		bottomAxis->SetTitle(wxT("Y"));
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		return new Chart(plot, GetName());
+	}
+};
+
+class XYDemo13 : public ChartDemo
+{
+public:
+	XYDemo13()
+	: ChartDemo(wxT("XY Demo 13 - log-log display"))
+	{
+	}
+
+	virtual Chart *Create()
+	{
+		// serie xy data
+		double data[][2] = {
+				{ 2, 2, },
+				{ 4, 4, },
+				{ 8, 8, },
+				{ 16, 16, },
+				{ 32, 32, },
+		};
+
+		// first step: create plot
+		XYPlot *plot = new XYPlot();
+
+		// create dataset
+		XYSimpleDataset *dataset = new XYSimpleDataset();
+
+		// and add serie to it
+		dataset->AddSerie((double *) data, WXSIZEOF(data));
+
+		// set line renderer to dataset
+		dataset->SetRenderer(new XYLineRenderer());
+
+		// add our dataset to plot
+		plot->AddDataset(dataset);
+
+		// create left and bottom number axes
+		LogarithmicNumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
+		leftAxis->SetLogBase(2.0);
+//		LogarithmicNumberAxis *bottomAxis = new LogarithmicNumberAxis(AXIS_BOTTOM);
+//		bottomAxis->SetLogBase(2.0);
+
+    NumberAxis* bottomAxis = new NumberAxis(AXIS_BOTTOM);
+
+		// optional: set axis titles
+		leftAxis->SetTitle(wxT("X"));
+		bottomAxis->SetTitle(wxT("Y"));
+
+		// add axes to plot
+		plot->AddAxis(leftAxis);
+		plot->AddAxis(bottomAxis);
+
+		// link axes and dataset
+		plot->LinkDataVerticalAxis(0, 0);
+		plot->LinkDataHorizontalAxis(0, 0);
+
+		// and finally create chart
+		return new Chart(plot, GetName());
+	}
+};
+
+
 ChartDemo *xyDemos[] = {
 	new XYDemo1(),
 	new XYDemo2(),
@@ -887,5 +1003,7 @@ ChartDemo *xyDemos[] = {
 	new XYDemo9(),
 	new XYDemo10(),
 	new XYDemo11(),
+	new XYDemo12(),
+	new XYDemo13(),
 };
 int xyDemosCount = WXSIZEOF(xyDemos);

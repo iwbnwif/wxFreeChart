@@ -15,8 +15,8 @@
 
 #include <wx/dynarray.h>
 
-WX_DECLARE_EXPORTED_OBJARRAY(wxDateSpan, wxDateSpanArray);
-WX_DECLARE_EXPORTED_OBJARRAY(wxTimeSpan, wxTimeSpanArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(wxDateSpan, wxDateSpanArray, WXDLLIMPEXP_FREECHART);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(wxTimeSpan, wxTimeSpanArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Composite date axis.

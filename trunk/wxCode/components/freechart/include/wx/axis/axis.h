@@ -319,7 +319,7 @@ private:
 	size_t m_shareCount;
 };
 
-WX_DECLARE_EXPORTED_OBJARRAY(Axis *, AxisArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(Axis *, AxisArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Used to combine axes.

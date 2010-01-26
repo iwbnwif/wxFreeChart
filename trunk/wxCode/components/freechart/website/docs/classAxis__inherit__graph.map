@@ -5,3 +5,4 @@
 <area shape="rect" href="$classCategoryAxis.html" title="CategoryAxis" alt="" coords="127,239,231,265">
 <area shape="rect" href="$classDateAxis.html" title="DateAxis" alt="" coords="255,239,332,265">
 <area shape="rect" href="$classNumberAxis.html" title="NumberAxis" alt="" coords="356,239,455,265">
+<area shape="rect" href="$classLogarithmicNumberAxis.html" title="LogarithmicNumberAxis" alt="" coords="319,316,492,343">

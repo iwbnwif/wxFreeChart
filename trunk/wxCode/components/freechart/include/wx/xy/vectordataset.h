@@ -13,7 +13,7 @@
 #include <wx/xy/xydataset.h>
 #include <wx/dynarray.h>
 
-WX_DECLARE_EXPORTED_OBJARRAY(double, wxDoubleArray);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(double, wxDoubleArray, WXDLLIMPEXP_FREECHART);
 
 /**
  * Vector implementation of XYDataset.

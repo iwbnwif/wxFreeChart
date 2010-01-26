@@ -51,6 +51,7 @@ src/bars/barplot.cpp
 src/marker.cpp
 src/chart.cpp
 src/axis/labelaxis.cpp
+src/axis/logarithmicnumberaxis.cpp
 src/axis/compdateaxis.cpp
 src/axis/axis.cpp
 src/axis/numberaxis.cpp
@@ -101,6 +102,7 @@ include/wx/axis/compdateaxis.h
 include/wx/axis/axis.h
 include/wx/axis/categoryaxis.h
 include/wx/axis/labelaxis.h
+include/wx/axis/logarithmicnumberaxis.h
 include/wx/legend.h
 include/wx/art.h
 include/wx/areadraw.h

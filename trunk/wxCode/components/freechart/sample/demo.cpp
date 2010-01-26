@@ -98,7 +98,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame()
-: wxFrame(NULL, wxID_ANY, wxT("wxFreeChart demo 1.4"), wxDefaultPosition, wxSize(800, 445))
+: wxFrame(NULL, wxID_ANY, wxT("wxFreeChart demo 1.5"), wxDefaultPosition, wxSize(800, 445))
 {
 	wxAuiManager *auiMan = new wxAuiManager(this);
 
@@ -170,9 +170,9 @@ void MainFrame::OnAbout(wxCommandEvent &WXUNUSED(ev))
 {
 	wxAboutDialogInfo about;
 	about.SetName(wxT("wxFreeChart demo"));
-	about.SetVersion(wxT("1.4"));
+	about.SetVersion(wxT("1.5"));
 	about.SetDescription(wxT("This is wxFreeChart demo collection. It shows various chart types."));
-	about.SetCopyright(wxT("Copyright (C) 2008-2009 Moskvichev Andrey V."));
+	about.SetCopyright(wxT("Copyright (C) 2008-2010 Moskvichev Andrey V."));
 
 	wxAboutBox(about);
 }
