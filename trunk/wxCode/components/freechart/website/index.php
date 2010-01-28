@@ -31,7 +31,8 @@
 		<li>Bar charts.</li>
 		<li>Stacked bar charts.</li>
 		<li>Layered bar charts.</li>
-		<li>OHLC financial charts.</li>
+		<li>OHLC bars financial charts.</li>
+		<li>OHLC candlesticks financial charts.</li>
 		<li>Bubble charts.</li>
 		<li>Gantt charts.</li>
 	</ol>
@@ -42,7 +43,9 @@
 		<li>High flexibility: you can create different types of charts with many different configurations.</li>
 		<li>Charts scrolling.</li>
 		<li>Multiple axes with different locations (top, bottom, left, right).</li>
-		<li>Axes font, text color, grid lines, chart background - everything can be changed.</li>
+		<li>Legend with different locations.</li>
+		<li>Axes font, text color, grid lines, chart lines, chart background - everything can be changed.</li>
+		<li>Various visual features, like: gradient area draws, gradient bars, etc.</li>
 		<li>Multiplots.</li>
 		<li>Clean MCV design. You can use different renderers to draw charts content, with many different data sources.</li>
 		<li>High performance.</li>
@@ -51,7 +54,6 @@
 	</ol>
 	
 	<br/><?php write_h1("Screenshots"); ?>
-	<p>Description</p>
   <div class="center">
     <?php writeScreenshotLink("bars1.png", ""); ?>
     <?php writeScreenshotLink("bars2.png", ""); ?>
@@ -89,6 +91,17 @@
 
 
 	<br/><?php write_h1("Future enhancements"); ?>
+	<ul>
+		 <li>Transparency for bubble charts, histogram charts.</li>
+		 <li>Markers.</li>
+		 <li>Interval axes.</li>
+		 <li>Add levels/fractals/etc support to OHLCPlot. Make OHLCPlot suitable for technical analysis applications.</li>
+		 <li>Make axis marks drawing more flexible.</li>
+		 <li>Add zoom to plots.</li>
+		 <li>Pie plots.</li>
+		 <li>Statistical plots.</li>
+		 <li>Make wxFreeChart to work on handheld wxWidgets ports.</li>
+	</ul>
 	
   <p> To submit a feature request please look at <a href="../../support.php">wxCode support page</a>.</p>
 
