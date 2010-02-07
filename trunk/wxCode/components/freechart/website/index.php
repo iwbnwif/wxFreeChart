@@ -45,12 +45,14 @@
 		<li>Multiple axes with different locations (top, bottom, left, right).</li>
 		<li>Legend with different locations.</li>
 		<li>Axes font, text color, grid lines, chart lines, chart background - everything can be changed.</li>
-		<li>Various visual features, like: gradient area draws, gradient bars, etc.</li>
+		<li>Various visual features, like: gradient areas, gradient bars, etc.</li>
 		<li>Multiplots.</li>
 		<li>Clean MCV design. You can use different renderers to draw charts content, with many different data sources.</li>
 		<li>High performance.</li>
 		<li>Dynamic charting: data change triggers chart redrawing. No additional coding is needed.</li>
 		<li>Charts can be saved as images or printed.</li>
+		<li>Full documented code.</li>
+		<li>Step-by-step detailed examples.</li>
 	</ol>
 	
 	<br/><?php write_h1("Screenshots"); ?>
@@ -98,6 +100,7 @@
 		 <li>Add levels/fractals/etc support to OHLCPlot. Make OHLCPlot suitable for technical analysis applications.</li>
 		 <li>Make axis marks drawing more flexible.</li>
 		 <li>Add zoom to plots.</li>
+		 <li>Crosshair.</li>
 		 <li>Pie plots.</li>
 		 <li>Statistical plots.</li>
 		 <li>Make wxFreeChart to work on handheld wxWidgets ports.</li>
