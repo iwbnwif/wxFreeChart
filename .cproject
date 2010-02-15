@@ -2096,8 +2096,8 @@
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.618365461" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
 <tool commandLinePattern="${COMMAND} ${FLAGS} `wx-config --libs` ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1723442992" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
 <option id="gnu.cpp.link.option.debugging.gprof.15332804" name="Generate gprof information (-pg)" superClass="gnu.cpp.link.option.debugging.gprof" value="true" valueType="boolean"/>
-<option id="gnu.cpp.link.option.libs.448713359" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs"/>
-<option id="gnu.cpp.link.option.paths.1532729876" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
+<option id="gnu.cpp.link.option.libs.448713359" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs"/>
+<option id="gnu.cpp.link.option.paths.1532729876" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1758929256" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -3069,9 +3069,13 @@
 </option>
 <option id="gnu.cpp.compiler.option.optimization.level.1225996908" name="Optimization Level" superClass="gnu.cpp.compiler.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.debugging.level.2012238733" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-<option id="gnu.cpp.compiler.option.preprocessor.def.1567342295" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+<option id="gnu.cpp.compiler.option.preprocessor.def.1567342295" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
 <listOptionValue builtIn="false" value="__WXDEBUG__"/>
+<listOptionValue builtIn="false" value="wxUSE_GRAPHICS_CONTEXT=1"/>
 </option>
+<option id="gnu.cpp.compiler.option.warnings.toerrors.1050099271" name="Warnings as errors (-Werror)" superClass="gnu.cpp.compiler.option.warnings.toerrors" value="true" valueType="boolean"/>
+<option id="gnu.cpp.compiler.option.warnings.pedantic.1527929788" name="Pedantic (-pedantic)" superClass="gnu.cpp.compiler.option.warnings.pedantic" value="false" valueType="boolean"/>
+<option id="gnu.cpp.compiler.option.warnings.pedantic.error.1003652534" name="Pedantic warnings as errors (-pedantic-errors)" superClass="gnu.cpp.compiler.option.warnings.pedantic.error" value="false" valueType="boolean"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.1484991396" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.base.1189965457" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.base">
@@ -3093,6 +3097,7 @@
 <listOptionValue builtIn="false" value="comctl32"/>
 <listOptionValue builtIn="false" value="comdlg32"/>
 <listOptionValue builtIn="false" value="user32"/>
+<listOptionValue builtIn="false" value="gdiplus"/>
 <listOptionValue builtIn="false" value="gdi32"/>
 <listOptionValue builtIn="false" value="ole32"/>
 <listOptionValue builtIn="false" value="oleaut32"/>

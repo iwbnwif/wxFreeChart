@@ -1,9 +1,1 @@
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="5,56,213,83">
-<area shape="rect" href="$classAxis.html" title="Axis" alt="" coords="261,56,309,83">
-<area shape="rect" href="$classAxisShare.html" title="AxisShare" alt="" coords="373,5,459,32">
-<area shape="rect" href="$classCompDateAxis.html" title="CompDateAxis" alt="" coords="359,56,473,83">
-<area shape="rect" href="$classLabelAxis.html" title="LabelAxis" alt="" coords="376,107,456,133">
-<area shape="rect" href="$classCategoryAxis.html" title="CategoryAxis" alt="" coords="524,56,628,83">
-<area shape="rect" href="$classDateAxis.html" title="DateAxis" alt="" coords="537,107,615,133">
-<area shape="rect" href="$classNumberAxis.html" title="NumberAxis" alt="" coords="527,157,625,184">
-<area shape="rect" href="$classLogarithmicNumberAxis.html" title="LogarithmicNumberAxis" alt="" coords="679,157,852,184">
+<area shape="rect" href="$classLegend.html" title="Legend" alt="" coords="7,5,73,32">

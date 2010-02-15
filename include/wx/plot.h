@@ -3,7 +3,7 @@
 // Purpose: plot base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -61,7 +61,7 @@ public:
 
 	/**
 	 * Sets plot background.
-	 * @param _background new background for plot
+	 * @param background new background for plot
 	 */
 	void SetBackground(AreaDraw *background)
 	{

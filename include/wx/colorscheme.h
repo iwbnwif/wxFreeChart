@@ -3,7 +3,7 @@
 // Purpose: color scheme declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +26,10 @@ public:
 	ColorScheme();
 	virtual ~ColorScheme();
 
+	/**
+	 * Sets this color scheme equal to other color scheme.
+	 * @param cs other color scheme
+	 */
 	void operator = (const ColorScheme &cs)
 	{
 		m_colours = cs.m_colours;

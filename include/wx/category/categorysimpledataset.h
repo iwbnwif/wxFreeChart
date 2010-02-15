@@ -14,14 +14,32 @@
 
 #include <wx/dynarray.h>
 
-class CategorySerie
+/**
+ * Category serie for CategorySimpleDataset.
+ */
+class WXDLLIMPEXP_FREECHART CategorySerie
 {
 public:
+	/**
+	 * Constructs new CategorySerie.
+	 * @param name serie name
+	 * @param value serie values array
+	 * @param count values array elements count
+	 */
 	CategorySerie(const wxString &name, double *values, size_t count);
 	virtual ~CategorySerie();
 
+	/**
+	 * Returns serie name.
+	 * @return serie name
+	 */
 	const wxString &GetName();
 
+	/**
+	 * Returns value at index.
+	 * @param index index of value
+	 * @return value
+	 */
 	double GetValue(size_t index);
 
 private:
@@ -34,8 +52,10 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(CategorySerie *, CategorySerieArray, WXDLLIMPE
 
 /**
  * Simple category dataset implementation.
+ * It's general purpose implementation, and useful for
+ * many applications.
  */
-class CategorySimpleDataset : public CategoryDataset
+class WXDLLIMPEXP_FREECHART CategorySimpleDataset : public CategoryDataset
 {
 	DECLARE_CLASS(CategorySimpleDataset)
 public:
@@ -47,8 +67,18 @@ public:
 	CategorySimpleDataset(wxString *names, size_t count);
 	virtual ~CategorySimpleDataset();
 
+	/**
+	 * Adds serie.
+	 * @param name serie name
+	 * @param value serie values array
+	 * @param count values array elements count
+	 */
 	void AddSerie(const wxString &name, double *values, size_t count);
 
+	/**
+	 * Adds serie.
+	 * @param serie serie to be added
+	 */
 	void AddSerie(CategorySerie *serie);
 
 	//

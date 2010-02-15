@@ -47,11 +47,11 @@ Collaboration diagram for AxisPlot:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#f150073d2e3f02f59e0419121af79f40">AddDataset</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset)</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#898ac0326365d6539cf679fbbbd9cd30">AddObjects</a> (<a class="el" href="classDataset.html">Dataset</a> *dataset, <a class="el" href="classAxis.html">Axis</a> *verticalAxis, <a class="el" href="classAxis.html">Axis</a> *horizontalAxis)</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">size_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#f21da1afc22cd8e908ec06100f71b6f3">GetDatasetCount</a> ()</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classDataset.html">Dataset</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#c75b48e680fee260011e3c708e2f412c">GetDataset</a> (size_t index)</td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#88c1cbac64e0bada3d0ea72f821fdb16">AddMarker</a> (<a class="el" href="classMarker.html">Marker</a> *marker)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisPlot.html#8952942d2942acd142bb3fe590fbc560">LinkDataHorizontalAxis</a> (size_t nData, size_t nAxis)</td></tr>
 
@@ -204,26 +204,43 @@ Adds dataset to plot. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 </div>
 </div><p>
-<a class="anchor" name="88c1cbac64e0bada3d0ea72f821fdb16"></a><!-- doxytag: member="AxisPlot::AddMarker" ref="88c1cbac64e0bada3d0ea72f821fdb16" args="(Marker *marker)" -->
+<a class="anchor" name="898ac0326365d6539cf679fbbbd9cd30"></a><!-- doxytag: member="AxisPlot::AddObjects" ref="898ac0326365d6539cf679fbbbd9cd30" args="(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void AxisPlot::AddMarker           </td>
+          <td class="memname">void AxisPlot::AddObjects           </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMarker.html">Marker</a> *&nbsp;</td>
-          <td class="paramname"> <em>marker</em>          </td>
-          <td>&nbsp;)&nbsp;</td>
+          <td class="paramtype"><a class="el" href="classDataset.html">Dataset</a> *&nbsp;</td>
+          <td class="paramname"> <em>dataset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td>
+          <td class="paramname"> <em>verticalAxis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classAxis.html">Axis</a> *&nbsp;</td>
+          <td class="paramname"> <em>horizontalAxis</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>
-Adds marker to plot. <a class="el" href="classPlot.html">Plot</a> takes ownership of marker. <dl compact><dt><b>Parameters:</b></dt><dd>
+Adds dataset and vertical and horizontal axes to plot. And links it all together. <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>marker</em>&nbsp;</td><td>marker to be added </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>dataset</em>&nbsp;</td><td>dataset to be added </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>verticalAxis</em>&nbsp;</td><td>vertical axis to be added </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>horizontalAxis</em>&nbsp;</td><td>horizontal axis to be added </td></tr>
   </table>
 </dl>
 
@@ -765,7 +782,7 @@ Translate coordinate from graphics to data space. <dl compact><dt><b>Parameters:
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/<a class="el" href="axisplot_8h-source.html">axisplot.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:21 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:22 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

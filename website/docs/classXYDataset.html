@@ -29,7 +29,7 @@ Inheritance diagram for XYDataset:</div>
 <div class="dynsection">
 <p><center><img src="classXYDataset__inherit__graph.png" border="0" usemap="#XYDataset__inherit__map" alt="Inheritance graph"></center>
 <map name="XYDataset__inherit__map">
-<area shape="rect" href="classCategoryDataset.html" title="CategoryDataset" alt="" coords="108,239,239,265"><area shape="rect" href="classPolynom.html" title="Polynom" alt="" coords="263,239,337,265"><area shape="rect" href="classSineFunction.html" title="SineFunction" alt="" coords="361,239,465,265"><area shape="rect" href="classVectorDataset.html" title="VectorDataset" alt="" coords="489,239,601,265"><area shape="rect" href="classXYSimpleDataset.html" title="XYSimpleDataset" alt="" coords="625,239,759,265"><area shape="rect" href="classXYZDataset.html" title="XYZDataset" alt="" coords="783,239,881,265"><area shape="rect" href="classDataset.html" title="Dataset" alt="" coords="443,84,515,111"><area shape="rect" href="classRefObject.html" title="RefObject" alt="" coords="256,7,339,33"><area shape="rect" href="classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="363,7,595,33"><area shape="rect" href="classDrawObserver.html" title="DrawObserver" alt="" coords="619,7,731,33"><area shape="rect" href="classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="5,316,179,343"><area shape="rect" href="classGanttDataset.html" title="GanttDataset" alt="" coords="203,316,309,343"><area shape="rect" href="classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="180,393,332,420"></map>
+<area shape="rect" href="classCategoryDataset.html" title="CategoryDataset" alt="" coords="552,31,683,57"><area shape="rect" href="classPolynom.html" title="Polynom" alt="" coords="580,81,655,108"><area shape="rect" href="classSineFunction.html" title="SineFunction" alt="" coords="565,132,669,159"><area shape="rect" href="classVectorDataset.html" title="VectorDataset" alt="" coords="561,183,673,209"><area shape="rect" href="classXYDynamicDataset.html" title="XYDynamicDataset" alt="" coords="545,233,689,260"><area shape="rect" href="classXYSimpleDataset.html" title="XYSimpleDataset" alt="" coords="551,284,684,311"><area shape="rect" href="classXYZDataset.html" title="XYZDataset" alt="" coords="568,335,667,361"><area shape="rect" href="classDataset.html" title="Dataset" alt="" coords="285,183,357,209"><area shape="rect" href="classRefObject.html" title="RefObject" alt="" coords="80,132,163,159"><area shape="rect" href="classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="5,183,237,209"><area shape="rect" href="classDrawObserver.html" title="DrawObserver" alt="" coords="65,233,177,260"><area shape="rect" href="classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="740,5,913,32"><area shape="rect" href="classGanttDataset.html" title="GanttDataset" alt="" coords="773,56,880,83"><area shape="rect" href="classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="963,56,1115,83"></map>
 <center><font size="2">[<a href="graph_legend.html">legend</a>]</font></center></div>
 <div class="dynheader">
 Collaboration diagram for XYDataset:</div>
@@ -58,11 +58,9 @@ Collaboration diagram for XYDataset:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYDataset.html#912f4104987771989c0688b45a1097c1">GetMinX</a> ()</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="812781b8e17c00c6e5c64a7b9531c79d"></a><!-- doxytag: member="XYDataset::GetMinValue" ref="812781b8e17c00c6e5c64a7b9531c79d" args="(bool verticalAxis)" -->
-virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMinValue</b> (bool verticalAxis)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYDataset.html#812781b8e17c00c6e5c64a7b9531c79d">GetMinValue</a> (bool verticalAxis)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="d7528f2ce7182927de69dd227d0934c6"></a><!-- doxytag: member="XYDataset::GetMaxValue" ref="d7528f2ce7182927de69dd227d0934c6" args="(bool verticalAxis)" -->
-virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMaxValue</b> (bool verticalAxis)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYDataset.html#d7528f2ce7182927de69dd227d0934c6">GetMaxValue</a> (bool verticalAxis)</td></tr>
 
 <tr><td colspan="2"><br><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classXYDataset.html#7057ba7314bcef308c5a4ea2ae73f485">AcceptRenderer</a> (<a class="el" href="classRenderer.html">Renderer</a> *r)</td></tr>
@@ -91,6 +89,36 @@ Checks whether renderer is acceptable by this dataset. TODO: this method must be
 <p>Implements <a class="el" href="classDataset.html#45ce4ddc8105500a91122d495377dd03">Dataset</a>.</p>
 
 <p>Reimplemented in <a class="el" href="classCategoryDataset.html#004c1aaa535fe342a6cb751cdacfa5c9">CategoryDataset</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="d7528f2ce7182927de69dd227d0934c6"></a><!-- doxytag: member="XYDataset::GetMaxValue" ref="d7528f2ce7182927de69dd227d0934c6" args="(bool verticalAxis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double XYDataset::GetMaxValue           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns maximal value. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>for datasets with XY coordinates, specifies direction </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>maximal value </dd></dl>
+
+<p>Implements <a class="el" href="classDataset.html#1f19ad398bd605967481925ddd22788c">Dataset</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classCategoryDataset.html#bc1339c54ca45b9b7f78a4526f1d4d3d">CategoryDataset</a>.</p>
 
 </div>
 </div><p>
@@ -131,6 +159,36 @@ Returns maximal x value. <dl class="return" compact><dt><b>Returns:</b></dt><dd>
 
 <p>
 Returns maximal y value. <dl class="return" compact><dt><b>Returns:</b></dt><dd>maximal y value </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="812781b8e17c00c6e5c64a7b9531c79d"></a><!-- doxytag: member="XYDataset::GetMinValue" ref="812781b8e17c00c6e5c64a7b9531c79d" args="(bool verticalAxis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double XYDataset::GetMinValue           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns minimal value. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>for datasets with XY coordinates, specifies direction </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>minimal value </dd></dl>
+
+<p>Implements <a class="el" href="classDataset.html#afae2d0155462915c9caefc9b6f6728b">Dataset</a>.</p>
+
+<p>Reimplemented in <a class="el" href="classCategoryDataset.html#e53df85d85dd63dc74e774b15fb21759">CategoryDataset</a>.</p>
 
 </div>
 </div><p>
@@ -207,7 +265,7 @@ Returns x value at index. <dl compact><dt><b>Parameters:</b></dt><dd>
 </dl>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>x value </dd></dl>
 
-<p>Implemented in <a class="el" href="classCategoryDataset.html#af1343affe6509a3538bb52e28313fef">CategoryDataset</a>, <a class="el" href="classPolynom.html#7b23bf8fd838902cb4b17dbb368ca105">Polynom</a>, <a class="el" href="classSineFunction.html#f07b197dfcfb97a66e140731544c8771">SineFunction</a>, <a class="el" href="classVectorDataset.html#4b242832bc0262ebc605d8ee76e4579e">VectorDataset</a>, and <a class="el" href="classXYSimpleDataset.html#ea628db4369c27c450334c748300b75e">XYSimpleDataset</a>.</p>
+<p>Implemented in <a class="el" href="classCategoryDataset.html#af1343affe6509a3538bb52e28313fef">CategoryDataset</a>, <a class="el" href="classPolynom.html#7b23bf8fd838902cb4b17dbb368ca105">Polynom</a>, <a class="el" href="classSineFunction.html#f07b197dfcfb97a66e140731544c8771">SineFunction</a>, <a class="el" href="classVectorDataset.html#4b242832bc0262ebc605d8ee76e4579e">VectorDataset</a>, <a class="el" href="classXYDynamicDataset.html#2d67d1aaf19a7835e17381578cfe0b7b">XYDynamicDataset</a>, and <a class="el" href="classXYSimpleDataset.html#ea628db4369c27c450334c748300b75e">XYSimpleDataset</a>.</p>
 
 </div>
 </div><p>
@@ -244,14 +302,14 @@ Returns y value at index. <dl compact><dt><b>Parameters:</b></dt><dd>
 </dl>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>y value </dd></dl>
 
-<p>Implemented in <a class="el" href="classCategoryDataset.html#de8f0625aacfef6604798b2867650e04">CategoryDataset</a>, <a class="el" href="classPolynom.html#608e4d982e0960c702d5b0a55d1507fd">Polynom</a>, <a class="el" href="classSineFunction.html#41027151242a44171f7c5234cd15d151">SineFunction</a>, <a class="el" href="classVectorDataset.html#01134d21e8fff8a2f2c172430c999f22">VectorDataset</a>, and <a class="el" href="classXYSimpleDataset.html#91580787e4501bf56e93a0c20623a64f">XYSimpleDataset</a>.</p>
+<p>Implemented in <a class="el" href="classCategoryDataset.html#de8f0625aacfef6604798b2867650e04">CategoryDataset</a>, <a class="el" href="classPolynom.html#608e4d982e0960c702d5b0a55d1507fd">Polynom</a>, <a class="el" href="classSineFunction.html#41027151242a44171f7c5234cd15d151">SineFunction</a>, <a class="el" href="classVectorDataset.html#01134d21e8fff8a2f2c172430c999f22">VectorDataset</a>, <a class="el" href="classXYDynamicDataset.html#a5ea34546091155dae652b716612bd0c">XYDynamicDataset</a>, and <a class="el" href="classXYSimpleDataset.html#91580787e4501bf56e93a0c20623a64f">XYSimpleDataset</a>.</p>
 
 </div>
 </div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/xy/<a class="el" href="xydataset_8h-source.html">xydataset.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:27 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:29 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

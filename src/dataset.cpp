@@ -3,15 +3,13 @@
 // Purpose: dataset implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/dataset.h>
 
 #include "wx/arrimpl.cpp"
-
-IMPLEMENT_CLASS(Dataset, wxObject)
 
 DatasetObserver::DatasetObserver()
 {
@@ -20,6 +18,12 @@ DatasetObserver::DatasetObserver()
 DatasetObserver::~DatasetObserver()
 {
 }
+
+//
+// Dataset
+//
+
+IMPLEMENT_CLASS(Dataset, wxObject)
 
 Dataset::Dataset()
 {
@@ -30,6 +34,12 @@ Dataset::Dataset()
 
 Dataset::~Dataset()
 {
+	for (size_t n = 0; n < m_markers.Count(); n++) {
+		Marker *marker = m_markers[n];
+		marker->RemoveObserver(this);
+		wxDELETE(marker);
+	}
+
 	SAFE_UNREF(m_renderer);
 }
 
@@ -47,7 +57,7 @@ Renderer *Dataset::GetBaseRenderer()
 
 void Dataset::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
-	FireDatasetChanged();
+	DatasetChanged();
 }
 
 void Dataset::BeginUpdate()
@@ -69,15 +79,37 @@ void Dataset::DatasetChanged()
 		m_changed = true;
 	}
 	else {
+		if (m_changed) {
+			FireDatasetChanged();
+		}
 		m_changed = false;
-		FireDatasetChanged();
 	}
+}
+
+void Dataset::AddMarker(Marker *marker)
+{
+	marker->AddObserver(this);
+	m_markers.Add(marker);
+}
+
+size_t Dataset::GetMarkersCount()
+{
+	return m_markers.Count();
+}
+
+Marker *Dataset::GetMarker(size_t index)
+{
+	return m_markers[index];
 }
 
 DateTimeDataset *Dataset::AsDateTimeDataset()
 {
 	return NULL; // dataset not supports date/times by default.
 }
+
+//
+// DateTimeDataset
+//
 
 DateTimeDataset::DateTimeDataset()
 {

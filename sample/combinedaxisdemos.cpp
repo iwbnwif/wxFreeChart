@@ -49,7 +49,7 @@ public:
 		MultiPlot *multiPlot = new MultiPlot(1, 0, 5, 5);
 
 		// create left axis, that will be shared between two plots
-		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+		NumberAxis *sharedLeftAxis = new NumberAxis(AXIS_LEFT);
 
 		// create first plot
 		XYPlot *plot1 = new XYPlot();
@@ -67,7 +67,7 @@ public:
 		plot1->AddDataset(dataset1);
 
 		// create axis share for first plot to share leftAxis between plots
-		AxisShare *leftAxis1 = new AxisShare(leftAxis);
+		AxisShare *leftAxis1 = new AxisShare(sharedLeftAxis);
 		// and make it visible for first plot
 		leftAxis1->SetShareVisible(true);
 
@@ -103,7 +103,7 @@ public:
 
 		// create axis share for second plot to share leftAxis between plots
 		// by default it will be invisible
-		AxisShare *leftAxis2 = new AxisShare(leftAxis);
+		AxisShare *leftAxis2 = new AxisShare(sharedLeftAxis);
 
 		// create bottom number axes
 		NumberAxis *bottomAxis2 = new NumberAxis(AXIS_BOTTOM);

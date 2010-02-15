@@ -23,7 +23,7 @@
 <a name="l00003"></a>00003 <span class="comment">// Purpose: axis plot declaration</span>
 <a name="l00004"></a>00004 <span class="comment">// Author:      Moskvichev Andrey V.</span>
 <a name="l00005"></a>00005 <span class="comment">// Created:     2008/11/07</span>
-<a name="l00006"></a>00006 <span class="comment">// Copyright:   (c) 2008-2009 Moskvichev Andrey V.</span>
+<a name="l00006"></a>00006 <span class="comment">// Copyright:   (c) 2008-2010 Moskvichev Andrey V.</span>
 <a name="l00007"></a>00007 <span class="comment">// Licence:     wxWidgets licence</span>
 <a name="l00009"></a>00009 <span class="comment"></span>
 <a name="l00010"></a>00010 <span class="preprocessor">#ifndef AXISPLOT_H_</span>
@@ -74,131 +74,129 @@
 <a name="l00065"></a>00065 
 <a name="l00070"></a>00070         <span class="keywordtype">void</span> AddDataset(<a class="code" href="classDataset.html">Dataset</a> *dataset);
 <a name="l00071"></a>00071 
-<a name="l00076"></a>00076         <span class="keywordtype">size_t</span> GetDatasetCount();
-<a name="l00077"></a>00077 
-<a name="l00083"></a>00083         <a class="code" href="classDataset.html">Dataset</a> *GetDataset(<span class="keywordtype">size_t</span> index);
-<a name="l00084"></a>00084 
-<a name="l00089"></a>00089         <span class="keywordtype">void</span> AddMarker(<a class="code" href="classMarker.html">Marker</a> *marker);
-<a name="l00090"></a>00090 
-<a name="l00096"></a>00096         <span class="keywordtype">void</span> LinkDataHorizontalAxis(<span class="keywordtype">size_t</span> nData, <span class="keywordtype">size_t</span> nAxis);
-<a name="l00097"></a>00097 
-<a name="l00103"></a>00103         <span class="keywordtype">void</span> LinkDataVerticalAxis(<span class="keywordtype">size_t</span> nData, <span class="keywordtype">size_t</span> nAxis);
-<a name="l00104"></a>00104 
-<a name="l00112"></a>00112         <a class="code" href="classAxis.html">Axis</a> *GetDatasetAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset, <span class="keywordtype">size_t</span> index, <span class="keywordtype">bool</span> vertical);
-<a name="l00113"></a>00113 
-<a name="l00123"></a>00123         <a class="code" href="classAxis.html">Axis</a> *GetDatasetAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset, <span class="keywordtype">bool</span> vertical);
-<a name="l00124"></a>00124 
-<a name="l00132"></a><a class="code" href="classAxisPlot.html#d89856f6f3c3876f1d0306b5c4879453">00132</a>         <a class="code" href="classAxis.html">Axis</a> *GetDatasetVerticalAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset)
-<a name="l00133"></a>00133         {
-<a name="l00134"></a>00134                 <span class="keywordflow">return</span> GetDatasetAxis(dataset, <span class="keyword">true</span>);
-<a name="l00135"></a>00135         }
-<a name="l00136"></a>00136 
-<a name="l00144"></a><a class="code" href="classAxisPlot.html#3f08583ad9653f59dd4c054bdf4b2c25">00144</a>         <a class="code" href="classAxis.html">Axis</a> *GetDatasetHorizontalAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset)
-<a name="l00145"></a>00145         {
-<a name="l00146"></a>00146                 <span class="keywordflow">return</span> GetDatasetAxis(dataset, <span class="keyword">false</span>);
-<a name="l00147"></a>00147         }
-<a name="l00148"></a>00148 
-<a name="l00155"></a><a class="code" href="classAxisPlot.html#adb2af4211e2b7108d29aef177bc860f">00155</a>         <a class="code" href="classDataset.html">Dataset</a> *GetAxisDataset(<a class="code" href="classAxis.html">Axis</a> *axis, <span class="keywordtype">size_t</span> index)
-<a name="l00156"></a>00156         {
-<a name="l00157"></a>00157                 <span class="keywordflow">return</span> axis-&gt;<a class="code" href="classAxis.html#7d7d04f984a6f15a94970c2870517273">GetDataset</a>(index);
-<a name="l00158"></a>00158         }
-<a name="l00159"></a>00159 
-<a name="l00165"></a>00165         <span class="keywordtype">void</span> SetDrawGrid(<span class="keywordtype">bool</span> drawGridVertical, <span class="keywordtype">bool</span> drawGridHorizontal);
-<a name="l00166"></a>00166 
-<a name="l00171"></a>00171         <span class="keywordtype">void</span> SetDataBackground(<a class="code" href="classAreaDraw.html">AreaDraw</a> *dataBackground);
-<a name="l00172"></a>00172 
-<a name="l00177"></a>00177         <span class="keywordtype">void</span> SetLegend(<a class="code" href="classLegend.html">Legend</a> *legend);
-<a name="l00178"></a>00178 
-<a name="l00190"></a>00190         <span class="keywordtype">bool</span> ToDataCoords(<span class="keywordtype">size_t</span> nData, wxDC &amp;dc, wxRect rc, wxCoord gx, wxCoord gy, <span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y);
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192         <span class="comment">//</span>
-<a name="l00193"></a>00193         <span class="comment">// DrawObserver</span>
-<a name="l00194"></a>00194         <span class="comment">//</span>
-<a name="l00195"></a>00195         <span class="keyword">virtual</span> <span class="keywordtype">void</span> NeedRedraw(<a class="code" href="classDrawObject.html">DrawObject</a> *obj);
-<a name="l00196"></a>00196 
+<a name="l00079"></a>00079         <span class="keywordtype">void</span> AddObjects(<a class="code" href="classDataset.html">Dataset</a> *dataset, <a class="code" href="classAxis.html">Axis</a> *verticalAxis, <a class="code" href="classAxis.html">Axis</a> *horizontalAxis);
+<a name="l00080"></a>00080 
+<a name="l00085"></a>00085         <span class="keywordtype">size_t</span> GetDatasetCount();
+<a name="l00086"></a>00086 
+<a name="l00092"></a>00092         <a class="code" href="classDataset.html">Dataset</a> *GetDataset(<span class="keywordtype">size_t</span> index);
+<a name="l00093"></a>00093 
+<a name="l00099"></a>00099         <span class="keywordtype">void</span> LinkDataHorizontalAxis(<span class="keywordtype">size_t</span> nData, <span class="keywordtype">size_t</span> nAxis);
+<a name="l00100"></a>00100 
+<a name="l00106"></a>00106         <span class="keywordtype">void</span> LinkDataVerticalAxis(<span class="keywordtype">size_t</span> nData, <span class="keywordtype">size_t</span> nAxis);
+<a name="l00107"></a>00107 
+<a name="l00115"></a>00115         <a class="code" href="classAxis.html">Axis</a> *GetDatasetAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset, <span class="keywordtype">size_t</span> index, <span class="keywordtype">bool</span> vertical);
+<a name="l00116"></a>00116 
+<a name="l00126"></a>00126         <a class="code" href="classAxis.html">Axis</a> *GetDatasetAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset, <span class="keywordtype">bool</span> vertical);
+<a name="l00127"></a>00127 
+<a name="l00135"></a><a class="code" href="classAxisPlot.html#d89856f6f3c3876f1d0306b5c4879453">00135</a>         <a class="code" href="classAxis.html">Axis</a> *GetDatasetVerticalAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset)
+<a name="l00136"></a>00136         {
+<a name="l00137"></a>00137                 <span class="keywordflow">return</span> GetDatasetAxis(dataset, <span class="keyword">true</span>);
+<a name="l00138"></a>00138         }
+<a name="l00139"></a>00139 
+<a name="l00147"></a><a class="code" href="classAxisPlot.html#3f08583ad9653f59dd4c054bdf4b2c25">00147</a>         <a class="code" href="classAxis.html">Axis</a> *GetDatasetHorizontalAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset)
+<a name="l00148"></a>00148         {
+<a name="l00149"></a>00149                 <span class="keywordflow">return</span> GetDatasetAxis(dataset, <span class="keyword">false</span>);
+<a name="l00150"></a>00150         }
+<a name="l00151"></a>00151 
+<a name="l00158"></a><a class="code" href="classAxisPlot.html#adb2af4211e2b7108d29aef177bc860f">00158</a>         <a class="code" href="classDataset.html">Dataset</a> *GetAxisDataset(<a class="code" href="classAxis.html">Axis</a> *axis, <span class="keywordtype">size_t</span> index)
+<a name="l00159"></a>00159         {
+<a name="l00160"></a>00160                 <span class="keywordflow">return</span> axis-&gt;<a class="code" href="classAxis.html#7d7d04f984a6f15a94970c2870517273">GetDataset</a>(index);
+<a name="l00161"></a>00161         }
+<a name="l00162"></a>00162 
+<a name="l00168"></a>00168         <span class="keywordtype">void</span> SetDrawGrid(<span class="keywordtype">bool</span> drawGridVertical, <span class="keywordtype">bool</span> drawGridHorizontal);
+<a name="l00169"></a>00169 
+<a name="l00174"></a>00174         <span class="keywordtype">void</span> SetDataBackground(<a class="code" href="classAreaDraw.html">AreaDraw</a> *dataBackground);
+<a name="l00175"></a>00175 
+<a name="l00180"></a>00180         <span class="keywordtype">void</span> SetLegend(<a class="code" href="classLegend.html">Legend</a> *legend);
+<a name="l00181"></a>00181 
+<a name="l00193"></a>00193         <span class="keywordtype">bool</span> ToDataCoords(<span class="keywordtype">size_t</span> nData, wxDC &amp;dc, wxRect rc, wxCoord gx, wxCoord gy, <span class="keywordtype">double</span> *x, <span class="keywordtype">double</span> *y);
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195         <span class="comment">//</span>
+<a name="l00196"></a>00196         <span class="comment">// DrawObserver</span>
 <a name="l00197"></a>00197         <span class="comment">//</span>
-<a name="l00198"></a>00198         <span class="comment">// DatasetObserver</span>
-<a name="l00199"></a>00199         <span class="comment">//</span>
-<a name="l00200"></a>00200         <span class="keyword">virtual</span> <span class="keywordtype">void</span> DatasetChanged(<a class="code" href="classDataset.html">Dataset</a> *dataset);
-<a name="l00201"></a>00201 
+<a name="l00198"></a>00198         <span class="keyword">virtual</span> <span class="keywordtype">void</span> NeedRedraw(<a class="code" href="classDrawObject.html">DrawObject</a> *obj);
+<a name="l00199"></a>00199 
+<a name="l00200"></a>00200         <span class="comment">//</span>
+<a name="l00201"></a>00201         <span class="comment">// DatasetObserver</span>
 <a name="l00202"></a>00202         <span class="comment">//</span>
-<a name="l00203"></a>00203         <span class="comment">// AxisObserver</span>
-<a name="l00204"></a>00204         <span class="comment">//</span>
-<a name="l00205"></a>00205         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisObserver.html#27dc85bd4629a428e0d3b26a9f7eb4a0">AxisChanged</a>(<a class="code" href="classAxis.html">Axis</a> *axis);
-<a name="l00206"></a>00206 
-<a name="l00207"></a>00207         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisObserver.html#733740dd390ca195ce0b690c4f7f3edb">BoundsChanged</a>(<a class="code" href="classAxis.html">Axis</a> *axis);
-<a name="l00208"></a>00208 
-<a name="l00209"></a>00209 <span class="keyword">protected</span>:
-<a name="l00210"></a>00210         <span class="comment">//</span>
-<a name="l00211"></a>00211         <span class="comment">// Methods to be implemented by derivative classes</span>
-<a name="l00212"></a>00212         <span class="comment">//</span>
-<a name="l00213"></a>00213 
-<a name="l00219"></a>00219         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> AcceptAxis(<a class="code" href="classAxis.html">Axis</a> *axis) = 0;
-<a name="l00220"></a>00220 
-<a name="l00226"></a>00226         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> AcceptDataset(<a class="code" href="classDataset.html">Dataset</a> *dataset) = 0;
-<a name="l00227"></a>00227 
-<a name="l00233"></a>00233         <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDatasets(wxDC &amp;dc, wxRect rc) = 0;
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235         wxCoord GetAxesExtent(wxDC &amp;dc, AxisArray *axes);
-<a name="l00236"></a>00236 
-<a name="l00237"></a>00237 <span class="keyword">private</span>:
-<a name="l00238"></a>00238         <span class="comment">//</span>
-<a name="l00239"></a>00239         <span class="comment">// Plot</span>
-<a name="l00240"></a>00240         <span class="comment">//</span>
-<a name="l00241"></a>00241         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPlot.html#11f3fd07825b7603c22f6c5f616d4b11">DrawData</a>(wxDC &amp;dc, wxRect rc);
-<a name="l00242"></a>00242 
-<a name="l00243"></a>00243         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPlot.html#a80da25a5adba3595e7d66ee9da050cb">HasData</a>();
-<a name="l00244"></a>00244 
+<a name="l00203"></a>00203         <span class="keyword">virtual</span> <span class="keywordtype">void</span> DatasetChanged(<a class="code" href="classDataset.html">Dataset</a> *dataset);
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205         <span class="comment">//</span>
+<a name="l00206"></a>00206         <span class="comment">// AxisObserver</span>
+<a name="l00207"></a>00207         <span class="comment">//</span>
+<a name="l00208"></a>00208         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisObserver.html#27dc85bd4629a428e0d3b26a9f7eb4a0">AxisChanged</a>(<a class="code" href="classAxis.html">Axis</a> *axis);
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classAxisObserver.html#733740dd390ca195ce0b690c4f7f3edb">BoundsChanged</a>(<a class="code" href="classAxis.html">Axis</a> *axis);
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212 <span class="keyword">protected</span>:
+<a name="l00213"></a>00213         <span class="comment">//</span>
+<a name="l00214"></a>00214         <span class="comment">// Methods to be implemented by derivative classes</span>
+<a name="l00215"></a>00215         <span class="comment">//</span>
+<a name="l00216"></a>00216 
+<a name="l00222"></a>00222         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> AcceptAxis(<a class="code" href="classAxis.html">Axis</a> *axis) = 0;
+<a name="l00223"></a>00223 
+<a name="l00229"></a>00229         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> AcceptDataset(<a class="code" href="classDataset.html">Dataset</a> *dataset) = 0;
+<a name="l00230"></a>00230 
+<a name="l00236"></a>00236         <span class="keyword">virtual</span> <span class="keywordtype">void</span> DrawDatasets(wxDC &amp;dc, wxRect rc) = 0;
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238         wxCoord GetAxesExtent(wxDC &amp;dc, AxisArray *axes);
+<a name="l00239"></a>00239 
+<a name="l00240"></a>00240 <span class="keyword">private</span>:
+<a name="l00241"></a>00241         <span class="comment">//</span>
+<a name="l00242"></a>00242         <span class="comment">// Plot</span>
+<a name="l00243"></a>00243         <span class="comment">//</span>
+<a name="l00244"></a>00244         <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPlot.html#11f3fd07825b7603c22f6c5f616d4b11">DrawData</a>(wxDC &amp;dc, wxRect rc);
 <a name="l00245"></a>00245 
-<a name="l00246"></a>00246         <span class="keywordtype">void</span> UpdateAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset = NULL);
+<a name="l00246"></a>00246         <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classPlot.html#a80da25a5adba3595e7d66ee9da050cb">HasData</a>();
 <a name="l00247"></a>00247 
-<a name="l00248"></a>00248         <span class="comment">//</span>
-<a name="l00249"></a>00249         <span class="comment">// Draw functions</span>
-<a name="l00250"></a>00250         <span class="comment">//</span>
-<a name="l00251"></a>00251 
-<a name="l00259"></a>00259         <span class="keywordtype">void</span> CalcDataArea(wxDC &amp;dc, wxRect rc, wxRect &amp;rcData, wxRect &amp;rcLegend);
-<a name="l00260"></a>00260 
-<a name="l00267"></a>00267         <span class="keywordtype">void</span> DrawAxes(wxDC &amp;dc, wxRect &amp;rc, wxRect rcData);
-<a name="l00268"></a>00268 
-<a name="l00276"></a>00276         <span class="keywordtype">void</span> DrawAxesArray(wxDC &amp;dc, wxRect rc, AxisArray *axes, <span class="keywordtype">bool</span> vertical);
-<a name="l00277"></a>00277 
-<a name="l00278"></a>00278 
-<a name="l00284"></a>00284         <span class="keywordtype">void</span> DrawGridLines(wxDC &amp;dc, wxRect rcData);
-<a name="l00285"></a>00285 
-<a name="l00291"></a>00291         <span class="keywordtype">void</span> DrawMarkers(wxDC &amp;dc, wxRect rcData);
-<a name="l00292"></a>00292 
-<a name="l00298"></a>00298         <span class="keywordtype">void</span> DrawDataArea(wxDC &amp;dc, wxRect rcData);
-<a name="l00299"></a>00299 
-<a name="l00305"></a>00305         <span class="keywordtype">void</span> DrawLegend(wxDC &amp;dc, wxRect rcLegend);
-<a name="l00306"></a>00306 
-<a name="l00307"></a>00307         <span class="keywordtype">bool</span> m_drawGridVertical;
-<a name="l00308"></a>00308         <span class="keywordtype">bool</span> m_drawGridHorizontal;
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249         <span class="keywordtype">void</span> UpdateAxis(<a class="code" href="classDataset.html">Dataset</a> *dataset = NULL);
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251         <span class="comment">//</span>
+<a name="l00252"></a>00252         <span class="comment">// Draw functions</span>
+<a name="l00253"></a>00253         <span class="comment">//</span>
+<a name="l00254"></a>00254 
+<a name="l00262"></a>00262         <span class="keywordtype">void</span> CalcDataArea(wxDC &amp;dc, wxRect rc, wxRect &amp;rcData, wxRect &amp;rcLegend);
+<a name="l00263"></a>00263 
+<a name="l00270"></a>00270         <span class="keywordtype">void</span> DrawAxes(wxDC &amp;dc, wxRect &amp;rc, wxRect rcData);
+<a name="l00271"></a>00271 
+<a name="l00279"></a>00279         <span class="keywordtype">void</span> DrawAxesArray(wxDC &amp;dc, wxRect rc, AxisArray *axes, <span class="keywordtype">bool</span> vertical);
+<a name="l00280"></a>00280 
+<a name="l00281"></a>00281 
+<a name="l00287"></a>00287         <span class="keywordtype">void</span> DrawGridLines(wxDC &amp;dc, wxRect rcData);
+<a name="l00288"></a>00288 
+<a name="l00294"></a>00294         <span class="keywordtype">void</span> DrawMarkers(wxDC &amp;dc, wxRect rcData);
+<a name="l00295"></a>00295 
+<a name="l00301"></a>00301         <span class="keywordtype">void</span> DrawDataArea(wxDC &amp;dc, wxRect rcData);
+<a name="l00302"></a>00302 
+<a name="l00308"></a>00308         <span class="keywordtype">void</span> DrawLegend(wxDC &amp;dc, wxRect rcLegend);
 <a name="l00309"></a>00309 
-<a name="l00310"></a>00310         AxisArray m_leftAxes;
-<a name="l00311"></a>00311         AxisArray m_rightAxes;
-<a name="l00312"></a>00312         AxisArray m_topAxes;
-<a name="l00313"></a>00313         AxisArray m_bottomAxes;
-<a name="l00314"></a>00314 
-<a name="l00315"></a>00315         AxisArray m_horizontalAxes;
-<a name="l00316"></a>00316         AxisArray m_verticalAxes;
+<a name="l00310"></a>00310         <span class="keywordtype">bool</span> m_drawGridVertical;
+<a name="l00311"></a>00311         <span class="keywordtype">bool</span> m_drawGridHorizontal;
+<a name="l00312"></a>00312 
+<a name="l00313"></a>00313         AxisArray m_leftAxes;
+<a name="l00314"></a>00314         AxisArray m_rightAxes;
+<a name="l00315"></a>00315         AxisArray m_topAxes;
+<a name="l00316"></a>00316         AxisArray m_bottomAxes;
 <a name="l00317"></a>00317 
-<a name="l00318"></a>00318         DataAxisLinkArray m_links;
-<a name="l00319"></a>00319 
-<a name="l00320"></a>00320         DatasetArray m_datasets;
-<a name="l00321"></a>00321         <a class="code" href="classAreaDraw.html">AreaDraw</a> *m_dataBackground; <span class="comment">// data area background</span>
+<a name="l00318"></a>00318         AxisArray m_horizontalAxes;
+<a name="l00319"></a>00319         AxisArray m_verticalAxes;
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321         DataAxisLinkArray m_links;
 <a name="l00322"></a>00322 
-<a name="l00323"></a>00323         MarkerArray m_markers;
-<a name="l00324"></a>00324 
-<a name="l00325"></a>00325         wxCoord m_legendPlotGap; <span class="comment">// distance between plot and legend</span>
-<a name="l00326"></a>00326 
-<a name="l00327"></a>00327         <a class="code" href="classLegend.html">Legend</a> *m_legend;
-<a name="l00328"></a>00328 
-<a name="l00329"></a>00329         <span class="comment">//bool m_plotConfigurationOk;</span>
-<a name="l00330"></a>00330 };
-<a name="l00331"></a>00331 
-<a name="l00332"></a>00332 <span class="preprocessor">#endif </span><span class="comment">/*AXISPLOT_H_*/</span>
+<a name="l00323"></a>00323         DatasetArray m_datasets;
+<a name="l00324"></a>00324         <a class="code" href="classAreaDraw.html">AreaDraw</a> *m_dataBackground; <span class="comment">// data area background</span>
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326         wxCoord m_legendPlotGap; <span class="comment">// distance between plot and legend</span>
+<a name="l00327"></a>00327 
+<a name="l00328"></a>00328         <a class="code" href="classLegend.html">Legend</a> *m_legend;
+<a name="l00329"></a>00329 
+<a name="l00330"></a>00330         <span class="comment">//bool m_plotConfigurationOk;</span>
+<a name="l00331"></a>00331 };
+<a name="l00332"></a>00332 
+<a name="l00333"></a>00333 <span class="preprocessor">#endif </span><span class="comment">/*AXISPLOT_H_*/</span>
 </pre></div></div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:20 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:22 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

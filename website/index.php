@@ -46,6 +46,7 @@
 		<li>Legend with different locations.</li>
 		<li>Axes font, text color, grid lines, chart lines, chart background - everything can be changed.</li>
 		<li>Various visual features, like: gradient areas, gradient bars, etc.</li>
+		<li>All-in-one solution. The same approach for different chart types.</li>
 		<li>Multiplots.</li>
 		<li>Clean MCV design. You can use different renderers to draw charts content, with many different data sources.</li>
 		<li>High performance.</li>

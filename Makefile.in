@@ -81,6 +81,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_sinefunction.o \
 	wxfreechart_lib_xyplot.o \
 	wxfreechart_lib_xyarearenderer.o \
+	wxfreechart_lib_xydynamicdataset.o \
 	wxfreechart_lib_vectordataset.o \
 	wxfreechart_lib_xyhistorenderer.o \
 	wxfreechart_lib_xyrenderer.o \
@@ -96,6 +97,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_categorysimpledataset.o \
 	wxfreechart_lib_symbol.o \
 	wxfreechart_lib_dataset.o \
+	wxfreechart_lib_chartsplitpanel.o \
 	wxfreechart_lib_colorscheme.o \
 	wxfreechart_lib_chartpanel.o
 WXFREECHART_LIB_HEADERS =  \
@@ -105,6 +107,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/gantt/ganttrenderer.h \
 	include/wx/gantt/ganttplot.h \
 	include/wx/gantt/ganttsimpledataset.h \
+	include/wx/chartsplitpanel.h \
 	include/wx/chart.h \
 	include/wx/bars/barplot.h \
 	include/wx/bars/barrenderer.h \
@@ -132,6 +135,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/xy/xyhistorenderer.h \
 	include/wx/xy/xysimpledataset.h \
 	include/wx/xy/xylinerenderer.h \
+	include/wx/xy/xydynamicdataset.h \
 	include/wx/xy/xydataset.h \
 	include/wx/xy/vectordataset.h \
 	include/wx/xy/xyrenderer.h \
@@ -184,6 +188,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_sinefunction.o \
 	wxfreechart_dll_xyplot.o \
 	wxfreechart_dll_xyarearenderer.o \
+	wxfreechart_dll_xydynamicdataset.o \
 	wxfreechart_dll_vectordataset.o \
 	wxfreechart_dll_xyhistorenderer.o \
 	wxfreechart_dll_xyrenderer.o \
@@ -199,6 +204,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_categorysimpledataset.o \
 	wxfreechart_dll_symbol.o \
 	wxfreechart_dll_dataset.o \
+	wxfreechart_dll_chartsplitpanel.o \
 	wxfreechart_dll_colorscheme.o \
 	wxfreechart_dll_chartpanel.o
 WXFREECHART_DLL_HEADERS =  \
@@ -208,6 +214,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/gantt/ganttrenderer.h \
 	include/wx/gantt/ganttplot.h \
 	include/wx/gantt/ganttsimpledataset.h \
+	include/wx/chartsplitpanel.h \
 	include/wx/chart.h \
 	include/wx/bars/barplot.h \
 	include/wx/bars/barrenderer.h \
@@ -235,6 +242,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/xy/xyhistorenderer.h \
 	include/wx/xy/xysimpledataset.h \
 	include/wx/xy/xylinerenderer.h \
+	include/wx/xy/xydynamicdataset.h \
 	include/wx/xy/xydataset.h \
 	include/wx/xy/vectordataset.h \
 	include/wx/xy/xyrenderer.h \
@@ -263,6 +271,7 @@ WXFREECHARTDEMO_LIB_OBJECTS =  \
 	wxFreeChartDemo_lib_demo.o \
 	wxFreeChartDemo_lib_democollection.o \
 	wxFreeChartDemo_lib_ganttdemos.o \
+	wxFreeChartDemo_lib_markersdemos.o \
 	wxFreeChartDemo_lib_multipleaxisdemos.o \
 	wxFreeChartDemo_lib_ohlcdemos.o \
 	wxFreeChartDemo_lib_timeseriesdemos.o \
@@ -277,6 +286,7 @@ WXFREECHARTDEMO_DLL_OBJECTS =  \
 	wxFreeChartDemo_dll_demo.o \
 	wxFreeChartDemo_dll_democollection.o \
 	wxFreeChartDemo_dll_ganttdemos.o \
+	wxFreeChartDemo_dll_markersdemos.o \
 	wxFreeChartDemo_dll_multipleaxisdemos.o \
 	wxFreeChartDemo_dll_ohlcdemos.o \
 	wxFreeChartDemo_dll_timeseriesdemos.o \
@@ -604,6 +614,9 @@ wxfreechart_lib_xyplot.o: $(srcdir)/src/xy/xyplot.cpp
 wxfreechart_lib_xyarearenderer.o: $(srcdir)/src/xy/xyarearenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/xyarearenderer.cpp
 
+wxfreechart_lib_xydynamicdataset.o: $(srcdir)/src/xy/xydynamicdataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/xydynamicdataset.cpp
+
 wxfreechart_lib_vectordataset.o: $(srcdir)/src/xy/vectordataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/vectordataset.cpp
 
@@ -648,6 +661,9 @@ wxfreechart_lib_symbol.o: $(srcdir)/src/symbol.cpp
 
 wxfreechart_lib_dataset.o: $(srcdir)/src/dataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/dataset.cpp
+
+wxfreechart_lib_chartsplitpanel.o: $(srcdir)/src/chartsplitpanel.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/chartsplitpanel.cpp
 
 wxfreechart_lib_colorscheme.o: $(srcdir)/src/colorscheme.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/colorscheme.cpp
@@ -745,6 +761,9 @@ wxfreechart_dll_xyplot.o: $(srcdir)/src/xy/xyplot.cpp
 wxfreechart_dll_xyarearenderer.o: $(srcdir)/src/xy/xyarearenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/xyarearenderer.cpp
 
+wxfreechart_dll_xydynamicdataset.o: $(srcdir)/src/xy/xydynamicdataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/xydynamicdataset.cpp
+
 wxfreechart_dll_vectordataset.o: $(srcdir)/src/xy/vectordataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/vectordataset.cpp
 
@@ -790,6 +809,9 @@ wxfreechart_dll_symbol.o: $(srcdir)/src/symbol.cpp
 wxfreechart_dll_dataset.o: $(srcdir)/src/dataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/dataset.cpp
 
+wxfreechart_dll_chartsplitpanel.o: $(srcdir)/src/chartsplitpanel.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/chartsplitpanel.cpp
+
 wxfreechart_dll_colorscheme.o: $(srcdir)/src/colorscheme.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/colorscheme.cpp
 
@@ -813,6 +835,9 @@ wxFreeChartDemo_lib_democollection.o: $(srcdir)/sample/democollection.cpp
 
 wxFreeChartDemo_lib_ganttdemos.o: $(srcdir)/sample/ganttdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/ganttdemos.cpp
+
+wxFreeChartDemo_lib_markersdemos.o: $(srcdir)/sample/markersdemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/markersdemos.cpp
 
 wxFreeChartDemo_lib_multipleaxisdemos.o: $(srcdir)/sample/multipleaxisdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/multipleaxisdemos.cpp
@@ -843,6 +868,9 @@ wxFreeChartDemo_dll_democollection.o: $(srcdir)/sample/democollection.cpp
 
 wxFreeChartDemo_dll_ganttdemos.o: $(srcdir)/sample/ganttdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/ganttdemos.cpp
+
+wxFreeChartDemo_dll_markersdemos.o: $(srcdir)/sample/markersdemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/markersdemos.cpp
 
 wxFreeChartDemo_dll_multipleaxisdemos.o: $(srcdir)/sample/multipleaxisdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/multipleaxisdemos.cpp

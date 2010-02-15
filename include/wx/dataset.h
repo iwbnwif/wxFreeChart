@@ -3,7 +3,7 @@
 // Purpose: dataset base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -18,6 +18,7 @@
 
 #include <wx/observable.h>
 #include <wx/chartrenderer.h>
+#include <wx/marker.h>
 
 #include <wx/dynarray.h>
 
@@ -31,7 +32,7 @@ class DateTimeDataset;
 	for (size_t index = 0; index < dataset->GetCount(serie); index++)
 
 /**
- * Class that receives notifications about dataset changes.
+ * Base class that receives notifications about dataset changes.
  */
 class WXDLLIMPEXP_FREECHART DatasetObserver
 {
@@ -43,7 +44,7 @@ public:
 };
 
 /**
- * Base class for all datasets (XYDatasets, CategoryDatasets, OHLCDatasets, etc).
+ * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
 class WXDLLIMPEXP_FREECHART Dataset : public wxObject,
@@ -96,16 +97,45 @@ public:
 	 */
 	virtual wxString GetSerieName(size_t serie) = 0;
 
+	/**
+	 * Returns minimal value.
+	 * @param vertical for datasets with XY coordinates, specifies direction
+	 * @return minimal value
+	 */
 	virtual double GetMinValue(bool vertical) = 0;
 
+	/**
+	 * Returns maximal value.
+	 * @param vertical for datasets with XY coordinates, specifies direction
+	 * @return maximal value
+	 */
 	virtual double GetMaxValue(bool vertical) = 0;
 
 	virtual DateTimeDataset *AsDateTimeDataset();
 
+	/**
+	 * Adds marker to plot. Plot takes ownership of marker.
+	 * @param marker marker to be added
+	 */
+	void AddMarker(Marker *marker);
+
+	/**
+	 * Returns marker count.
+	 * @return marker count
+	 */
+	size_t GetMarkersCount();
+
+	/**
+	 * Returns marker at specified index.
+	 * @param index index of marker
+	 * @return marker at specified index
+	 */
+	Marker *GetMarker(size_t index);
+
 	//
 	// DrawObjectObserver
 	//
-	// Received from renderer
+	// Received from renderer, or marker
 	virtual void NeedRedraw(DrawObject *obj);
 
 protected:
@@ -115,24 +145,42 @@ protected:
 	 */
 	virtual bool AcceptRenderer(Renderer *r) = 0;
 
+	/**
+	 * Called to indicate, that dataset is changed.
+	 * For call by derivate classes.
+	 */
 	void DatasetChanged();
 
 	Renderer *m_renderer;
+private:
 	bool m_updating;
 	bool m_changed;
 
-private:
+	MarkerArray m_markers;
+
 	FIRE_WITH_THIS(DatasetChanged);
 };
 
+/**
+ * Base class for datasets, with date/time.
+ */
 class WXDLLIMPEXP_FREECHART DateTimeDataset
 {
 public:
 	DateTimeDataset();
 	virtual ~DateTimeDataset();
 
+	/**
+	 * Returns date/time for specified index.
+	 * @param index index
+	 * @return date/time for specified index
+	 */
 	virtual time_t GetDate(size_t index) = 0;
 
+	/**
+	 * Returns date/time count.
+	 * @return date/time count
+	 */
 	virtual size_t GetCount() = 0;
 };
 

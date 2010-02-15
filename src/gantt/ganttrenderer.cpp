@@ -3,7 +3,7 @@
 // Purpose: gantt renderer implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2009/03/23
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 

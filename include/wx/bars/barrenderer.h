@@ -3,7 +3,7 @@
 // Purpose: bar renderer and bar types declarations
 // Author:	Moskvichev Andrey V.
 // Created:	14.11.2008
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -18,6 +18,7 @@ class BarRenderer;
 
 /**
  * Bar types base class.
+ * This class performs bars drawing.
  */
 class WXDLLIMPEXP_FREECHART BarType
 {
@@ -63,7 +64,7 @@ protected:
 };
 
 /**
- * Normal bar type. Draws series parallel to each other.
+ * Normal bar type. Draws series' bars parallel to each other.
  */
 class WXDLLIMPEXP_FREECHART NormalBarType : public BarType
 {
@@ -87,7 +88,7 @@ private:
 };
 
 /**
- * Draws series in stack, after each other.
+ * Draws series' bars in stack, after each other.
  */
 class WXDLLIMPEXP_FREECHART StackedBarType : public BarType
 {
@@ -112,7 +113,7 @@ private:
 };
 
 /**
- * Draws series overlapped.
+ * Draws series' bars overlapped.
  */
 class WXDLLIMPEXP_FREECHART LayeredBarType : public BarType
 {
@@ -164,7 +165,8 @@ public:
 	void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
 
 	/**
-	 * Sets bar type. BarRenderer owns this object.
+	 * Sets bar type, an object that performs bars drawing.
+	 * BarRenderer owns this object.
 	 * @param barType new bar type,
 	 * renderer takes ownership for bar type object
 	 */

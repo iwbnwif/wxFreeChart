@@ -43,17 +43,29 @@ Collaboration diagram for OHLCCandlestickRenderer:</div>
 <a href="classOHLCCandlestickRenderer-members.html">List of all members.</a><table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#ec16812e10d812368a584b456243f7bb">DrawItem</a> (wxDC &amp;dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#ee651f72253d997be9a95a8eb28e0cba">DrawItem</a> (wxDC &amp;dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#2ec88f54ef7e47a01b8edf3fbbfcd6eb">SetOutlinePen</a> (wxPen outlinePen)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const wxPen &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#f649e5ee73479f865af09eb5af476168">GetOutlinePen</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#c682f4f25b1bce771f1642419bbf9985">SetLowerBrush</a> (wxBrush lowerBrush)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const wxBrush &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#9ff6ab6bbfc678a59f0533905ab0bfef">GetLowerBrush</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#b3330d9e7374e87a7e126b629f3ae325">SetHigherBrush</a> (wxBrush higherBrush)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const wxBrush &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCCandlestickRenderer.html#f0ef3fe238ed04772dccb840b59b1d0d">GetHigherBrush</a> ()</td></tr>
 
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 OHLC renderer for displaying japanese candles. <hr><h2>Member Function Documentation</h2>
-<a class="anchor" name="ec16812e10d812368a584b456243f7bb"></a><!-- doxytag: member="OHLCCandlestickRenderer::DrawItem" ref="ec16812e10d812368a584b456243f7bb" args="(wxDC &amp;dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close)" -->
+<a class="anchor" name="ee651f72253d997be9a95a8eb28e0cba"></a><!-- doxytag: member="OHLCCandlestickRenderer::DrawItem" ref="ee651f72253d997be9a95a8eb28e0cba" args="(wxDC &amp;dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void OHLCCandlestickRenderer::DrawItem           </td>
+          <td class="memname">virtual void OHLCCandlestickRenderer::DrawItem           </td>
           <td>(</td>
           <td class="paramtype">wxDC &amp;&nbsp;</td>
           <td class="paramname"> <em>dc</em>, </td>
@@ -113,10 +125,145 @@ Draws item. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 </div>
 </div><p>
+<a class="anchor" name="f0ef3fe238ed04772dccb840b59b1d0d"></a><!-- doxytag: member="OHLCCandlestickRenderer::GetHigherBrush" ref="f0ef3fe238ed04772dccb840b59b1d0d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wxBrush&amp; OHLCCandlestickRenderer::GetHigherBrush           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Return brush to draw higher (bull) candles. <dl class="return" compact><dt><b>Returns:</b></dt><dd>brush to draw higher (bear) candles </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="9ff6ab6bbfc678a59f0533905ab0bfef"></a><!-- doxytag: member="OHLCCandlestickRenderer::GetLowerBrush" ref="9ff6ab6bbfc678a59f0533905ab0bfef" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wxBrush&amp; OHLCCandlestickRenderer::GetLowerBrush           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns brush to draw lower (bear) candles. <dl class="return" compact><dt><b>Returns:</b></dt><dd>brush to draw lower (bear) candles </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="f649e5ee73479f865af09eb5af476168"></a><!-- doxytag: member="OHLCCandlestickRenderer::GetOutlinePen" ref="f649e5ee73479f865af09eb5af476168" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wxPen&amp; OHLCCandlestickRenderer::GetOutlinePen           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns pen to draw candle outline. <dl class="return" compact><dt><b>Returns:</b></dt><dd>outlinePen pen to draw candle outline </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="b3330d9e7374e87a7e126b629f3ae325"></a><!-- doxytag: member="OHLCCandlestickRenderer::SetHigherBrush" ref="b3330d9e7374e87a7e126b629f3ae325" args="(wxBrush higherBrush)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OHLCCandlestickRenderer::SetHigherBrush           </td>
+          <td>(</td>
+          <td class="paramtype">wxBrush&nbsp;</td>
+          <td class="paramname"> <em>higherBrush</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sets brush to draw higher (bull) candles. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>higherBrush</em>&nbsp;</td><td>brush to draw higher (bear) candles </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
+<a class="anchor" name="c682f4f25b1bce771f1642419bbf9985"></a><!-- doxytag: member="OHLCCandlestickRenderer::SetLowerBrush" ref="c682f4f25b1bce771f1642419bbf9985" args="(wxBrush lowerBrush)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OHLCCandlestickRenderer::SetLowerBrush           </td>
+          <td>(</td>
+          <td class="paramtype">wxBrush&nbsp;</td>
+          <td class="paramname"> <em>lowerBrush</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sets brush to draw lower (bear) candles. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>lowerBrush</em>&nbsp;</td><td>brush to draw lower (bear) candles </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
+<a class="anchor" name="2ec88f54ef7e47a01b8edf3fbbfcd6eb"></a><!-- doxytag: member="OHLCCandlestickRenderer::SetOutlinePen" ref="2ec88f54ef7e47a01b8edf3fbbfcd6eb" args="(wxPen outlinePen)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OHLCCandlestickRenderer::SetOutlinePen           </td>
+          <td>(</td>
+          <td class="paramtype">wxPen&nbsp;</td>
+          <td class="paramname"> <em>outlinePen</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sets pen to draw candle outline. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>outlinePen</em>&nbsp;</td><td>pen to draw candle outline </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/ohlc/<a class="el" href="ohlccandlestickrenderer_8h-source.html">ohlccandlestickrenderer.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:25 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:27 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

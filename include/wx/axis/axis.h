@@ -3,7 +3,7 @@
 // Purpose: axis base class declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -51,6 +51,13 @@ public:
 
 /**
  * Base class for all axes.
+ * Axis has following attributes:
+ * <ol>
+ * 	<li>Location - where axis arranged on plot, can be: AXIS_LEFT, AXIS_RIGHT, AXIS_TOP, AXIS_BOTTOM.</li>
+ * 	<li>Margins - distance from plot edges to axis labels.</li>
+ * 	<li>Window - visible subset of data. Window has width and position. Width means how much
+ *  data points is visible at once, position is first data item visible.</li>
+ * </ol>
  */
 class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>//, public RefObject
 {
@@ -331,7 +338,16 @@ public:
 	AxisShare(Axis *axis);
 	virtual ~AxisShare();
 
+	/**
+	 * Sets axis share visible or not.
+	 * Note: by default axis share is invisible.
+	 * @param shareVisible true to set share visible
+	 */
 	void SetShareVisible(bool shareVisible);
+
+	//
+	// Axis
+	//
 
 	virtual void GetDataBounds(double &minValue, double &maxValue);
 

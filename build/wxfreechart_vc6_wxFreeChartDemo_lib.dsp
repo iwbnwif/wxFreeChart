@@ -492,6 +492,10 @@ SOURCE=..\sample\ganttdemos.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\sample\markersdemos.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\sample\multipleaxisdemos.cpp
 # End Source File
 # Begin Source File

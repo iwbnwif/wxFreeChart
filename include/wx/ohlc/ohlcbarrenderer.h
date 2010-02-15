@@ -3,7 +3,7 @@
 // Purpose: OHLC bar renderer declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -22,6 +22,25 @@ public:
 	virtual ~OHLCBarRenderer();
 
 	virtual void DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close);
+
+	/**
+	 * Sets pen to draw bars.
+	 * @param barPen pen to draw bars
+	 */
+	void SetBarPen(wxPen barPen)
+	{
+		m_barPen = barPen;
+		FireNeedRedraw();
+	}
+
+	/**
+	 * Return pen to draw bars.
+	 * @return pen to draw bars
+	 */
+	const wxPen &GetBarPen()
+	{
+		return m_barPen;
+	}
 
 private:
 	wxPen m_barPen;

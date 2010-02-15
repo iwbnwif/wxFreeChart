@@ -1942,6 +1942,9 @@
 				RelativePath="..\src\chartpanel.cpp">
 			</File>
 			<File
+				RelativePath="..\src\chartsplitpanel.cpp">
+			</File>
+			<File
 				RelativePath="..\src\colorscheme.cpp">
 			</File>
 			<File
@@ -2026,6 +2029,9 @@
 				RelativePath="..\src\xy\xydataset.cpp">
 			</File>
 			<File
+				RelativePath="..\src\xy\xydynamicdataset.cpp">
+			</File>
+			<File
 				RelativePath="..\src\xy\xyhistorenderer.cpp">
 			</File>
 			<File
@@ -2089,6 +2095,9 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\chartrenderer.h">
+			</File>
+			<File
+				RelativePath="..\include\wx\chartsplitpanel.h">
 			</File>
 			<File
 				RelativePath="..\include\wx\colorscheme.h">
@@ -2185,6 +2194,9 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\xy\xydataset.h">
+			</File>
+			<File
+				RelativePath="..\include\wx\xy\xydynamicdataset.h">
 			</File>
 			<File
 				RelativePath="..\include\wx\xy\xyhistorenderer.h">

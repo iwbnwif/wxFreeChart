@@ -108,6 +108,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_sinefunction.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xyplot.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xyarearenderer.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xydynamicdataset.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_vectordataset.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xyhistorenderer.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xyrenderer.o \
@@ -123,6 +124,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_categorysimpledataset.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_symbol.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_dataset.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_chartsplitpanel.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_colorscheme.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_chartpanel.o
 WXFREECHART_LIB_HEADERS =  \
@@ -132,6 +134,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/gantt/ganttrenderer.h \
 	include/wx/gantt/ganttplot.h \
 	include/wx/gantt/ganttsimpledataset.h \
+	include/wx/chartsplitpanel.h \
 	include/wx/chart.h \
 	include/wx/bars/barplot.h \
 	include/wx/bars/barrenderer.h \
@@ -159,6 +162,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/xy/xyhistorenderer.h \
 	include/wx/xy/xysimpledataset.h \
 	include/wx/xy/xylinerenderer.h \
+	include/wx/xy/xydynamicdataset.h \
 	include/wx/xy/xydataset.h \
 	include/wx/xy/vectordataset.h \
 	include/wx/xy/xyrenderer.h \
@@ -212,6 +216,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_sinefunction.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xyplot.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xyarearenderer.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xydynamicdataset.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_vectordataset.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xyhistorenderer.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xyrenderer.o \
@@ -227,6 +232,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_categorysimpledataset.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_symbol.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_dataset.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_chartsplitpanel.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_colorscheme.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_chartpanel.o
 WXFREECHART_DLL_HEADERS =  \
@@ -236,6 +242,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/gantt/ganttrenderer.h \
 	include/wx/gantt/ganttplot.h \
 	include/wx/gantt/ganttsimpledataset.h \
+	include/wx/chartsplitpanel.h \
 	include/wx/chart.h \
 	include/wx/bars/barplot.h \
 	include/wx/bars/barrenderer.h \
@@ -263,6 +270,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/xy/xyhistorenderer.h \
 	include/wx/xy/xysimpledataset.h \
 	include/wx/xy/xylinerenderer.h \
+	include/wx/xy/xydynamicdataset.h \
 	include/wx/xy/xydataset.h \
 	include/wx/xy/vectordataset.h \
 	include/wx/xy/xyrenderer.h \
@@ -291,6 +299,7 @@ WXFREECHARTDEMO_LIB_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_demo.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_democollection.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ganttdemos.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_markersdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_multipleaxisdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ohlcdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_timeseriesdemos.o \
@@ -304,6 +313,7 @@ WXFREECHARTDEMO_DLL_OBJECTS =  \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_demo.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_democollection.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ganttdemos.o \
+	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_markersdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_multipleaxisdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ohlcdemos.o \
 	gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_timeseriesdemos.o \
@@ -625,6 +635,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xyplot.o: ../src/xy/xypl
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xyarearenderer.o: ../src/xy/xyarearenderer.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
 
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_xydynamicdataset.o: ../src/xy/xydynamicdataset.cpp
+	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
+
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_vectordataset.o: ../src/xy/vectordataset.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
 
@@ -668,6 +681,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_symbol.o: ../src/symbol.
 	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_dataset.o: ../src/dataset.cpp
+	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
+
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_chartsplitpanel.o: ../src/chartsplitpanel.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_lib_colorscheme.o: ../src/colorscheme.cpp
@@ -766,6 +782,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xyplot.o: ../src/xy/xypl
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xyarearenderer.o: ../src/xy/xyarearenderer.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
 
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_xydynamicdataset.o: ../src/xy/xydynamicdataset.cpp
+	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
+
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_vectordataset.o: ../src/xy/vectordataset.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
 
@@ -811,6 +830,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_symbol.o: ../src/symbol.
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_dataset.o: ../src/dataset.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
 
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_chartsplitpanel.o: ../src/chartsplitpanel.cpp
+	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
+
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxfreechart_dll_colorscheme.o: ../src/colorscheme.cpp
 	$(CXX) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(CPPDEPS) $<
 
@@ -833,6 +855,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_democollection.o: ..
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_ganttdemos.o: ../sample/ganttdemos.cpp
+	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
+
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_markersdemos.o: ../sample/markersdemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_lib_multipleaxisdemos.o: ../sample/multipleaxisdemos.cpp
@@ -863,6 +888,9 @@ gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_democollection.o: ..
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_ganttdemos.o: ../sample/ganttdemos.cpp
+	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
+
+gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_markersdemos.o: ../sample/markersdemos.cpp
 	$(CXX) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(CPPDEPS) $<
 
 gcc$(WX_PORT)$(_BUILDDIR_SHARED_SUFFIX)/wxFreeChartDemo_dll_multipleaxisdemos.o: ../sample/multipleaxisdemos.cpp

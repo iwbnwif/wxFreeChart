@@ -916,6 +916,10 @@ SOURCE=..\src\chartpanel.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\chartsplitpanel.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\colorscheme.cpp
 # End Source File
 # Begin Source File
@@ -1028,6 +1032,10 @@ SOURCE=..\src\xy\xydataset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\xy\xydynamicdataset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\xy\xyhistorenderer.cpp
 # End Source File
 # Begin Source File
@@ -1109,6 +1117,10 @@ SOURCE=..\include\wx\chartpanel.h
 # Begin Source File
 
 SOURCE=..\include\wx\chartrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\chartsplitpanel.h
 # End Source File
 # Begin Source File
 
@@ -1237,6 +1249,10 @@ SOURCE=..\include\wx\xy\xyarearenderer.h
 # Begin Source File
 
 SOURCE=..\include\wx\xy\xydataset.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\xydynamicdataset.h
 # End Source File
 # Begin Source File
 

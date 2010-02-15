@@ -59,9 +59,6 @@ public:
 		// set line renderer to dataset
 		dataset->SetRenderer(new XYLineRenderer());
 
-		// add our dataset to plot
-		plot->AddDataset(dataset);
-
 		// create left and bottom number axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
@@ -70,13 +67,8 @@ public:
 		leftAxis->SetTitle(wxT("X"));
 		bottomAxis->SetTitle(wxT("Y"));
 
-		// add axes to plot
-		plot->AddAxis(leftAxis);
-		plot->AddAxis(bottomAxis);
-
-		// link axes and dataset
-		plot->LinkDataVerticalAxis(0, 0);
-		plot->LinkDataHorizontalAxis(0, 0);
+		// add axes and dataset to plot
+		plot->AddObjects(dataset, leftAxis, bottomAxis);
 
 		// and finally create chart
 		return new Chart(plot, GetName());
