@@ -3,7 +3,7 @@
 // Purpose: area draw declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -17,7 +17,7 @@
 
 /**
  * Base class for drawing area background.
- * Areas can be data area in Plot, chart background, etc...
+ * Areas can be data area in Plot, chart background, legend area, bars, etc...
  */
 class WXDLLIMPEXP_FREECHART AreaDraw : public DrawObject
 {
@@ -35,6 +35,7 @@ public:
 };
 
 /**
+ * Transparent area draw.
  * Doing nothing.
  */
 class WXDLLIMPEXP_FREECHART NoAreaDraw : public AreaDraw
@@ -54,20 +55,45 @@ public:
 class WXDLLIMPEXP_FREECHART FillAreaDraw : public AreaDraw
 {
 public:
+	/**
+	 * Constructs new fill area draw.
+	 * @param borderPen pen to draw area border
+	 * @param fillBrush brush to fill area
+	 */
 	FillAreaDraw(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
+
+	FillAreaDraw(wxColour borderColour, wxColour fillColour);
 
 	virtual ~FillAreaDraw();
 
 	virtual void Draw(wxDC &dc, wxRect rc);
 
 	/**
-	 * Sets border len.
+	 * Returns border pen.
+	 * @return border pen
+	 */
+	const wxPen &GetBorderPen()
+	{
+		return m_borderPen;
+	}
+
+	/**
+	 * Sets border pen.
 	 * @param borderPen border pen
 	 */
 	void SetBorderPen(wxPen borderPen)
 	{
 		m_borderPen = borderPen;
 		FireNeedRedraw();
+	}
+
+	/**
+	 * Returns fill brush.
+	 * @return fill brush
+	 */
+	const wxBrush &GetFillBrush()
+	{
+		return m_fillBrush;
 	}
 
 	/**
@@ -87,6 +113,7 @@ private:
 
 /**
  * Gradient fill area.
+ * Uses linear gradient fill to draw area.
  */
 class WXDLLIMPEXP_FREECHART GradientAreaDraw : public AreaDraw
 {

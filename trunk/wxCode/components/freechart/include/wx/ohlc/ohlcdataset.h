@@ -3,7 +3,7 @@
 // Purpose: OHLC datasets base class declaration.
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -40,6 +40,10 @@ public:
 		return (OHLCRenderer *) m_renderer;
 	}
 
+	/**
+	 * Sets serie name. OHLC datasets contains only one serie.
+	 * @param serieName new serie name
+	 */
 	void SetSerieName(const wxString &serieName)
 	{
 		m_serieName = serieName;

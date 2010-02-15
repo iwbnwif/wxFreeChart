@@ -3,7 +3,7 @@
 // Purpose: axis plot implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -50,11 +50,6 @@ AxisPlot::~AxisPlot()
 	for (size_t n = 0; n < m_verticalAxes.Count(); n++) {
 		Axis *axis = m_verticalAxes[n];
 		wxDELETE(axis);
-	}
-
-	for (size_t n = 0; n < m_markers.Count(); n++) {
-		Marker *marker = m_markers[n];
-		wxDELETE(marker);
 	}
 
 	SAFE_REMOVE_OBSERVER(this, m_dataBackground);
@@ -120,6 +115,16 @@ void AxisPlot::AddDataset(Dataset *dataset)
 	FirePlotNeedRedraw();
 }
 
+void AxisPlot::AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis)
+{
+	AddDataset(dataset);
+	AddAxis(verticalAxis);
+	AddAxis(horizontalAxis);
+
+	LinkDataVerticalAxis(m_datasets.Count() - 1, m_verticalAxes.Count() - 1);
+	LinkDataHorizontalAxis(m_datasets.Count() - 1, m_horizontalAxes.Count() - 1);
+}
+
 size_t AxisPlot::GetDatasetCount()
 {
 	return m_datasets.Count();
@@ -128,11 +133,6 @@ size_t AxisPlot::GetDatasetCount()
 Dataset *AxisPlot::GetDataset(size_t index)
 {
 	return m_datasets[index];
-}
-
-void AxisPlot::AddMarker(Marker *marker)
-{
-	m_markers.Add(marker);
 }
 
 void AxisPlot::LinkDataHorizontalAxis(size_t nData, size_t nAxis)
@@ -411,8 +411,21 @@ void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
 
 void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
 {
-	for (size_t n = 0; n < m_markers.Count(); n++) {
-		// TODO not implemented!
+	for (size_t n = 0; n < m_datasets.Count(); n++) {
+		Dataset *dataset = m_datasets[n];
+
+		if (dataset->GetMarkersCount() == 0) {
+			continue;
+		}
+
+		Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
+		Axis *vertAxis = GetDatasetVerticalAxis(dataset);
+
+		for (size_t nMarker = 0; nMarker < dataset->GetMarkersCount(); nMarker++) {
+			Marker *marker = dataset->GetMarker(nMarker);
+
+			marker->Draw(dc, rcData, horizAxis, vertAxis);
+		}
 	}
 }
 
@@ -429,8 +442,8 @@ void AxisPlot::DrawDataArea(wxDC &dc, wxRect rcData)
 	clipRc.Deflate(1, 1);
 	wxDCClipper clip(dc, clipRc);
 
-	DrawGridLines(dc, rcData);
 	DrawMarkers(dc, rcData);
+	DrawGridLines(dc, rcData);
 	DrawDatasets(dc, rcData);
 }
 

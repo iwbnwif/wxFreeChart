@@ -1568,6 +1568,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\sample\markersdemos.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\sample\multipleaxisdemos.cpp"
 				>
 			</File>

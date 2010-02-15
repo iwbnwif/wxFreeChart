@@ -3,7 +3,7 @@
 // Purpose: bar renderer implementation
 // Author:	Moskvichev Andrey V.
 // Created:	14.11.2008
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 

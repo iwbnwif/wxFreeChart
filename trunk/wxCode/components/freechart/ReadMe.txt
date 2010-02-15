@@ -4,7 +4,7 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.5
+ Version: 1.6
  Description:
  wxFreeChart is free powerful charting library based on wxWidgets. It 
  designed with flexibility in mind, and supports many types of charts 
@@ -26,8 +26,8 @@
  WX_DIR, WX_DEBUG, WX_UNICODE and WX_SHARED to match your wxWidgets build.
  Examples:
 
-   > nmake -fmakefile.vc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1
-   > make -fmakefile.bcc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1
+   > nmake -fmakefile.vc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1 WX_MONOLITHIC=0/1
+   > make -fmakefile.bcc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1 WX_MONOLITHIC=0/1
 
 
 
@@ -47,9 +47,18 @@
  ChangeLog
  ---------
  
+ 1.6:
+ 		What's new:
+ 		 - wxChartSplitPanel was added, it works with multiple plots, 
+ 		   and allows add/remove/resize them
+ 		 - XYDynamicDataset was added (thanks to Mike Sazonov)
+ 		 - basic markers support has been added
+ 		 - updated documentation
+ 		 - website update
+ 		 
  1.5:
  		What's new:
- 		 - logarithmic axes added (thanks to Andreas Kuchler)
+ 		 - logarithmic axes added (thanks to Andreas Kuechler)
  		 - updated demo
  		 - dll export problems fixed
  		 - updated documentation
@@ -88,18 +97,20 @@
 
  Future plans:
  - Transparency for bubble charts, histogram charts
- - Markers
  - Add levels/fractals/etc support to OHLCPlot. Make 
    OHLCPlot suitable for technical analysis applications
  - Make axis marks drawing more flexible
  - Add zoom to plots
+ - Add interval axes
+ - Crosshair
+ - Statistics charts
+ - Mouse events for chart item click, right/left up/down, drag, etc
  - Pie plots 
  - Make wxFreeChart to work on handheld wxWidgets ports
  
  Known issues:
  - window scrolling bugs
  - compdateaxis bugs
- - markers not implemented
  - Work with wxWidgets 2.6.x not tested.
  - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
  - Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
@@ -114,5 +125,11 @@
  - Donate to support project development, 
    click PayPal (tm) Donate button on wxFreeChart web site. 
  
+ Credits:
+ 	Mike Sazonov - testing, export bugfixes, XYDynamicDataset implementation, 
+ 					many interesting ideas.
+ 	
+ 	Andreas Kuechler - testing, logarithmic axes implementation, many interesting ideas.
+ 	
  Author contact email: mab[at]smtp[dot]ru
 

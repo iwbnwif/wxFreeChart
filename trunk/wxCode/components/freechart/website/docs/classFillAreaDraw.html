@@ -43,18 +43,60 @@ Collaboration diagram for FillAreaDraw:</div>
 <a href="classFillAreaDraw-members.html">List of all members.</a><table border="0" cellpadding="0" cellspacing="0">
 <tr><td></td></tr>
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="25ab57dbfa6235dc2e142fa3528e2f18"></a><!-- doxytag: member="FillAreaDraw::FillAreaDraw" ref="25ab57dbfa6235dc2e142fa3528e2f18" args="(wxPen borderPen=(wxPen)*wxBLACK_PEN, wxBrush fillBrush=(wxBrush)*wxWHITE_BRUSH)" -->
-&nbsp;</td><td class="memItemRight" valign="bottom"><b>FillAreaDraw</b> (wxPen borderPen=(wxPen)*wxBLACK_PEN, wxBrush fillBrush=(wxBrush)*wxWHITE_BRUSH)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFillAreaDraw.html#25ab57dbfa6235dc2e142fa3528e2f18">FillAreaDraw</a> (wxPen borderPen=(wxPen)*wxBLACK_PEN, wxBrush fillBrush=(wxBrush)*wxWHITE_BRUSH)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="f08391c2d574826c00fe33920726d808"></a><!-- doxytag: member="FillAreaDraw::FillAreaDraw" ref="f08391c2d574826c00fe33920726d808" args="(wxColour borderColour, wxColour fillColour)" -->
+&nbsp;</td><td class="memItemRight" valign="bottom"><b>FillAreaDraw</b> (wxColour borderColour, wxColour fillColour)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFillAreaDraw.html#d767e5eecb3997587b5b11c66f3d4e9b">Draw</a> (wxDC &amp;dc, wxRect rc)</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const wxPen &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFillAreaDraw.html#53cd577b531f4607fa4de8d0a9d4817e">GetBorderPen</a> ()</td></tr>
+
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFillAreaDraw.html#8d4050b714e5e6da5031bffa94d5a74d">SetBorderPen</a> (wxPen borderPen)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const wxBrush &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFillAreaDraw.html#5fff9b56b9c31c1d846bc78a0b831952">GetFillBrush</a> ()</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFillAreaDraw.html#0f90749099cd28104fdfa370a3c93054">SetFillBrush</a> (wxBrush fillBrush)</td></tr>
 
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
-Fills area with specified brush and draw outline of area with specified pen. <hr><h2>Member Function Documentation</h2>
+Fills area with specified brush and draw outline of area with specified pen. <hr><h2>Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" name="25ab57dbfa6235dc2e142fa3528e2f18"></a><!-- doxytag: member="FillAreaDraw::FillAreaDraw" ref="25ab57dbfa6235dc2e142fa3528e2f18" args="(wxPen borderPen=(wxPen)*wxBLACK_PEN, wxBrush fillBrush=(wxBrush)*wxWHITE_BRUSH)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FillAreaDraw::FillAreaDraw           </td>
+          <td>(</td>
+          <td class="paramtype">wxPen&nbsp;</td>
+          <td class="paramname"> <em>borderPen</em> = <code>(wxPen)*wxBLACK_PEN</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">wxBrush&nbsp;</td>
+          <td class="paramname"> <em>fillBrush</em> = <code>(wxBrush)*wxWHITE_BRUSH</code></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Constructs new fill area draw. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>borderPen</em>&nbsp;</td><td>pen to draw area border </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>fillBrush</em>&nbsp;</td><td>brush to fill area </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
+<hr><h2>Member Function Documentation</h2>
 <a class="anchor" name="d767e5eecb3997587b5b11c66f3d4e9b"></a><!-- doxytag: member="FillAreaDraw::Draw" ref="d767e5eecb3997587b5b11c66f3d4e9b" args="(wxDC &amp;dc, wxRect rc)" -->
 <div class="memitem">
 <div class="memproto">
@@ -92,6 +134,46 @@ Draw area background. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 </div>
 </div><p>
+<a class="anchor" name="53cd577b531f4607fa4de8d0a9d4817e"></a><!-- doxytag: member="FillAreaDraw::GetBorderPen" ref="53cd577b531f4607fa4de8d0a9d4817e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wxPen&amp; FillAreaDraw::GetBorderPen           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns border pen. <dl class="return" compact><dt><b>Returns:</b></dt><dd>border pen </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="5fff9b56b9c31c1d846bc78a0b831952"></a><!-- doxytag: member="FillAreaDraw::GetFillBrush" ref="5fff9b56b9c31c1d846bc78a0b831952" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wxBrush&amp; FillAreaDraw::GetFillBrush           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns fill brush. <dl class="return" compact><dt><b>Returns:</b></dt><dd>fill brush </dd></dl>
+
+</div>
+</div><p>
 <a class="anchor" name="8d4050b714e5e6da5031bffa94d5a74d"></a><!-- doxytag: member="FillAreaDraw::SetBorderPen" ref="8d4050b714e5e6da5031bffa94d5a74d" args="(wxPen borderPen)" -->
 <div class="memitem">
 <div class="memproto">
@@ -109,7 +191,7 @@ Draw area background. <dl compact><dt><b>Parameters:</b></dt><dd>
 <div class="memdoc">
 
 <p>
-Sets border len. <dl compact><dt><b>Parameters:</b></dt><dd>
+Sets border pen. <dl compact><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>borderPen</em>&nbsp;</td><td>border pen </td></tr>
   </table>
@@ -145,7 +227,7 @@ Sets fill brush. <dl compact><dt><b>Parameters:</b></dt><dd>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/<a class="el" href="areadraw_8h-source.html">areadraw.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:23 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:25 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

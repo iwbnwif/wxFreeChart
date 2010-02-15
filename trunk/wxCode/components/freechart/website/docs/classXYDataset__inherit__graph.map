@@ -1,13 +1,14 @@
-<area shape="rect" href="$classCategoryDataset.html" title="CategoryDataset" alt="" coords="108,239,239,265">
-<area shape="rect" href="$classPolynom.html" title="Polynom" alt="" coords="263,239,337,265">
-<area shape="rect" href="$classSineFunction.html" title="SineFunction" alt="" coords="361,239,465,265">
-<area shape="rect" href="$classVectorDataset.html" title="VectorDataset" alt="" coords="489,239,601,265">
-<area shape="rect" href="$classXYSimpleDataset.html" title="XYSimpleDataset" alt="" coords="625,239,759,265">
-<area shape="rect" href="$classXYZDataset.html" title="XYZDataset" alt="" coords="783,239,881,265">
-<area shape="rect" href="$classDataset.html" title="Dataset" alt="" coords="443,84,515,111">
-<area shape="rect" href="$classRefObject.html" title="RefObject" alt="" coords="256,7,339,33">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="363,7,595,33">
-<area shape="rect" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="619,7,731,33">
-<area shape="rect" href="$classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="5,316,179,343">
-<area shape="rect" href="$classGanttDataset.html" title="GanttDataset" alt="" coords="203,316,309,343">
-<area shape="rect" href="$classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="180,393,332,420">
+<area shape="rect" href="$classCategoryDataset.html" title="CategoryDataset" alt="" coords="552,31,683,57">
+<area shape="rect" href="$classPolynom.html" title="Polynom" alt="" coords="580,81,655,108">
+<area shape="rect" href="$classSineFunction.html" title="SineFunction" alt="" coords="565,132,669,159">
+<area shape="rect" href="$classVectorDataset.html" title="VectorDataset" alt="" coords="561,183,673,209">
+<area shape="rect" href="$classXYDynamicDataset.html" title="XYDynamicDataset" alt="" coords="545,233,689,260">
+<area shape="rect" href="$classXYSimpleDataset.html" title="XYSimpleDataset" alt="" coords="551,284,684,311">
+<area shape="rect" href="$classXYZDataset.html" title="XYZDataset" alt="" coords="568,335,667,361">
+<area shape="rect" href="$classDataset.html" title="Dataset" alt="" coords="285,183,357,209">
+<area shape="rect" href="$classRefObject.html" title="RefObject" alt="" coords="80,132,163,159">
+<area shape="rect" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="5,183,237,209">
+<area shape="rect" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="65,233,177,260">
+<area shape="rect" href="$classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="740,5,913,32">
+<area shape="rect" href="$classGanttDataset.html" title="GanttDataset" alt="" coords="773,56,880,83">
+<area shape="rect" href="$classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="963,56,1115,83">

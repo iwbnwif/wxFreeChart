@@ -3,7 +3,7 @@
 // Purpose: markers declarations
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -12,14 +12,11 @@
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/drawobject.h>
-
-#include <wx/axis/axis.h>
+#include <wx/areadraw.h>
 
 #include <wx/dynarray.h>
 
-//
-// TODO: markers are not implemented!
-//
+class Axis;
 
 /**
  * Markers base class.
@@ -42,6 +39,7 @@ public:
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(Marker *, MarkerArray, WXDLLIMPEXP_FREECHART);
 
+#if 0
 /**
  * Point marker.
  */
@@ -64,8 +62,11 @@ private:
 	wxFont m_textFont;
 	wxColour m_textColour;
 };
+#endif
 
-
+/**
+ * Marker that marks single value, and drawn as line.
+ */
 class WXDLLIMPEXP_FREECHART LineMarker : public Marker
 {
 public:
@@ -73,31 +74,79 @@ public:
 	virtual ~LineMarker();
 
 	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis);
+
+	/**
+	 * Sets vertical line value.
+	 * @param value mark value
+	 */
+	void SetVerticalLine(double value);
+
+	/**
+	 * Sets horizontal line value.
+	 * @param value mark value
+	 */
+	void SetHorizontalLine(double value);
+
+	/**
+	 * Sets line value.
+	 * @param value mark value
+	 * @param horizontal true to mark horizontal line, false to mark vertical
+	 */
+	void SetValue(double value, bool horizontal);
+
+private:
+	wxPen m_linePen;
+
+	double m_value;
+	bool m_horizontal;
 };
 
+/**
+ * Marker that marks range of data.
+ *
+ */
 class WXDLLIMPEXP_FREECHART RangeMarker : public Marker
 {
 public:
-	RangeMarker(wxBrush brush, wxPen pen);
+	RangeMarker(AreaDraw *rangeAreaDraw);
 	virtual ~RangeMarker();
 
 	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis);
 
 	/**
-	 * Sets range for marker.
+	 * Sets vertical range.
 	 * @param minValue range minimal value
 	 * @param maxValue range maximal value
 	 */
-	void SetRange(double minValue, double maxValue)
-	{
-		m_minValue = minValue;
-		m_maxValue = maxValue;
-		FireNeedRedraw();
-	}
+	void SetVerticalRange(double minValue, double maxValue);
+
+	/**
+	 * Sets horizontal range.
+	 * @param minValue range minimal value
+	 * @param maxValue range maximal value
+	 */
+	void SetHorizontalRange(double minValue, double maxValue);
+
+	/**
+	 * Sets range.
+	 * @param minValue range minimal value
+	 * @param maxValue range maximal value
+	 * @param horizontal true to mark horizontal range, false to mark vertical
+	 */
+	void SetRange(double minValue, double maxValue, bool horizontal);
+
+	/**
+	 * Sets area draw object to draw marked range.
+	 * @param rangeArea new range area draw
+	 */
+	void SetRangeAreaDraw(AreaDraw *rangeAreaDraw);
 
 private:
 	double m_minValue;
 	double m_maxValue;
+	bool m_horizontal;
+
+	AreaDraw *m_rangeAreaDraw;
 };
 
 #endif /*MARKER_H_*/

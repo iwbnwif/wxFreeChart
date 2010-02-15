@@ -52,11 +52,9 @@ Collaboration diagram for CategoryDataset:</div>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="0cf450704b5e86e38827f913a0567a25"></a><!-- doxytag: member="CategoryDataset::HasValue" ref="0cf450704b5e86e38827f913a0567a25" args="(size_t index, size_t serie)" -->
 virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>HasValue</b> (size_t index, size_t serie)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="e53df85d85dd63dc74e774b15fb21759"></a><!-- doxytag: member="CategoryDataset::GetMinValue" ref="e53df85d85dd63dc74e774b15fb21759" args="(bool verticalAxis)" -->
-virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMinValue</b> (bool verticalAxis)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategoryDataset.html#e53df85d85dd63dc74e774b15fb21759">GetMinValue</a> (bool verticalAxis)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="bc1339c54ca45b9b7f78a4526f1d4d3d"></a><!-- doxytag: member="CategoryDataset::GetMaxValue" ref="bc1339c54ca45b9b7f78a4526f1d4d3d" args="(bool verticalAxis)" -->
-virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMaxValue</b> (bool verticalAxis)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategoryDataset.html#bc1339c54ca45b9b7f78a4526f1d4d3d">GetMaxValue</a> (bool verticalAxis)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategoryDataset.html#af1343affe6509a3538bb52e28313fef">GetX</a> (size_t index, size_t serie)</td></tr>
 
@@ -144,6 +142,62 @@ Returns value count in serie specified by index. <dl compact><dt><b>Parameters:<
 Returns category count. <dl class="return" compact><dt><b>Returns:</b></dt><dd>category count </dd></dl>
 
 <p>Implemented in <a class="el" href="classCategorySimpleDataset.html#7c54283edd4764db91eb680e714db128">CategorySimpleDataset</a>, <a class="el" href="classGanttDataset.html#2db4f7f243eb9dbfbab3c686e20c8c55">GanttDataset</a>, and <a class="el" href="classGanttSimpleDataset.html#d76cb390c6c29888855d70f847e507d1">GanttSimpleDataset</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="bc1339c54ca45b9b7f78a4526f1d4d3d"></a><!-- doxytag: member="CategoryDataset::GetMaxValue" ref="bc1339c54ca45b9b7f78a4526f1d4d3d" args="(bool verticalAxis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double CategoryDataset::GetMaxValue           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns maximal value. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>for datasets with XY coordinates, specifies direction </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>maximal value </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classXYDataset.html#d7528f2ce7182927de69dd227d0934c6">XYDataset</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="e53df85d85dd63dc74e774b15fb21759"></a><!-- doxytag: member="CategoryDataset::GetMinValue" ref="e53df85d85dd63dc74e774b15fb21759" args="(bool verticalAxis)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double CategoryDataset::GetMinValue           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns minimal value. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>for datasets with XY coordinates, specifies direction </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>minimal value </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classXYDataset.html#812781b8e17c00c6e5c64a7b9531c79d">XYDataset</a>.</p>
 
 </div>
 </div><p>
@@ -289,7 +343,7 @@ Returns y value at index. <dl compact><dt><b>Parameters:</b></dt><dd>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/category/<a class="el" href="categorydataset_8h-source.html">categorydataset.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:22 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:23 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

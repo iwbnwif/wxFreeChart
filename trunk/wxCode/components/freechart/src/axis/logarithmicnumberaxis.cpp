@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	logarithmicnumberaxis.cpp
 // Purpose: label axis implementation
-// Author:	Andreas Kuchler
+// Author:	Andreas Kuechler
 // Created:	2008/11/07
-// Copyright:	(c) 2010 Andreas Kuchler
+// Copyright:	(c) 2010 Andreas Kuechler
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 

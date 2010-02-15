@@ -29,7 +29,7 @@ Inheritance diagram for Dataset:</div>
 <div class="dynsection">
 <p><center><img src="classDataset__inherit__graph.png" border="0" usemap="#Dataset__inherit__map" alt="Inheritance graph"></center>
 <map name="Dataset__inherit__map">
-<area shape="rect" href="classOHLCDataset.html" title="OHLCDataset" alt="" coords="304,161,411,188"><area shape="rect" href="classXYDataset.html" title="XYDataset" alt="" coords="435,161,523,188"><area shape="rect" href="classRefObject.html" title="RefObject" alt="" coords="195,7,277,33"><area shape="rect" href="classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="301,7,533,33"><area shape="rect" href="classDrawObserver.html" title="DrawObserver" alt="" coords="557,7,669,33"><area shape="rect" href="classCategoryDataset.html" title="CategoryDataset" alt="" coords="108,239,239,265"><area shape="rect" href="classPolynom.html" title="Polynom" alt="" coords="263,239,337,265"><area shape="rect" href="classSineFunction.html" title="SineFunction" alt="" coords="361,239,465,265"><area shape="rect" href="classVectorDataset.html" title="VectorDataset" alt="" coords="489,239,601,265"><area shape="rect" href="classXYSimpleDataset.html" title="XYSimpleDataset" alt="" coords="625,239,759,265"><area shape="rect" href="classXYZDataset.html" title="XYZDataset" alt="" coords="783,239,881,265"><area shape="rect" href="classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="5,316,179,343"><area shape="rect" href="classGanttDataset.html" title="GanttDataset" alt="" coords="203,316,309,343"><area shape="rect" href="classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="180,393,332,420"></map>
+<area shape="rect" href="classOHLCDataset.html" title="OHLCDataset" alt="" coords="407,132,513,159"><area shape="rect" href="classXYDataset.html" title="XYDataset" alt="" coords="416,183,504,209"><area shape="rect" href="classRefObject.html" title="RefObject" alt="" coords="80,107,163,133"><area shape="rect" href="classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="5,157,237,184"><area shape="rect" href="classDrawObserver.html" title="DrawObserver" alt="" coords="65,208,177,235"><area shape="rect" href="classCategoryDataset.html" title="CategoryDataset" alt="" coords="571,31,701,57"><area shape="rect" href="classPolynom.html" title="Polynom" alt="" coords="599,81,673,108"><area shape="rect" href="classSineFunction.html" title="SineFunction" alt="" coords="584,132,688,159"><area shape="rect" href="classVectorDataset.html" title="VectorDataset" alt="" coords="580,183,692,209"><area shape="rect" href="classXYDynamicDataset.html" title="XYDynamicDataset" alt="" coords="564,233,708,260"><area shape="rect" href="classXYSimpleDataset.html" title="XYSimpleDataset" alt="" coords="569,284,703,311"><area shape="rect" href="classXYZDataset.html" title="XYZDataset" alt="" coords="587,335,685,361"><area shape="rect" href="classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="759,5,932,32"><area shape="rect" href="classGanttDataset.html" title="GanttDataset" alt="" coords="792,56,899,83"><area shape="rect" href="classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="981,56,1133,83"></map>
 <center><font size="2">[<a href="graph_legend.html">legend</a>]</font></center></div>
 <div class="dynheader">
 Collaboration diagram for Dataset:</div>
@@ -58,14 +58,18 @@ Collaboration diagram for Dataset:</div>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual wxString&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#3d01edf567e431c10e7a708930cf4aaf">GetSerieName</a> (size_t serie)=0</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="afae2d0155462915c9caefc9b6f6728b"></a><!-- doxytag: member="Dataset::GetMinValue" ref="afae2d0155462915c9caefc9b6f6728b" args="(bool vertical)=0" -->
-virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMinValue</b> (bool vertical)=0</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#afae2d0155462915c9caefc9b6f6728b">GetMinValue</a> (bool vertical)=0</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="1f19ad398bd605967481925ddd22788c"></a><!-- doxytag: member="Dataset::GetMaxValue" ref="1f19ad398bd605967481925ddd22788c" args="(bool vertical)=0" -->
-virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><b>GetMaxValue</b> (bool vertical)=0</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#1f19ad398bd605967481925ddd22788c">GetMaxValue</a> (bool vertical)=0</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="13548a2479dccbcb743c8289377e7309"></a><!-- doxytag: member="Dataset::AsDateTimeDataset" ref="13548a2479dccbcb743c8289377e7309" args="()" -->
-virtual DateTimeDataset *&nbsp;</td><td class="memItemRight" valign="bottom"><b>AsDateTimeDataset</b> ()</td></tr>
+virtual <a class="el" href="classDateTimeDataset.html">DateTimeDataset</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><b>AsDateTimeDataset</b> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#eaab165eb9b77ab12f75e32c87d7843f">AddMarker</a> (<a class="el" href="classMarker.html">Marker</a> *marker)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">size_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#5de83633415d8d3d8f8f83c6a2553233">GetMarkersCount</a> ()</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="el" href="classMarker.html">Marker</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#87bdd9f3bdca5c643a1cf426d226d29c">GetMarker</a> (size_t index)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="b73a6bdf483dfdb0c47d7512c95f996c"></a><!-- doxytag: member="Dataset::NeedRedraw" ref="b73a6bdf483dfdb0c47d7512c95f996c" args="(DrawObject *obj)" -->
 virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>NeedRedraw</b> (<a class="el" href="classDrawObject.html">DrawObject</a> *obj)</td></tr>
@@ -73,22 +77,15 @@ virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><b>NeedRedraw</b
 <tr><td colspan="2"><br><h2>Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual bool&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#45ce4ddc8105500a91122d495377dd03">AcceptRenderer</a> (<a class="el" href="classRenderer.html">Renderer</a> *r)=0</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="b3fa4c02c3fd1a3839e396e774ff8243"></a><!-- doxytag: member="Dataset::DatasetChanged" ref="b3fa4c02c3fd1a3839e396e774ff8243" args="()" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>DatasetChanged</b> ()</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDataset.html#b3fa4c02c3fd1a3839e396e774ff8243">DatasetChanged</a> ()</td></tr>
 
 <tr><td colspan="2"><br><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="805f327ff8628bb32a845af6b918dfd5"></a><!-- doxytag: member="Dataset::m_renderer" ref="805f327ff8628bb32a845af6b918dfd5" args="" -->
 <a class="el" href="classRenderer.html">Renderer</a> *&nbsp;</td><td class="memItemRight" valign="bottom"><b>m_renderer</b></td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="10f6711853725ae1ee70e3fa52147a34"></a><!-- doxytag: member="Dataset::m_updating" ref="10f6711853725ae1ee70e3fa52147a34" args="" -->
-bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>m_updating</b></td></tr>
-
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="10bb3062c95b132446f8b2071703a058"></a><!-- doxytag: member="Dataset::m_changed" ref="10bb3062c95b132446f8b2071703a058" args="" -->
-bool&nbsp;</td><td class="memItemRight" valign="bottom"><b>m_changed</b></td></tr>
-
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
-Base class for all datasets (XYDatasets, CategoryDatasets, OHLCDatasets, etc). <hr><h2>Member Function Documentation</h2>
+Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc). <hr><h2>Member Function Documentation</h2>
 <a class="anchor" name="45ce4ddc8105500a91122d495377dd03"></a><!-- doxytag: member="Dataset::AcceptRenderer" ref="45ce4ddc8105500a91122d495377dd03" args="(Renderer *r)=0" -->
 <div class="memitem">
 <div class="memproto">
@@ -111,6 +108,31 @@ Checks whether renderer is acceptable by this dataset. TODO: this method must be
 
 </div>
 </div><p>
+<a class="anchor" name="eaab165eb9b77ab12f75e32c87d7843f"></a><!-- doxytag: member="Dataset::AddMarker" ref="eaab165eb9b77ab12f75e32c87d7843f" args="(Marker *marker)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Dataset::AddMarker           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMarker.html">Marker</a> *&nbsp;</td>
+          <td class="paramname"> <em>marker</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Adds marker to plot. <a class="el" href="classPlot.html">Plot</a> takes ownership of marker. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>marker</em>&nbsp;</td><td>marker to be added </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
 <a class="anchor" name="eae29e5bc9a610be2750c3133e828748"></a><!-- doxytag: member="Dataset::BeginUpdate" ref="eae29e5bc9a610be2750c3133e828748" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -128,6 +150,27 @@ Checks whether renderer is acceptable by this dataset. TODO: this method must be
 
 <p>
 Called to begin dataset update. Each call must have corresponding EndUpdate call. Increment dataset update counter. 
+</div>
+</div><p>
+<a class="anchor" name="b3fa4c02c3fd1a3839e396e774ff8243"></a><!-- doxytag: member="Dataset::DatasetChanged" ref="b3fa4c02c3fd1a3839e396e774ff8243" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Dataset::DatasetChanged           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Called to indicate, that dataset is changed. For call by derivate classes. 
+<p>Referenced by <a class="el" href="vectordataset_8h-source.html#l00048">VectorDataset::Add()</a>, <a class="el" href="vectordataset_8h-source.html#l00084">VectorDataset::Clear()</a>, <a class="el" href="vectordataset_8h-source.html#l00072">VectorDataset::RemoveAt()</a>, <a class="el" href="vectordataset_8h-source.html#l00059">VectorDataset::Replace()</a>, and <a class="el" href="ohlcdataset_8h-source.html#l00047">OHLCDataset::SetSerieName()</a>.</p>
+
 </div>
 </div><p>
 <a class="anchor" name="728ff9b0d9071dc2ad515b26e07081e0"></a><!-- doxytag: member="Dataset::EndUpdate" ref="728ff9b0d9071dc2ad515b26e07081e0" args="()" -->
@@ -173,7 +216,109 @@ Returns value count in serie specified by index. <dl compact><dt><b>Parameters:<
 </dl>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>value count </dd></dl>
 
-<p>Implemented in <a class="el" href="classCategoryDataset.html#4e6097b5b5a23e35f1eddc274eac8358">CategoryDataset</a>, <a class="el" href="classGanttDataset.html#685705cda371ef3d46e6ea8c22d3cf9b">GanttDataset</a>, <a class="el" href="classOHLCDataset.html#68562d2b7391084e4f2f1416a726210c">OHLCDataset</a>, <a class="el" href="classPolynom.html#a207bbe0bf0b063116f2e3cf056dd0cc">Polynom</a>, <a class="el" href="classSineFunction.html#7aa7ece618f6ca63872e77417278deb9">SineFunction</a>, <a class="el" href="classVectorDataset.html#772b29bb3fcde0cbeb0de6d209e0032e">VectorDataset</a>, and <a class="el" href="classXYSimpleDataset.html#df03805de2f9b7e4f19fd1273289654d">XYSimpleDataset</a>.</p>
+<p>Implemented in <a class="el" href="classCategoryDataset.html#4e6097b5b5a23e35f1eddc274eac8358">CategoryDataset</a>, <a class="el" href="classGanttDataset.html#685705cda371ef3d46e6ea8c22d3cf9b">GanttDataset</a>, <a class="el" href="classOHLCDataset.html#68562d2b7391084e4f2f1416a726210c">OHLCDataset</a>, <a class="el" href="classPolynom.html#a207bbe0bf0b063116f2e3cf056dd0cc">Polynom</a>, <a class="el" href="classSineFunction.html#7aa7ece618f6ca63872e77417278deb9">SineFunction</a>, <a class="el" href="classVectorDataset.html#772b29bb3fcde0cbeb0de6d209e0032e">VectorDataset</a>, <a class="el" href="classXYDynamicDataset.html#b0df9379aa8e85330d95925af8bc8341">XYDynamicDataset</a>, and <a class="el" href="classXYSimpleDataset.html#df03805de2f9b7e4f19fd1273289654d">XYSimpleDataset</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="87bdd9f3bdca5c643a1cf426d226d29c"></a><!-- doxytag: member="Dataset::GetMarker" ref="87bdd9f3bdca5c643a1cf426d226d29c" args="(size_t index)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMarker.html">Marker</a>* Dataset::GetMarker           </td>
+          <td>(</td>
+          <td class="paramtype">size_t&nbsp;</td>
+          <td class="paramname"> <em>index</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns marker at specified index. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>index</em>&nbsp;</td><td>index of marker </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>marker at specified index </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="5de83633415d8d3d8f8f83c6a2553233"></a><!-- doxytag: member="Dataset::GetMarkersCount" ref="5de83633415d8d3d8f8f83c6a2553233" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t Dataset::GetMarkersCount           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns marker count. <dl class="return" compact><dt><b>Returns:</b></dt><dd>marker count </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="1f19ad398bd605967481925ddd22788c"></a><!-- doxytag: member="Dataset::GetMaxValue" ref="1f19ad398bd605967481925ddd22788c" args="(bool vertical)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double Dataset::GetMaxValue           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns maximal value. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>for datasets with XY coordinates, specifies direction </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>maximal value </dd></dl>
+
+<p>Implemented in <a class="el" href="classCategoryDataset.html#bc1339c54ca45b9b7f78a4526f1d4d3d">CategoryDataset</a>, <a class="el" href="classOHLCDataset.html#a76dd708829d39092b463fa579237908">OHLCDataset</a>, and <a class="el" href="classXYDataset.html#d7528f2ce7182927de69dd227d0934c6">XYDataset</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="afae2d0155462915c9caefc9b6f6728b"></a><!-- doxytag: member="Dataset::GetMinValue" ref="afae2d0155462915c9caefc9b6f6728b" args="(bool vertical)=0" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double Dataset::GetMinValue           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>vertical</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [pure virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Returns minimal value. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>vertical</em>&nbsp;</td><td>for datasets with XY coordinates, specifies direction </td></tr>
+  </table>
+</dl>
+<dl class="return" compact><dt><b>Returns:</b></dt><dd>minimal value </dd></dl>
+
+<p>Implemented in <a class="el" href="classCategoryDataset.html#e53df85d85dd63dc74e774b15fb21759">CategoryDataset</a>, <a class="el" href="classOHLCDataset.html#99ef91551f6ab1693d36b683b7f8e0b0">OHLCDataset</a>, and <a class="el" href="classXYDataset.html#812781b8e17c00c6e5c64a7b9531c79d">XYDataset</a>.</p>
 
 </div>
 </div><p>
@@ -195,7 +340,7 @@ Returns value count in serie specified by index. <dl compact><dt><b>Parameters:<
 <p>
 Returns serie count in this dataset. <dl class="return" compact><dt><b>Returns:</b></dt><dd>serie count </dd></dl>
 
-<p>Implemented in <a class="el" href="classCategorySimpleDataset.html#1bc0ad88208ed22c85d2e8c922597372">CategorySimpleDataset</a>, <a class="el" href="classGanttSimpleDataset.html#3e72759af6c9ad1f306c541d5b34deb4">GanttSimpleDataset</a>, <a class="el" href="classOHLCDataset.html#836ba3fbcdbf2c5363b51fcaa99fefe7">OHLCDataset</a>, <a class="el" href="classPolynom.html#2f4adb82636e7ea1e21ec423c9dcabd8">Polynom</a>, <a class="el" href="classSineFunction.html#781c118e735630bebf26213d296dbe45">SineFunction</a>, <a class="el" href="classVectorDataset.html#d74021df9a8130625bac573b354fbbf8">VectorDataset</a>, and <a class="el" href="classXYSimpleDataset.html#eb8aa1dbcc1dc672986f9cb34f97f84e">XYSimpleDataset</a>.</p>
+<p>Implemented in <a class="el" href="classCategorySimpleDataset.html#1bc0ad88208ed22c85d2e8c922597372">CategorySimpleDataset</a>, <a class="el" href="classGanttSimpleDataset.html#3e72759af6c9ad1f306c541d5b34deb4">GanttSimpleDataset</a>, <a class="el" href="classOHLCDataset.html#836ba3fbcdbf2c5363b51fcaa99fefe7">OHLCDataset</a>, <a class="el" href="classPolynom.html#2f4adb82636e7ea1e21ec423c9dcabd8">Polynom</a>, <a class="el" href="classSineFunction.html#781c118e735630bebf26213d296dbe45">SineFunction</a>, <a class="el" href="classVectorDataset.html#d74021df9a8130625bac573b354fbbf8">VectorDataset</a>, <a class="el" href="classXYDynamicDataset.html#386786ab514d0dddce5175139c4bf8bb">XYDynamicDataset</a>, and <a class="el" href="classXYSimpleDataset.html#eb8aa1dbcc1dc672986f9cb34f97f84e">XYSimpleDataset</a>.</p>
 
 </div>
 </div><p>
@@ -223,7 +368,7 @@ Returns serie name. <dl compact><dt><b>Parameters:</b></dt><dd>
 </dl>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>serie name </dd></dl>
 
-<p>Implemented in <a class="el" href="classCategorySimpleDataset.html#b2378f5f6e448ef471d7c4da102e068b">CategorySimpleDataset</a>, <a class="el" href="classGanttSimpleDataset.html#da8543412815da7ca9e7d2e334542305">GanttSimpleDataset</a>, <a class="el" href="classOHLCDataset.html#4231c6481bec98cd41acbdc14cdf0e79">OHLCDataset</a>, <a class="el" href="classPolynom.html#20de093e61e1c862d577027445777e2a">Polynom</a>, <a class="el" href="classSineFunction.html#d6118eb1851965f70d9cb81c6ecef268">SineFunction</a>, <a class="el" href="classVectorDataset.html#aabb10ff79d42c45f86245c7a2711ef6">VectorDataset</a>, and <a class="el" href="classXYSimpleDataset.html#1fc18b03de877106c9cc3d23a6dcb6f0">XYSimpleDataset</a>.</p>
+<p>Implemented in <a class="el" href="classCategorySimpleDataset.html#b2378f5f6e448ef471d7c4da102e068b">CategorySimpleDataset</a>, <a class="el" href="classGanttSimpleDataset.html#da8543412815da7ca9e7d2e334542305">GanttSimpleDataset</a>, <a class="el" href="classOHLCDataset.html#4231c6481bec98cd41acbdc14cdf0e79">OHLCDataset</a>, <a class="el" href="classPolynom.html#20de093e61e1c862d577027445777e2a">Polynom</a>, <a class="el" href="classSineFunction.html#d6118eb1851965f70d9cb81c6ecef268">SineFunction</a>, <a class="el" href="classVectorDataset.html#aabb10ff79d42c45f86245c7a2711ef6">VectorDataset</a>, <a class="el" href="classXYDynamicDataset.html#5f6ab3d17b3a1573c43842d24fe4d80a">XYDynamicDataset</a>, and <a class="el" href="classXYSimpleDataset.html#1fc18b03de877106c9cc3d23a6dcb6f0">XYSimpleDataset</a>.</p>
 
 </div>
 </div><p>
@@ -255,7 +400,7 @@ Sets renderer for this dataset. <dl compact><dt><b>Parameters:</b></dt><dd>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/<a class="el" href="dataset_8h-source.html">dataset.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:23 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:24 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

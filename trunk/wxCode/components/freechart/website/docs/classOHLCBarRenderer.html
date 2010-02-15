@@ -45,6 +45,10 @@ Collaboration diagram for OHLCBarRenderer:</div>
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCBarRenderer.html#d0d7ae76488f4088c1519c576cd7094d">DrawItem</a> (wxDC &amp;dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close)</td></tr>
 
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCBarRenderer.html#f787b4d3609a39a645365cfdd9930c88">SetBarPen</a> (wxPen barPen)</td></tr>
+
+<tr><td class="memItemLeft" nowrap align="right" valign="top">const wxPen &amp;&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOHLCBarRenderer.html#9a4d6b3b700adf0c966ea0ec62c4a6c3">GetBarPen</a> ()</td></tr>
+
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
 OHLC renderer for displaying bars. <hr><h2>Member Function Documentation</h2>
@@ -113,10 +117,55 @@ Draws item. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 </div>
 </div><p>
+<a class="anchor" name="9a4d6b3b700adf0c966ea0ec62c4a6c3"></a><!-- doxytag: member="OHLCBarRenderer::GetBarPen" ref="9a4d6b3b700adf0c966ea0ec62c4a6c3" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const wxPen&amp; OHLCBarRenderer::GetBarPen           </td>
+          <td>(</td>
+          <td class="paramname">          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Return pen to draw bars. <dl class="return" compact><dt><b>Returns:</b></dt><dd>pen to draw bars </dd></dl>
+
+</div>
+</div><p>
+<a class="anchor" name="f787b4d3609a39a645365cfdd9930c88"></a><!-- doxytag: member="OHLCBarRenderer::SetBarPen" ref="f787b4d3609a39a645365cfdd9930c88" args="(wxPen barPen)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OHLCBarRenderer::SetBarPen           </td>
+          <td>(</td>
+          <td class="paramtype">wxPen&nbsp;</td>
+          <td class="paramname"> <em>barPen</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sets pen to draw bars. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>barPen</em>&nbsp;</td><td>pen to draw bars </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/ohlc/<a class="el" href="ohlcbarrenderer_8h-source.html">ohlcbarrenderer.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:25 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:27 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

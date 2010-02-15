@@ -3,7 +3,7 @@
 // Purpose: axis plot declaration
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -70,6 +70,15 @@ public:
 	void AddDataset(Dataset *dataset);
 
 	/**
+	 * Adds dataset and vertical and horizontal axes to plot.
+	 * And links it all together.
+	 * @param dataset dataset to be added
+	 * @param verticalAxis vertical axis to be added
+	 * @param horizontalAxis horizontal axis to be added
+	 */
+	void AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis);
+
+	/**
 	 * Returns dataset count.
 	 * @return dataset count
 	 */
@@ -81,12 +90,6 @@ public:
 	 * @return dataset or NULL if index is out of bounds
 	 */
 	Dataset *GetDataset(size_t index);
-
-	/**
-	 * Adds marker to plot. Plot takes ownership of marker.
-	 * @param marker marker to be added
-	 */
-	void AddMarker(Marker *marker);
 
 	/**
 	 * Links dataset with horizontal axis
@@ -319,8 +322,6 @@ private:
 
 	DatasetArray m_datasets;
 	AreaDraw *m_dataBackground; // data area background
-
-	MarkerArray m_markers;
 
 	wxCoord m_legendPlotGap; // distance between plot and legend
 

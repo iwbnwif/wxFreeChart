@@ -45,11 +45,9 @@ Collaboration diagram for CategorySimpleDataset:</div>
 <tr><td colspan="2"><br><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" nowrap align="right" valign="top">&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategorySimpleDataset.html#ec490dcca869451360e9191ed881a7fc">CategorySimpleDataset</a> (wxString *names, size_t count)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="9a8386af9a9997070f2e25b16e58cf65"></a><!-- doxytag: member="CategorySimpleDataset::AddSerie" ref="9a8386af9a9997070f2e25b16e58cf65" args="(const wxString &amp;name, double *values, size_t count)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>AddSerie</b> (const wxString &amp;name, double *values, size_t count)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategorySimpleDataset.html#9a8386af9a9997070f2e25b16e58cf65">AddSerie</a> (const wxString &amp;name, double *values, size_t count)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="6fc1ff1c990b1bd667a661459710b965"></a><!-- doxytag: member="CategorySimpleDataset::AddSerie" ref="6fc1ff1c990b1bd667a661459710b965" args="(CategorySerie *serie)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>AddSerie</b> (CategorySerie *serie)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategorySimpleDataset.html#6fc1ff1c990b1bd667a661459710b965">AddSerie</a> (<a class="el" href="classCategorySerie.html">CategorySerie</a> *serie)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual double&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCategorySimpleDataset.html#725ba832d26a514011a6ccd80e46bd5b">GetValue</a> (size_t index, size_t serie)</td></tr>
 
@@ -63,7 +61,7 @@ void&nbsp;</td><td class="memItemRight" valign="bottom"><b>AddSerie</b> (Categor
 
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
-Simple category dataset implementation. <hr><h2>Constructor &amp; Destructor Documentation</h2>
+Simple category dataset implementation. It's general purpose implementation, and useful for many applications. <hr><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" name="ec490dcca869451360e9191ed881a7fc"></a><!-- doxytag: member="CategorySimpleDataset::CategorySimpleDataset" ref="ec490dcca869451360e9191ed881a7fc" args="(wxString *names, size_t count)" -->
 <div class="memitem">
 <div class="memproto">
@@ -100,6 +98,73 @@ Constructs new category simple dataset. <dl compact><dt><b>Parameters:</b></dt><
 </div>
 </div><p>
 <hr><h2>Member Function Documentation</h2>
+<a class="anchor" name="6fc1ff1c990b1bd667a661459710b965"></a><!-- doxytag: member="CategorySimpleDataset::AddSerie" ref="6fc1ff1c990b1bd667a661459710b965" args="(CategorySerie *serie)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CategorySimpleDataset::AddSerie           </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classCategorySerie.html">CategorySerie</a> *&nbsp;</td>
+          <td class="paramname"> <em>serie</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Adds serie. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>serie</em>&nbsp;</td><td>serie to be added </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
+<a class="anchor" name="9a8386af9a9997070f2e25b16e58cf65"></a><!-- doxytag: member="CategorySimpleDataset::AddSerie" ref="9a8386af9a9997070f2e25b16e58cf65" args="(const wxString &amp;name, double *values, size_t count)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CategorySimpleDataset::AddSerie           </td>
+          <td>(</td>
+          <td class="paramtype">const wxString &amp;&nbsp;</td>
+          <td class="paramname"> <em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double *&nbsp;</td>
+          <td class="paramname"> <em>values</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&nbsp;</td>
+          <td class="paramname"> <em>count</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Adds serie. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>name</em>&nbsp;</td><td>serie name </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>value</em>&nbsp;</td><td>serie values array </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>count</em>&nbsp;</td><td>values array elements count </td></tr>
+  </table>
+</dl>
+
+</div>
+</div><p>
 <a class="anchor" name="7c54283edd4764db91eb680e714db128"></a><!-- doxytag: member="CategorySimpleDataset::GetCount" ref="7c54283edd4764db91eb680e714db128" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -240,7 +305,7 @@ Returns value associated with category at index. <dl compact><dt><b>Parameters:<
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/category/<a class="el" href="categorysimpledataset_8h-source.html">categorysimpledataset.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:22 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:23 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

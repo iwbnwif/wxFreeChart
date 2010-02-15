@@ -98,6 +98,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_sinefunction.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyarearenderer.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xydynamicdataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_vectordataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyhistorenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyrenderer.obj \
@@ -113,6 +114,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_categorysimpledataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_symbol.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_dataset.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chartsplitpanel.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_colorscheme.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chartpanel.obj
 WXFREECHART_DLL_CXXFLAGS = /MD$(____wx_6) /DWIN32 $(____WX_SHARED) \
@@ -152,6 +154,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_sinefunction.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyarearenderer.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xydynamicdataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_vectordataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyhistorenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyrenderer.obj \
@@ -167,6 +170,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_categorysimpledataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_symbol.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_dataset.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chartsplitpanel.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_colorscheme.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chartpanel.obj
 WXFREECHARTDEMO_LIB_CXXFLAGS = /MD$(____wx_6) /DWIN32 $(____WX_SHARED) \
@@ -181,6 +185,7 @@ WXFREECHARTDEMO_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_demo.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_democollection.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ganttdemos.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_markersdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_multipleaxisdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ohlcdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_timeseriesdemos.obj \
@@ -197,6 +202,7 @@ WXFREECHARTDEMO_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_demo.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_democollection.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ganttdemos.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_markersdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_multipleaxisdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ohlcdemos.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_timeseriesdemos.obj \
@@ -515,6 +521,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj: ..\sr
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyarearenderer.obj: ..\src\xy\xyarearenderer.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\xyarearenderer.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xydynamicdataset.obj: ..\src\xy\xydynamicdataset.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\xydynamicdataset.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_vectordataset.obj: ..\src\xy\vectordataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\vectordataset.cpp
 
@@ -559,6 +568,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_symbol.obj: ..\sr
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_dataset.obj: ..\src\dataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\dataset.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_chartsplitpanel.obj: ..\src\chartsplitpanel.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\chartsplitpanel.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_colorscheme.obj: ..\src\colorscheme.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\colorscheme.cpp
@@ -656,6 +668,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj: ..\sr
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyarearenderer.obj: ..\src\xy\xyarearenderer.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\xyarearenderer.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xydynamicdataset.obj: ..\src\xy\xydynamicdataset.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\xydynamicdataset.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_vectordataset.obj: ..\src\xy\vectordataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\vectordataset.cpp
 
@@ -701,6 +716,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_symbol.obj: ..\sr
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_dataset.obj: ..\src\dataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\dataset.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_chartsplitpanel.obj: ..\src\chartsplitpanel.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\chartsplitpanel.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_colorscheme.obj: ..\src\colorscheme.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\colorscheme.cpp
 
@@ -724,6 +742,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_democollectio
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_ganttdemos.obj: ..\sample\ganttdemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\ganttdemos.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_markersdemos.obj: ..\sample\markersdemos.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\markersdemos.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_lib_multipleaxisdemos.obj: ..\sample\multipleaxisdemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) ..\sample\multipleaxisdemos.cpp
@@ -754,6 +775,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_democollectio
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_ganttdemos.obj: ..\sample\ganttdemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\ganttdemos.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_markersdemos.obj: ..\sample\markersdemos.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\markersdemos.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxFreeChartDemo_dll_multipleaxisdemos.obj: ..\sample\multipleaxisdemos.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) ..\sample\multipleaxisdemos.cpp

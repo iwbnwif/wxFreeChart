@@ -46,8 +46,7 @@ Collaboration diagram for AxisShare:</div>
 <tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="7ac7c472a6971f04c20963be891f6a16"></a><!-- doxytag: member="AxisShare::AxisShare" ref="7ac7c472a6971f04c20963be891f6a16" args="(Axis *axis)" -->
 &nbsp;</td><td class="memItemRight" valign="bottom"><b>AxisShare</b> (<a class="el" href="classAxis.html">Axis</a> *axis)</td></tr>
 
-<tr><td class="memItemLeft" nowrap align="right" valign="top"><a class="anchor" name="a0dc646cd88b91cb963b128be40c05ac"></a><!-- doxytag: member="AxisShare::SetShareVisible" ref="a0dc646cd88b91cb963b128be40c05ac" args="(bool shareVisible)" -->
-void&nbsp;</td><td class="memItemRight" valign="bottom"><b>SetShareVisible</b> (bool shareVisible)</td></tr>
+<tr><td class="memItemLeft" nowrap align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisShare.html#a0dc646cd88b91cb963b128be40c05ac">SetShareVisible</a> (bool shareVisible)</td></tr>
 
 <tr><td class="memItemLeft" nowrap align="right" valign="top">virtual void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="classAxisShare.html#f403bb3c1988d44b3c852c79f0c032d5">GetDataBounds</a> (double &amp;minValue, double &amp;maxValue)</td></tr>
 
@@ -99,7 +98,7 @@ Checks whether dataset can be accepted by this axis. Must be implemented by deri
 
 <p>Implements <a class="el" href="classAxis.html#25b1ee49dfe072cedaad3afcc6b7e853">Axis</a>.</p>
 
-<p>Referenced by <a class="el" href="axis_8h-source.html#l00218">Axis::AddDataset()</a>.</p>
+<p>Referenced by <a class="el" href="axis_8h-source.html#l00225">Axis::AddDataset()</a>.</p>
 
 </div>
 </div><p>
@@ -240,7 +239,7 @@ Returns data bounds. <dl compact><dt><b>Parameters:</b></dt><dd>
 
 <p>Implements <a class="el" href="classAxis.html#155477c9d2f66e82a744a2893f5314ca">Axis</a>.</p>
 
-<p>Referenced by <a class="el" href="axis_8h-source.html#l00200">Axis::GetWindowBounds()</a>.</p>
+<p>Referenced by <a class="el" href="axis_8h-source.html#l00207">Axis::GetWindowBounds()</a>.</p>
 
 </div>
 </div><p>
@@ -297,6 +296,31 @@ Checks whether data value is visible. <dl compact><dt><b>Parameters:</b></dt><dd
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>true if data value is visible </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classAxis.html#298266b0e937e4790d55f73bad94ad79">Axis</a>.</p>
+
+</div>
+</div><p>
+<a class="anchor" name="a0dc646cd88b91cb963b128be40c05ac"></a><!-- doxytag: member="AxisShare::SetShareVisible" ref="a0dc646cd88b91cb963b128be40c05ac" args="(bool shareVisible)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void AxisShare::SetShareVisible           </td>
+          <td>(</td>
+          <td class="paramtype">bool&nbsp;</td>
+          <td class="paramname"> <em>shareVisible</em>          </td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>
+Sets axis share visible or not. Note: by default axis share is invisible. <dl compact><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>shareVisible</em>&nbsp;</td><td>true to set share visible </td></tr>
+  </table>
+</dl>
 
 </div>
 </div><p>
@@ -428,7 +452,7 @@ Performs axis bounds update after dataset/s change.
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/axis/<a class="el" href="axis_8h-source.html">axis.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:21 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:23 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

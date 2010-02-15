@@ -66,6 +66,7 @@ src/xy/functions/polynom.cpp
 src/xy/functions/sinefunction.cpp
 src/xy/xyplot.cpp
 src/xy/xyarearenderer.cpp
+src/xy/xydynamicdataset.cpp
 src/xy/vectordataset.cpp
 src/xy/xyhistorenderer.cpp
 src/xy/xyrenderer.cpp
@@ -81,6 +82,7 @@ src/category/categorydataset.cpp
 src/category/categorysimpledataset.cpp
 src/symbol.cpp
 src/dataset.cpp
+src/chartsplitpanel.cpp
 src/colorscheme.cpp
 src/chartpanel.cpp
     </set>
@@ -92,6 +94,7 @@ include/wx/gantt/ganttdataset.h
 include/wx/gantt/ganttrenderer.h
 include/wx/gantt/ganttplot.h
 include/wx/gantt/ganttsimpledataset.h
+include/wx/chartsplitpanel.h
 include/wx/chart.h
 include/wx/bars/barplot.h
 include/wx/bars/barrenderer.h
@@ -119,6 +122,7 @@ include/wx/xy/functions/sinefunction.h
 include/wx/xy/xyhistorenderer.h
 include/wx/xy/xysimpledataset.h
 include/wx/xy/xylinerenderer.h
+include/wx/xy/xydynamicdataset.h
 include/wx/xy/xydataset.h
 include/wx/xy/vectordataset.h
 include/wx/xy/xyrenderer.h

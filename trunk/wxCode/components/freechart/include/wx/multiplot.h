@@ -3,7 +3,7 @@
 // Purpose:
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -15,12 +15,27 @@
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(Plot *, PlotArray, WXDLLIMPEXP_FREECHART);
 
+/**
+ * Multiplot is plot containing one or more plots, called subplots.
+ * It arranges subplots to rows and columns.
+ */
 class WXDLLIMPEXP_FREECHART MultiPlot : public Plot, public PlotObserver
 {
 public:
+	/**
+	 * Constructs new multiplot.
+	 * @param rows number of rows for subplots
+	 * @param cols number of columns for subplots
+	 * @param horizGap distance between columns
+	 * @param vertGap distance between rows
+	 */
 	MultiPlot(int rows, int cols, wxCoord horizGap, wxCoord vertGap);
 	virtual ~MultiPlot();
 
+	/**
+	 * Add plot to this multiplot.
+	 * @param subPlot plot to be added
+	 */
 	void AddPlot(Plot *subPlot)
 	{
 		m_subPlots.Add(subPlot);

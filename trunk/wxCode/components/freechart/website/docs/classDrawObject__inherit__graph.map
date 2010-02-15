@@ -1,18 +1,19 @@
 <area shape="rect" href="$classAreaDraw.html" title="AreaDraw" alt="" coords="412,81,495,108">
-<area shape="rect" href="$classMarker.html" title="Marker" alt="" coords="421,208,485,235">
-<area shape="rect" href="$classRenderer.html" title="Renderer" alt="" coords="413,385,493,412">
-<area shape="rect" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="5,208,219,235">
+<area shape="rect" href="$classMarker.html" title="Marker" alt="" coords="421,183,485,209">
+<area shape="rect" href="$classRenderer.html" title="Renderer" alt="" coords="413,335,493,361">
+<area shape="rect" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="5,183,219,209">
 <area shape="rect" href="$classFillAreaDraw.html" title="FillAreaDraw" alt="" coords="564,5,663,32">
 <area shape="rect" href="$classGradientAreaDraw.html" title="GradientAreaDraw" alt="" coords="544,56,683,83">
 <area shape="rect" href="$classNoAreaDraw.html" title="NoAreaDraw" alt="" coords="563,107,664,133">
-<area shape="rect" href="$classPointMarker.html" title="PointMarker" alt="" coords="565,208,661,235">
-<area shape="rect" href="$classBarRenderer.html" title="BarRenderer" alt="" coords="563,309,664,336">
-<area shape="rect" href="$classGanttRenderer.html" title="GanttRenderer" alt="" coords="556,360,671,387">
-<area shape="rect" href="$classOHLCRenderer.html" title="OHLCRenderer" alt="" coords="556,411,671,437">
-<area shape="rect" href="$classXYRenderer.html" title="XYRenderer" alt="" coords="565,461,661,488">
-<area shape="rect" href="$classXYZRenderer.html" title="XYZRenderer" alt="" coords="560,512,667,539">
-<area shape="rect" href="$classOHLCBarRenderer.html" title="OHLCBarRenderer" alt="" coords="757,360,893,387">
-<area shape="rect" href="$classOHLCCandlestickRenderer.html" title="OHLCCandlestickRenderer" alt="" coords="732,411,919,437">
-<area shape="rect" href="$classXYHistoRenderer.html" title="XYHistoRenderer" alt="" coords="761,512,889,539">
-<area shape="rect" href="$classXYLineRenderer.html" title="XYLineRenderer" alt="" coords="983,537,1105,564">
-<area shape="rect" href="$classXYLineStepRenderer.html" title="XYLineStepRenderer" alt="" coords="968,588,1120,615">
+<area shape="rect" href="$classLineMarker.html" title="LineMarker" alt="" coords="568,157,659,184">
+<area shape="rect" href="$classRangeMarker.html" title="RangeMarker" alt="" coords="561,208,665,235">
+<area shape="rect" href="$classBarRenderer.html" title="BarRenderer" alt="" coords="563,259,664,285">
+<area shape="rect" href="$classGanttRenderer.html" title="GanttRenderer" alt="" coords="556,309,671,336">
+<area shape="rect" href="$classOHLCRenderer.html" title="OHLCRenderer" alt="" coords="556,360,671,387">
+<area shape="rect" href="$classXYRenderer.html" title="XYRenderer" alt="" coords="565,411,661,437">
+<area shape="rect" href="$classXYZRenderer.html" title="XYZRenderer" alt="" coords="560,461,667,488">
+<area shape="rect" href="$classOHLCBarRenderer.html" title="OHLCBarRenderer" alt="" coords="757,309,893,336">
+<area shape="rect" href="$classOHLCCandlestickRenderer.html" title="OHLCCandlestickRenderer" alt="" coords="732,360,919,387">
+<area shape="rect" href="$classXYHistoRenderer.html" title="XYHistoRenderer" alt="" coords="761,461,889,488">
+<area shape="rect" href="$classXYLineRenderer.html" title="XYLineRenderer" alt="" coords="983,487,1105,513">
+<area shape="rect" href="$classXYLineStepRenderer.html" title="XYLineStepRenderer" alt="" coords="968,537,1120,564">

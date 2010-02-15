@@ -3,7 +3,7 @@
 // Purpose: category dataset implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -21,7 +21,7 @@ CategoryDataset::~CategoryDataset()
 
 bool CategoryDataset::AcceptRenderer(Renderer *renderer)
 {
-	return wxDynamicCast(renderer, BarRenderer);
+	return (wxDynamicCast(renderer, BarRenderer) != NULL);
 }
 
 bool CategoryDataset::HasValue(size_t WXUNUSED(index), size_t WXUNUSED(serie))
@@ -45,8 +45,6 @@ double CategoryDataset::GetMaxValue(bool WXUNUSED(verticalAxis))
 	return GetRenderer()->GetMaxValue(this);
 }
 
-// TODO deprecated functions.
-//
 double CategoryDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return index;

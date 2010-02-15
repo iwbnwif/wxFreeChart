@@ -133,7 +133,15 @@ class&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="cla
 
 </table>
 <hr><a name="_details"></a><h2>Detailed Description</h2>
-Base class for all axes. <hr><h2>Constructor &amp; Destructor Documentation</h2>
+Base class for all axes. <a class="el" href="classAxis.html">Axis</a> has following attributes: <ol>
+<li>
+Location - where axis arranged on plot, can be: AXIS_LEFT, AXIS_RIGHT, AXIS_TOP, AXIS_BOTTOM. </li>
+<li>
+Margins - distance from plot edges to axis labels. </li>
+<li>
+Window - visible subset of data. Window has width and position. Width means how much data points is visible at once, position is first data item visible. </li>
+</ol>
+<hr><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" name="3c54eea130525c1aa20b3a6dad7b5c99"></a><!-- doxytag: member="Axis::Axis" ref="3c54eea130525c1aa20b3a6dad7b5c99" args="(AXIS_LOCATION location)" -->
 <div class="memitem">
 <div class="memproto">
@@ -373,7 +381,7 @@ Returns dataset, linked with this axis at specified index. <dl compact><dt><b>Pa
 </dl>
 <dl class="return" compact><dt><b>Returns:</b></dt><dd>dataset at index </dd></dl>
 
-<p>Referenced by <a class="el" href="axisplot_8h-source.html#l00155">AxisPlot::GetAxisDataset()</a>.</p>
+<p>Referenced by <a class="el" href="axisplot_8h-source.html#l00158">AxisPlot::GetAxisDataset()</a>.</p>
 
 </div>
 </div><p>
@@ -576,7 +584,7 @@ Checks whether line in data space intersects window. <dl compact><dt><b>Paramete
 <p>
 Checks whether axis is horizontal. <dl class="return" compact><dt><b>Returns:</b></dt><dd>true if axis is horizontal, false - overwise </dd></dl>
 
-<p>References <a class="el" href="axis_8h-source.html#l00082">IsVertical()</a>.</p>
+<p>References <a class="el" href="axis_8h-source.html#l00089">IsVertical()</a>.</p>
 
 </div>
 </div><p>
@@ -598,7 +606,7 @@ Checks whether axis is horizontal. <dl class="return" compact><dt><b>Returns:</b
 <p>
 Checks whether axis is vertical. <dl class="return" compact><dt><b>Returns:</b></dt><dd>true if axis is vertical, false - overwise </dd></dl>
 
-<p>Referenced by <a class="el" href="axis_8h-source.html#l00091">IsHorizontal()</a>.</p>
+<p>Referenced by <a class="el" href="axis_8h-source.html#l00098">IsHorizontal()</a>.</p>
 
 </div>
 </div><p>
@@ -723,7 +731,7 @@ Sets window params (position and width). Window params are in data space. <dl co
   </table>
 </dl>
 
-<p>Referenced by <a class="el" href="axis_8h-source.html#l00146">SetWindowPosition()</a>, and <a class="el" href="axis_8h-source.html#l00128">SetWindowWidth()</a>.</p>
+<p>Referenced by <a class="el" href="axis_8h-source.html#l00153">SetWindowPosition()</a>, and <a class="el" href="axis_8h-source.html#l00135">SetWindowWidth()</a>.</p>
 
 </div>
 </div><p>
@@ -750,7 +758,7 @@ Sets window position. Window position is in data space. <dl compact><dt><b>Param
   </table>
 </dl>
 
-<p>References <a class="el" href="axis_8h-source.html#l00177">SetWindow()</a>.</p>
+<p>References <a class="el" href="axis_8h-source.html#l00184">SetWindow()</a>.</p>
 
 </div>
 </div><p>
@@ -777,7 +785,7 @@ Sets window width. Window width is in data space. <dl compact><dt><b>Parameters:
   </table>
 </dl>
 
-<p>References <a class="el" href="axis_8h-source.html#l00177">SetWindow()</a>.</p>
+<p>References <a class="el" href="axis_8h-source.html#l00184">SetWindow()</a>.</p>
 
 </div>
 </div><p>
@@ -909,7 +917,7 @@ Performs axis bounds update after dataset/s change.
 <hr>The documentation for this class was generated from the following file:<ul>
 <li>include/wx/axis/<a class="el" href="axis_8h-source.html">axis.h</a></ul>
 </div>
-<hr size="1"><address style="text-align: right;"><small>Generated on Mon Jan 25 20:34:21 2010 for wxFreeChart by&nbsp;
+<hr size="1"><address style="text-align: right;"><small>Generated on Mon Feb 15 21:32:22 2010 for wxFreeChart by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
 </body>

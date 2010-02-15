@@ -34,6 +34,9 @@ extern int multipleAxisDemosCount;
 extern ChartDemo *timeSeriesDemos[];
 extern int timeSeriesDemosCount;
 
+extern ChartDemo *markersDemos[];
+extern int markersDemosCount;
+
 
 static DemoCollection instance;
 
@@ -86,6 +89,7 @@ static Category *cats[] = {
 	new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount), // TODO: not implemented
 	new Category(wxT("Multiple axis"), multipleAxisDemos, multipleAxisDemosCount),
 	new Category(wxT("Time series Charts"), timeSeriesDemos, timeSeriesDemosCount),
+	new Category(wxT("Markers"), markersDemos, markersDemosCount),
 };
 
 //

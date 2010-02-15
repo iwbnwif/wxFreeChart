@@ -3,7 +3,7 @@
 // Purpose: area draw classes implementation
 // Author:	Moskvichev Andrey V.
 // Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
+// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
@@ -33,8 +33,14 @@ void NoAreaDraw::Draw(wxDC &WXUNUSED(dc), wxRect WXUNUSED(rc))
 
 FillAreaDraw::FillAreaDraw(wxPen borderPen, wxBrush fillBrush)
 {
-	m_fillBrush = fillBrush;
 	m_borderPen = borderPen;
+	m_fillBrush = fillBrush;
+}
+
+FillAreaDraw::FillAreaDraw(wxColour borderColour, wxColour fillColour)
+{
+	m_borderPen = *wxThePenList->FindOrCreatePen(borderColour, 1, wxSOLID);
+	m_fillBrush = *wxTheBrushList->FindOrCreateBrush(fillColour, wxSOLID);
 }
 
 FillAreaDraw::~FillAreaDraw()
