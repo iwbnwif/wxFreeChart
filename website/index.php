@@ -44,6 +44,8 @@
 		<li>Charts scrolling.</li>
 		<li>Multiple axes with different locations (top, bottom, left, right).</li>
 		<li>Legend with different locations.</li>
+		<li>Composite axes.</li>
+		<li>Data markers: point, line, range.</li>
 		<li>Axes font, text color, grid lines, chart lines, chart background - everything can be changed.</li>
 		<li>Various visual features, like: gradient areas, gradient bars, etc.</li>
 		<li>All-in-one solution. The same approach for different chart types.</li>
@@ -70,6 +72,8 @@
     <?php writeScreenshotLink("xy1.png", ""); ?>
     <?php writeScreenshotLink("xy2.png", ""); ?>
     <?php writeScreenshotLink("xy3.png", ""); ?>
+    <?php writeScreenshotLink("markers1.png", ""); ?>
+    <?php writeScreenshotLink("combaxis1.png", ""); ?>
   </div>
 
 
@@ -96,7 +100,6 @@
 	<br/><?php write_h1("Future enhancements"); ?>
 	<ul>
 		 <li>Transparency for bubble charts, histogram charts.</li>
-		 <li>Markers.</li>
 		 <li>Interval axes.</li>
 		 <li>Add levels/fractals/etc support to OHLCPlot. Make OHLCPlot suitable for technical analysis applications.</li>
 		 <li>Make axis marks drawing more flexible.</li>
