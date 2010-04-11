@@ -30,10 +30,11 @@ public:
 	 */
 	void SetChart(Chart *chart);
 
-	Chart *GetChart()
-	{
-		return m_chart;
-	}
+	/**
+	 * Returns chart.
+	 * @return chart
+	 */
+	Chart *GetChart();
 
 	/**
 	 * Turn antialiasing on/off.
@@ -43,10 +44,11 @@ public:
 	 */
 	void SetAntialias(bool antialias);
 
-	bool GetAntialias()
-	{
-		return m_antialias;
-	}
+	/**
+	 * Checks whether antialiasing is enabled.
+	 * @return true if antialiasing is enabled
+	 */
+	bool GetAntialias();
 
 	/**
 	 * Returns back buffer copy as wxBitmap.
@@ -73,6 +75,7 @@ private:
 	void OnPaint(wxPaintEvent &ev);
 	void OnSize(wxSizeEvent &ev);
 	void OnScrollWin(wxScrollWinEvent &ev);
+	void OnMouseEvents(wxMouseEvent &ev);
 
 	void ScrollAxis(Axis *axis, int d);
 
@@ -84,5 +87,21 @@ private:
 
 	DECLARE_EVENT_TABLE()
 };
+
+//class WXDLLIMPEXP_FREECHART wxChartEvent :
+
+//
+// Events declarations.
+//
+BEGIN_DECLARE_EVENT_TYPES()
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_CLICK, 6000)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_CLICK, 6001)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_DCLICK, 6002)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_DCLICK, 6003)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_DOWN, 6004)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_DOWN, 6005)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_UP, 6006)
+	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_UP, 6007)
+END_DECLARE_EVENT_TYPES()
 
 #endif /*CHARTPANEL_H_*/

@@ -75,7 +75,7 @@ class MarkersDemo2 : public ChartDemo
 {
 public:
 	MarkersDemo2()
-	: ChartDemo(wxT("Markers Demo 2 - range"))
+	: ChartDemo(wxT("Markers Demo 2 - range and line"))
 	{
 	}
 
@@ -85,7 +85,7 @@ public:
 		double data[][2] = {
 				{ 10, 20, },
 				{ 13, 16, },
-				{ 7, 30, },
+				{ 14, 30, },
 				{ 15, 34, },
 				{ 25, 4, },
 		};
@@ -102,14 +102,23 @@ public:
 		// set line renderer to dataset
 		dataset->SetRenderer(new XYLineRenderer());
 
-		// create line marker
-		RangeMarker *rangeMarker = new RangeMarker(new FillAreaDraw(wxColour(80, 80, 255), wxColour(200, 200, 250)));
+		// create first range marker
+		RangeMarker *rangeMarker1 = new RangeMarker(new FillAreaDraw(wxColour(80, 80, 255), wxColour(200, 200, 250)));
 
-		// set value to be marked, in our case vertical line with x=20
-		rangeMarker->SetVerticalRange(15, 20);
+		// set value to be marked, in our case vertical range [15; 20]
+		rangeMarker1->SetVerticalRange(15, 20);
 
 		// and add marker to dataset
-		dataset->AddMarker(rangeMarker);
+		dataset->AddMarker(rangeMarker1);
+
+		// create line marker
+		LineMarker *lineMarker = new LineMarker(wxColour(80, 80, 255), 2);
+
+		// set value to be marked, in our case horizontal value 15
+		lineMarker->SetHorizontalLine(25);
+
+		// and add marker to dataset
+		dataset->AddMarker(lineMarker);
 
 		// create left and bottom number axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);

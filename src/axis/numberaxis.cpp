@@ -85,6 +85,7 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 void NumberAxis::UpdateBounds()
 {
 	if (m_fixedBounds) {
+		UpdateTickValues();
 		return ; // bounds are fixed, so don't update
 	}
 
@@ -153,7 +154,7 @@ wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
 	}
 }
 
-void NumberAxis::GetDataBounds(double &minValue, double &maxValue)
+void NumberAxis::GetDataBounds(double &minValue, double &maxValue) const
 {
 	minValue = m_minValue;
 	maxValue = m_maxValue;

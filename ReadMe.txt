@@ -4,13 +4,13 @@
 
  Website: http://wxcode.sourceforge.net/components/freechart
  Author: Moskvichev Andrey V.
- Version: 1.6
+ Version: 1.7
  Description:
  wxFreeChart is free powerful charting library based on wxWidgets. It 
  designed with flexibility in mind, and supports many types of charts 
  with many different configurations.
  Supported chart types are:
- - Line/histogram charts base on xy coordinates
+ - Line/histogram/area charts based on xy coordinates
  - Bar charts (vertical or horizontal)
  - Stacked bar charts
  - Layered bar charts
@@ -47,6 +47,12 @@
  ChangeLog
  ---------
  
+ 1.7:
+ 		What's new:
+ 		 - Chart mouse events was added
+ 		 - Some minor bugs fixed
+ 		 - Some API impovements
+ 		  
  1.6:
  		What's new:
  		 - wxChartSplitPanel was added, it works with multiple plots, 
@@ -131,5 +137,6 @@
  	
  	Andreas Kuechler - testing, logarithmic axes implementation, many interesting ideas.
  	
- Author contact email: mab[at]smtp[dot]ru
-
+ Author contacts:
+	email: mab[at]BitGriff[dot]com
+	skype: mab_at_smtp_ru

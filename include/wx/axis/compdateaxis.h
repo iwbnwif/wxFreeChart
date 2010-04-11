@@ -38,12 +38,15 @@ public:
 
 	virtual void UpdateBounds();
 
-	virtual void GetDataBounds(double &minValue, double &maxValue);
+	virtual void GetDataBounds(double &minValue, double &maxValue) const;
 
 	virtual wxCoord ToGraphics(wxDC &dc, int minCoord, int gRange, double value);
 
 	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g);
 
+	/**
+	 * Adds interval.
+	 */
 	void AddInterval(const wxDateSpan &interval);
 
 	void AddInterval(const wxTimeSpan &interval);

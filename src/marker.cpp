@@ -12,9 +12,6 @@
 
 #include "wx/arrimpl.cpp"
 
-//
-// TODO: write more!
-//
 WX_DEFINE_EXPORTED_OBJARRAY(MarkerArray);
 
 Marker::Marker()
@@ -52,6 +49,11 @@ void PointMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
 LineMarker::LineMarker(wxPen linePen)
 {
 	m_linePen = linePen;
+}
+
+LineMarker::LineMarker(wxColour lineColour, int lineWidth)
+{
+	m_linePen = *wxThePenList->FindOrCreatePen(lineColour, lineWidth, wxSOLID);
 }
 
 LineMarker::~LineMarker()

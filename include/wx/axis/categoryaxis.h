@@ -24,6 +24,8 @@ public:
 
 	virtual void UpdateBounds();
 
+	virtual void GetDataBounds(double &minValue, double &maxValue) const;
+
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);
 
@@ -37,8 +39,6 @@ protected:
 	virtual bool IsEnd(size_t step);
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
-
-	virtual void GetDataBounds(double &minValue, double &maxValue);
 
 private:
 	size_t m_categoryCount;

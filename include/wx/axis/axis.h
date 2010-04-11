@@ -234,7 +234,7 @@ public:
 	 * @param minValue output minimal data value
 	 * @param maxValue output maximal data value
 	 */
-	virtual void GetDataBounds(double &minValue, double &maxValue) = 0;
+	virtual void GetDataBounds(double &minValue, double &maxValue) const = 0;
 
 	/**
 	 * Used to determine minimal size needed to draw axis contents,
@@ -349,7 +349,7 @@ public:
 	// Axis
 	//
 
-	virtual void GetDataBounds(double &minValue, double &maxValue);
+	virtual void GetDataBounds(double &minValue, double &maxValue) const;
 
 	virtual wxCoord GetExtent(wxDC &dc);
 

@@ -64,7 +64,7 @@ wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 	return maxExtent;
 }
 
-void DateAxis::GetDataBounds(double &minValue, double &maxValue)
+void DateAxis::GetDataBounds(double &minValue, double &maxValue) const
 {
 	minValue = 0;
 	if (m_dateCount > 1) {

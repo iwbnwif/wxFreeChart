@@ -14,6 +14,19 @@
 #include <wx/dcgraph.h>
 #endif /* wxUSE_GRAPHICS_CONTEXT */
 
+//
+// Events
+//
+
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_CLICK)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_CLICK)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_DCLICK)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_DCLICK)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_DOWN)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_DOWN)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_UP)
+DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_UP)
+
 const int scrollPixelStep = 100;
 const int stepMult = 100;
 
@@ -30,10 +43,15 @@ void GetAxisScrollParams(Axis *axis, int &noUnits, int &pos)
 	pos = (int) (stepMult * (axis->GetWindowPosition() - minValue));
 }
 
+//
+// wxChartPanel
+//
+
 BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
 	EVT_PAINT(wxChartPanel::OnPaint)
 	EVT_SIZE(wxChartPanel::OnSize)
 	EVT_SCROLLWIN(wxChartPanel::OnScrollWin)
+	EVT_MOUSE_EVENTS(wxChartPanel::OnMouseEvents)
 END_EVENT_TABLE()
 
 wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &size)
@@ -68,6 +86,11 @@ void wxChartPanel::SetChart(Chart *chart)
 	Refresh(false);
 }
 
+Chart *wxChartPanel::GetChart()
+{
+	return m_chart;
+}
+
 void wxChartPanel::SetAntialias(bool antialias)
 {
 	if (m_antialias != antialias) {
@@ -80,6 +103,11 @@ void wxChartPanel::SetAntialias(bool antialias)
 		RedrawBackBitmap();
 		Refresh(false);
 	}
+}
+
+bool wxChartPanel::GetAntialias()
+{
+	return m_antialias;
 }
 
 wxBitmap wxChartPanel::CopyBackbuffer()
@@ -181,6 +209,16 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 		axis->SetWindowPosition(winPos);
 	}
 	ev.Skip();
+}
+
+void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
+{
+	// TODO
+	/*
+	switch (ev.GetEventType()) {
+	case wx
+	}
+	*/
 }
 
 void wxChartPanel::ScrollAxis(Axis *axis, int d)

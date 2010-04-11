@@ -166,7 +166,7 @@ wxCoord CompDateAxis::GetExtent(wxDC &dc)
 	return (m_dateSpans.Count()) * GetSpanExtent(dc);
 }
 
-void CompDateAxis::GetDataBounds(double &minValue, double &maxValue)
+void CompDateAxis::GetDataBounds(double &minValue, double &maxValue) const
 {
 	minValue = 0;
 	maxValue = m_dateCount;
