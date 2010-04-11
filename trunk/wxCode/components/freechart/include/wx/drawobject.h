@@ -31,12 +31,16 @@ public:
 	{
 	}
 
+	/**
+	 * Called when object is need to be redrawed.
+	 * @param obj object that need to be redrawed
+	 */
 	virtual void NeedRedraw(DrawObject *obj) = 0;
 };
 
 /**
  * Base class for objects drawn on chart or perform drawing of
- * another objects (like renderers).
+ * another objects (like renderers, area draws, etc).
  */
 class WXDLLIMPEXP_FREECHART DrawObject : public Observable<DrawObserver>
 {

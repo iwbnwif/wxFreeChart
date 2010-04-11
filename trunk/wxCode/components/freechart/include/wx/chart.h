@@ -93,7 +93,7 @@ public:
 
 	/**
 	 * Sets chart title.
-	 * @param _title chart title
+	 * @param title chart title
 	 */
 	void SetTitle(wxString title)
 	{
@@ -112,7 +112,7 @@ public:
 
 	/**
 	 * Sets font for chart title.
-	 * @param _font font for chart title
+	 * @param font font for chart title
 	 */
 	void SetTitleFont(wxFont font)
 	{
@@ -136,7 +136,7 @@ public:
 	//
 	// PlotObserver
 	//
-	virtual void PlotNeedRedraw(Plot *_plot);
+	virtual void PlotNeedRedraw(Plot *plot);
 
 	//
 	// AxisObserver

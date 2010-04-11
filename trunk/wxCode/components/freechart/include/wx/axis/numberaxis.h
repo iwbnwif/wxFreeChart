@@ -66,6 +66,19 @@ public:
 	 */
 	void SetFixedBounds(double minValue, double maxValue);
 
+	/**
+	 * Returns bounds, taken from data, eg. real min-max value.
+	 * @param minValue output minimal data value
+	 * @param maxValue output maximal data value
+	 */
+	virtual void GetDataBounds(double &minValue, double &maxValue) const;
+
+	/**
+	 * Returns label count, to be draw on axis.
+	 * @return label count, to be draw on axis
+	 */
+	size_t GetLabelCount() const;
+
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);
 
@@ -81,10 +94,6 @@ protected:
 	virtual bool HasLabels();
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
-
-	virtual void GetDataBounds(double &minValue, double &maxValue);
-
-  size_t GetLabelCount() const;
 
 private:
 	void UpdateTickValues();

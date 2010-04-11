@@ -71,6 +71,9 @@ class WXDLLIMPEXP_FREECHART LineMarker : public Marker
 {
 public:
 	LineMarker(wxPen linePen);
+
+	LineMarker(wxColour lineColour, int lineWidth = 1);
+
 	virtual ~LineMarker();
 
 	virtual void Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis);

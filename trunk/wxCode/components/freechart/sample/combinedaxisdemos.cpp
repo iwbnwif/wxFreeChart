@@ -12,6 +12,7 @@
 
 #include <wx/xy/xyplot.h>
 #include <wx/xy/xylinerenderer.h>
+#include <wx/xy/xyhistorenderer.h>
 #include <wx/xy/xysimpledataset.h>
 
 #include <wx/multiplot.h>
@@ -143,7 +144,7 @@ public:
 		double data1[][2] = {
 				{ 10, 20, },
 				{ 13, 16, },
-				{ 7, 30, },
+				{ 17, 30, },
 				{ 15, 34, },
 				{ 25, 4, },
 		};
@@ -151,8 +152,9 @@ public:
 		double data2[][2] = {
 				{ 45, 40, },
 				{ 23, 16, },
-				{ 43, 60, },
-				{ 25, 7, },
+				{ 35, 60, },
+				{ 15, 7, },
+				{ 5, 20 },
 				{ 66, 4, },
 		};
 
@@ -202,8 +204,11 @@ public:
 		// and add serie to it
 		dataset2->AddSerie((double *) data2, WXSIZEOF(data2));
 
-		// set line renderer to dataset
-		dataset2->SetRenderer(new XYLineRenderer());
+		// set histogram renderer to dataset
+		XYHistoRenderer *renderer2 = new XYHistoRenderer();
+		renderer2->SetBarArea(0, new FillAreaDraw(*wxBLACK, *wxGREEN));
+
+		dataset2->SetRenderer(renderer2);
 
 		// add our dataset to plot
 		plot2->AddDataset(dataset2);

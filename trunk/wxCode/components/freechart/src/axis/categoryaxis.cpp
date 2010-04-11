@@ -37,7 +37,7 @@ wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)
 	return dc.GetTextExtent(m_longestCategory);
 }
 
-void CategoryAxis::GetDataBounds(double &minValue, double &maxValue)
+void CategoryAxis::GetDataBounds(double &minValue, double &maxValue) const
 {
 	minValue = 0;
 	if (m_categoryCount > 1) {

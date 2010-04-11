@@ -173,7 +173,7 @@ void AxisShare::SetShareVisible(bool shareVisible)
 	}
 }
 
-void AxisShare::GetDataBounds(double &minValue, double &maxValue)
+void AxisShare::GetDataBounds(double &minValue, double &maxValue) const
 {
 	m_axis->GetDataBounds(minValue, maxValue);
 }
