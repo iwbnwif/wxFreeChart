@@ -16,11 +16,14 @@
 #include <wx/areadraw.h>
 #include <wx/legend.h>
 #include <wx/marker.h>
+#include <wx/crosshair.h>
+#include <wx/chartpanel.h>
 
 #include <wx/dynarray.h>
 
+
 /**
- * Internal class, don't use in programs.
+ * Internal class, don't use in your applications.
  */
 class WXDLLIMPEXP_FREECHART DataAxisLink
 {
@@ -51,7 +54,8 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(DataAxisLink, DataAxisLinkArray, WXDLLIMPEXP_F
  * Base class for plots that supports axes.
  */
 class WXDLLIMPEXP_FREECHART AxisPlot : public Plot,
-public DrawObserver, public DatasetObserver, public AxisObserver
+	public DrawObserver, public DatasetObserver, public AxisObserver,
+	public ChartPanelObserver
 {
 public:
 	AxisPlot();
@@ -68,6 +72,18 @@ public:
 	 * @param dataset dataset to be added
 	 */
 	void AddDataset(Dataset *dataset);
+
+	/**
+	 * Removes dataset from plot.
+	 * @param dataset dataset to be removed
+	 */
+	void RemoveDataset(Dataset *dataset);
+
+	/**
+	 * Removes dataset from plot.
+	 * @param dataset dataset index to be removed
+	 */
+	void RemoveDataset(size_t index);
 
 	/**
 	 * Adds dataset and vertical and horizontal axes to plot.
@@ -180,6 +196,12 @@ public:
 	void SetLegend(Legend *legend);
 
 	/**
+	 * Attaches crosshair to this plot.
+	 * @param crosshair crosshair
+	 */
+	void SetCrosshair(Crosshair *crosshair);
+
+	/**
 	 * Translate coordinate from graphics to data space.
 	 * @param nData number of dataset
 	 * @param dc device context
@@ -208,6 +230,11 @@ public:
 	virtual void AxisChanged(Axis *axis);
 
 	virtual void BoundsChanged(Axis *axis);
+
+	//
+	// ChartPanelObserver
+	//
+	virtual void ChartMouseDown(wxPoint &pt);
 
 protected:
 	//
@@ -244,6 +271,8 @@ private:
 	virtual void DrawData(wxDC &dc, wxRect rc);
 
 	virtual bool HasData();
+
+	virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
 
 
 	void UpdateAxis(Dataset *dataset = NULL);
@@ -327,7 +356,7 @@ private:
 
 	Legend *m_legend;
 
-	//bool m_plotConfigurationOk;
+	Crosshair *m_crosshair;
 };
 
 #endif /*AXISPLOT_H_*/

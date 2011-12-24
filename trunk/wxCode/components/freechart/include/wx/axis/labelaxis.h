@@ -173,6 +173,25 @@ public:
 		return m_verticalLabelText;
 	}
 
+	/**
+	 * Sets major label steps.
+	 * @param step  The step size at which major label should be drawn
+	 */
+	void SetMajorLabelSteps(size_t step)
+	{
+		m_majorLabelStep = step;
+	}
+
+	void SetLabelSkip(int blankLabels);
+
+	int GetLabelSkip();
+
+	/**
+   * Sets visibility of axis
+   * @param bVisible - false if hidden
+   */
+  void SetAxisVisible(bool bVisible);
+
 	//
 	// Axis
 	//
@@ -215,7 +234,7 @@ protected:
 private:
 	void DrawLabels(wxDC &dc, wxRect rc);
 
-	void DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double value);
+	void DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double value, bool isMajorLabel);
 
 	void DrawBorderLine(wxDC &dc, wxRect rc);
 
@@ -227,12 +246,16 @@ private:
 	wxColour m_labelTextColour;
 	wxPen m_labelPen;
 	bool m_verticalLabelText;
+	size_t m_majorLabelStep;
 
 	// label title properties
 	wxString m_title;
 	wxFont m_titleFont;
 	wxColour m_titleColour;
 	int m_titleLocation;
+
+	bool m_visible;
+	int m_blankLabels;
 };
 
 #endif /*LABELAXIS_H_*/

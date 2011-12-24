@@ -2764,6 +2764,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\category\categoryrenderer.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\category\categorysimpledataset.cpp"
 				>
 			</File>
@@ -2788,6 +2792,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\crosshair.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\dataset.cpp"
 				>
 			</File>
@@ -2809,6 +2817,14 @@
 			</File>
 			<File
 				RelativePath="..\src\gantt\ganttsimpledataset.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\axis\juliandateaxis.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\xy\juliantimeseriesdataset.cpp"
 				>
 			</File>
 			<File
@@ -2880,6 +2896,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\title.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\tooltips.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\xy\vectordataset.cpp"
 				>
 			</File>
@@ -2921,6 +2945,10 @@
 			</File>
 			<File
 				RelativePath="..\src\xyz\xyzrenderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\zoompan.cpp"
 				>
 			</File>
 		</Filter>
@@ -2966,6 +2994,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\wx\category\categoryrenderer.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\wx\category\categorysimpledataset.h"
 				>
 			</File>
@@ -2991,6 +3023,10 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\axis\compdateaxis.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\crosshair.h"
 				>
 			</File>
 			<File
@@ -3026,6 +3062,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\wx\axis\juliandateaxis.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\xy\juliantimeseriesdataset.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\wx\axis\labelaxis.h"
 				>
 			</File>
@@ -3039,6 +3083,10 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\marker.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\ohlc\movingavg.h"
 				>
 			</File>
 			<File
@@ -3098,6 +3146,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\wx\title.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\tooltips.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\wx\xy\vectordataset.h"
 				>
 			</File>
@@ -3143,6 +3199,10 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\xyz\xyzrenderer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\zoompan.h"
 				>
 			</File>
 		</Filter>

@@ -27,7 +27,7 @@ wxChartSplitPanel::~wxChartSplitPanel()
 
 void wxChartSplitPanel::AddPlot(Plot *plot, int pos, bool allowRemove)
 {
-	wxChartPanel *chartPanel = new wxChartPanel(this, wxID_ANY, new Chart(plot));
+	wxChartPanel *chartPanel = new wxChartPanel(this, wxID_ANY, new Chart(plot, wxT("")));
 
 	switch (pos) {
 	case wxLEFT:

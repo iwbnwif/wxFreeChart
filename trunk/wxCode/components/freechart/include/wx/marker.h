@@ -39,7 +39,6 @@ public:
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(Marker *, MarkerArray, WXDLLIMPEXP_FREECHART);
 
-#if 0
 /**
  * Point marker.
  */
@@ -62,7 +61,6 @@ private:
 	wxFont m_textFont;
 	wxColour m_textColour;
 };
-#endif
 
 /**
  * Marker that marks single value, and drawn as line.

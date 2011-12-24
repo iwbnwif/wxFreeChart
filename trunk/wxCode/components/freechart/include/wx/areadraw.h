@@ -146,7 +146,7 @@ public:
 
 	/**
 	 * Sets gradient fill second color.
-	 * @param _colour2 second color
+	 * @param colour2 second color
 	 */
 	void SetColour2(wxColour colour2)
 	{
@@ -156,7 +156,7 @@ public:
 
 	/**
 	 * Sets gradient fill direction.
-	 * @param _dir direction
+	 * @param dir direction
 	 */
 	void SetDirection(wxDirection dir)
 	{

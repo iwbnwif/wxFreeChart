@@ -10,6 +10,24 @@
 #include <wx/xy/xydataset.h>
 #include <wx/xy/xyrenderer.h>
 
+void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1)
+{
+	if (!axis->IsVisible(x)) {
+		double p = axis->BoundValue(x);
+		y = (y1 - y) * (p - x) / (x1 - x) + y;
+		x = p;
+	}
+}
+
+void ClipVert(Axis *axis, double &x, double &y, double x1, double y1)
+{
+	if (!axis->IsVisible(y)) {
+		double p = axis->BoundValue(y);
+    x = (p - y) * (x1 - x) / (y1 - y) + x;
+		y = p;
+	}
+}
+
 IMPLEMENT_CLASS(XYDataset, Dataset)
 
 XYDataset::XYDataset()

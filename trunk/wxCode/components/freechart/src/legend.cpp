@@ -57,6 +57,33 @@ void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
 	}
 }
 
+void Legend::Draw(wxDC &dc, wxRect rc, CategoryDataset &dataset)
+{
+	dc.SetFont(m_font);
+
+	m_background->Draw(dc, rc);
+
+	wxCoord x = rc.x + m_margin;
+	wxCoord y = rc.y + m_margin;
+
+	for (size_t n = 0; n < dataset.GetCount(); n++) {
+	  
+	  wxString name = dataset.GetName(n);
+	  wxSize textExtent = dc.GetTextExtent(name);
+
+	  Renderer *renderer = dataset.GetBaseRenderer();
+	  
+	  wxRect rcSymbol(x, y, textExtent.y, textExtent.y);
+	  renderer->DrawLegendSymbol(dc, rcSymbol, n);
+	  
+	  wxCoord textX = x + rcSymbol.width + m_symbolTextGap;
+	  
+	  dc.DrawText(name, textX, y);
+	  
+	  y += textExtent.y + labelsSpacing;
+	}
+}
+
 wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
 {
 	wxSize extent(0, 0);
@@ -85,3 +112,30 @@ wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
 	}
 	return extent;
 }
+
+wxSize Legend::GetExtent(wxDC &dc, CategoryDataset &dataset)
+{
+	wxSize extent(0, 0);
+
+	dc.SetFont(m_font);
+
+	extent.y = 2 * m_margin;
+
+	for (size_t n = 0; n < dataset.GetCount(); n++) {
+	  wxSize textExtent = dc.GetTextExtent(dataset.GetName(n));
+
+	  wxCoord symbolSize = textExtent.y; // symbol rectangle width and height
+
+	  wxCoord width = textExtent.x + symbolSize + m_symbolTextGap + 2 * m_margin;
+
+	  extent.x = wxMax(extent.x, width);
+
+	  extent.y += textExtent.y;
+	  if (n < dataset.GetCount() - 1) {
+	    extent.y += labelsSpacing;
+	  }
+	}
+	return extent;
+}
+
+

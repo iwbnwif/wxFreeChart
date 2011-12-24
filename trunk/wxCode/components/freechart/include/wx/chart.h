@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // Name:	chart.h
 // Purpose: chart declarations
-// Author:	Moskvichev Andrey V.
+// Author:	Moskvichev Andrey V., changes by Andreas Kuechler
 // Created:	2008/11/07
 // Copyright:	(c) 2008-2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
@@ -20,7 +20,10 @@
 
 #include <wx/axis/axis.h>
 
+#include <wx/title.h>
+
 class WXDLLIMPEXP_FREECHART Chart;
+class WXDLLIMPEXP_FREECHART wxChartPanel;
 
 /**
  * Interface for receiving chart events.
@@ -59,8 +62,14 @@ public:
 	 */
 	Chart(Plot *plot, const wxString &title = wxEmptyString);
 
+	Chart(Plot *plot, Header* header = NULL, Footer* footer = NULL);
+
 	virtual ~Chart();
 
+	/**
+	 * Returns plot associated with chart.
+	 * @return plot
+	 */
 	Plot *GetPlot()
 	{
 		return m_plot;
@@ -89,7 +98,7 @@ public:
 	 * @param rc entire chart rectangle
 	 * @return plot area rectangle
 	 */
-	wxRect CalcPlotRect(wxDC &dc, wxRect rc);
+	//	wxRect CalcPlotRect(wxDC &dc, wxRect rc);
 
 	/**
 	 * Sets chart title.
@@ -97,26 +106,18 @@ public:
 	 */
 	void SetTitle(wxString title)
 	{
-		m_title = title;
+		SetHeader(new Header(title));
+	}
+
+	void SetHeader(Header* header)
+	{
+		wxREPLACE(m_header, header);
 		FireChartChanged();
 	}
 
-	/**
-	 * Returns chart title.
-	 * @return chart title string
-	 */
-	const wxString &GetTitle()
+	void SetFooter(Footer* footer)
 	{
-		return m_title;
-	}
-
-	/**
-	 * Sets font for chart title.
-	 * @param font font for chart title
-	 */
-	void SetTitleFont(wxFont font)
-	{
-		m_titleFont = font;
+		wxREPLACE(m_footer, footer);
 		FireChartChanged();
 	}
 
@@ -126,12 +127,21 @@ public:
 		FireChartChanged();
 	}
 
+	//
+	// TODO old scrolling code is deprecated,
+	// will be used Zoom/pan feature instead.
+	//
+
 	void SetScrolledAxis(Axis *axis);
 
 	Axis *GetHorizScrolledAxis();
 
 	Axis *GetVertScrolledAxis();
 
+
+	wxChartPanel *GetChartPanel();
+
+	void SetChartPanel(wxChartPanel *chartPanel);
 
 	//
 	// PlotObserver
@@ -146,15 +156,20 @@ public:
 	virtual void BoundsChanged(Axis *axis);
 
 private:
+	void Init(Plot* plot, Header* header = NULL, Footer* footer = NULL);
+
 	Plot *m_plot;
 	AreaDraw *m_background;
-	wxString m_title;
-	wxFont m_titleFont;
+	Header* m_header;
+	Footer* m_footer;
 
+	int m_headerGap;
 	wxCoord m_margin;
 
 	Axis *m_horizScrolledAxis;
 	Axis *m_vertScrolledAxis;
+
+	wxChartPanel *m_chartPanel;
 
 	FIRE_WITH_THIS(ChartChanged);
 	FIRE_WITH_THIS(ChartScrollsChanged);

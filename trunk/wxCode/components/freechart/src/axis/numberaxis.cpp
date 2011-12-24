@@ -60,6 +60,8 @@ NumberAxis::NumberAxis(AXIS_LOCATION location)
 	m_intValues = false;
 	m_hasLabels = false;
 	m_fixedBounds = false;
+
+	m_multiplier = 1;
 }
 
 NumberAxis::~NumberAxis()
@@ -174,10 +176,12 @@ void NumberAxis::GetLabel(size_t step, wxString &label)
 	}
 
 	if (m_intValues) {
-		label = wxString::Format(wxT("%i"), (int) value);
+		// orig : label = wxString::Format(wxT("%i"), (int) value);
+		label = wxString::Format(wxT("%i"), (int) value * m_multiplier);
 	}
 	else {
-		label = wxString::Format(m_tickFormat, value);
+		// orig : label = wxString::Format(m_tickFormat, value);
+		label = wxString::Format(m_tickFormat, value * m_multiplier);
 	}
 }
 
@@ -194,4 +198,14 @@ bool NumberAxis::HasLabels()
 size_t NumberAxis::GetLabelCount() const
 {
   return m_labelCount;
+}
+
+double NumberAxis::GetMultiplier() const
+{
+  return m_multiplier;
+}
+
+void NumberAxis::SetMultiplier(double multiplier)
+{
+  m_multiplier = multiplier;
 }

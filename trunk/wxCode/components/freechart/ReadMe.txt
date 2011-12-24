@@ -6,8 +6,8 @@
  Author: Moskvichev Andrey V.
  Version: 1.7
  Description:
- wxFreeChart is free powerful charting library based on wxWidgets. It 
- designed with flexibility in mind, and supports many types of charts 
+ wxFreeChart is free powerful charting framework based on wxWidgets. 
+ It designed with flexibility in mind, and supports many types of charts 
  with many different configurations.
  Supported chart types are:
  - Line/histogram/area charts based on xy coordinates
@@ -18,7 +18,7 @@
  - Pie charts
  - Bubble charts
  - Gantt charts 
-
+ 
  Installation - win32
  --------------------
 
@@ -47,12 +47,16 @@
  ChangeLog
  ---------
  
- 1.7:
+ 1.7: FIXIT it's upcoming release, here is plans
  		What's new:
+ 		 - Mouse zoom/pan was added
  		 - Chart mouse events was added
+ 		 - Tooltips support was added
+ 		 - Crosshair was added
  		 - Some minor bugs fixed
- 		 - Some API impovements
- 		  
+ 		 - Many API impovements
+ 		 - Demos updated
+ 	
  1.6:
  		What's new:
  		 - wxChartSplitPanel was added, it works with multiple plots, 
@@ -117,8 +121,6 @@
  Known issues:
  - window scrolling bugs
  - compdateaxis bugs
- - Work with wxWidgets 2.6.x not tested.
- - I can test only wxMSW (on Windows XP, Windows Vista), and wxGTK (on Linux).
  - Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
  - Pie plots are very ugly, and must be cleaned up or rewritten.
 
@@ -136,6 +138,13 @@
  					many interesting ideas.
  	
  	Andreas Kuechler - testing, logarithmic axes implementation, many interesting ideas.
+ 	
+ 	Alan Yaniger - testing, many bugfixes, many usefull patches.
+ 	
+ 	Carsten Arnholm - julian axes and dataset implementation.
+ 	
+ 	Grgory Soutad - pie plots and category renderer.
+ 	
  	
  Author contacts:
 	email: mab[at]BitGriff[dot]com

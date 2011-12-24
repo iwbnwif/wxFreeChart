@@ -60,6 +60,18 @@ public:
 	}
 
 	/**
+	 * Returns multiplier for values.
+	 * @return multiplier
+	 */
+	double GetMultiplier() const;
+
+	/**
+	 * Sets multiplier for values.
+	 * @param multiplier multiplier
+	 */
+	void SetMultiplier(double multiplier);
+
+	/**
 	 * Make data bounds fixed.
 	 * @param minValue minimal data value
 	 * @param maxValue maximal data value
@@ -81,6 +93,7 @@ public:
 
 protected:
 	virtual bool AcceptDataset(Dataset *dataset);
+  void UpdateTickValues();
 
 	//
 	// LabelAxis
@@ -95,22 +108,25 @@ protected:
 
 	virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
+  bool m_fixedBounds;
+	bool m_hasLabels;
+  double m_minValue;
+	double m_maxValue;
+
 private:
-	void UpdateTickValues();
+
 
 	wxString m_tickFormat;
 
-	double m_minValue;
-	double m_maxValue;
 
 	double m_labelInterval;
 
 	size_t m_labelCount;
 	bool m_intValues;
 
-	bool m_hasLabels;
+	double m_multiplier;
 
-	bool m_fixedBounds;
+
 };
 
 #endif /*NUMBERAXIS_H_*/

@@ -13,7 +13,7 @@
 
 #include <wx/aboutdlg.h>
 
-static wxChar *version = wxT("1.6");
+static wxString version = wxT("1.7");
 
 class DemoTreeItemData : public wxTreeItemData
 {
@@ -100,7 +100,7 @@ BEGIN_EVENT_TABLE(MainFrame, wxFrame)
 END_EVENT_TABLE()
 
 MainFrame::MainFrame()
-: wxFrame(NULL, wxID_ANY, wxString::Format(wxT("wxFreeChart demo %s"), version), wxDefaultPosition, wxSize(800, 445))
+: wxFrame(NULL, wxID_ANY, wxString::Format(wxT("wxFreeChart demo %s"), version.c_str()), wxDefaultPosition, wxSize(800, 445))
 {
 	wxAuiManager *auiMan = new wxAuiManager(this);
 

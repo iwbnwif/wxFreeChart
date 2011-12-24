@@ -17,10 +17,12 @@ IMPLEMENT_CLASS(XYLineStepRenderer, XYLineRendererBase)
 // XYLineRendererBase
 //
 
-XYLineRendererBase::XYLineRendererBase(int defaultPenWidth, int defaultPenStyle)
+XYLineRendererBase::XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
 {
 	m_defaultPenWidth = defaultPenWidth;
 	m_defaultPenStyle = defaultPenStyle;
+	m_drawSymbols = drawSymbols;
+	m_drawLines = drawLines;
 }
 
 XYLineRendererBase::~XYLineRendererBase()
@@ -54,77 +56,18 @@ wxColour XYLineRendererBase::GetSerieColour(size_t serie)
 	return m_seriePens[serie].GetColour();
 }
 
-//
-// XYLineRenderer
-//
-
-XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
-: XYLineRendererBase(defaultPenWidth, defaultPenStyle)
+void XYLineRendererBase::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
 {
-	m_drawSymbols = drawSymbols;
-	m_drawLines = drawLines;
+  if(m_drawLines) {
+    DrawLines(dc, rc, horizAxis, vertAxis, dataset);
+  }
+
+  if(m_drawSymbols) {
+    DrawSymbols(dc, rc, horizAxis, vertAxis, dataset);
+  }
 }
 
-XYLineRenderer::~XYLineRenderer()
-{
-}
-
-void XYLineRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
-{
-	FOREACH_SERIE(serie, dataset) {
-		if (dataset->GetCount(serie) < 2) {
-			continue;
-		}
-
-		for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
-			double x0 = dataset->GetX(n, serie);
-			double y0 = dataset->GetY(n, serie);
-			double x1 = dataset->GetX(n + 1, serie);
-			double y1 = dataset->GetY(n + 1, serie);
-
-			// check whether segment is visible
-			if (!horizAxis->IntersectsWindow(x0, x1) &&
-					!vertAxis->IntersectsWindow(y0, y1)) {
-				continue;
-			}
-
-			ClipHoriz(horizAxis, x0, y0, x1, y1);
-			ClipHoriz(horizAxis, x1, y1, x0, y0);
-			ClipVert(vertAxis, x0, y0, x1, y1);
-			ClipVert(vertAxis, x1, y1, x0, y0);
-
-			// translate to graphics coordinates.
-			wxCoord xg0, yg0;
-			wxCoord xg1, yg1;
-
-			xg0 = horizAxis->ToGraphics(dc, rc.x, rc.width, x0);
-			yg0 = vertAxis->ToGraphics(dc, rc.y, rc.height, y0);
-			xg1 = horizAxis->ToGraphics(dc, rc.x, rc.width, x1);
-			yg1 = vertAxis->ToGraphics(dc, rc.y, rc.height, y1);
-
-			DrawSegment(dc, serie, xg0, yg0, xg1, yg1);
-		}
-	}
-}
-
-void XYLineRenderer::DrawSegment(wxDC &dc, size_t serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
-{
-	if (m_drawLines) {
-		wxPen *pen = GetSeriePen(serie);
-		dc.SetPen(*pen);
-		dc.DrawLine(x0, y0, x1, y1);
-	}
-
-	if (m_drawSymbols) {
-		Symbol *symbol = GetSerieSymbol(serie);
-
-		wxColour color = GetSerieColour(serie);
-		symbol->Draw(dc, x0, y0, color);
-		symbol->Draw(dc, x1, y1, color);
-	}
-}
-
-void XYLineRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
+void XYLineRendererBase::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 {
 	if (m_drawLines) {
 		dc.SetPen(*GetSeriePen(serie));
@@ -140,12 +83,88 @@ void XYLineRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 	}
 }
 
+void XYLineRendererBase::DrawSymbols(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
+{
+  FOREACH_SERIE(serie, dataset) {
+    Symbol *symbol = GetSerieSymbol(serie);
+    wxColour color = GetSerieColour(serie);
+
+    for(size_t n = 0; n < dataset->GetCount(serie); ++n) {
+      double x = dataset->GetX(n, serie);
+      double y = dataset->GetY(n, serie);
+
+      if(horizAxis->IsVisible(x) && vertAxis->IsVisible(y)) {
+        int xg = horizAxis->ToGraphics(dc, rc.x, rc.width, x);
+        int yg = vertAxis->ToGraphics(dc, rc.y, rc.height, y);
+
+        symbol->Draw(dc, xg, yg, color);
+      }
+    }
+  }
+}
+
+//
+// XYLineRenderer
+//
+
+XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
+: XYLineRendererBase(drawSymbols, drawLines, defaultPenWidth, defaultPenStyle)
+{
+}
+
+XYLineRenderer::~XYLineRenderer()
+{
+}
+
+
+void XYLineRenderer::DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
+{
+  FOREACH_SERIE(serie, dataset) {
+    if (dataset->GetCount(serie) < 2) {
+      continue;
+    }
+
+    for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
+      double x0 = dataset->GetX(n, serie);
+      double y0 = dataset->GetY(n, serie);
+      double x1 = dataset->GetX(n + 1, serie);
+      double y1 = dataset->GetY(n + 1, serie);
+
+      // check whether segment is visible
+      if (!horizAxis->IntersectsWindow(x0, x1) &&
+          !vertAxis->IntersectsWindow(y0, y1)) {
+        continue;
+      }
+
+      ClipHoriz(horizAxis, x0, y0, x1, y1);
+      ClipHoriz(horizAxis, x1, y1, x0, y0);
+      ClipVert(vertAxis, x0, y0, x1, y1);
+      ClipVert(vertAxis, x1, y1, x0, y0);
+
+      // translate to graphics coordinates.
+      wxCoord xg0, yg0;
+      wxCoord xg1, yg1;
+
+      xg0 = horizAxis->ToGraphics(dc, rc.x, rc.width, x0);
+      yg0 = vertAxis->ToGraphics(dc, rc.y, rc.height, y0);
+      xg1 = horizAxis->ToGraphics(dc, rc.x, rc.width, x1);
+      yg1 = vertAxis->ToGraphics(dc, rc.y, rc.height, y1);
+
+      wxPen *pen = GetSeriePen(serie);
+      dc.SetPen(*pen);
+      dc.DrawLine(xg0, yg0, xg1, yg1);
+    }
+  }
+}
+
+
+
 //
 // XYLineStepRenderer
 //
 
 XYLineStepRenderer::XYLineStepRenderer(int defaultPenWidth, int defaultPenStyle)
-: XYLineRendererBase(defaultPenWidth, defaultPenStyle)
+: XYLineRendererBase(false, true, defaultPenWidth, defaultPenStyle)
 {
 }
 
@@ -153,7 +172,7 @@ XYLineStepRenderer::~XYLineStepRenderer()
 {
 }
 
-void XYLineStepRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
+void XYLineStepRenderer::DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
 {
 	FOREACH_SERIE(serie, dataset) {
 		if (dataset->GetCount(serie) < 2) {
@@ -199,13 +218,6 @@ void XYLineStepRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAx
 			dc.DrawLine(xg0, yg0, xg1, yg1);
 		}
 	}
-}
-
-void XYLineStepRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
-{
-	dc.SetPen(*GetSeriePen(serie));
-	dc.DrawLine(rcSymbol.x, rcSymbol.y + rcSymbol.height / 2,
-			rcSymbol.x + rcSymbol.width, rcSymbol.y + rcSymbol.height / 2);
 }
 
 size_t XYLineStepRenderer::GetFirstVisibleIndex(Axis *horizAxis, Axis *vertAxis, XYDataset *dataset, size_t serie)

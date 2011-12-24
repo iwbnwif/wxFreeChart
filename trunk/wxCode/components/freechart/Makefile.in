@@ -59,8 +59,10 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_ganttsimpledataset.o \
 	wxfreechart_lib_ganttplot.o \
 	wxfreechart_lib_ganttrenderer.o \
+	wxfreechart_lib_tooltips.o \
 	wxfreechart_lib_plot.o \
 	wxfreechart_lib_renderer.o \
+	wxfreechart_lib_title.o \
 	wxfreechart_lib_barrenderer.o \
 	wxfreechart_lib_barplot.o \
 	wxfreechart_lib_marker.o \
@@ -68,6 +70,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_labelaxis.o \
 	wxfreechart_lib_logarithmicnumberaxis.o \
 	wxfreechart_lib_compdateaxis.o \
+	wxfreechart_lib_juliandateaxis.o \
 	wxfreechart_lib_axis.o \
 	wxfreechart_lib_numberaxis.o \
 	wxfreechart_lib_categoryaxis.o \
@@ -88,21 +91,26 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_xydataset.o \
 	wxfreechart_lib_xysimpledataset.o \
 	wxfreechart_lib_xylinerenderer.o \
+	wxfreechart_lib_juliantimeseriesdataset.o \
 	wxfreechart_lib_ohlcrenderer.o \
 	wxfreechart_lib_ohlcbarrenderer.o \
 	wxfreechart_lib_ohlcplot.o \
 	wxfreechart_lib_ohlccandlestickrenderer.o \
 	wxfreechart_lib_ohlcdataset.o \
 	wxfreechart_lib_categorydataset.o \
+	wxfreechart_lib_categoryrenderer.o \
 	wxfreechart_lib_categorysimpledataset.o \
 	wxfreechart_lib_symbol.o \
 	wxfreechart_lib_dataset.o \
 	wxfreechart_lib_chartsplitpanel.o \
 	wxfreechart_lib_colorscheme.o \
+	wxfreechart_lib_zoompan.o \
+	wxfreechart_lib_crosshair.o \
 	wxfreechart_lib_chartpanel.o
 WXFREECHART_LIB_HEADERS =  \
 	include/wx/pie/pieplot.h \
 	include/wx/multiplot.h \
+	include/wx/crosshair.h \
 	include/wx/gantt/ganttdataset.h \
 	include/wx/gantt/ganttrenderer.h \
 	include/wx/gantt/ganttplot.h \
@@ -118,6 +126,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/axis/axis.h \
 	include/wx/axis/categoryaxis.h \
 	include/wx/axis/labelaxis.h \
+	include/wx/axis/juliandateaxis.h \
 	include/wx/axis/logarithmicnumberaxis.h \
 	include/wx/legend.h \
 	include/wx/art.h \
@@ -140,16 +149,22 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/xy/vectordataset.h \
 	include/wx/xy/xyrenderer.h \
 	include/wx/xy/xyarearenderer.h \
+	include/wx/xy/juliantimeseriesdataset.h \
 	include/wx/wxfreechartdefs.h \
 	include/wx/ohlc/ohlcbarrenderer.h \
 	include/wx/ohlc/ohlcdataset.h \
 	include/wx/ohlc/ohlccandlestickrenderer.h \
 	include/wx/ohlc/ohlcrenderer.h \
 	include/wx/ohlc/ohlcplot.h \
+	include/wx/ohlc/movingavg.h \
+	include/wx/tooltips.h \
 	include/wx/category/categorysimpledataset.h \
+	include/wx/category/categoryrenderer.h \
 	include/wx/category/categorydataset.h \
 	include/wx/colorscheme.h \
 	include/wx/marker.h \
+	include/wx/title.h \
+	include/wx/zoompan.h \
 	include/wx/dataset.h \
 	include/wx/observable.h \
 	include/wx/drawobject.h \
@@ -166,8 +181,10 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_ganttsimpledataset.o \
 	wxfreechart_dll_ganttplot.o \
 	wxfreechart_dll_ganttrenderer.o \
+	wxfreechart_dll_tooltips.o \
 	wxfreechart_dll_plot.o \
 	wxfreechart_dll_renderer.o \
+	wxfreechart_dll_title.o \
 	wxfreechart_dll_barrenderer.o \
 	wxfreechart_dll_barplot.o \
 	wxfreechart_dll_marker.o \
@@ -175,6 +192,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_labelaxis.o \
 	wxfreechart_dll_logarithmicnumberaxis.o \
 	wxfreechart_dll_compdateaxis.o \
+	wxfreechart_dll_juliandateaxis.o \
 	wxfreechart_dll_axis.o \
 	wxfreechart_dll_numberaxis.o \
 	wxfreechart_dll_categoryaxis.o \
@@ -195,21 +213,26 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_xydataset.o \
 	wxfreechart_dll_xysimpledataset.o \
 	wxfreechart_dll_xylinerenderer.o \
+	wxfreechart_dll_juliantimeseriesdataset.o \
 	wxfreechart_dll_ohlcrenderer.o \
 	wxfreechart_dll_ohlcbarrenderer.o \
 	wxfreechart_dll_ohlcplot.o \
 	wxfreechart_dll_ohlccandlestickrenderer.o \
 	wxfreechart_dll_ohlcdataset.o \
 	wxfreechart_dll_categorydataset.o \
+	wxfreechart_dll_categoryrenderer.o \
 	wxfreechart_dll_categorysimpledataset.o \
 	wxfreechart_dll_symbol.o \
 	wxfreechart_dll_dataset.o \
 	wxfreechart_dll_chartsplitpanel.o \
 	wxfreechart_dll_colorscheme.o \
+	wxfreechart_dll_zoompan.o \
+	wxfreechart_dll_crosshair.o \
 	wxfreechart_dll_chartpanel.o
 WXFREECHART_DLL_HEADERS =  \
 	include/wx/pie/pieplot.h \
 	include/wx/multiplot.h \
+	include/wx/crosshair.h \
 	include/wx/gantt/ganttdataset.h \
 	include/wx/gantt/ganttrenderer.h \
 	include/wx/gantt/ganttplot.h \
@@ -225,6 +248,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/axis/axis.h \
 	include/wx/axis/categoryaxis.h \
 	include/wx/axis/labelaxis.h \
+	include/wx/axis/juliandateaxis.h \
 	include/wx/axis/logarithmicnumberaxis.h \
 	include/wx/legend.h \
 	include/wx/art.h \
@@ -247,16 +271,22 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/xy/vectordataset.h \
 	include/wx/xy/xyrenderer.h \
 	include/wx/xy/xyarearenderer.h \
+	include/wx/xy/juliantimeseriesdataset.h \
 	include/wx/wxfreechartdefs.h \
 	include/wx/ohlc/ohlcbarrenderer.h \
 	include/wx/ohlc/ohlcdataset.h \
 	include/wx/ohlc/ohlccandlestickrenderer.h \
 	include/wx/ohlc/ohlcrenderer.h \
 	include/wx/ohlc/ohlcplot.h \
+	include/wx/ohlc/movingavg.h \
+	include/wx/tooltips.h \
 	include/wx/category/categorysimpledataset.h \
+	include/wx/category/categoryrenderer.h \
 	include/wx/category/categorydataset.h \
 	include/wx/colorscheme.h \
 	include/wx/marker.h \
+	include/wx/title.h \
+	include/wx/zoompan.h \
 	include/wx/dataset.h \
 	include/wx/observable.h \
 	include/wx/drawobject.h \
@@ -274,7 +304,9 @@ WXFREECHARTDEMO_LIB_OBJECTS =  \
 	wxFreeChartDemo_lib_markersdemos.o \
 	wxFreeChartDemo_lib_multipleaxisdemos.o \
 	wxFreeChartDemo_lib_ohlcdemos.o \
+	wxFreeChartDemo_lib_pieplotdemos.o \
 	wxFreeChartDemo_lib_timeseriesdemos.o \
+	wxFreeChartDemo_lib_titledemos.o \
 	wxFreeChartDemo_lib_xydemos.o \
 	$(__wxFreeChartDemo_lib___win32rc)
 WXFREECHARTDEMO_DLL_CXXFLAGS = -I$(srcdir)/include $(WX_CXXFLAGS) $(CPPFLAGS) \
@@ -289,7 +321,9 @@ WXFREECHARTDEMO_DLL_OBJECTS =  \
 	wxFreeChartDemo_dll_markersdemos.o \
 	wxFreeChartDemo_dll_multipleaxisdemos.o \
 	wxFreeChartDemo_dll_ohlcdemos.o \
+	wxFreeChartDemo_dll_pieplotdemos.o \
 	wxFreeChartDemo_dll_timeseriesdemos.o \
+	wxFreeChartDemo_dll_titledemos.o \
 	wxFreeChartDemo_dll_xydemos.o \
 	$(__wxFreeChartDemo_dll___win32rc)
 
@@ -548,11 +582,17 @@ wxfreechart_lib_ganttplot.o: $(srcdir)/src/gantt/ganttplot.cpp
 wxfreechart_lib_ganttrenderer.o: $(srcdir)/src/gantt/ganttrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/gantt/ganttrenderer.cpp
 
+wxfreechart_lib_tooltips.o: $(srcdir)/src/tooltips.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/tooltips.cpp
+
 wxfreechart_lib_plot.o: $(srcdir)/src/plot.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/plot.cpp
 
 wxfreechart_lib_renderer.o: $(srcdir)/src/renderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/renderer.cpp
+
+wxfreechart_lib_title.o: $(srcdir)/src/title.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/title.cpp
 
 wxfreechart_lib_barrenderer.o: $(srcdir)/src/bars/barrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/bars/barrenderer.cpp
@@ -574,6 +614,9 @@ wxfreechart_lib_logarithmicnumberaxis.o: $(srcdir)/src/axis/logarithmicnumberaxi
 
 wxfreechart_lib_compdateaxis.o: $(srcdir)/src/axis/compdateaxis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/axis/compdateaxis.cpp
+
+wxfreechart_lib_juliandateaxis.o: $(srcdir)/src/axis/juliandateaxis.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/axis/juliandateaxis.cpp
 
 wxfreechart_lib_axis.o: $(srcdir)/src/axis/axis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/axis/axis.cpp
@@ -635,6 +678,9 @@ wxfreechart_lib_xysimpledataset.o: $(srcdir)/src/xy/xysimpledataset.cpp
 wxfreechart_lib_xylinerenderer.o: $(srcdir)/src/xy/xylinerenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/xylinerenderer.cpp
 
+wxfreechart_lib_juliantimeseriesdataset.o: $(srcdir)/src/xy/juliantimeseriesdataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/juliantimeseriesdataset.cpp
+
 wxfreechart_lib_ohlcrenderer.o: $(srcdir)/src/ohlc/ohlcrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/ohlc/ohlcrenderer.cpp
 
@@ -653,6 +699,9 @@ wxfreechart_lib_ohlcdataset.o: $(srcdir)/src/ohlc/ohlcdataset.cpp
 wxfreechart_lib_categorydataset.o: $(srcdir)/src/category/categorydataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/category/categorydataset.cpp
 
+wxfreechart_lib_categoryrenderer.o: $(srcdir)/src/category/categoryrenderer.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/category/categoryrenderer.cpp
+
 wxfreechart_lib_categorysimpledataset.o: $(srcdir)/src/category/categorysimpledataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/category/categorysimpledataset.cpp
 
@@ -667,6 +716,12 @@ wxfreechart_lib_chartsplitpanel.o: $(srcdir)/src/chartsplitpanel.cpp
 
 wxfreechart_lib_colorscheme.o: $(srcdir)/src/colorscheme.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/colorscheme.cpp
+
+wxfreechart_lib_zoompan.o: $(srcdir)/src/zoompan.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/zoompan.cpp
+
+wxfreechart_lib_crosshair.o: $(srcdir)/src/crosshair.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/crosshair.cpp
 
 wxfreechart_lib_chartpanel.o: $(srcdir)/src/chartpanel.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/chartpanel.cpp
@@ -695,11 +750,17 @@ wxfreechart_dll_ganttplot.o: $(srcdir)/src/gantt/ganttplot.cpp
 wxfreechart_dll_ganttrenderer.o: $(srcdir)/src/gantt/ganttrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/gantt/ganttrenderer.cpp
 
+wxfreechart_dll_tooltips.o: $(srcdir)/src/tooltips.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/tooltips.cpp
+
 wxfreechart_dll_plot.o: $(srcdir)/src/plot.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/plot.cpp
 
 wxfreechart_dll_renderer.o: $(srcdir)/src/renderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/renderer.cpp
+
+wxfreechart_dll_title.o: $(srcdir)/src/title.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/title.cpp
 
 wxfreechart_dll_barrenderer.o: $(srcdir)/src/bars/barrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/bars/barrenderer.cpp
@@ -721,6 +782,9 @@ wxfreechart_dll_logarithmicnumberaxis.o: $(srcdir)/src/axis/logarithmicnumberaxi
 
 wxfreechart_dll_compdateaxis.o: $(srcdir)/src/axis/compdateaxis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/axis/compdateaxis.cpp
+
+wxfreechart_dll_juliandateaxis.o: $(srcdir)/src/axis/juliandateaxis.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/axis/juliandateaxis.cpp
 
 wxfreechart_dll_axis.o: $(srcdir)/src/axis/axis.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/axis/axis.cpp
@@ -782,6 +846,9 @@ wxfreechart_dll_xysimpledataset.o: $(srcdir)/src/xy/xysimpledataset.cpp
 wxfreechart_dll_xylinerenderer.o: $(srcdir)/src/xy/xylinerenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/xylinerenderer.cpp
 
+wxfreechart_dll_juliantimeseriesdataset.o: $(srcdir)/src/xy/juliantimeseriesdataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/juliantimeseriesdataset.cpp
+
 wxfreechart_dll_ohlcrenderer.o: $(srcdir)/src/ohlc/ohlcrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/ohlc/ohlcrenderer.cpp
 
@@ -800,6 +867,9 @@ wxfreechart_dll_ohlcdataset.o: $(srcdir)/src/ohlc/ohlcdataset.cpp
 wxfreechart_dll_categorydataset.o: $(srcdir)/src/category/categorydataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/category/categorydataset.cpp
 
+wxfreechart_dll_categoryrenderer.o: $(srcdir)/src/category/categoryrenderer.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/category/categoryrenderer.cpp
+
 wxfreechart_dll_categorysimpledataset.o: $(srcdir)/src/category/categorysimpledataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/category/categorysimpledataset.cpp
 
@@ -814,6 +884,12 @@ wxfreechart_dll_chartsplitpanel.o: $(srcdir)/src/chartsplitpanel.cpp
 
 wxfreechart_dll_colorscheme.o: $(srcdir)/src/colorscheme.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/colorscheme.cpp
+
+wxfreechart_dll_zoompan.o: $(srcdir)/src/zoompan.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/zoompan.cpp
+
+wxfreechart_dll_crosshair.o: $(srcdir)/src/crosshair.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/crosshair.cpp
 
 wxfreechart_dll_chartpanel.o: $(srcdir)/src/chartpanel.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/chartpanel.cpp
@@ -845,8 +921,14 @@ wxFreeChartDemo_lib_multipleaxisdemos.o: $(srcdir)/sample/multipleaxisdemos.cpp
 wxFreeChartDemo_lib_ohlcdemos.o: $(srcdir)/sample/ohlcdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/ohlcdemos.cpp
 
+wxFreeChartDemo_lib_pieplotdemos.o: $(srcdir)/sample/pieplotdemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/pieplotdemos.cpp
+
 wxFreeChartDemo_lib_timeseriesdemos.o: $(srcdir)/sample/timeseriesdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/timeseriesdemos.cpp
+
+wxFreeChartDemo_lib_titledemos.o: $(srcdir)/sample/titledemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/titledemos.cpp
 
 wxFreeChartDemo_lib_xydemos.o: $(srcdir)/sample/xydemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_LIB_CXXFLAGS) $(srcdir)/sample/xydemos.cpp
@@ -878,8 +960,14 @@ wxFreeChartDemo_dll_multipleaxisdemos.o: $(srcdir)/sample/multipleaxisdemos.cpp
 wxFreeChartDemo_dll_ohlcdemos.o: $(srcdir)/sample/ohlcdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/ohlcdemos.cpp
 
+wxFreeChartDemo_dll_pieplotdemos.o: $(srcdir)/sample/pieplotdemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/pieplotdemos.cpp
+
 wxFreeChartDemo_dll_timeseriesdemos.o: $(srcdir)/sample/timeseriesdemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/timeseriesdemos.cpp
+
+wxFreeChartDemo_dll_titledemos.o: $(srcdir)/sample/titledemos.cpp
+	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/titledemos.cpp
 
 wxFreeChartDemo_dll_xydemos.o: $(srcdir)/sample/xydemos.cpp
 	$(CXXC) -c -o $@ $(WXFREECHARTDEMO_DLL_CXXFLAGS) $(srcdir)/sample/xydemos.cpp

@@ -22,6 +22,15 @@ VectorDataset::~VectorDataset()
 {
 }
 
+void VectorDataset::Add(double y)
+	{
+
+	  BeginUpdate();
+		m_values.Add(y);
+		EndUpdate();
+//		DatasetChanged();
+	}
+
 double VectorDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
 	return index + 1;
