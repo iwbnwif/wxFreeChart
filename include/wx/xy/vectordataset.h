@@ -45,12 +45,7 @@ public:
 	 * Adds y values to dataset.
 	 * @param y y value
 	 */
-	void Add(double y)
-	{
-		m_values.Add(y);
-		DatasetChanged();
-	}
-
+	void Add(double y);
 	/**
 	 * Replaces y value at specified index.
 	 * @param index index of value

@@ -17,7 +17,7 @@ class WXDLLIMPEXP_FREECHART XYLineRendererBase : public XYRenderer
 {
 	DECLARE_CLASS(XYLineRendererBase)
 public:
-	XYLineRendererBase(int defaultWidth = 1, int defaultStyle = wxSOLID);
+	XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultWidth = 1, int defaultStyle = wxSOLID);
 	virtual ~XYLineRendererBase();
 
 	/**
@@ -48,6 +48,20 @@ public:
 	 */
 	wxPen *GetSeriePen(size_t serie);
 
+  virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+
+	//
+	// Renderer
+	//
+	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
+
+protected:
+  virtual void DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset) = 0;
+  virtual void DrawSymbols(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+
+	bool m_drawSymbols;
+	bool m_drawLines;
+
 private:
 	PenMap m_seriePens;
 
@@ -72,18 +86,9 @@ public:
 	XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 1, int defaultStyle = wxSOLID);
 	virtual ~XYLineRenderer();
 
-	//
-	// Renderer
-	//
-	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
 
-	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
-
-private:
-	void DrawSegment(wxDC &dc, size_t serie, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
-
-	bool m_drawSymbols;
-	bool m_drawLines;
+protected:
+  virtual void DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 };
 
 /**
@@ -98,12 +103,9 @@ public:
 	XYLineStepRenderer(int defaultWidth = 1, int defaultStyle = wxSOLID);
 	virtual ~XYLineStepRenderer();
 
-	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
-	//
-	// Renderer
-	//
-	virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
+protected:
+  virtual void DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
 private:
 	size_t GetFirstVisibleIndex(Axis *horizAxis, Axis *vertAxis, XYDataset *dataset, size_t serie);

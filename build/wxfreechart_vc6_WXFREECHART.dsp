@@ -904,6 +904,10 @@ SOURCE=..\src\category\categorydataset.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\category\categoryrenderer.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\category\categorysimpledataset.cpp
 # End Source File
 # Begin Source File
@@ -928,6 +932,10 @@ SOURCE=..\src\axis\compdateaxis.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\crosshair.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\dataset.cpp
 # End Source File
 # Begin Source File
@@ -949,6 +957,14 @@ SOURCE=..\src\gantt\ganttrenderer.cpp
 # Begin Source File
 
 SOURCE=..\src\gantt\ganttsimpledataset.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\axis\juliandateaxis.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\xy\juliantimeseriesdataset.cpp
 # End Source File
 # Begin Source File
 
@@ -1020,6 +1036,14 @@ SOURCE=..\src\symbol.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\title.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\tooltips.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\xy\vectordataset.cpp
 # End Source File
 # Begin Source File
@@ -1061,6 +1085,10 @@ SOURCE=..\src\xyz\xyzdataset.cpp
 # Begin Source File
 
 SOURCE=..\src\xyz\xyzrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\zoompan.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -1104,6 +1132,10 @@ SOURCE=..\include\wx\category\categorydataset.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\category\categoryrenderer.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\category\categorysimpledataset.h
 # End Source File
 # Begin Source File
@@ -1129,6 +1161,10 @@ SOURCE=..\include\wx\colorscheme.h
 # Begin Source File
 
 SOURCE=..\include\wx\axis\compdateaxis.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\crosshair.h
 # End Source File
 # Begin Source File
 
@@ -1164,6 +1200,14 @@ SOURCE=..\include\wx\gantt\ganttsimpledataset.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\axis\juliandateaxis.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\juliantimeseriesdataset.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\axis\labelaxis.h
 # End Source File
 # Begin Source File
@@ -1177,6 +1221,10 @@ SOURCE=..\include\wx\axis\logarithmicnumberaxis.h
 # Begin Source File
 
 SOURCE=..\include\wx\marker.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\movingavg.h
 # End Source File
 # Begin Source File
 
@@ -1236,6 +1284,14 @@ SOURCE=..\include\wx\symbol.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\title.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\tooltips.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\xy\vectordataset.h
 # End Source File
 # Begin Source File
@@ -1281,6 +1337,10 @@ SOURCE=..\include\wx\xyz\xyzdataset.h
 # Begin Source File
 
 SOURCE=..\include\wx\xyz\xyzrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\zoompan.h
 # End Source File
 # End Group
 # End Target

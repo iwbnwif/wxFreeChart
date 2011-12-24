@@ -13,7 +13,7 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/dataset.h>
 #include <wx/areadraw.h>
-
+#include <wx/category/categorydataset.h>
 /**
  * Legend.
  * Performs legend drawing.
@@ -34,7 +34,8 @@ public:
 	 * @param symbolTextGap distance between symbol and text
 	 * @param margin legend margin
 	 */
-	Legend(int vertPosition, int horizPosition, AreaDraw *background = new FillAreaDraw(), int symbolTextGap = 2, int margin = 2);
+	Legend(int vertPosition, int horizPosition,
+			AreaDraw *background = new FillAreaDraw(), int symbolTextGap = 2, int margin = 2);
 
 	virtual ~Legend();
 
@@ -45,6 +46,7 @@ public:
 	 * @param datasets datasets array
 	 */
 	void Draw(wxDC &dc, wxRect rc, DatasetArray &datasets);
+	void Draw(wxDC &dc, wxRect rc, CategoryDataset &dataset);
 
 	/**
 	 * Returns legend vertical position.
@@ -89,6 +91,7 @@ public:
 	 * @return size needed for legend area
 	 */
 	wxSize GetExtent(wxDC &dc, DatasetArray &datasets);
+	wxSize GetExtent(wxDC &dc, CategoryDataset &dataset);
 
 private:
 	int m_vertPosition;

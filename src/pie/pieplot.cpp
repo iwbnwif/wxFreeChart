@@ -45,12 +45,16 @@ PiePlot::PiePlot()
 	m_labelsFont = *wxSMALL_FONT;
 
 	m_serie = 0; // default behaviour - use first serie
+
+	m_legendPlotGap = 2;
+	m_legend = NULL;
 }
 
 PiePlot::~PiePlot()
 {
 	SAFE_REMOVE_OBSERVER(this, m_dataset);
 	SAFE_UNREF(m_dataset);
+	wxDELETE(m_legend);
 }
 
 void PiePlot::SetDataset(CategoryDataset *dataset)
@@ -64,6 +68,12 @@ void PiePlot::SetDataset(CategoryDataset *dataset)
 void PiePlot::SetColorScheme(ColorScheme *colorScheme)
 {
 	m_colorScheme = *colorScheme;
+	FirePlotNeedRedraw();
+}
+
+void PiePlot::SetLegend(Legend *legend)
+{
+	wxREPLACE(m_legend, legend);
 	FirePlotNeedRedraw();
 }
 
@@ -87,6 +97,58 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 		sum += m_dataset->GetValue(n, m_serie);
 	}
 
+
+	wxRect rcLegend;
+	if (m_legend != NULL) {
+		wxSize legendExtent = m_legend->GetExtent(dc, *m_dataset);
+
+		switch (m_legend->GetHorizPosition()) {
+		case wxLEFT:
+			rcLegend.x = rc.x;
+
+			rc.x += legendExtent.x + m_legendPlotGap;
+			rc.width -= legendExtent.x + m_legendPlotGap;
+			break;
+		case wxRIGHT:
+			rcLegend.x = rc.x + rc.width - legendExtent.x + m_legendPlotGap;
+
+			rc.width -= legendExtent.x + m_legendPlotGap;
+			break;
+		case wxCENTER:
+			rcLegend.x = rc.x + rc.width / 2 - legendExtent.x / 2;
+			break;
+		default:
+			//(wxT("Invalid legend horizontal position"));
+			return ;
+		}
+
+		switch (m_legend->GetVertPosition()) {
+		case wxTOP:
+			rcLegend.y = rc.y;
+
+			rc.y += legendExtent.y + m_legendPlotGap;
+			rc.height -= legendExtent.y + m_legendPlotGap;
+			break;
+		case wxBOTTOM:
+			rcLegend.y = rc.y + rc.height - legendExtent.y + m_legendPlotGap;
+
+			rc.height -= legendExtent.y + m_legendPlotGap;
+			break;
+		case wxCENTER:
+			rcLegend.y = rc.y + rc.height / 2 - legendExtent.y / 2;
+			break;
+		default:
+			//(wxT("Invalid legend vertical position"));
+			return;
+		}
+
+		rcLegend.width = legendExtent.x;
+		rcLegend.height = legendExtent.y;
+
+		CheckFixRect(rcLegend);
+
+		m_legend->Draw(dc, rcLegend, *m_dataset);
+	}
 
 	int radHoriz = (int) (0.8 * wxMin(rc.width, rc.height));
 	int radVert  = (int) (radHoriz * m_ellipticAspect);

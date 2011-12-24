@@ -22,6 +22,10 @@ public:
 	LogarithmicNumberAxis(AXIS_LOCATION location);
 	virtual ~LogarithmicNumberAxis();
 
+  virtual void UpdateBounds();
+  virtual double BoundValue(double value);
+  virtual bool IsVisible(double value);
+
 	/**
 	 * Sets logarithmic base.
 	 * @param logBase   A value used as logarithmic base.
@@ -46,6 +50,9 @@ public:
 protected:
 	virtual void GetLabel(size_t step, wxString& label);
 	virtual double GetValue(size_t step);
+
+  double GetMinValue(Dataset* dataset);
+  double GetMaxValue(Dataset* dataset);
 
 private:
 	bool m_longExponent;

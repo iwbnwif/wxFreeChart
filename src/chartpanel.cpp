@@ -18,6 +18,7 @@
 // Events
 //
 
+/*// XXX deprecated?!
 DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_CLICK)
 DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_CLICK)
 DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_DCLICK)
@@ -26,6 +27,7 @@ DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_DOWN)
 DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_DOWN)
 DEFINE_EVENT_TYPE(wxEVT_FREECHART_LEFT_UP)
 DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_UP)
+*/
 
 const int scrollPixelStep = 100;
 const int stepMult = 100;
@@ -41,6 +43,34 @@ void GetAxisScrollParams(Axis *axis, int &noUnits, int &pos)
 	}
 
 	pos = (int) (stepMult * (axis->GetWindowPosition() - minValue));
+}
+
+
+//
+// ChartPanelObserver
+//
+void ChartPanelObserver::ChartEnterWindow()
+{
+}
+
+void ChartPanelObserver::ChartMouseDown(wxPoint &pt, int key)
+{
+}
+
+void ChartPanelObserver::ChartMouseUp(wxPoint &pt, int key)
+{
+}
+
+void ChartPanelObserver::ChartMouseMove(wxPoint &pt)
+{
+}
+
+void ChartPanelObserver::ChartMouseDrag(wxPoint &pt)
+{
+}
+
+void ChartPanelObserver::ChartMouseWheel(int rotation)
+{
 }
 
 //
@@ -63,6 +93,8 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
 	m_chart = NULL;
 	m_antialias = false;
 
+	m_mode = NULL;
+
 	ResizeBackBitmap(size);
 
 	SetScrollRate(1, 1);
@@ -78,7 +110,15 @@ wxChartPanel::~wxChartPanel()
 void wxChartPanel::SetChart(Chart *chart)
 {
 	SAFE_REPLACE_OBSERVER(this, m_chart, chart);
+	if (m_chart != NULL) {
+		m_chart->SetChartPanel(NULL);
+	}
+
 	wxREPLACE(m_chart, chart);
+
+	if (m_chart != NULL) {
+		m_chart->SetChartPanel(this);
+	}
 
 	RecalcScrollbars();
 
@@ -89,6 +129,19 @@ void wxChartPanel::SetChart(Chart *chart)
 Chart *wxChartPanel::GetChart()
 {
 	return m_chart;
+}
+
+void wxChartPanel::SetMode(ChartPanelMode *mode)
+{
+	if (m_mode != NULL)
+		RemoveObserver(m_mode);
+	if (mode != NULL)
+		AddObserver(mode);
+	wxREPLACE(m_mode, mode);
+
+	if (m_mode != NULL) {
+		m_mode->Init(this);
+	}
 }
 
 void wxChartPanel::SetAntialias(bool antialias)
@@ -213,12 +266,53 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 
 void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
 {
-	// TODO
-	/*
-	switch (ev.GetEventType()) {
-	case wx
+	if (m_mode == NULL) {
+		return ;
 	}
-	*/
+
+#if 0
+	// TODO
+	switch (ev.GetEventType()) {
+	case wxEVT_ENTER_WINDOW:
+		m_mode->ChartEnterWindow();
+		break;
+	case wxEVT_LEAVE_WINDOW:
+		m_mode->ChartLeaveWindow();
+		break;
+	case wxEVT_LEFT_DOWN:
+		m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_LEFT);
+		break;
+	case wxEVT_LEFT_UP:
+		m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_LEFT);
+		break;
+	//case wxEVT_LEFT_DCLICK:
+	case wxEVT_MIDDLE_DOWN:
+		m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_MIDDLE);
+		break;
+	case wxEVT_MIDDLE_UP:
+		m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_MIDDLE);
+		break;
+	//case wxEVT_MIDDLE_DCLICK:
+	case wxEVT_RIGHT_DOWN:
+		m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_RIGHT);
+		break;
+	case wxEVT_RIGHT_UP:
+		m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_RIGHT);
+		break;
+	//case wxEVT_RIGHT_DCLICK:
+	case wxEVT_MOTION:
+		if (ev.Dragging()) {
+			m_mode->ChartMouseDrag(ev.GetPosition());
+		}
+		else {
+			m_mode->ChartMouseMove(ev.GetPosition());
+		}
+		break;
+	case wxEVT_MOUSEWHEEL:
+		m_mode->ChartMouseWheel(GetWheelRotation());
+		break;
+	}
+#endif
 }
 
 void wxChartPanel::ScrollAxis(Axis *axis, int d)

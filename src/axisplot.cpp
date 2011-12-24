@@ -31,6 +31,7 @@ AxisPlot::AxisPlot()
 	m_drawGridHorizontal = true;
 
 	m_legend = NULL;
+	m_crosshair = NULL;
 	m_dataBackground = NULL;
 	SetDataBackground(new FillAreaDraw());
 }
@@ -56,6 +57,7 @@ AxisPlot::~AxisPlot()
 	wxDELETE(m_dataBackground);
 
 	wxDELETE(m_legend);
+	wxDELETE(m_crosshair);
 }
 
 void AxisPlot::SetDataBackground(AreaDraw *dataBackground)
@@ -102,6 +104,15 @@ bool AxisPlot::HasData()
 	return m_datasets.Count() != 0;
 }
 
+void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
+{
+	/* TODO
+	if (m_crosshair != NULL) {
+		SAFE_REPLACE_OBSERVER(m_crosshair, oldPanel, newPanel);
+	}
+	*/
+}
+
 void AxisPlot::AddDataset(Dataset *dataset)
 {
 	if (!AcceptDataset(dataset)) {
@@ -143,11 +154,7 @@ void AxisPlot::LinkDataHorizontalAxis(size_t nData, size_t nAxis)
 	m_links.Add(new DataAxisLink(m_datasets[nData], m_horizontalAxes[nAxis]));
 	m_horizontalAxes[nAxis]->AddDataset(m_datasets[nData]);
 
-	//UpdateAxis(m_datasets[nData]);
 	m_horizontalAxes[nAxis]->UpdateBounds();
-
-	// redundant
-	//FirePlotNeedRedraw();
 }
 
 void AxisPlot::LinkDataVerticalAxis(size_t nData, size_t nAxis)
@@ -158,16 +165,27 @@ void AxisPlot::LinkDataVerticalAxis(size_t nData, size_t nAxis)
 	m_links.Add(new DataAxisLink(m_datasets[nData], m_verticalAxes[nAxis]));
 	m_verticalAxes[nAxis]->AddDataset(m_datasets[nData]);
 
-	//UpdateAxis(m_datasets[nData]);
 	m_verticalAxes[nAxis]->UpdateBounds();
-
-	// redundant
-	//FirePlotNeedRedraw();
 }
 
 void AxisPlot::SetLegend(Legend *legend)
 {
 	wxREPLACE(m_legend, legend);
+	FirePlotNeedRedraw();
+}
+
+void AxisPlot::SetCrosshair(Crosshair *crosshair)
+{
+	/*// TODO
+	if (m_crosshair != NULL && GetChartPanel() != NULL) {
+		GetChartPanel()->RemoveObserver(m_crosshair);
+	}
+
+	wxREPLACE(m_crosshair, crosshair);
+	if (m_crosshair != NULL && GetChartPanel() != NULL) {
+		GetChartPanel()->AddObserver(m_crosshair);
+	}
+	*/
 	FirePlotNeedRedraw();
 }
 
@@ -445,6 +463,11 @@ void AxisPlot::DrawDataArea(wxDC &dc, wxRect rcData)
 	DrawMarkers(dc, rcData);
 	DrawGridLines(dc, rcData);
 	DrawDatasets(dc, rcData);
+
+	if (m_crosshair != NULL) {
+		// TODO crosshair drawing
+		//m_crosshair->Draw(dc, rcData, );
+	}
 }
 
 void AxisPlot::DrawData(wxDC &dc, wxRect rc)

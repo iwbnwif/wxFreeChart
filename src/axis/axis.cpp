@@ -100,7 +100,11 @@ double Axis::BoundValue(double value)
 		}
 	}
 	else {
-		return value;
+	  double min, max;
+	  GetDataBounds(min, max);
+
+    double bound = wxMin(max, wxMax(min, value));
+    return bound;
 	}
 }
 

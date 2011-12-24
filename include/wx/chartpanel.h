@@ -13,11 +13,43 @@
 #include <wx/wxfreechartdefs.h>
 #include <wx/chart.h>
 
+class wxChartPanel;
+
+/**
+ * Interface to propagate chart panel mouse events
+ * to lower layer classes, for mouse handling objects,
+ * such as crosshairs, tooltip generators, etc.
+ */
+class WXDLLIMPEXP_FREECHART ChartPanelObserver
+{
+public:
+	virtual void ChartEnterWindow();
+
+	virtual void ChartMouseDown(wxPoint &pt, int key);
+	virtual void ChartMouseUp(wxPoint &pt, int key);
+
+	virtual void ChartMouseMove(wxPoint &pt);
+	virtual void ChartMouseDrag(wxPoint &pt);
+
+	virtual void ChartMouseWheel(int rotation);
+};
+
+/**
+ * Base class for zoom/pan modes.
+ */
+class WXDLLIMPEXP_FREECHART ChartPanelMode  : public ChartPanelObserver
+{
+public:
+	virtual void Init(wxChartPanel *chartPanel) = 0;
+};
+
+
 /**
  * ChartPanel is wxWidgets panel for displaying chart.
  *
  */
-class WXDLLIMPEXP_FREECHART wxChartPanel : public wxScrolledWindow, public ChartObserver
+class WXDLLIMPEXP_FREECHART wxChartPanel : public wxScrolledWindow, public ChartObserver,
+	public Observable<ChartPanelObserver>
 {
 public:
 	wxChartPanel(wxWindow *parent, wxWindowID = wxID_ANY, Chart *chart = NULL,
@@ -37,8 +69,15 @@ public:
 	Chart *GetChart();
 
 	/**
+	 * Sets chart panel mode, eg. zoom, pan, etc.
+	 * @param mode mode
+	 */
+	void SetMode(ChartPanelMode *mode);
+
+	/**
 	 * Turn antialiasing on/off.
 	 * Has effect only when wx wxUSE_GRAPHICS_CONTEXT is set in wxWidgets build.
+	 * Warning: this feature can dramatically lower rendering performance.
 	 *
 	 * @param antialias true to turn on antialiasing.
 	 */
@@ -85,23 +124,10 @@ private:
 
 	bool m_antialias;
 
+	ChartPanelMode *m_mode;
+
 	DECLARE_EVENT_TABLE()
 };
 
-//class WXDLLIMPEXP_FREECHART wxChartEvent :
-
-//
-// Events declarations.
-//
-BEGIN_DECLARE_EVENT_TYPES()
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_CLICK, 6000)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_CLICK, 6001)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_DCLICK, 6002)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_DCLICK, 6003)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_DOWN, 6004)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_DOWN, 6005)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_LEFT_UP, 6006)
-	DECLARE_EXPORTED_EVENT_TYPE(WXDLLIMPEXP_FREECHART, wxEVT_FREECHART_RIGHT_UP, 6007)
-END_DECLARE_EVENT_TYPES()
 
 #endif /*CHARTPANEL_H_*/

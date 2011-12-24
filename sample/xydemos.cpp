@@ -880,11 +880,11 @@ public:
 	{
 		// serie xy data
 		double data[][2] = {
-				{ 1, 1e-16, },
-				{ 2, 1e2, },
-				{ 3, 1e-2, },
-				{ 4, 1e-13, },
-				{ 5, 1e-5, },
+				{ 1, 1e-3, },
+				{ 2, 0.0, },
+				{ 3, 1e1, },
+				{ 4, 1.131e-7, },
+				{ 5, 1e-3, },
 		};
 
 		// first step: create plot
@@ -897,13 +897,18 @@ public:
 		dataset->AddSerie((double *) data, WXSIZEOF(data));
 
 		// set line renderer to dataset
-		dataset->SetRenderer(new XYLineRenderer());
+		// renderer should draw symbols of algorithmic axis to show single points
+		// (ie, when drawing five values where the second is zero, the first point won't
+		// be visible because no line segment will be drawn from the first to the second point)
+		dataset->SetRenderer(new XYLineRenderer(true));
 
 		// add our dataset to plot
 		plot->AddDataset(dataset);
 
 		// create left and bottom number axes
-		NumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
+		LogarithmicNumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
+		leftAxis->SetFixedBounds(1e-6, 1e3);
+		leftAxis->SetMajorLabelSteps(2);
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
 		// optional: set axis titles
@@ -960,10 +965,8 @@ public:
 		// create left and bottom number axes
 		LogarithmicNumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
 		leftAxis->SetLogBase(2.0);
-//		LogarithmicNumberAxis *bottomAxis = new LogarithmicNumberAxis(AXIS_BOTTOM);
-//		bottomAxis->SetLogBase(2.0);
-
-    NumberAxis* bottomAxis = new NumberAxis(AXIS_BOTTOM);
+		LogarithmicNumberAxis *bottomAxis = new LogarithmicNumberAxis(AXIS_BOTTOM);
+		bottomAxis->SetLogBase(2.0);
 
 		// optional: set axis titles
 		leftAxis->SetTitle(wxT("X"));

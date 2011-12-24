@@ -1053,7 +1053,13 @@
 				RelativePath="..\sample\ohlcdemos.cpp">
 			</File>
 			<File
+				RelativePath="..\sample\pieplotdemos.cpp">
+			</File>
+			<File
 				RelativePath="..\sample\timeseriesdemos.cpp">
+			</File>
+			<File
+				RelativePath="..\sample\titledemos.cpp">
 			</File>
 			<File
 				RelativePath="..\sample\xydemos.cpp">

@@ -125,6 +125,11 @@ public:
 	Dataset *GetDataset(size_t index);
 
 	//
+	// Mouse drag behavior
+	//
+	void SetZoomPanMode();
+
+	//
 	// Window functions.
 	//
 

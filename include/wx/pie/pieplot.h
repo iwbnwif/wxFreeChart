@@ -12,6 +12,9 @@
 
 #include <wx/plot.h>
 #include <wx/category/categorydataset.h>
+#include <wx/category/categoryrenderer.h>
+#include <wx/legend.h>
+#include <wx/xy/xyarearenderer.h>
 
 #include <wx/colorscheme.h>
 
@@ -53,6 +56,8 @@ public:
 		}
 	}
 
+	void SetLegend(Legend *legend);
+
 	//
 	// DatasetObserver
 	//
@@ -76,6 +81,10 @@ private:
 	ColorScheme m_colorScheme;
 
 	size_t m_serie;
+
+	wxCoord m_legendPlotGap; // distance between plot and legend
+
+	Legend *m_legend;
 };
 
 #endif /*PIEPLOT_H_*/

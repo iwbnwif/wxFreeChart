@@ -20,19 +20,30 @@ ChartObserver::~ChartObserver()
 
 Chart::Chart(Plot *plot, const wxString &title)
 {
+	Init(plot, new Header(title));
+}
+
+Chart::Chart(Plot* plot, Header* header, Footer* footer)
+{
+	Init(plot, header, footer);
+}
+
+void Chart::Init(Plot* plot, Header* header, Footer* footer)
+{
 	// defaults
 	wxColour bgColor = wxColour(220, 220, 220);
 
 	m_background = new FillAreaDraw(
 			*wxThePenList->FindOrCreatePen(bgColor, 1, wxSOLID),
 			*wxTheBrushList->FindOrCreateBrush(bgColor));
-	m_titleFont = *wxNORMAL_FONT;
 
 	m_margin = 5;
 
 	m_plot = plot;
 	m_plot->AddObserver(this);
-	m_title = title;
+	m_header = header;
+	m_footer = footer;
+	m_headerGap = 2;
 
 	m_horizScrolledAxis = NULL;
 	m_vertScrolledAxis = NULL;
@@ -46,6 +57,8 @@ Chart::~Chart()
 	SAFE_REMOVE_OBSERVER(this, m_plot);
 	wxDELETE(m_plot);
 	wxDELETE(m_background);
+	wxDELETE(m_header);
+	wxDELETE(m_footer);
 }
 
 void Chart::PlotNeedRedraw(Plot *WXUNUSED(plot))
@@ -95,19 +108,31 @@ Axis *Chart::GetVertScrolledAxis()
 	return m_vertScrolledAxis;
 }
 
-wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
+wxChartPanel *Chart::GetChartPanel()
 {
-	int topMargin = m_margin;
-	if (m_title.Length() != 0) {
-		dc.SetFont(m_titleFont);
-
-		wxSize textExtent = dc.GetTextExtent(m_title);
-		topMargin += textExtent.y + 2;
-	}
-
-	Margins(rc, m_margin, topMargin, m_margin, m_margin);
-	return rc;
+	return m_chartPanel;
 }
+
+void Chart::SetChartPanel(wxChartPanel *chartPanel)
+{
+	m_chartPanel = chartPanel;
+	m_plot->SetChartPanel(chartPanel);
+}
+
+// Deprecated?
+//wxRect Chart::CalcPlotRect(wxDC &dc, wxRect rc)
+//{
+//	int topMargin = m_margin;
+//	if (m_title.Length() != 0) {
+//		dc.SetFont(m_titleFont);
+//
+//		wxSize textExtent = dc.GetTextExtent(m_title);
+//		topMargin += textExtent.y + 2;
+//	}
+//
+//	Margins(rc, m_margin, topMargin, m_margin, m_margin);
+//	return rc;
+//}
 
 void Chart::Draw(wxDC &dc, wxRect &rc)
 {
@@ -115,19 +140,27 @@ void Chart::Draw(wxDC &dc, wxRect &rc)
 	m_background->Draw(dc, rc);
 
 	int topMargin = m_margin;
-	if (m_title.Length() != 0) {
-		dc.SetFont(m_titleFont);
+	int bottomMargin = m_margin;
 
-		wxSize textExtent = dc.GetTextExtent(m_title);
-
-		wxRect titleRect = rc;
-		titleRect.height = textExtent.y + 2;
-
-		DrawTextCenter(dc, titleRect, m_title);
-
-		topMargin += titleRect.height;
+	if (m_header && !m_header->IsEmpty()) {
+		wxRect headerRect = rc;
+		Margins(headerRect, m_margin, m_margin, m_margin, m_margin);
+		wxSize headerExtent = m_header->CalculateExtent(dc);
+		headerRect.height = headerExtent.y + m_headerGap;
+		topMargin += headerRect.height;
+		m_header->Draw(dc, headerRect);
 	}
 
-	Margins(rc, m_margin, topMargin, m_margin, m_margin);
+	if (m_footer && !m_footer->IsEmpty()) {
+		wxRect footerRect = rc;
+		Margins(footerRect, m_margin, m_margin, m_margin, m_margin);
+		wxSize footerExtent = m_footer->CalculateExtent(dc);
+		footerRect.height = footerExtent.y + m_headerGap;
+		footerRect.y = rc.height - footerRect.height;
+		bottomMargin += footerRect.height;
+		m_footer->Draw(dc, footerRect);
+	}
+
+	Margins(rc, m_margin, topMargin, m_margin, bottomMargin);
 	m_plot->Draw(dc, rc);
 }

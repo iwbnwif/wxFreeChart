@@ -504,7 +504,15 @@ SOURCE=..\sample\ohlcdemos.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\sample\pieplotdemos.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\sample\timeseriesdemos.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\sample\titledemos.cpp
 # End Source File
 # Begin Source File
 

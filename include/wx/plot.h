@@ -16,6 +16,7 @@
 #include <wx/areadraw.h>
 
 class WXDLLIMPEXP_FREECHART Plot;
+class WXDLLIMPEXP_FREECHART wxChartPanel;
 
 /**
  * Interface that receives Plot events, such as need redraw condition.
@@ -59,6 +60,15 @@ public:
 	 */
 	virtual void DrawNoDataMessage(wxDC &dc, wxRect rc);
 
+	void SetChartPanel(wxChartPanel *chartPanel);
+
+	/**
+	 * Returns chart panel (GUI component, at top level) if
+	 * it
+	 */
+	wxChartPanel *GetChartPanel();
+
+
 	/**
 	 * Sets plot background.
 	 * @param background new background for plot
@@ -95,6 +105,13 @@ protected:
 	 */
 	virtual void DrawData(wxDC &dc, wxRect rc) = 0;
 
+	/**
+	 * Called when chart panel is changed.
+	 * @param oldPanel old chart panel
+	 * @param newPanel new chart panel
+	 */
+	virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
+
 	FIRE_WITH_THIS(PlotNeedRedraw);
 
 private:
@@ -102,6 +119,8 @@ private:
 	wxString m_textNoData;
 
 	AreaDraw *m_background;
+
+	wxChartPanel *m_chartPanel;
 };
 
 #endif /*PLOT_H_*/

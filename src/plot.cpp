@@ -25,6 +25,8 @@ Plot::Plot()
 	m_textNoData = wxT("No data");
 
 	m_background = new NoAreaDraw();
+
+	m_chartPanel = NULL;
 }
 
 Plot::~Plot()
@@ -48,4 +50,20 @@ void Plot::DrawNoDataMessage(wxDC &dc, wxRect rc)
 {
 	dc.SetFont(m_textNoDataFont);
 	DrawTextCenter(dc, rc, m_textNoData);
+}
+
+void Plot::SetChartPanel(wxChartPanel *chartPanel)
+{
+	ChartPanelChanged(m_chartPanel, chartPanel);
+	m_chartPanel = chartPanel;
+}
+
+wxChartPanel *Plot::GetChartPanel()
+{
+	return m_chartPanel;
+}
+
+void Plot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
+{
+	// default - do nothing
 }
