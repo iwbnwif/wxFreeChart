@@ -13,7 +13,7 @@
 #include <wx/chartrenderer.h>
 
 /**
- * Base class for displaying OHLC data.
+ * Base class for rendering OHLC data.
  */
 class WXDLLIMPEXP_FREECHART OHLCRenderer : public Renderer
 {

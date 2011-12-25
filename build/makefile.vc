@@ -251,9 +251,6 @@ ____wxfreechart_dll__DEBUGINFO_21 =
 !if "$(WX_DEBUG)" == "1"
 ____wxfreechart_dll__DEBUGINFO_21 = $(____wx_7)
 !endif
-!if "$(WX_MONOLITHIC)" == "0"
-__WXLIB_GL_NAME_p = wxmsw$(WX_VERSION)$(WXLIBPOSTFIX)_gl.lib
-!endif
 !if "$(WX_SHARED)" == "0"
 __wxFreeChartDemo_lib___depname = ..\sample\wxFreeChartDemo_lib.exe
 !endif
@@ -345,6 +342,9 @@ ____wx_7 =
 __WXLIB_AUI_NAME_p = wxmsw$(WX_VERSION)$(WXLIBPOSTFIX)_aui.lib
 !endif
 !if "$(WX_MONOLITHIC)" == "0"
+__WXLIB_ADV_NAME_p = wxmsw$(WX_VERSION)$(WXLIBPOSTFIX)_adv.lib
+!endif
+!if "$(WX_MONOLITHIC)" == "0"
 __WXLIB_CORE_NAME_p = wxmsw$(WX_VERSION)$(WXLIBPOSTFIX)_core.lib
 !endif
 !if "$(WX_MONOLITHIC)" == "0"
@@ -411,7 +411,7 @@ make_dir_wxfreechart_lib:
 !if "$(WX_SHARED)" == "1"
 ..\lib\vc_$(____wxfreechart_dll__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.dll: make_dir_wxfreechart_dll  $(WXFREECHART_DLL_OBJECTS)
 	link /DLL /NOLOGO /OUT:$@  /LIBPATH:$(WX_DIR)$(WXLIBPATH) $(____wx_5) /pdb:"..\lib\vc_$(____wxfreechart_dll__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.pdb" $(____wxfreechart_dll__DEBUGINFO_21) /LIBPATH:..$(WXLIBPATH) $(LDFLAGS) @<<
-	$(WXFREECHART_DLL_OBJECTS)   $(__WXLIB_GL_NAME_p) $(__WXLIB_CORE_NAME_p) $(__WXLIB_BASE_NAME_p) wxtiff$(WX3RDPARTYLIBPOSTFIX).lib wxjpeg$(WX3RDPARTYLIBPOSTFIX).lib wxpng$(WX3RDPARTYLIBPOSTFIX).lib wxzlib$(WX3RDPARTYLIBPOSTFIX).lib wxregex$(WXLIBPOSTFIX).lib wxexpat$(WX3RDPARTYLIBPOSTFIX).lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib oleacc.lib /IMPLIB:..\lib\vc_$(____wxfreechart_dll__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.lib
+	$(WXFREECHART_DLL_OBJECTS)   $(__WXLIB_CORE_NAME_p) $(__WXLIB_BASE_NAME_p) wxtiff$(WX3RDPARTYLIBPOSTFIX).lib wxjpeg$(WX3RDPARTYLIBPOSTFIX).lib wxpng$(WX3RDPARTYLIBPOSTFIX).lib wxzlib$(WX3RDPARTYLIBPOSTFIX).lib wxregex$(WXLIBPOSTFIX).lib wxexpat$(WX3RDPARTYLIBPOSTFIX).lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib oleacc.lib /IMPLIB:..\lib\vc_$(____wxfreechart_dll__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.lib
 <<
 !endif
 
@@ -421,7 +421,7 @@ make_dir_wxfreechart_dll:
 !if "$(WX_SHARED)" == "0"
 ..\sample\wxFreeChartDemo_lib.exe: $(WXFREECHARTDEMO_LIB_OBJECTS) make_sample_dir_wxFreeChartDemo_lib  $(__wxfreechart_lib___depname)
 	link /NOLOGO /OUT:$@  /LIBPATH:$(WX_DIR)$(WXLIBPATH) $(____wx_5) /pdb:"..\sample\wxFreeChartDemo_lib.pdb" $(____wxFreeChartDemo_lib__DEBUGINFO_32) /LIBPATH:..$(WXLIBPATH) /SUBSYSTEM:WINDOWS  $(LDFLAGS) @<<
-	$(WXFREECHARTDEMO_LIB_OBJECTS)   ..\lib\vc_$(____wxfreechart_lib__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.lib $(__WXLIB_AUI_NAME_p) $(__WXLIB_CORE_NAME_p) $(__WXLIB_BASE_NAME_p) wxtiff$(WX3RDPARTYLIBPOSTFIX).lib wxjpeg$(WX3RDPARTYLIBPOSTFIX).lib wxpng$(WX3RDPARTYLIBPOSTFIX).lib wxzlib$(WX3RDPARTYLIBPOSTFIX).lib wxregex$(WXLIBPOSTFIX).lib wxexpat$(WX3RDPARTYLIBPOSTFIX).lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib oleacc.lib
+	$(WXFREECHARTDEMO_LIB_OBJECTS)   ..\lib\vc_$(____wxfreechart_lib__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.lib $(__WXLIB_AUI_NAME_p) $(__WXLIB_ADV_NAME_p) $(__WXLIB_CORE_NAME_p) $(__WXLIB_BASE_NAME_p) wxtiff$(WX3RDPARTYLIBPOSTFIX).lib wxjpeg$(WX3RDPARTYLIBPOSTFIX).lib wxpng$(WX3RDPARTYLIBPOSTFIX).lib wxzlib$(WX3RDPARTYLIBPOSTFIX).lib wxregex$(WXLIBPOSTFIX).lib wxexpat$(WX3RDPARTYLIBPOSTFIX).lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib oleacc.lib
 <<
 !endif
 
@@ -431,7 +431,7 @@ make_sample_dir_wxFreeChartDemo_lib:
 !if "$(WX_SHARED)" == "1"
 ..\sample\wxFreeChartDemo_dll.exe: $(WXFREECHARTDEMO_DLL_OBJECTS) make_sample_dir_wxFreeChartDemo_dll  $(__wxfreechart_dll___depname)
 	link /NOLOGO /OUT:$@  /LIBPATH:$(WX_DIR)$(WXLIBPATH) $(____wx_5) /pdb:"..\sample\wxFreeChartDemo_dll.pdb" $(____wxFreeChartDemo_dll__DEBUGINFO_45) /LIBPATH:..$(WXLIBPATH) /SUBSYSTEM:WINDOWS  $(LDFLAGS) @<<
-	$(WXFREECHARTDEMO_DLL_OBJECTS)   ..\lib\vc_$(____wxfreechart_dll__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.lib $(__WXLIB_AUI_NAME_p) $(__WXLIB_CORE_NAME_p) $(__WXLIB_BASE_NAME_p) wxtiff$(WX3RDPARTYLIBPOSTFIX).lib wxjpeg$(WX3RDPARTYLIBPOSTFIX).lib wxpng$(WX3RDPARTYLIBPOSTFIX).lib wxzlib$(WX3RDPARTYLIBPOSTFIX).lib wxregex$(WXLIBPOSTFIX).lib wxexpat$(WX3RDPARTYLIBPOSTFIX).lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib oleacc.lib
+	$(WXFREECHARTDEMO_DLL_OBJECTS)   ..\lib\vc_$(____wxfreechart_dll__DIRNAME_SHARED_SUFFIX_FILENAMES)\wxcode_msw$(WX_VERSION)$(WXLIBPOSTFIX)_freechart.lib $(__WXLIB_AUI_NAME_p) $(__WXLIB_ADV_NAME_p) $(__WXLIB_CORE_NAME_p) $(__WXLIB_BASE_NAME_p) wxtiff$(WX3RDPARTYLIBPOSTFIX).lib wxjpeg$(WX3RDPARTYLIBPOSTFIX).lib wxpng$(WX3RDPARTYLIBPOSTFIX).lib wxzlib$(WX3RDPARTYLIBPOSTFIX).lib wxregex$(WXLIBPOSTFIX).lib wxexpat$(WX3RDPARTYLIBPOSTFIX).lib kernel32.lib user32.lib gdi32.lib comdlg32.lib winspool.lib winmm.lib shell32.lib comctl32.lib ole32.lib oleaut32.lib uuid.lib rpcrt4.lib advapi32.lib wsock32.lib odbc32.lib oleacc.lib
 <<
 !endif
 

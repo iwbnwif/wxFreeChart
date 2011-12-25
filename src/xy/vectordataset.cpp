@@ -23,13 +23,34 @@ VectorDataset::~VectorDataset()
 }
 
 void VectorDataset::Add(double y)
-	{
+{
+	m_values.Add(y);
+	DatasetChanged();
+}
 
-	  BeginUpdate();
-		m_values.Add(y);
-		EndUpdate();
-//		DatasetChanged();
+void VectorDataset::Replace(size_t index, double y)
+{
+	if (index < m_values.Count()) {
+		m_values[index] = y;
+
+		DatasetChanged();
 	}
+}
+
+void VectorDataset::RemoveAt(size_t index)
+{
+	if (index < m_values.Count()) {
+		m_values.RemoveAt(index);
+
+		DatasetChanged();
+	}
+}
+
+void VectorDataset::Clear()
+{
+	m_values.Clear();
+	DatasetChanged();
+}
 
 double VectorDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
@@ -51,7 +72,7 @@ size_t VectorDataset::GetSerieCount()
 	return 1;
 }
 
-wxString VectorDataset::GetSerieName(size_t serie)
+wxString VectorDataset::GetSerieName(size_t WXUNUSED(serie))
 {
 	return wxEmptyString;
 }

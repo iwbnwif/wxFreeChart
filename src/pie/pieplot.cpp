@@ -82,7 +82,7 @@ bool PiePlot::HasData()
 	return m_dataset != NULL && (m_dataset->GetSerieCount() >= m_serie);
 }
 
-void PiePlot::DatasetChanged(Dataset *dataset)
+void PiePlot::DatasetChanged(Dataset *WXUNUSED(dataset))
 {
 	FirePlotNeedRedraw();
 }

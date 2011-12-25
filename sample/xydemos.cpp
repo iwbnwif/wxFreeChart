@@ -261,16 +261,33 @@ public:
 	}
 };
 
+class DynamicDemoDatasetUpdater;
+
 /**
  * Dataset for dynamic demo.
  */
-class DynamicDemoDataset : public VectorDataset, public wxEvtHandler
+class DynamicDemoDataset : public VectorDataset
 {
 public:
 	DynamicDemoDataset();
 	virtual ~DynamicDemoDataset();
 
 private:
+	DynamicDemoDatasetUpdater *m_updater;
+};
+
+/**
+ * Class, that updates dynamic dataset on timer.
+ */ 
+class DynamicDemoDatasetUpdater : public wxEvtHandler
+{
+public:
+	DynamicDemoDatasetUpdater(DynamicDemoDataset *dataset);
+	virtual ~DynamicDemoDatasetUpdater();
+
+private:
+	DynamicDemoDataset *m_dataset;
+
 	wxTimer m_timer;
 
 	void OnTimer(wxTimerEvent &ev);
@@ -278,31 +295,46 @@ private:
 	DECLARE_EVENT_TABLE()
 };
 
-BEGIN_EVENT_TABLE(DynamicDemoDataset, wxEvtHandler)
-	EVT_TIMER(wxID_ANY, DynamicDemoDataset::OnTimer)
+BEGIN_EVENT_TABLE(DynamicDemoDatasetUpdater, wxEvtHandler)
+	EVT_TIMER(wxID_ANY, DynamicDemoDatasetUpdater::OnTimer)
 END_EVENT_TABLE()
 
 DynamicDemoDataset::DynamicDemoDataset()
 {
+	m_updater = new DynamicDemoDatasetUpdater(this);
+}
+
+DynamicDemoDataset::~DynamicDemoDataset()
+{
+	wxDELETE(m_updater);
+}
+
+DynamicDemoDatasetUpdater::DynamicDemoDatasetUpdater(DynamicDemoDataset *dataset)
+{
+	m_dataset = dataset;
+
 	// start timer, that will add new data to dataset
 	m_timer.SetOwner(this);
 	m_timer.Start(100);
 }
 
-DynamicDemoDataset::~DynamicDemoDataset()
+DynamicDemoDatasetUpdater::~DynamicDemoDatasetUpdater()
 {
 	m_timer.Stop();
 }
 
-void DynamicDemoDataset::OnTimer(wxTimerEvent &ev)
+void DynamicDemoDatasetUpdater::OnTimer(wxTimerEvent &WXUNUSED(ev))
 {
 	const double maxValue = 100.0;
 
 	double r = rand();
 	double y = maxValue * r / (double) RAND_MAX;
-	Add(y);
+	m_dataset->Add(y);
 }
 
+/**
+ * Dynamic chart demo.
+ */
 class XYDemo5 : public ChartDemo
 {
 public:

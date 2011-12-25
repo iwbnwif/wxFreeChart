@@ -29,3 +29,15 @@ void Crosshair::Draw(wxDC &dc, wxRect rcData)//, wxCoord x, wxCoord y)
 			rcData.x + rcData.width, y);
 	*/
 }
+
+void Crosshair::ChartMouseDown(wxPoint &pt, int key)
+{
+}
+
+void Crosshair::ChartMouseUp(wxPoint &pt, int key)
+{
+}
+
+void Crosshair::ChartMouseMove(wxPoint &pt)
+{
+}

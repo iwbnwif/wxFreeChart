@@ -59,7 +59,7 @@ public:
  *  data points is visible at once, position is first data item visible.</li>
  * </ol>
  */
-class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>//, public RefObject
+class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>
 {
 	DECLARE_CLASS(Axis)
 

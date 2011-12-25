@@ -179,7 +179,10 @@ public:
 	 */
 	void SetMajorLabelSteps(size_t step)
 	{
-		m_majorLabelStep = step;
+		if (m_majorLabelStep != step) {
+			m_majorLabelStep = step;
+			FireAxisChanged();
+		}
 	}
 
 	void SetLabelSkip(int blankLabels);
@@ -187,10 +190,10 @@ public:
 	int GetLabelSkip();
 
 	/**
-   * Sets visibility of axis
-   * @param bVisible - false if hidden
-   */
-  void SetAxisVisible(bool bVisible);
+     * Sets visibility of axis
+     * @param bVisible - false if hidden
+     */
+	void SetAxisVisible(bool bVisible);
 
 	//
 	// Axis

@@ -12,11 +12,13 @@
 #include <map> // XXX stl classes must be removed!
 #include <vector>
 using std::vector;
+
 #include <wx/dataset.h>
 #include <wx/xy/xydataset.h>
 
 
-class JulianTimeSeriesDataset : public XYDataset  {
+class JulianTimeSeriesDataset : public XYDataset 
+{
 public:
 	typedef std::pair<double,double> TimePair;  // a pair with time (julian date) and value data
 
@@ -39,7 +41,7 @@ public:
 	void push_back(const TimePair& tvpair);
 
 private:
-	vector<TimePair> m_data;
+	vector<TimePair> m_data; // XXX remove this, stl is not allowed
 };
 
 #endif // TIMESERIESDATA_H

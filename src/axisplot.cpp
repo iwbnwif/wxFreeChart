@@ -485,3 +485,33 @@ void AxisPlot::DrawData(wxDC &dc, wxRect rc)
 
 	DrawLegend(dc, rcLegend);
 }
+
+// TODO
+
+/*
+void AxisPlot::ChartEnterWindow()
+{
+}
+*/
+
+void AxisPlot::ChartMouseDown(wxPoint &pt, int key)
+{
+}
+
+/*
+void AxisPlot::ChartMouseUp(wxPoint &pt, int key)
+{
+}
+
+void AxisPlot::ChartMouseMove(wxPoint &pt)
+{
+}
+
+void AxisPlot::ChartMouseDrag(wxPoint &pt)
+{
+}
+
+void AxisPlot::ChartMouseWheel(int rotation)
+{
+}
+*/

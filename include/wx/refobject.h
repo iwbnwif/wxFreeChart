@@ -3,6 +3,7 @@
 
 /**
  * Object with reference counter.
+ * TODO: This class was not part of this project. Use other way to count references.
  */
 class WXDLLIMPEXP_FREECHART RefObject
 {

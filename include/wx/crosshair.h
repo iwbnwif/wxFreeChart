@@ -81,8 +81,8 @@ public:
 	//
 	// ChartPanelObserver
 	//
-	virtual void ChartMouseDown(wxPoint &pt);
-	virtual void ChartMouseUp(wxPoint &pt);
+	virtual void ChartMouseDown(wxPoint &pt, int key);
+	virtual void ChartMouseUp(wxPoint &pt, int key);
 	virtual void ChartMouseMove(wxPoint &pt);
 
 private:

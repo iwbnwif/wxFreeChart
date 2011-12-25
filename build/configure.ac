@@ -15,7 +15,7 @@
 # NOTE: you'll want to replace the first string in [] brackets with the name of your
 #	component, the second string with its version and third one with your mail
 #	(so that users will be able to contact you in case they have problems)
-AC_INIT([WXFREECHART], [1.4], [mab@smtp.ru])
+AC_INIT([WXFREECHART], [1.7], [mab@smtp.ru])
 AC_CONFIG_AUX_DIR(build)	# this is needed, don't touch it
 
 # ENABLES/DISABLES THE DEBUG MODE FOR THIS CONFIGURE SCRIPT
@@ -77,7 +77,7 @@ WXCODE_OPTIONS([debug,unicode,shared,toolkit,wxshared,wxversion])
 #	      NOTE: the libraries should be listed in the correct order: from
 #		    the most-advanced to the basic ones (e.g. 'base' _must_
 #		    always be the last listed library).
-WXCODE_CHECKS([2.8.0], [core,base,aui])	 # e.g. we need at least wxWidgets 2.8 to work and
+WXCODE_CHECKS([2.8.0], [core,base,adv,aui])	 # e.g. we need at least wxWidgets 2.8 to work and
 					 # we want to link against wxCore and wxBase libs
 
 # Other things which can be useful to add here can be:

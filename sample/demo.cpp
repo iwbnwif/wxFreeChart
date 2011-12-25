@@ -86,14 +86,12 @@ void ChartSelector::OnTreeItemActivated(wxTreeEvent &ev)
 
 enum
 {
-	MENU_FILE_EXPORT_TO_PS = 101,
-	MENU_FILE_EXPORT_TO_PNG,
+	MENU_FILE_SAVE_AS_PNG = 101,
 	MENU_FILE_ENABLE_ANTIALIAS,
 };
 
 BEGIN_EVENT_TABLE(MainFrame, wxFrame)
-	EVT_MENU(MENU_FILE_EXPORT_TO_PS, MainFrame::OnExportToPS)
-	EVT_MENU(MENU_FILE_EXPORT_TO_PNG, MainFrame::OnExportToPNG)
+	EVT_MENU(MENU_FILE_SAVE_AS_PNG, MainFrame::OnSaveAsPNG)
 	EVT_MENU(MENU_FILE_ENABLE_ANTIALIAS, MainFrame::OnEnableAntialias)
 	EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
 	EVT_MENU(wxID_EXIT, MainFrame::OnExit)
@@ -121,7 +119,7 @@ MainFrame::MainFrame()
 
 	wxMenu *menuFile = new wxMenu();
 
-	menuFile->Append(MENU_FILE_EXPORT_TO_PNG, wxT("Export to PNG"));
+	menuFile->Append(MENU_FILE_SAVE_AS_PNG, wxT("Save as PNG"));
 	menuFile->AppendSeparator();
 	menuFile->AppendCheckItem(MENU_FILE_ENABLE_ANTIALIAS, wxT("Enable antialiasing"));
 	menuFile->AppendSeparator();
@@ -140,12 +138,7 @@ MainFrame::~MainFrame()
 {
 }
 
-void MainFrame::OnExportToPS(wxCommandEvent &WXUNUSED(ev))
-{
-	// TODO not implemented
-}
-
-void MainFrame::OnExportToPNG(wxCommandEvent &WXUNUSED(ev))
+void MainFrame::OnSaveAsPNG(wxCommandEvent &WXUNUSED(ev))
 {
 	Chart *chart = m_chartPanel->GetChart();
 	if (chart != NULL) {
@@ -159,7 +152,7 @@ void MainFrame::OnExportToPNG(wxCommandEvent &WXUNUSED(ev))
 		bitmap.ConvertToImage().SaveFile(dlg.GetPath(), wxBITMAP_TYPE_PNG);
 	}
 	else {
-		wxLogError(wxT("No chart chosen!"));
+		wxLogError(wxT("No chart is chosen!"));
 	}
 }
 
