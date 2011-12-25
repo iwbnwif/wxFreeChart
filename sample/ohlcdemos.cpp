@@ -10,51 +10,19 @@
 #include "democollection.h"
 
 #include <wx/ohlc/ohlcplot.h>
-#include <wx/ohlc/ohlcdataset.h>
+#include <wx/ohlc/ohlcsimpledataset.h>
+
 #include <wx/ohlc/ohlcbarrenderer.h>
 #include <wx/ohlc/ohlccandlestickrenderer.h>
 
 // for moving average indicator
+#include <wx/ohlc/movingaverage.h>
 #include <wx/xy/xydataset.h>
 #include <wx/xy/xylinerenderer.h>
 
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
 #include <wx/axis/compdateaxis.h>
-
-/**
- * TODO: move from here and rename to OHLCSimpleDataset
- */
-class OHLCDemoDataset : public OHLCDataset
-{
-public:
-	OHLCDemoDataset(OHLCItem *items, size_t count)
-	{
-		m_items = new OHLCItem[count];
-		memcpy(m_items, items, count * sizeof(*items));
-		m_count = count;
-	}
-
-	virtual ~OHLCDemoDataset()
-	{
-		wxDELETEA(m_items);
-	}
-
-	virtual OHLCItem *GetItem(size_t index)
-	{
-		wxCHECK_MSG(index < m_count, NULL, wxT("GetItem"));
-		return &m_items[index];
-	}
-
-	virtual size_t GetCount()
-	{
-		return m_count;
-	}
-
-private:
-	OHLCItem *m_items;
-	size_t m_count;
-};
 
 /**
  * Simple OHLC demo with bar renderer.
@@ -119,7 +87,7 @@ public:
 		OHLCPlot *plot = new OHLCPlot();
 
 		// create OHLC dataset
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
+		OHLCSimpleDataset *dataset = new OHLCSimpleDataset(data, WXSIZEOF(data));
 
 		// create and set OHLC bars renderer to our dataset
 		dataset->SetRenderer(new OHLCBarRenderer());
@@ -215,10 +183,13 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
+		// create dataset
+		OHLCSimpleDataset *dataset = new OHLCSimpleDataset(data, WXSIZEOF(data));
 
+		// set renderer to dataset
 		dataset->SetRenderer(new OHLCCandlestickRenderer());
 
+		// add dataset to plot
 		plot->AddDataset(dataset);
 
 		// add left number (for quotes) and bottom date axes
@@ -306,10 +277,13 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
+		// create dataset
+		OHLCSimpleDataset *dataset = new OHLCSimpleDataset(data, WXSIZEOF(data));
 
+		// set renderer to it, in this case it will be candlestick renderer
 		dataset->SetRenderer(new OHLCCandlestickRenderer());
 
+		// add dataset to plot
 		plot->AddDataset(dataset);
 
 		// add left number (for quotes) and bottom date axes
@@ -326,6 +300,7 @@ public:
 		bottomAxis->AddInterval(wxDateSpan::Month());
 		bottomAxis->AddInterval(wxDateSpan::Year());
 
+		// add axes to plot
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 
@@ -341,96 +316,6 @@ public:
 	}
 };
 
-/**
- * Simple moving average indicator.
- * TODO: move it from demos to library
- */
-class MovingAverage : public XYDataset, public DatasetObserver
-{
-	DECLARE_CLASS(MovingAverage)
-public:
-	MovingAverage(OHLCDataset *ohlcDataset, int period);
-	virtual ~MovingAverage();
-
-	virtual size_t GetSerieCount();
-
-	virtual wxString GetSerieName(size_t serie);
-
-	virtual size_t GetCount(size_t serie);
-
-	virtual double GetX(size_t index, size_t serie);
-
-	virtual double GetY(size_t index, size_t serie);
-
-	//
-	// DatasetObserver
-	//
-	virtual void DatasetChanged(Dataset *dataset);
-
-private:
-	OHLCDataset *m_ohlcDataset;
-	int m_period;
-};
-
-IMPLEMENT_CLASS(MovingAverage, XYDataset)
-
-MovingAverage::MovingAverage(OHLCDataset *ohlcDataset, int period)
-{
-	m_ohlcDataset = ohlcDataset;
-	m_period = period;
-
-	m_ohlcDataset->AddRef();
-	m_ohlcDataset->AddObserver(this);
-}
-
-MovingAverage::~MovingAverage()
-{
-	SAFE_REMOVE_OBSERVER(this, m_ohlcDataset);
-	SAFE_UNREF(m_ohlcDataset);
-}
-
-size_t MovingAverage::GetSerieCount()
-{
-	return 1;
-}
-
-size_t MovingAverage::GetCount(size_t WXUNUSED(serie))
-{
-	int count = m_ohlcDataset->GetCount() - m_period + 1;
-	if (count < 0) {
-		count = 0; // period is larger than OHLC data
-	}
-	return count;
-}
-
-wxString MovingAverage::GetSerieName(size_t WXUNUSED(serie))
-{
-	return wxT("Moving average");
-}
-
-double MovingAverage::GetX(size_t index, size_t WXUNUSED(serie))
-{
-	return index + m_period - 1;
-}
-
-double MovingAverage::GetY(size_t index, size_t WXUNUSED(serie))
-{
-	wxCHECK_MSG(m_period != 0, 0, wxT("MovingAverage::GetX"));
-
-	double sum = 0;
-
-	for (size_t n = index; n < index + m_period; n++) {
-		OHLCItem *item = m_ohlcDataset->GetItem(n);
-
-		sum += item->close;
-	}
-	return sum / m_period;
-}
-
-void MovingAverage::DatasetChanged(Dataset *WXUNUSED(dataset))
-{
-	Dataset::DatasetChanged();
-}
 
 /**
  * OHLC demo with candlestick renderer and moving average indicator.
@@ -495,7 +380,7 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
+		OHLCSimpleDataset *dataset = new OHLCSimpleDataset(data, WXSIZEOF(data));
 
 		dataset->SetRenderer(new OHLCCandlestickRenderer());
 
@@ -596,7 +481,7 @@ public:
 		// first step: create plot
 		OHLCPlot *plot = new OHLCPlot();
 
-		OHLCDemoDataset *dataset = new OHLCDemoDataset(data, WXSIZEOF(data));
+		OHLCSimpleDataset *dataset = new OHLCSimpleDataset(data, WXSIZEOF(data));
 
 		OHLCBarRenderer *renderer = new OHLCBarRenderer();
 		//renderer->
@@ -604,12 +489,14 @@ public:
 
 		dataset->SetRenderer(renderer);
 
+		// add data to plot
 		plot->AddDataset(dataset);
 
 		// add moving average dataset with period = 5
 		MovingAverage *ma = new MovingAverage(dataset, 5);
 		ma->SetRenderer(new XYLineRenderer());
 
+		// add moving average to plot
 		plot->AddDataset(ma);
 
 		// add left number (for quotes) and bottom date axes
@@ -622,6 +509,8 @@ public:
 
 		bottomAxis->SetVerticalLabelText(true);
 		bottomAxis->SetDateFormat(wxT("%d-%m"));
+
+		// add axes to plot
 		plot->AddAxis(leftAxis);
 		plot->AddAxis(bottomAxis);
 

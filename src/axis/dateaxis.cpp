@@ -15,6 +15,7 @@ DateAxis::DateAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
 	m_dateFormat = wxT("%d %m");
+	m_dateCount = 0;
 }
 
 DateAxis::~DateAxis()

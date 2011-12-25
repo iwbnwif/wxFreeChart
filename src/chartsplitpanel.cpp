@@ -3,7 +3,6 @@
 // Purpose:
 // Author:	Moskvichev Andrey V.
 // Created:	28.01.2010
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
 // Copyright:	(c) 2010 Moskvichev Andrey V.
 // Licence:	wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
@@ -22,7 +21,6 @@ wxChartSplitPanel::wxChartSplitPanel(wxWindow *parent, wxWindowID id,
 
 wxChartSplitPanel::~wxChartSplitPanel()
 {
-
 }
 
 void wxChartSplitPanel::AddPlot(Plot *plot, int pos, bool allowRemove)

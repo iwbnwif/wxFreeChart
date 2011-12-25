@@ -77,10 +77,12 @@ src/xy/xydataset.cpp
 src/xy/xysimpledataset.cpp
 src/xy/xylinerenderer.cpp
 src/xy/juliantimeseriesdataset.cpp
+src/ohlc/ohlcsimpledataset.cpp
 src/ohlc/ohlcrenderer.cpp
 src/ohlc/ohlcbarrenderer.cpp
 src/ohlc/ohlcplot.cpp
 src/ohlc/ohlccandlestickrenderer.cpp
+src/ohlc/movingaverage.cpp
 src/ohlc/ohlcdataset.cpp
 src/category/categorydataset.cpp
 src/category/categoryrenderer.cpp
@@ -142,7 +144,9 @@ include/wx/ohlc/ohlcbarrenderer.h
 include/wx/ohlc/ohlcdataset.h
 include/wx/ohlc/ohlccandlestickrenderer.h
 include/wx/ohlc/ohlcrenderer.h
+include/wx/ohlc/ohlcsimpledataset.h
 include/wx/ohlc/ohlcplot.h
+include/wx/ohlc/movingaverage.h
 include/wx/ohlc/movingavg.h
 include/wx/tooltips.h
 include/wx/category/categorysimpledataset.h

@@ -11,7 +11,8 @@
 
 IMPLEMENT_CLASS(CategoryRenderer, Renderer)
 
-CategoryRenderer::CategoryRenderer(ColorScheme& colorScheme) : m_colorScheme(colorScheme)
+CategoryRenderer::CategoryRenderer(ColorScheme& colorScheme) 
+: m_colorScheme(colorScheme)
 {
 }
 

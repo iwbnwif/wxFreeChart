@@ -49,11 +49,15 @@ void PointMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
 LineMarker::LineMarker(wxPen linePen)
 {
 	m_linePen = linePen;
+	m_value = 0;
+	m_horizontal = true;
 }
 
 LineMarker::LineMarker(wxColour lineColour, int lineWidth)
 {
 	m_linePen = *wxThePenList->FindOrCreatePen(lineColour, lineWidth, wxSOLID);
+	m_value = 0;
+	m_horizontal = true;
 }
 
 LineMarker::~LineMarker()
@@ -111,6 +115,9 @@ void LineMarker::SetValue(double value, bool horizontal)
 RangeMarker::RangeMarker(AreaDraw *rangeAreaDraw)
 {
 	m_rangeAreaDraw = rangeAreaDraw;
+	m_minValue = 0;
+	m_maxValue =0;
+	m_horizontal = true;
 }
 
 RangeMarker::~RangeMarker()

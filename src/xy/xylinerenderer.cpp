@@ -157,8 +157,6 @@ void XYLineRenderer::DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertA
   }
 }
 
-
-
 //
 // XYLineStepRenderer
 //

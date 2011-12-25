@@ -984,6 +984,10 @@ SOURCE=..\src\marker.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\ohlc\movingaverage.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\multiplot.cpp
 # End Source File
 # Begin Source File
@@ -1009,6 +1013,10 @@ SOURCE=..\src\ohlc\ohlcplot.cpp
 # Begin Source File
 
 SOURCE=..\src\ohlc\ohlcrenderer.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\src\ohlc\ohlcsimpledataset.cpp
 # End Source File
 # Begin Source File
 
@@ -1224,6 +1232,10 @@ SOURCE=..\include\wx\marker.h
 # End Source File
 # Begin Source File
 
+SOURCE=..\include\wx\ohlc\movingaverage.h
+# End Source File
+# Begin Source File
+
 SOURCE=..\include\wx\ohlc\movingavg.h
 # End Source File
 # Begin Source File
@@ -1257,6 +1269,10 @@ SOURCE=..\include\wx\ohlc\ohlcplot.h
 # Begin Source File
 
 SOURCE=..\include\wx\ohlc\ohlcrenderer.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\ohlc\ohlcsimpledataset.h
 # End Source File
 # Begin Source File
 

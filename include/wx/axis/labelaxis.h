@@ -13,6 +13,15 @@
 #include <wx/axis/axis.h>
 
 /**
+ * Class that used to implement labels with different colours.
+ */
+class WXDLLIMPEXP_FREECHART LabelColourer
+{
+public:
+	virtual wxColor GetColour(int step) = 0;
+};
+
+/**
  * Base class for axes for displaying data labels.
  */
 class WXDLLIMPEXP_FREECHART LabelAxis : public Axis
@@ -189,6 +198,16 @@ public:
 
 	int GetLabelSkip();
 
+	void SetLabelColourer(LabelColourer *labelColourer)
+	{
+		wxREPLACE(m_labelColourer, labelColourer);
+	}
+
+	LabelColourer *GetLabelColourer()
+	{
+		return m_labelColourer;
+	}
+
 	/**
      * Sets visibility of axis
      * @param bVisible - false if hidden
@@ -259,6 +278,8 @@ private:
 
 	bool m_visible;
 	int m_blankLabels;
+
+	LabelColourer *m_labelColourer;
 };
 
 #endif /*LABELAXIS_H_*/

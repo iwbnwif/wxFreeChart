@@ -109,10 +109,12 @@ WXFREECHART_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xysimpledataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xylinerenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_juliantimeseriesdataset.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcsimpledataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcrenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcbarrenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcplot.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlccandlestickrenderer.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_movingaverage.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcdataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_categorydataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_categoryrenderer.obj \
@@ -172,10 +174,12 @@ WXFREECHART_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xysimpledataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xylinerenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_juliantimeseriesdataset.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcsimpledataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcrenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcbarrenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcplot.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlccandlestickrenderer.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_movingaverage.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcdataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_categorydataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_categoryrenderer.obj \
@@ -572,6 +576,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xylinerenderer.ob
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_juliantimeseriesdataset.obj: ..\src\xy\juliantimeseriesdataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\juliantimeseriesdataset.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcsimpledataset.obj: ..\src\ohlc\ohlcsimpledataset.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\ohlc\ohlcsimpledataset.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcrenderer.obj: ..\src\ohlc\ohlcrenderer.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\ohlc\ohlcrenderer.cpp
 
@@ -583,6 +590,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcplot.obj: ..\
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlccandlestickrenderer.obj: ..\src\ohlc\ohlccandlestickrenderer.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\ohlc\ohlccandlestickrenderer.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_movingaverage.obj: ..\src\ohlc\movingaverage.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\ohlc\movingaverage.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_ohlcdataset.obj: ..\src\ohlc\ohlcdataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\ohlc\ohlcdataset.cpp
@@ -740,6 +750,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xylinerenderer.ob
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_juliantimeseriesdataset.obj: ..\src\xy\juliantimeseriesdataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\juliantimeseriesdataset.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcsimpledataset.obj: ..\src\ohlc\ohlcsimpledataset.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\ohlc\ohlcsimpledataset.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcrenderer.obj: ..\src\ohlc\ohlcrenderer.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\ohlc\ohlcrenderer.cpp
 
@@ -751,6 +764,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcplot.obj: ..\
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlccandlestickrenderer.obj: ..\src\ohlc\ohlccandlestickrenderer.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\ohlc\ohlccandlestickrenderer.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_movingaverage.obj: ..\src\ohlc\movingaverage.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\ohlc\movingaverage.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_ohlcdataset.obj: ..\src\ohlc\ohlcdataset.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\ohlc\ohlcdataset.cpp
