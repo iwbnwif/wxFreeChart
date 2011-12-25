@@ -13,6 +13,16 @@
 #include <wx/chartrenderer.h>
 
 /**
+ * Class that controls bars/candlesticks colour.
+ * It's used to implement bar colo
+ */ 
+class WXDLLIMPEXP_FREECHART OHLCColourer
+{
+public:
+	virtual wxColor GetColour(int step) = 0;
+};
+
+/**
  * Base class for rendering OHLC data.
  */
 class WXDLLIMPEXP_FREECHART OHLCRenderer : public Renderer
@@ -31,6 +41,12 @@ public:
 	 * @param close close value in graphical coordinates
 	 */
 	virtual void DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close) = 0;
+
+	void SetColourer(OHLCColourer *colourer);
+	OHLCColourer *GetColourer();
+
+protected:
+	OHLCColourer *m_colourer;
 };
 
 #endif /*OHLCRENDERER_H_*/

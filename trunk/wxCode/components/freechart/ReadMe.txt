@@ -49,6 +49,15 @@
  
  1.7: FIXIT it's upcoming release, here is plans
  		What's new:
+		 - OHLCSimpleDataset was added
+		 - MovingAvarage for OHLC was added
+		 - Windows installer was added
+		 - Label colourer was added, to make possible axes labels 
+		   have different colours
+		 - OHLCColourer was added, so it's now possible to draw
+   		   bars/candlesticks in different colours (from indicator 
+		   values, etc)
+
  		 - Mouse zoom/pan was added
  		 - Chart mouse events was added
  		 - Tooltips support was added
@@ -62,7 +71,6 @@
 		 - Graphics rendering improvements, added drawing wrapper, to use wxGraphicsContext
  		 - Demos updated
 		 - Will be new website with example docs and forum
-		 - Windows installer is added
  	
  1.6:
  		What's new:

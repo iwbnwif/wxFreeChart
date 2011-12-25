@@ -12,6 +12,34 @@
 
 IMPLEMENT_CLASS(LabelAxis, Axis)
 
+class DefaultLabelColourer : public LabelColourer
+{
+public:
+	DefaultLabelColourer();
+	virtual ~DefaultLabelColourer();
+
+	virtual wxColor GetColour(int step);
+
+private:
+	wxColor m_oddColour;
+	wxColor m_evenColour;
+};
+
+DefaultLabelColourer::DefaultLabelColourer()
+{
+	m_oddColour = *wxLIGHT_GREY;
+	m_evenColour = wxColor(100, 100, 100);
+}
+
+DefaultLabelColourer::~DefaultLabelColourer()
+{
+}
+
+wxColor DefaultLabelColourer::GetColour(int step)
+{
+	return (step % 2) ? m_oddColour : m_evenColour;
+}
+
 LabelAxis::LabelAxis(AXIS_LOCATION location)
 : Axis(location)
 {
@@ -32,10 +60,13 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 
 	m_visible = true;
 	m_blankLabels = 0;
+
+	m_labelColourer = new DefaultLabelColourer();
 }
 
 LabelAxis::~LabelAxis()
 {
+	wxDELETE(m_labelColourer);
 }
 
 wxCoord LabelAxis::GetExtent(wxDC &dc)
@@ -247,16 +278,10 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 		return ;
 	}
 
-	dc.SetPen(m_gridLinesPen);
-
 	for (int nStep = 0; !IsEnd(nStep); nStep++) {
-		// Alan add - alternate line colors
-		if (nStep % 2)
-			m_gridLinesPen.SetColour(* wxLIGHT_GREY);
-		else
-			m_gridLinesPen.SetColour(* wxCYAN);
+		m_gridLinesPen.SetColour(m_labelColourer->GetColour(nStep));
 		dc.SetPen(m_gridLinesPen);
-		// End Alan add
+
 		double value = GetValue(nStep);
 		if (!IsVisible(value)) {
 			continue;
@@ -283,10 +308,6 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 	}
 }
 
-/**
- * Sets visibility of axis
- * @param bVisible - false if hidden
- */
 void LabelAxis::SetAxisVisible(bool bVisible)
 {
 	m_visible = bVisible;

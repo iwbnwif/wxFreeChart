@@ -92,10 +92,12 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_xysimpledataset.o \
 	wxfreechart_lib_xylinerenderer.o \
 	wxfreechart_lib_juliantimeseriesdataset.o \
+	wxfreechart_lib_ohlcsimpledataset.o \
 	wxfreechart_lib_ohlcrenderer.o \
 	wxfreechart_lib_ohlcbarrenderer.o \
 	wxfreechart_lib_ohlcplot.o \
 	wxfreechart_lib_ohlccandlestickrenderer.o \
+	wxfreechart_lib_movingaverage.o \
 	wxfreechart_lib_ohlcdataset.o \
 	wxfreechart_lib_categorydataset.o \
 	wxfreechart_lib_categoryrenderer.o \
@@ -155,7 +157,9 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/ohlc/ohlcdataset.h \
 	include/wx/ohlc/ohlccandlestickrenderer.h \
 	include/wx/ohlc/ohlcrenderer.h \
+	include/wx/ohlc/ohlcsimpledataset.h \
 	include/wx/ohlc/ohlcplot.h \
+	include/wx/ohlc/movingaverage.h \
 	include/wx/ohlc/movingavg.h \
 	include/wx/tooltips.h \
 	include/wx/category/categorysimpledataset.h \
@@ -214,10 +218,12 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_xysimpledataset.o \
 	wxfreechart_dll_xylinerenderer.o \
 	wxfreechart_dll_juliantimeseriesdataset.o \
+	wxfreechart_dll_ohlcsimpledataset.o \
 	wxfreechart_dll_ohlcrenderer.o \
 	wxfreechart_dll_ohlcbarrenderer.o \
 	wxfreechart_dll_ohlcplot.o \
 	wxfreechart_dll_ohlccandlestickrenderer.o \
+	wxfreechart_dll_movingaverage.o \
 	wxfreechart_dll_ohlcdataset.o \
 	wxfreechart_dll_categorydataset.o \
 	wxfreechart_dll_categoryrenderer.o \
@@ -277,7 +283,9 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/ohlc/ohlcdataset.h \
 	include/wx/ohlc/ohlccandlestickrenderer.h \
 	include/wx/ohlc/ohlcrenderer.h \
+	include/wx/ohlc/ohlcsimpledataset.h \
 	include/wx/ohlc/ohlcplot.h \
+	include/wx/ohlc/movingaverage.h \
 	include/wx/ohlc/movingavg.h \
 	include/wx/tooltips.h \
 	include/wx/category/categorysimpledataset.h \
@@ -681,6 +689,9 @@ wxfreechart_lib_xylinerenderer.o: $(srcdir)/src/xy/xylinerenderer.cpp
 wxfreechart_lib_juliantimeseriesdataset.o: $(srcdir)/src/xy/juliantimeseriesdataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/juliantimeseriesdataset.cpp
 
+wxfreechart_lib_ohlcsimpledataset.o: $(srcdir)/src/ohlc/ohlcsimpledataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/ohlc/ohlcsimpledataset.cpp
+
 wxfreechart_lib_ohlcrenderer.o: $(srcdir)/src/ohlc/ohlcrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/ohlc/ohlcrenderer.cpp
 
@@ -692,6 +703,9 @@ wxfreechart_lib_ohlcplot.o: $(srcdir)/src/ohlc/ohlcplot.cpp
 
 wxfreechart_lib_ohlccandlestickrenderer.o: $(srcdir)/src/ohlc/ohlccandlestickrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/ohlc/ohlccandlestickrenderer.cpp
+
+wxfreechart_lib_movingaverage.o: $(srcdir)/src/ohlc/movingaverage.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/ohlc/movingaverage.cpp
 
 wxfreechart_lib_ohlcdataset.o: $(srcdir)/src/ohlc/ohlcdataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/ohlc/ohlcdataset.cpp
@@ -849,6 +863,9 @@ wxfreechart_dll_xylinerenderer.o: $(srcdir)/src/xy/xylinerenderer.cpp
 wxfreechart_dll_juliantimeseriesdataset.o: $(srcdir)/src/xy/juliantimeseriesdataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/juliantimeseriesdataset.cpp
 
+wxfreechart_dll_ohlcsimpledataset.o: $(srcdir)/src/ohlc/ohlcsimpledataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/ohlc/ohlcsimpledataset.cpp
+
 wxfreechart_dll_ohlcrenderer.o: $(srcdir)/src/ohlc/ohlcrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/ohlc/ohlcrenderer.cpp
 
@@ -860,6 +877,9 @@ wxfreechart_dll_ohlcplot.o: $(srcdir)/src/ohlc/ohlcplot.cpp
 
 wxfreechart_dll_ohlccandlestickrenderer.o: $(srcdir)/src/ohlc/ohlccandlestickrenderer.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/ohlc/ohlccandlestickrenderer.cpp
+
+wxfreechart_dll_movingaverage.o: $(srcdir)/src/ohlc/movingaverage.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/ohlc/movingaverage.cpp
 
 wxfreechart_dll_ohlcdataset.o: $(srcdir)/src/ohlc/ohlcdataset.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/ohlc/ohlcdataset.cpp

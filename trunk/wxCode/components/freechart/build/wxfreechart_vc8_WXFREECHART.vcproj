@@ -2844,6 +2844,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\ohlc\movingaverage.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\multiplot.cpp"
 				>
 			</File>
@@ -2869,6 +2873,10 @@
 			</File>
 			<File
 				RelativePath="..\src\ohlc\ohlcrenderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\ohlc\ohlcsimpledataset.cpp"
 				>
 			</File>
 			<File
@@ -3086,6 +3094,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\include\wx\ohlc\movingaverage.h"
+				>
+			</File>
+			<File
 				RelativePath="..\include\wx\ohlc\movingavg.h"
 				>
 			</File>
@@ -3119,6 +3131,10 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\ohlc\ohlcrenderer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\ohlc\ohlcsimpledataset.h"
 				>
 			</File>
 			<File

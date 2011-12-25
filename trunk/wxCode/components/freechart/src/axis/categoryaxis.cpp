@@ -15,6 +15,7 @@ IMPLEMENT_CLASS(CategoryAxis, Axis)
 CategoryAxis::CategoryAxis(AXIS_LOCATION location)
 : LabelAxis(location)
 {
+	m_categoryCount = 0;
 }
 
 CategoryAxis::~CategoryAxis()

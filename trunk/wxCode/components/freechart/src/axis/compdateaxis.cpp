@@ -146,6 +146,8 @@ CompDateAxis::CompDateAxis(AXIS_LOCATION location)
 	m_spanDraw = new FillAreaDraw();
 	m_labelFont = *wxNORMAL_FONT;
 	m_labelColour = *wxBLACK;
+
+	m_dateCount = 0;
 }
 
 CompDateAxis::~CompDateAxis()
