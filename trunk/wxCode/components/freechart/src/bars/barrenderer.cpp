@@ -168,7 +168,7 @@ void StackedBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_
 	}
 }
 
-double StackedBarType::GetMinValue(CategoryDataset *dataset)
+double StackedBarType::GetMinValue(CategoryDataset *WXUNUSED(dataset))
 {
 	return m_base;
 }

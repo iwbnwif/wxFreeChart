@@ -53,9 +53,16 @@
  		 - Chart mouse events was added
  		 - Tooltips support was added
  		 - Crosshair was added
- 		 - Some minor bugs fixed
+ 		 - Many bugfixes
  		 - Many API impovements
+		 - Julian date axes was added (thanks to Carsten Arnholm)
+		 - Pie plots (thanks to Grgory Soutad)
+		 - OHLC charts improvements (now it's possible to control bars/candlesticks color from various conditions (indicator values, etc))
+		 //- Dynamic charts performance optimization (thanks to 
+		 - Graphics rendering improvements, added drawing wrapper, to use wxGraphicsContext
  		 - Demos updated
+		 - Will be new website with example docs and forum
+		 - Windows installer is added
  	
  1.6:
  		What's new:
@@ -112,17 +119,15 @@
  - Make axis marks drawing more flexible
  - Add zoom to plots
  - Add interval axes
- - Crosshair
  - Statistics charts
  - Mouse events for chart item click, right/left up/down, drag, etc
- - Pie plots 
+ - Pie plots improvements: 3d charts, using wxGL, more flexible legend drawing
  - Make wxFreeChart to work on handheld wxWidgets ports
  
  Known issues:
  - window scrolling bugs
  - compdateaxis bugs
  - Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
- - Pie plots are very ugly, and must be cleaned up or rewritten.
 
  Help project:
  Unfortunately, i have not enough time to work on project. 
@@ -139,11 +144,13 @@
  	
  	Andreas Kuechler - testing, logarithmic axes implementation, many interesting ideas.
  	
- 	Alan Yaniger - testing, many bugfixes, many usefull patches.
+ 	Alan Yaniger - testing, performance optimization, many bugfixes, many useful patches.
  	
  	Carsten Arnholm - julian axes and dataset implementation.
  	
  	Grgory Soutad - pie plots and category renderer.
+
+	Carsten Arnholm - julian date axes
  	
  	
  Author contacts:

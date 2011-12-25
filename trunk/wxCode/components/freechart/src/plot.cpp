@@ -63,7 +63,7 @@ wxChartPanel *Plot::GetChartPanel()
 	return m_chartPanel;
 }
 
-void Plot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
+void Plot::ChartPanelChanged(wxChartPanel *WXUNUSED(oldPanel), wxChartPanel *WXUNUSED(newPanel))
 {
 	// default - do nothing
 }

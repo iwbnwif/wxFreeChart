@@ -27,7 +27,6 @@ public:
 	 * @param step x value step
 	 */
 	Polynom(double *coefs, size_t coefCount, double min, double max, double step);
-
 	virtual ~Polynom();
 
 	virtual double GetX(size_t index, size_t serie);

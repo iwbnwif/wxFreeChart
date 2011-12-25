@@ -40,8 +40,8 @@ extern int markersDemosCount;
 extern ChartDemo *titleDemos[];
 extern int titleDemosCount;
 
-extern ChartDemo *pieDemos[];
-extern int pieDemosCount;
+extern ChartDemo *pieplotDemos[];
+extern int pieplotDemosCount;
 
 
 static DemoCollection instance;
@@ -92,12 +92,12 @@ static Category *cats[] = {
 	new Category(wxT("XY Charts"), xyDemos, xyDemosCount),
 	new Category(wxT("Gantt Charts"), ganttDemos, ganttDemosCount),
 	new Category(wxT("Bubble Charts"), bubbleDemos, bubbleDemosCount),
-	new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount), // TODO: not implemented
+	new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount),
 	new Category(wxT("Multiple axis"), multipleAxisDemos, multipleAxisDemosCount),
 	new Category(wxT("Time series Charts"), timeSeriesDemos, timeSeriesDemosCount),
 	new Category(wxT("Markers"), markersDemos, markersDemosCount),
 	new Category(wxT("Title"), titleDemos, titleDemosCount),
-	new Category(wxT("Pie plots"), pieDemos, pieDemosCount),
+	new Category(wxT("Pie plots"), pieplotDemos, pieplotDemosCount),
 };
 
 //

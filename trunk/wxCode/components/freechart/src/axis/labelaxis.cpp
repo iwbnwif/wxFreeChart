@@ -17,7 +17,7 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 {
 	// defaults
 	m_labelTextColour = *wxBLACK;
-	m_labelTextFont = *wxNORMAL_FONT;//*wxSMALL_FONT;
+	m_labelTextFont = *wxNORMAL_FONT;
 	m_labelPen = *wxBLACK_PEN;
 	m_titleFont = *wxNORMAL_FONT;
 	m_titleColour = *wxBLACK;
@@ -27,6 +27,7 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 	m_labelGap = 2;
 	m_verticalLabelText = false;
 	m_majorLabelStep = 1;
+	m_blankLabels = 0;
 }
 
 LabelAxis::~LabelAxis()
@@ -157,7 +158,7 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
 
 	dc.DrawLine(lineX1, lineY1, lineX2, lineY2);
 
-	if(isMajorLabel) {
+	if (isMajorLabel) {
 		if (m_verticalLabelText) {
 			dc.DrawRotatedText(label, textX, textY, 90);
 		}

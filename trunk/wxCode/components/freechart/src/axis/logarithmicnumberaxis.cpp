@@ -162,7 +162,7 @@ void LogarithmicNumberAxis::GetLabel(size_t step, wxString& label)
 	}
 }
 
-wxCoord LogarithmicNumberAxis::ToGraphics(wxDC &dc, int minCoord, int gRange, double value)
+wxCoord LogarithmicNumberAxis::ToGraphics(wxDC &WXUNUSED(dc), int minCoord, int gRange, double value)
 {
 	double minValue, maxValue;
 	GetDataBounds(minValue, maxValue);
@@ -186,7 +186,7 @@ wxCoord LogarithmicNumberAxis::ToGraphics(wxDC &dc, int minCoord, int gRange, do
 	return ::ToGraphics(minCoord, gRange, logMin, logMax, 0/*textMargin*/, IsVertical(), logValue);
 }
 
-double LogarithmicNumberAxis::ToData(wxDC &dc, int minCoord, int gRange, wxCoord g)
+double LogarithmicNumberAxis::ToData(wxDC &WXUNUSED(dc), int minCoord, int gRange, wxCoord g)
 {
 	double minValue, maxValue;
 	GetDataBounds(minValue, maxValue);

@@ -19,9 +19,9 @@ BubblePlot::~BubblePlot()
 {
 }
 
-bool BubblePlot::AcceptAxis(Axis *axis)
+bool BubblePlot::AcceptAxis(Axis *WXUNUSED(axis))
 {
-	// TODO: tempory accept all axes
+	// TODO FIXIT: accepts all axes. 
 	return true;
 }
 

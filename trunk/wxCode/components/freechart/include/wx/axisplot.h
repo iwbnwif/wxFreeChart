@@ -234,7 +234,7 @@ public:
 	//
 	// ChartPanelObserver
 	//
-	virtual void ChartMouseDown(wxPoint &pt);
+	virtual void ChartMouseDown(wxPoint &pt, int key);
 
 protected:
 	//

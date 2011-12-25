@@ -46,41 +46,24 @@ public:
 	 * @param y y value
 	 */
 	void Add(double y);
+
 	/**
 	 * Replaces y value at specified index.
 	 * @param index index of value
 	 * @param y new y value
 	 */
-	void Replace(size_t index, double y)
-	{
-		if (index < m_values.Count()) {
-			m_values[index] = y;
-
-			DatasetChanged();
-		}
-	}
+	void Replace(size_t index, double y);
 
 	/**
 	 * Removes value at specified index.
 	 * @param index of value
 	 */
-	void RemoveAt(size_t index)
-	{
-		if (index < m_values.Count()) {
-			m_values.RemoveAt(index);
-
-			DatasetChanged();
-		}
-	}
+	void RemoveAt(size_t index);
 
 	/**
 	 * Removes all values from dataset.
 	 */
-	void Clear()
-	{
-		m_values.Clear();
-		DatasetChanged();
-	}
+	void Clear();
 
 private:
 	wxDoubleArray m_values;

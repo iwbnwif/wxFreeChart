@@ -59,8 +59,7 @@ private:
 	//
 	// Event handlers
 	//
-	void OnExportToPS(wxCommandEvent &ev);
-	void OnExportToPNG(wxCommandEvent &ev);
+	void OnSaveAsPNG(wxCommandEvent &ev);
 	void OnEnableAntialias(wxCommandEvent &ev);
 	void OnAbout(wxCommandEvent &ev);
 	void OnExit(wxCommandEvent &ev);
