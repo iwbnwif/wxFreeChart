@@ -16,17 +16,21 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
 : Axis(location)
 {
 	// defaults
-	m_labelTextColour = *wxBLACK;
+	m_labelLineSize = 5;
+	m_labelGap = 2;
+
 	m_labelTextFont = *wxNORMAL_FONT;
+	m_labelTextColour = *wxBLACK;
 	m_labelPen = *wxBLACK_PEN;
+	m_verticalLabelText = false;
+	m_majorLabelStep = 1;
+
+	m_title = wxEmptyString;
 	m_titleFont = *wxNORMAL_FONT;
 	m_titleColour = *wxBLACK;
 	m_titleLocation = wxCENTER;
 
-	m_labelLineSize = 5;
-	m_labelGap = 2;
-	m_verticalLabelText = false;
-	m_majorLabelStep = 1;
+	m_visible = true;
 	m_blankLabels = 0;
 }
 

@@ -2,7 +2,8 @@
 use strict;
 
 #
-# Regenerate bkl
+# Script used to regenerate bkl, it searches for all source and header files, 
+# and put them into wxfreechart.bkl file.
 #
 
 my $bkl = "wxfreechart.bkl";
