@@ -44,6 +44,8 @@ SIP_SUPPORT	       = NO
 DISTRIBUTE_GROUP_DOC   = NO
 SUBGROUPING	       = YES
 TYPEDEF_HIDES_STRUCT   = NO
+SHOW_FILES             = NO
+
 #---------------------------------------------------------------------------
 # Build related configuration options
 #---------------------------------------------------------------------------
@@ -153,7 +155,7 @@ REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES
 REFERENCES_LINK_SOURCE = YES
 USE_HTAGS	       = NO
-VERBATIM_HEADERS       = YES
+VERBATIM_HEADERS       = NO
 #---------------------------------------------------------------------------
 # configuration options related to the alphabetical class index
 #---------------------------------------------------------------------------
@@ -184,7 +186,7 @@ TREEVIEW_WIDTH	       = 250
 #---------------------------------------------------------------------------
 # configuration options related to the LaTeX output
 #---------------------------------------------------------------------------
-GENERATE_LATEX	       = YES
+GENERATE_LATEX	       = NO
 LATEX_OUTPUT	       = latex
 LATEX_CMD_NAME	       = latex
 MAKEINDEX_CMD_NAME     = makeindex

@@ -112,8 +112,6 @@ MainFrame::MainFrame()
 
 	auiMan->Update();
 
-	Centre();
-
 	// Create main menu
 	wxMenuBar *menuBar = new wxMenuBar();
 
@@ -132,6 +130,8 @@ MainFrame::MainFrame()
 	menuBar->Append(menuHelp, wxT("&Help"));
 
 	SetMenuBar(menuBar);
+
+	Centre();
 }
 
 MainFrame::~MainFrame()
@@ -167,7 +167,7 @@ void MainFrame::OnAbout(wxCommandEvent &WXUNUSED(ev))
 	about.SetName(wxT("wxFreeChart demo"));
 	about.SetVersion(version);
 	about.SetDescription(wxT("This is wxFreeChart demo collection. It shows various chart types."));
-	about.SetCopyright(wxT("Copyright (C) 2008-2010 Moskvichev Andrey V."));
+	about.SetCopyright(wxT("Copyright (C) 2008-2012 Moskvichev Andrey V."));
 
 	wxAboutBox(about);
 }

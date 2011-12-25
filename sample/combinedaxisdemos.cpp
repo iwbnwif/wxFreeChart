@@ -143,9 +143,9 @@ public:
 		// first plot data
 		double data1[][2] = {
 				{ 10, 20, },
-				{ 13, 16, },
+				{ 43, 16, },
 				{ 17, 30, },
-				{ 15, 34, },
+				{ 65, 34, },
 				{ 25, 4, },
 		};
 		// second plot data
