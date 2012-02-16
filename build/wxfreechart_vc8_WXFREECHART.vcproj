@@ -2904,6 +2904,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\xy\timeseriesdataset.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\title.cpp"
 				>
 			</File>
@@ -3159,6 +3163,10 @@
 			</File>
 			<File
 				RelativePath="..\include\wx\symbol.h"
+				>
+			</File>
+			<File
+				RelativePath="..\include\wx\xy\timeseriesdataset.h"
 				>
 			</File>
 			<File

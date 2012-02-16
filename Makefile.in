@@ -82,6 +82,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	wxfreechart_lib_xyzrenderer.o \
 	wxfreechart_lib_polynom.o \
 	wxfreechart_lib_sinefunction.o \
+	wxfreechart_lib_timeseriesdataset.o \
 	wxfreechart_lib_xyplot.o \
 	wxfreechart_lib_xyarearenderer.o \
 	wxfreechart_lib_xydynamicdataset.o \
@@ -146,6 +147,7 @@ WXFREECHART_LIB_HEADERS =  \
 	include/wx/xy/xyhistorenderer.h \
 	include/wx/xy/xysimpledataset.h \
 	include/wx/xy/xylinerenderer.h \
+	include/wx/xy/timeseriesdataset.h \
 	include/wx/xy/xydynamicdataset.h \
 	include/wx/xy/xydataset.h \
 	include/wx/xy/vectordataset.h \
@@ -208,6 +210,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	wxfreechart_dll_xyzrenderer.o \
 	wxfreechart_dll_polynom.o \
 	wxfreechart_dll_sinefunction.o \
+	wxfreechart_dll_timeseriesdataset.o \
 	wxfreechart_dll_xyplot.o \
 	wxfreechart_dll_xyarearenderer.o \
 	wxfreechart_dll_xydynamicdataset.o \
@@ -272,6 +275,7 @@ WXFREECHART_DLL_HEADERS =  \
 	include/wx/xy/xyhistorenderer.h \
 	include/wx/xy/xysimpledataset.h \
 	include/wx/xy/xylinerenderer.h \
+	include/wx/xy/timeseriesdataset.h \
 	include/wx/xy/xydynamicdataset.h \
 	include/wx/xy/xydataset.h \
 	include/wx/xy/vectordataset.h \
@@ -659,6 +663,9 @@ wxfreechart_lib_polynom.o: $(srcdir)/src/xy/functions/polynom.cpp
 wxfreechart_lib_sinefunction.o: $(srcdir)/src/xy/functions/sinefunction.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/functions/sinefunction.cpp
 
+wxfreechart_lib_timeseriesdataset.o: $(srcdir)/src/xy/timeseriesdataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/timeseriesdataset.cpp
+
 wxfreechart_lib_xyplot.o: $(srcdir)/src/xy/xyplot.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_LIB_CXXFLAGS) $(srcdir)/src/xy/xyplot.cpp
 
@@ -832,6 +839,9 @@ wxfreechart_dll_polynom.o: $(srcdir)/src/xy/functions/polynom.cpp
 
 wxfreechart_dll_sinefunction.o: $(srcdir)/src/xy/functions/sinefunction.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/functions/sinefunction.cpp
+
+wxfreechart_dll_timeseriesdataset.o: $(srcdir)/src/xy/timeseriesdataset.cpp
+	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/timeseriesdataset.cpp
 
 wxfreechart_dll_xyplot.o: $(srcdir)/src/xy/xyplot.cpp
 	$(CXXC) -c -o $@ $(WXFREECHART_DLL_CXXFLAGS) $(srcdir)/src/xy/xyplot.cpp

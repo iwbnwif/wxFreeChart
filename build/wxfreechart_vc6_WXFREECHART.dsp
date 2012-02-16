@@ -1044,6 +1044,10 @@ SOURCE=..\src\symbol.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\src\xy\timeseriesdataset.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\src\title.cpp
 # End Source File
 # Begin Source File
@@ -1297,6 +1301,10 @@ SOURCE=..\include\wx\xy\functions\sinefunction.h
 # Begin Source File
 
 SOURCE=..\include\wx\symbol.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\include\wx\xy\timeseriesdataset.h
 # End Source File
 # Begin Source File
 

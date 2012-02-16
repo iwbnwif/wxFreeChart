@@ -99,6 +99,7 @@ WXFREECHART_LIB_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyzrenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_polynom.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_sinefunction.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_timeseriesdataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyarearenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xydynamicdataset.obj \
@@ -164,6 +165,7 @@ WXFREECHART_DLL_OBJECTS =  \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyzrenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_polynom.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_sinefunction.obj \
+	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_timeseriesdataset.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyarearenderer.obj \
 	vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xydynamicdataset.obj \
@@ -546,6 +548,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_polynom.obj: ..\s
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_sinefunction.obj: ..\src\xy\functions\sinefunction.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\functions\sinefunction.cpp
 
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_timeseriesdataset.obj: ..\src\xy\timeseriesdataset.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\timeseriesdataset.cpp
+
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj: ..\src\xy\xyplot.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_LIB_CXXFLAGS) ..\src\xy\xyplot.cpp
 
@@ -719,6 +724,9 @@ vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_polynom.obj: ..\s
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_sinefunction.obj: ..\src\xy\functions\sinefunction.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\functions\sinefunction.cpp
+
+vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_timeseriesdataset.obj: ..\src\xy\timeseriesdataset.cpp
+	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\timeseriesdataset.cpp
 
 vcmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj: ..\src\xy\xyplot.cpp
 	$(CXX) /c /nologo /TP /Fo$@ $(WXFREECHART_DLL_CXXFLAGS) ..\src\xy\xyplot.cpp

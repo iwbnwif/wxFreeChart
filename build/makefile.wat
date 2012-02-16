@@ -240,6 +240,7 @@ WXFREECHART_LIB_OBJECTS =  &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyzrenderer.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_polynom.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_sinefunction.obj &
+	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_timeseriesdataset.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyarearenderer.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xydynamicdataset.obj &
@@ -303,6 +304,7 @@ WXFREECHART_DLL_OBJECTS =  &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyzrenderer.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_polynom.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_sinefunction.obj &
+	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_timeseriesdataset.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyarearenderer.obj &
 	watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xydynamicdataset.obj &
@@ -569,6 +571,9 @@ watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_polynom.obj :  .
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_sinefunction.obj :  .AUTODEPEND ..\src\xy\functions\sinefunction.cpp
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_LIB_CXXFLAGS) $<
 
+watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_timeseriesdataset.obj :  .AUTODEPEND ..\src\xy\timeseriesdataset.cpp
+	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_LIB_CXXFLAGS) $<
+
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_lib_xyplot.obj :  .AUTODEPEND ..\src\xy\xyplot.cpp
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_LIB_CXXFLAGS) $<
 
@@ -741,6 +746,9 @@ watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_polynom.obj :  .
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_DLL_CXXFLAGS) $<
 
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_sinefunction.obj :  .AUTODEPEND ..\src\xy\functions\sinefunction.cpp
+	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_DLL_CXXFLAGS) $<
+
+watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_timeseriesdataset.obj :  .AUTODEPEND ..\src\xy\timeseriesdataset.cpp
 	$(CXX) -bt=nt -zq -fo=$^@ $(WXFREECHART_DLL_CXXFLAGS) $<
 
 watmsw$(WXLIBPOSTFIX)$(_BUILDDIR_SHARED_SUFFIX)\wxfreechart_dll_xyplot.obj :  .AUTODEPEND ..\src\xy\xyplot.cpp
