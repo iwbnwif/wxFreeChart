@@ -67,6 +67,7 @@ src/xyz/xyzdataset.cpp
 src/xyz/xyzrenderer.cpp
 src/xy/functions/polynom.cpp
 src/xy/functions/sinefunction.cpp
+src/xy/timeseriesdataset.cpp
 src/xy/xyplot.cpp
 src/xy/xyarearenderer.cpp
 src/xy/xydynamicdataset.cpp
@@ -133,6 +134,7 @@ include/wx/xy/functions/sinefunction.h
 include/wx/xy/xyhistorenderer.h
 include/wx/xy/xysimpledataset.h
 include/wx/xy/xylinerenderer.h
+include/wx/xy/timeseriesdataset.h
 include/wx/xy/xydynamicdataset.h
 include/wx/xy/xydataset.h
 include/wx/xy/vectordataset.h

@@ -68,6 +68,7 @@
 		 - Pie plots (thanks to Grgory Soutad)
 		 - OHLC charts improvements (now it's possible to control bars/candlesticks color from various conditions (indicator values, etc))
 		 //- Dynamic charts performance optimization (thanks to 
+		 - TimeSeriesDataset was added
 		 - Graphics rendering improvements, added drawing wrapper, to use wxGraphicsContext
  		 - Demos updated
 		 - Will be new website with example docs and forum
