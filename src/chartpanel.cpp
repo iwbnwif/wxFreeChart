@@ -219,7 +219,7 @@ void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
 	}
 	else {
 		dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(GetBackgroundColour()));
-		dc.SetPen(*wxThePenList->FindOrCreatePen(GetBackgroundColour(), 1, wxSOLID));
+		dc.SetPen(*wxThePenList->FindOrCreatePen(GetBackgroundColour(), 1, wxPENSTYLE_SOLID));
 		dc.DrawRectangle(rc);
 	}
 }

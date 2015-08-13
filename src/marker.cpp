@@ -55,7 +55,7 @@ LineMarker::LineMarker(wxPen linePen)
 
 LineMarker::LineMarker(wxColour lineColour, int lineWidth)
 {
-	m_linePen = *wxThePenList->FindOrCreatePen(lineColour, lineWidth, wxSOLID);
+	m_linePen = *wxThePenList->FindOrCreatePen(lineColour, lineWidth, wxPENSTYLE_SOLID);
 	m_value = 0;
 	m_horizontal = true;
 }

@@ -39,8 +39,8 @@ FillAreaDraw::FillAreaDraw(wxPen borderPen, wxBrush fillBrush)
 
 FillAreaDraw::FillAreaDraw(wxColour borderColour, wxColour fillColour)
 {
-	m_borderPen = *wxThePenList->FindOrCreatePen(borderColour, 1, wxSOLID);
-	m_fillBrush = *wxTheBrushList->FindOrCreateBrush(fillColour, wxSOLID);
+	m_borderPen = *wxThePenList->FindOrCreatePen(borderColour, 1, wxPENSTYLE_SOLID);
+	m_fillBrush = *wxTheBrushList->FindOrCreateBrush(fillColour, wxBRUSHSTYLE_SOLID);
 }
 
 FillAreaDraw::~FillAreaDraw()
@@ -71,7 +71,7 @@ void GradientAreaDraw::Draw(wxDC &dc, wxRect rc)
 	dc.GradientFillLinear(rc, m_colour1, m_colour2, m_dir);
 
 	dc.SetPen(m_borderPen);
-	dc.SetBrush(wxNoBrush);
+	dc.SetBrush(wxNullBrush);
 	dc.DrawRectangle(rc);
 }
 

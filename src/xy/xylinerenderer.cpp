@@ -17,7 +17,7 @@ IMPLEMENT_CLASS(XYLineStepRenderer, XYLineRendererBase)
 // XYLineRendererBase
 //
 
-XYLineRendererBase::XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
+XYLineRendererBase::XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultPenWidth, wxPenStyle defaultPenStyle)
 {
 	m_defaultPenWidth = defaultPenWidth;
 	m_defaultPenStyle = defaultPenStyle;
@@ -107,7 +107,7 @@ void XYLineRendererBase::DrawSymbols(wxDC &dc, wxRect rc, Axis *horizAxis, Axis 
 // XYLineRenderer
 //
 
-XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, int defaultPenStyle)
+XYLineRenderer::XYLineRenderer(bool drawSymbols, bool drawLines, int defaultPenWidth, wxPenStyle defaultPenStyle)
 : XYLineRendererBase(drawSymbols, drawLines, defaultPenWidth, defaultPenStyle)
 {
 }
@@ -161,7 +161,7 @@ void XYLineRenderer::DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertA
 // XYLineStepRenderer
 //
 
-XYLineStepRenderer::XYLineStepRenderer(int defaultPenWidth, int defaultPenStyle)
+XYLineStepRenderer::XYLineStepRenderer(int defaultPenWidth, wxPenStyle defaultPenStyle)
 : XYLineRendererBase(false, true, defaultPenWidth, defaultPenStyle)
 {
 }

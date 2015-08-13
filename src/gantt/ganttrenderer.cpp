@@ -64,7 +64,7 @@ AreaDraw *GanttRenderer::GetSerieDraw(size_t serie)
 	AreaDraw *serieDraw = m_serieDraws.GetAreaDraw(serie);
 	if (serieDraw == NULL) {
 		serieDraw = new FillAreaDraw(*wxBLACK_PEN,
-				*wxTheBrushList->FindOrCreateBrush(GetDefaultColour(serie), wxSOLID));
+				*wxTheBrushList->FindOrCreateBrush(GetDefaultColour(serie), wxBRUSHSTYLE_SOLID));
 		m_serieDraws.SetAreaDraw(serie, serieDraw);
 	}
 	return serieDraw;

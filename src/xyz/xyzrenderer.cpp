@@ -18,8 +18,8 @@ XYZRenderer::XYZRenderer(int minRad, int maxRad)
 	m_maxRad = maxRad;
 
 	m_defaultPenWidth = 1;
-	m_defaultPenStyle = wxSOLID;
-	m_defaultBrushStyle = wxSOLID;
+	m_defaultPenStyle = wxPENSTYLE_SOLID;
+	m_defaultBrushStyle = wxBRUSHSTYLE_SOLID;
 }
 
 XYZRenderer::~XYZRenderer()

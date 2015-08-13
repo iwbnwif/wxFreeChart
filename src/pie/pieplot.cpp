@@ -158,7 +158,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 
 	if (m_use3DView) {
 		dc.SetPen(m_outlinePen);
-		dc.SetBrush(wxNoBrush);
+		dc.SetBrush(wxNullBrush);
 		dc.DrawEllipticArc(x0, y0 + shift3D, radHoriz, radVert, -180, 0);
 		dc.DrawLine(x0, y0 + radVert / 2, x0, y0 + radVert / 2 + shift3D + 1);
 		dc.DrawLine(x0 + radHoriz, y0 + radVert / 2, x0 + radHoriz, y0 + radVert / 2 + shift3D + 1);
@@ -205,7 +205,7 @@ void PiePlot::DrawData(wxDC &dc, wxRect rc)
 
 	// draw edges
 	dc.SetPen(m_outlinePen);
-	dc.SetBrush(wxNoBrush);
+	dc.SetBrush(wxNullBrush);
 	part = 0;
 	for (size_t n = 0; n < m_dataset->GetCount(); n++) {
 		double v = m_dataset->GetValue(n, m_serie);

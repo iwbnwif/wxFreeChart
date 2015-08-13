@@ -27,7 +27,7 @@ Axis::Axis(AXIS_LOCATION location)
 	m_location = location;
 
 	// XXX: short dash style drawing hungs, when wxGCDC used
-	m_gridLinesPen = *wxThePenList->FindOrCreatePen(*wxLIGHT_GREY, 1, wxDOT);//wxSHORT_DASH);
+	m_gridLinesPen = *wxThePenList->FindOrCreatePen(*wxLIGHT_GREY, 1, wxPENSTYLE_DOT);//wxSHORT_DASH);
 
 	m_winPos = 0;
 	m_winWidth = 0;

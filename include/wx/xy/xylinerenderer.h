@@ -17,7 +17,7 @@ class WXDLLIMPEXP_FREECHART XYLineRendererBase : public XYRenderer
 {
 	DECLARE_CLASS(XYLineRendererBase)
 public:
-	XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultWidth = 1, int defaultStyle = wxSOLID);
+	XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultWidth = 1, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
 	virtual ~XYLineRendererBase();
 
 	/**
@@ -66,7 +66,7 @@ private:
 	PenMap m_seriePens;
 
 	int m_defaultPenWidth;
-	int m_defaultPenStyle;
+	wxPenStyle m_defaultPenStyle;
 };
 
 /**
@@ -83,7 +83,7 @@ public:
 	 * @param defaultWidth specifies default width for lines
 	 * @param defaultStyle specifies default style for lines
 	 */
-	XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 1, int defaultStyle = wxSOLID);
+	XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 1, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
 	virtual ~XYLineRenderer();
 
 
@@ -100,7 +100,7 @@ class WXDLLIMPEXP_FREECHART XYLineStepRenderer : public XYLineRendererBase
 {
 	DECLARE_CLASS(XYLineStepRenderer)
 public:
-	XYLineStepRenderer(int defaultWidth = 1, int defaultStyle = wxSOLID);
+	XYLineStepRenderer(int defaultWidth = 1, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
 	virtual ~XYLineStepRenderer();
 
 

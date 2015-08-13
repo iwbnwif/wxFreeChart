@@ -11,7 +11,7 @@
 
 OHLCBarRenderer::OHLCBarRenderer()
 {
-	m_barPen = *wxThePenList->FindOrCreatePen(*wxBLACK, 2, wxSOLID);
+	m_barPen = *wxThePenList->FindOrCreatePen(*wxBLACK, 2, wxPENSTYLE_SOLID);
 }
 
 OHLCBarRenderer::~OHLCBarRenderer()

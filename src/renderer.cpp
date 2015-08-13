@@ -52,7 +52,7 @@ void Renderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 	wxColour colour = GetSerieColour(serie);
 
 	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(colour));
-	dc.SetPen(*wxThePenList->FindOrCreatePen(colour, 1, wxSOLID));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(colour, 1, wxPENSTYLE_SOLID));
 
 	dc.DrawRectangle(rcSymbol);
 }

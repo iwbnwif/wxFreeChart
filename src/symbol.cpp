@@ -74,7 +74,7 @@ CircleSymbol::~CircleSymbol()
 
 void CircleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
-	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxPENSTYLE_SOLID));
 	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
 
 	dc.DrawCircle(x, y, m_size / 2);
@@ -93,7 +93,7 @@ SquareSymbol::~SquareSymbol()
 void SquareSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
 	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
-	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxPENSTYLE_SOLID));
 
 	dc.DrawRectangle(x - m_size / 2, y - m_size / 2, m_size, m_size);
 }
@@ -109,7 +109,7 @@ CrossSymbol::~CrossSymbol()
 
 void CrossSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
-	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxPENSTYLE_SOLID));
 
 	dc.DrawLine(x - m_size / 2, y, x + m_size / 2, y);
 	dc.DrawLine(x, y - m_size / 2, x, y + m_size / 2);
@@ -127,7 +127,7 @@ TriangleSymbol::~TriangleSymbol()
 void TriangleSymbol::Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color)
 {
 	dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(color));
-	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxSOLID));
+	dc.SetPen(*wxThePenList->FindOrCreatePen(color, 1, wxPENSTYLE_SOLID));
 
 	const double COS_30 = 0.866158094;
 	const double SIN_30 = 0.5;

@@ -65,10 +65,10 @@ private:
 
 	PenMap m_seriePens;
 	int m_defaultPenWidth;
-	int m_defaultPenStyle;
+	wxPenStyle m_defaultPenStyle;
 
 	BrushMap m_serieBrushs;
-	int m_defaultBrushStyle;
+	wxBrushStyle m_defaultBrushStyle;
 };
 
 #endif /* XYZRENDERER_H_ */
