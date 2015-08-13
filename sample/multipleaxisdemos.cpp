@@ -197,22 +197,26 @@ public:
 		// create left axis for first dataset
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		leftAxis->SetLabelTextColour(color1);
+        leftAxis->SetTitle("Left Axis");
 		plot->AddAxis(leftAxis);
 
 		// create left axis for second dataset
 		NumberAxis *rightAxis = new NumberAxis(AXIS_RIGHT);
 		rightAxis->SetLabelTextColour(color2);
+        rightAxis->SetTitle("Right Axis");
 		plot->AddAxis(rightAxis);
 
 		// create top axis for first dataset
 		NumberAxis *topAxis = new NumberAxis(AXIS_TOP);
 		topAxis->SetLabelTextColour(color1);
+        topAxis->SetTitle("Top Axis");
 		plot->AddAxis(topAxis);
 
 		// create bottom axis for second dataset
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 		bottomAxis->SetLabelTextColour(color2);
-		plot->AddAxis(bottomAxis);
+		bottomAxis->SetTitle("Bottom Axis");
+        plot->AddAxis(bottomAxis);
 
 		// link first dataset with left axis
 		plot->LinkDataVerticalAxis(0, 0);
