@@ -30,7 +30,7 @@ void CategoryRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)
 	dc.DrawRectangle(rcSymbol);
 
 	dc.SetPen(*wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxPENSTYLE_SOLID));
-	dc.SetBrush(wxNullBrush);
+	dc.SetBrush(wxNoBrush);
 
 	dc.DrawRectangle(rcSymbol);
 }

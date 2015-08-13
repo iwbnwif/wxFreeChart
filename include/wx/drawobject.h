@@ -12,8 +12,8 @@
 
 #include <wx/observable.h>
 
-#define wxNoBrush *wxTheBrushList->FindOrCreateBrush(*wxBLACK, wxTRANSPARENT)
-#define wxNoPen *wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxTRANSPARENT)
+#define wxNoBrush *wxTheBrushList->FindOrCreateBrush(*wxBLACK, wxBRUSHSTYLE_TRANSPARENT)
+#define wxNoPen *wxThePenList->FindOrCreatePen(*wxBLACK, 1, wxPENSTYLE_TRANSPARENT)
 
 class WXDLLIMPEXP_FREECHART DrawObject;
 
