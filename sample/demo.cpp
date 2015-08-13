@@ -9,8 +9,6 @@
 
 #include "demo.h"
 
-#include <wx/aui/aui.h>
-
 #include <wx/aboutdlg.h>
 
 static wxString version = wxT("1.7");
@@ -99,18 +97,18 @@ END_EVENT_TABLE()
 
 MainFrame::MainFrame()
 : wxFrame(NULL, wxID_ANY, wxString::Format(wxT("wxFreeChart demo %s"), version.c_str()), wxDefaultPosition, wxSize(800, 445))
-{
-	wxAuiManager *auiMan = new wxAuiManager(this);
-
-	m_chartPanel = new wxChartPanel(this);
-	auiMan->AddPane(m_chartPanel,
+{	
+	m_mgr.SetManagedWindow(this);
+    
+    m_chartPanel = new wxChartPanel(this);
+	m_mgr.AddPane(m_chartPanel,
 			wxAuiPaneInfo().Center().BestSize(400, 400).CloseButton(false).Caption(wxT("chart")));
 
 	ChartSelector *chartSelector = new ChartSelector(this, m_chartPanel, DemoCollection::Get());
-	auiMan->AddPane(chartSelector,
+	m_mgr.AddPane(chartSelector,
 			wxAuiPaneInfo().Left().Caption(wxT("chart types")).MinSize(350, 400).BestSize(350, 400).CloseButton(false));
 
-	auiMan->Update();
+	m_mgr.Update();
 
 	// Create main menu
 	wxMenuBar *menuBar = new wxMenuBar();
@@ -136,6 +134,7 @@ MainFrame::MainFrame()
 
 MainFrame::~MainFrame()
 {
+    m_mgr.UnInit();
 }
 
 void MainFrame::OnSaveAsPNG(wxCommandEvent &WXUNUSED(ev))

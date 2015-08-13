@@ -25,6 +25,8 @@
 #include "wx/wxfreechartdefs.h"
 #include "wx/chartpanel.h"
 
+#include <wx/aui/aui.h>
+
 #include "democollection.h"
 
 /**
@@ -64,7 +66,8 @@ private:
 	void OnAbout(wxCommandEvent &ev);
 	void OnExit(wxCommandEvent &ev);
 
-	wxChartPanel *m_chartPanel;
+	wxAuiManager m_mgr;
+    wxChartPanel *m_chartPanel;
 
 	DECLARE_EVENT_TABLE()
 };
