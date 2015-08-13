@@ -318,7 +318,8 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 {
 	if (!m_visible)
 		return;
-	// draw title
+
+    // draw title
 	if (m_title.Length() != 0) {
 		wxSize titleExtent = dc.GetTextExtent(m_title);
 
@@ -328,82 +329,57 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
 		if (IsVertical()) {
 			wxCoord y;
 			switch (m_titleLocation) {
-			case wxTOP:
-				y = rc.y + titleExtent.x;
-				break;
-			case wxCENTER:
-				y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
-				break;
-			case wxBOTTOM:
-				y = rc.y + rc.height;
-				break;
-			default:
-				// fallback to center
-				y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
+				case wxTOP:
+					y = rc.y + titleExtent.x;
+					break;
+				case wxCENTER:
+					y = rc.y + titleExtent.GetWidth() + (rc.GetHeight() - titleExtent.GetWidth()) / 2;
+					break;
+				case wxBOTTOM:
+					y = rc.y + rc.height;
+					break;
+				default:
+					// fallback to center
+					y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
 			}
-
-			// Alan add
-			if (GetLocation() == AXIS_LEFT)
-			{
-				dc.DrawRotatedText(m_title, rc.x, y, 90);
-				rc.x += titleExtent.y;
-				rc.width -= titleExtent.y;
-			}
-			// End Alan add
-			// orig : dc.DrawRotatedText(m_title, rc.x, y, 90);
-			// orig : rc.x += titleExtent.y;
-			// orig : rc.width -= titleExtent.y;
+            if (GetLocation() == AXIS_LEFT) {
+			    dc.DrawRotatedText(m_title, rc.x, y, 90);                    
+                rc.x += titleExtent.y;
+            } else {
+                dc.DrawRotatedText(m_title, rc.x + rc.width - titleExtent.y, y, 90);                                    
+            }            
+			rc.width -= titleExtent.y;
 		}
 		else {
 			wxCoord x;
 			switch (m_titleLocation) {
-			case wxLEFT:
-				x = rc.x;
-				break;
-			case wxCENTER:
-				x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
-				break;
-			case wxRIGHT:
-				x = rc.x + rc.width - titleExtent.x;
-				break;
-			default:
-				// fallback to center
-				x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
+				case wxLEFT:
+					x = rc.x;
+					break;
+				case wxCENTER:
+					// PBFIX
+                    x = rc.x + (rc.GetWidth() - titleExtent.GetWidth()) / 2;
+                    // x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
+					break;
+				case wxRIGHT:
+					x = rc.x + rc.width - titleExtent.x;
+					break;
+				default:
+					// fallback to center
+					x = rc.x + (rc.GetWidth() - titleExtent.GetWidth()) / 2;
 			}
 
-			dc.DrawText(m_title, x, rc.y + rc.height - titleExtent.y);
-			rc.height -= titleExtent.y;
+            if (GetLocation() == AXIS_TOP) {
+                dc.DrawText(m_title, x, rc.y);
+            } else {
+                dc.DrawText(m_title, x, rc.y + rc.height - titleExtent.y);
+                rc.SetBottom(rc.GetBottom() - titleExtent.y);			    
+            }
 		}
-	}
-
+	} 
+    
 	DrawLabels(dc, rc);
 	DrawBorderLine(dc, rc);
-	// Alan add
-	int y;
-	if (m_title.Length() != 0)
-	{
-		wxSize titleExtent = dc.GetTextExtent(m_title);
-		wxSize maxLabelExtent = GetLongestLabelExtent(dc);
-		if (GetLocation() == AXIS_RIGHT)
-		{
-			switch (m_titleLocation) {
-			case wxTOP:
-				y = rc.y + titleExtent.x;
-				break;
-			case wxCENTER:
-				y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
-				break;
-			case wxBOTTOM:
-				y = rc.y + rc.height;
-				break;
-			default:
-				// fallback to center
-				y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
-			}
-			dc.DrawRotatedText(m_title, rc.x + maxLabelExtent.x + m_labelGap + m_labelLineSize + 1, y, 90);
-		}
-	}
-	// End Alan add
 }
 
 bool LabelAxis::HasLabels()
