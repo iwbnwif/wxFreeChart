@@ -177,7 +177,7 @@ void NumberAxis::GetLabel(size_t step, wxString &label)
 
 	if (m_intValues) {
 		// orig : label = wxString::Format(wxT("%i"), (int) value);
-		label = wxString::Format(wxT("%i"), (int) value * m_multiplier);
+		label = wxString::Format(wxT("%i"), int(value * m_multiplier));
 	}
 	else {
 		// orig : label = wxString::Format(m_tickFormat, value);
