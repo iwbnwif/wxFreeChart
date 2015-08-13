@@ -357,5 +357,9 @@ void wxChartPanel::RedrawBackBitmap()
 
 void wxChartPanel::ResizeBackBitmap(wxSize size)
 {
-	m_backBitmap.Create(size.GetWidth(), size.GetHeight());
+    // make sure we do not attempt to create a bitmap 
+    // with invalid size (width and/or height < 1)
+    size.IncTo(wxSize(1, 1)); 
+    
+    m_backBitmap.Create(size.GetWidth(), size.GetHeight());
 }
