@@ -34,7 +34,7 @@ void Chart::Init(Plot* plot, Header* header, Footer* footer)
 	wxColour bgColor = wxColour(220, 220, 220);
 
 	m_background = new FillAreaDraw(
-			*wxThePenList->FindOrCreatePen(bgColor, 1, wxSOLID),
+			*wxThePenList->FindOrCreatePen(bgColor, 1, wxPENSTYLE_SOLID),
 			*wxTheBrushList->FindOrCreateBrush(bgColor));
 
 	m_margin = 5;
