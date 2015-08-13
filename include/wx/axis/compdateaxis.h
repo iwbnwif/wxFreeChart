@@ -23,7 +23,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(wxTimeSpan, wxTimeSpanArray, WXDLLIMPEXP_FREEC
  * Draws multiple date/time spans (like day, week, month, year),
  * instead of just label as DateAxis does.
  */
-class CompDateAxis : public Axis
+class WXDLLIMPEXP_FREECHART CompDateAxis : public Axis
 {
 	DECLARE_CLASS(CompDateAxis)
 public:
