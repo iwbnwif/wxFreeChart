@@ -173,7 +173,9 @@ private:
 };
 
 WX_DECLARE_HASH_MAP(int, AreaDraw *, wxIntegerHash, wxIntegerEqual, AreaDrawMap);
-class WXDLLIMPEXP_FREECHART AreaDrawMap;
+// IY: Class declaration not required because already declared by above 
+// declaration (on Linux at least). It may be needed in Windows.
+// class WXDLLIMPEXP_FREECHART AreaDrawMap;
 
 /**
  * Collection of areadraws for series.

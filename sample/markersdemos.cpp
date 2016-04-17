@@ -50,7 +50,7 @@ public:
 		dataset->SetRenderer(new XYLineRenderer());
 
 		// create line marker
-		LineMarker *lineMarker = new LineMarker(wxPen(*wxBLUE, 2, wxSOLID));
+		LineMarker *lineMarker = new LineMarker(wxPen(*wxBLUE, 2, wxPENSTYLE_SOLID));
 
 		// set value to be marked, in our case vertical line with x=20
 		lineMarker->SetVerticalLine(20);

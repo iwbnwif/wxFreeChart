@@ -40,6 +40,8 @@ public:
 class WXDLLIMPEXP_FREECHART ChartPanelMode  : public ChartPanelObserver
 {
 public:
+    // IY: Virtual destructor needed otherwise behaviour is undefined.
+    virtual ~ChartPanelMode() {}
 	virtual void Init(wxChartPanel *chartPanel) = 0;
 };
 

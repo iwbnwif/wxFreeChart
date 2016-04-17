@@ -791,7 +791,7 @@ public:
 
 		// we can change line pen for serie, for example set short-dash
 		// line style and width=2 for third serie
-		renderer->SetSeriePen(1, wxThePenList->FindOrCreatePen(*wxGREEN, 2, wxSOLID));
+		renderer->SetSeriePen(1, wxThePenList->FindOrCreatePen(*wxGREEN, 2, wxPENSTYLE_SOLID));
 		dataset->SetRenderer(renderer);
 
 		// add dataset to plot

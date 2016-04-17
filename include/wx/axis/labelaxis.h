@@ -18,6 +18,8 @@
 class WXDLLIMPEXP_FREECHART LabelColourer
 {
 public:
+    // IY: Virtual destructor needed otherwise behaviour is undefined.
+    virtual ~LabelColourer() {}
 	virtual wxColor GetColour(int step) = 0;
 };
 

@@ -13,7 +13,7 @@
 wxChartSplitPanel::wxChartSplitPanel(wxWindow *parent, wxWindowID id,
 		const wxPoint &pos, const wxSize &size)
 : wxPanel(parent, id, pos, size)
-{
+{   
 	m_auiManager = new wxAuiManager(this);
 
 	m_auiManager->Update();
