@@ -94,7 +94,7 @@ public:
 		// set label text colour same as lines
 		leftAxis1->SetLabelTextColour(color1);
 		// set label lines colour same as lines
-		leftAxis1->SetLabelPen(*wxThePenList->FindOrCreatePen(color1, 1, wxSOLID));
+		leftAxis1->SetLabelPen(*wxThePenList->FindOrCreatePen(color1, 1, wxPENSTYLE_SOLID));
 		plot->AddAxis(leftAxis1);
 
 		// create left axis for second dataset
@@ -102,7 +102,7 @@ public:
 		// set label text colour same as lines
 		leftAxis2->SetLabelTextColour(color2);
 		// set label lines colour same as lines
-		leftAxis2->SetLabelPen(*wxThePenList->FindOrCreatePen(color2, 1, wxSOLID));
+		leftAxis2->SetLabelPen(*wxThePenList->FindOrCreatePen(color2, 1, wxPENSTYLE_SOLID));
 		plot->AddAxis(leftAxis2);
 
 		// create bottom axis for first and second dataset

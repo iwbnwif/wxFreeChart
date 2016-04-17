@@ -288,7 +288,7 @@ void CompDateAxis::DrawSpan(wxDC &dc, wxRect rcAxis, int spanNum, wxString spanL
 		axisSize = rcAxis.width;
 	}
 
-	wxCoord gStart, gEnd, gCenter;
+	wxCoord gStart, gEnd;
 	if (start <= winMin) {
 		gStart = minCoord;
 	}
@@ -303,7 +303,9 @@ void CompDateAxis::DrawSpan(wxDC &dc, wxRect rcAxis, int spanNum, wxString spanL
 		gEnd = Axis::ToGraphics(dc, minCoord, axisSize, end);
 	}
 
-	gCenter = Axis::ToGraphics(dc, minCoord, axisSize, (start + end) / 2);
+    // Was wxCoord gCenter = Axis::ToGraphics(dc, minCoord, axisSize, (start + end) / 2);
+    // But gCenter is not used, so removed.
+	Axis::ToGraphics(dc, minCoord, axisSize, (start + end) / 2);
 
 	if (IsVertical()) {
 		rcSpan.x = rcAxis.x + spanNum * spanExtent;

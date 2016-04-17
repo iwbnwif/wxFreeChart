@@ -19,6 +19,8 @@
 class WXDLLIMPEXP_FREECHART OHLCColourer
 {
 public:
+    // IY: Virtual destructor needed otherwise behaviour is undefined.
+    virtual ~OHLCColourer() {}
 	virtual wxColor GetColour(int step) = 0;
 };
 
