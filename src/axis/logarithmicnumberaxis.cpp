@@ -156,10 +156,11 @@ double LogarithmicNumberAxis::GetValue(size_t step)
 void LogarithmicNumberAxis::GetLabel(size_t step, wxString& label)
 {
 	NumberAxis::GetLabel(step, label);
-
+#ifdef __WXMSW__
 	if (m_logBase == 10.0 && !m_longExponent) {
 		label.erase(label.length() - 3, 1);
 	}
+#endif // __WXMSW__
 }
 
 wxCoord LogarithmicNumberAxis::ToGraphics(wxDC &WXUNUSED(dc), int minCoord, int gRange, double value)
