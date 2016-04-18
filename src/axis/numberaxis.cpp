@@ -84,11 +84,11 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 	FireBoundsChanged();
 }
 
-void NumberAxis::UpdateBounds()
+bool NumberAxis::UpdateBounds()
 {
 	if (m_fixedBounds) {
 		UpdateTickValues();
-		return ; // bounds are fixed, so don't update
+		return false; // bounds are fixed, so don't update
 	}
 
 	m_hasLabels = false;
@@ -120,6 +120,7 @@ void NumberAxis::UpdateBounds()
 
 	UpdateTickValues();
 	FireBoundsChanged();
+    return true;
 }
 
 void NumberAxis::UpdateTickValues()

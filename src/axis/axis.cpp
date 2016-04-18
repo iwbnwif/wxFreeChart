@@ -210,9 +210,9 @@ double AxisShare::ToData(wxDC &dc, int minCoord, int gRange, wxCoord g)
 	return m_axis->ToData(dc, minCoord, gRange, g);
 }
 
-void AxisShare::UpdateBounds()
+bool AxisShare::UpdateBounds()
 {
-	m_axis->UpdateBounds();
+	return m_axis->UpdateBounds();
 }
 
 void AxisShare::Draw(wxDC &dc, wxRect rc)

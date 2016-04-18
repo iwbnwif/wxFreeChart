@@ -25,10 +25,10 @@ LogarithmicNumberAxis::~LogarithmicNumberAxis()
 {
 }
 
-void LogarithmicNumberAxis::UpdateBounds()
+bool LogarithmicNumberAxis::UpdateBounds()
 {
 	if (m_fixedBounds) {
-		return ; // bounds are fixed, so don't update
+		return false; // bounds are fixed, so don't update
 	}
 
 	m_hasLabels = false;
@@ -58,6 +58,7 @@ void LogarithmicNumberAxis::UpdateBounds()
 
 	UpdateTickValues();
 	FireBoundsChanged();
+    return true;
 }
 
 double LogarithmicNumberAxis::GetMinValue(Dataset* dataset)

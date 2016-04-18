@@ -286,7 +286,7 @@ public:
 	/**
 	 * Performs axis bounds update after dataset/s change.
 	 */
-	virtual void UpdateBounds() = 0;
+	virtual bool UpdateBounds() = 0;
 
 	/**
 	 * Performs axis drawing.
@@ -366,7 +366,7 @@ public:
 
 	virtual double ToData(wxDC &dc, int minCoord, int gRange, wxCoord g);
 
-	virtual void UpdateBounds();
+	virtual bool UpdateBounds() wxOVERRIDE;
 
 	virtual void Draw(wxDC &dc, wxRect rc);
 

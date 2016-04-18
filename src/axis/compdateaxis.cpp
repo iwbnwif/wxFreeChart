@@ -174,17 +174,17 @@ void CompDateAxis::GetDataBounds(double &minValue, double &maxValue) const
 	maxValue = m_dateCount;
 }
 
-void CompDateAxis::UpdateBounds()
+bool CompDateAxis::UpdateBounds()
 {
 	m_dateCount = 0;
 
 	DateTimeDataset *dataset = m_datasets[0]->AsDateTimeDataset();
 	if (dataset->GetCount() < 1) {
-		return ;
+		return false;
 	}
 
 	if (m_dateSpans.Count() == 0) {
-		return ;
+		return false;
 	}
 
 	time_t minDate = dataset->GetDate(0);

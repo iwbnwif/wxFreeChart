@@ -49,12 +49,12 @@ void CategoryAxis::GetDataBounds(double &minValue, double &maxValue) const
 	}
 }
 
-void CategoryAxis::UpdateBounds()
+bool CategoryAxis::UpdateBounds()
 {
 	CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
 	if (dataset == NULL) {
 		wxLogError(wxT("CategoryAxis::DataChanged: BUG dataset is not CategoryDataset")); // BUG!
-		return ;
+		return false;
 	}
 
 	m_categoryCount = dataset->GetCount();
@@ -69,6 +69,7 @@ void CategoryAxis::UpdateBounds()
 	}
 
 	FireBoundsChanged();
+    return true;
 }
 
 double CategoryAxis::GetValue(size_t step)

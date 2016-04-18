@@ -22,7 +22,7 @@ public:
 	CategoryAxis(AXIS_LOCATION location);
 	virtual ~CategoryAxis();
 
-	virtual void UpdateBounds();
+	virtual bool UpdateBounds() wxOVERRIDE;
 
 	virtual void GetDataBounds(double &minValue, double &maxValue) const;
 

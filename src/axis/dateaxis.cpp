@@ -30,7 +30,7 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 		&& (m_datasets.Count() == 0);
 }
 
-void DateAxis::UpdateBounds()
+bool DateAxis::UpdateBounds()
 {
 	size_t dateCount = 0;
 
@@ -44,7 +44,10 @@ void DateAxis::UpdateBounds()
 	if (dateCount != m_dateCount) {
 		m_dateCount = dateCount;
 		FireBoundsChanged();
+        return true;
 	}
+    else
+        return false;
 }
 
 wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)

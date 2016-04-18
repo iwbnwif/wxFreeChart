@@ -22,7 +22,7 @@ public:
 	NumberAxis(AXIS_LOCATION location);
 	virtual ~NumberAxis();
 
-	virtual void UpdateBounds();
+	virtual bool UpdateBounds();
 
 	/**
 	 * Sets format for tick marks.
