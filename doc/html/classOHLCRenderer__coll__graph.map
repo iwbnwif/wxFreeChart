@@ -1,0 +1,7 @@
+<map id="OHLCRenderer" name="OHLCRenderer">
+<area shape="rect" id="node2" href="$classRenderer.html" title="Renderer" alt="" coords="115,160,188,187"/>
+<area shape="rect" id="node4" href="$classDrawObject.html" title="DrawObject" alt="" coords="107,83,197,109"/>
+<area shape="rect" id="node5" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="54,5,249,32"/>
+<area shape="rect" id="node6" href="$classRefObject.html" title="RefObject" alt="" coords="222,83,303,109"/>
+<area shape="rect" id="node7" href="$classOHLCColourer.html" title="OHLCColourer" alt="" coords="214,160,321,187"/>
+</map>

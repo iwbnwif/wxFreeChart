@@ -1,0 +1,11 @@
+<map id="Plot" name="Plot">
+<area shape="rect" id="node3" href="$classAxisPlot.html" title="AxisPlot" alt="" coords="118,155,188,181"/>
+<area shape="rect" id="node9" href="$classMultiPlot.html" title="MultiPlot" alt="" coords="213,155,285,181"/>
+<area shape="rect" id="node10" href="$classPiePlot.html" title="PiePlot" alt="" coords="311,155,375,181"/>
+<area shape="rect" id="node2" href="$classObservable.html" title="Observable\&lt; PlotObserver \&gt;" alt="" coords="155,5,343,32"/>
+<area shape="rect" id="node4" href="$classBubblePlot.html" title="BubblePlot" alt="" coords="5,229,91,256"/>
+<area shape="rect" id="node5" href="$classGanttPlot.html" title="GanttPlot" alt="" coords="115,229,191,256"/>
+<area shape="rect" id="node6" href="$classXYPlot.html" title="XYPlot" alt="" coords="217,229,279,256"/>
+<area shape="rect" id="node7" href="$classBarPlot.html" title="BarPlot" alt="" coords="166,304,231,331"/>
+<area shape="rect" id="node8" href="$classOHLCPlot.html" title="OHLCPlot" alt="" coords="256,304,337,331"/>
+</map>

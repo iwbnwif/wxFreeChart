@@ -1,0 +1,9 @@
+<map id="LabelAxis" name="LabelAxis">
+<area shape="rect" id="node5" href="$classCategoryAxis.html" title="CategoryAxis" alt="" coords="5,229,107,256"/>
+<area shape="rect" id="node6" href="$classDateAxis.html" title="DateAxis" alt="" coords="131,229,207,256"/>
+<area shape="rect" id="node7" href="$classNumberAxis.html" title="NumberAxis" alt="" coords="231,229,325,256"/>
+<area shape="rect" id="node2" href="$classAxis.html" title="Axis" alt="" coords="145,80,193,107"/>
+<area shape="rect" id="node4" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="154,5,344,32"/>
+<area shape="rect" id="node8" href="$classJulianDateAxis.html" title="JulianDateAxis" alt="" coords="143,304,253,331"/>
+<area shape="rect" id="node9" href="$classLogarithmicNumberAxis.html" title="LogarithmicNumberAxis" alt="" coords="278,304,439,331"/>
+</map>

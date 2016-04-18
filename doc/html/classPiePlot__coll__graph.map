@@ -1,0 +1,5 @@
+<map id="PiePlot" name="PiePlot">
+<area shape="rect" id="node2" href="$classPlot.html" title="Plot" alt="" coords="76,80,121,107"/>
+<area shape="rect" id="node3" href="$classObservable.html" title="Observable\&lt; PlotObserver \&gt;" alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node4" href="$classDatasetObserver.html" title="DatasetObserver" alt="" coords="146,80,267,107"/>
+</map>

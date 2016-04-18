@@ -1,0 +1,6 @@
+<map id="DateTimeDataset" name="DateTimeDataset">
+<area shape="rect" id="node2" href="$classGanttDatasetDateHelper.html" title="GanttDatasetDateHelper" alt="" coords="5,80,171,107"/>
+<area shape="rect" id="node3" href="$classOHLCDataset.html" title="OHLCDataset" alt="" coords="195,80,300,107"/>
+<area shape="rect" id="node5" href="$classTimeSeriesDataset.html" title="TimeSeriesDataset" alt="" coords="325,80,459,107"/>
+<area shape="rect" id="node4" href="$classOHLCSimpleDataset.html" title="OHLCSimpleDataset" alt="" coords="175,155,320,181"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="CategoryDataset" name="CategoryDataset">
+<area shape="rect" id="node8" href="$classCategorySimpleDataset.html" title="CategorySimpleDataset" alt="" coords="74,304,235,331"/>
+<area shape="rect" id="node9" href="$classGanttDataset.html" title="GanttDataset" alt="" coords="259,304,359,331"/>
+<area shape="rect" id="node2" href="$classXYDataset.html" title="XYDataset" alt="" coords="189,155,275,181"/>
+<area shape="rect" id="node3" href="$classDataset.html" title="Dataset" alt="" coords="198,80,265,107"/>
+<area shape="rect" id="node5" href="$classRefObject.html" title="RefObject" alt="" coords="107,5,188,32"/>
+<area shape="rect" id="node6" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="212,5,421,32"/>
+<area shape="rect" id="node7" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="447,5,553,32"/>
+<area shape="rect" id="node10" href="$classGanttSimpleDataset.html" title="GanttSimpleDataset" alt="" coords="239,379,379,405"/>
+</map>
