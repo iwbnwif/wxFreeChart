@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	juliantimeseriesdataset.cpp
+// Name:    juliantimeseriesdataset.cpp
 // Purpose: An XY dataset where the X axis is a Julian Date
-// Author:	Carsten Arnholm
-// Created:	2010/08/19
-// Licence:	wxWidgets licence
+// Author:    Carsten Arnholm
+// Created:    2010/08/19
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/xy/juliantimeseriesdataset.h"
@@ -21,17 +21,17 @@ JulianTimeSeriesDataset::~JulianTimeSeriesDataset()
 
 size_t JulianTimeSeriesDataset::GetSerieCount()
 {
-	return 1;
+    return 1;
 }
 
 size_t JulianTimeSeriesDataset::GetCount(size_t WXUNUSED(serie))
 {
-	return m_data.size();
+    return m_data.size();
 }
 
 wxString JulianTimeSeriesDataset::GetSerieName(size_t WXUNUSED(serie))
 {
-	return wxT("JulianTimeSeriesDataset");
+    return wxT("JulianTimeSeriesDataset");
 }
 
 double JulianTimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie))
@@ -41,7 +41,7 @@ double JulianTimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie))
 
 double JulianTimeSeriesDataset::GetY(size_t index, size_t WXUNUSED(serie))
 {
-	return m_data[index].second;
+    return m_data[index].second;
 }
 
 void JulianTimeSeriesDataset::clear()

@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	xyarearenderer.h
+// Name:    xyarearenderer.h
 // Purpose: xy area renderer declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef XYAREARENDERER_H_
@@ -14,18 +14,18 @@
 
 class WXDLLIMPEXP_FREECHART XYAreaRenderer : public XYRenderer
 {
-	DECLARE_CLASS(XYAreaRenderer)
+    DECLARE_CLASS(XYAreaRenderer)
 public:
-	XYAreaRenderer();
-	virtual ~XYAreaRenderer();
+    XYAreaRenderer();
+    virtual ~XYAreaRenderer();
 
-	virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+    virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
 
-	virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
+    virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
 private:
-	wxPen m_outlinePen;
-	wxBrush m_areaBrush;
+    wxPen m_outlinePen;
+    wxBrush m_areaBrush;
 };
 
 #endif /*XYAREARENDERER_H_*/

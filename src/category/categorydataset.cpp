@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	categorydataset.cpp
+// Name:    categorydataset.cpp
 // Purpose: category dataset implementation
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/category/categorydataset.h>
@@ -21,41 +21,41 @@ CategoryDataset::~CategoryDataset()
 
 bool CategoryDataset::AcceptRenderer(Renderer *renderer)
 {
-	return (wxDynamicCast(renderer, BarRenderer) != NULL);
+    return (wxDynamicCast(renderer, BarRenderer) != NULL);
 }
 
 bool CategoryDataset::HasValue(size_t WXUNUSED(index), size_t WXUNUSED(serie))
 {
-	return true;
+    return true;
 }
 
 double CategoryDataset::GetMinValue(bool WXUNUSED(verticalAxis))
 {
-	if (GetRenderer() == NULL) {
-		return 0;
-	}
-	return GetRenderer()->GetMinValue(this);
+    if (GetRenderer() == NULL) {
+        return 0;
+    }
+    return GetRenderer()->GetMinValue(this);
 }
 
 double CategoryDataset::GetMaxValue(bool WXUNUSED(verticalAxis))
 {
-	if (GetRenderer() == NULL) {
-		return 0;
-	}
-	return GetRenderer()->GetMaxValue(this);
+    if (GetRenderer() == NULL) {
+        return 0;
+    }
+    return GetRenderer()->GetMaxValue(this);
 }
 
 double CategoryDataset::GetX(size_t index, size_t WXUNUSED(serie))
 {
-	return index;
+    return index;
 }
 
 double CategoryDataset::GetY(size_t index, size_t serie)
 {
-	return GetValue(index, serie);
+    return GetValue(index, serie);
 }
 
 size_t CategoryDataset::GetCount(size_t WXUNUSED(serie))
 {
-	return GetCount(); // in category dataset all series has equal count of elements
+    return GetCount(); // in category dataset all series has equal count of elements
 }

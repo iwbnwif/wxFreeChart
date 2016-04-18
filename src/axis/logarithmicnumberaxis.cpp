@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	logarithmicnumberaxis.cpp
+// Name:    logarithmicnumberaxis.cpp
 // Purpose: label axis implementation
-// Author:	Andreas Kuechler
-// Created:	2008/11/07
-// Copyright:	(c) 2010 Andreas Kuechler
-// Licence:	wxWidgets licence
+// Author:    Andreas Kuechler
+// Created:    2008/11/07
+// Copyright:    (c) 2010 Andreas Kuechler
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/logarithmicnumberaxis.h>
@@ -18,7 +18,7 @@ LogarithmicNumberAxis::LogarithmicNumberAxis(AXIS_LOCATION location)
 , m_longExponent(false)
 , m_logBase(10.0)
 {
-	m_logBase == 10.0 ? SetTickFormat(wxT("%2.2e")) : SetTickFormat(wxT("%2.2f"));
+    m_logBase == 10.0 ? SetTickFormat(wxT("%2.2e")) : SetTickFormat(wxT("%2.2f"));
 }
 
 LogarithmicNumberAxis::~LogarithmicNumberAxis()
@@ -27,37 +27,37 @@ LogarithmicNumberAxis::~LogarithmicNumberAxis()
 
 bool LogarithmicNumberAxis::UpdateBounds()
 {
-	if (m_fixedBounds) {
-		return false; // bounds are fixed, so don't update
-	}
+    if (m_fixedBounds) {
+        return false; // bounds are fixed, so don't update
+    }
 
-	m_hasLabels = false;
+    m_hasLabels = false;
 
-	for (size_t n = 0; n < m_datasets.Count(); n++) {
-		double minValue = GetMinValue(m_datasets[n]);
-		double maxValue = GetMaxValue(m_datasets[n]);
+    for (size_t n = 0; n < m_datasets.Count(); n++) {
+        double minValue = GetMinValue(m_datasets[n]);
+        double maxValue = GetMaxValue(m_datasets[n]);
 
-		if (n == 0) {
-			m_minValue = minValue;
-			m_maxValue = maxValue;
-		}
-		else {
-			m_minValue = wxMin(m_minValue, minValue);
-			m_maxValue = wxMax(m_maxValue, maxValue);
-		}
-	}
+        if (n == 0) {
+            m_minValue = minValue;
+            m_maxValue = maxValue;
+        }
+        else {
+            m_minValue = wxMin(m_minValue, minValue);
+            m_maxValue = wxMax(m_maxValue, maxValue);
+        }
+    }
 
-	if (m_minValue == m_maxValue) {
-		if (m_maxValue > 0) {
-			m_minValue = 0;
-		}
-		else {
-			m_maxValue = 0;
-		}
-	}
+    if (m_minValue == m_maxValue) {
+        if (m_maxValue > 0) {
+            m_minValue = 0;
+        }
+        else {
+            m_maxValue = 0;
+        }
+    }
 
-	UpdateTickValues();
-	FireBoundsChanged();
+    UpdateTickValues();
+    FireBoundsChanged();
     return true;
 }
 
@@ -133,99 +133,99 @@ double LogarithmicNumberAxis::GetMaxValue(Dataset* dataset)
 
 void LogarithmicNumberAxis::SetLogBase(double logBase)
 {
-	m_logBase = logBase;
-	m_logBase == 10.0 ? SetTickFormat(wxT("%2.2e")) : SetTickFormat(wxT("%2.2f"));
+    m_logBase = logBase;
+    m_logBase == 10.0 ? SetTickFormat(wxT("%2.2e")) : SetTickFormat(wxT("%2.2f"));
 }
 
 void LogarithmicNumberAxis::EnableLongLabelExponent(bool enable)
 {
-	m_longExponent = enable;
+    m_longExponent = enable;
 }
 
 double LogarithmicNumberAxis::GetValue(size_t step)
 {
-	double min, max;
-	GetDataBounds(min, max);
+    double min, max;
+    GetDataBounds(min, max);
 
-	double logMin = log(min) / log(m_logBase);
-	double logMax = log(max) / log(m_logBase);
+    double logMin = log(min) / log(m_logBase);
+    double logMax = log(max) / log(m_logBase);
 
-	double logInterval = (logMax - logMin) / (GetLabelCount() - 1);
-	return min * pow(m_logBase, step * logInterval);
+    double logInterval = (logMax - logMin) / (GetLabelCount() - 1);
+    return min * pow(m_logBase, step * logInterval);
 }
 
 void LogarithmicNumberAxis::GetLabel(size_t step, wxString& label)
 {
-	NumberAxis::GetLabel(step, label);
+    NumberAxis::GetLabel(step, label);
 #ifdef __WXMSW__
-	if (m_logBase == 10.0 && !m_longExponent) {
-		label.erase(label.length() - 3, 1);
-	}
+    if (m_logBase == 10.0 && !m_longExponent) {
+        label.erase(label.length() - 3, 1);
+    }
 #endif // __WXMSW__
 }
 
 wxCoord LogarithmicNumberAxis::ToGraphics(wxDC &WXUNUSED(dc), int minCoord, int gRange, double value)
 {
-	double minValue, maxValue;
-	GetDataBounds(minValue, maxValue);
+    double minValue, maxValue;
+    GetDataBounds(minValue, maxValue);
 
-	minCoord += m_marginMin;
-	gRange -= (m_marginMin + m_marginMax);
+    minCoord += m_marginMin;
+    gRange -= (m_marginMin + m_marginMax);
 
-	if (gRange < 0) {
-		gRange = 0;
-	}
+    if (gRange < 0) {
+        gRange = 0;
+    }
 
-	if (m_useWin) {
-		minValue = m_winPos;
-		maxValue = m_winPos + m_winWidth;
-	}
+    if (m_useWin) {
+        minValue = m_winPos;
+        maxValue = m_winPos + m_winWidth;
+    }
 
-	double logValue = log(value) / log(m_logBase);
-	double logMax = log(maxValue) / log(m_logBase);
-	double logMin = log(minValue) / log(m_logBase);
+    double logValue = log(value) / log(m_logBase);
+    double logMax = log(maxValue) / log(m_logBase);
+    double logMin = log(minValue) / log(m_logBase);
 
-	return ::ToGraphics(minCoord, gRange, logMin, logMax, 0/*textMargin*/, IsVertical(), logValue);
+    return ::ToGraphics(minCoord, gRange, logMin, logMax, 0/*textMargin*/, IsVertical(), logValue);
 }
 
 double LogarithmicNumberAxis::ToData(wxDC &WXUNUSED(dc), int minCoord, int gRange, wxCoord g)
 {
-	double minValue, maxValue;
-	GetDataBounds(minValue, maxValue);
+    double minValue, maxValue;
+    GetDataBounds(minValue, maxValue);
 
-	minCoord += m_marginMin;
-	gRange -= (m_marginMin + m_marginMax);
-	if (gRange < 0) {
-		gRange = 0;
-	}
+    minCoord += m_marginMin;
+    gRange -= (m_marginMin + m_marginMax);
+    if (gRange < 0) {
+        gRange = 0;
+    }
 
-	if (m_useWin) {
-		minValue = m_winPos;
-		maxValue = m_winPos + m_winWidth;
-	}
+    if (m_useWin) {
+        minValue = m_winPos;
+        maxValue = m_winPos + m_winWidth;
+    }
 
-	double logMin = log(minValue) / log(m_logBase);
-	double logMax = log(minValue) / log(m_logBase);
-	return ::ToData(minCoord, gRange, logMin, logMax, 0/*textMargin*/, IsVertical(), g);
+    double logMin = log(minValue) / log(m_logBase);
+    double logMax = log(minValue) / log(m_logBase);
+    return ::ToData(minCoord, gRange, logMin, logMax, 0/*textMargin*/, IsVertical(), g);
 }
 
 double LogarithmicNumberAxis::BoundValue(double value)
 {
 //  double v = abs((double)log10(value));
-	if (m_useWin) {
-		if (value <= m_winPos) {
-			return m_winPos;
-		}
-		else if (value >= (m_winPos + m_winWidth)) {
-			return m_winPos + m_winWidth;
-		}
-		else {
-			return value;
-		}
-	}
-	else {
-		return value;
-	}
+    if (m_useWin) {
+        if (value <= m_winPos) {
+            return m_winPos;
+        }
+        else if (value >= (m_winPos + m_winWidth)) {
+            return m_winPos + m_winWidth;
+        }
+        else {
+            return value;
+        }
+    }
+    else {
+        return value;
+    }
 }
 
 bool LogarithmicNumberAxis::IsVisible(double value)
@@ -235,7 +235,7 @@ bool LogarithmicNumberAxis::IsVisible(double value)
   }
   else {
     if (m_useWin) {
-		return (value >= m_winPos && value <= (m_winPos + m_winWidth));
+        return (value >= m_winPos && value <= (m_winPos + m_winWidth));
     }
     else {
       double minValue, maxValue;

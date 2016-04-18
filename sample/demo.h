@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	demo.h
+// Name:    demo.h
 // Purpose: demo application header
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2009 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef DEMO_H_
@@ -35,15 +35,15 @@
 class ChartSelector : public wxTreeCtrl
 {
 public:
-	ChartSelector(wxWindow *parent, wxChartPanel *chartPanel, DemoCollection *demoCollection);
-	virtual ~ChartSelector();
+    ChartSelector(wxWindow *parent, wxChartPanel *chartPanel, DemoCollection *demoCollection);
+    virtual ~ChartSelector();
 
 private:
-	void OnTreeItemActivated(wxTreeEvent &ev);
+    void OnTreeItemActivated(wxTreeEvent &ev);
 
-	wxChartPanel *m_chartPanel;
+    wxChartPanel *m_chartPanel;
 
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 /**
@@ -52,24 +52,24 @@ private:
 class MainFrame : public wxFrame
 {
 public:
-	friend class ChartSelector;
+    friend class ChartSelector;
 
-	MainFrame();
-	virtual ~MainFrame();
+    MainFrame();
+    virtual ~MainFrame();
 
 private:
-	//
-	// Event handlers
-	//
-	void OnSaveAsPNG(wxCommandEvent &ev);
-	void OnEnableAntialias(wxCommandEvent &ev);
-	void OnAbout(wxCommandEvent &ev);
-	void OnExit(wxCommandEvent &ev);
+    //
+    // Event handlers
+    //
+    void OnSaveAsPNG(wxCommandEvent &ev);
+    void OnEnableAntialias(wxCommandEvent &ev);
+    void OnAbout(wxCommandEvent &ev);
+    void OnExit(wxCommandEvent &ev);
 
-	wxAuiManager m_mgr;
+    wxAuiManager m_mgr;
     wxChartPanel *m_chartPanel;
 
-	DECLARE_EVENT_TABLE()
+    DECLARE_EVENT_TABLE()
 };
 
 #endif /*DEMO_H_*/

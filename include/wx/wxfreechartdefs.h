@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	wxfreechartdefs.h
+// Name:    wxfreechartdefs.h
 // Purpose: base declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef WXFREECHARTDEFS_H
@@ -34,19 +34,19 @@
 
 #define ABS(a) ((a) < 0) ? (-1*(a)) : (a)
 
-#define wxREPLACE(dst, src) do {					\
-	wxDELETE(dst);									\
-	dst = src;										\
+#define wxREPLACE(dst, src) do {                    \
+    wxDELETE(dst);                                    \
+    dst = src;                                        \
 } while (0)
 
 
 inline static int RoundHigh(double value)
 {
-	int iv = (int) value;
+    int iv = (int) value;
 
-	if (((double) iv) > value)
-		iv++;
-	return iv;
+    if (((double) iv) > value)
+        iv++;
+    return iv;
 }
 
 #endif /* WXFREECHARTDEFS_H */

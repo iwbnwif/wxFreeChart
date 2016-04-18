@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	ohlcrenderer.h
+// Name:    ohlcrenderer.h
 // Purpose: OHLC renderers base class declaration.
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef OHLCRENDERER_H_
@@ -21,7 +21,7 @@ class WXDLLIMPEXP_FREECHART OHLCColourer
 public:
     // IY: Virtual destructor needed otherwise behaviour is undefined.
     virtual ~OHLCColourer() {}
-	virtual wxColor GetColour(int step) = 0;
+    virtual wxColor GetColour(int step) = 0;
 };
 
 /**
@@ -30,25 +30,25 @@ public:
 class WXDLLIMPEXP_FREECHART OHLCRenderer : public Renderer
 {
 public:
-	OHLCRenderer();
-	virtual ~OHLCRenderer();
+    OHLCRenderer();
+    virtual ~OHLCRenderer();
 
-	/**
-	 * Draws item.
-	 * @param dc device context
-	 * @param x coordinate
-	 * @param open open value in graphical coordinates
-	 * @param high high value in graphical coordinates
-	 * @param low low value in graphical coordinates
-	 * @param close close value in graphical coordinates
-	 */
-	virtual void DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close) = 0;
+    /**
+     * Draws item.
+     * @param dc device context
+     * @param x coordinate
+     * @param open open value in graphical coordinates
+     * @param high high value in graphical coordinates
+     * @param low low value in graphical coordinates
+     * @param close close value in graphical coordinates
+     */
+    virtual void DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close) = 0;
 
-	void SetColourer(OHLCColourer *colourer);
-	OHLCColourer *GetColourer();
+    void SetColourer(OHLCColourer *colourer);
+    OHLCColourer *GetColourer();
 
 protected:
-	OHLCColourer *m_colourer;
+    OHLCColourer *m_colourer;
 };
 
 #endif /*OHLCRENDERER_H_*/

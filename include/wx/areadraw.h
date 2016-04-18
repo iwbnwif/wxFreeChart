@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	areadraw.h
+// Name:    areadraw.h
 // Purpose: area draw declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef AREADRAW_H_
@@ -22,16 +22,16 @@
 class WXDLLIMPEXP_FREECHART AreaDraw : public DrawObject
 {
 public:
-	AreaDraw();
+    AreaDraw();
 
-	virtual ~AreaDraw();
+    virtual ~AreaDraw();
 
-	/**
-	 * Draw area background.
-	 * @param dc device context
-	 * @param rc rectangle of area to draw
-	 */
-	virtual void Draw(wxDC &dc, wxRect rc) = 0;
+    /**
+     * Draw area background.
+     * @param dc device context
+     * @param rc rectangle of area to draw
+     */
+    virtual void Draw(wxDC &dc, wxRect rc) = 0;
 };
 
 /**
@@ -41,11 +41,11 @@ public:
 class WXDLLIMPEXP_FREECHART NoAreaDraw : public AreaDraw
 {
 public:
-	NoAreaDraw();
+    NoAreaDraw();
 
-	virtual ~NoAreaDraw();
+    virtual ~NoAreaDraw();
 
-	virtual void Draw(wxDC &dc, wxRect rc);
+    virtual void Draw(wxDC &dc, wxRect rc);
 };
 
 /**
@@ -55,60 +55,60 @@ public:
 class WXDLLIMPEXP_FREECHART FillAreaDraw : public AreaDraw
 {
 public:
-	/**
-	 * Constructs new fill area draw.
-	 * @param borderPen pen to draw area border
-	 * @param fillBrush brush to fill area
-	 */
-	FillAreaDraw(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
+    /**
+     * Constructs new fill area draw.
+     * @param borderPen pen to draw area border
+     * @param fillBrush brush to fill area
+     */
+    FillAreaDraw(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
 
-	FillAreaDraw(wxColour borderColour, wxColour fillColour);
+    FillAreaDraw(wxColour borderColour, wxColour fillColour);
 
-	virtual ~FillAreaDraw();
+    virtual ~FillAreaDraw();
 
-	virtual void Draw(wxDC &dc, wxRect rc);
+    virtual void Draw(wxDC &dc, wxRect rc);
 
-	/**
-	 * Returns border pen.
-	 * @return border pen
-	 */
-	const wxPen &GetBorderPen()
-	{
-		return m_borderPen;
-	}
+    /**
+     * Returns border pen.
+     * @return border pen
+     */
+    const wxPen &GetBorderPen()
+    {
+        return m_borderPen;
+    }
 
-	/**
-	 * Sets border pen.
-	 * @param borderPen border pen
-	 */
-	void SetBorderPen(wxPen borderPen)
-	{
-		m_borderPen = borderPen;
-		FireNeedRedraw();
-	}
+    /**
+     * Sets border pen.
+     * @param borderPen border pen
+     */
+    void SetBorderPen(wxPen borderPen)
+    {
+        m_borderPen = borderPen;
+        FireNeedRedraw();
+    }
 
-	/**
-	 * Returns fill brush.
-	 * @return fill brush
-	 */
-	const wxBrush &GetFillBrush()
-	{
-		return m_fillBrush;
-	}
+    /**
+     * Returns fill brush.
+     * @return fill brush
+     */
+    const wxBrush &GetFillBrush()
+    {
+        return m_fillBrush;
+    }
 
-	/**
-	 * Sets fill brush.
-	 * @param fillBrush fill brush
-	 */
-	void SetFillBrush(wxBrush fillBrush)
-	{
-		m_fillBrush = fillBrush;
-		FireNeedRedraw();
-	}
+    /**
+     * Sets fill brush.
+     * @param fillBrush fill brush
+     */
+    void SetFillBrush(wxBrush fillBrush)
+    {
+        m_fillBrush = fillBrush;
+        FireNeedRedraw();
+    }
 
 private:
-	wxBrush m_fillBrush;
-	wxPen m_borderPen;
+    wxBrush m_fillBrush;
+    wxPen m_borderPen;
 };
 
 /**
@@ -118,58 +118,58 @@ private:
 class WXDLLIMPEXP_FREECHART GradientAreaDraw : public AreaDraw
 {
 public:
-	/**
-	 * Constructs new gradient area background.
-	 * @param borderPen pen to draw border
-	 * @param colour1 first gradient fill color
-	 * @param colour2 second gradient fill color
-	 * @param dir gradient fill direction
-	 */
-	GradientAreaDraw(wxPen borderPen = *wxBLACK_PEN,
-			wxColour colour1 = wxColour(200, 220, 250),
-			wxColour colour2 = wxColour(255, 255, 255),
-			wxDirection dir = wxEAST);
+    /**
+     * Constructs new gradient area background.
+     * @param borderPen pen to draw border
+     * @param colour1 first gradient fill color
+     * @param colour2 second gradient fill color
+     * @param dir gradient fill direction
+     */
+    GradientAreaDraw(wxPen borderPen = *wxBLACK_PEN,
+            wxColour colour1 = wxColour(200, 220, 250),
+            wxColour colour2 = wxColour(255, 255, 255),
+            wxDirection dir = wxEAST);
 
-	virtual ~GradientAreaDraw();
+    virtual ~GradientAreaDraw();
 
-	virtual void Draw(wxDC &dc, wxRect rc);
+    virtual void Draw(wxDC &dc, wxRect rc);
 
-	/**
-	 * Sets gradient fill first color.
-	 * @param colour1 first color
-	 */
-	void SetColour1(wxColour colour1)
-	{
-		m_colour1 = colour1;
-		FireNeedRedraw();
-	}
+    /**
+     * Sets gradient fill first color.
+     * @param colour1 first color
+     */
+    void SetColour1(wxColour colour1)
+    {
+        m_colour1 = colour1;
+        FireNeedRedraw();
+    }
 
-	/**
-	 * Sets gradient fill second color.
-	 * @param colour2 second color
-	 */
-	void SetColour2(wxColour colour2)
-	{
-		m_colour2 = colour2;
-		FireNeedRedraw();
-	}
+    /**
+     * Sets gradient fill second color.
+     * @param colour2 second color
+     */
+    void SetColour2(wxColour colour2)
+    {
+        m_colour2 = colour2;
+        FireNeedRedraw();
+    }
 
-	/**
-	 * Sets gradient fill direction.
-	 * @param dir direction
-	 */
-	void SetDirection(wxDirection dir)
-	{
-		m_dir = dir;
-		FireNeedRedraw();
-	}
+    /**
+     * Sets gradient fill direction.
+     * @param dir direction
+     */
+    void SetDirection(wxDirection dir)
+    {
+        m_dir = dir;
+        FireNeedRedraw();
+    }
 
 private:
-	wxPen m_borderPen;
+    wxPen m_borderPen;
 
-	wxColour m_colour1;
-	wxColour m_colour2;
-	wxDirection m_dir;
+    wxColour m_colour1;
+    wxColour m_colour2;
+    wxDirection m_dir;
 };
 
 WX_DECLARE_HASH_MAP(int, AreaDraw *, wxIntegerHash, wxIntegerEqual, AreaDrawMap);
@@ -184,25 +184,25 @@ WX_DECLARE_HASH_MAP(int, AreaDraw *, wxIntegerHash, wxIntegerEqual, AreaDrawMap)
 class WXDLLIMPEXP_FREECHART AreaDrawCollection
 {
 public:
-	AreaDrawCollection();
-	virtual ~AreaDrawCollection();
+    AreaDrawCollection();
+    virtual ~AreaDrawCollection();
 
-	/**
-	 * Set areadraw for serie.
-	 * @param serie serie index
-	 * @param areaDraw areadraw for serie
-	 */
-	void SetAreaDraw(int serie, AreaDraw *areaDraw);
+    /**
+     * Set areadraw for serie.
+     * @param serie serie index
+     * @param areaDraw areadraw for serie
+     */
+    void SetAreaDraw(int serie, AreaDraw *areaDraw);
 
-	/**
-	 * Returns areadraw, if any, for serie.
-	 * @param serie serie index
-	 * @return areadraw
-	 */
-	AreaDraw *GetAreaDraw(int serie);
+    /**
+     * Returns areadraw, if any, for serie.
+     * @param serie serie index
+     * @return areadraw
+     */
+    AreaDraw *GetAreaDraw(int serie);
 
 private:
-	AreaDrawMap m_areas;
+    AreaDrawMap m_areas;
 };
 
 #endif /*AREADRAW_H_*/

@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	juliandateaxis.cpp
+// Name:    juliandateaxis.cpp
 // Purpose: Axis declaration where the values are Julian Dates
-// Author:	Carsten Arnholm
-// Created:	2010/08/19
-// Licence:	wxWidgets licence
+// Author:    Carsten Arnholm
+// Created:    2010/08/19
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/axis/juliandateaxis.h"
@@ -27,11 +27,11 @@ void JulianDateAxis::SetDateFormat(const wxString& dateFormat)
 
 void JulianDateAxis::GetLabel(size_t step, wxString &label)
 {
-	double value = GetValue(step);
+    double value = GetValue(step);
 
-	if (value == -0) {
-		value = 0;
-	}
+    if (value == -0) {
+        value = 0;
+    }
 
    wxDateTime dt(value);
    label = dt.Format(m_dateFormat);

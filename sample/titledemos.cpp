@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	titledemos.cpp
+// Name:    titledemos.cpp
 // Purpose: xy demos
-// Author:	Andreas Kuechler
-// Created:	2010/03/23
-// Copyright:	(c) 2010 Andreas Kuechler
-// Licence:	wxWidgets licence
+// Author:    Andreas Kuechler
+// Created:    2010/03/23
+// Copyright:    (c) 2010 Andreas Kuechler
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "democollection.h"

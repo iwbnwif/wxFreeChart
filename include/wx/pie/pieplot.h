@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	pieplot.h
+// Name:    pieplot.h
 // Purpose: pie plot declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef PIEPLOT_H_
@@ -27,64 +27,64 @@ const int shift3D = 20;
 class WXDLLIMPEXP_FREECHART PiePlot : public Plot, public DatasetObserver
 {
 public:
-	PiePlot();
-	virtual ~PiePlot();
+    PiePlot();
+    virtual ~PiePlot();
 
-	void SetDataset(CategoryDataset *dataset);
+    void SetDataset(CategoryDataset *dataset);
 
-	void SetUsedSerie(size_t serie)
-	{
-		m_serie = serie;
-		FirePlotNeedRedraw();
-	}
+    void SetUsedSerie(size_t serie)
+    {
+        m_serie = serie;
+        FirePlotNeedRedraw();
+    }
 
-	void SetColorScheme(ColorScheme *cs);
+    void SetColorScheme(ColorScheme *cs);
 
-	void Set3DView(bool use3DView)
-	{
-		if (m_use3DView != use3DView) {
-			m_use3DView = use3DView;
-			FirePlotNeedRedraw();
-		}
-	}
+    void Set3DView(bool use3DView)
+    {
+        if (m_use3DView != use3DView) {
+            m_use3DView = use3DView;
+            FirePlotNeedRedraw();
+        }
+    }
 
-	void SetEllipticAspect(float ellipticAspect)
-	{
-		if (m_ellipticAspect != ellipticAspect && ellipticAspect > 0 && ellipticAspect <= 1) {
-			m_ellipticAspect = ellipticAspect;
-			FirePlotNeedRedraw();
-		}
-	}
+    void SetEllipticAspect(float ellipticAspect)
+    {
+        if (m_ellipticAspect != ellipticAspect && ellipticAspect > 0 && ellipticAspect <= 1) {
+            m_ellipticAspect = ellipticAspect;
+            FirePlotNeedRedraw();
+        }
+    }
 
-	void SetLegend(Legend *legend);
+    void SetLegend(Legend *legend);
 
-	//
-	// DatasetObserver
-	//
-	virtual void DatasetChanged(Dataset *dataset);
+    //
+    // DatasetObserver
+    //
+    virtual void DatasetChanged(Dataset *dataset);
 
 protected:
-	virtual bool HasData();
+    virtual bool HasData();
 
-	virtual void DrawData(wxDC &dc, wxRect rc);
+    virtual void DrawData(wxDC &dc, wxRect rc);
 
 private:
 
-	bool m_use3DView;
-	float m_ellipticAspect;
+    bool m_use3DView;
+    float m_ellipticAspect;
 
-	wxFont m_labelsFont;
-	wxPen m_outlinePen;
+    wxFont m_labelsFont;
+    wxPen m_outlinePen;
 
-	CategoryDataset *m_dataset;
+    CategoryDataset *m_dataset;
 
-	ColorScheme m_colorScheme;
+    ColorScheme m_colorScheme;
 
-	size_t m_serie;
+    size_t m_serie;
 
-	wxCoord m_legendPlotGap; // distance between plot and legend
+    wxCoord m_legendPlotGap; // distance between plot and legend
 
-	Legend *m_legend;
+    Legend *m_legend;
 };
 
 #endif /*PIEPLOT_H_*/

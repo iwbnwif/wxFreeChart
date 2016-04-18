@@ -1,11 +1,11 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	timeseriesdataset.h
+// Name:    timeseriesdataset.h
 // Purpose: Time series dataset declaration
-// Author:	Moskvichev Andrey V.
-// Created:	16.02.2012
-// RCS-ID:	$Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
-// Copyright:	(c) 2012 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    16.02.2012
+// RCS-ID:    $Id: wxAdvTable.h,v 1.3 2008/11/07 16:42:58 moskvichev Exp $
+// Copyright:    (c) 2012 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef TIMESERIESDATASET_H_
@@ -18,34 +18,34 @@
  */
 class WXDLLIMPEXP_FREECHART TimeSeriesDataset : public XYDataset, public DateTimeDataset
 {
-	DECLARE_CLASS(TimeSeriesDataset)
+    DECLARE_CLASS(TimeSeriesDataset)
 public:
-	TimeSeriesDataset(double *data, time_t *times, size_t count);
-	virtual ~TimeSeriesDataset();
+    TimeSeriesDataset(double *data, time_t *times, size_t count);
+    virtual ~TimeSeriesDataset();
 
-	virtual size_t GetSerieCount();
+    virtual size_t GetSerieCount();
 
-	virtual wxString GetSerieName(size_t serie);
+    virtual wxString GetSerieName(size_t serie);
 
-	virtual size_t GetCount(size_t serie);
+    virtual size_t GetCount(size_t serie);
 
-	virtual double GetX(size_t index, size_t serie);
+    virtual double GetX(size_t index, size_t serie);
 
-	virtual double GetY(size_t index, size_t serie);
+    virtual double GetY(size_t index, size_t serie);
 
-	virtual DateTimeDataset *AsDateTimeDataset();
+    virtual DateTimeDataset *AsDateTimeDataset();
 
-	//
-	// DateTimeDataset
-	//
-	virtual time_t GetDate(size_t index);
+    //
+    // DateTimeDataset
+    //
+    virtual time_t GetDate(size_t index);
 
-	virtual size_t GetCount();
+    virtual size_t GetCount();
 
 private:
-	double *m_data;
-	time_t *m_times;
-	size_t m_count;
+    double *m_data;
+    time_t *m_times;
+    size_t m_count;
 };
 
 #endif /* TIMESERIESDATASET_H_ */

@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	drawutils.h
+// Name:    drawutils.h
 // Purpose: Defines some useful drawing utilities.
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef DRAWUTILS_H_
@@ -19,12 +19,12 @@
  */
 inline static void DrawTextCenter(wxDC &dc, wxCoord x, wxCoord y, wxString text)
 {
-	wxSize textExtent = dc.GetTextExtent(text);
+    wxSize textExtent = dc.GetTextExtent(text);
 
-	x -= textExtent.x / 2;
-	y -= textExtent.y / 2;
+    x -= textExtent.x / 2;
+    y -= textExtent.y / 2;
 
-	dc.DrawText(text, x, y);
+    dc.DrawText(text, x, y);
 }
 
 /**
@@ -35,12 +35,12 @@ inline static void DrawTextCenter(wxDC &dc, wxCoord x, wxCoord y, wxString text)
  */
 inline static void DrawTextCenter(wxDC &dc, wxRect &rc, wxString text)
 {
-	wxSize textExtent = dc.GetTextExtent(text);
+    wxSize textExtent = dc.GetTextExtent(text);
 
-	wxCoord x = rc.x + (rc.GetWidth() - textExtent.x) / 2;
-	wxCoord y = rc.y + (rc.GetHeight() - textExtent.y) / 2;
+    wxCoord x = rc.x + (rc.GetWidth() - textExtent.x) / 2;
+    wxCoord y = rc.y + (rc.GetHeight() - textExtent.y) / 2;
 
-	dc.DrawText(text, x, y);
+    dc.DrawText(text, x, y);
 }
 
 /**
@@ -51,14 +51,14 @@ inline static void DrawTextCenter(wxDC &dc, wxRect &rc, wxString text)
  */
 inline static void CheckFixRect(wxRect &rc)
 {
-	if (rc.x < 0)
-		rc.x = 0;
-	if (rc.y < 0)
-		rc.y = 0;
-	if (rc.width < 0)
-		rc.width = 0;
-	if (rc.height < 0)
-		rc.height = 0;
+    if (rc.x < 0)
+        rc.x = 0;
+    if (rc.y < 0)
+        rc.y = 0;
+    if (rc.width < 0)
+        rc.width = 0;
+    if (rc.height < 0)
+        rc.height = 0;
 }
 
 /**
@@ -71,25 +71,25 @@ inline static void CheckFixRect(wxRect &rc)
  */
 inline static void Margins(wxRect &rc, wxCoord left, wxCoord top, wxCoord right, wxCoord bottom)
 {
-	if ((left + right) > rc.width) {
-		rc.x = left;
-		rc.width = 0;
-	}
-	else {
-		rc.x += left;
-		rc.width -= (left + right);
-	}
+    if ((left + right) > rc.width) {
+        rc.x = left;
+        rc.width = 0;
+    }
+    else {
+        rc.x += left;
+        rc.width -= (left + right);
+    }
 
-	if ((top + bottom) > rc.height) {
-		rc.y = top;
-		rc.height = 0;
-	}
-	else {
-		rc.y += top;
-		rc.height -= (top + bottom);
-	}
+    if ((top + bottom) > rc.height) {
+        rc.y = top;
+        rc.height = 0;
+    }
+    else {
+        rc.y += top;
+        rc.height -= (top + bottom);
+    }
 
-	CheckFixRect(rc);
+    CheckFixRect(rc);
 }
 
 /**
@@ -102,23 +102,23 @@ inline static void Margins(wxRect &rc, wxCoord left, wxCoord top, wxCoord right,
  */
 inline static void SetupRect(wxRect &rc, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1)
 {
-	if (x0 < x1) {
-		rc.x = x0;
-		rc.width = x1 - x0;
-	}
-	else {
-		rc.x = x1;
-		rc.width = x0 - x1;
-	}
+    if (x0 < x1) {
+        rc.x = x0;
+        rc.width = x1 - x0;
+    }
+    else {
+        rc.x = x1;
+        rc.width = x0 - x1;
+    }
 
-	if (y0 < y1) {
-		rc.y = y0;
-		rc.height = y1 - y0;
-	}
-	else {
-		rc.y = y1;
-		rc.height = y0 - y1;
-	}
+    if (y0 < y1) {
+        rc.y = y0;
+        rc.height = y1 - y0;
+    }
+    else {
+        rc.y = y1;
+        rc.height = y0 - y1;
+    }
 }
 
 #endif /*DRAWUTILS_H_*/

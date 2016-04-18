@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	democollection.h
+// Name:    democollection.h
 // Purpose: Demo collection class declaration
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/12
-// Copyright:	(c) 2008-2009 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/12
+// Copyright:    (c) 2008-2009 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef DEMOCOLLECTION_H_
@@ -29,28 +29,28 @@
 class ChartDemo
 {
 public:
-	ChartDemo(const wxChar *name)
-	{
-		m_name = name;
-	}
+    ChartDemo(const wxChar *name)
+    {
+        m_name = name;
+    }
 
-	virtual ~ChartDemo()
-	{
-	}
+    virtual ~ChartDemo()
+    {
+    }
 
-	/**
-	 * Called to create chart.
-	 * @return created demo chart
-	 */
-	virtual Chart *Create() = 0;
+    /**
+     * Called to create chart.
+     * @return created demo chart
+     */
+    virtual Chart *Create() = 0;
 
-	const wxString &GetName()
-	{
-		return m_name;
-	}
+    const wxString &GetName()
+    {
+        return m_name;
+    }
 
 private:
-	wxString m_name;
+    wxString m_name;
 };
 
 /**
@@ -59,38 +59,38 @@ private:
 class DemoCollection
 {
 public:
-	DemoCollection();
-	virtual ~DemoCollection();
+    DemoCollection();
+    virtual ~DemoCollection();
 
-	/**
-	 * Returns category count.
-	 * @return category count
-	 */
-	int GetCategoryCount();
+    /**
+     * Returns category count.
+     * @return category count
+     */
+    int GetCategoryCount();
 
-	/**
-	 * Returns category name at index.
-	 * @param index index of category
-	 * @return category name
-	 */
-	const wxString &GetCategory(int index);
+    /**
+     * Returns category name at index.
+     * @param index index of category
+     * @return category name
+     */
+    const wxString &GetCategory(int index);
 
-	/**
-	 * Returns demo count in category.
-	 * @param index index of category
-	 * @return demo count in category
-	 */
-	int GetCategoryDemoCount(int index);
+    /**
+     * Returns demo count in category.
+     * @param index index of category
+     * @return demo count in category
+     */
+    int GetCategoryDemoCount(int index);
 
-	/**
-	 * Returns demo in category.
-	 * @param catIndex index of category
-	 * @param demoIndex index of demo in category
-	 * @return demo
-	 */
-	ChartDemo *GetCategoryDemo(int catIndex, int demoIndex);
+    /**
+     * Returns demo in category.
+     * @param catIndex index of category
+     * @param demoIndex index of demo in category
+     * @return demo
+     */
+    ChartDemo *GetCategoryDemo(int catIndex, int demoIndex);
 
-	static DemoCollection *Get();
+    static DemoCollection *Get();
 };
 
 

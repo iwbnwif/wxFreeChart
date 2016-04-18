@@ -1,9 +1,9 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	juliandateaxis.h
+// Name:    juliandateaxis.h
 // Purpose: Axis declaration where the values are Julian Dates
-// Author:	Carsten Arnholm
-// Created:	2010/08/19
-// Licence:	wxWidgets licence
+// Author:    Carsten Arnholm
+// Created:    2010/08/19
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef JULIANDATEAXIS_H
@@ -16,10 +16,10 @@ public:
    JulianDateAxis(AXIS_LOCATION location);
    virtual ~JulianDateAxis();
 
-	/**
-	 * Sets format for date labels.
-	 * @param dateFormat date format accrding to strftime
-	 */
+    /**
+     * Sets format for date labels.
+     * @param dateFormat date format accrding to strftime
+     */
    void SetDateFormat(const wxString& dateFormat);
 
 protected:

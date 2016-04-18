@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	plot.h
+// Name:    plot.h
 // Purpose: plot base class declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef PLOT_H_
@@ -24,15 +24,15 @@ class WXDLLIMPEXP_FREECHART wxChartPanel;
 class WXDLLIMPEXP_FREECHART PlotObserver
 {
 public:
-	PlotObserver();
+    PlotObserver();
 
-	virtual ~PlotObserver();
+    virtual ~PlotObserver();
 
-	/**
-	 * Called when plot has been changed and need to be redrawn.
-	 * @param _plot plot
-	 */
-	virtual void PlotNeedRedraw(Plot *_plot) = 0;
+    /**
+     * Called when plot has been changed and need to be redrawn.
+     * @param _plot plot
+     */
+    virtual void PlotNeedRedraw(Plot *_plot) = 0;
 };
 
 /**
@@ -42,93 +42,93 @@ public:
 class WXDLLIMPEXP_FREECHART Plot : public Observable<PlotObserver>
 {
 public:
-	Plot();
-	virtual ~Plot();
+    Plot();
+    virtual ~Plot();
 
-	/**
-	 * Draws plot
-	 * @param dc device context
-	 * @param rc rectangle where to draw
-	 */
-	virtual void Draw(wxDC &dc, wxRect rc);
+    /**
+     * Draws plot
+     * @param dc device context
+     * @param rc rectangle where to draw
+     */
+    virtual void Draw(wxDC &dc, wxRect rc);
 
-	/**
-	 * Draws "no data" message.
-	 * Can be overriden by derivative classes.
-	 * @param dc device context
-	 * @param rc rectangle where to draw
-	 */
-	virtual void DrawNoDataMessage(wxDC &dc, wxRect rc);
+    /**
+     * Draws "no data" message.
+     * Can be overriden by derivative classes.
+     * @param dc device context
+     * @param rc rectangle where to draw
+     */
+    virtual void DrawNoDataMessage(wxDC &dc, wxRect rc);
 
-	void SetChartPanel(wxChartPanel *chartPanel);
+    void SetChartPanel(wxChartPanel *chartPanel);
 
-	/**
-	 * Returns chart panel (GUI component, at top level) if
-	 * it
-	 */
-	wxChartPanel *GetChartPanel();
+    /**
+     * Returns chart panel (GUI component, at top level) if
+     * it
+     */
+    wxChartPanel *GetChartPanel();
 
 
-	/**
-	 * Sets plot background.
-	 * @param background new background for plot
-	 */
-	void SetBackground(AreaDraw *background)
-	{
-		wxREPLACE(m_background, background);
-		FirePlotNeedRedraw();
-	}
+    /**
+     * Sets plot background.
+     * @param background new background for plot
+     */
+    void SetBackground(AreaDraw *background)
+    {
+        wxREPLACE(m_background, background);
+        FirePlotNeedRedraw();
+    }
 
-	/**
-	 * Sets text message drawn, when plot has no data to draw
-	 * @param textNoData text message drawn, when plot has no data to draw
-	 */
-	void SetTextNoData(const wxString &textNoData)
-	{
-		m_textNoData = textNoData;
-		FirePlotNeedRedraw();
-	}
+    /**
+     * Sets text message drawn, when plot has no data to draw
+     * @param textNoData text message drawn, when plot has no data to draw
+     */
+    void SetTextNoData(const wxString &textNoData)
+    {
+        m_textNoData = textNoData;
+        FirePlotNeedRedraw();
+    }
 
 protected:
-	/**
-	 * Checks whether plot has data.
-	 * Must be overriden by derivative classes.
-	 * @return true if plot has data, false overwise
-	 */
-	virtual bool HasData() = 0;
+    /**
+     * Checks whether plot has data.
+     * Must be overriden by derivative classes.
+     * @return true if plot has data, false overwise
+     */
+    virtual bool HasData() = 0;
 
-	/**
-	 * Draw the plot data, i.e. the lines, bars etc. on top of the background.
-	 * Must be overriden by derivative classes.
-	 * @param dc device context
-	 * @param rc rectangle where to draw
-	 */
-	virtual void DrawData(wxDC &dc, wxRect rc) = 0;
+    /**
+     * Draw the plot data, i.e. the lines, bars etc. on top of the background.
+     * Must be overriden by derivative classes.
+     * @param dc device context
+     * @param rc rectangle where to draw
+     */
+    virtual void DrawData(wxDC &dc, wxRect rc) = 0;
 
-	/**
-	 * Draw the main part of the chart (excluding axis and titles).
-	 * Must be overriden by derivative classes.
-	 * @param dc device context
-	 * @param rc rectangle where to draw
-	 */
-	virtual void DrawDataAreaBackground(wxDC &dc, wxRect rc) {};
+    /**
+     * Draw the main part of the chart (excluding axis and titles).
+     * Must be overriden by derivative classes.
+     * @param dc device context
+     * @param rc rectangle where to draw
+     */
+    virtual void DrawDataAreaBackground(wxDC &dc, wxRect rc) {};
 
-	/**
-	 * Called when chart panel is changed.
-	 * @param oldPanel old chart panel
-	 * @param newPanel new chart panel
-	 */
-	virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
+    /**
+     * Called when chart panel is changed.
+     * @param oldPanel old chart panel
+     * @param newPanel new chart panel
+     */
+    virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
 
-	FIRE_WITH_THIS(PlotNeedRedraw);
+    FIRE_WITH_THIS(PlotNeedRedraw);
 
 private:
-	wxFont m_textNoDataFont;
-	wxString m_textNoData;
+    wxFont m_textNoDataFont;
+    wxString m_textNoData;
 
-	AreaDraw *m_background;
+    AreaDraw *m_background;
 
-	wxChartPanel *m_chartPanel;
+    wxChartPanel *m_chartPanel;
 };
 
 #endif /*PLOT_H_*/

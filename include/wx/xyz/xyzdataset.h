@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	xyzdataset.h
+// Name:    xyzdataset.h
 // Purpose: xyz dataset declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef XYZDATASET_H_
@@ -20,19 +20,19 @@ class XYZRenderer;
 class WXDLLIMPEXP_FREECHART XYZDataset : public XYDataset
 {
 public:
-	XYZDataset();
-	virtual ~XYZDataset();
+    XYZDataset();
+    virtual ~XYZDataset();
 
-	XYZRenderer *GetRenderer()
-	{
-		return (XYZRenderer *) m_renderer;
-	}
+    XYZRenderer *GetRenderer()
+    {
+        return (XYZRenderer *) m_renderer;
+    }
 
-	virtual double GetZ(size_t index, size_t serie) = 0;
+    virtual double GetZ(size_t index, size_t serie) = 0;
 
-	virtual double GetMinZ();
+    virtual double GetMinZ();
 
-	virtual double GetMaxZ();
+    virtual double GetMaxZ();
 };
 
 #endif /*XYZDATASET_H_*/

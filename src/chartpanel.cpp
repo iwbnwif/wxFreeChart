@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	chartpanel.cpp
+// Name:    chartpanel.cpp
 // Purpose:
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/chartpanel.h>
@@ -34,15 +34,15 @@ const int stepMult = 100;
 
 void GetAxisScrollParams(Axis *axis, int &noUnits, int &pos)
 {
-	double minValue, maxValue;
-	axis->GetDataBounds(minValue, maxValue);
+    double minValue, maxValue;
+    axis->GetDataBounds(minValue, maxValue);
 
-	noUnits = RoundHigh(stepMult * (maxValue - minValue - axis->GetWindowWidth())) + 10/*XXX dirty hack*/;
-	if (noUnits < 0) {
-		noUnits = 0;
-	}
+    noUnits = RoundHigh(stepMult * (maxValue - minValue - axis->GetWindowWidth())) + 10/*XXX dirty hack*/;
+    if (noUnits < 0) {
+        noUnits = 0;
+    }
 
-	pos = (int) (stepMult * (axis->GetWindowPosition() - minValue));
+    pos = (int) (stepMult * (axis->GetWindowPosition() - minValue));
 }
 
 
@@ -78,283 +78,283 @@ void ChartPanelObserver::ChartMouseWheel(int rotation)
 //
 
 BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
-	EVT_PAINT(wxChartPanel::OnPaint)
-	EVT_SIZE(wxChartPanel::OnSize)
-	EVT_SCROLLWIN(wxChartPanel::OnScrollWin)
-	EVT_MOUSE_EVENTS(wxChartPanel::OnMouseEvents)
+    EVT_PAINT(wxChartPanel::OnPaint)
+    EVT_SIZE(wxChartPanel::OnSize)
+    EVT_SCROLLWIN(wxChartPanel::OnScrollWin)
+    EVT_MOUSE_EVENTS(wxChartPanel::OnMouseEvents)
 END_EVENT_TABLE()
 
 wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &size)
 : wxScrolledWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
 {
-	SetBackgroundStyle(wxBG_STYLE_CUSTOM);
-	EnableScrolling(false, false);
+    SetBackgroundStyle(wxBG_STYLE_CUSTOM);
+    EnableScrolling(false, false);
 
-	m_chart = NULL;
-	m_antialias = false;
+    m_chart = NULL;
+    m_antialias = false;
 
-	m_mode = NULL;
+    m_mode = NULL;
 
-	ResizeBackBitmap(size);
+    ResizeBackBitmap(size);
 
-	SetScrollRate(1, 1);
-	SetChart(chart);
+    SetScrollRate(1, 1);
+    SetChart(chart);
 }
 
 wxChartPanel::~wxChartPanel()
 {
-	SAFE_REMOVE_OBSERVER(this, m_chart);
-	wxDELETE(m_chart);
+    SAFE_REMOVE_OBSERVER(this, m_chart);
+    wxDELETE(m_chart);
 }
 
 void wxChartPanel::SetChart(Chart *chart)
 {
-	SAFE_REPLACE_OBSERVER(this, m_chart, chart);
-	if (m_chart != NULL) {
-		m_chart->SetChartPanel(NULL);
-	}
+    SAFE_REPLACE_OBSERVER(this, m_chart, chart);
+    if (m_chart != NULL) {
+        m_chart->SetChartPanel(NULL);
+    }
 
-	wxREPLACE(m_chart, chart);
+    wxREPLACE(m_chart, chart);
 
-	if (m_chart != NULL) {
-		m_chart->SetChartPanel(this);
-	}
+    if (m_chart != NULL) {
+        m_chart->SetChartPanel(this);
+    }
 
-	RecalcScrollbars();
+    RecalcScrollbars();
 
-	RedrawBackBitmap();
-	Refresh(false);
+    RedrawBackBitmap();
+    Refresh(false);
 }
 
 Chart *wxChartPanel::GetChart()
 {
-	return m_chart;
+    return m_chart;
 }
 
 void wxChartPanel::SetMode(ChartPanelMode *mode)
 {
-	if (m_mode != NULL)
-		RemoveObserver(m_mode);
-	if (mode != NULL)
-		AddObserver(mode);
-	wxREPLACE(m_mode, mode);
+    if (m_mode != NULL)
+        RemoveObserver(m_mode);
+    if (mode != NULL)
+        AddObserver(mode);
+    wxREPLACE(m_mode, mode);
 
-	if (m_mode != NULL) {
-		m_mode->Init(this);
-	}
+    if (m_mode != NULL) {
+        m_mode->Init(this);
+    }
 }
 
 void wxChartPanel::SetAntialias(bool antialias)
 {
-	if (m_antialias != antialias) {
+    if (m_antialias != antialias) {
 #if wxUSE_GRAPHICS_CONTEXT
 #else
-		wxASSERT_MSG(!antialias, wxT("Cannot enable antialiasing due to missing wxUSE_GRAPHICS_CONTEXT"));
+        wxASSERT_MSG(!antialias, wxT("Cannot enable antialiasing due to missing wxUSE_GRAPHICS_CONTEXT"));
 #endif
-		m_antialias = antialias;
+        m_antialias = antialias;
 
-		RedrawBackBitmap();
-		Refresh(false);
-	}
+        RedrawBackBitmap();
+        Refresh(false);
+    }
 }
 
 bool wxChartPanel::GetAntialias()
 {
-	return m_antialias;
+    return m_antialias;
 }
 
 wxBitmap wxChartPanel::CopyBackbuffer()
 {
-	return wxBitmap(m_backBitmap);
+    return wxBitmap(m_backBitmap);
 }
 
 void wxChartPanel::ChartChanged(Chart *WXUNUSED(chart))
 {
-	RedrawBackBitmap();
-	Refresh(false);
+    RedrawBackBitmap();
+    Refresh(false);
 }
 
 void wxChartPanel::ChartScrollsChanged(Chart *WXUNUSED(chart))
 {
-	RecalcScrollbars();
+    RecalcScrollbars();
 
-	RedrawBackBitmap();
-	Refresh(false);
+    RedrawBackBitmap();
+    Refresh(false);
 }
 
 void wxChartPanel::RecalcScrollbars()
 {
-	if (m_chart == NULL) {
-		SetScrollbars(1, 1, 0, 0, 0, 0, true);
-		return ;
-	}
+    if (m_chart == NULL) {
+        SetScrollbars(1, 1, 0, 0, 0, 0, true);
+        return ;
+    }
 
-	Axis *horizAxis = m_chart->GetHorizScrolledAxis();
-	Axis *vertAxis = m_chart->GetVertScrolledAxis();
+    Axis *horizAxis = m_chart->GetHorizScrolledAxis();
+    Axis *vertAxis = m_chart->GetVertScrolledAxis();
 
-	int noUnitsX = 0;
-	int noUnitsY = 0;
-	int xPos = 0;
-	int yPos = 0;
+    int noUnitsX = 0;
+    int noUnitsY = 0;
+    int xPos = 0;
+    int yPos = 0;
 
-	if (horizAxis != NULL) {
-		GetAxisScrollParams(horizAxis, noUnitsX, xPos);
-	}
+    if (horizAxis != NULL) {
+        GetAxisScrollParams(horizAxis, noUnitsX, xPos);
+    }
 
-	if (vertAxis != NULL) {
-		GetAxisScrollParams(vertAxis, noUnitsY, yPos);
-	}
+    if (vertAxis != NULL) {
+        GetAxisScrollParams(vertAxis, noUnitsY, yPos);
+    }
 
-	SetScrollbars(scrollPixelStep, scrollPixelStep, noUnitsX, noUnitsY, xPos, yPos, true);
+    SetScrollbars(scrollPixelStep, scrollPixelStep, noUnitsX, noUnitsY, xPos, yPos, true);
 }
 
 void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
 {
-	wxPaintDC dc(this);
-	const wxRect &rc = GetClientRect();
+    wxPaintDC dc(this);
+    const wxRect &rc = GetClientRect();
 
 
-	if (m_chart != NULL) {
-		dc.DrawBitmap(m_backBitmap, 0, 0, false);
-	}
-	else {
-		dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(GetBackgroundColour()));
-		dc.SetPen(*wxThePenList->FindOrCreatePen(GetBackgroundColour(), 1, wxPENSTYLE_SOLID));
-		dc.DrawRectangle(rc);
-	}
+    if (m_chart != NULL) {
+        dc.DrawBitmap(m_backBitmap, 0, 0, false);
+    }
+    else {
+        dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(GetBackgroundColour()));
+        dc.SetPen(*wxThePenList->FindOrCreatePen(GetBackgroundColour(), 1, wxPENSTYLE_SOLID));
+        dc.DrawRectangle(rc);
+    }
 }
 
 void wxChartPanel::OnSize(wxSizeEvent &ev)
 {
-	const wxSize size = ev.GetSize();
-	ResizeBackBitmap(size);
+    const wxSize size = ev.GetSize();
+    ResizeBackBitmap(size);
 
-	RedrawBackBitmap();
-	Refresh();
+    RedrawBackBitmap();
+    Refresh();
 }
 
 void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 {
-	if (m_chart == NULL) {
-		return ;
-	}
+    if (m_chart == NULL) {
+        return ;
+    }
 
-	Axis *axis = NULL;
+    Axis *axis = NULL;
 
-	switch (ev.GetOrientation()) {
-	case wxHORIZONTAL:
-		axis = m_chart->GetHorizScrolledAxis();
-		break;
-	case wxVERTICAL:
-		axis = m_chart->GetVertScrolledAxis();
-		break;
-	default: // BUG
-		return ;
-	}
+    switch (ev.GetOrientation()) {
+    case wxHORIZONTAL:
+        axis = m_chart->GetHorizScrolledAxis();
+        break;
+    case wxVERTICAL:
+        axis = m_chart->GetVertScrolledAxis();
+        break;
+    default: // BUG
+        return ;
+    }
 
-	if (axis != NULL) {
-		double winPos = (double) ev.GetPosition() / (double) stepMult;
-		double minValue, maxValue;
+    if (axis != NULL) {
+        double winPos = (double) ev.GetPosition() / (double) stepMult;
+        double minValue, maxValue;
 
-		axis->GetDataBounds(minValue, maxValue);
-		winPos += minValue;
+        axis->GetDataBounds(minValue, maxValue);
+        winPos += minValue;
 
-		axis->SetWindowPosition(winPos);
-	}
-	ev.Skip();
+        axis->SetWindowPosition(winPos);
+    }
+    ev.Skip();
 }
 
 void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
 {
-	if (m_mode == NULL) {
-		return ;
-	}
+    if (m_mode == NULL) {
+        return ;
+    }
 
 #if 0
-	// TODO
-	switch (ev.GetEventType()) {
-	case wxEVT_ENTER_WINDOW:
-		m_mode->ChartEnterWindow();
-		break;
-	case wxEVT_LEAVE_WINDOW:
-		m_mode->ChartLeaveWindow();
-		break;
-	case wxEVT_LEFT_DOWN:
-		m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_LEFT);
-		break;
-	case wxEVT_LEFT_UP:
-		m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_LEFT);
-		break;
-	//case wxEVT_LEFT_DCLICK:
-	case wxEVT_MIDDLE_DOWN:
-		m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_MIDDLE);
-		break;
-	case wxEVT_MIDDLE_UP:
-		m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_MIDDLE);
-		break;
-	//case wxEVT_MIDDLE_DCLICK:
-	case wxEVT_RIGHT_DOWN:
-		m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_RIGHT);
-		break;
-	case wxEVT_RIGHT_UP:
-		m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_RIGHT);
-		break;
-	//case wxEVT_RIGHT_DCLICK:
-	case wxEVT_MOTION:
-		if (ev.Dragging()) {
-			m_mode->ChartMouseDrag(ev.GetPosition());
-		}
-		else {
-			m_mode->ChartMouseMove(ev.GetPosition());
-		}
-		break;
-	case wxEVT_MOUSEWHEEL:
-		m_mode->ChartMouseWheel(GetWheelRotation());
-		break;
-	}
+    // TODO
+    switch (ev.GetEventType()) {
+    case wxEVT_ENTER_WINDOW:
+        m_mode->ChartEnterWindow();
+        break;
+    case wxEVT_LEAVE_WINDOW:
+        m_mode->ChartLeaveWindow();
+        break;
+    case wxEVT_LEFT_DOWN:
+        m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_LEFT);
+        break;
+    case wxEVT_LEFT_UP:
+        m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_LEFT);
+        break;
+    //case wxEVT_LEFT_DCLICK:
+    case wxEVT_MIDDLE_DOWN:
+        m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_MIDDLE);
+        break;
+    case wxEVT_MIDDLE_UP:
+        m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_MIDDLE);
+        break;
+    //case wxEVT_MIDDLE_DCLICK:
+    case wxEVT_RIGHT_DOWN:
+        m_mode->ChartMouseDown(ev.GetPosition(), wxMOUSE_BTN_RIGHT);
+        break;
+    case wxEVT_RIGHT_UP:
+        m_mode->ChartMouseUp(ev.GetPosition(), wxMOUSE_BTN_RIGHT);
+        break;
+    //case wxEVT_RIGHT_DCLICK:
+    case wxEVT_MOTION:
+        if (ev.Dragging()) {
+            m_mode->ChartMouseDrag(ev.GetPosition());
+        }
+        else {
+            m_mode->ChartMouseMove(ev.GetPosition());
+        }
+        break;
+    case wxEVT_MOUSEWHEEL:
+        m_mode->ChartMouseWheel(GetWheelRotation());
+        break;
+    }
 #endif
 }
 
 void wxChartPanel::ScrollAxis(Axis *axis, int d)
 {
-	double delta = (double) d / (double) stepMult;
-	double minValue, maxValue;
+    double delta = (double) d / (double) stepMult;
+    double minValue, maxValue;
 
-	axis->GetDataBounds(minValue, maxValue);
+    axis->GetDataBounds(minValue, maxValue);
 
-	double winPos = axis->GetWindowPosition();
-	winPos += minValue + delta;
+    double winPos = axis->GetWindowPosition();
+    winPos += minValue + delta;
 
-	axis->SetWindowPosition(winPos);
+    axis->SetWindowPosition(winPos);
 }
 
 void wxChartPanel::RedrawBackBitmap()
 {
-	if (m_chart != NULL) {
-		wxMemoryDC mdc;
-		mdc.SelectObject(m_backBitmap);
+    if (m_chart != NULL) {
+        wxMemoryDC mdc;
+        mdc.SelectObject(m_backBitmap);
 
-		const wxRect &rc = GetClientRect();
+        const wxRect &rc = GetClientRect();
         mdc.SetBrush(*wxBLUE_BRUSH);
         mdc.DrawRectangle(rc);
 
-		// Using graphics context instead of normal DC
-		// allows antialiasing and other features,
-		// i tested it on Linux-wxGTK-2.8.8 and on Windows(tm)-wxWidgets-2.8.8
-		// there is bug with wxSHORT_DASH pen style, it drawing hungs,
-		// when wxGCDC used
+        // Using graphics context instead of normal DC
+        // allows antialiasing and other features,
+        // i tested it on Linux-wxGTK-2.8.8 and on Windows(tm)-wxWidgets-2.8.8
+        // there is bug with wxSHORT_DASH pen style, it drawing hungs,
+        // when wxGCDC used
 #if wxUSE_GRAPHICS_CONTEXT
-		if (m_antialias) {
-			wxGCDC gdc(mdc);
-			m_chart->Draw((wxDC&) gdc, (wxRect&) rc);
-		}
-		else {
-			m_chart->Draw(mdc, (wxRect&) rc);
-		}
+        if (m_antialias) {
+            wxGCDC gdc(mdc);
+            m_chart->Draw((wxDC&) gdc, (wxRect&) rc);
+        }
+        else {
+            m_chart->Draw(mdc, (wxRect&) rc);
+        }
 #else
-		m_chart->Draw(mdc, (wxRect&) rc);
+        m_chart->Draw(mdc, (wxRect&) rc);
 #endif
-	}
+    }
 }
 
 void wxChartPanel::ResizeBackBitmap(wxSize size)

@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	symbol.h
+// Name:    symbol.h
 // Purpose: symbols declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef SYMBOL_H_
@@ -18,23 +18,23 @@
 class WXDLLIMPEXP_FREECHART Symbol
 {
 public:
-	Symbol();
-	virtual ~Symbol();
+    Symbol();
+    virtual ~Symbol();
 
-	/**
-	 * Performs symbol drawing.
-	 * @param dc device context
-	 * @param x x coordinate
-	 * @param y y coordinate
-	 * @param color color to draw symbol
-	 */
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color) = 0;
+    /**
+     * Performs symbol drawing.
+     * @param dc device context
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param color color to draw symbol
+     */
+    virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color) = 0;
 
-	/**
-	 * Called to calculate size required for symbol.
-	 * @return size required for symbol
-	 */
-	virtual wxSize GetExtent() = 0;
+    /**
+     * Called to calculate size required for symbol.
+     * @return size required for symbol
+     */
+    virtual wxSize GetExtent() = 0;
 };
 
 /**
@@ -44,21 +44,21 @@ public:
 class WXDLLIMPEXP_FREECHART MaskedSymbol : public Symbol
 {
 public:
-	MaskedSymbol(const char **maskData, wxCoord size = 9);
+    MaskedSymbol(const char **maskData, wxCoord size = 9);
 
-	virtual ~MaskedSymbol();
+    virtual ~MaskedSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
+    virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 
-	virtual wxSize GetExtent();
+    virtual wxSize GetExtent();
 
 private:
-	wxBitmap m_maskBmp;
-	wxBitmap m_symbolBitmap;
+    wxBitmap m_maskBmp;
+    wxBitmap m_symbolBitmap;
 
-	bool m_initialized;
+    bool m_initialized;
 
-	wxCoord m_size;
+    wxCoord m_size;
 };
 
 /**
@@ -67,14 +67,14 @@ private:
 class WXDLLIMPEXP_FREECHART ShapeSymbol : public Symbol
 {
 public:
-	ShapeSymbol(wxCoord size);
-	virtual ~ShapeSymbol();
+    ShapeSymbol(wxCoord size);
+    virtual ~ShapeSymbol();
 
-	virtual wxSize GetExtent();
+    virtual wxSize GetExtent();
 
 protected:
-	wxColour m_color;
-	wxCoord m_size;
+    wxColour m_color;
+    wxCoord m_size;
 };
 
 //
@@ -87,10 +87,10 @@ protected:
 class WXDLLIMPEXP_FREECHART CircleSymbol : public ShapeSymbol
 {
 public:
-	CircleSymbol(wxCoord size = 9);
-	virtual ~CircleSymbol();
+    CircleSymbol(wxCoord size = 9);
+    virtual ~CircleSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
+    virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 /**
@@ -99,10 +99,10 @@ public:
 class WXDLLIMPEXP_FREECHART SquareSymbol : public ShapeSymbol
 {
 public:
-	SquareSymbol(wxCoord size = 9);
-	virtual ~SquareSymbol();
+    SquareSymbol(wxCoord size = 9);
+    virtual ~SquareSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
+    virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 /**
@@ -111,10 +111,10 @@ public:
 class WXDLLIMPEXP_FREECHART CrossSymbol : public ShapeSymbol
 {
 public:
-	CrossSymbol(wxCoord size = 9);
-	virtual ~CrossSymbol();
+    CrossSymbol(wxCoord size = 9);
+    virtual ~CrossSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
+    virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 /**
@@ -123,10 +123,10 @@ public:
 class WXDLLIMPEXP_FREECHART TriangleSymbol : public ShapeSymbol
 {
 public:
-	TriangleSymbol(wxCoord size = 9);
-	virtual ~TriangleSymbol();
+    TriangleSymbol(wxCoord size = 9);
+    virtual ~TriangleSymbol();
 
-	virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
+    virtual void Draw(wxDC &dc, wxCoord x, wxCoord y, wxColour color);
 };
 
 #endif /*SYMBOL_H_*/

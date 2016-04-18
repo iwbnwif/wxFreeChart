@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	zoompan.h
+// Name:    zoompan.h
 // Purpose: Zoom/pan declarations
-// Author:	Moskvichev Andrey V.
-// Created:	2010/09/13
-// Copyright:	(c) 2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2010/09/13
+// Copyright:    (c) 2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef ZOOMPAN_H_
@@ -17,28 +17,28 @@
 class WXDLLIMPEXP_FREECHART ZoomMode : public ChartPanelMode
 {
 public:
-	ZoomMode();
-	virtual ~ZoomMode();
+    ZoomMode();
+    virtual ~ZoomMode();
 
-	void SetAllowHorizontalZoom(bool allowHorizontalZoom);
-	void SetAllowVertialZoom(bool allowVerticalZoom);
+    void SetAllowHorizontalZoom(bool allowHorizontalZoom);
+    void SetAllowVertialZoom(bool allowVerticalZoom);
 
-	//
-	// ChartPanelObserver
-	//
-	virtual void ChartEnterWindow();
+    //
+    // ChartPanelObserver
+    //
+    virtual void ChartEnterWindow();
 
-	virtual void ChartMouseDown(wxPoint &pt, int key);
-	virtual void ChartMouseUp(wxPoint &pt, int key);
+    virtual void ChartMouseDown(wxPoint &pt, int key);
+    virtual void ChartMouseUp(wxPoint &pt, int key);
 
-	virtual void ChartMouseMove(wxPoint &pt);
-	virtual void ChartMouseDrag(wxPoint &pt);
+    virtual void ChartMouseMove(wxPoint &pt);
+    virtual void ChartMouseDrag(wxPoint &pt);
 
-	virtual void ChartMouseWheel(int rotation);
+    virtual void ChartMouseWheel(int rotation);
 
 private:
-	bool m_allowHorizontalZoom;
-	bool m_allowVerticalZoom;
+    bool m_allowHorizontalZoom;
+    bool m_allowVerticalZoom;
 };
 
 /**
@@ -48,18 +48,18 @@ private:
 class WXDLLIMPEXP_FREECHART PanMode : public ChartPanelMode
 {
 public:
-	PanMode();
-	virtual ~PanMode();
+    PanMode();
+    virtual ~PanMode();
 
-	void SetAllowHorizontalPan(bool allowHorizontalPan);
-	void SetAllowVertialPan(bool allowVerticalPan);
+    void SetAllowHorizontalPan(bool allowHorizontalPan);
+    void SetAllowVertialPan(bool allowVerticalPan);
 
-	//
-	// ChartPanelObserver
-	//
-	virtual void ChartMouseDown(wxPoint &pt);
-	virtual void ChartMouseUp(wxPoint &pt);
-	virtual void ChartMouseMove(wxPoint &pt);
+    //
+    // ChartPanelObserver
+    //
+    virtual void ChartMouseDown(wxPoint &pt);
+    virtual void ChartMouseUp(wxPoint &pt);
+    virtual void ChartMouseMove(wxPoint &pt);
 private:
 
 

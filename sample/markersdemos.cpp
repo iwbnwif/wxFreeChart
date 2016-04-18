@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	markersdemos.cpp
+// Name:    markersdemos.cpp
 // Purpose: markers usage demos
-// Author:	Moskvichev Andrey V.
-// Created:	2010/02/15
-// Copyright:	(c) 2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2010/02/15
+// Copyright:    (c) 2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "democollection.h"
@@ -21,119 +21,119 @@
 class MarkersDemo1 : public ChartDemo
 {
 public:
-	MarkersDemo1()
-	: ChartDemo(wxT("Markers Demo 1 - line"))
-	{
-	}
+    MarkersDemo1()
+    : ChartDemo(wxT("Markers Demo 1 - line"))
+    {
+    }
 
-	virtual Chart *Create()
-	{
-		// serie xy data
-		double data[][2] = {
-				{ 10, 20, },
-				{ 13, 16, },
-				{ 7, 30, },
-				{ 15, 34, },
-				{ 25, 4, },
-		};
+    virtual Chart *Create()
+    {
+        // serie xy data
+        double data[][2] = {
+                { 10, 20, },
+                { 13, 16, },
+                { 7, 30, },
+                { 15, 34, },
+                { 25, 4, },
+        };
 
-		// first step: create plot
-		XYPlot *plot = new XYPlot();
+        // first step: create plot
+        XYPlot *plot = new XYPlot();
 
-		// create dataset
-		XYSimpleDataset *dataset = new XYSimpleDataset();
+        // create dataset
+        XYSimpleDataset *dataset = new XYSimpleDataset();
 
-		// and add serie to it
-		dataset->AddSerie((double *) data, WXSIZEOF(data));
+        // and add serie to it
+        dataset->AddSerie((double *) data, WXSIZEOF(data));
 
-		// set line renderer to dataset
-		dataset->SetRenderer(new XYLineRenderer());
+        // set line renderer to dataset
+        dataset->SetRenderer(new XYLineRenderer());
 
-		// create line marker
-		LineMarker *lineMarker = new LineMarker(wxPen(*wxBLUE, 2, wxPENSTYLE_SOLID));
+        // create line marker
+        LineMarker *lineMarker = new LineMarker(wxPen(*wxBLUE, 2, wxPENSTYLE_SOLID));
 
-		// set value to be marked, in our case vertical line with x=20
-		lineMarker->SetVerticalLine(20);
+        // set value to be marked, in our case vertical line with x=20
+        lineMarker->SetVerticalLine(20);
 
-		// and add marker to dataset
-		dataset->AddMarker(lineMarker);
+        // and add marker to dataset
+        dataset->AddMarker(lineMarker);
 
-		// create left and bottom number axes
-		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        // create left and bottom number axes
+        NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
-		// add axes and dataset to plot
-		plot->AddObjects(dataset, leftAxis, bottomAxis);
+        // add axes and dataset to plot
+        plot->AddObjects(dataset, leftAxis, bottomAxis);
 
-		// and finally create chart
-		return new Chart(plot, GetName());
-	}
+        // and finally create chart
+        return new Chart(plot, GetName());
+    }
 };
 
 
 class MarkersDemo2 : public ChartDemo
 {
 public:
-	MarkersDemo2()
-	: ChartDemo(wxT("Markers Demo 2 - range and line"))
-	{
-	}
+    MarkersDemo2()
+    : ChartDemo(wxT("Markers Demo 2 - range and line"))
+    {
+    }
 
-	virtual Chart *Create()
-	{
-		// serie xy data
-		double data[][2] = {
-				{ 10, 20, },
-				{ 13, 16, },
-				{ 14, 30, },
-				{ 15, 34, },
-				{ 25, 4, },
-		};
+    virtual Chart *Create()
+    {
+        // serie xy data
+        double data[][2] = {
+                { 10, 20, },
+                { 13, 16, },
+                { 14, 30, },
+                { 15, 34, },
+                { 25, 4, },
+        };
 
-		// first step: create plot
-		XYPlot *plot = new XYPlot();
+        // first step: create plot
+        XYPlot *plot = new XYPlot();
 
-		// create dataset
-		XYSimpleDataset *dataset = new XYSimpleDataset();
+        // create dataset
+        XYSimpleDataset *dataset = new XYSimpleDataset();
 
-		// and add serie to it
-		dataset->AddSerie((double *) data, WXSIZEOF(data));
+        // and add serie to it
+        dataset->AddSerie((double *) data, WXSIZEOF(data));
 
-		// set line renderer to dataset
-		dataset->SetRenderer(new XYLineRenderer());
+        // set line renderer to dataset
+        dataset->SetRenderer(new XYLineRenderer());
 
-		// create first range marker
-		RangeMarker *rangeMarker1 = new RangeMarker(new FillAreaDraw(wxColour(80, 80, 255), wxColour(200, 200, 250)));
+        // create first range marker
+        RangeMarker *rangeMarker1 = new RangeMarker(new FillAreaDraw(wxColour(80, 80, 255), wxColour(200, 200, 250)));
 
-		// set value to be marked, in our case vertical range [15; 20]
-		rangeMarker1->SetVerticalRange(15, 20);
+        // set value to be marked, in our case vertical range [15; 20]
+        rangeMarker1->SetVerticalRange(15, 20);
 
-		// and add marker to dataset
-		dataset->AddMarker(rangeMarker1);
+        // and add marker to dataset
+        dataset->AddMarker(rangeMarker1);
 
-		// create line marker
-		LineMarker *lineMarker = new LineMarker(wxColour(80, 80, 255), 2);
+        // create line marker
+        LineMarker *lineMarker = new LineMarker(wxColour(80, 80, 255), 2);
 
-		// set value to be marked, in our case horizontal value 15
-		lineMarker->SetHorizontalLine(25);
+        // set value to be marked, in our case horizontal value 15
+        lineMarker->SetHorizontalLine(25);
 
-		// and add marker to dataset
-		dataset->AddMarker(lineMarker);
+        // and add marker to dataset
+        dataset->AddMarker(lineMarker);
 
-		// create left and bottom number axes
-		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        // create left and bottom number axes
+        NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
-		// add axes and dataset to plot
-		plot->AddObjects(dataset, leftAxis, bottomAxis);
+        // add axes and dataset to plot
+        plot->AddObjects(dataset, leftAxis, bottomAxis);
 
-		// and finally create chart
-		return new Chart(plot, GetName());
-	}
+        // and finally create chart
+        return new Chart(plot, GetName());
+    }
 };
 
 ChartDemo *markersDemos[] = {
-	new MarkersDemo1(),
-	new MarkersDemo2(),
+    new MarkersDemo1(),
+    new MarkersDemo2(),
 };
 int markersDemosCount = WXSIZEOF(markersDemos);

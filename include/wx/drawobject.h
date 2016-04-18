@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:	drawobject.h
+// Name:    drawobject.h
 // Purpose:
-// Author:	Moskvichev Andrey V.
-// Created:	2008/11/07
-// Copyright:	(c) 2008-2010 Moskvichev Andrey V.
-// Licence:	wxWidgets licence
+// Author:    Moskvichev Andrey V.
+// Created:    2008/11/07
+// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
+// Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef DRAWOBJECT_H_
@@ -23,19 +23,19 @@ class WXDLLIMPEXP_FREECHART DrawObject;
 class WXDLLIMPEXP_FREECHART DrawObserver
 {
 public:
-	DrawObserver()
-	{
-	}
+    DrawObserver()
+    {
+    }
 
-	virtual ~DrawObserver()
-	{
-	}
+    virtual ~DrawObserver()
+    {
+    }
 
-	/**
-	 * Called when object is need to be redrawed.
-	 * @param obj object that need to be redrawed
-	 */
-	virtual void NeedRedraw(DrawObject *obj) = 0;
+    /**
+     * Called when object is need to be redrawed.
+     * @param obj object that need to be redrawed
+     */
+    virtual void NeedRedraw(DrawObject *obj) = 0;
 };
 
 /**
@@ -45,16 +45,16 @@ public:
 class WXDLLIMPEXP_FREECHART DrawObject : public Observable<DrawObserver>
 {
 public:
-	DrawObject()
-	{
-	}
+    DrawObject()
+    {
+    }
 
-	virtual ~DrawObject()
-	{
-	}
+    virtual ~DrawObject()
+    {
+    }
 
 protected:
-	FIRE_WITH_THIS(NeedRedraw);
+    FIRE_WITH_THIS(NeedRedraw);
 };
 
 #endif /*DRAWOBJECT_H_*/
