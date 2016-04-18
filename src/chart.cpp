@@ -134,11 +134,9 @@ void Chart::SetChartPanel(wxChartPanel *chartPanel)
 //	return rc;
 //}
 
+// Draw the entire chart, including titles, labels and the actual plot.
 void Chart::Draw(wxDC &dc, wxRect &rc)
 {
-	// draw chart background
-	m_background->Draw(dc, rc);
-
 	int topMargin = m_margin;
 	int bottomMargin = m_margin;
 
@@ -160,7 +158,7 @@ void Chart::Draw(wxDC &dc, wxRect &rc)
 		bottomMargin += footerRect.height;
 		m_footer->Draw(dc, footerRect);
 	}
-
 	Margins(rc, m_margin, topMargin, m_margin, bottomMargin);
+
 	m_plot->Draw(dc, rc);
 }
