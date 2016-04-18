@@ -98,12 +98,20 @@ protected:
 	virtual bool HasData() = 0;
 
 	/**
-	 * Perform data rendering.
+	 * Draw the plot data, i.e. the lines, bars etc. on top of the background.
 	 * Must be overriden by derivative classes.
 	 * @param dc device context
 	 * @param rc rectangle where to draw
 	 */
 	virtual void DrawData(wxDC &dc, wxRect rc) = 0;
+
+	/**
+	 * Draw the main part of the chart (excluding axis and titles).
+	 * Must be overriden by derivative classes.
+	 * @param dc device context
+	 * @param rc rectangle where to draw
+	 */
+	virtual void DrawDataAreaBackground(wxDC &dc, wxRect rc) {};
 
 	/**
 	 * Called when chart panel is changed.

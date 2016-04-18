@@ -10,7 +10,10 @@
 #include <wx/axisplot.h>
 #include <wx/drawutils.h>
 
+#include <wx/dcgraph.h>
 #include "wx/arrimpl.cpp"
+
+#include <iostream>
 
 WX_DEFINE_EXPORTED_OBJARRAY(DataAxisLinkArray)
 
@@ -33,6 +36,7 @@ AxisPlot::AxisPlot()
 	m_legend = NULL;
 	m_crosshair = NULL;
 	m_dataBackground = NULL;
+    
 	SetDataBackground(new FillAreaDraw());
 }
 
@@ -106,6 +110,9 @@ bool AxisPlot::HasData()
 
 void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
 {
+    m_redrawDataArea = true;
+    FirePlotNeedRedraw();
+
 	/* TODO
 	if (m_crosshair != NULL) {
 		SAFE_REPLACE_OBSERVER(m_crosshair, oldPanel, newPanel);
@@ -189,15 +196,24 @@ void AxisPlot::SetCrosshair(Crosshair *crosshair)
 	FirePlotNeedRedraw();
 }
 
-void AxisPlot::UpdateAxis(Dataset *dataset)
+// Inspects the passed dataset and if axes are set to automatically update
+// then their dimensions are recalculated. The return value indicates if
+// the axis bounds have changed or not.
+bool AxisPlot::UpdateAxis(Dataset *dataset)
 {
+    int updated = 0;
+    
 	for (size_t nLink = 0; nLink < m_links.Count(); nLink++) {
 		DataAxisLink &link = m_links[nLink];
 
 		if (dataset == NULL || link.m_dataset == dataset) {
-			link.m_axis->UpdateBounds();
+            if (link.m_axis->UpdateBounds()) {
+                updated++;
+            }
 		}
 	}
+    
+    return updated > 0;
 }
 
 void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
@@ -254,8 +270,14 @@ void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
 
 void AxisPlot::DatasetChanged(Dataset *dataset)
 {
-	UpdateAxis(dataset);
-	FirePlotNeedRedraw();
+    // Update the axis. If the axis have changed (UpdateAxis returns true)
+    // then redraw the chart background because the scale will have changed.
+	if (UpdateAxis(dataset))
+        m_redrawDataArea = true;
+    else
+        m_redrawDataArea = false;
+
+    FirePlotNeedRedraw();
 }
 
 void AxisPlot::AxisChanged(Axis *WXUNUSED(axis))
@@ -454,39 +476,92 @@ void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
 	}
 }
 
-void AxisPlot::DrawDataArea(wxDC &dc, wxRect rcData)
+// Draw the background of the data area, basically everything except the data.
+void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
 {
-	wxRect clipRc = rcData;
-	clipRc.Deflate(1, 1);
-	wxDCClipper clip(dc, clipRc);
+	wxRect rcData;
+	wxRect rcLegend;
 
-	DrawMarkers(dc, rcData);
-	DrawGridLines(dc, rcData);
-	DrawDatasets(dc, rcData);
+    // Hackish test to see if the background needs to be redrawn 
+    // due to a size change.
+    if (rc.GetSize() != m_drawRect)
+    {
+        m_redrawDataArea = true;
+        m_drawRect.SetSize(rc.GetSize());
+        m_drawRect.SetTopLeft(wxPoint(0, 0));
+    }
 
+    // Calculate the rectangle where the actual data is plotted.
+	CalcDataArea(dc, m_drawRect, rcData, rcLegend);
+    
+    // The plot area has changed (size change, axis change).
+    if (m_redrawDataArea) {
+        wxMemoryDC mdc;
+        wxPrintf ("Drawing background\n");
+        
+        // Redimension the 
+        m_plotBackgroundBitmap.Create(m_drawRect.GetWidth(), m_drawRect.GetHeight());
+        mdc.SelectObject(m_plotBackgroundBitmap);
+
+        // Clear the background of the data area and draw the axis.
+        m_dataBackground->Draw(mdc, m_drawRect);
+        DrawAxes(mdc, m_drawRect, rcData);
+
+        // Define the clipping rectangle for the data area.
+        wxRect clipRc = rcData;
+        clipRc.Deflate(1, 1);
+        wxDCClipper clip(mdc, clipRc);
+
+        // Draw markers and gridlines.
+        DrawMarkers(mdc, rcData);
+        DrawGridLines(mdc, rcData);
+        
+        // Redimension the data overlay bitmap here, in preparation.
+        // TODO: The overlay only needs to be rcData big, but currently
+        // this function draws the whole chart, including axes and titles!
+        m_dataOverlayBitmap.Create(m_drawRect.GetWidth(), m_drawRect.GetHeight());
+
+        // Clear redraw flag. TODO: Replace flag with 'smarter' function calls.
+        m_redrawDataArea = false;
+    }
+
+    wxMemoryDC mdc;
+    mdc.SelectObject(m_dataOverlayBitmap);
+
+    // Copy the background bitmap onto a temporary bitmap.
+    mdc.DrawBitmap(m_plotBackgroundBitmap, 0, 0);
+
+    // Draw the actual plot data onto the temporary bitmap (over the top of the 
+    // background. If antialiasing is enabled, then draw the data with a wxGCDC.
+#if wxUSE_GRAPHICS_CONTEXT
+    if (true) { // TODO: Should be if m_antialias.
+        wxGCDC gdc(mdc);
+        DrawData ((wxDC&)gdc, rcData);
+    }
+    else {
+        DrawData ((wxDC&)mdc, rcData);
+    }
+#else
+		DrawData ((wxDC&)mdc, rcData);
+#endif
+
+    // Finally copy the updated temporary bitmap onto the background.
+    dc.DrawBitmap(m_dataOverlayBitmap, rc.GetTopLeft());
+    
+    DrawLegend (dc, rcLegend);
+    
 	if (m_crosshair != NULL) {
 		// TODO crosshair drawing
 		//m_crosshair->Draw(dc, rcData, );
 	}
 }
 
-void AxisPlot::DrawData(wxDC &dc, wxRect rc)
+void AxisPlot::DrawData(wxDC &dc, wxRect rcData)
 {
-	wxRect rcData;
-	wxRect rcLegend;
-
-	CalcDataArea(dc, rc, rcData, rcLegend);
-
-	m_dataBackground->Draw(dc, rcData);
-
-	DrawAxes(dc, rc, rcData);
-
-	DrawDataArea(dc, rcData);
-
-	DrawLegend(dc, rcLegend);
+	DrawDatasets(dc, rcData);
 }
 
-// TODO
+// TODO: Everything below this point is still TODO.
 
 /*
 void AxisPlot::ChartEnterWindow()
@@ -496,6 +571,7 @@ void AxisPlot::ChartEnterWindow()
 
 void AxisPlot::ChartMouseDown(wxPoint &pt, int key)
 {
+    
 }
 
 /*

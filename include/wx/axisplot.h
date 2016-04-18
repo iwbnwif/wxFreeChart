@@ -274,8 +274,7 @@ private:
 
 	virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
 
-
-	void UpdateAxis(Dataset *dataset = NULL);
+	bool UpdateAxis(Dataset *dataset = NULL);
 
 	//
 	// Draw functions
@@ -327,7 +326,7 @@ private:
 	 * @param dc device context
 	 * @param rcData data area rectangle
 	 */
-	void DrawDataArea(wxDC &dc, wxRect rcData);
+	virtual void DrawDataAreaBackground(wxDC &dc, wxRect rcData) wxOVERRIDE;
 
 	/**
 	 * Draws legend.
@@ -357,6 +356,12 @@ private:
 	Legend *m_legend;
 
 	Crosshair *m_crosshair;
+    
+    wxBitmap m_plotBackgroundBitmap; // Bitmap to hold the static (background) part of the plot.
+    wxBitmap m_dataOverlayBitmap; // Bitmap on which the data (lines, bars etc.) is drawn.
+    
+    bool m_redrawDataArea; // Flag to indicate if the background needs to be redrawn.
+    wxRect m_drawRect; // Rectangle to see if the size changed.
 };
 
 #endif /*AXISPLOT_H_*/

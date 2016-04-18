@@ -335,6 +335,8 @@ void wxChartPanel::RedrawBackBitmap()
 		mdc.SelectObject(m_backBitmap);
 
 		const wxRect &rc = GetClientRect();
+        mdc.SetBrush(*wxBLUE_BRUSH);
+        mdc.DrawRectangle(rc);
 
 		// Using graphics context instead of normal DC
 		// allows antialiasing and other features,

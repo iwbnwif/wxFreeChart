@@ -36,10 +36,11 @@ Plot::~Plot()
 
 void Plot::Draw(wxDC &dc, wxRect rc)
 {
-	m_background->Draw(dc, rc);
+    // Erase the background of the plot area.
+	// m_background->Draw(dc, rc);
 
 	if (HasData()) {
-		DrawData(dc, rc);
+		DrawDataAreaBackground(dc, rc);
 	}
 	else {
 		DrawNoDataMessage(dc, rc);
