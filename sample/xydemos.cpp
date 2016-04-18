@@ -62,6 +62,12 @@ public:
 		// create left and bottom number axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        
+        leftAxis->SetFixedBounds(0, 40);
+        // leftAxis->IntegerValues();
+        // leftAxis->SetLabelSkip(1);
+        leftAxis->SetLabelCount(50);
+        // leftAxis->SetTickFormat("Hello%f");
 
 		// optional: set axis titles
 		leftAxis->SetTitle(wxT("X"));
@@ -301,6 +307,10 @@ END_EVENT_TABLE()
 
 DynamicDemoDataset::DynamicDemoDataset()
 {
+    // 'Prime' with zero values.
+    for (int i = 0; i < 300; i++)
+        Add(75);
+        
 	m_updater = new DynamicDemoDatasetUpdater(this);
 }
 
@@ -315,7 +325,7 @@ DynamicDemoDatasetUpdater::DynamicDemoDatasetUpdater(DynamicDemoDataset *dataset
 
 	// start timer, that will add new data to dataset
 	m_timer.SetOwner(this);
-	m_timer.Start(100);
+	m_timer.Start(30, wxTIMER_ONE_SHOT);
 }
 
 DynamicDemoDatasetUpdater::~DynamicDemoDatasetUpdater()
@@ -328,8 +338,12 @@ void DynamicDemoDatasetUpdater::OnTimer(wxTimerEvent &WXUNUSED(ev))
 	const double maxValue = 100.0;
 
 	double r = rand();
-	double y = maxValue * r / (double) RAND_MAX;
+	double y = (maxValue * r / (double) RAND_MAX) + 0;
+    
+    // Push a new value at the end and pop one from the start.
 	m_dataset->Add(y);
+    m_dataset->RemoveAt(0);
+	m_timer.Start(30, wxTIMER_ONE_SHOT);
 }
 
 /**
@@ -350,7 +364,7 @@ public:
 
 		// create dynamic dataset
 		DynamicDemoDataset *dataset = new DynamicDemoDataset();
-
+        
 		// set line renderer to it
 		dataset->SetRenderer(new XYLineStepRenderer());
 
@@ -360,6 +374,12 @@ public:
 		// create left and bottom number axes
 		NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        leftAxis->SetFixedBounds(0.0, 100.0);
+        leftAxis->SetLabelCount(101);
+        leftAxis->SetLabelSkip(9);
+        bottomAxis->SetFixedBounds(0.0, 300.0);
+        bottomAxis->SetLabelCount(101);
+        bottomAxis->SetLabelSkip(9);
 
 		// we setup window
 		//bottomAxis->SetWindow(0, 10);
@@ -939,8 +959,8 @@ public:
 
 		// create left and bottom number axes
 		LogarithmicNumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
-		leftAxis->SetFixedBounds(1e-6, 1e3);
-		leftAxis->SetMajorLabelSteps(2);
+		//leftAxis->SetFixedBounds(1e-6, 1e3);
+		//leftAxis->SetMajorLabelSteps(2);
 		NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
 		// optional: set axis titles
