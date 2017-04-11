@@ -1,8 +1,0 @@
-<map id="XYLineStepRenderer" name="XYLineStepRenderer">
-<area shape="rect" id="node2" href="$classXYLineRendererBase.html" title="XYLineRendererBase" alt="" coords="79,304,225,331"/>
-<area shape="rect" id="node3" href="$classXYRenderer.html" title="XYRenderer" alt="" coords="105,229,199,256"/>
-<area shape="rect" id="node4" href="$classRenderer.html" title="Renderer" alt="" coords="115,155,189,181"/>
-<area shape="rect" id="node6" href="$classDrawObject.html" title="DrawObject" alt="" coords="107,80,197,107"/>
-<area shape="rect" id="node7" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="54,5,250,32"/>
-<area shape="rect" id="node8" href="$classRefObject.html" title="RefObject" alt="" coords="222,80,303,107"/>
-</map>

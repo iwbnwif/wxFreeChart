@@ -1,7 +1,0 @@
-<map id="VectorDataset" name="VectorDataset">
-<area shape="rect" id="node2" href="$classXYDataset.html" title="XYDataset" alt="" coords="189,155,275,181"/>
-<area shape="rect" id="node3" href="$classDataset.html" title="Dataset" alt="" coords="198,80,266,107"/>
-<area shape="rect" id="node5" href="$classRefObject.html" title="RefObject" alt="" coords="107,5,189,32"/>
-<area shape="rect" id="node6" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="212,5,423,32"/>
-<area shape="rect" id="node7" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="447,5,553,32"/>
-</map>

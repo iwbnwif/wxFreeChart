@@ -1,6 +1,0 @@
-<map id="Marker" name="Marker">
-<area shape="rect" id="node4" href="$classLineMarker.html" title="LineMarker" alt="" coords="5,229,92,256"/>
-<area shape="rect" id="node5" href="$classRangeMarker.html" title="RangeMarker" alt="" coords="116,229,216,256"/>
-<area shape="rect" id="node2" href="$classDrawObject.html" title="DrawObject" alt="" coords="62,80,153,107"/>
-<area shape="rect" id="node3" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="9,5,205,32"/>
-</map>

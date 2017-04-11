@@ -1,8 +1,0 @@
-<map id="OHLCRenderer" name="OHLCRenderer">
-<area shape="rect" id="node7" href="$classOHLCBarRenderer.html" title="OHLCBarRenderer" alt="" coords="5,304,137,331"/>
-<area shape="rect" id="node8" href="$classOHLCCandlestickRenderer.html" title="OHLCCandlestickRenderer" alt="" coords="162,304,343,331"/>
-<area shape="rect" id="node2" href="$classRenderer.html" title="Renderer" alt="" coords="125,155,199,181"/>
-<area shape="rect" id="node4" href="$classDrawObject.html" title="DrawObject" alt="" coords="117,80,207,107"/>
-<area shape="rect" id="node5" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="64,5,260,32"/>
-<area shape="rect" id="node6" href="$classRefObject.html" title="RefObject" alt="" coords="232,80,313,107"/>
-</map>

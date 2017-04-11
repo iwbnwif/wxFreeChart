@@ -1,9 +1,0 @@
-<map id="BubblePlot" name="BubblePlot">
-<area shape="rect" id="node2" href="$classAxisPlot.html" title="AxisPlot" alt="" coords="303,155,373,181"/>
-<area shape="rect" id="node3" href="$classPlot.html" title="Plot" alt="" coords="77,80,122,107"/>
-<area shape="rect" id="node4" href="$classObservable.html" title="Observable\&lt; PlotObserver \&gt;" alt="" coords="5,5,193,32"/>
-<area shape="rect" id="node5" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="146,80,253,107"/>
-<area shape="rect" id="node6" href="$classDatasetObserver.html" title="DatasetObserver" alt="" coords="277,80,399,107"/>
-<area shape="rect" id="node7" href="$classAxisObserver.html" title="AxisObserver" alt="" coords="423,80,525,107"/>
-<area shape="rect" id="node8" href="$classChartPanelObserver.html" title="ChartPanelObserver" alt="" coords="549,80,689,107"/>
-</map>

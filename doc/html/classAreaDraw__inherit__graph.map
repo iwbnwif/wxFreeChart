@@ -1,7 +1,0 @@
-<map id="AreaDraw" name="AreaDraw">
-<area shape="rect" id="node4" href="$classFillAreaDraw.html" title="FillAreaDraw" alt="" coords="5,229,103,256"/>
-<area shape="rect" id="node5" href="$classGradientAreaDraw.html" title="GradientAreaDraw" alt="" coords="127,229,256,256"/>
-<area shape="rect" id="node6" href="$classNoAreaDraw.html" title="NoAreaDraw" alt="" coords="280,229,377,256"/>
-<area shape="rect" id="node2" href="$classDrawObject.html" title="DrawObject" alt="" coords="146,80,237,107"/>
-<area shape="rect" id="node3" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="93,5,289,32"/>
-</map>

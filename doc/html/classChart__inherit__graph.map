@@ -1,5 +1,0 @@
-<map id="Chart" name="Chart">
-<area shape="rect" id="node2" href="$classObservable.html" title="Observable\&lt; ChartObserver \&gt;" alt="" coords="5,5,203,32"/>
-<area shape="rect" id="node3" href="$classPlotObserver.html" title="PlotObserver" alt="" coords="227,5,325,32"/>
-<area shape="rect" id="node4" href="$classAxisObserver.html" title="AxisObserver" alt="" coords="349,5,451,32"/>
-</map>

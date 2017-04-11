@@ -1,5 +1,0 @@
-<map id="BarType" name="BarType">
-<area shape="rect" id="node2" href="$classLayeredBarType.html" title="LayeredBarType" alt="" coords="5,80,123,107"/>
-<area shape="rect" id="node3" href="$classNormalBarType.html" title="NormalBarType" alt="" coords="147,80,261,107"/>
-<area shape="rect" id="node4" href="$classStackedBarType.html" title="StackedBarType" alt="" coords="285,80,403,107"/>
-</map>
