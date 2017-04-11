@@ -1,4 +1,4 @@
 <map id="PlotObserver" name="PlotObserver">
-<area shape="rect" id="node2" href="$classChart.html" title="Chart" alt="" coords="5,80,59,107"/>
-<area shape="rect" id="node3" href="$classMultiPlot.html" title="MultiPlot" alt="" coords="83,80,156,107"/>
+<area shape="rect" id="node2" href="$classChart.html" title="Chart" alt="" coords="5,80,60,107"/>
+<area shape="rect" id="node3" href="$classMultiPlot.html" title="MultiPlot" alt="" coords="84,80,157,107"/>
 </map>

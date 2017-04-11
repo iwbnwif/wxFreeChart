@@ -1,10 +1,10 @@
 <map id="JulianTimeSeriesDataset" name="JulianTimeSeriesDataset">
-<area shape="rect" id="node2" href="$classXYDataset.html" title="XYDataset" alt="" coords="198,328,284,355"/>
-<area shape="rect" id="node3" href="$classDataset.html" title="Dataset" alt="" coords="207,251,275,277"/>
-<area shape="rect" id="node8" href="$classRenderer.html" title="Renderer" alt="" coords="115,160,188,187"/>
-<area shape="rect" id="node5" href="$classRefObject.html" title="RefObject" alt="" coords="222,83,303,109"/>
-<area shape="rect" id="node6" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="279,160,488,187"/>
-<area shape="rect" id="node7" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="513,160,620,187"/>
-<area shape="rect" id="node9" href="$classDrawObject.html" title="DrawObject" alt="" coords="107,83,197,109"/>
-<area shape="rect" id="node10" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="54,5,249,32"/>
+<area shape="rect" id="node2" href="$classXYDataset.html" title="XYDataset" alt="" coords="198,323,285,349"/>
+<area shape="rect" id="node3" href="$classDataset.html" title="Dataset" alt="" coords="207,247,275,273"/>
+<area shape="rect" id="node8" href="$classRenderer.html" title="Renderer" alt="" coords="115,157,189,184"/>
+<area shape="rect" id="node5" href="$classRefObject.html" title="RefObject" alt="" coords="222,81,303,108"/>
+<area shape="rect" id="node6" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="279,157,489,184"/>
+<area shape="rect" id="node7" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="513,157,620,184"/>
+<area shape="rect" id="node9" href="$classDrawObject.html" title="DrawObject" alt="" coords="107,81,197,108"/>
+<area shape="rect" id="node10" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="54,5,250,32"/>
 </map>

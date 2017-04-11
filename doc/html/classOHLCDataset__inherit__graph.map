@@ -1,8 +1,8 @@
 <map id="OHLCDataset" name="OHLCDataset">
-<area shape="rect" id="node8" href="$classOHLCSimpleDataset.html" title="OHLCSimpleDataset" alt="" coords="219,229,364,256"/>
-<area shape="rect" id="node2" href="$classDataset.html" title="Dataset" alt="" coords="198,80,265,107"/>
-<area shape="rect" id="node4" href="$classRefObject.html" title="RefObject" alt="" coords="107,5,188,32"/>
-<area shape="rect" id="node5" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="212,5,421,32"/>
+<area shape="rect" id="node8" href="$classOHLCSimpleDataset.html" title="OHLCSimpleDataset" alt="" coords="219,229,365,256"/>
+<area shape="rect" id="node2" href="$classDataset.html" title="Dataset" alt="" coords="198,80,266,107"/>
+<area shape="rect" id="node4" href="$classRefObject.html" title="RefObject" alt="" coords="107,5,189,32"/>
+<area shape="rect" id="node5" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="212,5,423,32"/>
 <area shape="rect" id="node6" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="447,5,553,32"/>
 <area shape="rect" id="node7" href="$classDateTimeDataset.html" title="DateTimeDataset" alt="" coords="291,80,416,107"/>
 </map>

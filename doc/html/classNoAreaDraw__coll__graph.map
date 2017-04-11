@@ -1,5 +1,5 @@
 <map id="NoAreaDraw" name="NoAreaDraw">
-<area shape="rect" id="node2" href="$classAreaDraw.html" title="AreaDraw" alt="" coords="63,155,141,181"/>
-<area shape="rect" id="node3" href="$classDrawObject.html" title="DrawObject" alt="" coords="57,80,148,107"/>
-<area shape="rect" id="node4" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="5,5,200,32"/>
+<area shape="rect" id="node2" href="$classAreaDraw.html" title="AreaDraw" alt="" coords="63,155,143,181"/>
+<area shape="rect" id="node3" href="$classDrawObject.html" title="DrawObject" alt="" coords="58,80,149,107"/>
+<area shape="rect" id="node4" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="5,5,201,32"/>
 </map>

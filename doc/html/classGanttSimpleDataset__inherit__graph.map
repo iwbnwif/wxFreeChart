@@ -1,9 +1,9 @@
 <map id="GanttSimpleDataset" name="GanttSimpleDataset">
-<area shape="rect" id="node2" href="$classGanttDataset.html" title="GanttDataset" alt="" coords="182,304,281,331"/>
-<area shape="rect" id="node3" href="$classCategoryDataset.html" title="CategoryDataset" alt="" coords="171,229,292,256"/>
+<area shape="rect" id="node2" href="$classGanttDataset.html" title="GanttDataset" alt="" coords="182,304,282,331"/>
+<area shape="rect" id="node3" href="$classCategoryDataset.html" title="CategoryDataset" alt="" coords="171,229,293,256"/>
 <area shape="rect" id="node4" href="$classXYDataset.html" title="XYDataset" alt="" coords="189,155,275,181"/>
-<area shape="rect" id="node5" href="$classDataset.html" title="Dataset" alt="" coords="198,80,265,107"/>
-<area shape="rect" id="node7" href="$classRefObject.html" title="RefObject" alt="" coords="107,5,188,32"/>
-<area shape="rect" id="node8" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="212,5,421,32"/>
+<area shape="rect" id="node5" href="$classDataset.html" title="Dataset" alt="" coords="198,80,266,107"/>
+<area shape="rect" id="node7" href="$classRefObject.html" title="RefObject" alt="" coords="107,5,189,32"/>
+<area shape="rect" id="node8" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="212,5,423,32"/>
 <area shape="rect" id="node9" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="447,5,553,32"/>
 </map>

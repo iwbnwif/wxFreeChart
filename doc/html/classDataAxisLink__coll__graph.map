@@ -1,12 +1,12 @@
 <map id="DataAxisLink" name="DataAxisLink">
-<area shape="rect" id="node2" href="$classDataset.html" title="Dataset" alt="" coords="769,239,837,265"/>
-<area shape="rect" id="node7" href="$classRenderer.html" title="Renderer" alt="" coords="503,267,577,293"/>
-<area shape="rect" id="node10" href="$classAxis.html" title="Axis" alt="" coords="779,83,827,109"/>
-<area shape="rect" id="node4" href="$classRefObject.html" title="RefObject" alt="" coords="278,329,359,356"/>
-<area shape="rect" id="node5" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="435,388,645,415"/>
-<area shape="rect" id="node6" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="487,157,593,184"/>
-<area shape="rect" id="node8" href="$classDrawObject.html" title="DrawObject" alt="" coords="273,271,364,297"/>
-<area shape="rect" id="node9" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="6,271,202,297"/>
-<area shape="rect" id="node11" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="445,5,635,32"/>
-<area shape="rect" id="node12" href="$classDatasetArray.html" title="DatasetArray" alt="" coords="491,56,589,83"/>
+<area shape="rect" id="node2" href="$classDataset.html" title="Dataset" alt="" coords="761,239,829,265"/>
+<area shape="rect" id="node7" href="$classRenderer.html" title="Renderer" alt="" coords="497,267,572,293"/>
+<area shape="rect" id="node10" href="$classAxis.html" title="Axis" alt="" coords="771,83,819,109"/>
+<area shape="rect" id="node4" href="$classRefObject.html" title="RefObject" alt="" coords="275,329,356,356"/>
+<area shape="rect" id="node5" href="$classObservable.html" title="Observable\&lt; DatasetObserver \&gt;" alt="" coords="429,388,640,415"/>
+<area shape="rect" id="node6" href="$classDrawObserver.html" title="DrawObserver" alt="" coords="481,157,588,184"/>
+<area shape="rect" id="node8" href="$classDrawObject.html" title="DrawObject" alt="" coords="270,271,361,297"/>
+<area shape="rect" id="node9" href="$classObservable.html" title="Observable\&lt; DrawObserver \&gt;" alt="" coords="5,271,201,297"/>
+<area shape="rect" id="node11" href="$classObservable.html" title="Observable\&lt; AxisObserver \&gt;" alt="" coords="439,5,630,32"/>
+<area shape="rect" id="node12" href="$classDatasetArray.html" title="DatasetArray" alt="" coords="485,56,584,83"/>
 </map>

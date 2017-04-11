@@ -1,8 +1,8 @@
 <map id="Symbol" name="Symbol">
-<area shape="rect" id="node2" href="$classMaskedSymbol.html" title="MaskedSymbol" alt="" coords="56,80,167,107"/>
-<area shape="rect" id="node3" href="$classShapeSymbol.html" title="ShapeSymbol" alt="" coords="193,80,295,107"/>
-<area shape="rect" id="node4" href="$classCircleSymbol.html" title="CircleSymbol" alt="" coords="5,155,104,181"/>
-<area shape="rect" id="node5" href="$classCrossSymbol.html" title="CrossSymbol" alt="" coords="129,155,231,181"/>
-<area shape="rect" id="node6" href="$classSquareSymbol.html" title="SquareSymbol" alt="" coords="255,155,361,181"/>
-<area shape="rect" id="node7" href="$classTriangleSymbol.html" title="TriangleSymbol" alt="" coords="385,155,496,181"/>
+<area shape="rect" id="node2" href="$classMaskedSymbol.html" title="MaskedSymbol" alt="" coords="57,80,169,107"/>
+<area shape="rect" id="node3" href="$classShapeSymbol.html" title="ShapeSymbol" alt="" coords="193,80,296,107"/>
+<area shape="rect" id="node4" href="$classCircleSymbol.html" title="CircleSymbol" alt="" coords="5,155,105,181"/>
+<area shape="rect" id="node5" href="$classCrossSymbol.html" title="CrossSymbol" alt="" coords="130,155,231,181"/>
+<area shape="rect" id="node6" href="$classSquareSymbol.html" title="SquareSymbol" alt="" coords="255,155,362,181"/>
+<area shape="rect" id="node7" href="$classTriangleSymbol.html" title="TriangleSymbol" alt="" coords="386,155,498,181"/>
 </map>
