@@ -60,7 +60,7 @@ public:
      * @param borderPen pen to draw area border
      * @param fillBrush brush to fill area
      */
-    FillAreaDraw(wxPen borderPen = (wxPen) *wxBLACK_PEN, wxBrush fillBrush =  (wxBrush) *wxWHITE_BRUSH);
+    FillAreaDraw(wxPen borderPen = *wxBLACK_PEN, wxBrush fillBrush = *wxWHITE_BRUSH);
 
     FillAreaDraw(wxColour borderColour, wxColour fillColour);
 
