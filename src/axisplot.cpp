@@ -497,7 +497,6 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
     // The plot area has changed (size change, axis change).
     if (m_redrawDataArea) {
         wxMemoryDC mdc;
-        wxPrintf ("Drawing background\n");
         
         // Redimension the 
         m_plotBackgroundBitmap.Create(m_drawRect.GetWidth(), m_drawRect.GetHeight());
@@ -545,9 +544,13 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
         DrawData ((wxDC&)mdc, rcData);
 #endif
 
+    // Select a null bitmap into the memory DC to write the plot bitmap and release it.
+    mdc.SelectObject(wxNullBitmap);
+
     // Finally copy the updated temporary bitmap onto the background.
     dc.DrawBitmap(m_dataOverlayBitmap, rc.GetTopLeft());
     
+    // Draw the legend.
     DrawLegend (dc, rcLegend);
     
     if (m_crosshair != NULL) {
