@@ -195,6 +195,8 @@ bool CompDateAxis::UpdateBounds()
     m_dateCount = NumOfSpans(wxDateTime(minDate), wxDateTime(maxDate), span);
 
     FireBoundsChanged();
+    
+    return true;
 }
 
 void CompDateAxis::DrawGridLines(wxDC &dc, wxRect rc)
