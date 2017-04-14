@@ -58,6 +58,37 @@ public:
             FireAxisChanged();
         }
     }
+    
+    /**
+     * Set whether the axis origin starts at zero. This setting is enabled by default.
+     * Note: this setting is ignored if the axis bounds are set manually by SetFixedBounds.
+     * @param zeroOrigin If true, the minimum value on the axis is zero. If false, then 
+     *                   the minimum value will be calculated from the dataset.
+     */
+    void ZeroOrigin(bool zeroOrigin = true)
+    {
+        if (m_zeroOrigin != zeroOrigin)
+        {
+            m_zeroOrigin = zeroOrigin;
+            FireAxisChanged();
+        }
+    }
+    
+    /**
+     * Forces an extra tick to be drawn at the top of vertical axis if the maximum value
+     * is the same as the last tick. This setting is disabled by default.
+     * Note: this setting if the axis bounds are set manually by SetFixedBounds.
+     * @param force If true, an extra tick is drawn at the top of a vertical axis if
+     *              the maximum value falls on a tick interval.
+     */
+    void ForceExtraTick(bool force = true)
+    {
+        if (m_forceExtraTick != force)
+        {
+            m_forceExtraTick = force;
+            FireAxisChanged();
+        }
+    }
 
     /**
      * Returns multiplier for values.
@@ -93,7 +124,7 @@ public:
 
 protected:
     virtual bool AcceptDataset(Dataset *dataset);
-  void UpdateTickValues();
+    void UpdateTickValues();
 
     //
     // LabelAxis
@@ -108,25 +139,21 @@ protected:
 
     virtual wxSize GetLongestLabelExtent(wxDC &dc);
 
-  bool m_fixedBounds;
+    // Protected members.
+    bool m_fixedBounds;
     bool m_hasLabels;
-  double m_minValue;
+    double m_minValue;
     double m_maxValue;
 
 private:
-
-
+    // Private members.
     wxString m_tickFormat;
-
-
     double m_labelInterval;
-
     size_t m_labelCount;
     bool m_intValues;
-
+    bool m_zeroOrigin;
+    bool m_forceExtraTick;
     double m_multiplier;
-
-
 };
 
 #endif /*NUMBERAXIS_H_*/

@@ -43,6 +43,49 @@ bool IsNormalValue(double v)
 
 #endif
 
+/**
+ * Helper function to calculate a 'nice' label interval for the given dataset. Label intervals are considered
+ * nice if they are 1, 2, 5 or 10 raised to an appropriate power of 10.
+ * @param value     The approximate interval required.
+ * @param round     Whether the values should be rounded.
+ * @return          The 'nice' value for the interval.
+ */
+double nicenum (double value, bool round)
+{
+    // Get the logarithmic form of the value. 
+    double exp = floor(log10(fabs(value)));
+    double mant = value / pow(10.0, exp);
+    
+    // Find a nice value.
+    double nice;
+    
+    if (round)
+    {
+        if (mant <= 1.5)
+            nice = 1.0;
+        else if (mant <= 3.0)
+            nice = 2.0;
+        else if (mant <= 7.0)
+            nice = 5.0;
+        else
+            nice = 10.0;  
+    }
+    
+    else
+    {
+        if (mant <= 1.0)
+            nice = 1.0;
+        else if (mant <= 2.0)
+            nice = 2.0;
+        else if (mant <= 5.0)
+            nice = 5.0;
+        else
+            nice = 10.0;    
+    }
+    
+    return  nice * pow(10, exp);
+}
+
 IMPLEMENT_CLASS(NumberAxis, Axis)
 
 NumberAxis::NumberAxis(AXIS_LOCATION location)
@@ -60,6 +103,8 @@ NumberAxis::NumberAxis(AXIS_LOCATION location)
     m_intValues = false;
     m_hasLabels = false;
     m_fixedBounds = false;
+    m_zeroOrigin = true;
+    m_forceExtraTick = false;
 
     m_multiplier = 1;
 }
@@ -86,39 +131,61 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
 
 bool NumberAxis::UpdateBounds()
 {
-    if (m_fixedBounds) {
+    // No need to update bounds if they are fixed (defined by the user).
+    if (m_fixedBounds) 
+    {
         UpdateTickValues();
-        return false; // bounds are fixed, so don't update
+        return false;
     }
 
     m_hasLabels = false;
 
-    for (size_t n = 0; n < m_datasets.Count(); n++) {
+    for (size_t n = 0; n < m_datasets.Count(); n++) 
+    {
         bool verticalAxis = IsVertical();
 
         double minValue = m_datasets[n]->GetMinValue(verticalAxis);
         double maxValue = m_datasets[n]->GetMaxValue(verticalAxis);
 
-        if (n == 0) {
+        if (n == 0) 
+        {
             m_minValue = minValue;
             m_maxValue = maxValue;
         }
-        else {
+        else 
+        {
             m_minValue = wxMin(m_minValue, minValue);
             m_maxValue = wxMax(m_maxValue, maxValue);
         }
     }
+    
+    // Prefer the axis at zero.
+    if (m_zeroOrigin && m_minValue > 0)
+        m_minValue = 0;
 
-    if (m_minValue == m_maxValue) {
-        if (m_maxValue > 0) {
+    // Handle horizontal line case. Offset from a zero baseline.
+    if (m_minValue == m_maxValue)
+    {
+        if (m_maxValue > 0)
             m_minValue = 0;
-        }
-        else {
+        else
             m_maxValue = 0;
-        }
     }
 
+    // Make sure m_maxValue doesn't fall on a boundary for vertical axis (ensures some padding
+    // between maximum value and topmost tick).
+    if (m_forceExtraTick && IsVertical())
+        m_maxValue += 0.00000001;
+
+    m_labelInterval = nicenum((m_maxValue - m_minValue) / (m_labelCount - 1), false);
+    m_maxValue = ceil(m_maxValue / m_labelInterval) * m_labelInterval;
+    m_minValue = floor(m_minValue / m_labelInterval) * m_labelInterval;
+    
+    // The following might be a way of formatting the number of relevant decimal places.
+    // int nfrac = wxMax(-floor(log10(nice)), 0);
+        
     UpdateTickValues();
+    
     FireBoundsChanged();
     return true;
 }
@@ -126,7 +193,7 @@ bool NumberAxis::UpdateBounds()
 void NumberAxis::UpdateTickValues()
 {
     m_hasLabels = false;
-    m_labelInterval = (m_maxValue - m_minValue) / (double) (m_labelCount - 1);
+    // m_labelInterval = (m_maxValue - m_minValue) / (double) (m_labelCount - 1);
 
     if (!IsNormalValue(m_labelInterval)) {
         // overflow condition bugfix
