@@ -484,7 +484,7 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
 
     // Hackish test to see if the background needs to be redrawn 
     // due to a size change.
-    if (rc.GetSize() != m_drawRect)
+    if (rc.GetSize() != m_drawRect.GetSize())
     {
         m_redrawDataArea = true;
         m_drawRect.SetSize(rc.GetSize());
@@ -495,7 +495,8 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
     CalcDataArea(dc, m_drawRect, rcData, rcLegend);
     
     // The plot area has changed (size change, axis change).
-    if (m_redrawDataArea) {
+    if (m_redrawDataArea)
+    {
         wxMemoryDC mdc;
         
         // Redimension the 
@@ -503,21 +504,15 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
         mdc.SelectObject(m_plotBackgroundBitmap);
 
         // Clear the background of the data area and draw the axis.
-        m_dataBackground->Draw(mdc, m_drawRect);
+        mdc.Clear();
+        m_dataBackground->Draw(mdc, rcData);
         DrawAxes(mdc, m_drawRect, rcData);
-
-        // Define the clipping rectangle for the data area.
-        wxRect clipRc = rcData;
-        clipRc.Deflate(1, 1);
-        wxDCClipper clip(mdc, clipRc);
 
         // Draw markers and gridlines.
         DrawMarkers(mdc, rcData);
         DrawGridLines(mdc, rcData);
         
         // Redimension the data overlay bitmap here, in preparation.
-        // TODO: The overlay only needs to be rcData big, but currently
-        // this function draws the whole chart, including axes and titles!
         m_dataOverlayBitmap.Create(m_drawRect.GetWidth(), m_drawRect.GetHeight());
 
         // Clear redraw flag. TODO: Replace flag with 'smarter' function calls.
@@ -533,13 +528,14 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
     // Draw the actual plot data onto the temporary bitmap (over the top of the 
     // background. If antialiasing is enabled, then draw the data with a wxGCDC.
 #if wxUSE_GRAPHICS_CONTEXT
-    if (true) { // TODO: Should be if m_antialias.
+    if (true) // TODO: Should be if m_antialias.
+    { 
         wxGCDC gdc(mdc);
+        
         DrawData ((wxDC&)gdc, rcData);
     }
-    else {
+    else
         DrawData ((wxDC&)mdc, rcData);
-    }
 #else
         DrawData ((wxDC&)mdc, rcData);
 #endif
@@ -553,7 +549,8 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
     // Draw the legend.
     DrawLegend (dc, rcLegend);
     
-    if (m_crosshair != NULL) {
+    if (m_crosshair != NULL) 
+    {
         // TODO crosshair drawing
         //m_crosshair->Draw(dc, rcData, );
     }
@@ -561,6 +558,10 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
 
 void AxisPlot::DrawData(wxDC &dc, wxRect rcData)
 {
+    // Define the clipping rectangle for the data area to avoid drawing outside this area when
+    // a scrolled window is in use.
+    wxDCClipper clip(dc, rcData);
+
     DrawDatasets(dc, rcData);
 }
 
