@@ -34,17 +34,19 @@ Plot::~Plot()
     wxDELETE(m_background);
 }
 
-void Plot::Draw(wxDC &dc, wxRect rc)
+void Plot::Draw(ChartDC &cdc, wxRect rc, PlotDrawMode mode)
 {
-    // Erase the background of the plot area.
-    // m_background->Draw(dc, rc);
+    if (!HasData())
+    {
+        DrawNoDataMessage(cdc.GetDC(), rc);
+        return;
+    }
+    
+    if (mode == PLOT_DRAW_BACKGROUND || mode == PLOT_DRAW_ALL)
+        DrawBackground(cdc, rc);
 
-    if (HasData()) {
-        DrawDataAreaBackground(dc, rc);
-    }
-    else {
-        DrawNoDataMessage(dc, rc);
-    }
+    if (mode == PLOT_DRAW_DATA || mode == PLOT_DRAW_ALL)
+        DrawData(cdc,rc);
 }
 
 void Plot::DrawNoDataMessage(wxDC &dc, wxRect rc)

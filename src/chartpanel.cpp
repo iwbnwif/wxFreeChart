@@ -330,30 +330,15 @@ void wxChartPanel::ScrollAxis(Axis *axis, int d)
 
 void wxChartPanel::RedrawBackBitmap()
 {
-    if (m_chart != NULL) {
+    if (m_chart != NULL) 
+    {
         wxMemoryDC mdc;
         mdc.SelectObject(m_backBitmap);
 
-        const wxRect &rc = GetClientRect();
-        mdc.SetBrush(*wxBLUE_BRUSH);
-        mdc.DrawRectangle(rc);
-
-        // Using graphics context instead of normal DC
-        // allows antialiasing and other features,
-        // i tested it on Linux-wxGTK-2.8.8 and on Windows(tm)-wxWidgets-2.8.8
-        // there is bug with wxSHORT_DASH pen style, it drawing hungs,
-        // when wxGCDC used
-#if wxUSE_GRAPHICS_CONTEXT
-        if (m_antialias) {
-            wxGCDC gdc(mdc);
-            m_chart->Draw((wxDC&) gdc, (wxRect&) rc);
-        }
-        else {
-            m_chart->Draw(mdc, (wxRect&) rc);
-        }
-#else
-        m_chart->Draw(mdc, (wxRect&) rc);
-#endif
+        const wxRect& rc = GetClientRect();
+        
+        ChartDC cdc (mdc, m_antialias);
+        m_chart->Draw(cdc, (wxRect&)rc, m_antialias);
     }
 }
 

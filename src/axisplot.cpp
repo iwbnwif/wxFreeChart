@@ -10,8 +10,12 @@
 #include <wx/axisplot.h>
 #include <wx/drawutils.h>
 
-#include <wx/dcgraph.h>
 #include "wx/arrimpl.cpp"
+
+#if wxUSE_GRAPHICS_CONTEXT
+#include <wx/dcgraph.h>
+#endif /* wxUSE_GRAPHICS_CONTEXT */
+
 
 #include <iostream>
 
@@ -477,78 +481,26 @@ void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
 }
 
 // Draw the background of the data area, basically everything except the data.
-void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
+void AxisPlot::DrawBackground(ChartDC& cdc, wxRect rc)
 {
-    wxRect rcData;
+    wxRect rcPlot;
     wxRect rcLegend;
-
-    // Hackish test to see if the background needs to be redrawn 
-    // due to a size change.
-    if (rc.GetSize() != m_drawRect.GetSize())
-    {
-        m_redrawDataArea = true;
-        m_drawRect.SetSize(rc.GetSize());
-        m_drawRect.SetTopLeft(wxPoint(0, 0));
-    }
+    
+    wxDC& dc = cdc.GetDC();
 
     // Calculate the rectangle where the actual data is plotted.
-    CalcDataArea(dc, m_drawRect, rcData, rcLegend);
-    
-    // The plot area has changed (size change, axis change).
-    if (m_redrawDataArea)
-    {
-        wxMemoryDC mdc;
-        
-        // Redimension the 
-        m_plotBackgroundBitmap.Create(m_drawRect.GetWidth(), m_drawRect.GetHeight());
-        mdc.SelectObject(m_plotBackgroundBitmap);
+    CalcDataArea(dc, rc, rcPlot, rcLegend);
 
-        // Clear the background of the data area and draw the axis.
-        mdc.Clear();
-        m_dataBackground->Draw(mdc, rcData);
-        DrawAxes(mdc, m_drawRect, rcData);
+    // Draw the background of the plot area.
+    m_dataBackground->Draw(dc, rcPlot);
 
-        // Draw markers and gridlines.
-        DrawMarkers(mdc, rcData);
-        DrawGridLines(mdc, rcData);
-        
-        // Redimension the data overlay bitmap here, in preparation.
-        m_dataOverlayBitmap.Create(m_drawRect.GetWidth(), m_drawRect.GetHeight());
 
-        // Clear redraw flag. TODO: Replace flag with 'smarter' function calls.
-        m_redrawDataArea = false;
-    }
-
-    wxMemoryDC mdc;
-    mdc.SelectObject(m_dataOverlayBitmap);
-
-    // Copy the background bitmap onto a temporary bitmap.
-    mdc.DrawBitmap(m_plotBackgroundBitmap, 0, 0);
-
-    // Draw the actual plot data onto the temporary bitmap (over the top of the 
-    // background. If antialiasing is enabled, then draw the data with a wxGCDC.
-#if wxUSE_GRAPHICS_CONTEXT
-    if (true) // TODO: Should be if m_antialias.
-    { 
-        wxGCDC gdc(mdc);
-        
-        DrawData ((wxDC&)gdc, rcData);
-    }
-    else
-        DrawData ((wxDC&)mdc, rcData);
-#else
-        DrawData ((wxDC&)mdc, rcData);
-#endif
-
-    // Select a null bitmap into the memory DC to write the plot bitmap and release it.
-    mdc.SelectObject(wxNullBitmap);
-
-    // Finally copy the updated temporary bitmap onto the background.
-    dc.DrawBitmap(m_dataOverlayBitmap, rc.GetTopLeft());
-    
-    // Draw the legend.
+    // Draw all static items.
+    DrawGridLines(dc, rcPlot);
+    DrawAxes(dc, rc, rcPlot);
+    DrawMarkers(dc, rcPlot);
     DrawLegend (dc, rcLegend);
-    
+
     if (m_crosshair != NULL) 
     {
         // TODO crosshair drawing
@@ -556,13 +508,43 @@ void AxisPlot::DrawDataAreaBackground(wxDC &dc, wxRect rc)
     }
 }
 
-void AxisPlot::DrawData(wxDC &dc, wxRect rcData)
+void AxisPlot::DrawData(ChartDC& cdc, wxRect rc)
 {
-    // Define the clipping rectangle for the data area to avoid drawing outside this area when
-    // a scrolled window is in use.
-    wxDCClipper clip(dc, rcData);
+    wxRect rcPlot;
+    wxRect rcLegend;
+    
+    wxDC& dc = cdc.GetDC();
 
-    DrawDatasets(dc, rcData);
+    // Calculate the rectangle where the actual data is plotted.
+    CalcDataArea(dc, rc, rcPlot, rcLegend);
+    
+    // Deflate by one to prevent drawing on the axis.
+    rcPlot.Deflate(1);
+
+    // TODO: Currently all data items are drawn using antialiasing if it is available and enabled.
+    // It would be better if this decision was made at the individual renderer level, for example 
+    // a bar couild be drawn without antialiasing, but an XY line could be drawn with it.
+    
+    // A clipping rectangle is needed for the data area to avoid drawing outside this area when
+    // a scrolled window is in use. The clipper is specific to the DC, so has to be created within
+    // the correct context.
+#if wxUSE_GRAPHICS_CONTEXT
+		if (cdc.AntialiasActive()) 
+        {
+			wxGCDC gdc((wxMemoryDC&)dc);
+            wxDCClipper clip(gdc, rcPlot);
+			DrawDatasets(gdc, rcPlot);
+		}
+		else
+        {
+            wxDCClipper clip(dc, rcPlot);
+            DrawDatasets(dc, rcPlot);
+        }
+			
+#else
+        wxDCClipper clip(dc, rcPlot);
+		DrawDatasets(dc, rcPlot);
+#endif
 }
 
 // TODO: Everything below this point is still TODO.

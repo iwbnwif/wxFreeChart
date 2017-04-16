@@ -12,11 +12,18 @@
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/observable.h>
-
 #include <wx/areadraw.h>
+#include <wx/chartdc.h>
 
 class WXDLLIMPEXP_FREECHART Plot;
 class WXDLLIMPEXP_FREECHART wxChartPanel;
+
+enum PlotDrawMode
+{
+    PLOT_DRAW_BACKGROUND,
+    PLOT_DRAW_DATA,
+    PLOT_DRAW_ALL
+};
 
 /**
  * Interface that receives Plot events, such as need redraw condition.
@@ -50,7 +57,7 @@ public:
      * @param dc device context
      * @param rc rectangle where to draw
      */
-    virtual void Draw(wxDC &dc, wxRect rc);
+    virtual void Draw(ChartDC &cdc, wxRect rc, PlotDrawMode mode = PLOT_DRAW_ALL);
 
     /**
      * Draws "no data" message.
@@ -103,15 +110,15 @@ protected:
      * @param dc device context
      * @param rc rectangle where to draw
      */
-    virtual void DrawData(wxDC &dc, wxRect rc) = 0;
+    virtual void DrawData(ChartDC& cdc, wxRect rc) = 0;
 
     /**
-     * Draw the main part of the chart (excluding axis and titles).
+     * Draw the plot's static items (e.g. axis, gridlines, legend etc.).
      * Must be overriden by derivative classes.
      * @param dc device context
      * @param rc rectangle where to draw
      */
-    virtual void DrawDataAreaBackground(wxDC &dc, wxRect rc) {};
+    virtual void DrawBackground(ChartDC& cdc, wxRect rc) = 0;
 
     /**
      * Called when chart panel is changed.

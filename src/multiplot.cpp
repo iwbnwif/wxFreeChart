@@ -43,7 +43,7 @@ bool MultiPlot::HasData()
     return (m_subPlots.Count() != 0);
 }
 
-void MultiPlot::DrawData(wxDC &dc, wxRect rc)
+void MultiPlot::DrawData(ChartDC& cdc, wxRect rc)
 {
     wxCHECK_RET(m_rows != 0 || m_cols != 0, wxT("row and column count = 0"));
 
@@ -114,7 +114,8 @@ void MultiPlot::DrawData(wxDC &dc, wxRect rc)
 
         wxRect subRc(x, y, subWidth, subHeight);
 
-        m_subPlots[n]->Draw(dc, subRc);
+        // TODO: Multiplot needs to implement cdc.
+        // m_subPlots[n]->Draw(dc, subRc);
 
         if (vertical) {
             row++;

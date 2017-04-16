@@ -9,6 +9,7 @@
 
 #include <wx/chart.h>
 #include <wx/drawutils.h>
+#include <wx/dcgraph.h>
 
 ChartObserver::ChartObserver()
 {
@@ -134,10 +135,10 @@ void Chart::SetChartPanel(wxChartPanel *chartPanel)
 //    return rc;
 //}
 
-void Chart::Draw(wxDC &dc, wxRect &rc)
+void Chart::Draw(ChartDC &cdc, wxRect &rc, bool antialias)
 {
     // draw chart background
-    m_background->Draw(dc, rc);
+    m_background->Draw(cdc.GetDC(), rc);
 
     int topMargin = m_margin;
     int bottomMargin = m_margin;
@@ -145,23 +146,26 @@ void Chart::Draw(wxDC &dc, wxRect &rc)
     if (m_header && !m_header->IsEmpty()) {
         wxRect headerRect = rc;
         Margins(headerRect, m_margin, m_margin, m_margin, m_margin);
-        wxSize headerExtent = m_header->CalculateExtent(dc);
+        wxSize headerExtent = m_header->CalculateExtent(cdc.GetDC());
         headerRect.height = headerExtent.y + m_headerGap;
         topMargin += headerRect.height;
-        m_header->Draw(dc, headerRect);
+        m_header->Draw(cdc.GetDC(), headerRect);
     }
 
     if (m_footer && !m_footer->IsEmpty()) {
         wxRect footerRect = rc;
         Margins(footerRect, m_margin, m_margin, m_margin, m_margin);
-        wxSize footerExtent = m_footer->CalculateExtent(dc);
+        wxSize footerExtent = m_footer->CalculateExtent(cdc.GetDC());
         footerRect.height = footerExtent.y + m_headerGap;
         footerRect.y = rc.height - footerRect.height;
         bottomMargin += footerRect.height;
-        m_footer->Draw(dc, footerRect);
+        m_footer->Draw(cdc.GetDC(), footerRect);
     }
     
     // Shrink the drawing rectangle by the margins.
     Margins(rc, m_margin, topMargin, m_margin, bottomMargin);
-    m_plot->Draw(dc, rc);
+   
+    m_plot->Draw(cdc, rc, PLOT_DRAW_BACKGROUND);
+    
+    m_plot->Draw(cdc, rc, PLOT_DRAW_DATA);
 }

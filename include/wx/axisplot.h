@@ -268,7 +268,7 @@ private:
     //
     // Plot
     //
-    virtual void DrawData(wxDC &dc, wxRect rc);
+    virtual void DrawData(ChartDC& cdc, wxRect rc);
 
     virtual bool HasData();
 
@@ -326,7 +326,7 @@ private:
      * @param dc device context
      * @param rcData data area rectangle
      */
-    virtual void DrawDataAreaBackground(wxDC &dc, wxRect rcData) wxOVERRIDE;
+    virtual void DrawBackground(ChartDC& cdc, wxRect rcData) wxOVERRIDE;
 
     /**
      * Draws legend.

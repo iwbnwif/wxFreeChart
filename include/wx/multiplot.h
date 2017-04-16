@@ -52,7 +52,9 @@ public:
 protected:
     virtual bool HasData();
 
-    virtual void DrawData(wxDC &dc, wxRect rc);
+    virtual void DrawData(ChartDC& cdc, wxRect rc);
+    
+    virtual void DrawBackground(ChartDC& cdc, wxRect rc) {}; // Does nothing in a multi plot?
 
 private:
     PlotArray m_subPlots;

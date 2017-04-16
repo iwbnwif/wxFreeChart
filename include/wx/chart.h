@@ -80,7 +80,7 @@ public:
      * @param dc device context
      * @param rc rectangle where to draw chart
      */
-    void Draw(wxDC &dc, wxRect &rc);
+    void Draw(ChartDC& dc, wxRect& rc, bool antialias = false);
 
     /**
      * Sets chart background.
@@ -90,6 +90,11 @@ public:
     {
         wxREPLACE(m_background, background);
         FireChartChanged();
+    }
+    
+    AreaDraw* GetBackground()
+    {
+        return m_background;
     }
 
     /**

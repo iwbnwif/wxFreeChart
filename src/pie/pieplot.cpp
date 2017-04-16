@@ -87,11 +87,13 @@ void PiePlot::DatasetChanged(Dataset *WXUNUSED(dataset))
     FirePlotNeedRedraw();
 }
 
-void PiePlot::DrawData(wxDC &dc, wxRect rc)
+void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
 {
     // TODO initial quick and dirty, need cleanup.
     //
     double sum = 0;
+    
+    wxDC& dc = cdc.GetDC();
 
     for (size_t n = 0; n < m_dataset->GetCount(); n++) {
         sum += m_dataset->GetValue(n, m_serie);
