@@ -191,15 +191,17 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
         }
     }
 
+    // Draw every tick mark.
     dc.DrawLine(lineX1, lineY1, lineX2, lineY2);
 
-    if (isMajorLabel) {
-        if (m_verticalLabelText) {
+    // But only draw labels for major tick intervals.
+    if (isMajorLabel) 
+    {
+        if (m_verticalLabelText)
             dc.DrawRotatedText(label, textX, textY, 90);
-        }
-        else {
+        
+        else
             dc.DrawText(label, textX, textY);
-        }
     }
 }
 
@@ -215,23 +217,25 @@ int LabelAxis::GetLabelSkip()
 
 void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 {
-    if (!HasLabels()) {
+    if (!HasLabels())
         return ;
-    }
 
-    // setup dc objects for labels and lines
+    // Setup dc objects for labels and lines.
     dc.SetFont(m_labelTextFont);
     dc.SetTextForeground(m_labelTextColour);
     dc.SetPen(m_labelPen);
 
     wxString label;
-    for (int step = 0; !IsEnd(step) ; step++) {
+    
+    for (int step = 0; !IsEnd(step) ; step++) 
+    {
         double value = GetValue(step);
-        if (!IsVisible(value)) {
+        
+        if (!IsVisible(value))
             continue;
-        }
 
         label = wxEmptyString;
+
         if (step % (m_blankLabels + 1) == 0)
             GetLabel(step, label);
 
@@ -269,6 +273,7 @@ void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
         return ; // BUG
     }
 
+    dc.SetPen(m_labelPen); // TODO: Consider having a different colour option.
     dc.DrawLine(x1, y1, x2, y2);
 }
 
@@ -278,30 +283,36 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
         return ;
     }
 
-    for (int nStep = 0; !IsEnd(nStep); nStep++) {
-        m_gridLinesPen.SetColour(m_labelColourer->GetColour(nStep));
-        dc.SetPen(m_gridLinesPen);
+    for (int nStep = 0; !IsEnd(nStep); nStep++) 
+    {
+        // Set the pen for major and minor gridlines as appropriate.
+        if (!(nStep % m_majorLabelStep))
+            dc.SetPen(m_majorGridlinePen);
+        
+        else
+            dc.SetPen(m_minorGridlinePen);
 
         double value = GetValue(nStep);
-        if (!IsVisible(value)) {
+        
+        if (!IsVisible(value))
             continue;
-        }
 
-        if (IsVertical()) {
+        if (IsVertical()) 
+        {
             wxCoord y = ToGraphics(dc, rc.y, rc.height, value);
 
-            if (y == rc.y || y == (rc.y + rc.height)) {
+            if (y == rc.y || y == (rc.y + rc.height))
                 continue;
-            }
 
             dc.DrawLine(rc.x, y, rc.x + rc.width, y);
         }
-        else {
+        
+        else 
+        {
             wxCoord x = ToGraphics(dc, rc.x, rc.width, value);
 
-            if (x == rc.x || x == (rc.x + rc.width)) {
+            if (x == rc.x || x == (rc.x + rc.width))
                 continue;
-            }
 
             dc.DrawLine(x, rc.y, x, rc.y + rc.height);
         }

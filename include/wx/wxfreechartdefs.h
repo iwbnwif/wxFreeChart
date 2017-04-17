@@ -49,4 +49,8 @@ inline static int RoundHigh(double value)
     return iv;
 }
 
+// Default Colours
+#define DEFAULT_MAJOR_GRIDLINE_PEN_COLOUR wxColour("#8B8B8B")
+#define DEFAULT_MINOR_GRIDLINE_PEN_COLOUR *wxLIGHT_GREY 
+
 #endif /* WXFREECHARTDEFS_H */

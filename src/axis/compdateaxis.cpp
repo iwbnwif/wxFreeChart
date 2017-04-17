@@ -212,7 +212,7 @@ void CompDateAxis::DrawGridLines(wxDC &dc, wxRect rc)
         return ;
     }
 
-    dc.SetPen(m_gridLinesPen);
+    dc.SetPen(m_majorGridlinePen);
 
     wxDateTime date = RoundDateToSpan(firstDate, span);
     do {

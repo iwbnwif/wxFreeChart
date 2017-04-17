@@ -108,6 +108,46 @@ public:
      */
     void SetMargins(wxCoord marginMin, wxCoord marginMax);
 
+    /**
+     * Sets the pen to be used for drawing major gridlines. A major gridline is a gridline that is associated with a major 
+     * axis label.
+     * @param majorGridlinePen The pen to be used to draw major gridlines on this axis.
+     */
+     void SetMajorGridlinePen(wxPen& pen)
+     {
+         m_majorGridlinePen = pen;
+         FireAxisChanged();
+     }
+     
+    /**
+     * Sets the pen to be used for drawing minor gridlines. A minor gridline is a gridline that is associated with a minor 
+     * axis label, i.e. any label that is not a major axis label.
+     * @param minorGridlinePen The pen to be used to draw minor gridlines on this axis.
+     */
+     void SetMinorGridlinePen(wxPen& pen)
+     {
+         m_minorGridlinePen = pen;
+         FireAxisChanged();
+     }
+     
+     /**
+      * Gets the pen that is currently used to draw major gridlines on this axis.
+      * @return The pen currently used to draw major gridlines.
+      */
+     const wxPen& GetMajorGridlinePen()
+     {
+         return m_majorGridlinePen;
+     }
+
+     /**
+      * Gets the pen that is currently used to draw minor gridlines on this axis.
+      * @return The pen currently used to draw minor gridlines.
+      */
+     const wxPen& GetMinorGridlinePen()
+     {
+         return m_minorGridlinePen;
+     }
+
     //
     // Dataset functions.
     //
@@ -313,7 +353,8 @@ protected:
     virtual bool AcceptDataset(Dataset *dataset) = 0;
 
     DatasetArray m_datasets;
-    wxPen m_gridLinesPen;
+	wxPen m_majorGridlinePen;
+	wxPen m_minorGridlinePen;
 
     wxCoord m_marginMin;
     wxCoord m_marginMax;
