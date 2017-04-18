@@ -17,13 +17,16 @@ WX_DEFINE_OBJARRAY(SymbolArray);
 
 SymbolArray defaultSymbols;
 
-wxColour defaultColours[] = {
-    wxColour(255, 0, 0),
-    wxColour(0, 255, 0),
-    wxColour(0, 0, 255),
-    wxColour(200, 100, 100),
-    wxColour(200, 200, 100),
-    // TODO add more colors
+wxColour defaultColours[] = 
+{
+    DEFAULT_BAR_FILL_COLOUR_0,
+    DEFAULT_BAR_FILL_COLOUR_1,
+    DEFAULT_BAR_FILL_COLOUR_2,
+    DEFAULT_BAR_FILL_COLOUR_3,
+    DEFAULT_BAR_FILL_COLOUR_4,
+    DEFAULT_BAR_FILL_COLOUR_5,
+    DEFAULT_BAR_FILL_COLOUR_6,
+    DEFAULT_BAR_FILL_COLOUR_7
 };
 
 void InitDefaultSymbols()
