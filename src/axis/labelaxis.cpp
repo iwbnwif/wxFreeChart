@@ -47,15 +47,15 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
     m_labelLineSize = 5;
     m_labelGap = 2;
 
-    m_labelTextFont = *wxNORMAL_FONT;
-    m_labelTextColour = *wxBLACK;
-    m_labelPen = *wxBLACK_PEN;
+    m_labelTextFont = wxFont(wxFontInfo(9));
+    m_labelTextColour = DEFAULT_AXIS_LABEL_COLOUR;
+    m_labelPen = DEFAULT_AXIS_BORDER_COLOUR;
     m_verticalLabelText = false;
     m_majorLabelStep = 1;
 
     m_title = wxEmptyString;
-    m_titleFont = *wxNORMAL_FONT;
-    m_titleColour = *wxBLACK;
+    m_titleFont = wxFont(wxFontInfo(9));
+    m_titleColour = DEFAULT_AXIS_LABEL_COLOUR;
     m_titleLocation = wxCENTER;
 
     m_visible = true;
@@ -299,22 +299,24 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 
         if (IsVertical()) 
         {
+            // Vertical axis, so gridlines are horizontal.
             wxCoord y = ToGraphics(dc, rc.y, rc.height, value);
 
             if (y == rc.y || y == (rc.y + rc.height))
                 continue;
 
-            dc.DrawLine(rc.x, y, rc.x + rc.width, y);
+            dc.DrawLine(rc.x + 1, y, rc.x + rc.width - 1, y);
         }
         
         else 
         {
+            // Horizontal axis, so gridlines are vertical.
             wxCoord x = ToGraphics(dc, rc.x, rc.width, value);
 
             if (x == rc.x || x == (rc.x + rc.width))
                 continue;
 
-            dc.DrawLine(x, rc.y, x, rc.y + rc.height);
+            dc.DrawLine(x, rc.y + 1, x, rc.y + rc.height - 1);
         }
     }
 }
