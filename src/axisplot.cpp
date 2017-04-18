@@ -448,7 +448,7 @@ void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
         DrawAxesArray(dc, rcTopAxes, &m_topAxes, false);
     }
     if (m_bottomAxes.Count() != 0) {
-        wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height - 1, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
+        wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
         DrawAxesArray(dc, rcBottomAxes, &m_bottomAxes, false);
     }
 }
@@ -492,9 +492,10 @@ void AxisPlot::DrawBackground(ChartDC& cdc, wxRect rc)
     CalcDataArea(dc, rc, rcPlot, rcLegend);
 
     // Draw the background of the plot area.
-    m_dataBackground->Draw(dc, rcPlot);
-
-
+    // Is there a bug in dc.DrawRectangle? It seems the rectangle is 1 pixel smaller in height than it should be.
+    m_dataBackground->Draw(dc, wxRect(rcPlot.x, rcPlot.y, rcPlot.width, rcPlot.height + 1));
+    // m_background->Draw(dc, rcPlot);
+    
     // Draw all static items.
     DrawGridLines(dc, rcPlot);
     DrawAxes(dc, rc, rcPlot);
