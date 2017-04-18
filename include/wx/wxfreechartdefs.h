@@ -35,8 +35,8 @@
 #define ABS(a) ((a) < 0) ? (-1*(a)) : (a)
 
 #define wxREPLACE(dst, src) do {                    \
-    wxDELETE(dst);                                    \
-    dst = src;                                        \
+    wxDELETE(dst);                                  \
+    dst = src;                                      \
 } while (0)
 
 
@@ -50,7 +50,32 @@ inline static int RoundHigh(double value)
 }
 
 // Default Colours
-#define DEFAULT_MAJOR_GRIDLINE_PEN_COLOUR wxColour("#8B8B8B")
-#define DEFAULT_MINOR_GRIDLINE_PEN_COLOUR *wxLIGHT_GREY 
+#define DEFAULT_LINE_COLOUR_0 wxColour("#5B9BD5")
+#define DEFAULT_LINE_COLOUR_1 wxColour("#ED7D31")
+#define DEFAULT_LINE_COLOUR_2 wxColour("#FFC000")
+#define DEFAULT_LINE_COLOUR_3 wxColour("#4472C4")
+#define DEFAULT_LINE_COLOUR_4 wxColour("#70AD47")
+#define DEFAULT_LINE_COLOUR_5 wxColour("#9E480E")
+#define DEFAULT_LINE_COLOUR_6 wxColour("#997300")
+#define DEFAULT_LINE_COLOUR_7 wxColour("#A5A5A5")
+
+#define DEFAULT_BAR_FILL_COLOUR_0 wxColour("#5B9BD5")
+#define DEFAULT_BAR_FILL_COLOUR_1 wxColour("#ED7D31")
+#define DEFAULT_BAR_FILL_COLOUR_2 wxColour("#FFC000")
+#define DEFAULT_BAR_FILL_COLOUR_3 wxColour("#4472C4")
+#define DEFAULT_BAR_FILL_COLOUR_4 wxColour("#70AD47")
+#define DEFAULT_BAR_FILL_COLOUR_5 wxColour("#9E480E")
+#define DEFAULT_BAR_FILL_COLOUR_6 wxColour("#997300")
+#define DEFAULT_BAR_FILL_COLOUR_7 wxColour("#A5A5A5")
+
+#define DEFAULT_TEXT_COLOUR wxColour("#8B8B8B")
+
+#define DEFAULT_AXIS_LABEL_COLOUR DEFAULT_TEXT_COLOUR 
+#define DEFAULT_AXIS_BORDER_COLOUR DEFAULT_TEXT_COLOUR 
+#define DEFAULT_AXIS_TICK_COLOUR DEFAULT_TEXT_COLOUR 
+#define DEFAULT_TITLE_COLOUR DEFAULT_TEXT_COLOUR 
+
+#define DEFAULT_MAJOR_GRIDLINE_PEN_COLOUR wxColour("#DADADA")
+#define DEFAULT_MINOR_GRIDLINE_PEN_COLOUR wxColour("#F0F0F0")
 
 #endif /* WXFREECHARTDEFS_H */

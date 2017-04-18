@@ -20,7 +20,7 @@ TextElement::TextElement(const wxString& text, int hAlign, wxFont font)
     : m_text(text)
     , m_hAlign(hAlign)
     , m_font(font)
-    , m_textColour(*wxBLACK)
+    , m_textColour(DEFAULT_TITLE_COLOUR)
 {
 }
 
@@ -74,6 +74,12 @@ TextElementContainer::TextElementContainer()
 {
 }
 
+TextElementContainer::TextElementContainer(const TextElement& element)
+: m_extent()
+, m_margin(40)
+{
+    m_elements.push_back(element);
+}
 
 TextElementContainer::TextElementContainer(const wxString& contents)
 : m_extent()
@@ -116,5 +122,4 @@ wxSize TextElementContainer::CalculateExtent(wxDC& dc)
 
     return extent;
 }
-
 

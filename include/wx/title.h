@@ -22,7 +22,7 @@ class WXDLLIMPEXP_FREECHART TextElement
 {
 public:
     // Constructors
-    TextElement(const wxString& text, int hAlign, wxFont font = *wxNORMAL_FONT);
+    TextElement(const wxString& text, int hAlign = wxALIGN_CENTER_HORIZONTAL, wxFont font = *wxNORMAL_FONT);
     TextElement(const TextElement& orig);
 
     TextElement& operator = (const TextElement& orig);
@@ -78,7 +78,9 @@ class WXDLLIMPEXP_FREECHART TextElementContainer
 {
 public:
     TextElementContainer();
+    wxDEPRECATED_MSG("Use TextElementContainer(const TextElement&) instead)")
     TextElementContainer(const wxString& title);
+    TextElementContainer(const TextElement& element);
     TextElementContainer(const TextElementContainer& orig);
     TextElementContainer& operator=(const TextElementContainer& title);
     virtual ~TextElementContainer();
