@@ -264,6 +264,9 @@ protected:
 
     wxCoord GetAxesExtent(wxDC &dc, AxisArray *axes);
 
+    bool m_drawGridVertical;
+    bool m_drawGridHorizontal;
+
 private:
     //
     // Plot
@@ -323,7 +326,7 @@ private:
 
     /**
      * Draws data.
-     * @param dc device context
+     * @param cdc Chart device context
      * @param rcData data area rectangle
      */
     virtual void DrawBackground(ChartDC& cdc, wxRect rcData) wxOVERRIDE;
@@ -334,9 +337,6 @@ private:
      * @param rcLegend legend area rectangle
      */
     void DrawLegend(wxDC &dc, wxRect rcLegend);
-
-    bool m_drawGridVertical;
-    bool m_drawGridHorizontal;
 
     AxisArray m_leftAxes;
     AxisArray m_rightAxes;
