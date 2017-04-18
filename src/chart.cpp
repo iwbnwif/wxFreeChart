@@ -21,7 +21,7 @@ ChartObserver::~ChartObserver()
 
 Chart::Chart(Plot *plot, const wxString &title)
 {
-    Init(plot, new Header(title));
+    Init(plot, new Header(TextElement(title, wxALIGN_CENTRE_HORIZONTAL, wxFontInfo(14))));
 }
 
 Chart::Chart(Plot* plot, Header* header, Footer* footer)
@@ -32,7 +32,7 @@ Chart::Chart(Plot* plot, Header* header, Footer* footer)
 void Chart::Init(Plot* plot, Header* header, Footer* footer)
 {
     // defaults
-    wxColour bgColor = wxColour(220, 220, 220);
+    wxColour bgColor = *wxWHITE;
 
     m_background = new FillAreaDraw(
             *wxThePenList->FindOrCreatePen(bgColor, 1, wxPENSTYLE_SOLID),

@@ -29,7 +29,7 @@ public:
 
   virtual Chart* Create()
   {
-    Header* simpleTitle = new Header(GetName());
+    Header* simpleTitle = new Header(TextElement(GetName()));
     return new Chart(new XYPlot(), simpleTitle);
   }
 };

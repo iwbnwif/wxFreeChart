@@ -111,7 +111,7 @@ public:
      */
     void SetTitle(wxString title)
     {
-        SetHeader(new Header(title));
+        SetHeader(new Header(TextElement(title)));
     }
 
     void SetHeader(Header* header)
