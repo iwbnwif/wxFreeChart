@@ -129,11 +129,11 @@ protected:
 
     FIRE_WITH_THIS(PlotNeedRedraw);
 
+    AreaDraw *m_background;
+
 private:
     wxFont m_textNoDataFont;
     wxString m_textNoData;
-
-    AreaDraw *m_background;
 
     wxChartPanel *m_chartPanel;
 };

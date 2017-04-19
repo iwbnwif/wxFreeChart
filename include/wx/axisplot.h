@@ -185,8 +185,10 @@ public:
 
     /**
      * Sets background for data area.
+     * This function is deprecated, use SetPlotAreaBackground instead.
      * @param dataBackground background for data area
      */
+    wxDEPRECATED_MSG("SetDataBackground is deprecated, use SetBackground instead");
     void SetDataBackground(AreaDraw *dataBackground);
 
     /**

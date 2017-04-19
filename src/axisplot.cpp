@@ -41,7 +41,7 @@ AxisPlot::AxisPlot()
     m_crosshair = NULL;
     m_dataBackground = NULL;
     
-    SetDataBackground(new FillAreaDraw());
+    SetBackground(new FillAreaDraw(wxPen(DEFAULT_AXIS_BORDER_COLOUR)));
 }
 
 AxisPlot::~AxisPlot()
@@ -70,8 +70,7 @@ AxisPlot::~AxisPlot()
 
 void AxisPlot::SetDataBackground(AreaDraw *dataBackground)
 {
-    SAFE_REPLACE_OBSERVER(this, m_dataBackground, dataBackground);
-    wxREPLACE(m_dataBackground, dataBackground);
+    SetBackground(dataBackground);
 }
 
 void AxisPlot::AddAxis(Axis *axis)
@@ -491,8 +490,8 @@ void AxisPlot::DrawBackground(ChartDC& cdc, wxRect rc)
     // Calculate the rectangle where the actual data is plotted.
     CalcDataArea(dc, rc, rcPlot, rcLegend);
 
-    m_dataBackground->Draw(dc, rcPlot);
-    // m_background->Draw(dc, rcPlot);
+    // Draw the very background of the plot area.
+    m_background->Draw(dc, rcPlot);
     
     // Draw all static items.
     DrawGridLines(dc, rcPlot);
