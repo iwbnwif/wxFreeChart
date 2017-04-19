@@ -123,7 +123,7 @@ public:
      * @param borderPen pen to draw border
      * @param colour1 first gradient fill color
      * @param colour2 second gradient fill color
-     * @param dir gradient fill direction
+     * @param dir The direction of the gradient fill. wxALL creates a radial gradient.
      */
     GradientAreaDraw(wxPen borderPen = *wxBLACK_PEN,
             wxColour colour1 = wxColour(200, 220, 250),
