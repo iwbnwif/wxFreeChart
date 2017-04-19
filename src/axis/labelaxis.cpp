@@ -300,9 +300,9 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
         if (IsVertical()) 
         {
             // Vertical axis, so gridlines are horizontal.
-            wxCoord y = ToGraphics(dc, rc.y, rc.height, value);
+            wxCoord y = ToGraphics(dc, rc.y, rc.height - 1, value);
 
-            if (y == rc.y || y == (rc.y + rc.height))
+            if (y == rc.y || y == (rc.y + rc.height - 1))
                 continue;
 
             dc.DrawLine(rc.x + 1, y, rc.x + rc.width - 1, y);
@@ -311,9 +311,9 @@ void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
         else 
         {
             // Horizontal axis, so gridlines are vertical.
-            wxCoord x = ToGraphics(dc, rc.x, rc.width, value);
+            wxCoord x = ToGraphics(dc, rc.x, rc.width - 1, value);
 
-            if (x == rc.x || x == (rc.x + rc.width))
+            if (x == rc.x || x == (rc.x + rc.width - 1))
                 continue;
 
             dc.DrawLine(x, rc.y + 1, x, rc.y + rc.height - 1);

@@ -435,7 +435,7 @@ void AxisPlot::DrawAxesArray(wxDC &dc, wxRect rc, AxisArray *axes, bool vertical
 void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
 {
     if (m_leftAxes.Count() != 0) {
-        wxRect rcLeftAxes(rc.x, rcData.y, (rcData.x - rc.x), rcData.height);
+        wxRect rcLeftAxes(rc.x, rcData.y, (rcData.x - rc.x), rcData.height - 1);
         DrawAxesArray(dc, rcLeftAxes, &m_leftAxes, true);
     }
     if (m_rightAxes.Count() != 0) {
@@ -448,7 +448,7 @@ void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
         DrawAxesArray(dc, rcTopAxes, &m_topAxes, false);
     }
     if (m_bottomAxes.Count() != 0) {
-        wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
+        wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height - 1, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
         DrawAxesArray(dc, rcBottomAxes, &m_bottomAxes, false);
     }
 }
@@ -491,9 +491,7 @@ void AxisPlot::DrawBackground(ChartDC& cdc, wxRect rc)
     // Calculate the rectangle where the actual data is plotted.
     CalcDataArea(dc, rc, rcPlot, rcLegend);
 
-    // Draw the background of the plot area.
-    // Is there a bug in dc.DrawRectangle? It seems the rectangle is 1 pixel smaller in height than it should be.
-    m_dataBackground->Draw(dc, wxRect(rcPlot.x, rcPlot.y, rcPlot.width, rcPlot.height + 1));
+    m_dataBackground->Draw(dc, rcPlot);
     // m_background->Draw(dc, rcPlot);
     
     // Draw all static items.
