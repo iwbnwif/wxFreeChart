@@ -117,9 +117,16 @@ MainFrame::MainFrame()
 
     menuFile->Append(MENU_FILE_SAVE_AS_PNG, wxT("Save as PNG"));
     menuFile->AppendSeparator();
+
+#ifdef wxUSE_GRAPHICS_CONTEXT
     menuFile->AppendCheckItem(MENU_FILE_ENABLE_ANTIALIAS, wxT("Enable antialiasing"));
+    menuFile->Check(MENU_FILE_ENABLE_ANTIALIAS, true);
+    m_chartPanel->SetAntialias(true);
     menuFile->AppendSeparator();
+#endif
+
     menuFile->Append(wxID_EXIT, wxT("E&xit"));
+
 
     wxMenu *menuHelp = new wxMenu();
     menuHelp->Append(wxID_ABOUT, wxT("&About"));
