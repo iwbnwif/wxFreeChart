@@ -254,9 +254,10 @@ void BarRenderer::SetBarDraw(size_t serie, AreaDraw *areaDraw)
 AreaDraw *BarRenderer::GetBarDraw(size_t serie)
 {
     AreaDraw *barDraw = m_barDraws.GetAreaDraw(serie);
-    if (barDraw == NULL) {
-        barDraw = new FillAreaDraw(*wxBLACK_PEN,
-                *wxTheBrushList->FindOrCreateBrush(GetDefaultColour(serie), wxBRUSHSTYLE_SOLID));
+    if (barDraw == NULL) 
+    {
+        // barDraw = new FillAreaDraw(GetDefaultColour(serie), GetDefaultColour(serie));
+        barDraw = new FillAreaDraw(*wxTRANSPARENT_PEN, GetDefaultColour(serie));
 
         m_barDraws.SetAreaDraw(serie, barDraw);
     }
