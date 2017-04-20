@@ -36,17 +36,17 @@ Plot::~Plot()
 
 void Plot::Draw(ChartDC &cdc, wxRect rc, PlotDrawMode mode)
 {
-    if (!HasData())
-    {
-        DrawNoDataMessage(cdc.GetDC(), rc);
-        return;
-    }
-    
     if (mode == PLOT_DRAW_BACKGROUND || mode == PLOT_DRAW_ALL)
         DrawBackground(cdc, rc);
 
     if (mode == PLOT_DRAW_DATA || mode == PLOT_DRAW_ALL)
-        DrawData(cdc,rc);
+    {
+        if (HasData())
+            DrawData(cdc,rc);
+        else
+            DrawNoDataMessage(cdc.GetDC(), rc);
+    }
+        
 }
 
 void Plot::DrawNoDataMessage(wxDC &dc, wxRect rc)
