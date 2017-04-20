@@ -20,12 +20,12 @@ class ChartDC
 public:
     ChartDC (wxDC& dc, bool antialias) : m_DC(dc), m_Antialias(antialias) {}
 
-    wxDC& GetDC ()
+    wxDC& GetDC()
     {
         return m_DC;
     }
     
-    bool AntialiasActive ()
+    bool AntialiasActive()
     {
         return m_Antialias;
     }

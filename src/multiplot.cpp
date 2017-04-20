@@ -114,8 +114,7 @@ void MultiPlot::DrawData(ChartDC& cdc, wxRect rc)
 
         wxRect subRc(x, y, subWidth, subHeight);
 
-        // TODO: Multiplot needs to implement cdc.
-        // m_subPlots[n]->Draw(dc, subRc);
+        m_subPlots[n]->Draw(cdc, subRc);
 
         if (vertical) {
             row++;
