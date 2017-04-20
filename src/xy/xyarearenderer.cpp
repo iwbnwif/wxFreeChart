@@ -15,10 +15,10 @@
 
 IMPLEMENT_CLASS(XYAreaRenderer, XYRenderer)
 
-XYAreaRenderer::XYAreaRenderer()
+XYAreaRenderer::XYAreaRenderer(const wxPen& outlinePen, const wxBrush& areaBrush)
 {
-    m_outlinePen = *wxBLACK_PEN;
-    m_areaBrush = *wxGREY_BRUSH;
+    m_outlinePen = outlinePen;
+    m_areaBrush = areaBrush;
 }
 
 XYAreaRenderer::~XYAreaRenderer()

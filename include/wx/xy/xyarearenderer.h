@@ -16,7 +16,7 @@ class WXDLLIMPEXP_FREECHART XYAreaRenderer : public XYRenderer
 {
     DECLARE_CLASS(XYAreaRenderer)
 public:
-    XYAreaRenderer();
+    XYAreaRenderer(const wxPen& outlinePen = *wxTRANSPARENT_PEN, const wxBrush& areaBrush = *wxGREY_BRUSH);
     virtual ~XYAreaRenderer();
 
     virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
