@@ -17,7 +17,7 @@ class WXDLLIMPEXP_FREECHART XYLineRendererBase : public XYRenderer
 {
     DECLARE_CLASS(XYLineRendererBase)
 public:
-    XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultWidth = 1, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
+    XYLineRendererBase(bool drawSymbols, bool drawLines, int defaultWidth = 2, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
     virtual ~XYLineRendererBase();
 
     /**
@@ -83,7 +83,7 @@ public:
      * @param defaultWidth specifies default width for lines
      * @param defaultStyle specifies default style for lines
      */
-    XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 1, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
+    XYLineRenderer(bool drawSymbols = false, bool drawLines = true, int defaultWidth = 2, wxPenStyle defaultStyle = wxPENSTYLE_SOLID);
     virtual ~XYLineRenderer();
 
 
