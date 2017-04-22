@@ -25,7 +25,14 @@ public:
      * @param data double [x, y] array
      * @param count point count in data array
      */
+    wxDEPRECATED_MSG("Use XYSerie(const wxVector&<wxRealPoint>) instead.")
     XYSerie(double *data, size_t count);
+    
+    /**
+     * Constructs a new XY series using data that is already stored in the prepared vector.
+     * @param seriesData The data that will be displayed by this series.
+     */
+    XYSerie(const wxVector<wxRealPoint>& seriesData);
 
     virtual ~XYSerie();
 
@@ -40,8 +47,7 @@ public:
     void SetName(const wxString &name);
 
 private:
-    double *m_data;
-    size_t m_count;
+    wxVector<wxRealPoint> m_newdata;
     wxString m_name;
 };
 
@@ -62,6 +68,7 @@ public:
      * @param data double [x, y] array
      * @param count point count in data array
      */
+    wxDEPRECATED_MSG("Use AddSerie(new XYSerie(const wxVector&<wxRealPoint>)) instead.")
     void AddSerie(double *data, size_t count);
 
     /**

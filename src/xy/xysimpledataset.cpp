@@ -21,31 +21,33 @@ IMPLEMENT_CLASS(XYSimpleDataset, XYDataset)
 
 XYSerie::XYSerie(double *data, size_t count)
 {
-    m_data = new double[2 * count];
-    memcpy(m_data, data, 2 * count * sizeof(double));
-    m_count = count;
+    for (size_t i = 0; i < count; i++)
+        m_newdata.push_back(wxRealPoint(data[i * 2], data[(i * 2) + 1]));
+}
+
+XYSerie::XYSerie(const wxVector<wxRealPoint>& seriesData)
+{
+    m_newdata = seriesData;
 }
 
 XYSerie::~XYSerie()
 {
-    wxDELETEA(m_data);
+
 }
 
 double XYSerie::GetX(size_t index)
 {
-    wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetX"));
-    return m_data[index * 2];
+    return m_newdata.at(index).x;
 }
 
 double XYSerie::GetY(size_t index)
 {
-    wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetY"));
-    return m_data[index * 2 + 1];
+    return m_newdata.at(index).y;
 }
 
 size_t XYSerie::GetCount()
 {
-    return m_count;
+    return m_newdata.size();
 }
 
 const wxString &XYSerie::GetName()
@@ -117,3 +119,4 @@ void XYSimpleDataset::SetSerieName(size_t serie, const wxString &name)
     m_series[serie]->SetName(name);
     DatasetChanged();
 }
+
