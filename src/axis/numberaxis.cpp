@@ -43,49 +43,6 @@ bool IsNormalValue(double v)
 
 #endif
 
-/**
- * Helper function to calculate a 'nice' label interval for the given dataset. Label intervals are considered
- * nice if they are 1, 2, 5 or 10 raised to an appropriate power of 10.
- * @param value     The approximate interval required.
- * @param round     Whether the values should be rounded.
- * @return          The 'nice' value for the interval.
- */
-double nicenum (double value, bool round)
-{
-    // Get the logarithmic form of the value. 
-    double exp = floor(log10(fabs(value)));
-    double mant = value / pow(10.0, exp);
-    
-    // Find a nice value.
-    double nice;
-    
-    if (round)
-    {
-        if (mant <= 1.5)
-            nice = 1.0;
-        else if (mant <= 3.0)
-            nice = 2.0;
-        else if (mant <= 7.0)
-            nice = 5.0;
-        else
-            nice = 10.0;  
-    }
-    
-    else
-    {
-        if (mant <= 1.0)
-            nice = 1.0;
-        else if (mant <= 2.0)
-            nice = 2.0;
-        else if (mant <= 5.0)
-            nice = 5.0;
-        else
-            nice = 10.0;    
-    }
-    
-    return  nice * pow(10, exp);
-}
-
 IMPLEMENT_CLASS(NumberAxis, Axis)
 
 NumberAxis::NumberAxis(AXIS_LOCATION location)
@@ -98,13 +55,13 @@ NumberAxis::NumberAxis(AXIS_LOCATION location)
     m_maxValue = 100;
 
     m_labelInterval = 10;
-    m_labelCount = 5;
+    m_labelCount = 0;
 
     m_intValues = false;
     m_hasLabels = false;
     m_fixedBounds = false;
     m_zeroOrigin = true;
-    m_forceExtraTick = false;
+    m_extraMajorInterval = false;
 
     m_multiplier = 1;
 }
@@ -125,7 +82,7 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
     m_maxValue = maxValue;
     m_fixedBounds = true;
 
-    UpdateTickValues();
+    UpdateMajorIntervalValues();
     FireBoundsChanged();
 }
 
@@ -134,7 +91,7 @@ bool NumberAxis::UpdateBounds()
     // No need to update bounds if they are fixed (defined by the user).
     if (m_fixedBounds) 
     {
-        UpdateTickValues();
+        UpdateMajorIntervalValues();
         return false;
     }
 
@@ -174,37 +131,37 @@ bool NumberAxis::UpdateBounds()
 
     // Make sure m_maxValue doesn't fall on a boundary for vertical axis (ensures some padding
     // between maximum value and topmost tick).
-    if (m_forceExtraTick && IsVertical())
+    if (m_extraMajorInterval && IsVertical())
         m_maxValue += 0.00000001;
 
-    m_labelInterval = nicenum((m_maxValue - m_minValue) / (m_labelCount - 1), false);
+    m_labelInterval = CalcNiceInterval((m_maxValue - m_minValue) / (DEFAULT_MAJOR_LABEL_COUNT - 1));
     m_maxValue = ceil(m_maxValue / m_labelInterval) * m_labelInterval;
     m_minValue = floor(m_minValue / m_labelInterval) * m_labelInterval;
+    m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
     
     // The following might be a way of formatting the number of relevant decimal places.
     // int nfrac = wxMax(-floor(log10(nice)), 0);
         
-    UpdateTickValues();
-    
+    UpdateMajorIntervalValues();
     FireBoundsChanged();
     return true;
 }
 
-void NumberAxis::UpdateTickValues()
+void NumberAxis::UpdateMajorIntervalValues()
 {
     m_hasLabels = false;
-    // m_labelInterval = (m_maxValue - m_minValue) / (double) (m_labelCount - 1);
 
-    if (!IsNormalValue(m_labelInterval)) {
+    if (!IsNormalValue(m_labelInterval)) 
+    {
         // overflow condition bugfix
         m_minValue = 0;
         m_maxValue = 0;
         m_labelInterval = 0;
     }
-    else {
-        if (ABS(m_maxValue - m_minValue) > 0.000000001) {
+    else 
+    {
+        if (ABS(m_maxValue - m_minValue) > 0.000000001)
             m_hasLabels = true;
-        }
     }
     FireAxisChanged();
 }
@@ -251,6 +208,42 @@ void NumberAxis::GetLabel(size_t step, wxString &label)
         // orig : label = wxString::Format(m_tickFormat, value);
         label = wxString::Format(m_tickFormat, value * m_multiplier);
     }
+}
+
+double NumberAxis::CalcNiceInterval (double value, bool round)
+{
+    // Get the logarithmic form of the value. 
+    double exp = floor(log10(fabs(value)));
+    double mant = value / pow(10.0, exp);
+    
+    // Find a nice value.
+    double nice;
+    
+    if (round)
+    {
+        if (mant <= 1.5)
+            nice = 1.0;
+        else if (mant <= 3.0)
+            nice = 2.0;
+        else if (mant <= 7.0)
+            nice = 5.0;
+        else
+            nice = 10.0;  
+    }
+    
+    else
+    {
+        if (mant <= 1.0)
+            nice = 1.0;
+        else if (mant <= 2.0)
+            nice = 2.0;
+        else if (mant <= 5.0)
+            nice = 5.0;
+        else
+            nice = 10.0;    
+    }
+    
+    return  nice * pow(10, exp);
 }
 
 bool NumberAxis::IsEnd(size_t step)

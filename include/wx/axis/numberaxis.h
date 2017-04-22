@@ -34,17 +34,8 @@ public:
         FireAxisChanged();
     }
 
-    /**
-     * Sets count of labels.
-     * @param labelCount count of labels
-     */
-    void SetLabelCount(size_t labelCount)
-    {
-        if (m_labelCount != labelCount) {
-            m_labelCount = labelCount;
-            FireAxisChanged();
-        }
-    }
+    wxDEPRECATED_MSG("Do not use this function, instead use SetMajorInterval.")
+    void SetLabelCount(size_t labelCount) {}
 
     /**
      * Set whether to use integer values instead of doubles.
@@ -81,11 +72,11 @@ public:
      * @param force If true, an extra tick is drawn at the top of a vertical axis if
      *              the maximum value falls on a tick interval.
      */
-    void ForceExtraTick(bool force = true)
+    void ForceExtraMajorInterval(bool force = true)
     {
-        if (m_forceExtraTick != force)
+        if (m_extraMajorInterval != force)
         {
-            m_forceExtraTick = force;
+            m_extraMajorInterval = force;
             FireAxisChanged();
         }
     }
@@ -124,7 +115,17 @@ public:
 
 protected:
     virtual bool AcceptDataset(Dataset *dataset);
-    void UpdateTickValues();
+    
+    /**
+    * Helper function to calculate a 'nice' label interval for the given dataset. Label intervals are considered
+    * nice if they are 1, 2, 5 or 10 raised to an appropriate power of 10.
+    * @param value     The approximate interval required.
+    * @param round     Whether the values should be rounded.
+    * @return          The 'nice' value for the interval.
+    */
+    double CalcNiceInterval(double value, bool round = false);
+    
+    void UpdateMajorIntervalValues();
 
     //
     // LabelAxis
@@ -144,15 +145,15 @@ protected:
     bool m_hasLabels;
     double m_minValue;
     double m_maxValue;
+    double m_labelInterval;
+    size_t m_labelCount;
 
 private:
     // Private members.
     wxString m_tickFormat;
-    double m_labelInterval;
-    size_t m_labelCount;
     bool m_intValues;
     bool m_zeroOrigin;
-    bool m_forceExtraTick;
+    bool m_extraMajorInterval;
     double m_multiplier;
 };
 

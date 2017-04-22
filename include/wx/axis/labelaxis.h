@@ -188,12 +188,32 @@ public:
      * Sets major label steps.
      * @param step  The step size at which major label should be drawn
      */
+    wxDEPRECATED_MSG("Use SetMinorIntervalCount instead.")
     void SetMajorLabelSteps(size_t step)
     {
         if (m_majorLabelStep != step) {
             m_majorLabelStep = step;
             FireAxisChanged();
         }
+    }
+
+    /**
+     * Set the number of ticks between each label (major interval).
+     * @param count The number of minor interval ticks that should appear between each major interval label.
+     */
+    void SetMinorIntervalCount(size_t count)
+    {
+        m_minorIntervalCount = count;
+        FireAxisChanged();
+    }
+
+    /**
+     * Get the number of ticks between each label (major interval).
+     * @return The number of minor interval ticks that appear between each major interval label.
+     */
+    size_t GetMinorIntervalCout()
+    {
+        return m_minorIntervalCount;
     }
 
     void SetLabelSkip(int blankLabels);
@@ -261,6 +281,8 @@ private:
     void DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double value, bool isMajorLabel);
 
     void DrawBorderLine(wxDC &dc, wxRect rc);
+    
+    void DrawGridLine(wxDC& dc, const wxRect& rc, double value);
 
     wxCoord m_labelLineSize;
     wxCoord m_labelGap;
@@ -271,6 +293,7 @@ private:
     wxPen m_labelPen;
     bool m_verticalLabelText;
     size_t m_majorLabelStep;
+    size_t m_minorIntervalCount;
 
     // label title properties
     wxString m_title;

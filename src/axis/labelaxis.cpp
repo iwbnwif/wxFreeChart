@@ -52,6 +52,7 @@ LabelAxis::LabelAxis(AXIS_LOCATION location)
     m_labelPen = DEFAULT_AXIS_BORDER_COLOUR;
     m_verticalLabelText = false;
     m_majorLabelStep = 1;
+    m_minorIntervalCount = 0;
 
     m_title = wxEmptyString;
     m_titleFont = wxFont(wxFontInfo(9));
@@ -105,6 +106,59 @@ wxCoord LabelAxis::GetExtent(wxDC &dc)
         extent += m_labelPen.GetWidth();
     }
     return extent;
+}
+
+void LabelAxis::SetLabelSkip(int blankLabels)
+{
+    m_blankLabels = blankLabels;
+}
+
+int LabelAxis::GetLabelSkip()
+{
+    return m_blankLabels;
+}
+
+void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
+{
+    if (!HasLabels())
+        return ;
+
+    // Setup dc objects for labels and tick mark lines.
+    dc.SetFont(m_labelTextFont);
+    dc.SetTextForeground(m_labelTextColour);
+    dc.SetPen(m_labelPen);
+
+    wxString label;
+    
+    for (int majorStep = 0; !IsEnd(majorStep); majorStep++) 
+    {
+        double value = GetValue(majorStep);
+        
+        if (!IsVisible(value))
+            continue;
+
+        label = wxEmptyString;
+
+        // Get the value for this step as a string (can be number, category etc. depending on derivative).
+        GetLabel(majorStep, label);
+
+        // Draw a tick and label at the major interval.
+        DrawLabel(dc, rc, label, value, true);
+
+        // Calculate the value range between this label and the next (changes for non-linear axis, such as log).
+        double minorInterval =  (GetValue(majorStep + 1) - GetValue(majorStep)) / m_minorIntervalCount;
+        
+        for (size_t minorStep = 1; minorStep <= m_minorIntervalCount; minorStep++)
+        {
+            double minorValue = GetValue(majorStep) + (minorInterval * minorStep);
+
+            if (!IsVisible(minorValue))
+                continue;
+            
+            // Draw the minor interval tick.
+            DrawLabel(dc, rc, "", minorValue, false);
+        }
+    }
 }
 
 void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double value, bool isMajorLabel)
@@ -205,44 +259,6 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
     }
 }
 
-void LabelAxis::SetLabelSkip(int blankLabels)
-{
-    m_blankLabels = blankLabels;
-}
-
-int LabelAxis::GetLabelSkip()
-{
-    return m_blankLabels;
-}
-
-void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
-{
-    if (!HasLabels())
-        return ;
-
-    // Setup dc objects for labels and lines.
-    dc.SetFont(m_labelTextFont);
-    dc.SetTextForeground(m_labelTextColour);
-    dc.SetPen(m_labelPen);
-
-    wxString label;
-    
-    for (int step = 0; !IsEnd(step) ; step++) 
-    {
-        double value = GetValue(step);
-        
-        if (!IsVisible(value))
-            continue;
-
-        label = wxEmptyString;
-
-        if (step % (m_blankLabels + 1) == 0)
-            GetLabel(step, label);
-
-        DrawLabel(dc, rc, label, value, !(step % m_majorLabelStep));
-    }
-}
-
 void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
 {
     wxCoord x1, y1;
@@ -279,45 +295,59 @@ void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
 
 void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
 {
-    if (!HasLabels()) {
+    if (!HasLabels()) 
         return ;
-    }
 
-    for (int nStep = 0; !IsEnd(nStep); nStep++) 
+    for (int majorStep = 0; !IsEnd(majorStep); majorStep++) 
     {
-        // Set the pen for major and minor gridlines as appropriate.
-        if (!(nStep % m_majorLabelStep))
-            dc.SetPen(m_majorGridlinePen);
-        
-        else
-            dc.SetPen(m_minorGridlinePen);
-
-        double value = GetValue(nStep);
+        double value = GetValue(majorStep);
         
         if (!IsVisible(value))
             continue;
 
-        if (IsVertical()) 
+        // Draw the major interval gridline.
+        dc.SetPen(m_majorGridlinePen);
+        DrawGridLine(dc, rc, value);
+
+        for (size_t minorStep = 1; minorStep <= m_minorIntervalCount; minorStep++)
         {
-            // Vertical axis, so gridlines are horizontal.
-            wxCoord y = ToGraphics(dc, rc.y, rc.height - 1, value);
+            // Calculate the value range between this label and the next (changes for non-linear axis, such as log).
+            double minorInterval = (GetValue(majorStep + 1) - GetValue(majorStep)) / m_minorIntervalCount;
+            
+            double minorValue = GetValue(majorStep) + (minorInterval * minorStep);
 
-            if (y == rc.y || y == (rc.y + rc.height - 1))
+            if (!IsVisible(minorValue))
                 continue;
-
-            dc.DrawLine(rc.x + 1, y, rc.x + rc.width - 1, y);
+            
+            // Draw the minor interval gridline.
+            dc.SetPen(m_minorGridlinePen);
+            DrawGridLine(dc, rc, minorValue);
         }
-        
-        else 
-        {
-            // Horizontal axis, so gridlines are vertical.
-            wxCoord x = ToGraphics(dc, rc.x, rc.width - 1, value);
+    }
+}
 
-            if (x == rc.x || x == (rc.x + rc.width - 1))
-                continue;
+void LabelAxis::DrawGridLine(wxDC& dc, const wxRect& rc, double value)
+{
+    if (IsVertical()) 
+    {
+        // Vertical axis, so gridlines are horizontal.
+        wxCoord y = ToGraphics(dc, rc.y, rc.height - 1, value);
 
-            dc.DrawLine(x, rc.y + 1, x, rc.y + rc.height - 1);
-        }
+        if (y == rc.y || y == (rc.y + rc.height - 1))
+            return;
+
+        dc.DrawLine(rc.x + 1, y, rc.x + rc.width - 1, y);
+    }
+    
+    else 
+    {
+        // Horizontal axis, so gridlines are vertical.
+        wxCoord x = ToGraphics(dc, rc.x, rc.width - 1, value);
+
+        if (x == rc.x || x == (rc.x + rc.width - 1))
+            return;
+
+        dc.DrawLine(x + 1, rc.y + 1, x + 1, rc.y + rc.height - 1);
     }
 }
 
@@ -332,8 +362,9 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
     if (!m_visible)
         return;
 
-    // draw title
-    if (m_title.Length() != 0) {
+    // Calculate the axis' title position and draw the title.
+    if (m_title.Length() != 0) 
+    {
         wxSize titleExtent = dc.GetTextExtent(m_title);
 
         dc.SetFont(m_titleFont);
@@ -391,8 +422,11 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
         }
     } 
     
+    // Draw the tick marks and labels.
     DrawLabels(dc, rc);
-    DrawBorderLine(dc, rc);
+    
+    // Draw the border.
+    // DrawBorderLine(dc, rc);
 }
 
 bool LabelAxis::HasLabels()
