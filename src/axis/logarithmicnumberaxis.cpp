@@ -19,6 +19,7 @@ LogarithmicNumberAxis::LogarithmicNumberAxis(AXIS_LOCATION location)
 , m_logBase(10.0)
 {
     m_logBase == 10.0 ? SetTickFormat(wxT("%2.2e")) : SetTickFormat(wxT("%2.2f"));
+    SetMinorIntervalCount(9); 
 }
 
 LogarithmicNumberAxis::~LogarithmicNumberAxis()
@@ -27,13 +28,13 @@ LogarithmicNumberAxis::~LogarithmicNumberAxis()
 
 bool LogarithmicNumberAxis::UpdateBounds()
 {
-    if (m_fixedBounds) {
+    if (m_fixedBounds) 
         return false; // bounds are fixed, so don't update
-    }
 
     m_hasLabels = false;
 
-    for (size_t n = 0; n < m_datasets.Count(); n++) {
+    for (size_t n = 0; n < m_datasets.Count(); n++) 
+    {
         double minValue = GetMinValue(m_datasets[n]);
         double maxValue = GetMaxValue(m_datasets[n]);
 
@@ -47,16 +48,23 @@ bool LogarithmicNumberAxis::UpdateBounds()
         }
     }
 
-    if (m_minValue == m_maxValue) {
-        if (m_maxValue > 0) {
+    if (m_minValue == m_maxValue) 
+    {
+        if (m_maxValue > 0)
             m_minValue = 0;
-        }
-        else {
+
+        else
             m_maxValue = 0;
-        }
     }
 
-    UpdateTickValues();
+    // Note: log_base(n) = log(n) / log(base).
+
+    m_minValue = pow(m_logBase, floor(log(m_minValue) / log(m_logBase)));
+    m_maxValue = pow(m_logBase, ceil(log(m_maxValue) / log(m_logBase)));
+
+    m_labelCount = (log(m_maxValue) / log(m_logBase)) - (log(m_minValue) / log(m_logBase)) + 1;
+
+    UpdateMajorIntervalValues();
     FireBoundsChanged();
     return true;
 }
@@ -157,7 +165,9 @@ double LogarithmicNumberAxis::GetValue(size_t step)
 void LogarithmicNumberAxis::GetLabel(size_t step, wxString& label)
 {
     NumberAxis::GetLabel(step, label);
+
 #ifdef __WXMSW__
+    // Remove trailing zeros on wxMSW.
     if (m_logBase == 10.0 && !m_longExponent) {
         label.erase(label.length() - 3, 1);
     }
