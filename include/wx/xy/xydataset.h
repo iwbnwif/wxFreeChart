@@ -68,7 +68,6 @@ public:
      */
     virtual double GetMinX();
 
-
     virtual double GetMinValue(bool verticalAxis);
 
     virtual double GetMaxValue(bool verticalAxis);

@@ -138,18 +138,18 @@ public:
     // Received from renderer, or marker
     virtual void NeedRedraw(DrawObject *obj);
 
+    /**
+     * Called to indicate, that dataset is changed.
+     * For call by derivate classes.
+     */
+    void DatasetChanged();
+
 protected:
     /**
      * Checks whether renderer is acceptable by this dataset.
      * TODO: this method must be removed, because acceptable renderer type depends on plot type.
      */
     virtual bool AcceptRenderer(Renderer *r) = 0;
-
-    /**
-     * Called to indicate, that dataset is changed.
-     * For call by derivate classes.
-     */
-    void DatasetChanged();
 
     Renderer *m_renderer;
 private:
