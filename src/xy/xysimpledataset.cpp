@@ -45,6 +45,16 @@ double XYSerie::GetY(size_t index)
     return m_newdata.at(index).y;
 }
 
+void XYSerie::UpdateX(size_t index, double x)
+{
+    m_newdata.at(index).x = x;
+}
+
+void XYSerie::UpdateY(size_t index, double y)
+{
+    m_newdata.at(index).y = y;
+}
+
 size_t XYSerie::GetCount()
 {
     return m_newdata.size();
@@ -58,6 +68,27 @@ const wxString &XYSerie::GetName()
 void XYSerie::SetName(const wxString &name)
 {
     m_name = name;
+}
+
+void XYSerie::UpdatePoint(size_t index, const wxRealPoint& values)
+{
+    m_newdata.at(index).x = values.x;
+    m_newdata.at(index).y = values.y;
+}
+
+void XYSerie::Insert(size_t index, const wxRealPoint& values)
+{
+    m_newdata.insert(m_newdata.begin() + index, values);
+}
+
+void XYSerie::Remove(size_t index)
+{
+    m_newdata.erase(m_newdata.begin() + index);
+}
+
+void XYSerie::Append(const wxRealPoint& values)
+{
+    m_newdata.push_back(values);
 }
 
 //
@@ -84,6 +115,12 @@ void XYSimpleDataset::AddSerie(XYSerie *serie)
 {
     m_series.Add(serie);
     DatasetChanged();
+}
+
+XYSerie* XYSimpleDataset::GetSerie(size_t series)
+{
+    wxCHECK(series < m_series.Count(), 0);
+    return m_series[series];
 }
 
 double XYSimpleDataset::GetX(size_t index, size_t serie)
@@ -119,4 +156,3 @@ void XYSimpleDataset::SetSerieName(size_t serie, const wxString &name)
     m_series[serie]->SetName(name);
     DatasetChanged();
 }
-

@@ -36,9 +36,47 @@ public:
 
     virtual ~XYSerie();
 
+    void Append(const wxRealPoint& values);
+
+    void Insert(size_t index, const wxRealPoint& values);
+    
+    void Remove(size_t index);
+
+    /**
+     * Retrieves the X value of an existing data point within the series.
+     * @param index The position of the data point within the series.
+     * @return The X value for the selected data point.
+     */
     double GetX(size_t index);
 
+    /**
+     * Retrieves the Y value of an existing data point within the series.
+     * @param index The position of the data point within the series.
+     * @return The Y value for the selected data point.
+     */
     double GetY(size_t index);
+    
+    /**
+     * Updates the X value of an existing data point within the series.
+     * @param index The position of the data point within the series.
+     * @param values The new values for X.
+     */
+    void UpdateX(size_t index, double x);
+    
+    /**
+     * Updates the Y value of an existing data point within the series.
+     * @param index The position of the data point within the series.
+     * @param values The new value for Y.
+     */
+    void UpdateY(size_t index, double y);
+
+    /**
+     * Updates the X and Y values of an existing data point within the series.
+     * @param index The position of the data point within the series.
+     * @param values The new values for X and Y.
+     */
+    void UpdatePoint(size_t index, const wxRealPoint& values);
+    
 
     size_t GetCount();
 
@@ -48,7 +86,7 @@ public:
 
 private:
     wxVector<wxRealPoint> m_newdata;
-    wxString m_name;
+    wxString m_name;  
 };
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(XYSerie *, XYSerieArray, WXDLLIMPEXP_FREECHART);
@@ -77,23 +115,27 @@ public:
      */
     void AddSerie(XYSerie *serie);
 
-    //
-    // XYDataset
-    //
-    virtual double GetX(size_t index, size_t serie);
+    XYSerie* GetSerie(size_t series);
 
-    virtual double GetY(size_t index, size_t serie);
+    virtual double GetX(size_t index, size_t serie) wxOVERRIDE;
+
+    virtual double GetY(size_t index, size_t serie) wxOVERRIDE;
 
     virtual size_t GetSerieCount();
 
     virtual size_t GetCount(size_t serie);
 
+    wxDEPRECATED_MSG("Use GetSeries()->GetName() instead.");
     virtual wxString GetSerieName(size_t serie);
 
+    wxDEPRECATED_MSG("Use GetSeries()->SetName() instead.");
     void SetSerieName(size_t serie, const wxString &name);
 
 private:
     XYSerieArray m_series;
+    wxVector<wxSharedPtr<XYSerie> > m_series2;
+    
+    friend XYSerie;
 };
 
 #endif /*XYSIMPLEDATASET_H_*/
