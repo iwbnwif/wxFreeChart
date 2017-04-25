@@ -78,4 +78,7 @@ inline static int RoundHigh(double value)
 #define DEFAULT_MAJOR_GRIDLINE_PEN_COLOUR wxColour("#DADADA")
 #define DEFAULT_MINOR_GRIDLINE_PEN_COLOUR wxColour("#F0F0F0")
 
+// Default Values
+#define DEFAULT_MAJOR_LABEL_COUNT 10
+
 #endif /* WXFREECHARTDEFS_H */
