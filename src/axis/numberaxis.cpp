@@ -91,6 +91,7 @@ bool NumberAxis::UpdateBounds()
     // No need to update bounds if they are fixed (defined by the user).
     if (m_fixedBounds) 
     {
+        m_labelInterval = CalcNiceInterval((m_maxValue - m_minValue) / (DEFAULT_MAJOR_LABEL_COUNT - 1));
         UpdateMajorIntervalValues();
         return false;
     }
@@ -137,7 +138,6 @@ bool NumberAxis::UpdateBounds()
     m_labelInterval = CalcNiceInterval((m_maxValue - m_minValue) / (DEFAULT_MAJOR_LABEL_COUNT - 1));
     m_maxValue = ceil(m_maxValue / m_labelInterval) * m_labelInterval;
     m_minValue = floor(m_minValue / m_labelInterval) * m_labelInterval;
-    m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
     
     // The following might be a way of formatting the number of relevant decimal places.
     // int nfrac = wxMax(-floor(log10(nice)), 0);
@@ -160,7 +160,9 @@ void NumberAxis::UpdateMajorIntervalValues()
     }
     else 
     {
-        if (ABS(m_maxValue - m_minValue) > 0.000000001)
+        m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
+
+        if (m_labelCount)
             m_hasLabels = true;
     }
     FireAxisChanged();
