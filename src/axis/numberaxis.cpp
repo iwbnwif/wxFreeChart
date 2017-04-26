@@ -92,6 +92,7 @@ bool NumberAxis::UpdateBounds()
     if (m_fixedBounds) 
     {
         m_labelInterval = CalcNiceInterval((m_maxValue - m_minValue) / (DEFAULT_MAJOR_LABEL_COUNT - 1));
+        m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
         UpdateMajorIntervalValues();
         return false;
     }
@@ -138,6 +139,7 @@ bool NumberAxis::UpdateBounds()
     m_labelInterval = CalcNiceInterval((m_maxValue - m_minValue) / (DEFAULT_MAJOR_LABEL_COUNT - 1));
     m_maxValue = ceil(m_maxValue / m_labelInterval) * m_labelInterval;
     m_minValue = floor(m_minValue / m_labelInterval) * m_labelInterval;
+    m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
     
     // The following might be a way of formatting the number of relevant decimal places.
     // int nfrac = wxMax(-floor(log10(nice)), 0);
@@ -160,8 +162,6 @@ void NumberAxis::UpdateMajorIntervalValues()
     }
     else 
     {
-        m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
-
         if (m_labelCount)
             m_hasLabels = true;
     }
