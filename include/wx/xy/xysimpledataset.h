@@ -125,10 +125,10 @@ public:
 
     virtual size_t GetCount(size_t serie);
 
-    wxDEPRECATED_MSG("Use GetSeries()->GetName() instead.");
+    wxDEPRECATED_MSG("Use GetSeries()->GetName() instead.")
     virtual wxString GetSerieName(size_t serie);
 
-    wxDEPRECATED_MSG("Use GetSeries()->SetName() instead.");
+    wxDEPRECATED_MSG("Use GetSeries()->SetName() instead.")
     void SetSerieName(size_t serie, const wxString &name);
 
 private:
