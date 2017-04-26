@@ -41,7 +41,8 @@ public:
 private:
     void OnTreeItemActivated(wxTreeEvent &ev);
 
-    wxChartPanel *m_chartPanel;
+    wxChartPanel* m_chartPanel;
+    ChartDemo* m_currentDemo;
 
     DECLARE_EVENT_TABLE()
 };

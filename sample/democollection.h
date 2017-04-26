@@ -43,6 +43,12 @@ public:
      * @return created demo chart
      */
     virtual Chart *Create() = 0;
+    
+    /**
+     * Called to cleanup before changing demos.
+     * Default is to do nothing. Needed for dynamic demo to stop the timer before destroying objects.
+     */
+    virtual void CleanUp () {};
 
     const wxString &GetName()
     {

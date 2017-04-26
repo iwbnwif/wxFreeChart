@@ -46,6 +46,7 @@ ChartSelector::ChartSelector(wxWindow *parent, wxChartPanel *chartPanel, DemoCol
 : wxTreeCtrl(parent, wxID_ANY, wxDefaultPosition, wxDefaultSize)
 {
     m_chartPanel = chartPanel;
+    m_currentDemo = NULL;
 
     // create tree items for chart demos
     wxTreeItemId root = AddRoot(wxT("Charts"));
@@ -72,9 +73,13 @@ void ChartSelector::OnTreeItemActivated(wxTreeEvent &ev)
     DemoTreeItemData *demoItem = dynamic_cast<DemoTreeItemData *>(ev.GetClientObject());
 
     if (demoItem != NULL) {
-        ChartDemo *demo = demoItem->GetDemo();
 
-        m_chartPanel->SetChart(demo->Create());
+        if (m_currentDemo != NULL)
+            m_currentDemo->CleanUp();
+        
+        m_currentDemo = demoItem->GetDemo();
+
+        m_chartPanel->SetChart(m_currentDemo->Create());
     }
 }
 
