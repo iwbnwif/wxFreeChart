@@ -426,7 +426,7 @@ void LabelAxis::Draw(wxDC &dc, wxRect rc)
     DrawLabels(dc, rc);
     
     // Draw the border.
-    // DrawBorderLine(dc, rc);
+    DrawBorderLine(dc, rc);
 }
 
 bool LabelAxis::HasLabels()
