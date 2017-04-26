@@ -113,7 +113,7 @@ public:
      * axis label.
      * @param majorGridlinePen The pen to be used to draw major gridlines on this axis.
      */
-     void SetMajorGridlinePen(wxPen& pen)
+     void SetMajorGridlinePen(const wxPen& pen)
      {
          m_majorGridlinePen = pen;
          FireAxisChanged();
@@ -124,7 +124,7 @@ public:
      * axis label, i.e. any label that is not a major axis label.
      * @param minorGridlinePen The pen to be used to draw minor gridlines on this axis.
      */
-     void SetMinorGridlinePen(wxPen& pen)
+     void SetMinorGridlinePen(const wxPen& pen)
      {
          m_minorGridlinePen = pen;
          FireAxisChanged();
