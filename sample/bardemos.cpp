@@ -29,7 +29,7 @@ class BarDemo1 : public ChartDemo
 {
 public:
     BarDemo1()
-    : ChartDemo(wxT("Bar demo 1 - one serie"))
+    : ChartDemo(wxT("Bar demo 1 - Single Series"))
     {
     }
 
@@ -58,7 +58,7 @@ public:
         dataset->AddSerie(wxT("Serie 0"), values, WXSIZEOF(values));
 
         // create normal bar type with bar width = 10
-        BarType *barType = new NormalBarType(10);
+        BarType *barType = new NormalBarType(30);
 
         // Set bar renderer for it
         dataset->SetRenderer(new BarRenderer(barType));
@@ -69,15 +69,22 @@ public:
         // Create left number axis, set it's margins, and add it to plot
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         leftAxis->SetMargins(5, 0);
+        leftAxis->SetLabelTextColour(wxColour("#DADADA"));
+        leftAxis->SetLabelPen(wxPen(wxColour("#DADADA")));
+        leftAxis->SetMajorGridlinePen(wxPen(wxColour("#DADADA")));
         plot->AddAxis(leftAxis);
 
         // Create bottom axis, set it's margins, and add it to plot
         CategoryAxis *bottomAxis = new CategoryAxis(AXIS_BOTTOM);
-        bottomAxis->SetMargins(10, 10);
+        bottomAxis->SetMargins(20, 20);
+        bottomAxis->SetLabelTextColour(wxColour("#DADADA"));
+        bottomAxis->SetLabelPen(wxPen(wxColour("#DADADA")));
         plot->AddAxis(bottomAxis);
 
         // Add dataset to plot
         plot->AddDataset(dataset);
+        
+        plot->SetBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
         // Link first dataset with horizontal axis
         plot->LinkDataHorizontalAxis(0, 0);
@@ -85,8 +92,23 @@ public:
         // Link first dataset with vertical axis
         plot->LinkDataVerticalAxis(0, 0);
 
+        // Show a legend at the centre-right position.
+        Legend* legend = new Legend(wxCENTER, wxRIGHT, new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
+        plot->SetLegend(legend);
+
+        // Create a custom title.
+        TextElement title(GetName());
+        title.SetColour(wxColour("#DADADA"));
+
         // and finally construct and return chart
-        return new Chart(plot, GetName());
+        Chart* chart = new Chart(plot, new Header(title));
+        
+        // Create a radial gradient background.
+        // Warning: Radial gradients are slow to draw in wxWidgets!
+        chart->SetBackground(new GradientAreaDraw(*wxTRANSPARENT_PEN, 
+                                                    wxColour("#8A8A8A"), wxColour("#707070"), wxALL));
+        
+        return chart;
     }
 };
 
@@ -97,7 +119,7 @@ class BarDemo2 : public ChartDemo
 {
 public:
     BarDemo2()
-    : ChartDemo(wxT("Bar demo 2 - one category"))
+    : ChartDemo(wxT("Bar Demo 2 - One Category"))
     {
     }
 
@@ -158,7 +180,7 @@ class BarDemo3 : public ChartDemo
 {
 public:
     BarDemo3()
-    : ChartDemo(wxT("Bar demo 3 - normal bars"))
+    : ChartDemo(wxT("Bar Demo 3 - Normal Bars"))
     {
     }
 
@@ -174,10 +196,10 @@ public:
 
         // serie 1 values
         double values1[] = {
-                10,
-                20,
-                5,
-                50,
+                7.5,
+                19,
+                19,
+                22,
                 25,
         };
 
@@ -198,15 +220,15 @@ public:
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
 
         // Create bat type
-        BarType *barType = new NormalBarType(10);
+        BarType *barType = new NormalBarType(20);
 
         // Set bar renderer for it, with normal bars
         BarRenderer *renderer = new BarRenderer(barType);
-
-        // some eyes-candy: gradient bars
-        renderer->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-        renderer->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
-
+        
+        // Why doesn't SetSerieColour work for bars?
+        renderer->SetBarDraw(0, new FillAreaDraw(*wxTRANSPARENT_PEN, wxBrush(wxColour("#007F7F"))));
+        renderer->SetBarDraw(1, new FillAreaDraw(*wxTRANSPARENT_PEN, wxBrush(wxColour("#EA4B32"))));
+        
         // assign renderer to dataset - necessary step
         dataset->SetRenderer(renderer);
 
@@ -215,12 +237,14 @@ public:
 
         // Add left category axis
         CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
-        leftAxis->SetMargins(20, 20); // setup margins, so bars will fit to plot.
+        leftAxis->SetMargins(40, 40); // setup margins, so bars will fit to plot.
+        
         plot->AddAxis(leftAxis);
 
         // Add bottom number axis
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
         bottomAxis->SetMargins(0, 5);
+        bottomAxis->IntegerValues(true);
         plot->AddAxis(bottomAxis);
 
         // Add dataset to plot
@@ -244,7 +268,7 @@ class BarDemo4 : public ChartDemo
 {
 public:
     BarDemo4()
-    : ChartDemo(wxT("Bar demo 4 - stacked bars"))
+    : ChartDemo(wxT("Bar Demo 4 - Stacked Bars"))
     {
     }
 
@@ -284,7 +308,7 @@ public:
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
 
         // Create stacked bar type
-        BarType *barType = new StackedBarType(10, 0);
+        BarType *barType = new StackedBarType(40, 0);
 
         // Set bar renderer for it, with stacked bar type
         BarRenderer *renderer = new BarRenderer(barType);
@@ -297,7 +321,7 @@ public:
 
         // Add left category axis
         CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
-        leftAxis->SetMargins(10, 10);
+        leftAxis->SetMargins(20, 20);
         plot->AddAxis(leftAxis);
 
         // Add bottom number axis
@@ -326,7 +350,7 @@ class BarDemo5 : public ChartDemo
 {
 public:
     BarDemo5()
-    : ChartDemo(wxT("Bar demo 5 - layered bars"))
+    : ChartDemo(wxT("Bar Demo 5 - Layered Bars"))
     {
     }
 
@@ -365,15 +389,17 @@ public:
         dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
 
-        // create layered bar type with width=20 and base=0
-        BarType *barType = new LayeredBarType(20, 0);
+        // create layered bar type with width=40 and base=0
+        BarType *barType = new LayeredBarType(40, 0);
 
         // Set bar renderer for it, with layered bar type
         BarRenderer *renderer = new BarRenderer(barType);
 
-        // some eyes-candy: gradient bars
-        renderer->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-        renderer->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+        // Some eye-candy: gradient bars
+        renderer->SetBarDraw(0, new GradientAreaDraw(DEFAULT_BAR_FILL_COLOUR_0, DEFAULT_BAR_FILL_COLOUR_0, 
+                                                        DEFAULT_BAR_FILL_COLOUR_0.ChangeLightness(150), wxEAST));
+        renderer->SetBarDraw(1, new GradientAreaDraw(DEFAULT_BAR_FILL_COLOUR_1, DEFAULT_BAR_FILL_COLOUR_1, 
+                                                        DEFAULT_BAR_FILL_COLOUR_1.ChangeLightness(150), wxEAST));
 
         // assign renderer to dataset
         dataset->SetRenderer(renderer);
@@ -412,7 +438,7 @@ class BarDemo6 : public ChartDemo
 {
 public:
     BarDemo6()
-    : ChartDemo(wxT("Bar demo 6 - date bars"))
+    : ChartDemo(wxT("Bar Demo 6 - Date Bars"))
     {
     }
 
@@ -420,14 +446,14 @@ public:
     {
         // TODO: !!! remake this demo to use dates, not string representation of years!
         wxString names[] = { // category names
-                wxT("2000"),
-                wxT("2001"),
-                wxT("2002"),
-                wxT("2003"),
-                wxT("2004"),
-                wxT("2005"),
-                wxT("2006"),
-                wxT("2007"),
+                wxT("2010"),
+                wxT("2011"),
+                wxT("2012"),
+                wxT("2013"),
+                wxT("2014"),
+                wxT("2015"),
+                wxT("2016"),
+                wxT("2017"),
         };
 
         // serie 1 values
@@ -439,7 +465,8 @@ public:
         double values2[] = {
                 298603,    286184,    292299,    304342,    353072,    389122,    433905,    497245,
         };
-
+        
+                
         // Create dataset
         CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
 
@@ -448,14 +475,16 @@ public:
         dataset->AddSerie(wxT("Services"), values2, WXSIZEOF(values2));
 
         // create layered bar type with width=20 and base=0
-        BarType *barType = new LayeredBarType(20, 0);
+        BarType *barType = new LayeredBarType(30, 0);
 
         // Set bar renderer for it, with layered bar type
         BarRenderer *renderer = new BarRenderer(barType);
 
-        // some eyes-candy: gradient bars
-        renderer->SetBarDraw(0, new GradientAreaDraw(*wxBLACK_PEN, wxColour(50, 0, 0), wxColour(255, 0, 0)));
-        renderer->SetBarDraw(1, new GradientAreaDraw(*wxBLACK_PEN, wxColour(0, 50, 0), wxColour(0, 255, 0)));
+        // Some eye-candy: gradient bars.
+        renderer->SetBarDraw(0, new GradientAreaDraw(*wxTRANSPARENT_PEN, DEFAULT_BAR_FILL_COLOUR_0, 
+                                                        DEFAULT_BAR_FILL_COLOUR_0.ChangeLightness(50), wxSOUTH));
+        renderer->SetBarDraw(1, new GradientAreaDraw(*wxTRANSPARENT_PEN, DEFAULT_BAR_FILL_COLOUR_1, 
+                                                        DEFAULT_BAR_FILL_COLOUR_1.ChangeLightness(50), wxSOUTH));
 
         // assign renderer to dataset
         dataset->SetRenderer(renderer);
@@ -465,7 +494,13 @@ public:
 
         // Add left number axis
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        leftAxis->SetMargins(5, 0);
+
+        ///// leftAxis Experiments.
+        leftAxis->SetMargins(20, 0);
+        // leftAxis->SetMajorLabelSteps(5);
+        leftAxis->SetMinorIntervalCount(0);
+        // leftAxis->SetLabelSkip(5);
+        
         plot->AddAxis(leftAxis);
 
         // Add bottom category axis
@@ -483,11 +518,17 @@ public:
         // Link first dataset with first vertical axis
         plot->LinkDataVerticalAxis(0, 0);
 
-        // set legend
+        // Set legend
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
+        
+        // Experiments.
+        plot->SetDrawGrid(true, false);
+        
+        plot->SetBackground(new FillAreaDraw(*wxGREEN_PEN, *wxBLUE_BRUSH));
+        plot->SetDataBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
         // and finally construct and return chart
-        return new Chart(plot, wxT("USA export goods/services"));
+        return new Chart(plot, wxT("USA Export Goods / Services"));;
     }
 };
 

@@ -98,6 +98,9 @@ public:
         // create left number (for quotes) and bottom date axes
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
+        
+        // Don't start the left axis at zero.
+        leftAxis->ZeroOrigin(false);
 
         // setup window, so we will see 5 bars at once, not entire dataset
         bottomAxis->SetWindow(0, 5);
@@ -195,7 +198,10 @@ public:
         // add left number (for quotes) and bottom date axes
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
-
+        
+        // Don't start the left axis at zero.
+        leftAxis->ZeroOrigin(false);
+        
         // setup window
         bottomAxis->SetWindow(0, 5);
         bottomAxis->SetUseWindow(true);
@@ -289,6 +295,9 @@ public:
         // add left number (for quotes) and bottom date axes
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         CompDateAxis *bottomAxis = new CompDateAxis(AXIS_BOTTOM);
+
+        // Don't start the left axis at zero.
+        leftAxis->ZeroOrigin(false);
 
         // setup window
         bottomAxis->SetWindow(0, 10);
@@ -396,6 +405,9 @@ public:
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
 
+        // Don't start the left axis at zero.
+        leftAxis->ZeroOrigin(false);
+
         // setup window
         bottomAxis->SetWindow(0, 10);
         bottomAxis->SetUseWindow(true);
@@ -502,6 +514,9 @@ public:
         // add left number (for quotes) and bottom date axes
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
+
+        // Don't start the left axis at zero.
+        leftAxis->ZeroOrigin(false);
 
         // setup window
         bottomAxis->SetWindow(0, 10);
