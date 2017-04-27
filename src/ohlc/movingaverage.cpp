@@ -17,12 +17,10 @@ MovingAverage::MovingAverage(OHLCDataset *ohlcDataset, int period)
     m_period = period;
 
     m_ohlcDataset->AddRef();
-    m_ohlcDataset->AddObserver(this);
 }
 
 MovingAverage::~MovingAverage()
 {
-    SAFE_REMOVE_OBSERVER(this, m_ohlcDataset);
     SAFE_UNREF(m_ohlcDataset);
 }
 

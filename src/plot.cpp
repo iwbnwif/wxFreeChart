@@ -10,15 +10,6 @@
 #include <wx/plot.h>
 #include <wx/drawutils.h>
 
-PlotObserver::PlotObserver()
-{
-}
-
-PlotObserver::~PlotObserver()
-{
-}
-
-
 Plot::Plot()
 {
     m_textNoDataFont = *wxNORMAL_FONT;

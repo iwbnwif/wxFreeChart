@@ -35,7 +35,7 @@ enum {
  * Performs crosshair drawing.
  *
  */
-class WXDLLIMPEXP_FREECHART Crosshair : public ChartPanelObserver
+class WXDLLIMPEXP_FREECHART Crosshair
 {
 public:
     Crosshair(int style, wxPen *pen = (wxPen *) wxBLACK_PEN);

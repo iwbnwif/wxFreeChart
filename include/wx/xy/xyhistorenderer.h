@@ -16,7 +16,7 @@
 /**
  * Renderer for displaying XY data as histograms.
  */
-class WXDLLIMPEXP_FREECHART XYHistoRenderer : public XYRenderer, public DrawObserver
+class WXDLLIMPEXP_FREECHART XYHistoRenderer : public XYRenderer
 {
     DECLARE_CLASS(XYHistoRenderer)
 public:

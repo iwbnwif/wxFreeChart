@@ -13,7 +13,6 @@
 #include <wx/wxfreechartdefs.h>
 
 #include <wx/refobject.h>
-#include <wx/observable.h>
 #include <wx/plot.h>
 
 #include <wx/areadraw.h>
@@ -26,33 +25,9 @@ class WXDLLIMPEXP_FREECHART Chart;
 class WXDLLIMPEXP_FREECHART wxChartPanel;
 
 /**
- * Interface for receiving chart events.
- */
-class WXDLLIMPEXP_FREECHART ChartObserver
-{
-public:
-    ChartObserver();
-
-    virtual ~ChartObserver();
-
-    /**
-     * Called when some of chart or chart component properties
-     * has been changed.
-     * @param chart chart that has been changed
-     */
-    virtual void ChartChanged(Chart *chart) = 0;
-
-    /**
-     * Called when some of chart scrolled axes changed its bounds.
-     * @param chart chart
-     */
-    virtual void ChartScrollsChanged(Chart *chart) = 0;
-};
-
-/**
  * Chart. Contains plot, title and chart attributes.
  */
-class WXDLLIMPEXP_FREECHART Chart : public Observable<ChartObserver>, public PlotObserver, public AxisObserver
+class WXDLLIMPEXP_FREECHART Chart
 {
 public:
     /**

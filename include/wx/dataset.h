@@ -16,7 +16,6 @@
 
 #include <wx/refobject.h>
 
-#include <wx/observable.h>
 #include <wx/chartrenderer.h>
 #include <wx/marker.h>
 
@@ -32,23 +31,10 @@ class DateTimeDataset;
     for (size_t index = 0; index < dataset->GetCount(serie); index++)
 
 /**
- * Base class that receives notifications about dataset changes.
- */
-class WXDLLIMPEXP_FREECHART DatasetObserver
-{
-public:
-    DatasetObserver();
-    virtual ~DatasetObserver();
-
-    virtual void DatasetChanged(Dataset *dataset) = 0;
-};
-
-/**
  * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
-class WXDLLIMPEXP_FREECHART Dataset : public wxObject,
-    public RefObject, public Observable<DatasetObserver>, public DrawObserver
+class WXDLLIMPEXP_FREECHART Dataset : public wxObject, public RefObject
 {
     DECLARE_CLASS(Dataset)
 public:

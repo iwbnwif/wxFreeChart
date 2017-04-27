@@ -95,7 +95,6 @@ void AreaDrawCollection::SetAreaDraw(int serie, AreaDraw *barArea)
     if (m_areas.find(serie) != m_areas.end()) 
     {
         AreaDraw *oldBarArea = m_areas[serie];
-        //oldBarArea->RemoveObserver(this);
         delete oldBarArea;
     }
 

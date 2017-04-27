@@ -52,14 +52,12 @@ PiePlot::PiePlot()
 
 PiePlot::~PiePlot()
 {
-    SAFE_REMOVE_OBSERVER(this, m_dataset);
     SAFE_UNREF(m_dataset);
     wxDELETE(m_legend);
 }
 
 void PiePlot::SetDataset(CategoryDataset *dataset)
 {
-    SAFE_REPLACE_OBSERVER(this, m_dataset, dataset);
     SAFE_REPLACE_UNREF(m_dataset, dataset);
 }
 
@@ -80,7 +78,7 @@ bool PiePlot::HasData()
 
 void PiePlot::DatasetChanged(Dataset *WXUNUSED(dataset))
 {
-    // FirePlotNeedRedraw();
+    // TODO.
 }
 
 void PiePlot::DrawData(ChartDC& cdc, wxRect rc)

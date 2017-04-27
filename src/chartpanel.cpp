@@ -47,33 +47,6 @@ void GetAxisScrollParams(Axis *axis, int &noUnits, int &pos)
 
 
 //
-// ChartPanelObserver
-//
-void ChartPanelObserver::ChartEnterWindow()
-{
-}
-
-void ChartPanelObserver::ChartMouseDown(wxPoint &pt, int key)
-{
-}
-
-void ChartPanelObserver::ChartMouseUp(wxPoint &pt, int key)
-{
-}
-
-void ChartPanelObserver::ChartMouseMove(wxPoint &pt)
-{
-}
-
-void ChartPanelObserver::ChartMouseDrag(wxPoint &pt)
-{
-}
-
-void ChartPanelObserver::ChartMouseWheel(int rotation)
-{
-}
-
-//
 // wxChartPanel
 //
 
@@ -103,13 +76,11 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
 
 wxChartPanel::~wxChartPanel()
 {
-    SAFE_REMOVE_OBSERVER(this, m_chart);
     wxDELETE(m_chart);
 }
 
 void wxChartPanel::SetChart(Chart *chart)
 {
-    SAFE_REPLACE_OBSERVER(this, m_chart, chart);
     if (m_chart != NULL) {
         m_chart->SetChartPanel(NULL);
     }
@@ -133,15 +104,10 @@ Chart *wxChartPanel::GetChart()
 
 void wxChartPanel::SetMode(ChartPanelMode *mode)
 {
-    if (m_mode != NULL)
-        RemoveObserver(m_mode);
-    if (mode != NULL)
-        AddObserver(mode);
     wxREPLACE(m_mode, mode);
 
-    if (m_mode != NULL) {
+    if (m_mode != NULL)
         m_mode->Init(this);
-    }
 }
 
 void wxChartPanel::SetAntialias(bool antialias)

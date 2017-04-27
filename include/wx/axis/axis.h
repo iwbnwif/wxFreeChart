@@ -16,7 +16,6 @@
 #include <wx/dynarray.h>
 
 #include <wx/drawobject.h>
-#include <wx/observable.h>
 
 enum AXIS_LOCATION {
     AXIS_LEFT = 1,
@@ -28,28 +27,6 @@ enum AXIS_LOCATION {
 class WXDLLIMPEXP_FREECHART Axis;
 
 /**
- * Interface to receive axis events.
- */
-class WXDLLIMPEXP_FREECHART AxisObserver
-{
-public:
-    AxisObserver();
-    virtual ~AxisObserver();
-
-    /**
-     * Called when axis is changed.
-     * @param axis changed axis
-     */
-    virtual void AxisChanged(Axis *axis) = 0;
-
-    /**
-     * Called when axis bounds are changed.
-     * @param axis axis that bounds are changed
-     */
-    virtual void BoundsChanged(Axis *axis) = 0;
-};
-
-/**
  * Base class for all axes.
  * Axis has following attributes:
  * <ol>
@@ -59,7 +36,7 @@ public:
  *  data points is visible at once, position is first data item visible.</li>
  * </ol>
  */
-class WXDLLIMPEXP_FREECHART Axis : public wxObject, public Observable<AxisObserver>
+class WXDLLIMPEXP_FREECHART Axis : public wxObject
 {
     DECLARE_CLASS(Axis)
 

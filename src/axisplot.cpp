@@ -21,7 +21,6 @@
 
 WX_DEFINE_EXPORTED_OBJARRAY(DataAxisLinkArray)
 
-
 #define CHECK_INDEX(name, index, v) do {                                            \
     if (index >= v.Count()) {                                                        \
         wxLogError(wxT("%s index out of bounds: %i %i"), name, index, v.Count());    \
@@ -46,11 +45,6 @@ AxisPlot::AxisPlot()
 
 AxisPlot::~AxisPlot()
 {
-    for (size_t n = 0; n < m_datasets.Count(); n++) {
-        Dataset *dataset = m_datasets[n];
-        dataset->RemoveObserver(this);
-    }
-
     for (size_t n = 0; n < m_horizontalAxes.Count(); n++) {
         Axis *axis = m_horizontalAxes[n];
         wxDELETE(axis);
@@ -61,7 +55,6 @@ AxisPlot::~AxisPlot()
         wxDELETE(axis);
     }
 
-    SAFE_REMOVE_OBSERVER(this, m_dataBackground);
     wxDELETE(m_dataBackground);
 
     wxDELETE(m_legend);
@@ -102,8 +95,6 @@ void AxisPlot::AddAxis(Axis *axis)
         wxLogError(wxT("AxisPlot::AddAxis: invalid location value %i"), axis->GetLocation());
         return ;
     }
-
-    axis->AddObserver(this);
 }
 
 bool AxisPlot::HasData()
@@ -114,12 +105,6 @@ bool AxisPlot::HasData()
 void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
 {
     m_redrawDataArea = true;
-
-    /* TODO
-    if (m_crosshair != NULL) {
-        SAFE_REPLACE_OBSERVER(m_crosshair, oldPanel, newPanel);
-    }
-    */
 }
 
 void AxisPlot::AddDataset(Dataset *dataset)
@@ -130,8 +115,6 @@ void AxisPlot::AddDataset(Dataset *dataset)
     }
 
     m_datasets.Add(dataset);
-    dataset->AddObserver(this);
-    //dataset->AddRef();
 }
 
 void AxisPlot::AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis)
@@ -183,16 +166,7 @@ void AxisPlot::SetLegend(Legend *legend)
 
 void AxisPlot::SetCrosshair(Crosshair *crosshair)
 {
-    /*// TODO
-    if (m_crosshair != NULL && GetChartPanel() != NULL) {
-        GetChartPanel()->RemoveObserver(m_crosshair);
-    }
 
-    wxREPLACE(m_crosshair, crosshair);
-    if (m_crosshair != NULL && GetChartPanel() != NULL) {
-        GetChartPanel()->AddObserver(m_crosshair);
-    }
-    */
 }
 
 // Inspects the passed dataset and if axes are set to automatically update

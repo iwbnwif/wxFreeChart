@@ -14,14 +14,6 @@
 IMPLEMENT_CLASS(Axis, wxObject)
 
 
-AxisObserver::AxisObserver()
-{
-}
-
-AxisObserver::~AxisObserver()
-{
-}
-
 Axis::Axis(AXIS_LOCATION location)
 {
     m_location = location;

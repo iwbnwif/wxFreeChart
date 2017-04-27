@@ -24,7 +24,7 @@ const int shift3D = 20;
  * Pie plot.
  * TODO: initial quick and dirty, must be cleaned up or rewritten.
  */
-class WXDLLIMPEXP_FREECHART PiePlot : public Plot, public DatasetObserver
+class WXDLLIMPEXP_FREECHART PiePlot : public Plot
 {
 public:
     PiePlot();

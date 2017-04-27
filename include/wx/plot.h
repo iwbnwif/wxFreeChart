@@ -11,7 +11,6 @@
 #define PLOT_H_
 
 #include <wx/wxfreechartdefs.h>
-#include <wx/observable.h>
 #include <wx/areadraw.h>
 #include <wx/chartdc.h>
 
@@ -26,27 +25,10 @@ enum PlotDrawMode
 };
 
 /**
- * Interface that receives Plot events, such as need redraw condition.
- */
-class WXDLLIMPEXP_FREECHART PlotObserver
-{
-public:
-    PlotObserver();
-
-    virtual ~PlotObserver();
-
-    /**
-     * Called when plot has been changed and need to be redrawn.
-     * @param _plot plot
-     */
-    virtual void PlotNeedRedraw(Plot *_plot) = 0;
-};
-
-/**
  * Base class for all plots.
  *
  */
-class WXDLLIMPEXP_FREECHART Plot : public Observable<PlotObserver>
+class WXDLLIMPEXP_FREECHART Plot
 {
 public:
     Plot();

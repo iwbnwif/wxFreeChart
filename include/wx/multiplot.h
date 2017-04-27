@@ -19,7 +19,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(Plot *, PlotArray, WXDLLIMPEXP_FREECHART);
  * Multiplot is plot containing one or more plots, called subplots.
  * It arranges subplots to rows and columns.
  */
-class WXDLLIMPEXP_FREECHART MultiPlot : public Plot, public PlotObserver
+class WXDLLIMPEXP_FREECHART MultiPlot : public Plot
 {
 public:
     /**
@@ -39,8 +39,6 @@ public:
     void AddPlot(Plot *subPlot)
     {
         m_subPlots.Add(subPlot);
-
-        subPlot->AddObserver(this);
     }
 
     //

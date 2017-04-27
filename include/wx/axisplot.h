@@ -53,9 +53,7 @@ WX_DECLARE_USER_EXPORTED_OBJARRAY(DataAxisLink, DataAxisLinkArray, WXDLLIMPEXP_F
 /**
  * Base class for plots that supports axes.
  */
-class WXDLLIMPEXP_FREECHART AxisPlot : public Plot,
-    public DrawObserver, public DatasetObserver, public AxisObserver,
-    public ChartPanelObserver
+class WXDLLIMPEXP_FREECHART AxisPlot : public Plot
 {
 public:
     AxisPlot();

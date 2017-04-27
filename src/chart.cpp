@@ -11,14 +11,6 @@
 #include <wx/drawutils.h>
 #include <wx/dcgraph.h>
 
-ChartObserver::ChartObserver()
-{
-}
-
-ChartObserver::~ChartObserver()
-{
-}
-
 Chart::Chart(Plot *plot, const wxString &title)
 {
     Init(plot, new Header(TextElement(title, wxALIGN_CENTRE_HORIZONTAL, wxFontInfo(14))));
@@ -41,7 +33,6 @@ void Chart::Init(Plot* plot, Header* header, Footer* footer)
     m_margin = 5;
 
     m_plot = plot;
-    m_plot->AddObserver(this);
     m_header = header;
     m_footer = footer;
     m_headerGap = 2;
@@ -52,10 +43,6 @@ void Chart::Init(Plot* plot, Header* header, Footer* footer)
 
 Chart::~Chart()
 {
-    SAFE_REMOVE_OBSERVER(this, m_horizScrolledAxis);
-    SAFE_REMOVE_OBSERVER(this, m_vertScrolledAxis);
-
-    SAFE_REMOVE_OBSERVER(this, m_plot);
     wxDELETE(m_plot);
     wxDELETE(m_background);
     wxDELETE(m_header);
@@ -81,22 +68,11 @@ void Chart::BoundsChanged(Axis *axis)
 
 void Chart::SetScrolledAxis(Axis *axis)
 {
-    if (axis->IsVertical()) {
-        if (m_vertScrolledAxis != NULL) {
-            m_vertScrolledAxis->RemoveObserver(this);
-        }
+    if (axis->IsVertical())
         m_vertScrolledAxis = axis;
-    }
-    else {
-        if (m_horizScrolledAxis != NULL) {
-            m_horizScrolledAxis->RemoveObserver(this);
-        }
+
+    else
         m_horizScrolledAxis = axis;
-    }
-
-    axis->AddObserver(this);
-
-    // FireChartScrollsChanged();
 }
 
 Axis *Chart::GetHorizScrolledAxis()

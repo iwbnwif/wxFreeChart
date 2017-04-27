@@ -16,7 +16,7 @@
 /**
  * Simple moving average indicator.
  */
-class WXDLLIMPEXP_FREECHART MovingAverage : public XYDataset, public DatasetObserver
+class WXDLLIMPEXP_FREECHART MovingAverage : public XYDataset
 {
     DECLARE_CLASS(MovingAverage)
 public:

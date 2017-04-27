@@ -16,28 +16,9 @@
 class wxChartPanel;
 
 /**
- * Interface to propagate chart panel mouse events
- * to lower layer classes, for mouse handling objects,
- * such as crosshairs, tooltip generators, etc.
- */
-class WXDLLIMPEXP_FREECHART ChartPanelObserver
-{
-public:
-    virtual void ChartEnterWindow();
-
-    virtual void ChartMouseDown(wxPoint &pt, int key);
-    virtual void ChartMouseUp(wxPoint &pt, int key);
-
-    virtual void ChartMouseMove(wxPoint &pt);
-    virtual void ChartMouseDrag(wxPoint &pt);
-
-    virtual void ChartMouseWheel(int rotation);
-};
-
-/**
  * Base class for zoom/pan modes.
  */
-class WXDLLIMPEXP_FREECHART ChartPanelMode  : public ChartPanelObserver
+class WXDLLIMPEXP_FREECHART ChartPanelMode
 {
 public:
     // IY: Virtual destructor needed otherwise behaviour is undefined.
@@ -50,8 +31,7 @@ public:
  * ChartPanel is wxWidgets panel for displaying chart.
  *
  */
-class WXDLLIMPEXP_FREECHART wxChartPanel : public wxScrolledWindow, public ChartObserver,
-    public Observable<ChartPanelObserver>
+class WXDLLIMPEXP_FREECHART wxChartPanel : public wxScrolledWindow
 {
 public:
     wxChartPanel(wxWindow *parent, wxWindowID = wxID_ANY, Chart *chart = NULL,

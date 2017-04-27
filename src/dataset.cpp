@@ -11,14 +11,6 @@
 
 #include "wx/arrimpl.cpp"
 
-DatasetObserver::DatasetObserver()
-{
-}
-
-DatasetObserver::~DatasetObserver()
-{
-}
-
 //
 // Dataset
 //
@@ -34,9 +26,9 @@ Dataset::Dataset()
 
 Dataset::~Dataset()
 {
-    for (size_t n = 0; n < m_markers.Count(); n++) {
+    for (size_t n = 0; n < m_markers.Count(); n++) 
+    {
         Marker *marker = m_markers[n];
-        marker->RemoveObserver(this);
         wxDELETE(marker);
     }
 
@@ -45,7 +37,6 @@ Dataset::~Dataset()
 
 void Dataset::SetRenderer(Renderer *renderer)
 {
-    SAFE_REPLACE_OBSERVER(this, m_renderer, renderer);
     SAFE_REPLACE_UNREF(m_renderer, renderer);
     DatasetChanged();
 }
@@ -90,7 +81,6 @@ void Dataset::DatasetChanged()
 
 void Dataset::AddMarker(Marker *marker)
 {
-    marker->AddObserver(this);
     m_markers.Add(marker);
 }
 
