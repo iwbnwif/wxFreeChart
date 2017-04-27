@@ -260,6 +260,8 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
         winPos += minValue;
 
         axis->SetWindowPosition(winPos);
+        
+        ChartScrollsChanged(m_chart);
     }
     ev.Skip();
 }
