@@ -30,7 +30,6 @@ public:
     void SetOutlinePen(wxPen outlinePen)
     {
         m_outlinePen = outlinePen;
-        FireNeedRedraw();
     }
 
     /**
@@ -49,7 +48,6 @@ public:
     void SetLowerBrush(wxBrush lowerBrush)
     {
         m_lowerBrush = lowerBrush;
-        FireNeedRedraw();
     }
 
     /**
@@ -68,7 +66,6 @@ public:
     void SetHigherBrush(wxBrush higherBrush)
     {
         m_higherBrush = higherBrush;
-        FireNeedRedraw();
     }
 
     /**

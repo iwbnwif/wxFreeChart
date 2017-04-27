@@ -77,7 +77,6 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
 void XYHistoRenderer::SetBarArea(size_t serie, AreaDraw *barArea)
 {
     m_barAreas.SetAreaDraw(serie, barArea);
-    FireNeedRedraw();
 }
 
 AreaDraw *XYHistoRenderer::GetBarArea(size_t serie)
@@ -87,5 +86,5 @@ AreaDraw *XYHistoRenderer::GetBarArea(size_t serie)
 
 void XYHistoRenderer::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
-    FireNeedRedraw();
+    // FireNeedRedraw();
 }

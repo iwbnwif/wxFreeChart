@@ -84,7 +84,6 @@ public:
     void SetBorderPen(wxPen borderPen)
     {
         m_borderPen = borderPen;
-        FireNeedRedraw();
     }
 
     /**
@@ -103,7 +102,6 @@ public:
     void SetFillBrush(wxBrush fillBrush)
     {
         m_fillBrush = fillBrush;
-        FireNeedRedraw();
     }
 
 private:
@@ -141,7 +139,6 @@ public:
     void SetColour1(wxColour colour1)
     {
         m_colour1 = colour1;
-        FireNeedRedraw();
     }
 
     /**
@@ -151,7 +148,6 @@ public:
     void SetColour2(wxColour colour2)
     {
         m_colour2 = colour2;
-        FireNeedRedraw();
     }
 
     /**
@@ -161,7 +157,6 @@ public:
     void SetDirection(wxDirection dir)
     {
         m_dir = dir;
-        FireNeedRedraw();
     }
 
 private:

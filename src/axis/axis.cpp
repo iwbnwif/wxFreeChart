@@ -45,10 +45,10 @@ Axis::~Axis()
 
 void Axis::SetMargins(wxCoord marginMin, wxCoord marginMax)
 {
-    if (m_marginMin != marginMin || m_marginMax != marginMax) {
+    if (m_marginMin != marginMin || m_marginMax != marginMax)
+    {
         m_marginMin = marginMin;
         m_marginMax = marginMax;
-        FireAxisChanged();
     }
 }
 
@@ -171,10 +171,8 @@ AxisShare::~AxisShare()
 
 void AxisShare::SetShareVisible(bool shareVisible)
 {
-    if (m_shareVisible != shareVisible) {
+    if (m_shareVisible != shareVisible) 
         m_shareVisible = shareVisible;
-        FireAxisChanged();
-    }
 }
 
 void AxisShare::GetDataBounds(double &minValue, double &maxValue) const

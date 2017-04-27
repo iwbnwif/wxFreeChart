@@ -114,7 +114,6 @@ bool AxisPlot::HasData()
 void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
 {
     m_redrawDataArea = true;
-    FirePlotNeedRedraw();
 
     /* TODO
     if (m_crosshair != NULL) {
@@ -133,7 +132,6 @@ void AxisPlot::AddDataset(Dataset *dataset)
     m_datasets.Add(dataset);
     dataset->AddObserver(this);
     //dataset->AddRef();
-    FirePlotNeedRedraw();
 }
 
 void AxisPlot::AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis)
@@ -181,7 +179,6 @@ void AxisPlot::LinkDataVerticalAxis(size_t nData, size_t nAxis)
 void AxisPlot::SetLegend(Legend *legend)
 {
     wxREPLACE(m_legend, legend);
-    FirePlotNeedRedraw();
 }
 
 void AxisPlot::SetCrosshair(Crosshair *crosshair)
@@ -196,7 +193,6 @@ void AxisPlot::SetCrosshair(Crosshair *crosshair)
         GetChartPanel()->AddObserver(m_crosshair);
     }
     */
-    FirePlotNeedRedraw();
 }
 
 // Inspects the passed dataset and if axes are set to automatically update
@@ -223,8 +219,6 @@ void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
 {
     m_drawGridVertical = drawGridVertical;
     m_drawGridHorizontal = drawGridHorizontal;
-
-    FirePlotNeedRedraw();
 }
 
 void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
@@ -268,7 +262,7 @@ Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
 
 void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
-    FirePlotNeedRedraw();
+    // FirePlotNeedRedraw();
 }
 
 void AxisPlot::DatasetChanged(Dataset *dataset)
@@ -279,18 +273,16 @@ void AxisPlot::DatasetChanged(Dataset *dataset)
         m_redrawDataArea = true;
     else
         m_redrawDataArea = false;
-
-    FirePlotNeedRedraw();
 }
 
 void AxisPlot::AxisChanged(Axis *WXUNUSED(axis))
 {
-    FirePlotNeedRedraw();
+    // FirePlotNeedRedraw();
 }
 
 void AxisPlot::BoundsChanged(Axis *WXUNUSED(axis))
 {
-    FirePlotNeedRedraw();
+    // FirePlotNeedRedraw();
 }
 
 wxCoord AxisPlot::GetAxesExtent(wxDC &dc, AxisArray *axes)

@@ -83,7 +83,6 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
     m_fixedBounds = true;
 
     UpdateMajorIntervalValues();
-    FireBoundsChanged();
 }
 
 bool NumberAxis::UpdateBounds()
@@ -145,7 +144,6 @@ bool NumberAxis::UpdateBounds()
     // int nfrac = wxMax(-floor(log10(nice)), 0);
         
     UpdateMajorIntervalValues();
-    FireBoundsChanged();
     return true;
 }
 
@@ -165,7 +163,6 @@ void NumberAxis::UpdateMajorIntervalValues()
         if (m_labelCount)
             m_hasLabels = true;
     }
-    FireAxisChanged();
 }
 
 wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)

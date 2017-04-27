@@ -31,7 +31,6 @@ public:
     void SetTickFormat(const wxString &tickFormat)
     {
         m_tickFormat = tickFormat;
-        FireAxisChanged();
     }
 
     wxDEPRECATED_MSG("Do not use this function, instead use SetMajorInterval.")
@@ -43,10 +42,10 @@ public:
      */
     void IntegerValues(bool intValues = true)
     {
-        if (m_intValues != intValues) {
+        if (m_intValues != intValues) 
+        {
             m_intValues = intValues;
             // TODO recalc tick steps
-            FireAxisChanged();
         }
     }
     
@@ -59,10 +58,7 @@ public:
     void ZeroOrigin(bool zeroOrigin = true)
     {
         if (m_zeroOrigin != zeroOrigin)
-        {
             m_zeroOrigin = zeroOrigin;
-            FireAxisChanged();
-        }
     }
     
     /**
@@ -75,10 +71,7 @@ public:
     void ForceExtraMajorInterval(bool force = true)
     {
         if (m_extraMajorInterval != force)
-        {
             m_extraMajorInterval = force;
-            FireAxisChanged();
-        }
     }
 
     /**

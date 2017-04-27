@@ -106,7 +106,6 @@ void LineMarker::SetValue(double value, bool horizontal)
 {
     m_value = value;
     m_horizontal = horizontal;
-    FireNeedRedraw();
 }
 
 //
@@ -177,11 +176,9 @@ void RangeMarker::SetRange(double minValue, double maxValue, bool horizontal)
     m_minValue = minValue;
     m_maxValue = maxValue;
     m_horizontal = horizontal;
-    FireNeedRedraw();
 }
 
 void RangeMarker::SetRangeAreaDraw(AreaDraw *rangeAreaDraw)
 {
     wxREPLACE(m_rangeAreaDraw, rangeAreaDraw);
-    FireNeedRedraw();
 }

@@ -35,25 +35,20 @@ public:
     void SetUsedSerie(size_t serie)
     {
         m_serie = serie;
-        FirePlotNeedRedraw();
     }
 
     void SetColorScheme(ColorScheme *cs);
 
     void Set3DView(bool use3DView)
     {
-        if (m_use3DView != use3DView) {
+        if (m_use3DView != use3DView)
             m_use3DView = use3DView;
-            FirePlotNeedRedraw();
-        }
     }
 
     void SetEllipticAspect(float ellipticAspect)
     {
-        if (m_ellipticAspect != ellipticAspect && ellipticAspect > 0 && ellipticAspect <= 1) {
+        if (m_ellipticAspect != ellipticAspect && ellipticAspect > 0 && ellipticAspect <= 1)
             m_ellipticAspect = ellipticAspect;
-            FirePlotNeedRedraw();
-        }
     }
 
     void SetLegend(Legend *legend);

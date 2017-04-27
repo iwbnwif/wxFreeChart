@@ -30,7 +30,6 @@ public:
     void SetBarPen(wxPen barPen)
     {
         m_barPen = barPen;
-        FireNeedRedraw();
     }
 
     /**

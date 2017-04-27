@@ -34,7 +34,6 @@ public:
     void SetDateFormat(const wxString &dateFormat)
     {
         m_dateFormat = dateFormat;
-        FireAxisChanged();
     }
 
     virtual void GetDataBounds(double &minValue, double &maxValue) const;

@@ -157,8 +157,6 @@ private:
     bool m_changed;
 
     MarkerArray m_markers;
-
-    FIRE_WITH_THIS(DatasetChanged);
 };
 
 /**

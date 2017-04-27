@@ -68,7 +68,6 @@ bool CategoryAxis::UpdateBounds()
         }
     }
 
-    FireBoundsChanged();
     return true;
 }
 

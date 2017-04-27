@@ -61,20 +61,16 @@ void PiePlot::SetDataset(CategoryDataset *dataset)
 {
     SAFE_REPLACE_OBSERVER(this, m_dataset, dataset);
     SAFE_REPLACE_UNREF(m_dataset, dataset);
-
-    FirePlotNeedRedraw();
 }
 
 void PiePlot::SetColorScheme(ColorScheme *colorScheme)
 {
     m_colorScheme = *colorScheme;
-    FirePlotNeedRedraw();
 }
 
 void PiePlot::SetLegend(Legend *legend)
 {
     wxREPLACE(m_legend, legend);
-    FirePlotNeedRedraw();
 }
 
 bool PiePlot::HasData()
@@ -84,7 +80,7 @@ bool PiePlot::HasData()
 
 void PiePlot::DatasetChanged(Dataset *WXUNUSED(dataset))
 {
-    FirePlotNeedRedraw();
+    // FirePlotNeedRedraw();
 }
 
 void PiePlot::DrawData(ChartDC& cdc, wxRect rc)

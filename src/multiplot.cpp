@@ -35,7 +35,7 @@ MultiPlot::~MultiPlot()
 
 void MultiPlot::PlotNeedRedraw(Plot *WXUNUSED(plot))
 {
-    FirePlotNeedRedraw();
+    // FirePlotNeedRedraw();
 }
 
 bool MultiPlot::HasData()

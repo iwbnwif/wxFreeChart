@@ -116,7 +116,6 @@ public:
      void SetMajorGridlinePen(const wxPen& pen)
      {
          m_majorGridlinePen = pen;
-         FireAxisChanged();
      }
      
     /**
@@ -127,7 +126,6 @@ public:
      void SetMinorGridlinePen(const wxPen& pen)
      {
          m_minorGridlinePen = pen;
-         FireAxisChanged();
      }
      
      /**
@@ -217,7 +215,6 @@ public:
     {
         if (m_useWin != useWin) {
             m_useWin = useWin;
-            FireAxisChanged();
         }
     }
 
@@ -231,7 +228,6 @@ public:
         if (m_winPos != winPos || m_winWidth != winWidth) {
             m_winPos = winPos;
             m_winWidth = winWidth;
-            FireAxisChanged();
         }
     }
 
@@ -362,9 +358,6 @@ protected:
     double m_winPos;
     double m_winWidth;
     bool m_useWin;
-
-    FIRE_WITH_THIS(AxisChanged);
-    FIRE_WITH_THIS(BoundsChanged);
 
 private:
     AXIS_LOCATION m_location;

@@ -22,7 +22,6 @@ JulianDateAxis::~JulianDateAxis()
 void JulianDateAxis::SetDateFormat(const wxString& dateFormat)
 {
    m_dateFormat = dateFormat;
-   FireAxisChanged();
 }
 
 void JulianDateAxis::GetLabel(size_t step, wxString &label)

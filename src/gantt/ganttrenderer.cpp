@@ -73,7 +73,6 @@ AreaDraw *GanttRenderer::GetSerieDraw(size_t serie)
 void GanttRenderer::SetSerieDraw(size_t serie, AreaDraw *areaDraw)
 {
     m_serieDraws.SetAreaDraw(serie, areaDraw);
-    FireNeedRedraw();
 }
 
 void GanttRenderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)

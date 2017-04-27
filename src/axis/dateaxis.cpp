@@ -41,9 +41,9 @@ bool DateAxis::UpdateBounds()
         dateCount = wxMax(dateCount, count);
     }
 
-    if (dateCount != m_dateCount) {
+    if (dateCount != m_dateCount) 
+    {
         m_dateCount = dateCount;
-        FireBoundsChanged();
         return true;
     }
     else

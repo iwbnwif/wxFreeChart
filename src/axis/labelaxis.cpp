@@ -354,7 +354,6 @@ void LabelAxis::DrawGridLine(wxDC& dc, const wxRect& rc, double value)
 void LabelAxis::SetAxisVisible(bool bVisible)
 {
     m_visible = bVisible;
-    FireAxisChanged();
 }
 
 void LabelAxis::Draw(wxDC &dc, wxRect rc)

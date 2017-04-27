@@ -55,7 +55,6 @@ public:
     void SetText(const wxString &text)
     {
         m_text = text;
-        FireNeedRedraw();
     }
 
 private:

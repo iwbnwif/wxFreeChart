@@ -59,7 +59,6 @@ public:
     void SetSpanDraw(AreaDraw *spanDraw)
     {
         wxREPLACE(m_spanDraw, spanDraw);
-        FireAxisChanged();
     }
 
 protected:

@@ -69,19 +69,21 @@ void Dataset::EndUpdate()
 {
     if (m_updating) {
         m_updating = false;
-        if (m_changed) {
-            FireDatasetChanged();
+        if (m_changed) 
+        {
+            // FireDatasetChanged();
         }
     }
 }
 
 void Dataset::DatasetChanged()
 {
-    if (m_updating) {
+    if (m_updating)
         m_changed = true;
-    }
-    else {
-        FireDatasetChanged();
+
+    else 
+    {
+        // FireDatasetChanged();
         m_changed = false;
     }
 }

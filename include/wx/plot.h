@@ -83,7 +83,6 @@ public:
     void SetBackground(AreaDraw *background)
     {
         wxREPLACE(m_background, background);
-        FirePlotNeedRedraw();
     }
 
     /**
@@ -93,7 +92,6 @@ public:
     void SetTextNoData(const wxString &textNoData)
     {
         m_textNoData = textNoData;
-        FirePlotNeedRedraw();
     }
 
 protected:
@@ -126,8 +124,6 @@ protected:
      * @param newPanel new chart panel
      */
     virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
-
-    FIRE_WITH_THIS(PlotNeedRedraw);
 
     AreaDraw *m_background;
 

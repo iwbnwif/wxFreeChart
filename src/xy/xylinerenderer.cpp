@@ -32,7 +32,6 @@ XYLineRendererBase::~XYLineRendererBase()
 void XYLineRendererBase::SetSeriePen(size_t serie, wxPen *pen)
 {
     m_seriePens[serie] = *pen;
-    FireNeedRedraw();
 }
 
 wxPen *XYLineRendererBase::GetSeriePen(size_t serie)

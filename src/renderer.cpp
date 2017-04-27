@@ -22,7 +22,6 @@ Renderer::~Renderer()
 void Renderer::SetSerieColour(size_t serie, wxColour *colour)
 {
     m_serieColours[serie] = *colour;
-    FireNeedRedraw();
 }
 
 wxColour Renderer::GetSerieColour(size_t serie)
@@ -36,7 +35,6 @@ wxColour Renderer::GetSerieColour(size_t serie)
 void Renderer::SetSerieSymbol(size_t serie, Symbol *symbol)
 {
     m_serieSymbols[serie] = symbol;
-    FireNeedRedraw();
 }
 
 Symbol *Renderer::GetSerieSymbol(size_t serie)

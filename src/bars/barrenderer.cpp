@@ -232,7 +232,6 @@ BarRenderer::~BarRenderer()
 void BarRenderer::SetBarType(BarType *barType)
 {
     wxREPLACE(m_barType, barType);
-    FireNeedRedraw();
 }
 
 BarType *BarRenderer::GetBarType()

@@ -41,7 +41,6 @@ public:
         m_subPlots.Add(subPlot);
 
         subPlot->AddObserver(this);
-        FirePlotNeedRedraw();
     }
 
     //

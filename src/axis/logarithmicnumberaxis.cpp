@@ -65,7 +65,6 @@ bool LogarithmicNumberAxis::UpdateBounds()
     m_labelCount = (log(m_maxValue) / log(m_logBase)) - (log(m_minValue) / log(m_logBase)) + 1;
 
     UpdateMajorIntervalValues();
-    FireBoundsChanged();
     return true;
 }
 

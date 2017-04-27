@@ -52,9 +52,6 @@ public:
     virtual ~DrawObject()
     {
     }
-
-protected:
-    FIRE_WITH_THIS(NeedRedraw);
 };
 
 #endif /*DRAWOBJECT_H_*/

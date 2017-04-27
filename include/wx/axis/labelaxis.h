@@ -40,7 +40,6 @@ public:
     void SetTitle(const wxString &title)
     {
         m_title = title;
-        FireAxisChanged();
     }
 
     /**
@@ -60,10 +59,8 @@ public:
      */
     void SetTitleLocation(int location)
     {
-        if (m_titleLocation != location) {
+        if (m_titleLocation != location)
             m_titleLocation = location;
-            FireAxisChanged();
-        }
     }
 
     /**
@@ -82,7 +79,6 @@ public:
     void SetTitleFont(wxFont &font)
     {
         m_titleFont = font;
-        FireAxisChanged();
     }
 
     /**
@@ -102,7 +98,6 @@ public:
     {
         if (m_titleColour != colour) {
             m_titleColour = colour;
-            FireAxisChanged();
         }
     }
 
@@ -122,7 +117,6 @@ public:
     void SetLabelPen(wxPen labelPen)
     {
         m_labelPen = labelPen;
-        FireAxisChanged();
     }
 
     /**
@@ -132,7 +126,6 @@ public:
     void SetLabelTextColour(wxColour labelTextColour)
     {
         m_labelTextColour = labelTextColour;
-        FireAxisChanged();
     }
 
     /**
@@ -151,7 +144,6 @@ public:
     void SetLabelTextFont(wxFont labelTextFont)
     {
         m_labelTextFont = labelTextFont;
-        FireAxisChanged();
     }
 
     /**
@@ -169,10 +161,8 @@ public:
      */
     void SetVerticalLabelText(bool verticalLabelText)
     {
-        if (m_verticalLabelText != verticalLabelText) {
+        if (m_verticalLabelText != verticalLabelText)
             m_verticalLabelText = verticalLabelText;
-            FireAxisChanged();
-        }
     }
 
     /**
@@ -191,10 +181,8 @@ public:
     wxDEPRECATED_MSG("Use SetMinorIntervalCount instead.")
     void SetMajorLabelSteps(size_t step)
     {
-        if (m_majorLabelStep != step) {
+        if (m_majorLabelStep != step)
             m_majorLabelStep = step;
-            FireAxisChanged();
-        }
     }
 
     /**
@@ -204,7 +192,6 @@ public:
     void SetMinorIntervalCount(size_t count)
     {
         m_minorIntervalCount = count;
-        FireAxisChanged();
     }
 
     /**

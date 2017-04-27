@@ -55,10 +55,8 @@ public:
 
     void SetBarWidth(int barWidth)
     {
-        if (m_barWidth != barWidth) {
+        if (m_barWidth != barWidth)
             m_barWidth = barWidth;
-            FireNeedRedraw();
-        }
     }
 
 private:

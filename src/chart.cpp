@@ -64,7 +64,7 @@ Chart::~Chart()
 
 void Chart::PlotNeedRedraw(Plot *WXUNUSED(plot))
 {
-    FireChartChanged();
+    // FireChartChanged();
 }
 
 void Chart::AxisChanged(Axis *WXUNUSED(axis))
@@ -75,7 +75,7 @@ void Chart::AxisChanged(Axis *WXUNUSED(axis))
 void Chart::BoundsChanged(Axis *axis)
 {
     if (axis == m_horizScrolledAxis || axis == m_vertScrolledAxis) {
-        FireChartScrollsChanged();
+        // FireChartScrollsChanged();
     }
 }
 
@@ -96,7 +96,7 @@ void Chart::SetScrolledAxis(Axis *axis)
 
     axis->AddObserver(this);
 
-    FireChartScrollsChanged();
+    // FireChartScrollsChanged();
 }
 
 Axis *Chart::GetHorizScrolledAxis()

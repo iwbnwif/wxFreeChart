@@ -60,7 +60,6 @@ void XYZRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYZ
 void XYZRenderer::SetSeriePen(size_t serie, wxPen *pen)
 {
     m_seriePens[serie] = *pen;
-    FireNeedRedraw();
 }
 
 void XYZRenderer::SetSerieColor(size_t serie, wxColour *color)
@@ -88,7 +87,6 @@ wxPen *XYZRenderer::GetSeriePen(size_t serie)
 void XYZRenderer::SetSerieBrush(size_t serie, wxBrush *brush)
 {
     m_serieBrushs[serie] = *brush;
-    FireNeedRedraw();
 }
 
 wxBrush *XYZRenderer::GetSerieBrush(size_t serie)

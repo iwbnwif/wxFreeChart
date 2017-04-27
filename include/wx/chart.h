@@ -89,7 +89,6 @@ public:
     void SetBackground(AreaDraw *background)
     {
         wxREPLACE(m_background, background);
-        FireChartChanged();
     }
     
     AreaDraw* GetBackground()
@@ -117,19 +116,16 @@ public:
     void SetHeader(Header* header)
     {
         wxREPLACE(m_header, header);
-        FireChartChanged();
     }
 
     void SetFooter(Footer* footer)
     {
         wxREPLACE(m_footer, footer);
-        FireChartChanged();
     }
 
     void SetMargin(wxCoord margin)
     {
         m_margin = margin;
-        FireChartChanged();
     }
 
     //
@@ -175,9 +171,6 @@ private:
     Axis *m_vertScrolledAxis;
 
     wxChartPanel *m_chartPanel;
-
-    FIRE_WITH_THIS(ChartChanged);
-    FIRE_WITH_THIS(ChartScrollsChanged);
 };
 
 #endif /*CHART_H_*/
