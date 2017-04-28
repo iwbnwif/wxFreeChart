@@ -51,107 +51,108 @@
  to build against the default build of wxWidgets (the one listed as 'default'
  by wx-config --list). Type "./configure --help" for more info.
 
- ChangeLog (for original project)
- --------------------------------
- 
- 1.7:
+ChangeLog (for original project)
+--------------------------------
+
+1.7:
 What's new:
- - OHLCSimpleDataset was added
- - MovingAvarage for OHLC was added
- - Windows installer was added
- - Label colourer was added, to make possible axes labels have different colours
- - OHLCColourer was added, so it's now possible to draw bars/candlesticks in different colours (from indicator values, etc)
- - Mouse zoom/pan was added
- - Chart mouse events was added
- - Tooltips support was added
- - Crosshair was added
- - Many bugfixes
- - Many API impovements
- - Julian date axes was added (thanks to Carsten Arnholm)
- - Pie plots (thanks to Grgory Soutad)
- - OHLC charts improvements (now it's possible to control bars/candlesticks color from various conditions (indicator values, etc))
- - Dynamic charts performance optimization
- - TimeSeriesDataset was added
- - Graphics rendering improvements, added drawing wrapper, to use wxGraphicsContext
- - Demos updated
- - Will be new website with example docs and forum
- 	
- 1.6:
- 		What's new:
- 		 - wxChartSplitPanel was added, it works with multiple plots, 
- 		   and allows add/remove/resize them
- 		 - XYDynamicDataset was added (thanks to Mike Sazonov)
- 		 - basic markers support has been added
- 		 - updated documentation
- 		 - website update
- 		 
- 1.5:
- 		What's new:
- 		 - logarithmic axes added (thanks to Andreas Kuechler)
- 		 - updated demo
- 		 - dll export problems fixed
- 		 - updated documentation
- 		 
- 1.4:
- 		What's new:
- 		 - added methods to access axis-dataset links to AxisPlot and Axis
- 		 - XYLineRenderer and XYAreaRenderer bugfixes
- 		 - added XYLineStepRenderer class
- 		 - added initial combined axes support (see AxisShare class)
- 		 
- 1.3: 
- 		What's new:
- 		 - antialiasing added
- 		 - axis improvements (added vertical text for labels)
- 		 - API changes: int replaced with size_t for indexes  
- 		 
- 1.2: third version of wxFreeChart at wxCode
- 		What's new:
- 		 - added xy datasets support to OHLCPlot
- 		 - added XYSimpleDataset, CategorySimpleDataset, GanttSimpleDataset classes
- 		 - many refactoring changes
- 		 - many bugfixes
- 		 - updated documentation
- 		 - added time series, multiple axis and combined axis demos
- 		 
- 1.1: second version of wxFreeChart at wxCode
- 		What's new:
- 		 - many bugfixes
- 		 - updated demos
- 		 - major redesign
- 		 - build system fixes
- 
+- OHLCSimpleDataset was added
+- MovingAvarage for OHLC was added
+- ~~Windows installer was added~~
+- Label colourer was added, to make possible axes labels have different colours
+- OHLCColourer was added, so it's now possible to draw bars/candlesticks in different colours (from indicator values, etc)
+- ~~Mouse zoom/pan was added~~
+- ~~Chart mouse events was added~~
+- ~~Tooltips support was added~~
+- ~~Crosshair was added~~
+- Many bugfixes
+- Many API impovements
+- Julian date axes was added (thanks to Carsten Arnholm)
+- Pie plots (thanks to Grgory Soutad)
+- OHLC charts improvements (now it's possible to control bars/candlesticks color from various conditions (indicator values, etc))
+- Dynamic charts performance optimization
+- TimeSeriesDataset was added
+- Graphics rendering improvements, added drawing wrapper, to use wxGraphicsContext
+- Demos updated
+- ~~Will be new website with example docs and forum~~
 
- 1.0 - first version of wxFreeChart at wxCode
+1.6:
+What's new:
+- wxChartSplitPanel was added, it works with multiple plots,and allows add/remove/resize them
+- XYDynamicDataset was added (thanks to Mike Sazonov)
+- Basic markers support has been added
+- Updated documentation
+- Website update
 
- Future plans:
- - Transparency for bubble charts, histogram charts
- - Add levels/fractals/etc support to OHLCPlot. Make 
-   OHLCPlot suitable for technical analysis applications
- - Make axis marks drawing more flexible
- - Add zoom to plots
- - Add interval axes
- - Statistics charts
- - Mouse events for chart item click, right/left up/down, drag, etc
- - Pie plots improvements: 3d charts, using wxGL, more flexible legend drawing
- - Make wxFreeChart to work on handheld wxWidgets ports
- 
- Known issues:
- - window scrolling bugs
- - compdateaxis bugs
- - Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
+1.5:
+What's new:
+- Logarithmic axes added (thanks to Andreas Kuechler)
+- Updated demo
+- DLL export problems fixed
+- Updated documentation
 
- Help project:
- Unfortunately, i have not enough time to work on project. 
- You can help project development in following ways:
- - Test it and write bugreports/bugfixes, especially test on MacOSX and WINCE ports.
- - Write additional code and contribute it to project.
- - Donate to support project development, click PayPal (tm) Donate button on wxFreeChart web site. 
+1.4:
+What's new:
+- Added methods to access axis-dataset links to AxisPlot and Axis
+- XYLineRenderer and XYAreaRenderer bugfixes
+- Added XYLineStepRenderer class
+- Added initial combined axes support (see AxisShare class)
+
+1.3: 
+What's new:
+- Antialiasing added
+- Axis improvements (added vertical text for labels)
+- API changes: int replaced with size_t for indexes  
+
+1.2: Third version of wxFreeChart at wxCode
+What's new:
+- Added xy datasets support to OHLCPlot
+- Added XYSimpleDataset, CategorySimpleDataset, GanttSimpleDataset classes
+- Many refactoring changes
+- Many bugfixes
+- Updated documentation
+- Added time series, multiple axis and combined axis demos
+
+1.1: Second version of wxFreeChart at wxCode
+What's new:
+- Many bugfixes
+- Updated demos
+- Major redesign
+- Build system fixes
+
+1.0 - First version of wxFreeChart at wxCode
+
+Future plans
+------------
+- Transparency for bubble charts, histogram charts
+- Add levels/fractals/etc support to OHLCPlot. Make OHLCPlot suitable for technical analysis applications
+- Make axis marks drawing more flexible
+- Add zoom to plots
+- Add interval axes
+- Statistics charts
+- Mouse events for chart item click, right/left up/down, drag, etc
+- Pie plots improvements: 3D charts, using wxGL, more flexible legend drawing
+- Make wxFreeChart to work on handheld wxWidgets ports
  
- Credits:
- 	Mike Sazonov - testing, export bugfixes, XYDynamicDataset implementation, many interesting ideas.
- 	Andreas Kuechler - testing, logarithmic axes implementation, many interesting ideas.
- 	Alan Yaniger - testing, performance optimization, many bugfixes, many useful patches.
- 	Carsten Arnholm - julian axes and dataset implementation.
- 	Grgory Soutad - pie plots and category renderer.
-	Carsten Arnholm - julian date axes
+Known issues
+------------
+- Window scrolling bugs
+- Compdateaxis bugs
+- Antialiasing doesn't work correctly with wxSHORT_DASH pen styles (on wxGTK port)
+
+Help project
+------------
+Unfortunately, I have not enough time to work on project. 
+You can help project development in following ways:
+- Test it and write bugreports/bugfixes, especially test on MacOSX and WINCE ports.
+- Write additional code and contribute it to project.
+- Donate to support project development, click PayPal (tm) Donate button on wxFreeChart web site. 
+ 
+Credits
+-------
+Mike Sazonov - Testing, export bugfixes, XYDynamicDataset implementation, many interesting ideas.
+Andreas Kuechler - Testing, logarithmic axes implementation, many interesting ideas.
+Alan Yaniger - Testing, performance optimization, many bugfixes, many useful patches.
+Carsten Arnholm - Julian axes and dataset implementation.
+Grgory Soutad - Pie plots and category renderer.
+Carsten Arnholm - Julian date axes
