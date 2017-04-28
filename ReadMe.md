@@ -2,54 +2,52 @@
  wxFreeChart Development Version ReadMe
  ======================================
 
- Official Website: <a href="http://wxcode.sourceforge.net/components/freechart" target="_blank">http://wxcode.sourceforge.net/components/freechart</a>
- Original Author: Moskvichev Andrey V.
+Official Website: <a href="http://wxcode.sourceforge.net/components/freechart" target="_blank">wxCode</a>
+Original Author: Moskvichev Andrey V.
  
- **IMPORTANT**
- This is a clone (not fork) from the pbfordev/wxFreeChart repository, which is itself a clone of the original sourceforge code.
+**IMPORTANT**
+This is a clone (not fork) from the pbfordev/wxFreeChart repository, which is itself a clone of the original sourceforge code.
  
- This particular repository is under constant development for the next few months and may contain numerous bugs or fail to even 
- compile at times. Also, the API may well change in the near future and at some point diverge from the original API.
+This particular repository is under constant development for the next few months and may contain numerous bugs or fail to even compile at times. Also, the API may well change in the near future and at some point diverge from the original API.
  
- Nonetheless, any bug reports, comments or discussions on the API are very welcome :)
+Nonetheless, any bug reports, comments or discussions on the API are very welcome :)
  
- Description
- -----------
- wxFreeChart is free powerful charting framework based on wxWidgets. 
- It designed with flexibility in mind, and supports many types of charts with many different configurations.
- 
- Some reasonably up-to-date documentation can be found here: https://iwbnwif.github.io/freechart_docs/html/index.html
- 
- The currently supported chart types are:
- - Line/histogram/area charts based on xy coordinates
- - Bar charts (vertical or horizontal)
- - Stacked bar charts
- - Layered bar charts
- - OHLC financial charts (bars or candlesticks)
- - Pie charts
- - Bubble charts
- - Gantt charts 
- 
- Installation - win32
- --------------------
+Description
+-----------
+wxFreeChart is free powerful charting framework based on wxWidgets. 
+It designed with flexibility in mind, and supports many types of charts with many different configurations.
 
- When building on win32, you can use the makefiles in the BUILD folder using the
- WX_DIR, WX_DEBUG, WX_UNICODE and WX_SHARED to match your wxWidgets build.
- Examples:
+Some reasonably up-to-date documentation can be found here: https://iwbnwif.github.io/freechart_docs/html/index.html
 
-   > nmake -fmakefile.vc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1 WX_MONOLITHIC=0/1
-   > make -fmakefile.bcc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1 WX_MONOLITHIC=0/1
+The currently supported chart types are:
+- Line/histogram/area charts based on xy coordinates
+- Bar charts (vertical or horizontal)
+- Stacked bar charts
+- Layered bar charts
+- OHLC financial charts (bars or candlesticks)
+- Pie charts
+- Bubble charts
+- Gantt charts 
 
- Installation - unix
- -------------------
+Installation - win32
+--------------------
 
- When building on a Linux/GNU-based system, type
+When building on win32, you can use the makefiles in the BUILD folder using the
+WX_DIR, WX_DEBUG, WX_UNICODE and WX_SHARED to match your wxWidgets build.
+Examples:
 
-  ./configure
-  make
-  
- to build against the default build of wxWidgets (the one listed as 'default'
- by wx-config --list). Type "./configure --help" for more info.
+  > nmake -fmakefile.vc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1 WX_MONOLITHIC=0/1
+  > make -fmakefile.bcc WX_DIR=c:\path\to\my\wxWidgets WX_UNICODE=0/1 WX_DEBUG=0/1 WX_SHARED=0/1 WX_MONOLITHIC=0/1
+
+Installation - unix
+-------------------
+
+When building on a Linux/GNU-based system, type
+
+  > ./configure
+  > make
+
+To build against the default build of wxWidgets (the one listed as 'default' by wx-config --list). Type "./configure --help" for more info.
 
 ChangeLog (for original project)
 --------------------------------
