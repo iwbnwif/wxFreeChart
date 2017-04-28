@@ -30,6 +30,8 @@ class DateTimeDataset;
 #define FOREACH_DATAITEM(index, serie, dataset) \
     for (size_t index = 0; index < dataset->GetCount(serie); index++)
 
+wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);        
+
 /**
  * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
  *

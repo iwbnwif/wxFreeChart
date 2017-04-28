@@ -17,6 +17,8 @@
 
 IMPLEMENT_CLASS(Dataset, wxObject)
 
+wxDEFINE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);
+
 Dataset::Dataset()
 {
     m_renderer = NULL;
@@ -75,7 +77,7 @@ void Dataset::DatasetChanged()
     else 
     {
         // FireDatasetChanged();
-        wxCommandEvent* event = new wxCommandEvent(wxEVT_COMMAND_TEXT_UPDATED);
+        wxCommandEvent* event = new wxCommandEvent(EVT_DATASET_CHANGED);
         wxQueueEvent(this, event);
         m_changed = false;
     }
