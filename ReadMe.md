@@ -2,7 +2,7 @@
  wxFreeChart Development Version ReadMe
  ======================================
 
- Official Website: http://wxcode.sourceforge.net/components/freechart
+ Official Website: <a href="http://wxcode.sourceforge.net/components/freechart" target="_blank">http://wxcode.sourceforge.net/components/freechart</a>
  Original Author: Moskvichev Andrey V.
  
  **IMPORTANT**
