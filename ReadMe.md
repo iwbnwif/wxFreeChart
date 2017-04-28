@@ -18,6 +18,8 @@
  wxFreeChart is free powerful charting framework based on wxWidgets. 
  It designed with flexibility in mind, and supports many types of charts with many different configurations.
  
+ Some reasonably up-to-date documentation can be found here: https://iwbnwif.github.io/freechart_docs/html/index.html
+ 
  The currently supported chart types are:
  - Line/histogram/area charts based on xy coordinates
  - Bar charts (vertical or horizontal)
