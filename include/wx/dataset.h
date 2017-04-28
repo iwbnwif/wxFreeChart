@@ -34,7 +34,7 @@ class DateTimeDataset;
  * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
  */
-class WXDLLIMPEXP_FREECHART Dataset : public wxObject, public RefObject
+class WXDLLIMPEXP_FREECHART Dataset : public wxEvtHandler, public RefObject
 {
     DECLARE_CLASS(Dataset)
 public:

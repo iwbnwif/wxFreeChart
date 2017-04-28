@@ -114,6 +114,7 @@ void AxisPlot::AddDataset(Dataset *dataset)
         return ;
     }
 
+    dataset->Bind(wxEVT_COMMAND_TEXT_UPDATED, &AxisPlot::DataChanged, this);
     m_datasets.Add(dataset);
 }
 
@@ -237,6 +238,13 @@ Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
 void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
 {
     // FirePlotNeedRedraw();
+}
+
+void AxisPlot::DataChanged(wxCommandEvent& event)
+{
+    GetChartPanel()->RedrawBackBitmap();
+    GetChartPanel()->Update();
+    GetChartPanel()->Refresh();
 }
 
 void AxisPlot::DatasetChanged(Dataset *dataset)

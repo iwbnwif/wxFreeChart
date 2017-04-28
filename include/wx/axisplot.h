@@ -218,6 +218,8 @@ public:
     // DrawObserver
     //
     virtual void NeedRedraw(DrawObject *obj);
+    
+    virtual void DataChanged(wxCommandEvent& event);
 
     //
     // DatasetObserver
