@@ -24,14 +24,15 @@ class TimeSeriesDemo1 : public ChartDemo
 {
 public:
     TimeSeriesDemo1()
-    : ChartDemo(wxT("Time series Demo 1"))
+    : ChartDemo(wxT("Time Series Demo 1"))
     {
     }
 
     virtual Chart *Create()
     {
-        // data
-        double data[] = {
+        // Data
+        double data[] = 
+        {
              64.09,
              63.34,
              61.41,
@@ -49,8 +50,10 @@ public:
              67.27,
              67.66,
         };
-        // dates
-        const wxChar *strDates[] = {
+        
+        // Dates
+        const wxChar *strDates[] = 
+        {
             wxT("20060317"),
             wxT("20060320"),
             wxT("20060321"),
@@ -72,42 +75,55 @@ public:
         time_t times[WXSIZEOF(strDates)];
 
         wxDateTime dt;
-        for (size_t n = 0; n < WXSIZEOF(strDates); n++) {
+        for (size_t n = 0; n < WXSIZEOF(strDates); n++) 
+        {
             dt.ParseFormat(strDates[n], wxT("%Y%m%d"));
             times[n] = dt.GetTicks();
         }
 
-        // first step: create plot
+        // First step: create a plot.
         XYPlot *plot = new XYPlot();
 
+        // Second step: create the dataset.
         TimeSeriesDataset *dataset = new TimeSeriesDataset(data, times, WXSIZEOF(data));
 
-        dataset->SetRenderer(new XYLineRenderer());
+        // Third step: define a renderer for the dataset.
+        Renderer* renderer = new XYLineRenderer();
+        renderer->SetSerieColour(0, new wxColour(255,0,0));
+        dataset->SetRenderer(renderer);
+        
 
+        // Fourth step: add the dataset to the plot.
         plot->AddDataset(dataset);
 
-        // add left number and bottom date axes
+        // Add left number and bottom date axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+        leftAxis->SetFixedBounds(61.0, 68.0);
+        leftAxis->SetMinorIntervalCount(4);
+        leftAxis->SetMajorGridlinePen(wxColour(100, 100, 100));
+        leftAxis->SetMinorGridlinePen(wxColour(150, 150, 150));
+        
         DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
-
-        // setup window
-        //bottomAxis->SetWindow(0, 10);
-        //bottomAxis->SetUseWindow(true);
-
         bottomAxis->SetVerticalLabelText(true);
         bottomAxis->SetDateFormat(wxT("%d-%m"));
+        bottomAxis->SetMajorGridlinePen(wxColour(100, 100, 100));
 
-        // add axes to first plot
+        // Add axes to plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
+        
+        // Define the plot background and legend.
+        plot->SetBackground(new NoAreaDraw()); // new GradientAreaDraw(*wxTRANSPARENT_PEN, wxColour(100, 100, 250), wxColour(200, 220, 250)));
+        plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
-        // and finally create chart
+        // And finally create the chart.
         Chart *chart = new Chart(plot, GetName());
-
+        chart->SetBackground(new GradientAreaDraw(*wxTRANSPARENT_PEN, wxColour(200, 220, 250), *wxWHITE, wxSOUTH));
+        
         //chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
