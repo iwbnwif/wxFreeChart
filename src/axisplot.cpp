@@ -248,7 +248,7 @@ void AxisPlot::DataChanged(wxCommandEvent& event)
     {
         GetChartPanel()->RedrawBackBitmap();
         GetChartPanel()->Update();
-        GetChartPanel()->Refresh();      
+        GetChartPanel()->Refresh();     
     }
 }
 
