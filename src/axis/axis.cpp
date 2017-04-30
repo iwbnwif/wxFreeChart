@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:    axis.cpp
-// Purpose: axis base class implementation
-// Author:    Moskvichev Andrey V.
-// Created:    2008/11/07
-// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
-// Licence:    wxWidgets licence
+// Name:        axis.cpp
+// Purpose:     axis base class implementation
+// Author:      Moskvichev Andrey V.
+// Created:     2008/11/07
+// Copyright:   (c) 2008-2010 Moskvichev Andrey V.
+// Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/axis.h>
@@ -12,6 +12,8 @@
 #include "wx/arrimpl.cpp"
 
 IMPLEMENT_CLASS(Axis, wxObject)
+
+wxDEFINE_EVENT(EVT_AXIS_CHANGED, wxCommandEvent);
 
 
 Axis::Axis(AXIS_LOCATION location)
@@ -35,23 +37,14 @@ Axis::~Axis()
 {
 }
 
-void Axis::SetMargins(wxCoord marginMin, wxCoord marginMax)
+Dataset *Axis::GetDataset(size_t index)
 {
-    if (m_marginMin != marginMin || m_marginMax != marginMax)
-    {
-        m_marginMin = marginMin;
-        m_marginMax = marginMax;
-    }
+    return m_datasets[index];
 }
 
 size_t Axis::GetDatasetCount()
 {
     return m_datasets.Count();
-}
-
-Dataset *Axis::GetDataset(size_t index)
-{
-    return m_datasets[index];
 }
 
 bool Axis::IsVisible(double value)
@@ -67,15 +60,18 @@ bool Axis::IsVisible(double value)
     }
 }
 
-bool Axis::IntersectsWindow(double v0, double v1)
+void Axis::SetMargins(wxCoord marginMin, wxCoord marginMax)
 {
-    if (m_useWin) {
-        return ((v0 >= v1 && v0 >= m_winPos && v1 <= m_winPos)
-                || (v0 < v1 && v1 >= m_winPos && v0 <= m_winPos));
+    if (m_marginMin != marginMin || m_marginMax != marginMax)
+    {
+        m_marginMin = marginMin;
+        m_marginMax = marginMax;
     }
-    else {
-        return IsVisible(v0) || IsVisible(v1);
-    }
+}
+
+void Axis::AxisChanged()
+{
+    wxQueueEvent(this, new wxCommandEvent(EVT_AXIS_CHANGED));
 }
 
 double Axis::BoundValue(double value)
@@ -97,6 +93,17 @@ double Axis::BoundValue(double value)
 
     double bound = wxMin(max, wxMax(min, value));
     return bound;
+    }
+}
+
+bool Axis::IntersectsWindow(double v0, double v1)
+{
+    if (m_useWin) {
+        return ((v0 >= v1 && v0 >= m_winPos && v1 <= m_winPos)
+                || (v0 < v1 && v1 >= m_winPos && v0 <= m_winPos));
+    }
+    else {
+        return IsVisible(v0) || IsVisible(v1);
     }
 }
 

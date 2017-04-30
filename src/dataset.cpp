@@ -76,9 +76,7 @@ void Dataset::DatasetChanged()
 
     else 
     {
-        // FireDatasetChanged();
-        wxCommandEvent* event = new wxCommandEvent(EVT_DATASET_CHANGED);
-        wxQueueEvent(this, event);
+        wxQueueEvent(this, new wxCommandEvent(EVT_DATASET_CHANGED));
         m_changed = false;
     }
 }

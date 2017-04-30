@@ -81,13 +81,17 @@ wxChartPanel::~wxChartPanel()
 
 void wxChartPanel::SetChart(Chart *chart)
 {
-    if (m_chart != NULL) {
+    if (m_chart != NULL)
+    {
+        m_chart->Unbind(EVT_CHART_CHANGED, &wxChartPanel::OnChartChanged, this);
         m_chart->SetChartPanel(NULL);
     }
 
     wxREPLACE(m_chart, chart);
 
-    if (m_chart != NULL) {
+    if (m_chart != NULL) 
+    {
+        m_chart->Bind(EVT_CHART_CHANGED, &wxChartPanel::OnChartChanged, this);
         m_chart->SetChartPanel(this);
     }
 
@@ -317,4 +321,11 @@ void wxChartPanel::ResizeBackBitmap(wxSize size)
     size.IncTo(wxSize(1, 1)); 
     
     m_backBitmap.Create(size.GetWidth(), size.GetHeight());
+}
+
+void wxChartPanel::OnChartChanged(wxCommandEvent& event)
+{
+    std::cout << "wxChartPanel::On chart changed event" << std::endl;    
+    RedrawBackBitmap();
+    Refresh(false);
 }

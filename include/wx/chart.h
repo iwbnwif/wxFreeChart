@@ -24,38 +24,65 @@
 class WXDLLIMPEXP_FREECHART Chart;
 class WXDLLIMPEXP_FREECHART wxChartPanel;
 
+wxDECLARE_EVENT(EVT_CHART_CHANGED, wxCommandEvent);
+
 /**
  * Chart. Contains plot, title and chart attributes.
  */
-class WXDLLIMPEXP_FREECHART Chart
+class WXDLLIMPEXP_FREECHART Chart : public wxEvtHandler
 {
 public:
     /**
-     * Constructs new chart.
-     * @param plot plot
-     * @param title chart title (empty string - no title)
+     * Constructor allowing creation of a custom header and foooter.
+     * @param plot The plot that will displayed in this chart. If more than one plot will be displayed, then use MultiPlot - see
+     * MultiPlot class documentation for more details.
+     * @param header The text element container that will be placed within the header area of the chart.
+     * @param footer The text element container that will be placed within the footer area of the chart.
+     */
+    Chart(Plot *plot, Header* header = NULL, Footer* footer = NULL);
+
+    /**
+     * Convenience constructor for creating a chart with a simple header and no footer. A more complex header and a footer can
+     * still be added later if necessary.
+     * @param plot The plot that will displayed in this chart. If more than one plot will be displayed, then use MultiPlot - see
+     * MultiPlot class documentation for more details.
+     * @param title The chart's title that will be drawn in the header area using the default title font. Can be NULL, in which
+     * case the chart will have no title.
      */
     Chart(Plot *plot, const wxString &title = wxEmptyString);
 
-    Chart(Plot *plot, Header* header = NULL, Footer* footer = NULL);
-
+    /**
+     * Destructor. Will also destroy plot, background, header and footer objects.
+     */
     virtual ~Chart();
 
     /**
+     * Gets the AreaDraw object that draws the background area of this chart.
+     * @return AreaDraw responsible for drawing the chart area.
+     */
+    AreaDraw* GetBackground()
+    {
+        return m_background;
+    }
+
+    /**
+     * Gets the chart panel to which this plot belongs.
+     * @return %Chart panel which this plot belongs to.
+     */
+    wxChartPanel *GetChartPanel();  
+
+    Axis *GetHorizScrolledAxis();
+
+    Axis *GetVertScrolledAxis();
+
+    /**
      * Returns plot associated with chart.
-     * @return plot
+     * @return plot Plot belonging to this chart.
      */
     Plot *GetPlot()
     {
         return m_plot;
     }
-
-    /**
-     * Draws chart.
-     * @param dc device context
-     * @param rc rectangle where to draw chart
-     */
-    void Draw(ChartDC& dc, wxRect& rc, bool antialias = false);
 
     /**
      * Sets chart background.
@@ -64,11 +91,6 @@ public:
     void SetBackground(AreaDraw *background)
     {
         wxREPLACE(m_background, background);
-    }
-    
-    AreaDraw* GetBackground()
-    {
-        return m_background;
     }
 
     /**
@@ -110,29 +132,26 @@ public:
 
     void SetScrolledAxis(Axis *axis);
 
-    Axis *GetHorizScrolledAxis();
-
-    Axis *GetVertScrolledAxis();
-
-
-    wxChartPanel *GetChartPanel();
-
     void SetChartPanel(wxChartPanel *chartPanel);
 
-    //
-    // PlotObserver
-    //
-    virtual void PlotNeedRedraw(Plot *plot);
+    /**
+     * Event handler called when (one of) the contained plot(s) changes.
+     * @param event Details of the change event.
+     */
+    virtual void OnPlotChanged(wxCommandEvent& event);
 
-    //
-    // AxisObserver
-    //
-    virtual void AxisChanged(Axis *axis);
-
-    virtual void BoundsChanged(Axis *axis);
+protected:
+    /**
+     * Draws chart.
+     * @param dc device context
+     * @param rc rectangle where to draw chart
+     */
+    void Draw(ChartDC& dc, wxRect& rc, bool antialias = false);
 
 private:
     void Init(Plot* plot, Header* header = NULL, Footer* footer = NULL);
+    
+    virtual void ChartChanged();
 
     Plot *m_plot;
     AreaDraw *m_background;
@@ -146,6 +165,8 @@ private:
     Axis *m_vertScrolledAxis;
 
     wxChartPanel *m_chartPanel;
+    
+friend wxChartPanel;
 };
 
 #endif /*CHART_H_*/

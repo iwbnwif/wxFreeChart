@@ -1,14 +1,16 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:    plot.cpp
-// Purpose: plot base class implementation
-// Author:    Moskvichev Andrey V.
-// Created:    2008/11/07
-// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
-// Licence:    wxWidgets licence
+// Name:        plot.cpp
+// Purpose:     plot base class implementation
+// Author:      Moskvichev Andrey V.
+// Created:     2008/11/07
+// Copyright:   (c) 2008-2010 Moskvichev Andrey V. (c)2017 wxChartCtrl team.
+// Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/plot.h>
 #include <wx/drawutils.h>
+
+wxDEFINE_EVENT(EVT_PLOT_CHANGED, wxCommandEvent);
 
 Plot::Plot()
 {
@@ -60,4 +62,9 @@ wxChartPanel *Plot::GetChartPanel()
 void Plot::ChartPanelChanged(wxChartPanel *WXUNUSED(oldPanel), wxChartPanel *WXUNUSED(newPanel))
 {
     // default - do nothing
+}
+
+void Plot::PlotChanged()
+{
+    wxQueueEvent(this, new wxCommandEvent(EVT_PLOT_CHANGED));
 }

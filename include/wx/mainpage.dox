@@ -267,8 +267,4 @@ The final layer is the PlotDatasetLayerBitmap. Once the the PlotAxisLayerBitmap 
 the renderers for each Series of each Dataset with the plot are called to render the actual data. Therefore, in a single series
 dynamic chart with static axis, each redraw consists of one extremely fast blit followed by the render of the series.
 
-
-
-
-
 */

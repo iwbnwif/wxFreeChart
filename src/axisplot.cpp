@@ -61,9 +61,73 @@ AxisPlot::~AxisPlot()
     wxDELETE(m_crosshair);
 }
 
+wxCoord AxisPlot::GetAxesExtent(wxDC &dc, AxisArray *axes)
+{
+    wxCoord ext = 0;
+    for (size_t nAxis = 0; nAxis < axes->Count(); nAxis++) {
+        ext += (*axes)[nAxis]->GetExtent(dc);
+    }
+    return ext;
+}
+
+Dataset *AxisPlot::GetDataset(size_t index)
+{
+    return m_datasets[index];
+}
+
+Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, size_t index, bool vertical)
+{
+    size_t axisIndex = 0;
+
+    for (size_t nLink = 0; nLink < m_links.Count(); nLink++) {
+        DataAxisLink &link = m_links[nLink];
+
+        if (link.m_dataset == dataset) {
+            if (vertical == link.m_axis->IsVertical()) {
+                if (axisIndex == index) {
+                    return link.m_axis;
+                }
+                axisIndex++;
+            }
+        }
+    }
+    return NULL; // not found
+}
+
+Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
+{
+    return GetDatasetAxis(dataset, 0, vertical);
+}
+
+size_t AxisPlot::GetDatasetCount()
+{
+    return m_datasets.Count();
+}
+
+bool AxisPlot::HasData()
+{
+    return m_datasets.Count() != 0;
+}
+
+void AxisPlot::SetCrosshair(Crosshair *crosshair)
+{
+
+}
+
 void AxisPlot::SetDataBackground(AreaDraw *dataBackground)
 {
     SetBackground(dataBackground);
+}
+
+void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
+{
+    m_drawGridVertical = drawGridVertical;
+    m_drawGridHorizontal = drawGridHorizontal;
+}
+
+void AxisPlot::SetLegend(Legend *legend)
+{
+    wxREPLACE(m_legend, legend);
 }
 
 void AxisPlot::AddAxis(Axis *axis)
@@ -97,16 +161,6 @@ void AxisPlot::AddAxis(Axis *axis)
     }
 }
 
-bool AxisPlot::HasData()
-{
-    return m_datasets.Count() != 0;
-}
-
-void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
-{
-    m_redrawDataArea = true;
-}
-
 void AxisPlot::AddDataset(Dataset *dataset)
 {
     if (!AcceptDataset(dataset)) {
@@ -114,7 +168,10 @@ void AxisPlot::AddDataset(Dataset *dataset)
         return ;
     }
 
-    dataset->Bind(EVT_DATASET_CHANGED, &AxisPlot::DataChanged, this);
+    // Subscribe to change events from this dataset so the plot can be redrawn if necessary.
+    dataset->Bind(EVT_DATASET_CHANGED, &AxisPlot::OnDataChanged, this);
+    
+    // Add to the list of datasets drawn by this plot.
     m_datasets.Add(dataset);
 }
 
@@ -126,16 +183,6 @@ void AxisPlot::AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontal
 
     LinkDataVerticalAxis(m_datasets.Count() - 1, m_verticalAxes.Count() - 1);
     LinkDataHorizontalAxis(m_datasets.Count() - 1, m_horizontalAxes.Count() - 1);
-}
-
-size_t AxisPlot::GetDatasetCount()
-{
-    return m_datasets.Count();
-}
-
-Dataset *AxisPlot::GetDataset(size_t index)
-{
-    return m_datasets[index];
 }
 
 void AxisPlot::LinkDataHorizontalAxis(size_t nData, size_t nAxis)
@@ -160,16 +207,6 @@ void AxisPlot::LinkDataVerticalAxis(size_t nData, size_t nAxis)
     m_verticalAxes[nAxis]->UpdateBounds();
 }
 
-void AxisPlot::SetLegend(Legend *legend)
-{
-    wxREPLACE(m_legend, legend);
-}
-
-void AxisPlot::SetCrosshair(Crosshair *crosshair)
-{
-
-}
-
 // Inspects the passed dataset and if axes are set to automatically update
 // then their dimensions are recalculated. The return value indicates if
 // the axis bounds have changed or not.
@@ -188,97 +225,6 @@ bool AxisPlot::UpdateAxis(Dataset *dataset)
     }
     
     return updated > 0;
-}
-
-void AxisPlot::SetDrawGrid(bool drawGridVertical, bool drawGridHorizontal)
-{
-    m_drawGridVertical = drawGridVertical;
-    m_drawGridHorizontal = drawGridHorizontal;
-}
-
-void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
-{
-    if (m_drawGridVertical) {
-        for (size_t nAxis = 0; nAxis < m_verticalAxes.Count(); nAxis++) {
-            m_verticalAxes[nAxis]->DrawGridLines(dc, rc);
-        }
-    }
-
-    if (m_drawGridHorizontal) {
-        for (size_t nAxis = 0; nAxis < m_horizontalAxes.Count(); nAxis++) {
-            m_horizontalAxes[nAxis]->DrawGridLines(dc, rc);
-        }
-    }
-}
-
-Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, size_t index, bool vertical)
-{
-    size_t axisIndex = 0;
-
-    for (size_t nLink = 0; nLink < m_links.Count(); nLink++) {
-        DataAxisLink &link = m_links[nLink];
-
-        if (link.m_dataset == dataset) {
-            if (vertical == link.m_axis->IsVertical()) {
-                if (axisIndex == index) {
-                    return link.m_axis;
-                }
-                axisIndex++;
-            }
-        }
-    }
-    return NULL; // not found
-}
-
-Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
-{
-    return GetDatasetAxis(dataset, 0, vertical);
-}
-
-void AxisPlot::NeedRedraw(DrawObject *WXUNUSED(obj))
-{
-    // FirePlotNeedRedraw();
-}
-
-void AxisPlot::DataChanged(wxCommandEvent& event)
-{
-    wxChartPanel* panel = GetChartPanel();
-    
-    if (panel)
-    {
-        GetChartPanel()->RedrawBackBitmap();
-        GetChartPanel()->Update();
-        GetChartPanel()->Refresh();     
-    }
-}
-
-void AxisPlot::DatasetChanged(Dataset *dataset)
-{
-    // Update the axis. If the axis have changed (UpdateAxis returns true)
-    // then redraw the chart background because the scale will have changed.
-    if (UpdateAxis(dataset))
-        m_redrawDataArea = true;
-    else
-        m_redrawDataArea = false;
-}
-
-void AxisPlot::AxisChanged(Axis *WXUNUSED(axis))
-{
-    // FirePlotNeedRedraw();
-}
-
-void AxisPlot::BoundsChanged(Axis *WXUNUSED(axis))
-{
-    // FirePlotNeedRedraw();
-}
-
-wxCoord AxisPlot::GetAxesExtent(wxDC &dc, AxisArray *axes)
-{
-    wxCoord ext = 0;
-    for (size_t nAxis = 0; nAxis < axes->Count(); nAxis++) {
-        ext += (*axes)[nAxis]->GetExtent(dc);
-    }
-    return ext;
 }
 
 bool AxisPlot::ToDataCoords(size_t nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y)
@@ -384,6 +330,27 @@ void AxisPlot::CalcDataArea(wxDC &dc, wxRect rc, wxRect &rcData, wxRect &rcLegen
     CheckFixRect(rcData);
 }
 
+void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
+{
+    if (m_leftAxes.Count() != 0) {
+        wxRect rcLeftAxes(rc.x, rcData.y, (rcData.x - rc.x), rcData.height - 1);
+        DrawAxesArray(dc, rcLeftAxes, &m_leftAxes, true);
+    }
+    if (m_rightAxes.Count() != 0) {
+        wxRect rcRightAxes(rcData.x + rcData.width - 1, rcData.y, (rc.x + rc.width - rcData.x - rcData.width - 1), rcData.height);
+        DrawAxesArray(dc, rcRightAxes, &m_rightAxes, true);
+    }
+    if (m_topAxes.Count() != 0) {
+        wxRect rcTopAxes(rcData.x, rc.y, rcData.width, (rcData.y - rc.y));
+        //wxRect rcTopAxes(rcData.x, rc.y + 2, rcData.width, (rcData.y - rc.y + 2));
+        DrawAxesArray(dc, rcTopAxes, &m_topAxes, false);
+    }
+    if (m_bottomAxes.Count() != 0) {
+        wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height - 1, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
+        DrawAxesArray(dc, rcBottomAxes, &m_bottomAxes, false);
+    }
+}
+
 void AxisPlot::DrawAxesArray(wxDC &dc, wxRect rc, AxisArray *axes, bool vertical)
 {
     wxRect rcAxis(rc);
@@ -407,54 +374,6 @@ void AxisPlot::DrawAxesArray(wxDC &dc, wxRect rc, AxisArray *axes, bool vertical
         else {
             rcAxis.y += ext;
         }
-    }
-}
-
-void AxisPlot::DrawAxes(wxDC &dc, wxRect &rc, wxRect rcData)
-{
-    if (m_leftAxes.Count() != 0) {
-        wxRect rcLeftAxes(rc.x, rcData.y, (rcData.x - rc.x), rcData.height - 1);
-        DrawAxesArray(dc, rcLeftAxes, &m_leftAxes, true);
-    }
-    if (m_rightAxes.Count() != 0) {
-        wxRect rcRightAxes(rcData.x + rcData.width - 1, rcData.y, (rc.x + rc.width - rcData.x - rcData.width - 1), rcData.height);
-        DrawAxesArray(dc, rcRightAxes, &m_rightAxes, true);
-    }
-    if (m_topAxes.Count() != 0) {
-        wxRect rcTopAxes(rcData.x, rc.y, rcData.width, (rcData.y - rc.y));
-        //wxRect rcTopAxes(rcData.x, rc.y + 2, rcData.width, (rcData.y - rc.y + 2));
-        DrawAxesArray(dc, rcTopAxes, &m_topAxes, false);
-    }
-    if (m_bottomAxes.Count() != 0) {
-        wxRect rcBottomAxes(rcData.x, rcData.y + rcData.height - 1, rcData.width, (rc.y + rc.height - rcData.y - rcData.height - 1));
-        DrawAxesArray(dc, rcBottomAxes, &m_bottomAxes, false);
-    }
-}
-
-void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
-{
-    for (size_t n = 0; n < m_datasets.Count(); n++) {
-        Dataset *dataset = m_datasets[n];
-
-        if (dataset->GetMarkersCount() == 0) {
-            continue;
-        }
-
-        Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
-        Axis *vertAxis = GetDatasetVerticalAxis(dataset);
-
-        for (size_t nMarker = 0; nMarker < dataset->GetMarkersCount(); nMarker++) {
-            Marker *marker = dataset->GetMarker(nMarker);
-
-            marker->Draw(dc, rcData, horizAxis, vertAxis);
-        }
-    }
-}
-
-void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
-{
-    if (m_legend != NULL) {
-        m_legend->Draw(dc, rcLegend, m_datasets);
     }
 }
 
@@ -482,6 +401,48 @@ void AxisPlot::DrawBackground(ChartDC& cdc, wxRect rc)
     {
         // TODO crosshair drawing
         //m_crosshair->Draw(dc, rcData, );
+    }
+}
+
+void AxisPlot::DrawGridLines(wxDC &dc, wxRect rc)
+{
+    if (m_drawGridVertical) {
+        for (size_t nAxis = 0; nAxis < m_verticalAxes.Count(); nAxis++) {
+            m_verticalAxes[nAxis]->DrawGridLines(dc, rc);
+        }
+    }
+
+    if (m_drawGridHorizontal) {
+        for (size_t nAxis = 0; nAxis < m_horizontalAxes.Count(); nAxis++) {
+            m_horizontalAxes[nAxis]->DrawGridLines(dc, rc);
+        }
+    }
+}
+
+void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
+{
+    if (m_legend != NULL) {
+        m_legend->Draw(dc, rcLegend, m_datasets);
+    }
+}
+
+void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
+{
+    for (size_t n = 0; n < m_datasets.Count(); n++) {
+        Dataset *dataset = m_datasets[n];
+
+        if (dataset->GetMarkersCount() == 0) {
+            continue;
+        }
+
+        Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
+        Axis *vertAxis = GetDatasetVerticalAxis(dataset);
+
+        for (size_t nMarker = 0; nMarker < dataset->GetMarkersCount(); nMarker++) {
+            Marker *marker = dataset->GetMarker(nMarker);
+
+            marker->Draw(dc, rcData, horizAxis, vertAxis);
+        }
     }
 }
 
@@ -523,6 +484,37 @@ void AxisPlot::DrawData(ChartDC& cdc, wxRect rc)
 		DrawDatasets(dc, rcPlot);
 #endif
 }
+
+void AxisPlot::AxisChanged(Axis *WXUNUSED(axis))
+{
+    // FirePlotNeedRedraw();
+}
+
+void AxisPlot::BoundsChanged(Axis *WXUNUSED(axis))
+{
+    // FirePlotNeedRedraw();
+}
+
+void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
+{
+    m_redrawDataArea = true;
+}
+
+void AxisPlot::OnDataChanged(wxCommandEvent& event)
+{
+    PlotChanged();
+}
+
+void AxisPlot::DatasetChanged(Dataset *dataset)
+{
+    // Update the axis. If the axis have changed (UpdateAxis returns true)
+    // then redraw the chart background because the scale will have changed.
+    if (UpdateAxis(dataset))
+        m_redrawDataArea = true;
+    else
+        m_redrawDataArea = false;
+}
+
 
 // TODO: Everything below this point is still TODO.
 

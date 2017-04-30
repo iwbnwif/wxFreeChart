@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:    plot.h
-// Purpose: plot base class declarations
-// Author:    Moskvichev Andrey V.
-// Created:    2008/11/07
-// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
-// Licence:    wxWidgets licence
+// Name:        plot.h
+// Purpose:     plot base class declarations
+// Author:      Moskvichev Andrey V.
+// Created:     2008/11/07
+// Copyright:   (c) 2008-2010 Moskvichev Andrey V. (c)2017 wxChartCtrl team.
+// Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef PLOT_H_
@@ -17,6 +17,8 @@
 class WXDLLIMPEXP_FREECHART Plot;
 class WXDLLIMPEXP_FREECHART wxChartPanel;
 
+wxDECLARE_EVENT(EVT_PLOT_CHANGED, wxCommandEvent);
+
 enum PlotDrawMode
 {
     PLOT_DRAW_BACKGROUND,
@@ -28,7 +30,7 @@ enum PlotDrawMode
  * Base class for all plots.
  *
  */
-class WXDLLIMPEXP_FREECHART Plot
+class WXDLLIMPEXP_FREECHART Plot : public wxEvtHandler
 {
 public:
     Plot();
@@ -56,7 +58,6 @@ public:
      * it
      */
     wxChartPanel *GetChartPanel();
-
 
     /**
      * Sets plot background.
@@ -108,6 +109,9 @@ protected:
     virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
 
     AreaDraw *m_background;
+
+protected:
+    virtual void PlotChanged();
 
 private:
     wxFont m_textNoDataFont;

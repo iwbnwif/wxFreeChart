@@ -1,10 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:    axisplot.h
-// Purpose: axis plot declaration
-// Author:    Moskvichev Andrey V.
-// Created:    2008/11/07
-// Copyright:    (c) 2008-2010 Moskvichev Andrey V.
-// Licence:    wxWidgets licence
+// Name:        axisplot.h
+// Purpose:     AxisPlot declaration
+// Author:      Moskvichev Andrey V.
+// Created:     2008/11/07
+// Copyright:   (c)2008-2010 Moskvichev Andrey V. (c)2017 wxChartCtrl team.
+// Licence:     wxWidgets licence see wxwidgets.org
 /////////////////////////////////////////////////////////////////////////////
 
 #ifndef AXISPLOT_H_
@@ -20,7 +20,6 @@
 #include <wx/chartpanel.h>
 
 #include <wx/dynarray.h>
-
 
 /**
  * Internal class, don't use in your applications.
@@ -60,26 +59,26 @@ public:
     virtual ~AxisPlot();
 
     /**
-     * Adds axis to plot.
-     * @param axis axis to be added
+     * Adds an axis to the plot.
+     * @param axis The axis to be added.
      */
     void AddAxis(Axis *axis);
 
     /**
-     * Adds dataset to plot.
-     * @param dataset dataset to be added
+     * Adds a dataset to the plot.
+     * @param dataset The dataset to be added.
      */
     void AddDataset(Dataset *dataset);
 
     /**
-     * Removes dataset from plot.
-     * @param dataset dataset to be removed
+     * Removes a dataset from the plot.
+     * @param dataset The dataset to be removed.
      */
     void RemoveDataset(Dataset *dataset);
 
     /**
-     * Removes dataset from plot.
-     * @param dataset dataset index to be removed
+     * Removes a dataset from the plot.
+     * @param dataset Index of the dataset to be removed.
      */
     void RemoveDataset(size_t index);
 
@@ -213,13 +212,12 @@ public:
      * @return true if coordinate was succesfully translated, false - overwise
      */
     bool ToDataCoords(size_t nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y);
-
-    //
-    // DrawObserver
-    //
-    virtual void NeedRedraw(DrawObject *obj);
-    
-    virtual void DataChanged(wxCommandEvent& event);
+ 
+    /**
+     * Event handler called when the data changes in a represented dataset.
+     * @param event Details of the change event.
+     */
+    virtual void OnDataChanged(wxCommandEvent& event);
 
     //
     // DatasetObserver

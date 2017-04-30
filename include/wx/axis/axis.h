@@ -12,23 +12,22 @@
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/dataset.h>
-
+#include <wx/drawobject.h>
 #include <wx/dynarray.h>
 
-#include <wx/drawobject.h>
-
-enum AXIS_LOCATION {
+enum AXIS_LOCATION 
+{
     AXIS_LEFT = 1,
     AXIS_RIGHT,
     AXIS_TOP,
     AXIS_BOTTOM,
 };
 
-class WXDLLIMPEXP_FREECHART Axis;
+wxDECLARE_EVENT(EVT_AXIS_CHANGED, wxCommandEvent);
 
 /**
- * Base class for all axes.
- * Axis has following attributes:
+ * This is the base class for all axes.
+ * An axis has following attributes:
  * <ol>
  *     <li>Location - where axis arranged on plot, can be: AXIS_LEFT, AXIS_RIGHT, AXIS_TOP, AXIS_BOTTOM.</li>
  *     <li>Margins - distance from plot edges to axis labels.</li>
@@ -36,7 +35,7 @@ class WXDLLIMPEXP_FREECHART Axis;
  *  data points is visible at once, position is first data item visible.</li>
  * </ol>
  */
-class WXDLLIMPEXP_FREECHART Axis : public wxObject
+class WXDLLIMPEXP_FREECHART Axis : public wxEvtHandler
 {
     DECLARE_CLASS(Axis)
 
@@ -51,6 +50,37 @@ public:
     virtual ~Axis();
 
     /**
+     * Returns data bounds.
+     * @param minValue output minimal data value
+     * @param maxValue output maximal data value
+     */
+    virtual void GetDataBounds(double &minValue, double &maxValue) const = 0;
+
+    //
+    // Dataset functions.
+    //
+    /**
+     * Returns dataset counts, linked with this axis.
+     * @return dataset counts, linked with this axis
+     */
+    size_t GetDatasetCount();
+
+    /**
+     * Returns dataset, linked with this axis at specified index.
+     * @param index dataset index
+     * @return dataset at index
+     */
+    Dataset *GetDataset(size_t index);
+
+    /**
+     * Used to determine minimal size needed to draw axis contents,
+     * minimal width for vertical axes, minimal height for horizontal.
+     * @param dc device context
+     * @return extent
+     */
+    virtual wxCoord GetExtent(wxDC &dc) = 0;
+
+    /**
      * Returns axis location.
      * @return axis location
      */
@@ -58,6 +88,78 @@ public:
     {
         return m_location;
     }
+
+     /**
+      * Gets the pen that is currently used to draw major gridlines on this axis.
+      * @return The pen currently used to draw major gridlines.
+      */
+     const wxPen& GetMajorGridlinePen()
+     {
+         return m_majorGridlinePen;
+     }
+
+     /**
+      * Gets the pen that is currently used to draw minor gridlines on this axis.
+      * @return The pen currently used to draw minor gridlines.
+      */
+     const wxPen& GetMinorGridlinePen()
+     {
+         return m_minorGridlinePen;
+     }
+
+    /**
+     * Returns window bounds.
+     * If window is not used, simply returns data bounds.
+     * @param winMin out for window minimal
+     * @param winMax out for window maximal
+     */
+    void GetWindowBounds(double &winMin, double &winMax)
+    {
+        double minValue, maxValue;
+        GetDataBounds(minValue, maxValue);
+
+        if (m_useWin) {
+            winMin = m_winPos;
+            winMax = wxMin(maxValue, winMin + m_winWidth);
+        }
+        else {
+            winMin = minValue;
+            winMax = maxValue;
+        }
+    }
+
+    /**
+     * Returns window position.
+     * @return window position
+     */
+    double GetWindowPosition()
+    {
+        return m_winPos;
+    }
+    
+    /**
+     * Returns window width.
+     * @return window width
+     */
+    double GetWindowWidth()
+    {
+        return m_winWidth;
+    }
+
+    /**
+     * Checks whether line in data space intersects window.
+     * @param v0 line begin in data space
+     * @param v0 line end in data space
+     * @return true if line intersects window
+     */
+    bool IntersectsWindow(double v0, double v1);
+
+    /**
+     * Checks whether data value is visible.
+     * @param value value in data space
+     * @return true if data value is visible
+     */
+    virtual bool IsVisible(double value);
 
     /**
      * Checks whether axis is vertical.
@@ -105,40 +207,6 @@ public:
          m_minorGridlinePen = pen;
      }
      
-     /**
-      * Gets the pen that is currently used to draw major gridlines on this axis.
-      * @return The pen currently used to draw major gridlines.
-      */
-     const wxPen& GetMajorGridlinePen()
-     {
-         return m_majorGridlinePen;
-     }
-
-     /**
-      * Gets the pen that is currently used to draw minor gridlines on this axis.
-      * @return The pen currently used to draw minor gridlines.
-      */
-     const wxPen& GetMinorGridlinePen()
-     {
-         return m_minorGridlinePen;
-     }
-
-    //
-    // Dataset functions.
-    //
-    /**
-     * Returns dataset counts, linked with this axis.
-     * @return dataset counts, linked with this axis
-     */
-    size_t GetDatasetCount();
-
-    /**
-     * Returns dataset, linked with this axis at specified index.
-     * @param index dataset index
-     * @return dataset at index
-     */
-    Dataset *GetDataset(size_t index);
-
     //
     // Mouse drag behavior
     //
@@ -147,25 +215,7 @@ public:
     //
     // Window functions.
     //
-
-    /**
-     * Sets window width. Window width is in data space.
-     * @param winWidth new window width
-     */
-    void SetWindowWidth(double winWidth)
-    {
-        SetWindow(m_winPos, winWidth);
-    }
-
-    /**
-     * Returns window width.
-     * @return window width
-     */
-    double GetWindowWidth()
-    {
-        return m_winWidth;
-    }
-
+    
     /**
      * Sets window position. Window position is in data space.
      * @param winPos new window position
@@ -176,12 +226,12 @@ public:
     }
 
     /**
-     * Returns window position.
-     * @return window position
+     * Sets window width. Window width is in data space.
+     * @param winWidth new window width
      */
-    double GetWindowPosition()
+    void SetWindowWidth(double winWidth)
     {
-        return m_winPos;
+        SetWindow(m_winPos, winWidth);
     }
 
     /**
@@ -209,35 +259,6 @@ public:
     }
 
     /**
-     * Checks whether line in data space intersects window.
-     * @param v0 line begin in data space
-     * @param v0 line end in data space
-     * @return true if line intersects window
-     */
-    bool IntersectsWindow(double v0, double v1);
-
-    /**
-     * Returns window bounds.
-     * If window is not used, simply returns data bounds.
-     * @param winMin out for window minimal
-     * @param winMax out for window maximal
-     */
-    void GetWindowBounds(double &winMin, double &winMax)
-    {
-        double minValue, maxValue;
-        GetDataBounds(minValue, maxValue);
-
-        if (m_useWin) {
-            winMin = m_winPos;
-            winMax = wxMin(maxValue, winMin + m_winWidth);
-        }
-        else {
-            winMin = minValue;
-            winMax = maxValue;
-        }
-    }
-
-    /**
      * internal. Don't use from programs.
      */
     void AddDataset(Dataset *dataset)
@@ -246,28 +267,6 @@ public:
             m_datasets.Add(dataset);
         }
     }
-
-    /**
-     * Returns data bounds.
-     * @param minValue output minimal data value
-     * @param maxValue output maximal data value
-     */
-    virtual void GetDataBounds(double &minValue, double &maxValue) const = 0;
-
-    /**
-     * Used to determine minimal size needed to draw axis contents,
-     * minimal width for vertical axes, minimal height for horizontal.
-     * @param dc device context
-     * @return extent
-     */
-    virtual wxCoord GetExtent(wxDC &dc) = 0;
-
-    /**
-     * Checks whether data value is visible.
-     * @param value value in data space
-     * @return true if data value is visible
-     */
-    virtual bool IsVisible(double value);
 
     /**
      * Returns nearest boundary value.
@@ -319,12 +318,17 @@ protected:
     /**
      * Checks whether dataset can be accepted by this axis.
      * Must be implemented by derivative classes.
-     * XXX: maybe remove this method later.
      * @param dataset dataset to be checked
      * @return true - if dataset can be accepted, false overwise
      */
     virtual bool AcceptDataset(Dataset *dataset) = 0;
 
+    /**
+     * Notifies any subscribers to this axis that something about the axis has changed 
+     * and therefor other objects may need to be recalculated / redrawn.
+     */
+    virtual void AxisChanged();
+        
     DatasetArray m_datasets;
 	wxPen m_majorGridlinePen;
 	wxPen m_minorGridlinePen;
