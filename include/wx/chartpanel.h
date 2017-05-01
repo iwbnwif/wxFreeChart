@@ -103,6 +103,8 @@ private:
     void OnScrollWin(wxScrollWinEvent &ev);
     void OnMouseEvents(wxMouseEvent &ev);
 
+    void Resize(const wxRect& rect);
+    
     void ScrollAxis(Axis *axis, int d);
 
     Chart *m_chart;

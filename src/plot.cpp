@@ -20,6 +20,10 @@ Plot::Plot()
     m_background = new NoAreaDraw();
 
     m_chartPanel = NULL;
+    
+    // Bind a few default events.
+    Bind(wxEVT_MOTION, &Plot::OnMouseMove, this);
+    Bind(wxEVT_SIZE, &Plot::OnPlotResize, this);
 }
 
 Plot::~Plot()
@@ -30,14 +34,14 @@ Plot::~Plot()
 void Plot::Draw(ChartDC &cdc, wxRect rc, PlotDrawMode mode)
 {
     if (mode == PLOT_DRAW_BACKGROUND || mode == PLOT_DRAW_ALL)
-        DrawBackground(cdc, rc);
+        DrawBackground(cdc, m_rect);
 
     if (mode == PLOT_DRAW_DATA || mode == PLOT_DRAW_ALL)
     {
         if (HasData())
-            DrawData(cdc,rc);
+            DrawData(cdc,m_rect);
         else
-            DrawNoDataMessage(cdc.GetDC(), rc);
+            DrawNoDataMessage(cdc.GetDC(), m_rect);
     }
         
 }
@@ -45,7 +49,7 @@ void Plot::Draw(ChartDC &cdc, wxRect rc, PlotDrawMode mode)
 void Plot::DrawNoDataMessage(wxDC &dc, wxRect rc)
 {
     dc.SetFont(m_textNoDataFont);
-    DrawTextCenter(dc, rc, m_textNoData);
+    DrawTextCenter(dc, m_rect, m_textNoData);
 }
 
 void Plot::SetChartPanel(wxChartPanel *chartPanel)
@@ -67,4 +71,9 @@ void Plot::ChartPanelChanged(wxChartPanel *WXUNUSED(oldPanel), wxChartPanel *WXU
 void Plot::PlotChanged()
 {
     wxQueueEvent(this, new wxCommandEvent(EVT_PLOT_CHANGED));
+}
+
+void Plot::OnPlotResize(wxSizeEvent& event)
+{
+    m_rect = event.GetRect();
 }

@@ -72,6 +72,8 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
 
     SetScrollRate(1, 1);
     SetChart(chart);
+    
+    this->SetToolTip("Hello");
 }
 
 wxChartPanel::~wxChartPanel()
@@ -97,8 +99,8 @@ void wxChartPanel::SetChart(Chart *chart)
 
     RecalcScrollbars();
 
-    RedrawBackBitmap();
-    Refresh(false);
+    // Update the chart with the current size.
+    Resize(GetClientRect());
 }
 
 Chart *wxChartPanel::GetChart()
@@ -181,26 +183,21 @@ void wxChartPanel::RecalcScrollbars()
 void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
 {
     wxPaintDC dc(this);
-    const wxRect &rc = GetClientRect();
 
-
-    if (m_chart != NULL) {
+    if (m_chart != NULL)
         dc.DrawBitmap(m_backBitmap, 0, 0, false);
-    }
-    else {
-        dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(GetBackgroundColour()));
+
+    else 
+    {
+        dc.SetBrush(*wxBLUE); // *wxTheBrushList->FindOrCreateBrush(GetBackgroundColour()));
         dc.SetPen(*wxThePenList->FindOrCreatePen(GetBackgroundColour(), 1, wxPENSTYLE_SOLID));
-        dc.DrawRectangle(rc);
+        dc.DrawRectangle(GetClientRect());
     }
 }
 
 void wxChartPanel::OnSize(wxSizeEvent &ev)
 {
-    const wxSize size = ev.GetSize();
-    ResizeBackBitmap(size);
-
-    RedrawBackBitmap();
-    Refresh();
+    Resize(GetClientRect());
 }
 
 void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
@@ -238,9 +235,20 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 
 void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
 {
+    // Forward the event to the Plot or Multiplot
+    if (GetChart() && GetChart()->GetPlot())
+        wxQueueEvent(GetChart()->GetPlot(), new wxMouseEvent(ev));
+
+    
+    // TODO: Tooltip experiments.
+    if (ev.Moving())
+        UnsetToolTip();
+
+
     if (m_mode == NULL) {
         return ;
     }
+
 
 #if 0
     // TODO
@@ -302,30 +310,47 @@ void wxChartPanel::ScrollAxis(Axis *axis, int d)
 
 void wxChartPanel::RedrawBackBitmap()
 {
+    wxMemoryDC mdc(m_backBitmap);
+
+    ChartDC cdc (mdc, m_antialias);
+
     if (m_chart != NULL) 
     {
-        wxMemoryDC mdc;
-        mdc.SelectObject(m_backBitmap);
-
-        const wxRect& rc = GetClientRect();
-        
-        ChartDC cdc (mdc, m_antialias);
-        m_chart->Draw(cdc, (wxRect&)rc, m_antialias);
+        wxRect rect = GetClientRect();
+        m_chart->Draw(cdc, rect, m_antialias);
     }
+        
+    else
+    {
+        mdc.SetBrush(*wxRED_BRUSH);
+        mdc.DrawRectangle(GetClientRect());
+    }
+}
+
+void wxChartPanel::Resize(const wxRect& rect)
+{
+    // Create a temporary DC for the chart (needed to calculate text extents).
+    wxMemoryDC mdc(m_backBitmap);
+    ChartDC cdc (mdc, m_antialias);   
+
+    // Update the chart's size (will cascade to plot).
+    if (m_chart)
+        m_chart->ResizeChart(cdc, rect);
+    
+    // Update the caching bitmap's size.
+    ResizeBackBitmap(rect.GetSize());
 }
 
 void wxChartPanel::ResizeBackBitmap(wxSize size)
 {
-    // make sure we do not attempt to create a bitmap 
-    // with invalid size (width and/or height < 1)
-    size.IncTo(wxSize(1, 1)); 
-    
+    // Make sure the size is valid for a bitmap (at least 1 x 1).
+    size.IncTo(wxSize(1, 1));
     m_backBitmap.Create(size.GetWidth(), size.GetHeight());
 }
 
 void wxChartPanel::OnChartChanged(wxCommandEvent& event)
 {
-    std::cout << "wxChartPanel::On chart changed event" << std::endl;    
     RedrawBackBitmap();
     Refresh(false);
 }
+

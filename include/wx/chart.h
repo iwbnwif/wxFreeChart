@@ -134,12 +134,6 @@ public:
 
     void SetChartPanel(wxChartPanel *chartPanel);
 
-    /**
-     * Event handler called when (one of) the contained plot(s) changes.
-     * @param event Details of the change event.
-     */
-    virtual void OnPlotChanged(wxCommandEvent& event);
-
 protected:
     /**
      * Draws chart.
@@ -147,6 +141,19 @@ protected:
      * @param rc rectangle where to draw chart
      */
     void Draw(ChartDC& dc, wxRect& rc, bool antialias = false);
+
+    /**
+     * Called by wxChartPanel when it changes size. The chart then recalculates header, plot area and footer sizes.
+     * @param cdc The device context of the chart panel's drawing area. This is needed to calculate text extents.
+     * @param size The full size of the chart, including header, plot and footer.
+     */
+    virtual void ResizeChart(ChartDC& cdc, const wxRect& rect);
+
+    /**
+     * Event handler called when (one of) the contained plot(s) changes.
+     * @param event Details of the change event.
+     */
+    virtual void OnPlotChanged(wxCommandEvent& event);
 
 private:
     void Init(Plot* plot, Header* header = NULL, Footer* footer = NULL);
@@ -159,6 +166,8 @@ private:
     Footer* m_footer;
 
     int m_headerGap;
+    wxRect m_headerRect;
+    wxRect m_footerRect;
     wxCoord m_margin;
 
     Axis *m_horizScrolledAxis;

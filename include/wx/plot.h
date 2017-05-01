@@ -77,6 +77,12 @@ public:
         m_textNoData = textNoData;
     }
 
+    void SetPlotRect(const wxRect& rect) 
+    { 
+        m_rect = rect;
+        PlotChanged();
+    }
+
 protected:
     /**
      * Checks whether plot has data.
@@ -107,16 +113,39 @@ protected:
      * @param newPanel new chart panel
      */
     virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
-
+    
     AreaDraw *m_background;
+    
+    /**
+     * Method to be called when this plot has changed. It causes a plot change event to be added to the
+     * plots event queue which can be bound to by any observers.
+     */
+    virtual void PlotChanged();
+
+    /**
+     * Event handler called (via Chart) when the containing wxChartPanel changes size and therefore the
+     * all plots need to be resized.
+     * @param event Details of the resize event.
+     */
+    virtual void OnPlotResize(wxSizeEvent& event);
+
+    /**
+     * Event generated when the mouse pointer is moved over the plot. This method does nothing in the default implementation,
+     * but can be overrided by derived classes to provide functionality.
+     * 
+     * For more complex interactions, the Plot base class receives all mouse events in its event queue (this one is bound 
+     * from there). Any subclass can bind to the standard mouse events and implement a full range of functionality.
+     * @param event The mouse event details.
+     */
+    virtual void OnMouseMove(wxMouseEvent& event) {}
 
 protected:
-    virtual void PlotChanged();
+    wxRect m_rect;
 
 private:
     wxFont m_textNoDataFont;
     wxString m_textNoData;
-
+    
     wxChartPanel *m_chartPanel;
 };
 

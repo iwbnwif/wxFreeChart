@@ -49,7 +49,7 @@ void Chart::Init(Plot* plot, Header* header, Footer* footer)
     
     // Subscribe to change events from the plot so the chart can be redrawn when necessary.
     plot->Bind(EVT_PLOT_CHANGED, &Chart::OnPlotChanged, this);
-
+    
     m_horizScrolledAxis = NULL;
     m_vertScrolledAxis = NULL;
 }
@@ -89,34 +89,13 @@ void Chart::Draw(ChartDC &cdc, wxRect &rc, bool antialias)
     // Draw chart background with the current AreaDraw.
     m_background->Draw(cdc.GetDC(), rc);
 
-    // Calculate header, footer rects and margins. Draw the header and footer if required.
-    int topMargin = m_margin;
-    int bottomMargin = m_margin;
-
+    // Draw header and footer if necessary.
     if (m_header && !m_header->IsEmpty()) 
-    {
-        wxRect headerRect = rc;
-        Margins(headerRect, m_margin, m_margin, m_margin, m_margin);
-        wxSize headerExtent = m_header->CalculateExtent(cdc.GetDC());
-        headerRect.height = headerExtent.y + m_headerGap;
-        topMargin += headerRect.height;
-        m_header->Draw(cdc.GetDC(), headerRect);
-    }
+        m_header->Draw(cdc.GetDC(), m_headerRect);
 
     if (m_footer && !m_footer->IsEmpty()) 
-    {
-        wxRect footerRect = rc;
-        Margins(footerRect, m_margin, m_margin, m_margin, m_margin);
-        wxSize footerExtent = m_footer->CalculateExtent(cdc.GetDC());
-        footerRect.height = footerExtent.y + m_headerGap;
-        footerRect.y = rc.height - footerRect.height;
-        bottomMargin += footerRect.height;
-        m_footer->Draw(cdc.GetDC(), footerRect);
-    }
-    
-    // Shrink the drawing rectangle by the calculted margins.
-    Margins(rc, m_margin, topMargin, m_margin, bottomMargin);
-   
+        m_footer->Draw(cdc.GetDC(), m_footerRect);
+
     // Draw the plot background, including axes and grid lines.
     m_plot->Draw(cdc, rc, PLOT_DRAW_BACKGROUND);
     
@@ -127,7 +106,44 @@ void Chart::Draw(ChartDC &cdc, wxRect &rc, bool antialias)
 void Chart::ChartChanged()
 {
     wxQueueEvent(this, new wxCommandEvent(EVT_CHART_CHANGED));
-    std::cout << "Chart::Chart changed event" << std::endl;
+}
+
+void Chart::ResizeChart(ChartDC& cdc, const wxRect& rect)
+{
+    // Calculate header, footer rects and margins.
+    int topMargin = m_margin;
+    int bottomMargin = m_margin;
+
+    if (m_header && !m_header->IsEmpty()) 
+    {
+        m_headerRect = rect;
+        Margins(m_headerRect, m_margin, m_margin, m_margin, m_margin);
+        wxSize headerExtent = m_header->CalculateExtent(cdc.GetDC());
+        m_headerRect.height = headerExtent.y + m_headerGap;
+        topMargin += m_headerRect.height;
+    }
+
+    if (m_footer && !m_footer->IsEmpty()) 
+    {
+        m_footerRect = rect;
+        Margins(m_footerRect, m_margin, m_margin, m_margin, m_margin);
+        wxSize footerExtent = m_footer->CalculateExtent(cdc.GetDC());
+        m_footerRect.height = footerExtent.y + m_headerGap;
+        m_footerRect.y = rect.height - m_footerRect.height;
+        bottomMargin += m_footerRect.height;
+    }
+    
+    if (m_plot)
+    {
+        // Shrink the drawing rectangle by the calculted margins.
+        wxRect plotRect = rect;
+        Margins(plotRect, m_margin, topMargin, m_margin, bottomMargin);
+
+        // TODO: Why isn't this being called?
+        wxQueueEvent(m_plot, new wxSizeEvent(plotRect, wxID_ANY));
+
+        m_plot->SetPlotRect(plotRect);
+    }
 }
 
 void Chart::OnPlotChanged(wxCommandEvent& event)
