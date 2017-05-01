@@ -497,7 +497,7 @@ void AxisPlot::BoundsChanged(Axis *WXUNUSED(axis))
 
 void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
 {
-    m_redrawDataArea = true;
+
 }
 
 void AxisPlot::OnDataChanged(wxCommandEvent& event)
@@ -507,12 +507,7 @@ void AxisPlot::OnDataChanged(wxCommandEvent& event)
 
 void AxisPlot::DatasetChanged(Dataset *dataset)
 {
-    // Update the axis. If the axis have changed (UpdateAxis returns true)
-    // then redraw the chart background because the scale will have changed.
-    if (UpdateAxis(dataset))
-        m_redrawDataArea = true;
-    else
-        m_redrawDataArea = false;
+
 }
 
 

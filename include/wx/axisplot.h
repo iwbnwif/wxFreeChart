@@ -356,12 +356,7 @@ private:
     Legend *m_legend;
 
     Crosshair *m_crosshair;
-    
-    wxBitmap m_plotBackgroundBitmap; // Bitmap to hold the static (background) part of the plot.
-    wxBitmap m_dataOverlayBitmap; // Bitmap on which the data (lines, bars etc.) is drawn.
-    
-    bool m_redrawDataArea; // Flag to indicate if the background needs to be redrawn.
-    wxRect m_drawRect; // Rectangle to see if the size changed.
+
 };
 
 #endif /*AXISPLOT_H_*/
