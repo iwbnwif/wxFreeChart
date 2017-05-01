@@ -47,7 +47,7 @@ public:
                 { 66, 4, },
         };
 
-        MultiPlot *multiPlot = new MultiPlot(1, 0, 5, 5);
+        MultiPlot *multiPlot = new MultiPlot(1, 2, 5, 5);
 
         // create left axis, that will be shared between two plots
         NumberAxis *sharedLeftAxis = new NumberAxis(AXIS_LEFT);
@@ -158,7 +158,7 @@ public:
                 { 66, 4, },
         };
 
-        MultiPlot *multiPlot = new MultiPlot(0, 1, 5, 5);
+        MultiPlot *multiPlot = new MultiPlot(2, 1, 5, 5);
 
         // create left axis, that will be shared between two plots
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);

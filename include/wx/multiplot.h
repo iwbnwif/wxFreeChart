@@ -45,15 +45,27 @@ public:
     // PlotObserver
     //
     virtual void PlotNeedRedraw(Plot *plot);
+    
+    virtual void SetPlotRect(const wxRect& rect)
+    {
+        m_rect = rect;
+        CalcSubplotRects();
+        PlotChanged();
+    }
 
 protected:
     virtual bool HasData();
 
     virtual void DrawData(ChartDC& cdc, wxRect rc);
     
+    /**
+     * Overridden to do nothing in a multiplot.
+     */
     virtual void DrawBackground(ChartDC& cdc, wxRect rc) {}; // Does nothing in a multi plot?
 
 private:
+    void CalcSubplotRects();
+
     PlotArray m_subPlots;
 
     int m_rows;

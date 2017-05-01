@@ -78,7 +78,7 @@ public:
         m_textNoData = textNoData;
     }
 
-    void SetPlotRect(const wxRect& rect) 
+    virtual void SetPlotRect(const wxRect& rect) 
     { 
         m_rect = rect;
         PlotChanged();
