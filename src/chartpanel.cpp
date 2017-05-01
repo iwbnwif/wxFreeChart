@@ -338,7 +338,16 @@ void wxChartPanel::ResizeBackBitmap(wxSize size)
 {
     // Make sure the size is valid for a bitmap (at least 1 x 1).
     size.IncTo(wxSize(1, 1));
-    m_backBitmap.Create(size.GetWidth(), size.GetHeight());
+    
+    // Rescale image with a zoom blur effect whilst the window size is changing.
+    if (m_backBitmap.IsOk())
+    {
+        wxImage old = m_backBitmap.ConvertToImage();
+        m_backBitmap = wxBitmap(old.Rescale(size.x, size.y, wxIMAGE_QUALITY_BILINEAR));
+    }
+    
+    else
+        m_backBitmap.Create(size.GetWidth(), size.GetHeight());
 }
 
 void wxChartPanel::OnChartChanged(wxCommandEvent& event)
