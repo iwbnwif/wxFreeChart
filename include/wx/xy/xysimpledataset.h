@@ -57,6 +57,13 @@ public:
     double GetY(size_t index);
     
     /**
+     * Retrieves an existing datapoint within the series.
+     * @param index The position of the data point within the series.
+     * @return The point within the series at the passed index.
+     */
+    const wxRealPoint& GetPoint(size_t index);
+    
+    /**
      * Updates the X value of an existing data point within the series.
      * @param index The position of the data point within the series.
      * @param values The new values for X.

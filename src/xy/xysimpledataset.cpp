@@ -45,6 +45,11 @@ double XYSerie::GetY(size_t index)
     return m_newdata.at(index).y;
 }
 
+const wxRealPoint& XYSerie::GetPoint(size_t index)
+{
+    return m_newdata.at(index);
+}
+
 void XYSerie::UpdateX(size_t index, double x)
 {
     m_newdata.at(index).x = x;

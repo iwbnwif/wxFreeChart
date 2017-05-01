@@ -264,6 +264,12 @@ protected:
 
     wxCoord GetAxesExtent(wxDC &dc, AxisArray *axes);
 
+    /**
+     * Override of base class to implement simple tooltip functionality.
+     * @param event Details of the mouse motion.
+     */
+    virtual void OnMouseMove(wxMouseEvent& event) wxOVERRIDE;
+
     bool m_drawGridVertical;
     bool m_drawGridHorizontal;
 

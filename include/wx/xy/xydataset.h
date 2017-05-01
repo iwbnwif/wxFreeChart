@@ -71,6 +71,14 @@ public:
     virtual double GetMinValue(bool verticalAxis);
 
     virtual double GetMaxValue(bool verticalAxis);
+    
+    /**
+     * Searches for a point that falls within the rectangle described by min and max.
+     * @param min Point in the data coordinate space that defines the bottom left corner of the search area.
+     * @param max Point in the data coordinate space that defines the top right of the search area.
+     * @return The first point found in the dataset that falls within the rectangle described by min and max.
+     */
+    virtual wxPoint SearchNearPoint(const wxRealPoint& min, const wxRealPoint& max);
 
 
 protected:

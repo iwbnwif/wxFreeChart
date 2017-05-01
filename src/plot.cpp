@@ -11,6 +11,8 @@
 #include <wx/drawutils.h>
 
 wxDEFINE_EVENT(EVT_PLOT_CHANGED, wxCommandEvent);
+wxDEFINE_EVENT(EVT_PLOT_TIP_DATA, wxCommandEvent);
+
 
 Plot::Plot()
 {
@@ -43,7 +45,6 @@ void Plot::Draw(ChartDC &cdc, wxRect rc, PlotDrawMode mode)
         else
             DrawNoDataMessage(cdc.GetDC(), m_rect);
     }
-        
 }
 
 void Plot::DrawNoDataMessage(wxDC &dc, wxRect rc)
@@ -65,7 +66,7 @@ wxChartPanel *Plot::GetChartPanel()
 
 void Plot::ChartPanelChanged(wxChartPanel *WXUNUSED(oldPanel), wxChartPanel *WXUNUSED(newPanel))
 {
-    // default - do nothing
+    // Default - do nothing.
 }
 
 void Plot::PlotChanged()
@@ -73,7 +74,21 @@ void Plot::PlotChanged()
     wxQueueEvent(this, new wxCommandEvent(EVT_PLOT_CHANGED));
 }
 
+void Plot::SetTipData(const wxString& tip)
+{
+    wxCommandEvent* event = new wxCommandEvent(EVT_PLOT_TIP_DATA);
+    event->SetString(tip);
+    
+    wxQueueEvent(this, event);
+}
+
+void Plot::OnMouseMove(wxMouseEvent& event)
+{
+    // Default - do nothing.
+}
+
 void Plot::OnPlotResize(wxSizeEvent& event)
 {
     m_rect = event.GetRect();
 }
+

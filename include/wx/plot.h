@@ -18,6 +18,7 @@ class WXDLLIMPEXP_FREECHART Plot;
 class WXDLLIMPEXP_FREECHART wxChartPanel;
 
 wxDECLARE_EVENT(EVT_PLOT_CHANGED, wxCommandEvent);
+wxDECLARE_EVENT(EVT_PLOT_TIP_DATA, wxCommandEvent);
 
 enum PlotDrawMode
 {
@@ -121,6 +122,12 @@ protected:
      * plots event queue which can be bound to by any observers.
      */
     virtual void PlotChanged();
+    
+    /**
+     * Method to be called when the plot wants to set or clear a tooltip string.
+     * @param tip The tip string to be shown, or clear the tip if the string is wxEmptyString.
+     */
+     virtual void SetTipData(const wxString& tip);
 
     /**
      * Event handler called (via Chart) when the containing wxChartPanel changes size and therefore the
@@ -137,7 +144,7 @@ protected:
      * from there). Any subclass can bind to the standard mouse events and implement a full range of functionality.
      * @param event The mouse event details.
      */
-    virtual void OnMouseMove(wxMouseEvent& event) {}
+    virtual void OnMouseMove(wxMouseEvent& event);
 
 protected:
     wxRect m_rect;

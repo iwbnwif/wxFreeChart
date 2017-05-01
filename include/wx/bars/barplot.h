@@ -31,6 +31,12 @@ protected:
     virtual bool AcceptDataset(Dataset *dataset);
 
     virtual void DrawDatasets(wxDC &dc, wxRect rc);
+    
+    /**
+     * Override of base class to implement simple tooltip functionality for bar charts.
+     * @param event Details of the mouse motion.
+     */
+    virtual void OnMouseMove(wxMouseEvent& event) wxOVERRIDE;
 };
 
 #endif /*BARPLOT_H_*/

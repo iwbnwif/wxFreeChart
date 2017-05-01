@@ -126,3 +126,20 @@ double XYDataset::GetMaxValue(bool verticalAxis)
         return GetMaxX();
     }
 }
+
+wxPoint XYDataset::SearchNearPoint(const wxRealPoint& min, const wxRealPoint& max)
+{
+    for (size_t series = 0; series < GetSerieCount(); series++)
+    {
+        for (size_t index = 0; index < GetCount(series); index++)
+        {
+            double x = GetX(index, series);
+            double y = GetY(index, series);
+
+            if (x > min.x && x < max.x && y > min.y && y < max.y)
+                return wxPoint(index, series);
+        }
+    }
+
+    return wxPoint(-1, -1);
+}

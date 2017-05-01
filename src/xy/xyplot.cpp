@@ -49,3 +49,40 @@ void XYPlot::DrawXYDataset(wxDC &dc, wxRect rc, XYDataset *dataset)
     renderer->Draw(dc, rc, horizAxis, vertAxis, dataset);
 }
 
+/*
+#include <wx/xy/xysimpledataset.h>
+
+void XYPlot::OnMouseMove(wxMouseEvent& event)
+{
+    // wxRealPoint mousetodata = 
+    for (size_t set = 0; set < GetDatasetCount(); set++)
+    {
+        XYSimpleDataset* dataset = static_cast<XYSimpleDataset*>(GetDataset(set));
+
+        NumberAxis* xAxis = static_cast<NumberAxis*>(GetDatasetAxis(dataset, false));
+        NumberAxis* yAxis = static_cast<NumberAxis*>(GetDatasetAxis(dataset, true));
+        
+        for (size_t ser = 0; ser < dataset->GetSerieCount(); ser++)
+        {
+            XYSerie* series = dataset->GetSerie(ser);
+            
+            wxMemoryDC dummy;
+            double x = xAxis->ToData(dummy, m_rect.x, m_rect.GetWidth(), event.GetPosition().x);
+            double y = yAxis->ToData(dummy, m_rect.y, m_rect.GetHeight(), event.GetPosition().y);
+            
+            for (size_t pt = 0; pt < series->GetCount(); pt++)
+            {
+                wxRealPoint point = series->GetPoint(pt);
+                if (point.x < x + 2 &&
+                    point.x > x - 2 &&
+                    point.y < y + 2 &&
+                    point.y > y - 2)
+                {
+                        std::cout << "Got a point in Dataset: " << set << ", Series: " << ser << ", Point Index: " << pt <<
+                                        ", at Point (x,y): " << point.x << ", " << point.y << std::endl;
+                }
+            }
+        }
+    }
+}
+*/

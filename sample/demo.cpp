@@ -142,6 +142,8 @@ MainFrame::MainFrame()
     SetMenuBar(menuBar);
 
     Centre();
+    
+    wxLog::SetActiveTarget(new wxLogStream(&std::cout));
 }
 
 MainFrame::~MainFrame()

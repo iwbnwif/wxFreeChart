@@ -72,8 +72,6 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
 
     SetScrollRate(1, 1);
     SetChart(chart);
-    
-    this->SetToolTip("Hello");
 }
 
 wxChartPanel::~wxChartPanel()
@@ -235,16 +233,11 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 
 void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
 {
-    // Forward the event to the Plot or Multiplot
+    // Forward the mouse event to the Plot or Multiplot
     if (GetChart() && GetChart()->GetPlot())
         wxQueueEvent(GetChart()->GetPlot(), new wxMouseEvent(ev));
 
     
-    // TODO: Tooltip experiments.
-    if (ev.Moving())
-        UnsetToolTip();
-
-
     if (m_mode == NULL) {
         return ;
     }

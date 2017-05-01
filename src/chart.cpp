@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/chart.h>
+#include <wx/chartpanel.h>
 #include <wx/drawutils.h>
 #include <wx/dcgraph.h>
 
@@ -47,8 +48,9 @@ void Chart::Init(Plot* plot, Header* header, Footer* footer)
     m_footer = footer;
     m_headerGap = 2;
     
-    // Subscribe to change events from the plot so the chart can be redrawn when necessary.
+    // Subscribe to plot events so the chart can be redrawn when necessary.
     plot->Bind(EVT_PLOT_CHANGED, &Chart::OnPlotChanged, this);
+    plot->Bind(EVT_PLOT_TIP_DATA, &Chart::OnToolTip, this);
     
     m_horizScrolledAxis = NULL;
     m_vertScrolledAxis = NULL;
@@ -149,4 +151,15 @@ void Chart::ResizeChart(ChartDC& cdc, const wxRect& rect)
 void Chart::OnPlotChanged(wxCommandEvent& event)
 {
     ChartChanged();
+}
+
+void Chart::OnToolTip(wxCommandEvent& event)
+{
+    wxASSERT(GetChartPanel());
+    
+    if (event.GetString() != wxEmptyString)
+        GetChartPanel()->SetToolTip(event.GetString());
+        
+    else
+        GetChartPanel()->UnsetToolTip();
 }

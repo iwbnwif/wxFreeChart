@@ -154,6 +154,12 @@ protected:
      * @param event Details of the change event.
      */
     virtual void OnPlotChanged(wxCommandEvent& event);
+    
+    /**
+     * Event handler called when (one of) the contained plot(s) wants to set or clear the tooltip.
+     * @param event The event's details, containing the new string.
+     */
+    virtual void OnToolTip(wxCommandEvent& event);
 
 private:
     void Init(Plot* plot, Header* header = NULL, Footer* footer = NULL);
