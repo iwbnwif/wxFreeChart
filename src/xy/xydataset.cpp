@@ -127,7 +127,7 @@ double XYDataset::GetMaxValue(bool verticalAxis)
     }
 }
 
-wxPoint XYDataset::SearchNearPoint(const wxRealPoint& min, const wxRealPoint& max)
+DataItemLocator XYDataset::SearchNearPoint(const wxRealPoint& min, const wxRealPoint& max)
 {
     for (size_t series = 0; series < GetSerieCount(); series++)
     {
@@ -137,9 +137,9 @@ wxPoint XYDataset::SearchNearPoint(const wxRealPoint& min, const wxRealPoint& ma
             double y = GetY(index, series);
 
             if (x > min.x && x < max.x && y > min.y && y < max.y)
-                return wxPoint(index, series);
+                return DataItemLocator(0, series, index, true);
         }
     }
 
-    return wxPoint(-1, -1);
+    return DataItemLocator(0, 0, 0, false);
 }

@@ -70,6 +70,8 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
     }
 }
 
+// TODO: This is an almost blanket copy of the AxisPlot implementation. Consider abstracting a chunk into 
+// the base class.
 void BarPlot::OnMouseMove(wxMouseEvent& event)
 {
     for (size_t set = 0; set < GetDatasetCount(); set++)
@@ -90,14 +92,14 @@ void BarPlot::OnMouseMove(wxMouseEvent& event)
             ToDataCoords(set, dummy, m_rect, gmax.x, gmax.y, &dmax.x, &dmax.y);
             
             // Search the dataset (all series) for a point within the search area.
-            wxPoint data = dataset->SearchNearPoint(dmin, dmax);
+            DataItemLocator item = dataset->SearchNearPoint(dmin, dmax);
             
             // If a point is found then set the tip data.
-            if (data != wxPoint(-1, -1))
+            if (item.IsValid())
             {
-                SetTipData(wxString::Format("Dataset: %zu, Series: %d, Data: %s, %g", set, data.y, 
-                                                dataset->GetName(data.x), 
-                                                dataset->GetY(data.x, data.y)));
+                SetTipData(wxString::Format("Dataset: %zu, Series: %zu, Data: %s, %g", set, item.GetSeries(), 
+                                                dataset->GetName(item.GetIndex()), 
+                                                dataset->GetY(item.GetIndex(), item.GetSeries())));
                 return;
             }
         }

@@ -19,6 +19,34 @@ IMPLEMENT_CLASS(Dataset, wxObject)
 
 wxDEFINE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);
 
+DataItemLocator::DataItemLocator(size_t dataset, size_t series, size_t index, bool valid)
+{
+    m_dataset = dataset;
+    m_series = series;
+    m_index = index;
+    m_valid = valid;
+}
+
+size_t DataItemLocator::GetDataset()
+{
+    return m_dataset;
+}
+
+size_t DataItemLocator::GetSeries()
+{
+    return m_series;
+}
+
+size_t DataItemLocator::GetIndex()
+{
+    return m_index;
+}
+
+bool DataItemLocator::IsValid()
+{
+    return m_valid;
+}
+
 Dataset::Dataset()
 {
     m_renderer = NULL;
@@ -152,3 +180,4 @@ void DatasetArray::RemoveAt(size_t index, size_t count)
 
     DatasetArrayBase::RemoveAt(index, count);
 }
+

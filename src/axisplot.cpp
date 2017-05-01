@@ -530,14 +530,14 @@ void AxisPlot::OnMouseMove(wxMouseEvent& event)
             ToDataCoords(set, dummy, m_rect, gmax.x, gmax.y, &dmax.x, &dmax.y);
             
             // Search the dataset (all series) for a point within the search area.
-            wxPoint data = dataset->SearchNearPoint(dmin, dmax);
+            DataItemLocator item = dataset->SearchNearPoint(dmin, dmax);
             
             // If a point is found then set the tip data.
-            if (data != wxPoint(-1, -1))
+            if (item.IsValid())
             {
-                SetTipData(wxString::Format("Dataset: %zu, Series: %d, Data: %g, %g", set, data.y, 
-                                                dataset->GetX(data.x, data.y), 
-                                                dataset->GetY(data.x, data.y)));
+                SetTipData(wxString::Format("Dataset: %zu, Series: %zu, Data: %g, %g", set, item.GetSeries(), 
+                                                dataset->GetX(item.GetIndex(), item.GetSeries()), 
+                                                dataset->GetY(item.GetIndex(), item.GetSeries())));
                 return;
             }
         }
