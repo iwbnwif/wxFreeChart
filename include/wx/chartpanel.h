@@ -98,10 +98,30 @@ private:
     //
     // Event handlers
     //
-    void OnPaint(wxPaintEvent &ev);
-    void OnSize(wxSizeEvent &ev);
-    void OnScrollWin(wxScrollWinEvent &ev);
-    void OnMouseEvents(wxMouseEvent &ev);
+    void OnPaint(wxPaintEvent& event);
+    void OnSize(wxSizeEvent& event);
+    void OnScrollWin(wxScrollWinEvent& event);
+    void OnMouseEvents(wxMouseEvent& event);
+    
+    /**
+     * \cond INTERNAL
+     */
+     
+    /**
+     * The chart panel implements a very simple throttling mechanism for limiting the number of 'burst' redraws caused
+     * by several small changes at a time.
+     * 
+     * A timer is started (currently 10 milliseconds) that is allowed to timeout prior to the redraw occuring. Any 
+     * redraw instructions arriving within the 10 millisecond period are discarded and only the first redraw command
+     * has any effect.
+     * 
+     * This is safe because currently the whole chart is redrawn for each redraw event. Therefore, whatever causes the
+     * redraw will be included in the udpate. 
+     * 
+     * It may still be possible to aggregate redraws in future using a similar mechanism to save the common parts of the
+     * redraw being repeated.
+     */
+    void OnThrottleTimer(wxTimerEvent& event);
 
     void Resize(const wxRect& rect);
     
@@ -114,7 +134,12 @@ private:
     bool m_antialias;
 
     ChartPanelMode *m_mode;
+    
+    wxTimer m_redrawThrottle;
 
+    /**
+     * \endcond
+     */
     DECLARE_EVENT_TABLE()
 };
 

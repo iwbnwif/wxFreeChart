@@ -60,13 +60,17 @@ END_EVENT_TABLE()
 wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &size)
 : wxScrolledWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
 {
+    new wxLogWindow(this, "Log Window");
+    
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
     EnableScrolling(false, false);
 
     m_chart = NULL;
-    m_antialias = false;
-
     m_mode = NULL;
+    m_antialias = false;
+    
+    m_redrawThrottle.SetOwner(this);
+    Bind(wxEVT_TIMER, &wxChartPanel::OnThrottleTimer, this);
 
     ResizeBackBitmap(size);
 
@@ -303,6 +307,7 @@ void wxChartPanel::ScrollAxis(Axis *axis, int d)
 
 void wxChartPanel::RedrawBackBitmap()
 {
+    wxLogMessage("wxChartPanel::RedrawBackBitmap");
     wxMemoryDC mdc(m_backBitmap);
 
     ChartDC cdc (mdc, m_antialias);
@@ -352,6 +357,16 @@ void wxChartPanel::ResizeBackBitmap(wxSize size)
 
 void wxChartPanel::OnChartChanged(wxCommandEvent& event)
 {
+    if (!m_redrawThrottle.IsRunning())
+        m_redrawThrottle.StartOnce(10);
+        
+    else
+        wxLogMessage("Redraw throttled");
+}
+
+void wxChartPanel::OnThrottleTimer(wxTimerEvent& event)
+{
+    wxLogMessage("Redraw timeout");
     RedrawBackBitmap();
     Refresh(false);
 }
