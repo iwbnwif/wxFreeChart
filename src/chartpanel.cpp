@@ -60,7 +60,7 @@ END_EVENT_TABLE()
 wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &size)
 : wxScrolledWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
 {
-    new wxLogWindow(this, "Log Window");
+    // new wxLogWindow(this, "Log Window");
     
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
     EnableScrolling(false, false);
@@ -307,7 +307,6 @@ void wxChartPanel::ScrollAxis(Axis *axis, int d)
 
 void wxChartPanel::RedrawBackBitmap()
 {
-    wxLogMessage("wxChartPanel::RedrawBackBitmap");
     wxMemoryDC mdc(m_backBitmap);
 
     ChartDC cdc (mdc, m_antialias);
@@ -337,6 +336,9 @@ void wxChartPanel::Resize(const wxRect& rect)
     
     // Update the caching bitmap's size.
     ResizeBackBitmap(rect.GetSize());
+    
+    RedrawBackBitmap();
+    Refresh(false);
 }
 
 void wxChartPanel::ResizeBackBitmap(wxSize size)
@@ -344,29 +346,35 @@ void wxChartPanel::ResizeBackBitmap(wxSize size)
     // Make sure the size is valid for a bitmap (at least 1 x 1).
     size.IncTo(wxSize(1, 1));
     
+    /*
     // Rescale image with a zoom blur effect whilst the window size is changing.
+    // Not currently used because the redraw is fast enough for non-complex charts.
     if (m_backBitmap.IsOk())
     {
         wxImage old = m_backBitmap.ConvertToImage();
         m_backBitmap = wxBitmap(old.Rescale(size.x, size.y, wxIMAGE_QUALITY_BILINEAR));
     }
     
-    else
-        m_backBitmap.Create(size.GetWidth(), size.GetHeight());
+    else 
+    */
+        
+    m_backBitmap.Create(size.GetWidth(), size.GetHeight());
 }
 
 void wxChartPanel::OnChartChanged(wxCommandEvent& event)
 {
+    /*
+     This throttles the redraw rate to a maximum of one redraw every 10 milliseconds.
+     If another changed event arrives in this time, it is ignored. Nothing is missed because
+     a complete redraw occurs at the timeout which will include the changes related to the 
+     later events.
+     */
     if (!m_redrawThrottle.IsRunning())
-        m_redrawThrottle.StartOnce(10);
-        
-    else
-        wxLogMessage("Redraw throttled");
+        m_redrawThrottle.StartOnce(10);       
 }
 
 void wxChartPanel::OnThrottleTimer(wxTimerEvent& event)
 {
-    wxLogMessage("Redraw timeout");
     RedrawBackBitmap();
     Refresh(false);
 }

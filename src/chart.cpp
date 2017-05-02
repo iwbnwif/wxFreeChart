@@ -150,6 +150,7 @@ void Chart::ResizeChart(ChartDC& cdc, const wxRect& rect)
 
 void Chart::OnPlotChanged(wxCommandEvent& event)
 {
+    wxLogMessage("Chart::OnPlotChanged");
     ChartChanged();
 }
 
