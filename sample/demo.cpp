@@ -102,7 +102,9 @@ END_EVENT_TABLE()
 
 MainFrame::MainFrame()
 : wxFrame(NULL, wxID_ANY, wxString::Format(wxT("wxFreeChart demo %s"), version.c_str()), wxDefaultPosition, wxSize(800, 445))
-{    
+{   
+   wxLog::SetActiveTarget(new wxLogStream(&std::cout));
+
     m_mgr.SetManagedWindow(this);
     
     m_chartPanel = new wxChartPanel(this);
@@ -141,9 +143,7 @@ MainFrame::MainFrame()
 
     SetMenuBar(menuBar);
 
-    Centre();
-    
-    wxLog::SetActiveTarget(new wxLogStream(&std::cout));
+    Centre();   
 }
 
 MainFrame::~MainFrame()
