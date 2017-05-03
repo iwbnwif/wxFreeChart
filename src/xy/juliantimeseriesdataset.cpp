@@ -10,14 +10,27 @@
 
 
 JulianTimeSeriesDataset::JulianTimeSeriesDataset()
-{}
+{
+
+}
+
 
 JulianTimeSeriesDataset::JulianTimeSeriesDataset(const vector<TimePair>& data)
-: m_data(data)
-{}
+{
+    for (size_t i = 0; i < data.size(); i++)
+        m_data.push_back(data[i]);
+}
+
+
+JulianTimeSeriesDataset::JulianTimeSeriesDataset(const wxVector<TimePair>& data)
+{
+    m_data = data;
+}
 
 JulianTimeSeriesDataset::~JulianTimeSeriesDataset()
-{}
+{
+    
+}
 
 size_t JulianTimeSeriesDataset::GetSerieCount()
 {

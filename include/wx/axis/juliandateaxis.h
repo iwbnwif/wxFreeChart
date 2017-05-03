@@ -21,6 +21,8 @@ public:
      * @param dateFormat date format accrding to strftime
      */
    void SetDateFormat(const wxString& dateFormat);
+   
+   virtual bool UpdateBounds();
 
 protected:
    virtual void GetLabel(size_t step, wxString &label);

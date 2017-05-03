@@ -11,7 +11,6 @@
 
 JulianDateAxis::JulianDateAxis(AXIS_LOCATION location)
 : NumberAxis(location)
-, m_dateFormat(wxT("%Y-%m-%d"))
 {
 }
 
@@ -33,6 +32,17 @@ void JulianDateAxis::GetLabel(size_t step, wxString &label)
     }
 
    wxDateTime dt(value);
-   label = dt.Format(m_dateFormat);
+   label = dt.FormatISODate(); // Format(m_dateFormat);
+   wxLogMessage(dt.FormatISODate());
 }
 
+bool JulianDateAxis::UpdateBounds()
+{
+    NumberAxis::UpdateBounds();
+    
+    wxLogMessage("%f", m_labelInterval);
+    m_labelInterval = 1.0;
+    m_labelCount *= 5.0;
+    
+    return true;
+}

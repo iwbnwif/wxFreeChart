@@ -23,7 +23,9 @@ public:
     typedef std::pair<double,double> TimePair;  // a pair with time (julian date) and value data
 
     JulianTimeSeriesDataset();
+    wxDEPRECATED_MSG("Use wxVector<TimePair> instead");
     JulianTimeSeriesDataset(const vector<TimePair>& data);
+    JulianTimeSeriesDataset(const wxVector<TimePair>& data);
     virtual ~JulianTimeSeriesDataset();
 
     virtual size_t GetSerieCount();
@@ -41,7 +43,7 @@ public:
     void push_back(const TimePair& tvpair);
 
 private:
-    vector<TimePair> m_data; // XXX remove this, stl is not allowed
+    wxVector<TimePair> m_data; // XXX remove this, stl is not allowed
 };
 
 #endif // TIMESERIESDATA_H
