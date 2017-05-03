@@ -117,7 +117,7 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
         
         // Define the plot background and legend.
-        plot->SetBackground(new NoAreaDraw()); // new GradientAreaDraw(*wxTRANSPARENT_PEN, wxColour(100, 100, 250), wxColour(200, 220, 250)));
+        plot->SetBackground(new GradientAreaDraw(*wxTRANSPARENT_PEN, wxColour(100, 100, 250), wxColour(200, 220, 250)));
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
         // And finally create the chart.

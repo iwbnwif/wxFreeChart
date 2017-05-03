@@ -31,7 +31,7 @@ class OHLCDemo1 : public ChartDemo
 {
 public:
     OHLCDemo1()
-    : ChartDemo(wxT("OHLC Demo 1 - bars"))
+    : ChartDemo(wxT("OHLC Demo 1 - Bars"))
     {
     }
 
@@ -133,7 +133,7 @@ class OHLCDemo2 : public ChartDemo
 {
 public:
     OHLCDemo2()
-    : ChartDemo(wxT("OHLC Demo 2 - candlesticks"))
+    : ChartDemo(wxT("OHLC Demo 2 - Candlesticks"))
     {
     }
 
@@ -230,7 +230,7 @@ class OHLCDemo3 : public ChartDemo
 {
 public:
     OHLCDemo3()
-    : ChartDemo(wxT("OHLC Demo 3 - composite date axis"))
+    : ChartDemo(wxT("OHLC Demo 3 - Composite Date Axis"))
     {
     }
 
@@ -333,7 +333,7 @@ class OHLCDemo4 : public ChartDemo
 {
 public:
     OHLCDemo4()
-    : ChartDemo(wxT("OHLC Demo 4 - with moving average"))
+    : ChartDemo(wxT("OHLC Demo 4 - Candlesticks with Moving Average"))
     {
     }
 
@@ -437,7 +437,7 @@ class OHLCDemo5 : public ChartDemo
 {
 public:
     OHLCDemo5()
-    : ChartDemo(wxT("OHLC Demo 5 - colour bars"))
+    : ChartDemo(wxT("OHLC Demo 5 - Colour Bars"))
     {
     }
 
