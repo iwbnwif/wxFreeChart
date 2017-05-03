@@ -55,7 +55,7 @@ public:
         CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
 
         // add serie to it
-        dataset->AddSerie(wxT("Serie 0"), values, WXSIZEOF(values));
+        dataset->AddSerie("Series 0", values, WXSIZEOF(values));
 
         // create normal bar type with bar width = 10
         BarType *barType = new NormalBarType(30);
@@ -521,11 +521,9 @@ public:
         // Set legend
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
         
-        // Experiments.
-        plot->SetBackground(new FillAreaDraw(*wxGREEN_PEN, *wxBLUE_BRUSH));
-        plot->SetDataBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
+        plot->SetBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
-        // and finally construct and return chart
+        // And finally construct and return chart
         return new Chart(plot, wxT("USA Export Goods / Services"));;
     }
 };

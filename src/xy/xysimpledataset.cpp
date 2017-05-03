@@ -27,6 +27,8 @@ XYSerie::XYSerie(double *data, size_t count)
 
 XYSerie::XYSerie(const wxVector<wxRealPoint>& seriesData)
 {
+    wxASSERT_MSG(seriesData.size() > 0, "Series data is empty");
+    
     m_newdata = seriesData;
 }
 

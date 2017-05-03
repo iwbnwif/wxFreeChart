@@ -135,6 +135,9 @@ bool NumberAxis::UpdateBounds()
     if (m_extraMajorInterval && IsVertical())
         m_maxValue += 0.00000001;
 
+    // TODO: This can create a weird result for empty datasets. Add a test for empty dataset before
+    // running.
+
     m_labelInterval = CalcNiceInterval((m_maxValue - m_minValue) / (DEFAULT_MAJOR_LABEL_COUNT - 1));
     m_maxValue = ceil(m_maxValue / m_labelInterval) * m_labelInterval;
     m_minValue = floor(m_minValue / m_labelInterval) * m_labelInterval;

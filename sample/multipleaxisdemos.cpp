@@ -30,91 +30,76 @@ public:
 
     virtual Chart *Create()
     {
-        // first dataset values
-        double values1[][2] = {
-                { 1, 1 },
-                { 2, 3 },
-                { 5, 4 },
-                { 6, 3 },
-                { 7, 6 },
-                { 8, 6 },
-                { 9, 4 },
-        };
+        // First dataset values.
+        wxVector<wxRealPoint> values1;
+        values1.push_back(wxRealPoint(1, 1));
+        values1.push_back(wxRealPoint(2, 3));
+        values1.push_back(wxRealPoint(5, 4));
+        values1.push_back(wxRealPoint(6, 3));
+        values1.push_back(wxRealPoint(7, 6));
+        values1.push_back(wxRealPoint(8, 6));
+        values1.push_back(wxRealPoint(9, 4));
 
-        // second dataset values
-        double values2[][2] = {
-                { 0, 0 },
-                { 2, -1 },
-                { 4, 6 },
-                { 5, 2 },
-                { 7, 8 },
-                { 8, 4 },
-                { 9, -2 },
-        };
+        // Second dataset values.
+        wxVector<wxRealPoint> values2;
+        values2.push_back(wxRealPoint(0, 0));
+        values2.push_back(wxRealPoint(2, -1));
+        values2.push_back(wxRealPoint(4, 6));
+        values2.push_back(wxRealPoint(5, 2));
+        values2.push_back(wxRealPoint(7, 8));
+        values2.push_back(wxRealPoint(8, 4));
+        values2.push_back(wxRealPoint(9, -2));
 
-        // colors for first and second datasets
-        wxColour color1 = wxColour(255, 0, 0);
-        wxColour color2 = wxColour(0, 0, 255);
-
-        // create xy plot
+        // Create xy plot.
         XYPlot *plot = new XYPlot();
-
-        // create first dataset
+        
+        // Create first dataset and add series 1 to it.
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
-        // add serie to it
-        dataset1->AddSerie((double *) values1, WXSIZEOF(values1));
+        dataset1->AddSerie(new XYSerie(values1));
 
-        // create second dataset
+        // Create second dataset and add series 2 to it.
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
-        // add serie to it
-        dataset2->AddSerie((double *) values2, WXSIZEOF(values2));
+        dataset2->AddSerie(new XYSerie(values2));
 
-        // create renderer for first dataset
+        // Create colours for the series.
+        wxColour colour1 = DEFAULT_LINE_COLOUR_0;
+        wxColour colour2 = DEFAULT_LINE_COLOUR_1;
+
+        // Create renderer for first dataset.
         XYLineRenderer *renderer1 = new XYLineRenderer();
-        renderer1->SetSerieColour(0, &color1);
-
-        // add first dataset to plot
-        plot->AddDataset(dataset1);
-
-        // set it to first dataset
+        renderer1->SetSerieColour(0, &colour1);
         dataset1->SetRenderer(renderer1);
 
-        // create renderer for second dataset
+        // Create renderer for second dataset.
         XYLineRenderer *renderer2 = new XYLineRenderer();
-        renderer2->SetSerieColour(0, &color2);
-
-        // set it to second dataset
+        renderer2->SetSerieColour(0, &colour2);
         dataset2->SetRenderer(renderer2);
 
-        // add second dataset to plot
+        // Add both datasets to the plot.
+        plot->AddDataset(dataset1);
         plot->AddDataset(dataset2);
 
-        // create left axis for first dataset
+        // Create left axis for first dataset with the same colours as the line.
         NumberAxis *leftAxis1 = new NumberAxis(AXIS_LEFT);
-        // set label text colour same as lines
-        leftAxis1->SetLabelTextColour(color1);
-        // set label lines colour same as lines
-        leftAxis1->SetLabelPen(*wxThePenList->FindOrCreatePen(color1, 1, wxPENSTYLE_SOLID));
+        leftAxis1->SetLabelTextColour(colour1);
+        leftAxis1->SetLabelPen(wxPen(colour1));
         plot->AddAxis(leftAxis1);
 
-        // create left axis for second dataset
+        // Create left axis for second dataset also with the same colours as the line.
         NumberAxis *leftAxis2 = new NumberAxis(AXIS_LEFT);
-        // set label text colour same as lines
-        leftAxis2->SetLabelTextColour(color2);
-        // set label lines colour same as lines
-        leftAxis2->SetLabelPen(*wxThePenList->FindOrCreatePen(color2, 1, wxPENSTYLE_SOLID));
+        leftAxis2->SetLabelTextColour(colour2);
+        leftAxis2->SetLabelPen(wxPen(colour2));
         plot->AddAxis(leftAxis2);
 
-        // create bottom axis for first and second dataset
-        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-        plot->AddAxis(bottomAxis);
+        // Create bottom axis.
+        plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
 
-        // link first dataset with first left axis
+        // Link the first dataset with the first left axis.
         plot->LinkDataVerticalAxis(0, 0);
-        // link second dataset with second left axis
+        // Link the second dataset with the second left axis.
         plot->LinkDataVerticalAxis(1, 1);
 
-        // link first and second datasets with bottom axis
+        // Link both datasets with the bottom axis.
         plot->LinkDataHorizontalAxis(0, 0);
         plot->LinkDataHorizontalAxis(1, 0);
 
@@ -135,98 +120,89 @@ public:
 
     virtual Chart *Create()
     {
-        // first dataset values
-        double values1[][2] = {
-                { 1, 1 },
-                { 2, 3 },
-                { 5, 4 },
-                { 6, 3 },
-                { 7, 6 },
-                { 8, 6 },
-                { 9, 4 },
-        };
+        // First dataset values.
+        wxVector<wxRealPoint> values1;
+        values1.push_back(wxRealPoint(1, 1));
+        values1.push_back(wxRealPoint(2, 3));
+        values1.push_back(wxRealPoint(5, 4));
+        values1.push_back(wxRealPoint(6, 3));
+        values1.push_back(wxRealPoint(7, 6));
+        values1.push_back(wxRealPoint(8, 6));
+        values1.push_back(wxRealPoint(9, 4));
 
-        // second dataset values
-        double values2[][2] = {
-                { 0, 0 },
-                { 2, -1 },
-                { 4, 6 },
-                { 5, 2 },
-                { 7, 8 },
-                { 8, 4 },
-                { 9, -2 },
-        };
+        // Second dataset values.
+        wxVector<wxRealPoint> values2;
+        values2.push_back(wxRealPoint(0, 0));
+        values2.push_back(wxRealPoint(2, -1));
+        values2.push_back(wxRealPoint(4, 6));
+        values2.push_back(wxRealPoint(5, 2));
+        values2.push_back(wxRealPoint(7, 8));
+        values2.push_back(wxRealPoint(8, 4));
+        values2.push_back(wxRealPoint(90, -2));
 
-        // colors for first and second datasets
-        wxColour color1 = wxColour(255, 0, 0);
-        wxColour color2 = wxColour(0, 0, 255);
-
-        // create xy plot
+        // Create xy plot.
         XYPlot *plot = new XYPlot();
-
-        // create first dataset
+        
+        // Create first dataset and add series 1 to it.
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
-        // add serie to it
-        dataset1->AddSerie((double *) values1, WXSIZEOF(values1));
+        dataset1->AddSerie(new XYSerie(values1));
 
-        // create second dataset
+        // Create second dataset and add series 2 to it.
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
-        // add serie to it
-        dataset2->AddSerie((double *) values2, WXSIZEOF(values2));
+        dataset2->AddSerie(new XYSerie(values2));
 
-        // create renderer for first dataset
+        // Create colours for the series.
+        wxColour colour1 = DEFAULT_LINE_COLOUR_0;
+        wxColour colour2 = DEFAULT_LINE_COLOUR_1;
+
+        // Create renderer for first dataset.
         XYLineRenderer *renderer1 = new XYLineRenderer();
-        renderer1->SetSerieColour(0, &color1);
-
-        // add first dataset to plot
-        plot->AddDataset(dataset1);
-
-        // set it to first dataset
+        renderer1->SetSerieColour(0, &colour1);
         dataset1->SetRenderer(renderer1);
 
-        // create renderer for second dataset
+        // Create renderer for second dataset.
         XYLineRenderer *renderer2 = new XYLineRenderer();
-        renderer2->SetSerieColour(0, &color2);
-
-        // set it to second dataset
+        renderer2->SetSerieColour(0, &colour2);
         dataset2->SetRenderer(renderer2);
 
-        // add second dataset to plot
+        // Add both datasets to the plot.
+        plot->AddDataset(dataset1);
         plot->AddDataset(dataset2);
 
-        // create left axis for first dataset
+        // Create left axis for first dataset with the same colours as the line.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        leftAxis->SetLabelTextColour(color1);
+        leftAxis->SetLabelTextColour(colour1);
         leftAxis->SetTitle("Left Axis");
         plot->AddAxis(leftAxis);
 
-        // create left axis for second dataset
+        // Create right axis for second dataset also with the same colours as the line.
         NumberAxis *rightAxis = new NumberAxis(AXIS_RIGHT);
-        rightAxis->SetLabelTextColour(color2);
+        rightAxis->SetLabelTextColour(colour2);
         rightAxis->SetTitle("Right Axis");
         plot->AddAxis(rightAxis);
 
-        // create top axis for first dataset
+        // Create a top axis for first dataset.
         NumberAxis *topAxis = new NumberAxis(AXIS_TOP);
-        topAxis->SetLabelTextColour(color1);
+        topAxis->SetLabelTextColour(colour1);
         topAxis->SetTitle("Top Axis");
         plot->AddAxis(topAxis);
 
-        // create bottom axis for second dataset
+        // Create a bottom axis for second dataset.
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-        bottomAxis->SetLabelTextColour(color2);
+        bottomAxis->SetLabelTextColour(colour2);
         bottomAxis->SetTitle("Bottom Axis");
         plot->AddAxis(bottomAxis);
 
-        // link first dataset with left axis
+        // Link the first dataset with left axis.
         plot->LinkDataVerticalAxis(0, 0);
-        // link second dataset with right axis
+        
+        // Link the second dataset with right axis.
         plot->LinkDataVerticalAxis(1, 1);
 
-        // link first dataset with top axis
+        // Link first dataset with top axis.
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // link second dataset with bottom axis
+        // Link second dataset with bottom axis.
         plot->LinkDataHorizontalAxis(1, 1);
 
         return new Chart(plot, GetName());

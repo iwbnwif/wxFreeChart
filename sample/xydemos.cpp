@@ -82,7 +82,7 @@ class XYDemo2 : public ChartDemo
 {
 public:
     XYDemo2()
-    : ChartDemo(wxT("XY Demo 2 - Multiple Series (with legend)"))
+    : ChartDemo(wxT("XY Demo 2 - Multiple Series with legend"))
     {
     }
 
@@ -114,28 +114,28 @@ public:
         dataset->AddSerie(new XYSerie(data1));
         dataset->AddSerie(new XYSerie(data2));
 
-        // set line renderer to dataset
+        // Set line renderer for the dataset.
         dataset->SetRenderer(new XYLineRenderer());
 
-        // add our dataset to plot
+        // Add our dataset to plot.
         plot->AddDataset(dataset);
 
-        // create left and bottom number axes
+        // Create left and bottom number axes.
         plot->AddAxis(new NumberAxis(AXIS_LEFT));
         plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
 
-        // link axes and dataset
+        // Link the axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("Serie 0"));
-        dataset->SetSerieName(1, wxT("Serie 1"));
+        // Set the series names to be displayed in the legend and on tooltips.
+        dataset->GetSerie(0)->SetName("Series 0");
+        dataset->GetSerie(1)->SetName("Series 1");
 
-        // set legend
+        // Create the legend and add it to the plot.
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
-        // and finally create chart
+        // ... and finally create chart.
         return new Chart(plot, GetName());
     }
 };
@@ -180,28 +180,28 @@ public:
         dataset->AddSerie(new XYSerie(data1));
         dataset->AddSerie(new XYSerie(data2));
 
-        // set line renderer with symbols enabled and lines disabled
+        // Set line renderer with symbols enabled and lines disabled.
         dataset->SetRenderer(new XYLineRenderer(true, false));
 
-        // add our dataset to plot
+        // Add our dataset to the plot.
         plot->AddDataset(dataset);
 
-        // create left and bottom number axes
+        // Create left and bottom number axes.
         plot->AddAxis(new NumberAxis(AXIS_LEFT));
         plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
 
-        // link axes and dataset
+        // Link the axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("First"));
-        dataset->SetSerieName(1, wxT("Second"));
+        // Set the series names to be displayed on legend.
+        dataset->GetSerie(0)->SetName("First Series");
+        dataset->GetSerie(1)->SetName("Second Series");
 
-        // set legend to plot
+        // Add the legend to the plot.
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
-        // and finally create chart
+        // ... and finally create chart.
         return new Chart(plot, GetName());
     }
 };
@@ -602,7 +602,7 @@ class XYDemo9 : public ChartDemo
 {
 public:
     XYDemo9()
-    : ChartDemo(wxT("XY Demo 9 - sine"))
+    : ChartDemo(wxT("XY Demo 9 - Sine"))
     {
     }
 
@@ -647,7 +647,7 @@ class XYDemo10 : public ChartDemo
 {
 public:
     XYDemo10()
-    : ChartDemo(wxT("XY Demo 10 - lines"))
+    : ChartDemo(wxT("XY Demo 10 - Multiple Series with Symbols"))
     {
     }
 
@@ -725,9 +725,9 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
 
         // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("First"));
-        dataset->SetSerieName(1, wxT("Second"));
-        dataset->SetSerieName(2, wxT("Third"));
+        dataset->GetSerie(0)->SetName("First Series");
+        dataset->GetSerie(1)->SetName("Second Series");
+        dataset->GetSerie(2)->SetName("Third Series");
 
         // set legend
         plot->SetLegend(new Legend(wxBOTTOM, wxCENTER));
@@ -744,7 +744,7 @@ class XYDemo11 : public ChartDemo
 {
 public:
     XYDemo11()
-    : ChartDemo(wxT("XY Demo 11 - areas"))
+    : ChartDemo(wxT("XY Demo 11 - Areas"))
     {
     }
 
@@ -805,8 +805,8 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
 
         // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("Serie 0"));
-        dataset->SetSerieName(1, wxT("Serie 1"));
+        dataset->GetSerie(0)->SetName("Series 0");
+        dataset->GetSerie(1)->SetName("Series 0");
 
         // set legend
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
