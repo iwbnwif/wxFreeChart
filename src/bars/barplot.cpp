@@ -13,8 +13,15 @@
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
 
-BarPlot::BarPlot()
+BarPlot::BarPlot(BarPlotOrientation orientation)
 {
+    m_orientation = orientation;
+    
+    if (orientation == BARPLOT_VERTICAL)
+        m_drawGridHorizontal = false;
+    else
+        m_drawGridVertical = false;
+
 }
 
 BarPlot::~BarPlot()
@@ -23,8 +30,27 @@ BarPlot::~BarPlot()
 
 bool BarPlot::AcceptAxis(Axis *axis)
 {
-    return (wxDynamicCast(axis, NumberAxis) != NULL) ||
-            (wxDynamicCast(axis, CategoryAxis) != NULL);
+    if (m_orientation == BARPLOT_VERTICAL && 
+            wxDynamicCast(axis, NumberAxis) &&
+            dynamic_cast<NumberAxis*>(axis)->IsVertical())
+        return true;
+        
+    if (m_orientation == BARPLOT_VERTICAL && 
+            wxDynamicCast(axis, CategoryAxis) &&
+            dynamic_cast<CategoryAxis*>(axis)->IsHorizontal())
+        return true;
+
+    if (m_orientation == BARPLOT_HORIZONTAL && 
+            wxDynamicCast(axis, NumberAxis) &&
+            dynamic_cast<NumberAxis*>(axis)->IsHorizontal())
+        return true;
+        
+    if (m_orientation == BARPLOT_HORIZONTAL && 
+            wxDynamicCast(axis, CategoryAxis) &&
+            dynamic_cast<CategoryAxis*>(axis)->IsVertical())
+        return true;
+    
+    return false;
 }
 
 bool BarPlot::AcceptDataset(Dataset *dataset)
@@ -45,28 +71,7 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
         wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
         wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
 
-        // Determine if this is a horizontal or a vertical bar plot.
-        // TODO: Should this be done here? Maybe when the axis are added.
-        bool verticalBars;
-        if (wxDynamicCast(horizAxis, CategoryAxis) != NULL ||
-                wxDynamicCast(horizAxis, DateAxis) != NULL) {
-            verticalBars = true;
-        }
-        else if (wxDynamicCast(vertAxis, CategoryAxis) != NULL ||
-                wxDynamicCast(vertAxis, DateAxis) != NULL) {
-            verticalBars = false;
-        }
-        else {
-            // wrong plot configuration, TODO be handled not here
-            return ;
-        }
-        
-        // Do not draw gridlines in the same direction as the bars.
-        // Would be better when the grid direction is determined so this can be overridden if desired.
-        m_drawGridHorizontal = !verticalBars;
-        m_drawGridVertical = verticalBars;
-
-        renderer->Draw(dc, rc, horizAxis, vertAxis, verticalBars, dataset);
+        renderer->Draw(dc, rc, horizAxis, vertAxis, m_orientation == BARPLOT_VERTICAL, dataset);
     }
 }
 

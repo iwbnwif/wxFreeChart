@@ -10,10 +10,14 @@
 #ifndef BARPLOT_H_
 #define BARPLOT_H_
 
-//#include <wx/axisplot.h>
+#include <wx/category/categorydataset.h>
 #include <wx/xy/xyplot.h>
 
-#include <wx/category/categorydataset.h>
+enum BarPlotOrientation
+{
+    BARPLOT_HORIZONTAL,
+    BARPLOT_VERTICAL
+};
 
 /**
  * Plot for displaying histograms with values at one axis and
@@ -22,7 +26,7 @@
 class WXDLLIMPEXP_FREECHART BarPlot : public XYPlot
 {
 public:
-    BarPlot();
+    BarPlot(BarPlotOrientation orientation = BARPLOT_VERTICAL);
     virtual ~BarPlot();
 
 protected:
@@ -37,6 +41,8 @@ protected:
      * @param event Details of the mouse motion.
      */
     virtual void OnMouseMove(wxMouseEvent& event) wxOVERRIDE;
+    
+    BarPlotOrientation m_orientation;
 };
 
 #endif /*BARPLOT_H_*/

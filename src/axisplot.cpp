@@ -23,7 +23,7 @@ WX_DEFINE_EXPORTED_OBJARRAY(DataAxisLinkArray)
 
 #define CHECK_INDEX(name, index, v) do {                                            \
     if (index >= v.Count()) {                                                        \
-        wxLogError(wxT("%s index out of bounds: %i %i"), name, index, v.Count());    \
+        wxLogError(wxT("%s index out of bounds: %zu %zu"), name, index, v.Count());    \
         return ;                                                                    \
     }                                                                                \
 } while (0)

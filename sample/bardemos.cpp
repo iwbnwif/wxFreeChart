@@ -29,7 +29,7 @@ class BarDemo1 : public ChartDemo
 {
 public:
     BarDemo1()
-    : ChartDemo(wxT("Bar demo 1 - Single Series"))
+    : ChartDemo(wxT("Bar Demo 1 - Single Series"))
     {
     }
 
@@ -64,7 +64,7 @@ public:
         dataset->SetRenderer(new BarRenderer(barType));
 
         // Create bar plot
-        BarPlot *plot = new BarPlot();
+        BarPlot *plot = new BarPlot(BARPLOT_VERTICAL);
 
         // Create left number axis, set it's margins, and add it to plot
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
@@ -146,7 +146,7 @@ public:
         dataset->SetRenderer(new BarRenderer(barType));
 
         // Create bar plot
-        BarPlot *plot = new BarPlot();
+        BarPlot *plot = new BarPlot(BARPLOT_VERTICAL);
 
         // Add left number axis
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
@@ -233,7 +233,7 @@ public:
         dataset->SetRenderer(renderer);
 
         // Create bar plot
-        BarPlot *plot = new BarPlot();
+        BarPlot *plot = new BarPlot(BARPLOT_HORIZONTAL);
 
         // Add left category axis
         CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
@@ -317,7 +317,7 @@ public:
         dataset->SetRenderer(renderer);
 
         // Create bar plot
-        BarPlot *plot = new BarPlot();
+        BarPlot *plot = new BarPlot(BARPLOT_HORIZONTAL);
 
         // Add left category axis
         CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
@@ -405,7 +405,7 @@ public:
         dataset->SetRenderer(renderer);
 
         // Create bar plot
-        BarPlot *plot = new BarPlot();
+        BarPlot *plot = new BarPlot(BARPLOT_HORIZONTAL);
 
         // Add left category axis
         CategoryAxis *leftAxis = new CategoryAxis(AXIS_LEFT);
@@ -490,7 +490,7 @@ public:
         dataset->SetRenderer(renderer);
 
         // Create bar plot
-        BarPlot *plot = new BarPlot();
+        BarPlot *plot = new BarPlot(BARPLOT_VERTICAL);
 
         // Add left number axis
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
@@ -522,8 +522,6 @@ public:
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
         
         // Experiments.
-        plot->SetDrawGrid(true, false);
-        
         plot->SetBackground(new FillAreaDraw(*wxGREEN_PEN, *wxBLUE_BRUSH));
         plot->SetDataBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
