@@ -140,13 +140,16 @@ public:
     virtual Chart *Create()
     {
         wxVector<JulianTimeSeriesDataset::TimePair> times;
-        wxDateTime dt = wxDateTime::Now().GetDateOnly() - wxDateSpan(0, 0, 4, 0);
+
+        wxDateTime dt = wxDateTime::Now().GetDateOnly() - wxDateSpan(100, 0, 0, 0);
+        size_t days = wxDateTime::Now().GetDateOnly().GetJDN() - dt.GetJDN();
         
+        wxLogMessage("Days is %zu", days);
+                
         for (size_t i = 0; i < 28; i++)
         {
             double val = (rand() % 10000) / 100.0;
             times.push_back(JulianTimeSeriesDataset::TimePair(dt.GetJDN(), val));
-            wxLogMessage(dt.FormatISODate() + " value %f", val);
             dt.Add(wxDateSpan(0, 0, 0, 1));
         }
 
