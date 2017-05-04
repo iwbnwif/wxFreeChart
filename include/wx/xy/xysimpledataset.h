@@ -142,7 +142,7 @@ private:
     XYSerieArray m_series;
     wxVector<wxSharedPtr<XYSerie> > m_series2;
     
-    friend XYSerie;
+    friend class XYSerie;
 };
 
 #endif /*XYSIMPLEDATASET_H_*/
