@@ -11,7 +11,8 @@
 
 #include <wx/axis/numberaxis.h>
 
-class JulianDateAxis : public NumberAxis {
+class WXDLLIMPEXP_FREECHART JulianDateAxis : public NumberAxis 
+{
 public:
    JulianDateAxis(AXIS_LOCATION location);
    virtual ~JulianDateAxis();
