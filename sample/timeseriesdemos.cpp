@@ -129,6 +129,9 @@ public:
     }
 };
 
+/**
+ * The following demo shows how to use a Julian time series axis on a normal XY plot.
+ */
 class TimeSeriesDemo2 : public ChartDemo
 {
 public:
@@ -141,15 +144,13 @@ public:
     {
         wxVector<JulianTimeSeriesDataset::TimePair> times;
 
-        // Find the Julian Date Number (JDN) for 4 weeks ago.
+        // Find the Julian Date Number (JDN) for 100 years ago.
         wxDateTime dt = wxDateTime::Now().GetDateOnly() - wxDateSpan(100, 0, 0, 0);
         
-        wxDateSpan span(10000, 0, 0, 0);
-        
-        wxLogMessage("Span is %d", span.GetTotalDays());
-        
-        // Generate 4 weeks' worth of dates and random values.
-        for (size_t i = 0; i < 36525; i++)
+        // Find the number of days elapsed between dt and now and generate random data for that period.
+        size_t days = wxDateTime::Now().GetDateOnly().GetJDN() - dt.GetJDN();
+
+        for (size_t i = 0; i < days; i++)
         {
             double val = (rand() % 10000) / 100.0;
             times.push_back(JulianTimeSeriesDataset::TimePair(dt.GetJDN(), val));
@@ -165,31 +166,32 @@ public:
 
         plot->AddDataset(dataset);
 
-        // add left number and bottom date axes
+        // Add left number and bottom date axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         JulianDateAxis *bottomAxis = new JulianDateAxis(AXIS_BOTTOM);
 
+        // Display the data 4 weeks at a time.
         bottomAxis->SetWindow(times.front().first, 28);
-        // bottomAxis->SetWindowWidth(7.0);
         bottomAxis->SetUseWindow(true);
-
         bottomAxis->SetVerticalLabelText(true);
         bottomAxis->SetDateFormat("%Y/%m/%d");
-        // bottomAxis->ZeroOrigin(false);
+
+        // Set the bounds to match exactly the date range for which we have data.
+        // TODO: THis should probably be the default on all time axis.
         bottomAxis->SetFixedBounds(times.front().first, times.back().first);
 
-        // add axes to first plot
+        // Add axes to the plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and the dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // and finally create chart
+        // Create the chart and set the bottom axis (windowed) to be scrolled.
         Chart *chart = new Chart(plot, GetName());
-
         chart->SetScrolledAxis(bottomAxis);
+
         return chart;
     }
 };

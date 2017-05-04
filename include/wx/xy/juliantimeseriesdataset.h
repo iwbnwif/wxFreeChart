@@ -17,7 +17,7 @@ using std::vector;
 #include <wx/xy/xydataset.h>
 
 
-class JulianTimeSeriesDataset : public XYDataset 
+class WXDLLIMPEXP_FREECHART JulianTimeSeriesDataset : public XYDataset 
 {
 public:
     typedef std::pair<double,double> TimePair;  // a pair with time (julian date) and value data
