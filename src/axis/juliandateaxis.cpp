@@ -32,17 +32,19 @@ void JulianDateAxis::GetLabel(size_t step, wxString &label)
     }
 
    wxDateTime dt(value);
-   label = dt.FormatISODate(); // Format(m_dateFormat);
-   wxLogMessage(dt.FormatISODate());
+   label = dt.Format(m_dateFormat);
 }
 
+/*
+ * Hack to change the interval to a single day, no matter what nice interval is calculated.
+ * TODO: This is probably something that needs to be implemented properly for number axis.
+ */
 bool JulianDateAxis::UpdateBounds()
 {
     NumberAxis::UpdateBounds();
     
-    wxLogMessage("%f", m_labelInterval);
     m_labelInterval = 1.0;
-    m_labelCount *= 5.0;
+    m_labelCount = ((m_maxValue - m_minValue) / m_labelInterval) + 1;
     
     return true;
 }

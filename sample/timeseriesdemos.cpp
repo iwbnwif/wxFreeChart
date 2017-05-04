@@ -140,13 +140,19 @@ public:
     virtual Chart *Create()
     {
         wxVector<JulianTimeSeriesDataset::TimePair> times;
-        wxDateTime dt = wxDateTime::Now().GetDateOnly() - wxDateSpan(0, 0, 4, 0);
+
+        // Find the Julian Date Number (JDN) for 4 weeks ago.
+        wxDateTime dt = wxDateTime::Now().GetDateOnly() - wxDateSpan(100, 0, 0, 0);
         
-        for (size_t i = 0; i < 28; i++)
+        wxDateSpan span(10000, 0, 0, 0);
+        
+        wxLogMessage("Span is %d", span.GetTotalDays());
+        
+        // Generate 4 weeks' worth of dates and random values.
+        for (size_t i = 0; i < 36525; i++)
         {
             double val = (rand() % 10000) / 100.0;
             times.push_back(JulianTimeSeriesDataset::TimePair(dt.GetJDN(), val));
-            wxLogMessage(dt.FormatISODate() + " value %f", val);
             dt.Add(wxDateSpan(0, 0, 0, 1));
         }
 
@@ -163,12 +169,12 @@ public:
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         JulianDateAxis *bottomAxis = new JulianDateAxis(AXIS_BOTTOM);
 
-        // setup window
-        //bottomAxis->SetWindow(0, 10);
-        //bottomAxis->SetUseWindow(true);
+        bottomAxis->SetWindow(times.front().first, 28);
+        // bottomAxis->SetWindowWidth(7.0);
+        bottomAxis->SetUseWindow(true);
 
         bottomAxis->SetVerticalLabelText(true);
-        bottomAxis->SetDateFormat("%Y%m%d");
+        bottomAxis->SetDateFormat("%Y/%m/%d");
         // bottomAxis->ZeroOrigin(false);
         bottomAxis->SetFixedBounds(times.front().first, times.back().first);
 
@@ -183,7 +189,7 @@ public:
         // and finally create chart
         Chart *chart = new Chart(plot, GetName());
 
-        //chart->SetScrolledAxis(bottomAxis);
+        chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
 };

@@ -94,7 +94,7 @@ static Category *cats[] = {
     new Category(wxT("Bubble Charts"), bubbleDemos, bubbleDemosCount),
     new Category(wxT("Combined axis"), combinedAxisDemos, combinedAxisDemosCount),
     new Category(wxT("Multiple axis"), multipleAxisDemos, multipleAxisDemosCount),
-    new Category(wxT("Time series Charts"), timeSeriesDemos, timeSeriesDemosCount),
+    new Category(wxT("Time Series Charts"), timeSeriesDemos, timeSeriesDemosCount),
     new Category(wxT("Markers"), markersDemos, markersDemosCount),
     new Category(wxT("Title"), titleDemos, titleDemosCount),
     new Category(wxT("Pie plots"), pieplotDemos, pieplotDemosCount),
