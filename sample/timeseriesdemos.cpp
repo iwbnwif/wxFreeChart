@@ -142,7 +142,7 @@ public:
 
     virtual Chart *Create()
     {
-        wxVector<JulianTimeSeriesDataset::TimePair> times;
+        wxVector<TimePair> times;
 
         // Find the Julian Date Number (JDN) for 100 years ago.
         wxDateTime dt = wxDateTime::Now().GetDateOnly() - wxDateSpan(100, 0, 0, 0);
@@ -153,7 +153,7 @@ public:
         for (size_t i = 0; i < days; i++)
         {
             double val = (rand() % 10000) / 100.0;
-            times.push_back(JulianTimeSeriesDataset::TimePair(dt.GetJDN(), val));
+            times.push_back(TimePair(dt.GetJDN(), val));
             dt.Add(wxDateSpan(0, 0, 0, 1));
         }
 

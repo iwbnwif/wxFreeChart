@@ -9,22 +9,20 @@
 #ifndef TIMESERIESDATA_H
 #define TIMESERIESDATA_H
 
-#include <map> // XXX stl classes must be removed!
-#include <vector>
-using std::vector;
-
 #include <wx/dataset.h>
 #include <wx/xy/xydataset.h>
 
+struct TimePair
+{
+    TimePair(double f, double s) : first(f), second(s) {}
+    double first;
+    double second;
+};
 
 class WXDLLIMPEXP_FREECHART JulianTimeSeriesDataset : public XYDataset 
 {
 public:
-    typedef std::pair<double,double> TimePair;  // a pair with time (julian date) and value data
-
     JulianTimeSeriesDataset();
-    wxDEPRECATED_MSG("Use wxVector<TimePair> instead");
-    JulianTimeSeriesDataset(const vector<TimePair>& data);
     JulianTimeSeriesDataset(const wxVector<TimePair>& data);
     virtual ~JulianTimeSeriesDataset();
 
@@ -43,7 +41,7 @@ public:
     void push_back(const TimePair& tvpair);
 
 private:
-    wxVector<TimePair> m_data; // XXX remove this, stl is not allowed
+    wxVector<TimePair> m_data;
 };
 
 #endif // TIMESERIESDATA_H
