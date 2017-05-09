@@ -22,12 +22,12 @@ DataPoint::~DataPoint()
 {
 }
 
-const wxString& DataPoint::GetComment()
+const wxString& DataPoint::GetComment() const
 {
     return m_comment;
 }
 
-bool DataPoint::HasData()
+bool DataPoint::HasData() const
 {
     return m_hasData;
 }
@@ -44,7 +44,7 @@ UniDataPoint::UniDataPoint()
 {
 }
 
-UniDataPoint::UniDataPoint (const wxAny& val, const wxString& comment)
+UniDataPoint::UniDataPoint (double val, const wxString& comment)
     : DataPoint (comment)
 {
     value = val;
@@ -58,32 +58,33 @@ UniDataPoint::~UniDataPoint()
 
 void UniDataPoint::Clear()
 {
-    value.MakeNull();
+    value = 0;
     m_hasData = false;
 }
 
-const size_t UniDataPoint::GetDimensionCount()
+size_t UniDataPoint::GetDimensionCount() const
 {
     return 1;
 }
 
-const wxAny& UniDataPoint::GetDimensionValue (const size_t dimension)
+double UniDataPoint::GetDimensionValue(size_t dimension) const
+{
+    wxASSERT (dimension == 0);
+    return value;
+}
+
+double UniDataPoint::GetValue() const
 {
     return value;
 }
 
-const wxAny& UniDataPoint::GetValue()
-{
-    return value;
-}
-
-void UniDataPoint::SetDimensionValue (const size_t dimension, const wxAny& val)
+void UniDataPoint::SetDimensionValue(size_t dimension, double val)
 {
     wxASSERT (dimension == 0);
     value = val;
 }
 
-void UniDataPoint::SetValue (const wxAny& val)
+void UniDataPoint::SetValue(double val)
 {
     value = val;
     m_hasData = true;
@@ -96,7 +97,7 @@ BiDataPoint::BiDataPoint()
 {
 }
 
-BiDataPoint::BiDataPoint (const wxAny& first, const wxAny& second, const wxString& comment)
+BiDataPoint::BiDataPoint (double first, double second, const wxString& comment)
     : DataPoint (comment)
 {
 }
@@ -107,28 +108,28 @@ BiDataPoint::~BiDataPoint()
 
 void BiDataPoint::Clear()
 {
-    first.MakeNull();
-    second.MakeNull();
+    first = 0;
+    second = 0;
     m_hasData = false;
 }
 
-const size_t BiDataPoint::GetDimensionCount()
+size_t BiDataPoint::GetDimensionCount() const
 {
     return 2;
 }
 
-const wxAny& BiDataPoint::GetDimensionValue (const size_t dimension)
+double BiDataPoint::GetDimensionValue(size_t dimension) const
 {
     return dimension == 0 ? first : second;
 }
 
-void BiDataPoint::GetValues(wxAny& fst, wxAny& snd)
+void BiDataPoint::GetValues(double& f, double& s) const
 {
-    first = fst;
-    second = snd;
+    f = first;
+    s = second;
 }
 
-void BiDataPoint::SetDimensionValue (const size_t dimension, const wxAny& val)
+void BiDataPoint::SetDimensionValue(size_t dimension, double val)
 {
     if (dimension == 0)
         first = val;
@@ -136,16 +137,16 @@ void BiDataPoint::SetDimensionValue (const size_t dimension, const wxAny& val)
         second = val;
 }
 
-void BiDataPoint::SetValue (const wxAny& fst, const wxAny& snd)
+void BiDataPoint::SetValues(double f, double s)
 {
-    first = fst;
-    second = snd;
+    first = f;
+    second = s;
 }
 
 /***************************************
  * N-ARY DATA POINT
  ***************************************/
-NaryDataPoint::NaryDataPoint (const wxVector<wxAny>& dat, const wxString& comment)
+NaryDataPoint::NaryDataPoint (const wxVector<double>& dat, const wxString& comment)
     : DataPoint (comment)
 {
 
@@ -157,39 +158,30 @@ NaryDataPoint::~NaryDataPoint()
 
 void NaryDataPoint::Clear()
 {
-    for (size_t i = 0; i < data.size(); i++)
-        data[i].MakeNull();
+    data.clear();
 }
 
-const size_t NaryDataPoint::GetDimensionCount()
+size_t NaryDataPoint::GetDimensionCount() const
 {
     return data.size();
 }
 
-const wxAny& NaryDataPoint::GetDimensionValue (const size_t dimension)
+double NaryDataPoint::GetDimensionValue (size_t dimension) const
 {
     return data.at(dimension);
 }
 
-bool NaryDataPoint::HasData()
+bool NaryDataPoint::HasData() const
 {
-    // Note: m_hasData is not used here. If any dimensions do not have valid data
-    // then return false, otherwise return true.
-    for (size_t i = 0; i < data.size(); i++)
-        {
-            if (data[i].IsNull())
-                return false;
-        }
-        
-    return true; 
+    return data.size() > 0 ? true : false; 
 }
 
-void NaryDataPoint::SetData (const wxVector<wxAny>& dat)
+void NaryDataPoint::SetData(const wxVector<double>& d)
 {
-    data = dat;
+    data = d;
 }
 
-void NaryDataPoint::SetDimensionValue (const size_t dimension, const wxAny& val)
+void NaryDataPoint::SetDimensionValue(size_t dimension, double val)
 {
-    data.at(0) = val;
+    data[dimension] = val;
 }

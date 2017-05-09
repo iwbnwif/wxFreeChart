@@ -53,7 +53,7 @@ public:
      * has been set.
      * @return The comment for this datapoint or an empty string.
      */
-    virtual const wxString& GetComment();
+    virtual const wxString& GetComment() const;
 
     /**
      * Facilitates direct access to the data held by a data point. Normally used in conjunction with
@@ -61,7 +61,7 @@ public:
      * @return The number of dimensions in this data point.
      * @see GetDimensionValue
      */
-    virtual const size_t GetDimensionCount() = 0;
+    virtual size_t GetDimensionCount() const = 0;
 
     /**
      * Returns the value for the given dimension in a datapoint. This gives direct access to the data
@@ -71,12 +71,12 @@ public:
      * @return The data held in the specified dimension.
      * @see GetDimensionCount
      */
-    virtual const wxAny& GetDimensionValue (const size_t dimension) = 0;
+    virtual double GetDimensionValue(size_t dimension) const = 0;
 
     /**
      * Returns whether this object has any valid data stored.
      */
-    virtual bool HasData();
+    virtual bool HasData() const;
 
     /**
      * Sets a comment for this data point. The comment can be shown during
@@ -92,7 +92,7 @@ public:
      * @param dimension The dimension for which to set the data.
      * @param val The value to be set.
      */
-    virtual void SetDimensionValue (const size_t dimension, const wxAny& val) = 0;
+    virtual void SetDimensionValue (size_t dimension, double val) = 0;
 
 protected:
     bool m_hasData;
@@ -122,7 +122,7 @@ public:
      * @param comment A comment about this data point. The comment can be shown during
      * mouse hovering or as a callout on some plots.
      */
-    UniDataPoint (const wxAny& val, const wxString& comment = wxEmptyString);
+    UniDataPoint (double val, const wxString& comment = wxEmptyString);
 
     /**
      * Default destructor. Note that this is a virtual destructor to allow vectors to
@@ -136,7 +136,7 @@ public:
      * can also be accessed directly as it is a public member.
      * @return The value that is represented by this data point.
      */
-    virtual const wxAny& GetValue();
+    virtual double GetValue() const;
 
 
     /**
@@ -145,20 +145,20 @@ public:
      * can also be accessed directly as it is a public member.
      * @param value The value that is to be represented by this data point.
      */
-    virtual void SetValue (const wxAny& val);
+    virtual void SetValue (double val);
 
     // Abstract Data Point method implementations.
 
-    virtual void Clear();
+    virtual void Clear() wxOVERRIDE;;
 
-    virtual const size_t GetDimensionCount();
+    virtual size_t GetDimensionCount() const wxOVERRIDE;
 
-    virtual const wxAny& GetDimensionValue (const size_t dimension);
+    virtual double GetDimensionValue (size_t dimension) const wxOVERRIDE;
 
-    virtual void SetDimensionValue (const size_t dimension, const wxAny& val);
+    virtual void SetDimensionValue (size_t dimension, double val) wxOVERRIDE;
     
     // Data holder.
-    wxAny value;
+    double value;
 };
 
 
@@ -181,7 +181,7 @@ public:
      * @param comment A comment about this data point. The comment can be shown during
      * mouse hovering or as a callout on some plots.
      */
-    BiDataPoint (const wxAny& first, const wxAny& second, const wxString& comment = wxEmptyString);
+    BiDataPoint (double first,  double second, const wxString& comment = wxEmptyString);
 
     /**
      * Default destructor. Note that this is a virtual destructor to allow vectors to
@@ -197,7 +197,7 @@ public:
      * @param first The variable into which the first dimension of the data represented by this data point should be copied.
      * @param second The variable into which the second dimension of the data represented by this data point should be copied.
      */
-    virtual void GetValues (wxAny& first, wxAny& second);
+    virtual void GetValues (double& first, double& second) const;
 
     /**
      * Sets the value for this data point.
@@ -207,21 +207,21 @@ public:
      * @param first The value of the first dimension that is represented by this data point.
      * @param second The value of the second dimension that is represented by this data point.
      */
-    virtual void SetValues (const wxAny& first, const wxAny& second);
+    virtual void SetValues (double first, double second);
 
     // Abstract Data Point method implementations.
 
-    virtual void Clear();
+    virtual void Clear() wxOVERRIDE;
 
-    virtual const size_t GetDimensionCount();
+    virtual size_t GetDimensionCount() const wxOVERRIDE;
 
-    virtual const wxAny& GetDimensionValue (const size_t dimension);
+    virtual double GetDimensionValue (size_t dimension) const wxOVERRIDE;
 
-    virtual void SetDimensionValue (const size_t dimension, const wxAny& val);
+    virtual void SetDimensionValue (size_t dimension, double val) wxOVERRIDE;
     
-    // Data holder.
-    wxAny first;
-    wxAny second;
+    // Data holders.
+    double first;
+    double second;
 };
 
 
@@ -239,7 +239,7 @@ public:
      * @param comment A comment about this data point. The comment can be shown during
      * mouse hovering or as a callout on some plots.
      */
-    NaryDataPoint (const wxVector<wxAny>& data, const wxString& comment = wxEmptyString);
+    NaryDataPoint (const wxVector<double>& data, const wxString& comment = wxEmptyString);
 
     /**
      * Default destructor. Note that this is a virtual destructor to allow vectors to
@@ -247,19 +247,19 @@ public:
      */
     virtual ~NaryDataPoint();
 
-    virtual void Clear();
+    virtual void Clear() wxOVERRIDE;
 
-    virtual const size_t GetDimensionCount();
+    virtual size_t GetDimensionCount() const;
 
-    virtual const wxAny& GetDimensionValue (const size_t dimension);
+    virtual double GetDimensionValue (size_t dimension) const wxOVERRIDE;
 
-    virtual bool HasData();
+    virtual bool HasData() const wxOVERRIDE;
 
-    virtual void SetDimensionValue (const size_t dimension, const wxAny& val);
+    virtual void SetDimensionValue (size_t dimension, double val) wxOVERRIDE;
 
-    virtual void SetData (const wxVector<wxAny>& data);
+    virtual void SetData (const wxVector<double>& data) wxOVERRIDE;
 
-    wxVector<wxAny> data;
+    wxVector<double> data;
 };
 
 #endif // DATAPOINT_H_

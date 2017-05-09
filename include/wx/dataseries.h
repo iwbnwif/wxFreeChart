@@ -50,7 +50,6 @@ public:
     /**
      * Adds a new data point to this series. 
      * 
-     * This is a generic access method so the data point is encapsulated within a wxAny object.
      * The first data point that is added to the series specifies the number of dimensions
      * for that series and cannot be changed. Adding a data point that has a different number
      * of dimensions will raise an assert. Similarly attempting to add anything that is not
@@ -80,17 +79,14 @@ public:
     /**
      * Returns the data point at the given index position.
      * @param index The position within the series where the required data point is stored.
-     * @return The required data point encapsulated in a wxAny object. Normally, this will 
-     * encapsulate one of the default data point types (UniDataPoint, BiDataPoint, NaryDataPoint).
-     * The contents of the data point can be accessed via the wxAny::As<T>() access method. For example:
+     * @return The required data point object. Normally, this will encapsulate one of the default 
+     * data point types (UniDataPoint, BiDataPoint, NaryDataPoint).
+     * The contents of the data point can be accessed via the generic access method. For example:
      * @code
-     * // Use the convenience accessor.
-     * series.GetPoint(15).value.As<double>();
-     * // Use the generic accessor.
-     * series.GetPoint(15).As<UniDataPoint>().GetDimensionValue(0).As<double>();
+     * series->GetPoint(15).get()->GetDimensionValue(0);
      * @endcode
      */
-    virtual wxSharedPtr<DataPoint> GetPointPtr(size_t index) { return m_points[index]; }
+    virtual wxSharedPtr<DataPoint> GetPoint(size_t index);
 
     /**
      * Sets the name for this series.

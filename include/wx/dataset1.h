@@ -15,6 +15,10 @@
 #include <wx/dataset.h>
 #include <wx/dataseries.h>
 
+/***************************************
+ * DATA SET
+ ***************************************/
+
 /**
  * Base class for all objects representing a data set.
  *
@@ -79,6 +83,10 @@ protected:
     wxVector<wxSharedPtr<Renderer> > m_renderers;
 };
 
+/***************************************
+ * UNI DATA SET
+ ***************************************/
+
 class WXDLLIMPEXP_FREECHART UniDataSet : public DataSet
 {
 public:
@@ -90,20 +98,24 @@ public:
 
     virtual size_t GetBaseCount();
     
-    virtual DataSeries& GetBaseSeries();
+    virtual const wxVector<wxAny>& GetBaseSeries() const;
     
-    virtual const wxAny& GetBaseValue(size_t index);
+    virtual const wxAny& GetBaseValue(size_t index) const;
 
     virtual double GetMaxValue(bool vertical);
-
+    
     virtual double GetMinValue(bool vertical);
 
-    virtual const wxAny& GetValue(size_t series, size_t index);
+    virtual double GetValue(size_t series, size_t index) const;
     
 
 private:
-    DataSeries m_baseSeries;
+    wxVector<wxAny> m_baseSeries;
 };
+
+/***************************************
+ * BI DATA SET
+ ***************************************/
 
 class WXDLLIMPEXP_FREECHART BiDataSet : public DataSet
 {
@@ -114,6 +126,9 @@ public:
 
 };
 
+/***************************************
+ * NARY DATA SET
+ ***************************************/
 
 class WXDLLIMPEXP_FREECHART NaryDataSet : public DataSet
 {

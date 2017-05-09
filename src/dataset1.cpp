@@ -11,7 +11,9 @@
 
 #include <wx/xy/xylinerenderer.h>
 
-
+/***************************************
+ * DATA SET
+ ***************************************/
 DataSet::DataSet (const wxString& name)
 {
 }
@@ -74,6 +76,9 @@ void DataSet::SetSeriesRenderer(size_t series, Renderer* renderer)
     m_renderers[series] = (wxSharedPtr<Renderer>(renderer));
 }
 
+/***************************************
+ * UNI DATA SET
+ ***************************************/
 UniDataSet::UniDataSet (const wxString& name)
 {
 }
@@ -84,40 +89,59 @@ UniDataSet::~UniDataSet()
 
 void UniDataSet::AddCategory(const wxAny& category)
 {
-    m_baseSeries.AddPoint(new UniDataPoint(category));
+    m_baseSeries.push_back(category);
 }
 
 size_t UniDataSet::GetBaseCount()
 {
-    return m_baseSeries.GetCount();
+    return m_baseSeries.size();
 }
 
-DataSeries& UniDataSet::GetBaseSeries()
+const wxVector<wxAny>& UniDataSet::GetBaseSeries() const
 {
     return m_baseSeries;
 }
 
-const wxAny& UniDataSet::GetBaseValue(size_t index)
+const wxAny& UniDataSet::GetBaseValue(size_t index) const
 {
-    return m_baseSeries.GetPointPtr(index).get()->GetDimensionValue(0);
+    return m_baseSeries[index];
 }
 
-double UniDataSet::GetMaxValue (bool vertical)
+double UniDataSet::GetMaxValue(bool vertical)
 {
-    return 100.0;
+    double max = GetValue(0, 0);
+    
+    for (size_t ser = 0; ser < GetSerieCount(); ser++)
+    {
+        for (size_t pt = 0; pt < GetCount(ser); pt++)
+            max = wxMax(max, GetValue(ser, pt));
+    }
+    
+    return max;       
 }
 
-double UniDataSet::GetMinValue (bool vertical)
+double UniDataSet::GetMinValue(bool vertical)
 {
-    return 0.0;
+    double min = GetValue(0, 0);
+    
+    for (size_t ser = 0; ser < GetSerieCount(); ser++)
+    {
+        for (size_t pt = 0; pt < GetCount(ser); pt++)
+            min = wxMin(min, GetValue(ser, pt));
+    }
+    
+    return min;       
 }
 
-const wxAny& UniDataSet::GetValue(size_t series, size_t index)
+double UniDataSet::GetValue(size_t series, size_t index) const
 {
-    return m_series[series]->GetPointPtr(index).get()->GetDimensionValue(0);
+    return m_series[series]->GetPoint(index).get()->GetDimensionValue(0);
 }
 
 
+/***************************************
+ * BI DATA SET
+ ***************************************/
 BiDataSet::BiDataSet (const wxString& name)
 {
 }
@@ -126,6 +150,9 @@ BiDataSet::~BiDataSet()
 {
 }
 
+/***************************************
+ * NARY DATA SET
+ ***************************************/
 NaryDataSet::NaryDataSet (const wxString& name)
 {
 }

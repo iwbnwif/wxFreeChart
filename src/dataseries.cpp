@@ -12,11 +12,12 @@
 
 DataSeries::DataSeries(const wxString& name)
 {
+    
 }
 
 DataSeries::~DataSeries()
 {
-    wxLogMessage("DataSeries dtor");
+    
 }
 
 const wxString& DataSeries::GetName()
@@ -41,6 +42,11 @@ void DataSeries::Clear()
 const size_t DataSeries::GetCount()
 {
     return m_points.size();
+}
+
+wxSharedPtr<DataPoint> DataSeries::GetPoint(size_t index)
+{
+    return m_points[index];
 }
 
 #ifdef DONOTUSE
