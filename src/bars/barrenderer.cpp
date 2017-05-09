@@ -82,6 +82,64 @@ void BarType::Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc,
     }
 }
 
+void BarType::Draw(BarRenderer* barRenderer, wxDC& dc, wxRect rc, Axis* horizAxis, Axis* vertAxis, bool vertical, size_t item, UniDataSet* dataset)
+{
+    for(size_t n = 0; n < dataset->GetSeriesCount(); n++)
+    {
+        // bar geometry params
+        int width;
+        wxCoord shift;
+        double base, value;
+
+        // get bar geometry
+        GetBarGeometry(dataset, item, n, width, shift, base, value);
+
+        double xBase, yBase;
+        double xVal, yVal;
+
+        if (vertical) {
+            xBase = xVal = item;
+            yBase = base;
+            yVal = value;
+        }
+        else {
+            xBase = base;
+            yBase = yVal = item;
+            xVal = value;
+        }
+
+        // transform base and value to graphics coordinates
+        wxCoord xBaseG = horizAxis->ToGraphics(dc, rc.x, rc.width, xBase);
+        wxCoord yBaseG = vertAxis->ToGraphics(dc, rc.y, rc.height, yBase);
+        wxCoord xG = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
+        wxCoord yG = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
+
+        wxRect rcBar;
+        if (vertical) {
+            xBaseG += shift;
+            xG += shift;
+
+            rcBar.x = wxMin(xBaseG, xG);
+            rcBar.y = wxMin(yBaseG, yG);
+            rcBar.width = width;
+            rcBar.height = ABS(yBaseG - yG);
+        }
+        else {
+            yBaseG += shift;
+            yG += shift;
+
+            rcBar.x = wxMin(xBaseG, xG);
+            rcBar.y = wxMin(yBaseG, yG);
+            rcBar.width = ABS(xBaseG - xG);
+            rcBar.height = width;
+        }
+
+        // draw bar
+        AreaDraw *barDraw = barRenderer->GetBarDraw(n);
+        barDraw->Draw(dc, rcBar);
+    }
+}
+
 double BarType::GetMinValue(CategoryDataset *dataset)
 {
     if (dataset->GetCount() == 0)
@@ -142,6 +200,23 @@ void NormalBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_t
     base = m_base;
     value = dataset->GetValue(item, serie);
 }
+
+void NormalBarType::GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie, int &width, wxCoord &shift, double &base, double &value)
+{
+    width = m_barWidth;
+
+    const int serieCount = dataset->GetSerieCount();
+    if (serieCount > 1) {
+        shift = serie * (m_barWidth + m_serieGap) - (m_serieGap * (serieCount - 1) + m_barWidth);
+    }
+    else {
+        shift = -m_barWidth / 2;
+    }
+
+    base = m_base;
+    value = dataset->GetValue(serie, item).As<double>();
+}
+
 
 //
 // StackedBarType
@@ -266,6 +341,13 @@ AreaDraw *BarRenderer::GetBarDraw(size_t serie)
 void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset)
 {
     for (size_t n = 0; n < dataset->GetCount(); n++) {
+        m_barType->Draw(this, dc, rc, horizAxis, vertAxis, vertical, n, dataset);
+    }
+}
+
+void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, UniDataSet* dataset)
+{
+    for (size_t n = 0; n < dataset->GetSeries(0)->GetCount(); n++) {
         m_barType->Draw(this, dc, rc, horizAxis, vertAxis, vertical, n, dataset);
     }
 }

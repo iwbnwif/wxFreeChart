@@ -55,14 +55,17 @@ bool BarPlot::AcceptAxis(Axis *axis)
 
 bool BarPlot::AcceptDataset(Dataset *dataset)
 {
-    return (wxDynamicCast(dataset, CategoryDataset) != NULL);
+    return (wxDynamicCast(dataset, CategoryDataset) != NULL ||
+            wxDynamicCast(dataset, UniDataSet) != NULL);
 }
 
 void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
     for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
-        CategoryDataset *dataset = (CategoryDataset *) GetDataset(nData);
-        BarRenderer *renderer = dataset->GetRenderer();
+        // CategoryDataset *dataset = (CategoryDataset *) GetDataset(nData);
+        Dataset *dataset = GetDataset(nData);
+        // BarRenderer *renderer = dataset->GetRenderer();
+        BarRenderer *renderer = wxDynamicCast(dataset->GetBaseRenderer(), BarRenderer);
         wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
 
         Axis *vertAxis = GetDatasetVerticalAxis(dataset);
@@ -71,7 +74,7 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
         wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
         wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
 
-        renderer->Draw(dc, rc, horizAxis, vertAxis, m_orientation == BARPLOT_VERTICAL, dataset);
+        renderer->Draw(dc, rc, horizAxis, vertAxis, m_orientation == BARPLOT_VERTICAL, (UniDataSet*)dataset);
     }
 }
 

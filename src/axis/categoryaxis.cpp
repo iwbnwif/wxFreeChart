@@ -9,6 +9,7 @@
 
 #include <wx/axis/categoryaxis.h>
 #include <wx/category/categorydataset.h>
+#include <wx/dataset1.h>
 
 IMPLEMENT_CLASS(CategoryAxis, Axis)
 
@@ -28,7 +29,8 @@ bool CategoryAxis::AcceptDataset(Dataset *dataset)
     // It must be CategoryDataset and this class supports only one
     // dataset
     //
-    return ((wxDynamicCast(dataset, CategoryDataset) != NULL)
+    return ((wxDynamicCast(dataset, CategoryDataset) != NULL ||
+            wxDynamicCast(dataset, UniDataSet))
         && m_datasets.Count() == 0);
 }
 
@@ -51,17 +53,18 @@ void CategoryAxis::GetDataBounds(double &minValue, double &maxValue) const
 
 bool CategoryAxis::UpdateBounds()
 {
-    CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
+    // CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
+    UniDataSet *dataset = wxDynamicCast(m_datasets[0], UniDataSet);
     if (dataset == NULL) {
-        wxLogError(wxT("CategoryAxis::DataChanged: BUG dataset is not CategoryDataset")); // BUG!
+        wxLogError(wxT("CategoryAxis::UpdateBounds: Dataset is not UniDataSet")); // BUG!
         return false;
     }
 
-    m_categoryCount = dataset->GetCount();
+    m_categoryCount = dataset->GetBaseCount();
 
-    m_longestCategory = dataset->GetName(0);
+    m_longestCategory = dataset->GetBaseValue(0).As<wxString>();
     for (size_t nCat = 1; nCat < m_categoryCount; nCat++) {
-        wxString catName = dataset->GetName(nCat);
+        wxString catName = dataset->GetBaseValue(nCat).As<wxString>();
 
         if (m_longestCategory.Length() < catName.Length()) {
             m_longestCategory = catName;
@@ -81,17 +84,13 @@ double CategoryAxis::GetValue(size_t step)
 
 void CategoryAxis::GetLabel(size_t step, wxString &label)
 {
-    CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
-    if (dataset == NULL) {
-        label = wxEmptyString;
-        return ; // BUG
-    }
+    wxASSERT(wxDynamicCast(m_datasets[0], UniDataSet));
+    UniDataSet* dataset = wxDynamicCast(m_datasets[0], UniDataSet);
 
-    if (IsVertical()) {
+    if (IsVertical())
         step = m_categoryCount - 1 - step;
-    }
 
-    label = dataset->GetName(step);
+    label = wxDynamicCast(dataset->GetBaseSeries().GetPointPtr(step).get(), UniDataPoint)->value.As<wxString>();
 }
 
 bool CategoryAxis::IsEnd(size_t step)

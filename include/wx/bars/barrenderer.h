@@ -12,6 +12,7 @@
 
 #include "wx/xy/xyrenderer.h"
 #include "wx/areadraw.h"
+#include "wx/dataset1.h"
 
 class CategoryDataset;
 class BarRenderer;
@@ -39,6 +40,9 @@ public:
      */
     virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, size_t item, CategoryDataset *dataset);
 
+    virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, size_t item, UniDataSet* dataset);
+
+
     //
     // Called from BarRenderer. Don't call from programs.
     //
@@ -58,6 +62,9 @@ protected:
      * @param value output for bar value
      */
     virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
+            int &width, wxCoord &shift, double &base, double &value) = 0;
+            
+    virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value) = 0;
 
     double m_base;
@@ -80,6 +87,9 @@ public:
 
 protected:
     virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
+            int &width, wxCoord &shift, double &base, double &value);
+
+    virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value);
 
 private:
@@ -107,6 +117,9 @@ public:
 protected:
     virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value);
+            
+    virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
+            int &width, wxCoord &shift, double &base, double &value) {}
 
 private:
     int m_barWidth;
@@ -129,6 +142,9 @@ public:
 protected:
     virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value);
+            
+    virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
+            int &width, wxCoord &shift, double &base, double &value) {}
 
 private:
     int m_initialBarWidth;
@@ -163,6 +179,9 @@ public:
      * @param dataset dataset to be drawn
      */
     void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
+
+    void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, UniDataSet* dataset);
+
 
     /**
      * Sets bar type, an object that performs bars drawing.
