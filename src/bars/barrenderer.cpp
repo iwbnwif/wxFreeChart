@@ -201,22 +201,20 @@ void NormalBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_t
     value = dataset->GetValue(item, serie);
 }
 
-void NormalBarType::GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie, int &width, wxCoord &shift, double &base, double &value)
+void NormalBarType::GetBarGeometry(UniDataSet *dataset, size_t item, size_t series, int &width, wxCoord &shift, double &base, double &value)
 {
     width = m_barWidth;
 
-    const int serieCount = dataset->GetSerieCount();
-    if (serieCount > 1) {
-        shift = serie * (m_barWidth + m_serieGap) - (m_serieGap * (serieCount - 1) + m_barWidth);
-    }
-    else {
+    const int seriesCount = dataset->GetSeriesCount();
+    if (seriesCount > 1)
+        shift = series * (m_barWidth + m_serieGap) - (m_serieGap * (seriesCount - 1) + m_barWidth);
+
+    else
         shift = -m_barWidth / 2;
-    }
 
     base = m_base;
-    value = dataset->GetValue(serie, item).As<double>();
+    value = dataset->GetValue(series, item);
 }
-
 
 //
 // StackedBarType
@@ -243,6 +241,20 @@ void StackedBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_
     }
 }
 
+void StackedBarType::GetBarGeometry(UniDataSet* dataset, size_t item, size_t series, int& width, wxCoord& shift, double& base, double& value)
+{
+    width = m_barWidth;
+    shift = -m_barWidth / 2;
+    
+    // Find the end of the previous bar segment.
+    base = (series >= 1) ? dataset->GetValue(series - 1, item) : m_base;
+    
+    // Add the length of this segment.
+    value = dataset->GetValue(series, item);
+    if (series >= 1)
+        value += base;
+}
+
 double StackedBarType::GetMinValue(CategoryDataset *WXUNUSED(dataset))
 {
     return m_base;
@@ -266,6 +278,23 @@ double StackedBarType::GetMaxValue(CategoryDataset *dataset)
     return maxValue;
 }
 
+const double StackedBarType::GetMaxValue(UniDataSet* dataset) const
+{
+    double maxValue;
+
+    for (size_t pt = 0; pt < dataset->GetCount(0); pt++) 
+    {
+        double sum = m_base;
+
+        for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
+            sum += dataset->GetValue(ser, pt);
+
+        maxValue = wxMax(maxValue, sum);
+    }
+
+    return maxValue;
+}
+
 //
 // LayeredBarType
 //
@@ -286,6 +315,14 @@ void LayeredBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_
     shift = -width / 2;
     base = m_base;
     value = dataset->GetValue(item, serie);
+}
+
+void LayeredBarType::GetBarGeometry(UniDataSet* dataset, size_t item, size_t series, int &width, wxCoord &shift, double &base, double &value)
+{
+    width = (int) (m_initialBarWidth * (1 - series / (double)dataset->GetSeriesCount()));
+    shift = -width / 2;
+    base = m_base;
+    value = dataset->GetValue(series, item);
 }
 
 //

@@ -90,7 +90,7 @@ void CategoryAxis::GetLabel(size_t step, wxString &label)
     if (IsVertical())
         step = m_categoryCount - 1 - step;
 
-    label = wxDynamicCast(dataset->GetBaseSeries().GetPointPtr(step).get(), UniDataPoint)->value.As<wxString>();
+    label = dataset->GetBaseSeries()[step].As<wxString>();
 }
 
 bool CategoryAxis::IsEnd(size_t step)

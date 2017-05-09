@@ -113,13 +113,14 @@ public:
 
     virtual double GetMinValue(CategoryDataset *dataset);
     virtual double GetMaxValue(CategoryDataset *dataset);
+    virtual const double GetMaxValue(UniDataSet *dataset) const;
 
 protected:
     virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value);
             
     virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value) {}
+            int &width, wxCoord &shift, double &base, double &value);
 
 private:
     int m_barWidth;
@@ -143,8 +144,8 @@ protected:
     virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value);
             
-    virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value) {}
+    virtual void GetBarGeometry(UniDataSet* dataset, size_t item, size_t serie,
+            int &width, wxCoord &shift, double &base, double &value);
 
 private:
     int m_initialBarWidth;
