@@ -1,0 +1,265 @@
+/////////////////////////////////////////////////////////////////////////////
+// Name:        datapoint.h
+// Purpose:     Default data point classes
+// Author:      wxFreeChart team
+// Created:     06.05.2017
+// Copyright:   (c) 2017 wxFreeChart team
+// Licence:     wxWidgets licence
+/////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef DATAPOINT_H_
+#define DATAPOINT_H_
+
+#include <wx/wxfreechartdefs.h>
+
+
+/***************************************
+ * DATA POINT
+ ***************************************/
+
+/**
+ * Abstract base class for all objects representing data points.
+ *
+ * A data point represents a unique point on a chart's plot. Data points can be rendered in many
+ * different ways as appropriate for a given chart, for example, points on a line, bars, segements
+ * of a pie etc.
+ *
+ * Closely related data points are collected together to form a data series (see DataSeries).
+ */
+class WXDLLIMPEXP_FREECHART DataPoint : public wxObject
+{
+public:
+    /**
+     * Default constructor. Instantiates the data point, but without any data.
+     */
+    DataPoint (const wxString& comment = wxEmptyString);
+
+    /**
+     * Default destructor. Note that this is a virtual destructor to allow vectors to
+     * be formed of subclasses.
+     */
+    virtual ~DataPoint();
+
+    /**
+     * Empties this point of all data. Empty datapoints are useful in category plots because
+     * of the relationship between a datapoint's position in the data series and the category
+     * that it corresponds to.
+     */
+    virtual void Clear() = 0;
+
+    /**
+     * Returns the comment that has been set for this datapoint or an empty string if none
+     * has been set.
+     * @return The comment for this datapoint or an empty string.
+     */
+    virtual const wxString& GetComment();
+
+    /**
+     * Facilitates direct access to the data held by a data point. Normally used in conjunction with
+     * GetDimensionValue.
+     * @return The number of dimensions in this data point.
+     * @see GetDimensionValue
+     */
+    virtual const size_t GetDimensionCount() = 0;
+
+    /**
+     * Returns the value for the given dimension in a datapoint. This gives direct access to the data
+     * held by a data point. Normally the convenience functions implemented by specialised versions
+     * of DataSet (e.g. UniDataSet, BiDataSet and NaryDataSet) are used instead.
+     * @param dimension The dimension for which to return the data.
+     * @return The data held in the specified dimension.
+     * @see GetDimensionCount
+     */
+    virtual const wxAny& GetDimensionValue (const size_t dimension) = 0;
+
+    /**
+     * Returns whether this object has any valid data stored.
+     */
+    virtual bool HasData();
+
+    /**
+     * Sets a comment for this data point. The comment can be shown during
+     * mouse hovering or as a callout on some plots.
+     * @param comment The comment for this data point.
+     */
+    virtual void SetComment (const wxString& comment);
+
+    /**
+     * Provides direct access to the data held by the data point in an abstract way (works with
+     * data sets of all dimensions). Normally the convenience functions implemented by specialised
+     * versions of DataSet (e.g. UniDataSet, BiDataSet and NaryDataSet) are used instead.
+     * @param dimension The dimension for which to set the data.
+     * @param val The value to be set.
+     */
+    virtual void SetDimensionValue (const size_t dimension, const wxAny& val) = 0;
+
+protected:
+    bool m_hasData;
+    wxString m_comment;
+};
+
+
+/***************************************
+ * UNI DATA POINT
+ ***************************************/
+
+/**
+ * Base class for all data points with one dimension. Further subclasses can be made from this class
+ * or it can be used 'as is'.
+ */
+class WXDLLIMPEXP_FREECHART UniDataPoint : public DataPoint
+{
+public:
+    /**
+     * Default constructor. Instantiates the data point with no data (HasData() will return false).
+     */
+    UniDataPoint();
+
+    /**
+     * Default constructor. Instantiates the data point with valid data and an optional comment.
+     * @param value The value that is represented by this data point.
+     * @param comment A comment about this data point. The comment can be shown during
+     * mouse hovering or as a callout on some plots.
+     */
+    UniDataPoint (const wxAny& val, const wxString& comment = wxEmptyString);
+
+    /**
+     * Default destructor. Note that this is a virtual destructor to allow vectors to
+     * be formed of subclasses.
+     */
+    virtual ~UniDataPoint();
+
+    /**
+     * Gets the value for this data point.
+     * This is a convenience method to access the abstract GetDimensionValue. The value
+     * can also be accessed directly as it is a public member.
+     * @return The value that is represented by this data point.
+     */
+    virtual const wxAny& GetValue();
+
+
+    /**
+     * Sets the value for this data point.
+     * This is a convenience method to access the abstract SetDimensionValue. The value
+     * can also be accessed directly as it is a public member.
+     * @param value The value that is to be represented by this data point.
+     */
+    virtual void SetValue (const wxAny& val);
+
+    // Abstract Data Point method implementations.
+
+    virtual void Clear();
+
+    virtual const size_t GetDimensionCount();
+
+    virtual const wxAny& GetDimensionValue (const size_t dimension);
+
+    virtual void SetDimensionValue (const size_t dimension, const wxAny& val);
+    
+    // Data holder.
+    wxAny value;
+};
+
+
+/***************************************
+ * BI DATA POINT
+ ***************************************/
+
+class WXDLLIMPEXP_FREECHART BiDataPoint : public DataPoint
+{
+public:
+    /**
+     * Default constructor. Instantiates the data point with no data (HasData() will return false).
+     */
+    BiDataPoint();
+
+    /**
+     * Default constructor. Instantiates the data point with valid data and an optional comment.
+     * @param first The 'first' value that is represented by this data point.
+     * @param second The 'second' value that is represented by this data point.
+     * @param comment A comment about this data point. The comment can be shown during
+     * mouse hovering or as a callout on some plots.
+     */
+    BiDataPoint (const wxAny& first, const wxAny& second, const wxString& comment = wxEmptyString);
+
+    /**
+     * Default destructor. Note that this is a virtual destructor to allow vectors to
+     * be formed of subclasses.
+     */
+    virtual ~BiDataPoint();
+
+    /**
+     * Gets the first and second values for this data point.
+     *
+     * This is a convenience method to access the abstract GetDimensionValue. The values
+     * can also be accessed directly as they are public members.
+     * @param first The variable into which the first dimension of the data represented by this data point should be copied.
+     * @param second The variable into which the second dimension of the data represented by this data point should be copied.
+     */
+    virtual void GetValues (wxAny& first, wxAny& second);
+
+    /**
+     * Sets the value for this data point.
+     *
+     * This is a convenience method to access the abstract SetDimensionValue. The values
+     * can also be accessed directly as they are public members.
+     * @param first The value of the first dimension that is represented by this data point.
+     * @param second The value of the second dimension that is represented by this data point.
+     */
+    virtual void SetValues (const wxAny& first, const wxAny& second);
+
+    // Abstract Data Point method implementations.
+
+    virtual void Clear();
+
+    virtual const size_t GetDimensionCount();
+
+    virtual const wxAny& GetDimensionValue (const size_t dimension);
+
+    virtual void SetDimensionValue (const size_t dimension, const wxAny& val);
+    
+    // Data holder.
+    wxAny first;
+    wxAny second;
+};
+
+
+/***************************************
+ * NARY DATA POINT
+ ***************************************/
+
+class WXDLLIMPEXP_FREECHART NaryDataPoint : public DataPoint
+{
+public:
+    /**
+     * Default constructor. Instantiates the data point with valid data and an optional comment.
+     * @param first The 'first' value that is represented by this data point.
+     * @param second The 'second' value that is represented by this data point.
+     * @param comment A comment about this data point. The comment can be shown during
+     * mouse hovering or as a callout on some plots.
+     */
+    NaryDataPoint (const wxVector<wxAny>& data, const wxString& comment = wxEmptyString);
+
+    /**
+     * Default destructor. Note that this is a virtual destructor to allow vectors to
+     * be formed of subclasses.
+     */
+    virtual ~NaryDataPoint();
+
+    virtual void Clear();
+
+    virtual const size_t GetDimensionCount();
+
+    virtual const wxAny& GetDimensionValue (const size_t dimension);
+
+    virtual bool HasData();
+
+    virtual void SetDimensionValue (const size_t dimension, const wxAny& val);
+
+    virtual void SetData (const wxVector<wxAny>& data);
+
+    wxVector<wxAny> data;
+};
+
+#endif // DATAPOINT_H_
