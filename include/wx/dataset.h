@@ -74,6 +74,38 @@ private:
 
 wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);        
 
+inline const wxAny wxAnyMax(const wxAny& a, const wxAny& b)
+{
+    wxASSERT(a.HasSameType(b));
+    
+    if (a.CheckType<double>())
+        return a.As<double>() > b.As<double>() ? a : b;
+        
+    if (a.CheckType<wxDateTime>())
+        return a.As<wxDateTime>() > b.As<wxDateTime>() ? a : b;
+        
+    // Error: Unsupported any type.
+    wxFAIL;
+    
+    return wxAny(0);
+}
+
+inline const wxAny wxAnyMin(const wxAny& a, const wxAny& b)
+{
+    wxASSERT(a.HasSameType(b));
+    
+    if (a.CheckType<double>())
+        return a.As<double>() < b.As<double>() ? a : b;
+        
+    if (a.CheckType<wxDateTime>())
+        return a.As<wxDateTime>() < b.As<wxDateTime>() ? a : b;
+        
+    // Error: Unsupported any type.
+    wxFAIL;
+    
+    return wxAny(0);
+}
+
 /**
  * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
  *

@@ -64,11 +64,21 @@ public:
     virtual size_t GetDimensionCount() const = 0;
 
     /**
-     * Returns the value for the given dimension in a datapoint. This gives direct access to the data
+     * Returns the object for the given dimension in a datapoint. This gives direct access to the data
      * held by a data point. Normally the convenience functions implemented by specialised versions
      * of DataSet (e.g. UniDataSet, BiDataSet and NaryDataSet) are used instead.
      * @param dimension The dimension for which to return the data.
      * @return The data held in the specified dimension.
+     * @see GetDimensionCount
+     */
+    virtual const wxAny& GetDimensionData(size_t dimension) const = 0;
+
+    /**
+     * Returns the value for the given dimension in a numerical datapoint. This gives direct access to the value
+     * held by a data point. Normally the convenience functions implemented by specialised versions
+     * of DataSet (e.g. UniDataSet, BiDataSet and NaryDataSet) are used instead.
+     * @param dimension The dimension for which to return the value.
+     * @return The value held in the specified dimension.
      * @see GetDimensionCount
      */
     virtual double GetDimensionValue(size_t dimension) const = 0;
@@ -83,16 +93,25 @@ public:
      * mouse hovering or as a callout on some plots.
      * @param comment The comment for this data point.
      */
-    virtual void SetComment (const wxString& comment);
+    virtual void SetComment(const wxString& comment);
 
     /**
      * Provides direct access to the data held by the data point in an abstract way (works with
      * data sets of all dimensions). Normally the convenience functions implemented by specialised
      * versions of DataSet (e.g. UniDataSet, BiDataSet and NaryDataSet) are used instead.
      * @param dimension The dimension for which to set the data.
+     * @param data The object to be assigned to this data point.
+     */
+    virtual void SetDimensionData(size_t dimension, const wxAny& data) = 0;
+
+    /**
+     * Provides direct access to the value held by a numerical data point in an abstract way (works with
+     * data sets of all dimensions). Normally the convenience functions implemented by specialised
+     * versions of DataSet (e.g. UniDataSet, BiDataSet and NaryDataSet) are used instead.
+     * @param dimension The dimension for which to set the data.
      * @param val The value to be set.
      */
-    virtual void SetDimensionValue (size_t dimension, double val) = 0;
+    virtual void SetDimensionValue(size_t dimension, double value) = 0;
 
 protected:
     bool m_hasData;
@@ -149,16 +168,20 @@ public:
 
     // Abstract Data Point method implementations.
 
-    virtual void Clear() wxOVERRIDE;;
+    virtual void Clear() wxOVERRIDE;
 
     virtual size_t GetDimensionCount() const wxOVERRIDE;
 
-    virtual double GetDimensionValue (size_t dimension) const wxOVERRIDE;
+    virtual const wxAny& GetDimensionData(size_t dimension) const wxOVERRIDE;
 
-    virtual void SetDimensionValue (size_t dimension, double val) wxOVERRIDE;
-    
+    virtual double GetDimensionValue(size_t dimension) const wxOVERRIDE;
+
+    virtual void SetDimensionData(size_t dimension, const wxAny& data) wxOVERRIDE;
+
+    virtual void SetDimensionValue(size_t dimension, double val) wxOVERRIDE;
+
     // Data holder.
-    double value;
+    wxAny data;
 };
 
 
@@ -215,13 +238,17 @@ public:
 
     virtual size_t GetDimensionCount() const wxOVERRIDE;
 
-    virtual double GetDimensionValue (size_t dimension) const wxOVERRIDE;
+    virtual const wxAny& GetDimensionData(size_t dimension) const wxOVERRIDE;
 
-    virtual void SetDimensionValue (size_t dimension, double val) wxOVERRIDE;
-    
+    virtual double GetDimensionValue(size_t dimension) const wxOVERRIDE;
+
+    virtual void SetDimensionData(size_t dimension, const wxAny& data) wxOVERRIDE;
+
+    virtual void SetDimensionValue(size_t dimension, double val) wxOVERRIDE;
+
     // Data holders.
-    double first;
-    double second;
+    wxAny first;
+    wxAny second;
 };
 
 
@@ -247,19 +274,35 @@ public:
      */
     virtual ~NaryDataPoint();
 
+    /**
+     * Populate the data point with all dimensions at once.
+     * @param data A vector containing objects for all dimensions of the data point.
+     */
+    virtual void SetData(const wxVector<wxAny>& data);
+
+    /**
+     * Populate the data point with all dimensions at once.
+     * @param data A vector containing values for all dimensions of the data point.
+     */
+    virtual void SetData(const wxVector<double>& data);
+
+    // Abstract Data Point method implementations.
+
     virtual void Clear() wxOVERRIDE;
 
-    virtual size_t GetDimensionCount() const;
+    virtual size_t GetDimensionCount() const wxOVERRIDE;
 
-    virtual double GetDimensionValue (size_t dimension) const wxOVERRIDE;
+    virtual const wxAny& GetDimensionData(size_t dimension) const wxOVERRIDE;
+
+    virtual double GetDimensionValue(size_t dimension) const wxOVERRIDE;
 
     virtual bool HasData() const wxOVERRIDE;
 
-    virtual void SetDimensionValue (size_t dimension, double val) wxOVERRIDE;
+    virtual void SetDimensionData(size_t dimension, const wxAny& data) wxOVERRIDE;
 
-    virtual void SetData (const wxVector<double>& data) wxOVERRIDE;
+    virtual void SetDimensionValue(size_t dimension, double val) wxOVERRIDE;
 
-    wxVector<double> data;
+    wxVector<wxAny> data;
 };
 
 #endif // DATAPOINT_H_
