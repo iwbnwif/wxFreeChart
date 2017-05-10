@@ -22,6 +22,8 @@
 
 #include <wx/category/categorysimpledataset.h>
 
+#include <wx/dataset1.h>
+
 /**
  * Simple demo with one dataset, and left and bottom axes.
  */
@@ -35,36 +37,36 @@ public:
 
     virtual Chart *Create()
     {
-        wxString names[] = { // category names
-                wxT("Cat 1"),
-                wxT("Cat 2"),
-                wxT("Cat 3"),
-                wxT("Cat 4"),
-                wxT("Cat 5"),
-        };
-        // serie 1 values - we have only one serie
-        double values[] = {
-                10.0,
-                20.0,
-                5.0,
-                50.0,
-                25.0,
-        };
+        // Create the category dataset and add the categories.
+        UniDataSet* dataset = new UniDataSet("Bar Demo 1");
+        dataset->AddCategory("Cat 1");
+        dataset->AddCategory("Cat 2");
+        dataset->AddCategory("Cat 3");
+        dataset->AddCategory("Cat 4");
+        dataset->AddCategory("Cat 5");
 
-        // Create dataset
-        CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
+        // Create the series data.
+        DataSeries* series = new DataSeries("Series 1");
+        series->AddPoint(new UniDataPoint(10.0));
+        series->AddPoint(new UniDataPoint(20.0));
+        series->AddPoint(new UniDataPoint(5.0));
+        series->AddPoint(new UniDataPoint(50.0));
+        series->AddPoint(new UniDataPoint(25.0));
+        
+        // Add the series to the data set.
+        dataset->AddSeries(series);
 
-        // add serie to it
-        dataset->AddSerie("Series 0", values, WXSIZEOF(values));
-
-        // create normal bar type with bar width = 10
-        BarType *barType = new NormalBarType(30);
-
-        // Set bar renderer for it
+        // Assign a renderer to the series.
+        BarType* barType = new NormalBarType(30);
+        
+        // dataset1->SetSeriesRenderer(0, new BarRenderer(barType1));
         dataset->SetRenderer(new BarRenderer(barType));
-
+       
         // Create bar plot
         BarPlot *plot = new BarPlot(BARPLOT_VERTICAL);
+
+        // Add dataset to plot
+        plot->AddDataset(dataset);
 
         // Create left number axis, set it's margins, and add it to plot
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
@@ -80,17 +82,12 @@ public:
         bottomAxis->SetLabelTextColour(wxColour("#DADADA"));
         bottomAxis->SetLabelPen(wxPen(wxColour("#DADADA")));
         plot->AddAxis(bottomAxis);
-
-        // Add dataset to plot
-        plot->AddDataset(dataset);
         
-        plot->SetBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
-
-        // Link first dataset with horizontal axis
+        // Link the data sets to the axis.
         plot->LinkDataHorizontalAxis(0, 0);
-
-        // Link first dataset with vertical axis
         plot->LinkDataVerticalAxis(0, 0);
+
+        plot->SetBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
         // Show a legend at the centre-right position.
         Legend* legend = new Legend(wxCENTER, wxRIGHT, new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
@@ -109,6 +106,7 @@ public:
                                                     wxColour("#8A8A8A"), wxColour("#707070"), wxALL));
         
         return chart;
+
     }
 };
 
@@ -186,38 +184,32 @@ public:
 
     virtual Chart *Create()
     {
-        wxString names[] = { // category names
-                wxT("Cat 1"),
-                wxT("Cat 2"),
-                wxT("Cat 3"),
-                wxT("Cat 4"),
-                wxT("Cat 5"),
-        };
+        // Create the category dataset and add the categories.
+        UniDataSet* dataset = new UniDataSet("Bar Demo 1");
+        dataset->AddCategory("Cat 1");
+        dataset->AddCategory("Cat 2");
+        dataset->AddCategory("Cat 3");
+        dataset->AddCategory("Cat 4");
+        dataset->AddCategory("Cat 5");
 
-        // serie 1 values
-        double values1[] = {
-                7.5,
-                19,
-                19,
-                22,
-                25,
-        };
+        // Create the first series data.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new UniDataPoint(7.5));
+        series1->AddPoint(new UniDataPoint(19.0));
+        series1->AddPoint(new UniDataPoint(19.0));
+        series1->AddPoint(new UniDataPoint(22.0));
+        series1->AddPoint(new UniDataPoint(25.0));        
+        
+        // Create the second series data.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new UniDataPoint(16.0));
+        series2->AddPoint(new UniDataPoint(10.0));
+        series2->AddPoint(new UniDataPoint(15.0));
+        series2->AddPoint(new UniDataPoint(30.0));
+        series2->AddPoint(new UniDataPoint(45.0));        
 
-        // serie 2 values
-        double values2[] = {
-                16,
-                10,
-                15,
-                30,
-                45,
-        };
-
-        // Create dataset
-        CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
-
-        // add two series to it
-        dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
-        dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
+        dataset->AddSeries(series1);
+        dataset->AddSeries(series2);
 
         // Create bat type
         BarType *barType = new NormalBarType(20);
@@ -274,38 +266,32 @@ public:
 
     virtual Chart *Create()
     {
-        wxString names[] = { // category names
-                wxT("Cat 1"),
-                wxT("Cat 2"),
-                wxT("Cat 3"),
-                wxT("Cat 4"),
-                wxT("Cat 5"),
-        };
+        // Create the category dataset and add the categories.
+        UniDataSet* dataset = new UniDataSet("Bar Demo 4");
+        dataset->AddCategory("Cat 1");
+        dataset->AddCategory("Cat 2");
+        dataset->AddCategory("Cat 3");
+        dataset->AddCategory("Cat 4");
+        dataset->AddCategory("Cat 5");
 
-        // serie 1 values
-        double values1[] = {
-                10,
-                20,
-                5,
-                50,
-                25,
-        };
+        // Create the first series data.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new UniDataPoint(10));
+        series1->AddPoint(new UniDataPoint(20.0));
+        series1->AddPoint(new UniDataPoint(5.0));
+        series1->AddPoint(new UniDataPoint(50.0));
+        series1->AddPoint(new UniDataPoint(25.0));        
+        
+        // Create the second series data.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new UniDataPoint(16.0));
+        series2->AddPoint(new UniDataPoint(10.0));
+        series2->AddPoint(new UniDataPoint(15.0));
+        series2->AddPoint(new UniDataPoint(30.0));
+        series2->AddPoint(new UniDataPoint(45.0));        
 
-        // serie 2 values
-        double values2[] = {
-                16,
-                10,
-                15,
-                30,
-                45,
-        };
-
-        // Create dataset
-        CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
-
-        // add two series to it
-        dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
-        dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
+        dataset->AddSeries(series1);
+        dataset->AddSeries(series2);
 
         // Create stacked bar type
         BarType *barType = new StackedBarType(40, 0);
@@ -356,38 +342,32 @@ public:
 
     virtual Chart *Create()
     {
-        wxString names[] = { // category names
-                wxT("Cat 1"),
-                wxT("Cat 2"),
-                wxT("Cat 3"),
-                wxT("Cat 4"),
-                wxT("Cat 5"),
-        };
+        // Create the category dataset and add the categories.
+        UniDataSet* dataset = new UniDataSet("Bar Demo 1");
+        dataset->AddCategory("Cat 1");
+        dataset->AddCategory("Cat 2");
+        dataset->AddCategory("Cat 3");
+        dataset->AddCategory("Cat 4");
+        dataset->AddCategory("Cat 5");
 
-        // serie 1 values
-        double values1[] = {
-                10,
-                20,
-                5,
-                50,
-                25,
-        };
+        // Create the first series data.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new UniDataPoint(10.0));
+        series1->AddPoint(new UniDataPoint(20.0));
+        series1->AddPoint(new UniDataPoint(5.0));
+        series1->AddPoint(new UniDataPoint(50.0));
+        series1->AddPoint(new UniDataPoint(25.0));        
+        
+        // Create the second series data.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new UniDataPoint(16.0));
+        series2->AddPoint(new UniDataPoint(10.0));
+        series2->AddPoint(new UniDataPoint(15.0));
+        series2->AddPoint(new UniDataPoint(30.0));
+        series2->AddPoint(new UniDataPoint(45.0));        
 
-        // serie 2 values
-        double values2[] = {
-                16,
-                10,
-                15,
-                30,
-                45,
-        };
-
-        // Create dataset
-        CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
-
-        // add two series to it
-        dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
-        dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
+        dataset->AddSeries(series1);
+        dataset->AddSeries(series2);
 
         // create layered bar type with width=40 and base=0
         BarType *barType = new LayeredBarType(40, 0);
@@ -444,28 +424,43 @@ public:
 
     virtual Chart *Create()
     {
-        // TODO: !!! remake this demo to use dates, not string representation of years!
-        wxString names[] = { // category names
-                wxT("2010"),
-                wxT("2011"),
-                wxT("2012"),
-                wxT("2013"),
-                wxT("2014"),
-                wxT("2015"),
-                wxT("2016"),
-                wxT("2017"),
-        };
+        // Create the category dataset and add the categories.
+        UniDataSet* dataset = new UniDataSet("Bar Demo 6");
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2010).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2011).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2012).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2013).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2014).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2015).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2016).Format("%Y"));
+        dataset->AddCategory(wxDateTime(1, wxDateTime::Jan, 2017).Format("%Y"));
 
-        // serie 1 values
-        double values1[] = {
-                771994,    718712,    682422,    713415,    807516,    894631,    1023109, 1148481,
-        };
-
-        // serie 2 values
-        double values2[] = {
-                298603,    286184,    292299,    304342,    353072,    389122,    433905,    497245,
-        };
+        // Create the first series data.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new UniDataPoint(771994.0));
+        series1->AddPoint(new UniDataPoint(718712.0));
+        series1->AddPoint(new UniDataPoint(682422.0));
+        series1->AddPoint(new UniDataPoint(713415.0));
+        series1->AddPoint(new UniDataPoint(807516.0));        
+        series1->AddPoint(new UniDataPoint(894631.0));        
+        series1->AddPoint(new UniDataPoint(1023109.0));        
+        series1->AddPoint(new UniDataPoint(1148481.0));        
         
+        // Create the second series data.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new UniDataPoint(298603.0));
+        series2->AddPoint(new UniDataPoint(286184.0));
+        series2->AddPoint(new UniDataPoint(292299.0));
+        series2->AddPoint(new UniDataPoint(304342.0));
+        series2->AddPoint(new UniDataPoint(353072.0));        
+        series2->AddPoint(new UniDataPoint(389122.0));        
+        series2->AddPoint(new UniDataPoint(433905.0));        
+        series2->AddPoint(new UniDataPoint(497245.0));        
+
+        dataset->AddSeries(series1);
+        dataset->AddSeries(series2);
+
+        /*
                 
         // Create dataset
         CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
@@ -473,7 +468,7 @@ public:
         // add two series to it
         dataset->AddSerie(wxT("Goods"), values1, WXSIZEOF(values1));
         dataset->AddSerie(wxT("Services"), values2, WXSIZEOF(values2));
-
+        */
         // create layered bar type with width=20 and base=0
         BarType *barType = new LayeredBarType(30, 0);
 
