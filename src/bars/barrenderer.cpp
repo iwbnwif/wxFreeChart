@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include "wx/bars/barrenderer.h"
-#include "wx/category/categorydataset.h"
 
 //
 // bar types
@@ -23,66 +22,9 @@ BarType::~BarType()
 {
 }
 
-void BarType::Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc,
-        Axis *horizAxis, Axis *vertAxis,
-        bool vertical, size_t item, CategoryDataset *dataset)
-{
-    FOREACH_SERIE(serie, dataset) {
-        // bar geometry params
-        int width;
-        wxCoord shift;
-        double base, value;
-
-        // get bar geometry
-        GetBarGeometry(dataset, item, serie, width, shift, base, value);
-
-        double xBase, yBase;
-        double xVal, yVal;
-
-        if (vertical) {
-            xBase = xVal = item;
-            yBase = base;
-            yVal = value;
-        }
-        else {
-            xBase = base;
-            yBase = yVal = item;
-            xVal = value;
-        }
-
-        // transform base and value to graphics coordinates
-        wxCoord xBaseG = horizAxis->ToGraphics(dc, rc.x, rc.width, xBase);
-        wxCoord yBaseG = vertAxis->ToGraphics(dc, rc.y, rc.height, yBase);
-        wxCoord xG = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
-        wxCoord yG = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
-
-        wxRect rcBar;
-        if (vertical) {
-            xBaseG += shift;
-            xG += shift;
-
-            rcBar.x = wxMin(xBaseG, xG);
-            rcBar.y = wxMin(yBaseG, yG);
-            rcBar.width = width;
-            rcBar.height = ABS(yBaseG - yG);
-        }
-        else {
-            yBaseG += shift;
-            yG += shift;
-
-            rcBar.x = wxMin(xBaseG, xG);
-            rcBar.y = wxMin(yBaseG, yG);
-            rcBar.width = ABS(xBaseG - xG);
-            rcBar.height = width;
-        }
-
-        // draw bar
-        AreaDraw *barDraw = barRenderer->GetBarDraw(serie);
-        barDraw->Draw(dc, rcBar);
-    }
-}
-
-void BarType::Draw(BarRenderer* barRenderer, wxDC& dc, wxRect rc, Axis* horizAxis, Axis* vertAxis, bool vertical, size_t item, UniDataSet* dataset)
+void BarType::Draw(BarRenderer* barRenderer, wxDC& dc, wxRect rc, 
+                    Axis* horizAxis, Axis* vertAxis, 
+                    bool vertical, size_t item, UniDataSet* dataset)
 {
     for(size_t n = 0; n < dataset->GetSeriesCount(); n++)
     {
@@ -140,34 +82,30 @@ void BarType::Draw(BarRenderer* barRenderer, wxDC& dc, wxRect rc, Axis* horizAxi
     }
 }
 
-double BarType::GetMinValue(CategoryDataset *dataset)
+double BarType::GetMinValue(UniDataSet* dataset) const
 {
-    if (dataset->GetCount() == 0)
-        return 0;
+    double min = dataset->GetValue(0, 0);
 
-    double minValue = dataset->GetValue(0, 0);
-
-    FOREACH_SERIE(serie, dataset) {
-        for (size_t n = 0; n < dataset->GetCount(); n++) {
-            minValue = wxMin(minValue, dataset->GetValue(n, serie));
-        }
+    for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
+    {
+        for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
+            min = wxMin(min, dataset->GetValue(ser, pt));
     }
-    return wxMin(minValue, m_base);
+
+    return wxMin(min, m_base);
 }
 
-double BarType::GetMaxValue(CategoryDataset *dataset)
+double BarType::GetMaxValue(UniDataSet* dataset) const
 {
-    if (dataset->GetCount() == 0)
-        return 0;
+    double max = dataset->GetValue(0, 0);
 
-    double maxValue = dataset->GetValue(0, 0);
-
-    FOREACH_SERIE(serie, dataset) {
-        for (size_t n = 0; n < dataset->GetCount(); n++) {
-            maxValue = wxMax(maxValue, dataset->GetValue(n, serie));
-        }
+    for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
+    {
+        for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
+            max = wxMin(max, dataset->GetValue(ser, pt));
     }
-    return maxValue;
+
+    return wxMin(max, m_base);
 }
 
 //
@@ -183,22 +121,6 @@ NormalBarType::NormalBarType(int barWidth, int serieGap, double base)
 
 NormalBarType::~NormalBarType()
 {
-}
-
-void NormalBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie, int &width, wxCoord &shift, double &base, double &value)
-{
-    width = m_barWidth;
-
-    const int serieCount = dataset->GetSerieCount();
-    if (serieCount > 1) {
-        shift = serie * (m_barWidth + m_serieGap) - (m_serieGap * (serieCount - 1) + m_barWidth);
-    }
-    else {
-        shift = -m_barWidth / 2;
-    }
-
-    base = m_base;
-    value = dataset->GetValue(item, serie);
 }
 
 void NormalBarType::GetBarGeometry(UniDataSet *dataset, size_t item, size_t series, int &width, wxCoord &shift, double &base, double &value)
@@ -230,17 +152,6 @@ StackedBarType::~StackedBarType()
 {
 }
 
-void StackedBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie, int &width, wxCoord &shift, double &base, double &value)
-{
-    width = m_barWidth;
-    shift = -m_barWidth / 2;
-    base = (serie >= 1) ? dataset->GetValue(item, serie - 1) : m_base;
-    value = dataset->GetValue(item, serie);
-    if (serie >= 1) {
-        value += base;
-    }
-}
-
 void StackedBarType::GetBarGeometry(UniDataSet* dataset, size_t item, size_t series, int& width, wxCoord& shift, double& base, double& value)
 {
     width = m_barWidth;
@@ -255,32 +166,14 @@ void StackedBarType::GetBarGeometry(UniDataSet* dataset, size_t item, size_t ser
         value += base;
 }
 
-double StackedBarType::GetMinValue(CategoryDataset *WXUNUSED(dataset))
+double StackedBarType::GetMinValue(UniDataSet* dataset) const
 {
     return m_base;
 }
 
-double StackedBarType::GetMaxValue(CategoryDataset *dataset)
+double StackedBarType::GetMaxValue(UniDataSet* dataset) const
 {
-    if (dataset->GetCount() == 0)
-        return 0;
-
-    double maxValue = 0;
-
-    for (size_t n = 0; n < dataset->GetCount(); n++) {
-        double sum = m_base;
-
-        FOREACH_SERIE(serie, dataset) {
-            sum += dataset->GetValue(n, serie);
-        }
-        maxValue = wxMax(maxValue, sum);
-    }
-    return maxValue;
-}
-
-const double StackedBarType::GetMaxValue(UniDataSet* dataset) const
-{
-    double maxValue;
+    double max;
 
     for (size_t pt = 0; pt < dataset->GetCount(0); pt++) 
     {
@@ -289,11 +182,12 @@ const double StackedBarType::GetMaxValue(UniDataSet* dataset) const
         for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
             sum += dataset->GetValue(ser, pt);
 
-        maxValue = wxMax(maxValue, sum);
+        max = wxMax(max, sum);
     }
 
-    return maxValue;
+    return max;
 }
+
 
 //
 // LayeredBarType
@@ -307,14 +201,6 @@ LayeredBarType::LayeredBarType(int initialBarWidth, double base)
 
 LayeredBarType::~LayeredBarType()
 {
-}
-
-void LayeredBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie, int &width, wxCoord &shift, double &base, double &value)
-{
-    width = (int) ( m_initialBarWidth * (1 - serie / (double)dataset->GetSerieCount()));
-    shift = -width / 2;
-    base = m_base;
-    value = dataset->GetValue(item, serie);
 }
 
 void LayeredBarType::GetBarGeometry(UniDataSet* dataset, size_t item, size_t series, int &width, wxCoord &shift, double &base, double &value)
@@ -375,13 +261,6 @@ AreaDraw *BarRenderer::GetBarDraw(size_t serie)
     return barDraw;
 }
 
-void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset)
-{
-    for (size_t n = 0; n < dataset->GetCount(); n++) {
-        m_barType->Draw(this, dc, rc, horizAxis, vertAxis, vertical, n, dataset);
-    }
-}
-
 void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, UniDataSet* dataset)
 {
     for (size_t n = 0; n < dataset->GetSeries(0)->GetCount(); n++) {
@@ -389,12 +268,12 @@ void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, boo
     }
 }
 
-double BarRenderer::GetMinValue(CategoryDataset *dataset)
+double BarRenderer::GetMinValue(UniDataSet* dataset) const
 {
     return m_barType->GetMinValue(dataset);
 }
 
-double BarRenderer::GetMaxValue(CategoryDataset *dataset)
+double BarRenderer::GetMaxValue(UniDataSet* dataset) const
 {
     return m_barType->GetMaxValue(dataset);
 }

@@ -38,21 +38,20 @@ public:
      * @param item dataset item index
      * @param dataset dataset to draw bars
      */
-    virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, size_t item, CategoryDataset *dataset);
-
-    virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, size_t item, UniDataSet* dataset);
-
+    virtual void Draw(BarRenderer *barRenderer, wxDC &dc, wxRect rc, 
+                        Axis *horizAxis, Axis *vertAxis, 
+                        bool vertical, size_t item, UniDataSet* dataset);
 
     //
     // Called from BarRenderer. Don't call from programs.
     //
-    virtual double GetMinValue(CategoryDataset *dataset);
-    virtual double GetMaxValue(CategoryDataset *dataset);
+    virtual double GetMinValue(UniDataSet* dataset) const;
+    virtual double GetMaxValue(UniDataSet* dataset) const;
 
 protected:
     /**
      * Called to calculate bar geometry params.
-     * Must be implemented by derivate classes.
+     * Must be implemented by derived classes.
      * @param dataset dataset
      * @param item item index
      * @param serie serie index
@@ -61,11 +60,8 @@ protected:
      * @param base output for bar base
      * @param value output for bar value
      */
-    virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value) = 0;
-            
     virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value) = 0;
+                                int& width, wxCoord& shift, double& base, double& value) = 0;
 
     double m_base;
 };
@@ -86,9 +82,6 @@ public:
     virtual ~NormalBarType();
 
 protected:
-    virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value);
-
     virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
             int &width, wxCoord &shift, double &base, double &value);
 
@@ -111,16 +104,12 @@ public:
     StackedBarType(int barWidth, double base);
     virtual ~StackedBarType();
 
-    virtual double GetMinValue(CategoryDataset *dataset);
-    virtual double GetMaxValue(CategoryDataset *dataset);
-    virtual const double GetMaxValue(UniDataSet *dataset) const;
+    virtual double GetMinValue(UniDataSet* dataset) const;
+    virtual double GetMaxValue(UniDataSet* dataset) const;
 
 protected:
-    virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value);
-            
     virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value);
+                                int &width, wxCoord &shift, double &base, double &value);
 
 private:
     int m_barWidth;
@@ -141,11 +130,8 @@ public:
     virtual ~LayeredBarType();
 
 protected:
-    virtual void GetBarGeometry(CategoryDataset *dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value);
-            
     virtual void GetBarGeometry(UniDataSet* dataset, size_t item, size_t serie,
-            int &width, wxCoord &shift, double &base, double &value);
+                                int &width, wxCoord &shift, double &base, double &value);
 
 private:
     int m_initialBarWidth;
@@ -179,10 +165,7 @@ public:
      * @param vertical true to draw vertical bars
      * @param dataset dataset to be drawn
      */
-    void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, CategoryDataset *dataset);
-
     void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, UniDataSet* dataset);
-
 
     /**
      * Sets bar type, an object that performs bars drawing.
@@ -212,8 +195,8 @@ public:
      */
     AreaDraw *GetBarDraw(size_t serie);
 
-    double GetMinValue(CategoryDataset *dataset);
-    double GetMaxValue(CategoryDataset *dataset);
+    double GetMinValue(UniDataSet* dataset) const;
+    double GetMaxValue(UniDataSet* dataset) const;
 
 private:
     BarType *m_barType;
