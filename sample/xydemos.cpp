@@ -14,18 +14,11 @@
 #include <wx/xy/xysimpledataset.h>
 #include <wx/axis/logarithmicnumberaxis.h>
 
-// for histogram demo
 #include <wx/xy/xyhistorenderer.h>
 
-// for area demo
 #include <wx/xy/xyarearenderer.h>
 
-// for dynamic dataset
-#include <wx/xy/vectordataset.h>
-
-#include <wx/xy/functions/sinefunction.h>
-
-#include <math.h>
+#include <cmath>
 
 
 class XYDemo1 : public ChartDemo
@@ -38,25 +31,24 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for series
-        wxVector<wxRealPoint> data;
-        data.push_back(wxRealPoint(10, 20));
-        data.push_back(wxRealPoint(13, 16));
-        data.push_back(wxRealPoint(7, 30));
-        data.push_back(wxRealPoint(15, 34));
-        data.push_back(wxRealPoint(25, 4));
-        
-        // First step: create plot.
-        XYPlot *plot = new XYPlot();
+        // XY data for series.
+        DataSeries* series = new DataSeries("Series 1");
+        series->AddPoint(new BiDataPoint(10.0, 20.0));
+        series->AddPoint(new BiDataPoint(13.0, 16.0));
+        series->AddPoint(new BiDataPoint(7.0, 30.0));
+        series->AddPoint(new BiDataPoint(15.0, 34.0));
+        series->AddPoint(new BiDataPoint(25.0, 4.0));
 
-        // Second step: create dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
+        BiDataSet* dataset = new BiDataSet("XY Demo 1");
 
-        // Third step: add a series to it.
-        dataset->AddSerie(new XYSerie(data));
-        
-        // set line renderer to dataset
+        // Add the series to the data set.
+        dataset->AddSeries(series);
+
+        // Set a XY line renderer for the dataset.
         dataset->SetRenderer(new XYLineRenderer());
+        
+        // Create an XY plot.
+        XYPlot *plot = new XYPlot();
 
         // create left and bottom number axes
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
@@ -88,34 +80,33 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for first series
-        wxVector<wxRealPoint> data1;
-        data1.push_back(wxRealPoint(10, 20));
-        data1.push_back(wxRealPoint(13, 16));
-        data1.push_back(wxRealPoint(7, 30));
-        data1.push_back(wxRealPoint(15, 34));
-        data1.push_back(wxRealPoint(25, 4));
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(10.0, 20.0));
+        series1->AddPoint(new BiDataPoint(13.0, 16.0));
+        series1->AddPoint(new BiDataPoint(7.0, 30.0));
+        series1->AddPoint(new BiDataPoint(15.0, 34.0));
+        series1->AddPoint(new BiDataPoint(25.0, 4.0));
 
-        // XY data for second series
-        wxVector<wxRealPoint> data2;
-        data2.push_back(wxRealPoint(45, 40));
-        data2.push_back(wxRealPoint(23, 16));
-        data2.push_back(wxRealPoint(43, 60));
-        data2.push_back(wxRealPoint(25, 7));
-        data2.push_back(wxRealPoint(66, 4));
+        // XY data for first series.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new BiDataPoint(45.0, 40.0));
+        series2->AddPoint(new BiDataPoint(23.0, 16.0));
+        series2->AddPoint(new BiDataPoint(43.0, 60.0));
+        series2->AddPoint(new BiDataPoint(25.0, 7.0));
+        series2->AddPoint(new BiDataPoint(66.0, 4.0));
 
-        // First step: create the plot.
-        XYPlot *plot = new XYPlot();
-
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data1));
-        dataset->AddSerie(new XYSerie(data2));
-
+        BiDataSet* dataset = new BiDataSet("XY Demo 2");
+        
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        dataset->AddSeries(series2);  
+        
         // Set line renderer for the dataset.
         dataset->SetRenderer(new XYLineRenderer());
+
+        // Create the plot.
+        XYPlot *plot = new XYPlot();
 
         // Add our dataset to plot.
         plot->AddDataset(dataset);
@@ -127,10 +118,6 @@ public:
         // Link the axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
-
-        // Set the series names to be displayed in the legend and on tooltips.
-        dataset->GetSerie(0)->SetName("Series 0");
-        dataset->GetSerie(1)->SetName("Series 1");
 
         // Create the legend and add it to the plot.
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
@@ -154,35 +141,34 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for first series
-        wxVector<wxRealPoint> data1;
-        data1.push_back(wxRealPoint(10, 20));
-        data1.push_back(wxRealPoint(13, 16));
-        data1.push_back(wxRealPoint(7, 30));
-        data1.push_back(wxRealPoint(15, 34));
-        data1.push_back(wxRealPoint(25, 4));
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(10.0, 20.0));
+        series1->AddPoint(new BiDataPoint(13.0, 16.0));
+        series1->AddPoint(new BiDataPoint(7.0, 30.0));
+        series1->AddPoint(new BiDataPoint(15.0, 34.0));
+        series1->AddPoint(new BiDataPoint(25.0, 4.0));
 
-        // XY data for second series
-        wxVector<wxRealPoint> data2;
-        data2.push_back(wxRealPoint(45, 40));
-        data2.push_back(wxRealPoint(23, 16));
-        data2.push_back(wxRealPoint(43, 60));
-        data2.push_back(wxRealPoint(25, 7));
-        data2.push_back(wxRealPoint(66, 4));
+        // XY data for first series.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new BiDataPoint(45.0, 40.0));
+        series2->AddPoint(new BiDataPoint(23.0, 16.0));
+        series2->AddPoint(new BiDataPoint(43.0, 60.0));
+        series2->AddPoint(new BiDataPoint(25.0, 7.0));
+        series2->AddPoint(new BiDataPoint(66.0, 4.0));
 
-        // First step: create the plot.
-        XYPlot *plot = new XYPlot();
-
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data1));
-        dataset->AddSerie(new XYSerie(data2));
-
+        BiDataSet* dataset = new BiDataSet("XY Demo 3");
+        
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        dataset->AddSeries(series2);  
+        
         // Set line renderer with symbols enabled and lines disabled.
         dataset->SetRenderer(new XYLineRenderer(true, false));
 
+        // Create the plot.
+        XYPlot *plot = new XYPlot();
+        
         // Add our dataset to the plot.
         plot->AddDataset(dataset);
 
@@ -193,10 +179,6 @@ public:
         // Link the axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
-
-        // Set the series names to be displayed on legend.
-        dataset->GetSerie(0)->SetName("First Series");
-        dataset->GetSerie(1)->SetName("Second Series");
 
         // Add the legend to the plot.
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
@@ -216,27 +198,26 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for series
-        wxVector<wxRealPoint> data;
-        data.push_back(wxRealPoint(10, 20));
-        data.push_back(wxRealPoint(13, 16));
-        data.push_back(wxRealPoint(7, 30));
-        data.push_back(wxRealPoint(15, 34));
-        data.push_back(wxRealPoint(25, 4));
+        // XY data for the series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(10.0, 20.0));
+        series1->AddPoint(new BiDataPoint(13.0, 16.0));
+        series1->AddPoint(new BiDataPoint(7.0, 30.0));
+        series1->AddPoint(new BiDataPoint(15.0, 34.0));
+        series1->AddPoint(new BiDataPoint(25.0, 4.0));
 
-        // first step: create plot
-        XYPlot *plot = new XYPlot();
-
-        // create dataset
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // and add serie to it
-        dataset->AddSerie(new XYSerie(data));
-
-        // set line renderer to dataset
+        BiDataSet* dataset = new BiDataSet("XY Demo 4");
+        
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        
+        // Set line renderer with symbols enabled and lines disabled.
         dataset->SetRenderer(new XYLineRenderer());
 
-        // add our dataset to plot
+        // Create the plot.
+        XYPlot *plot = new XYPlot();
+
+        // Add the dataset to plot.
         plot->AddDataset(dataset);
 
         // create left and bottom number axes
@@ -277,7 +258,7 @@ public:
 class DynamicUpdater : public wxEvtHandler
 {
 public:
-    DynamicUpdater(XYSimpleDataset* dataset, NumberAxis* axis) :
+    DynamicUpdater(BiDataSet* dataset, NumberAxis* axis) :
     m_dataset(dataset),
     m_axis(axis)
     {
@@ -296,21 +277,24 @@ public:
     }
 
 private:
-    XYSimpleDataset *m_dataset;
+    BiDataSet* m_dataset;
     NumberAxis* m_axis;
     wxTimer m_timer;
     
     void OnTimer(wxTimerEvent &ev)
     {
-        double first_x = m_dataset->GetSerie(0)->GetX(0);
+        double first_x = m_dataset->GetFirst(0, 0);
         
         // Ripple the values down the vector.
         for (size_t i = 0; i < DYNAMIC_DATA_POINTS - 1; i++)
-            m_dataset->GetSerie(0)->UpdatePoint(i, wxRealPoint(first_x + i + 1, m_dataset->GetSerie(0)->GetY(i + 1)));
+        {
+            static_cast<BiDataPoint*>(m_dataset->GetSeries(0)->GetPoint(i).get())->
+                                        SetValues(m_dataset->GetFirst(0, i + 1), m_dataset->GetSecond(0, i + 1));
+        }
 
         // Generate a new random value for the end point.
-        m_dataset->GetSerie(0)->UpdatePoint(DYNAMIC_DATA_POINTS - 1, 
-                                            wxPoint(first_x + DYNAMIC_DATA_POINTS + 1, (100.0 * rand() / (double) RAND_MAX)));
+        static_cast<BiDataPoint*>(m_dataset->GetSeries(0)->GetPoint(DYNAMIC_DATA_POINTS - 1).get())->
+                                    SetValues(first_x + DYNAMIC_DATA_POINTS + 1, 100.0 * rand() / (double) RAND_MAX);
                                             
         // Shift the axis left also.
         m_axis->SetFixedBounds(first_x + 1, first_x + DYNAMIC_DATA_POINTS);
@@ -333,26 +317,25 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for series.
-        wxVector<wxRealPoint> data;
+        // XY data for the series.
+        DataSeries* series1 = new DataSeries("Series 1");
         
         for (size_t i = 0; i < DYNAMIC_DATA_POINTS; i++)
-            data.push_back(wxRealPoint(i, 50));
+            series1->AddPoint(new BiDataPoint(i, 50.0));
 
-        // First step: create plot.
-        XYPlot *plot = new XYPlot();
+        // Create the dataset.
+        BiDataSet* dataset = new BiDataSet("Dynamic Data Set");
 
-        // Second step: create dataset
-        XYSimpleDataset *dataset = new XYSimpleDataset();
+        // Add the series to it.
+        dataset->AddSeries(series1);
 
-        // and add serie to it
-        dataset->AddSerie(new XYSerie(data));
-
-        
-        // set line renderer to it
+        // Set the line renderer.
         dataset->SetRenderer(new XYLineRenderer());
 
-        // add our dataset to plot
+        // Create plot.
+        XYPlot *plot = new XYPlot();
+
+        // Add the dataset to the plot.
         plot->AddDataset(dataset);
 
         // create left and bottom number axes
@@ -364,30 +347,16 @@ public:
         
         m_pUpdater = new DynamicUpdater(dataset, bottomAxis);
 
-        // leftAxis->SetLabelCount(101);
-        // leftAxis->SetLabelSkip(9);
-        // bottomAxis->SetFixedBounds(0.0, 300.0);
-        // bottomAxis->SetLabelCount(101);
-        // bottomAxis->SetLabelSkip(9);
-
-        // we setup window
-        //bottomAxis->SetWindow(0, 10);
-        //bottomAxis->SetUseWindow(true);
-
-        // add axes to plot
+        // Add axes to the plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // and finally create chart
-        Chart *chart = new Chart(plot, GetName());
-
-        // set axis as scrolled, so chart panel can scroll its window.
-        //chart->SetScrolledAxis(bottomAxis);
-        return chart;
+        // And finally create the chart.
+        return new Chart(plot, GetName());
     }
     
     virtual void CleanUp() wxOVERRIDE
@@ -397,245 +366,52 @@ public:
 
 private:
     DynamicUpdater* m_pUpdater;
-
 };
 
 /**
- * Histogram XY chart demo
+ * Sine function chart demo
  */
 class XYDemo6 : public ChartDemo
 {
 public:
     XYDemo6()
-    : ChartDemo(wxT("XY Demo 6 - Single Histogram"))
+    : ChartDemo(wxT("XY Demo 6 - Sine Wave"))
     {
     }
 
     virtual Chart *Create()
     {
-        // XY data for first series
-        wxVector<wxRealPoint> data;
+        // Create a data series to hold the sine data.
+        DataSeries* series = new DataSeries("Sine Series");
         
-        data.push_back(wxRealPoint(-2.75, 0.01));
-        data.push_back(wxRealPoint(-2.5, 0.02));
-        data.push_back(wxRealPoint(-2.25, 0.03));
-        data.push_back(wxRealPoint(-2, 0.05));
-        data.push_back(wxRealPoint(-1.75, 0.09));
-        data.push_back(wxRealPoint(-1.5, 0.13));
-        data.push_back(wxRealPoint(-1.25, 0.18));
-        data.push_back(wxRealPoint(-1, 0.24));
-        data.push_back(wxRealPoint(-0.75, 0.3));
-        data.push_back(wxRealPoint(-0.5, 0.35));
-        data.push_back(wxRealPoint(-0.25, 0.39));
-        data.push_back(wxRealPoint(0, 0.4));
-        data.push_back(wxRealPoint(0.25, 0.39));
-        data.push_back(wxRealPoint(0.5, 0.35));
-        data.push_back(wxRealPoint(0.75, 0.3));
-        data.push_back(wxRealPoint(1, 0.24));
-        data.push_back(wxRealPoint(1.25, 0.18));
-        data.push_back(wxRealPoint(1.5, 0.13));
-        data.push_back(wxRealPoint(1.75, 0.09));
-        data.push_back(wxRealPoint(2, 0.05));
-        data.push_back(wxRealPoint(2.25, 0.03));
-        data.push_back(wxRealPoint(2.5, 0.02));
-        data.push_back(wxRealPoint(2.75, 0.01));
+        // Populate the series with the data.
+        for (double angle = 0.0; angle <= 360.0; angle++)
+            series->AddPoint(new BiDataPoint(angle, std::sin(angle * M_PI / 180.0)));
+        
+        // Create a data set and add the series to it.
+        BiDataSet* dataset = new BiDataSet("Sine Wave Example");
+        dataset->AddSeries(series);
 
-        // First step: create the plot.
+        // Create a line renderer and set it for this dataset.
+        dataset->SetRenderer(new XYLineRenderer());
+
+        // Create an X-Y scatter plot and add the data set to it.
         XYPlot *plot = new XYPlot();
-
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the series to it.
-        dataset->AddSerie(new XYSerie(data));
-
-        // create histogram renderer with bar width = 10 and vertical bars
-        XYHistoRenderer *histoRenderer = new XYHistoRenderer(10, true);
-
-        // set bar areas to renderer
-        // in this case, we set green bar with black outline for serie 0
-        histoRenderer->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxGREEN_BRUSH));
-
-        // set renderer to dataset
-        dataset->SetRenderer(histoRenderer);
-
-        // add our dataset to plot
         plot->AddDataset(dataset);
 
-        // add left and bottom number axes
-        NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-
-        // set bottom axis margins
-        bottomAxis->SetMargins(15, 15);
-
-        // add axes to plot
-        plot->AddAxis(leftAxis);
+        // Add left and bottom number axes.
+        plot->AddAxis(new NumberAxis(AXIS_LEFT));
+        
+        NumberAxis* bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        bottomAxis->SetMinorIntervalCount(2);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
         // and finally create chart
-        Chart *chart = new Chart(plot, GetName());
-        return chart;
-    }
-};
-
-/**
- * Histogram XY chart demo
- */
-class XYDemo7 : public ChartDemo
-{
-public:
-    XYDemo7()
-    : ChartDemo(wxT("XY Demo 7 - Two Histograms"))
-    {
-    }
-
-    virtual Chart *Create()
-    {
-        // XY data for first series
-        wxVector<wxRealPoint> data1;
-        
-        data1.push_back(wxRealPoint(-2.75, 0.01));
-        data1.push_back(wxRealPoint(-2.5, 0.02));
-        data1.push_back(wxRealPoint(-2.25, 0.03));
-        data1.push_back(wxRealPoint(-2, 0.05));
-        data1.push_back(wxRealPoint(-1.75, 0.09));
-        data1.push_back(wxRealPoint(-1.5, 0.13));
-        data1.push_back(wxRealPoint(-1.25, 0.18));
-        data1.push_back(wxRealPoint(-1, 0.24));
-        data1.push_back(wxRealPoint(-0.75, 0.3));
-        data1.push_back(wxRealPoint(-0.5, 0.35));
-        data1.push_back(wxRealPoint(-0.25, 0.39));
-        data1.push_back(wxRealPoint(0, 0.4));
-        data1.push_back(wxRealPoint(0.25, 0.39));
-        data1.push_back(wxRealPoint(0.5, 0.35));
-        data1.push_back(wxRealPoint(0.75, 0.3));
-        data1.push_back(wxRealPoint(1, 0.24));
-        data1.push_back(wxRealPoint(1.25, 0.18));
-        data1.push_back(wxRealPoint(1.5, 0.13));
-        data1.push_back(wxRealPoint(1.75, 0.09));
-        data1.push_back(wxRealPoint(2, 0.05));
-        data1.push_back(wxRealPoint(2.25, 0.03));
-        data1.push_back(wxRealPoint(2.5, 0.02));
-        data1.push_back(wxRealPoint(2.75, 0.01));
-
-        // XY data for second series
-        wxVector<wxRealPoint> data2;
-        
-        data2.push_back(wxRealPoint(-3.75, 0.01));
-        data2.push_back(wxRealPoint(-3.5, 0.02));
-        data2.push_back(wxRealPoint(-3.25, 0.03));
-        data2.push_back(wxRealPoint(-3, 0.05));
-        data2.push_back(wxRealPoint(-2.75, 0.09));
-        data2.push_back(wxRealPoint(-2.5, 0.13));
-        data2.push_back(wxRealPoint(-2.25, 0.18));
-        data2.push_back(wxRealPoint(-2, 0.24));
-        data2.push_back(wxRealPoint(-1.75, 0.3));
-        data2.push_back(wxRealPoint(-1.5, 0.35));
-        data2.push_back(wxRealPoint(-1.25, 0.39));
-        data2.push_back(wxRealPoint(-1, 0.4));
-        data2.push_back(wxRealPoint(-0.75, 0.39));
-        data2.push_back(wxRealPoint(-0.5, 0.35));
-        data2.push_back(wxRealPoint(-0.25, 0.3));
-        data2.push_back(wxRealPoint(0, 0.24));
-        data2.push_back(wxRealPoint(0.25, 0.18));
-        data2.push_back(wxRealPoint(0.5, 0.13));
-        data2.push_back(wxRealPoint(0.75, 0.09));
-        data2.push_back(wxRealPoint(1, 0.05));
-        data2.push_back(wxRealPoint(1.25, 0.03));
-        data2.push_back(wxRealPoint(1.5, 0.02));
-        data2.push_back(wxRealPoint(1.75, 0.01));
-
-        // First step: create the plot.
-        XYPlot *plot = new XYPlot();
-
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data1));
-        dataset->AddSerie(new XYSerie(data2));
-
-        // create histogram renderer with bar width = 10 and vertical bars
-        XYHistoRenderer *histoRenderer = new XYHistoRenderer(10, true);
-
-        // set bar area draw for two series
-        histoRenderer->SetBarArea(0, new FillAreaDraw(*wxBLACK_PEN, *wxBLUE_BRUSH));
-        histoRenderer->SetBarArea(1, new FillAreaDraw(*wxBLACK_PEN, *wxGREEN_BRUSH));
-
-        // set renderer to dataset
-        dataset->SetRenderer(histoRenderer);
-
-        // add our dataset to plot
-        plot->AddDataset(dataset);
-
-        // add left and bottom number axes
-        NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-
-        // set bottom axis margins
-        bottomAxis->SetMargins(15, 15);
-
-        // add axes to plot
-        plot->AddAxis(leftAxis);
-        plot->AddAxis(bottomAxis);
-
-        // link axes and dataset
-        plot->LinkDataVerticalAxis(0, 0);
-        plot->LinkDataHorizontalAxis(0, 0);
-
-        // and finally create chart
-        Chart *chart = new Chart(plot, GetName());
-        return chart;
-    }
-};
-
-
-/**
- * Sine function chart demo
- */
-class XYDemo9 : public ChartDemo
-{
-public:
-    XYDemo9()
-    : ChartDemo(wxT("XY Demo 9 - Sine"))
-    {
-    }
-
-    virtual Chart *Create()
-    {
-        // first step: create plot
-        XYPlot *plot = new XYPlot();
-
-        SineFunction *dataset = new SineFunction(1, -10, 10, 0.1);
-
-        // create line renderer
-        XYLineRenderer *renderer = new XYLineRenderer();
-        dataset->SetRenderer(renderer);
-
-        plot->AddDataset(dataset);
-
-        // add left and bottom number axes
-        NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-
-        // add axes to plot
-        plot->AddAxis(leftAxis);
-        plot->AddAxis(bottomAxis);
-
-        // link axes and dataset
-        plot->LinkDataVerticalAxis(0, 0);
-        plot->LinkDataHorizontalAxis(0, 0);
-
-        // and finally create chart
-        Chart *chart = new Chart(plot, GetName());
-
-        // set axis as scrolled, so chart panel can scroll its window.
-        return chart;
+        return new Chart(plot, GetName());
     }
 };
 
@@ -643,70 +419,64 @@ public:
  * Multiseries line xy chart demo.
  * Also it shows how to use legend.
  */
-class XYDemo10 : public ChartDemo
+class XYDemo7 : public ChartDemo
 {
 public:
-    XYDemo10()
-    : ChartDemo(wxT("XY Demo 10 - Multiple Series with Symbols"))
+    XYDemo7()
+    : ChartDemo(wxT("XY Demo 7 - Multiple Series with Symbols"))
     {
     }
 
     virtual Chart *Create()
     {
-        // XY data for first series
-        wxVector<wxRealPoint> data1;
-        
-        data1.push_back(wxRealPoint(1, 1));
-        data1.push_back(wxRealPoint(2, 4));
-        data1.push_back(wxRealPoint(3, 3));
-        data1.push_back(wxRealPoint(4, 5));
-        data1.push_back(wxRealPoint(5, 5));
-        data1.push_back(wxRealPoint(6, 7));
-        data1.push_back(wxRealPoint(7, 7));
-        data1.push_back(wxRealPoint(8, 8));
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(1, 1));
+        series1->AddPoint(new BiDataPoint(2, 4));
+        series1->AddPoint(new BiDataPoint(3, 3));
+        series1->AddPoint(new BiDataPoint(4, 5));
+        series1->AddPoint(new BiDataPoint(5, 5));
+        series1->AddPoint(new BiDataPoint(6, 7));
+        series1->AddPoint(new BiDataPoint(7, 7));
+        series1->AddPoint(new BiDataPoint(8, 8));
 
-        // XY data for second series
-        wxVector<wxRealPoint> data2;
+        // XY data for second series.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new BiDataPoint(3, 4));
+        series2->AddPoint(new BiDataPoint(4, 3));
+        series2->AddPoint(new BiDataPoint(5, 2));
+        series2->AddPoint(new BiDataPoint(6, 3));
+        series2->AddPoint(new BiDataPoint(7, 6));
+        series2->AddPoint(new BiDataPoint(8, 3));
+        series2->AddPoint(new BiDataPoint(9, 4));
+        series2->AddPoint(new BiDataPoint(10, 3));
         
-        data2.push_back(wxRealPoint(3, 4));
-        data2.push_back(wxRealPoint(4, 3));
-        data2.push_back(wxRealPoint(5, 2));
-        data2.push_back(wxRealPoint(6, 3));
-        data2.push_back(wxRealPoint(7, 6));
-        data2.push_back(wxRealPoint(8, 3));
-        data2.push_back(wxRealPoint(9, 4));
-        data2.push_back(wxRealPoint(10, 3));
+        // XY data for third series.
+        DataSeries* series3 = new DataSeries("Series 3");
+        series3->AddPoint(new BiDataPoint(1, 5));
+        series3->AddPoint(new BiDataPoint(2, 7));
+        series3->AddPoint(new BiDataPoint(3, 6));
+        series3->AddPoint(new BiDataPoint(4, 8));
+        series3->AddPoint(new BiDataPoint(5, 4));
+        series3->AddPoint(new BiDataPoint(6, 4));
+        series3->AddPoint(new BiDataPoint(7, 2));
+        series3->AddPoint(new BiDataPoint(8, 1));
 
-        // XY data for third series
-        wxVector<wxRealPoint> data3;
+        BiDataSet* dataset = new BiDataSet("XY Demo 10");
         
-        data3.push_back(wxRealPoint(1, 5));
-        data3.push_back(wxRealPoint(2, 7));
-        data3.push_back(wxRealPoint(3, 6));
-        data3.push_back(wxRealPoint(4, 8));
-        data3.push_back(wxRealPoint(5, 4));
-        data3.push_back(wxRealPoint(6, 4));
-        data3.push_back(wxRealPoint(7, 2));
-        data3.push_back(wxRealPoint(8, 1));
-
-        // First step: create the plot.
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        dataset->AddSeries(series2);  
+        dataset->AddSeries(series3);  
+        
+        // Create the plot.
         XYPlot *plot = new XYPlot();
-
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data1));
-        dataset->AddSerie(new XYSerie(data2));
-        dataset->AddSerie(new XYSerie(data3));
-
-        // create line renderer
-        // set it to draw lines and symbols.
-        XYLineRenderer *renderer = new XYLineRenderer(true, true);
-
+        
+        // Set line renderer with symbols enabled and lines disabled.
+        XYLineRenderer* renderer = new XYLineRenderer(true, true);
         // we can change line pen for serie, for example set short-dash
         // line style and width=2 for third serie
-        renderer->SetSeriePen(1, wxThePenList->FindOrCreatePen(*wxGREEN, 2, wxPENSTYLE_SOLID));
+        renderer->SetSeriePen(1, new wxPen(*wxGREEN, 2, wxPENSTYLE_SOLID));
         dataset->SetRenderer(renderer);
 
         // add dataset to plot
@@ -724,11 +494,6 @@ public:
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // set serie names to be displayed on legend
-        dataset->GetSerie(0)->SetName("First Series");
-        dataset->GetSerie(1)->SetName("Second Series");
-        dataset->GetSerie(2)->SetName("Third Series");
-
         // set legend
         plot->SetLegend(new Legend(wxBOTTOM, wxCENTER));
 
@@ -740,75 +505,66 @@ public:
     }
 };
 
-class XYDemo11 : public ChartDemo
+class XYDemo8 : public ChartDemo
 {
 public:
-    XYDemo11()
-    : ChartDemo(wxT("XY Demo 11 - Areas"))
+    XYDemo8()
+    : ChartDemo(wxT("XY Demo 8 - Areas"))
     {
     }
 
     virtual Chart *Create()
     {
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(1, 1));
+        series1->AddPoint(new BiDataPoint(2, 4));
+        series1->AddPoint(new BiDataPoint(3, 3));
+        series1->AddPoint(new BiDataPoint(4, 5));
+        series1->AddPoint(new BiDataPoint(5, 5));
+        series1->AddPoint(new BiDataPoint(6, 7));
+        series1->AddPoint(new BiDataPoint(7, 7));
+        series1->AddPoint(new BiDataPoint(8, 8));
 
-        // XY data for first series
-        wxVector<wxRealPoint> data1;
+        // XY data for second series.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new BiDataPoint(3, 4));
+        series2->AddPoint(new BiDataPoint(4, 3));
+        series2->AddPoint(new BiDataPoint(5, 2));
+        series2->AddPoint(new BiDataPoint(6, 3));
+        series2->AddPoint(new BiDataPoint(7, 6));
+        series2->AddPoint(new BiDataPoint(8, 3));
+        series2->AddPoint(new BiDataPoint(9, 4));
+        series2->AddPoint(new BiDataPoint(10, 3));
+
+        BiDataSet* dataset = new BiDataSet("XY Demo 11");
         
-        data1.push_back(wxRealPoint(1, 1));
-        data1.push_back(wxRealPoint(2, 4));
-        data1.push_back(wxRealPoint(3, 3));
-        data1.push_back(wxRealPoint(4, 5));
-        data1.push_back(wxRealPoint(5, 5));
-        data1.push_back(wxRealPoint(6, 7));
-        data1.push_back(wxRealPoint(7, 7));
-        data1.push_back(wxRealPoint(8, 8));
-
-        // XY data for second series
-        wxVector<wxRealPoint> data2;
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        dataset->AddSeries(series2);  
         
-        data2.push_back(wxRealPoint(3, 4));
-        data2.push_back(wxRealPoint(4, 3));
-        data2.push_back(wxRealPoint(5, 2));
-        data2.push_back(wxRealPoint(6, 3));
-        data2.push_back(wxRealPoint(7, 6));
-        data2.push_back(wxRealPoint(8, 3));
-        data2.push_back(wxRealPoint(9, 4));
-        data2.push_back(wxRealPoint(10, 3));
-
-        // First step: create the plot.
+        // Create the plot.
         XYPlot *plot = new XYPlot();
 
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
+        // Create area renderer and set it to dataset.
+        dataset->SetRenderer(new XYAreaRenderer());
 
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data1));
-        dataset->AddSerie(new XYSerie(data2));
-
-        // create area renderer and set it to dataset
-        XYAreaRenderer *renderer = new XYAreaRenderer();
-        dataset->SetRenderer(renderer);
-
-        // add our dataset to plot
+        // Add our dataset to plot.
         plot->AddDataset(dataset);
 
-        // create left and bottom number axes
+        // Create left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
-        // add axes to plot
+        // Add axes to plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // set serie names to be displayed on legend
-        dataset->GetSerie(0)->SetName("Series 0");
-        dataset->GetSerie(1)->SetName("Series 0");
-
-        // set legend
+        // Set legend.
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
         // and finally create chart
@@ -817,43 +573,38 @@ public:
     }
 };
 
-class XYDemo12 : public ChartDemo
+class XYDemo9 : public ChartDemo
 {
 public:
-    XYDemo12()
-    : ChartDemo(wxT("XY Demo 12 - Logarithmic Y Axis"))
+    XYDemo9()
+    : ChartDemo(wxT("XY Demo 9 - Logarithmic Y Axis"))
     {
     }
 
     virtual Chart *Create()
     {
-        // XY data for series
-        wxVector<wxRealPoint> data;
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(1, 1e3));
+        series1->AddPoint(new BiDataPoint(2, 1.0));
+        series1->AddPoint(new BiDataPoint(3, 1e2));
+        series1->AddPoint(new BiDataPoint(4, 2e7));
+        series1->AddPoint(new BiDataPoint(5, 1e3));
         
-        data.push_back(wxRealPoint(1, 1e3));
-        data.push_back(wxRealPoint(2, 1.0));
-        data.push_back(wxRealPoint(3, 1e2));
-        data.push_back(wxRealPoint(4, 2e7));
-        data.push_back(wxRealPoint(5, 1e3));
-
-        // First step: create the plot.
-        XYPlot *plot = new XYPlot();
-
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data));
+        BiDataSet* dataset = new BiDataSet("XY Demo 9");
         
-        // set line renderer to dataset
-        // renderer should draw symbols of algorithmic axis to show single points
-        // (ie, when drawing five values where the second is zero, the first point won't
-        // be visible because no line segment will be drawn from the first to the second point)
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        
+        // Set a line renderer to the dataset.
         dataset->SetRenderer(new XYLineRenderer(true));
 
-        // add our dataset to plot
-        plot->AddDataset(dataset);
+        // Create the plot.
+        XYPlot *plot = new XYPlot();
 
+        // Add our dataset to plot.
+        plot->AddDataset(dataset);
+        
         // create left and bottom number axes
         LogarithmicNumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
@@ -876,40 +627,38 @@ public:
     }
 };
 
-class XYDemo13 : public ChartDemo
+class XYDemo10 : public ChartDemo
 {
 public:
-    XYDemo13()
-    : ChartDemo(wxT("XY Demo 13 - Logarithmic X and Y Axis"))
+    XYDemo10()
+    : ChartDemo(wxT("XY Demo 10 - Logarithmic X and Y Axis"))
     {
     }
 
     virtual Chart *Create()
     {
-        // XY data for series
-        wxVector<wxRealPoint> data;
+        // XY data for the series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(2, 2));
+        series1->AddPoint(new BiDataPoint(4, 4));
+        series1->AddPoint(new BiDataPoint(8, 8));
+        series1->AddPoint(new BiDataPoint(16, 16));
+        series1->AddPoint(new BiDataPoint(32, 32));
         
-        data.push_back(wxRealPoint(2, 2));
-        data.push_back(wxRealPoint(4, 4));
-        data.push_back(wxRealPoint(8, 8));
-        data.push_back(wxRealPoint(16, 16));
-        data.push_back(wxRealPoint(32, 32));
+        BiDataSet* dataset = new BiDataSet("XY Demo 10");
+        
+        // Add the series to the data set.
+        dataset->AddSeries(series1);  
+        
+        // Set a line renderer to the dataset.
+        dataset->SetRenderer(new XYLineRenderer(true));
 
-        // First step: create the plot.
+        // Create the plot.
         XYPlot *plot = new XYPlot();
 
-        // Second step: create the dataset.
-        XYSimpleDataset *dataset = new XYSimpleDataset();
-
-        // Third step: add the two series to it.
-        dataset->AddSerie(new XYSerie(data));        
+        // Add our dataset to plot.
+        plot->AddDataset(dataset);        
         
-        // set line renderer to dataset
-        dataset->SetRenderer(new XYLineRenderer(true, true));
-
-        // add our dataset to plot
-        plot->AddDataset(dataset);
-
         // create left and bottom number axes
         LogarithmicNumberAxis *leftAxis = new LogarithmicNumberAxis(AXIS_LEFT);
         leftAxis->SetLogBase(2.0);
@@ -935,8 +684,8 @@ public:
     }
 };
 
-
-ChartDemo *xyDemos[] = {
+ChartDemo *xyDemos[] = 
+{
     new XYDemo1(),
     new XYDemo2(),
     new XYDemo3(),
@@ -944,11 +693,8 @@ ChartDemo *xyDemos[] = {
     new XYDemo5(),
     new XYDemo6(),
     new XYDemo7(),
-//    new XYDemo8(), deleted because it was a duplicate.
+    new XYDemo8(),
     new XYDemo9(),
-    new XYDemo10(),
-    new XYDemo11(),
-    new XYDemo12(),
-    new XYDemo13(),
+    new XYDemo10()
 };
 int xyDemosCount = WXSIZEOF(xyDemos);
