@@ -12,7 +12,7 @@
 
 #include <wx/chartrenderer.h>
 #include <wx/axis/axis.h>
-#include <wx/xy/xydataset.h>
+#include <wx/dataset1.h>
 
 /**
  * Base class for all XYDataset renderers.
@@ -25,14 +25,14 @@ public:
     virtual ~XYRenderer();
 
     /**
-     * Draws dataset.
-     * @param dc device context
-     * @param rc rectangle where to draw
-     * @param horizAxis horizontal axis
-     * @param vertAxis vertical axis
-     * @param dataset dataset to be drawn
+     * Base class for classes that render to an X-Y scatter plot.
+     * @param dc The device context for the plot.
+     * @param rc The rectangle that defines the boundaries of the plot.
+     * @param xAxis A pointer to the X (horizontal) axis.
+     * @param yAxis A pointer to the Y (vertical) axis.
+     * @param dataset The dataset to be drawn by this renderer.
      */
-    virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset) = 0;
+    virtual void Draw(wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) = 0;
 };
 
 #endif /*XYRENDERER_H_*/

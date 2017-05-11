@@ -41,7 +41,7 @@ protected:
      * @param rc rectangle where to draw
      * @param dataset XY dataset to draw
      */
-    void DrawXYDataset(wxDC &dc, wxRect rc, XYDataset *dataset);
+    void DrawXYDataset(wxDC& dc, const wxRect& rc, BiDataSet* dataset);
 };
 
 #endif /*XYPLOT_H_*/

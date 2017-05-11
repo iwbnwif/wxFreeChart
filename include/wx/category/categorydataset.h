@@ -10,7 +10,7 @@
 #ifndef CATEGORYDATASET_H_
 #define CATEGORYDATASET_H_
 
-#include <wx/dataset.h>
+#include <wx/xy/xydataset.h>
 #include <wx/bars/barrenderer.h>
 
 /**

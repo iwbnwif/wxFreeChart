@@ -9,6 +9,7 @@
 
 #include <wx/axis/logarithmicnumberaxis.h>
 #include <wx/xy/xydataset.h>
+#include <wx/dataset1.h>
 #include <math.h>
 
 IMPLEMENT_CLASS(LogarithmicNumberAxis, NumberAxis);
@@ -58,7 +59,6 @@ bool LogarithmicNumberAxis::UpdateBounds()
     }
 
     // Note: log_base(n) = log(n) / log(base).
-
     m_minValue = pow(m_logBase, floor(log(m_minValue) / log(m_logBase)));
     m_maxValue = pow(m_logBase, ceil(log(m_maxValue) / log(m_logBase)));
 
@@ -68,14 +68,18 @@ bool LogarithmicNumberAxis::UpdateBounds()
     return true;
 }
 
-double LogarithmicNumberAxis::GetMinValue(Dataset* dataset)
+double LogarithmicNumberAxis::GetMinValue(Dataset* d)
 {
-  XYDataset* xyds = wxDynamicCast(dataset, XYDataset);
+  BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
+  
+  return dataset->GetMinValue(IsVertical());
+  
+  /*
   double min = 0;
   if(IsVertical()) {
-    for (size_t serie = 0; serie < xyds->GetSerieCount(); serie++) {
-      for (size_t n = 0; n < xyds->GetCount(serie); n++) {
-        double y = xyds->GetY(n, serie);
+    for (size_t serie = 0; serie < dataset->GetSeriesCount(); serie++) {
+      for (size_t n = 0; n < dataset->GetCount(serie); n++) {
+        double y = dataset->GetY(n, serie);
 
         if(y == 0) continue;
 
@@ -87,9 +91,9 @@ double LogarithmicNumberAxis::GetMinValue(Dataset* dataset)
     }
   }
   else {
-    for (size_t serie = 0; serie < xyds->GetSerieCount(); serie++) {
-      for (size_t n = 0; n < xyds->GetCount(serie); n++) {
-        double x = xyds->GetX(n, serie);
+    for (size_t serie = 0; serie < dataset->GetSeriesCount(); serie++) {
+      for (size_t n = 0; n < dataset->GetCount(serie); n++) {
+        double x = dataset->GetX(n, serie);
 
         if(x == 0) continue;
 
@@ -102,10 +106,15 @@ double LogarithmicNumberAxis::GetMinValue(Dataset* dataset)
   }
 
   return min;
+  */ 
 }
 
-double LogarithmicNumberAxis::GetMaxValue(Dataset* dataset)
+double LogarithmicNumberAxis::GetMaxValue(Dataset* d)
 {
+    BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
+    
+    return dataset->GetMaxValue(IsVertical());
+  /*  
   XYDataset* xyds = wxDynamicCast(dataset, XYDataset);
   double max = 0;
 
@@ -136,6 +145,7 @@ double LogarithmicNumberAxis::GetMaxValue(Dataset* dataset)
   }
 
   return max;
+   */ 
 }
 
 void LogarithmicNumberAxis::SetLogBase(double logBase)

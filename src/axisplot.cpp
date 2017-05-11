@@ -512,9 +512,10 @@ void AxisPlot::OnDataChanged(wxCommandEvent& event)
 
 void AxisPlot::OnMouseMove(wxMouseEvent& event)
 {
+    /*
     for (size_t set = 0; set < GetDatasetCount(); set++)
     {
-        XYDataset* dataset = wxDynamicCast(GetDataset(set), XYDataset);
+        BiDataSet* dataset = wxDynamicCast(GetDataset(set), BiDataSet);
         
         if (dataset)
         {
@@ -545,6 +546,7 @@ void AxisPlot::OnMouseMove(wxMouseEvent& event)
     
     // If no points have been found, clear the tip.
     SetTipData(wxEmptyString);
+    */ 
     return;
 }
 

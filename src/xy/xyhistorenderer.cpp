@@ -45,7 +45,7 @@ void XYHistoRenderer::DrawBar(int serie, wxDC &dc, wxRect rcData, wxCoord x, wxC
     barArea->Draw(dc, rcBar);
 }
 
-void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
+void XYHistoRenderer::Draw(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset)
 {
     FOREACH_SERIE(serie, dataset) {
         FOREACH_DATAITEM(n, serie, dataset) {
@@ -53,21 +53,21 @@ void XYHistoRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis,
             double yVal;
 
             if (m_vertical) {
-                xVal = dataset->GetX(n, serie);
-                yVal = dataset->GetY(n, serie);
+                xVal = dataset->GetFirst(n, serie);
+                yVal = dataset->GetSecond(serie, n);
             }
             else {
-                xVal = dataset->GetY(n, serie);
-                yVal = dataset->GetX(n, serie);
+                xVal = dataset->GetSecond(serie, n);
+                yVal = dataset->GetFirst(n, serie);
             }
 
-            if (!horizAxis->IsVisible(xVal) ||
-                    !vertAxis->IsVisible(yVal)) {
+            if (!xAxis->IsVisible(xVal) ||
+                    !yAxis->IsVisible(yVal)) {
                 continue;
             }
 
-            wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
-            wxCoord y = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
+            wxCoord x = xAxis->ToGraphics(dc, rc.x, rc.width, xVal);
+            wxCoord y = yAxis->ToGraphics(dc, rc.y, rc.height, yVal);
 
             DrawBar(serie, dc, rc, x, y);
         }

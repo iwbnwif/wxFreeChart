@@ -28,7 +28,7 @@ public:
     XYHistoRenderer(int barWidth = 10, bool vertical = true);
     virtual ~XYHistoRenderer();
 
-    virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+    virtual void Draw(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 
     /**
      * Set area fill to draw specified serie.

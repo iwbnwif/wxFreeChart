@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/xy/xyarearenderer.h>
+#include <wx/xy/xydataset.h>
 
 //
 // TODO: need cleanup!
@@ -51,36 +52,35 @@ void XYAreaRenderer::Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoo
     dc.DrawLine(pts[1], pts[2]);
 }
 
-void XYAreaRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset)
+void XYAreaRenderer::Draw(wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet *dataset)
 {
-    FOREACH_SERIE(serie, dataset) {
+    FOREACH_SERIE(serie, dataset) 
+    {
         dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(GetSerieColour(serie)));
 
         for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
-            double x0 = dataset->GetX(n, serie);
-            double y0 = dataset->GetY(n, serie);
-            double x1 = dataset->GetX(n + 1, serie);
-            double y1 = dataset->GetY(n + 1, serie);
+            double x0 = dataset->GetFirst(serie, n);
+            double y0 = dataset->GetSecond(serie, n);
+            double x1 = dataset->GetFirst(serie, n + 1);
+            double y1 = dataset->GetSecond(serie, n);
 
-            // check whether segment is visible
-            if (!horizAxis->IntersectsWindow(x0, x1) &&
-                    !vertAxis->IntersectsWindow(y0, y1)) {
+            // Check whether segment is visible.
+            if (!xAxis->IntersectsWindow(x0, x1) && !yAxis->IntersectsWindow(y0, y1))
                 continue;
-            }
 
-            ClipHoriz(horizAxis, x0, y0, x1, y1);
-            ClipHoriz(horizAxis, x1, y1, x0, y0);
-            ClipVert(vertAxis, x0, y0, x1, y1);
-            ClipVert(vertAxis, x1, y1, x0, y0);
+            ClipHoriz(xAxis, x0, y0, x1, y1);
+            ClipHoriz(xAxis, x1, y1, x0, y0);
+            ClipVert(yAxis, x0, y0, x1, y1);
+            ClipVert(yAxis, x1, y1, x0, y0);
 
-            // translate to graphics coordinates.
+            // Translate to graphics coordinates.
             wxCoord xg0, yg0;
             wxCoord xg1, yg1;
 
-            xg0 = horizAxis->ToGraphics(dc, rc.x, rc.width, x0);
-            yg0 = vertAxis->ToGraphics(dc, rc.y, rc.height, y0);
-            xg1 = horizAxis->ToGraphics(dc, rc.x, rc.width, x1);
-            yg1 = vertAxis->ToGraphics(dc, rc.y, rc.height, y1);
+            xg0 = xAxis->ToGraphics(dc, rc.x, rc.width, x0);
+            yg0 = yAxis->ToGraphics(dc, rc.y, rc.height, y0);
+            xg1 = xAxis->ToGraphics(dc, rc.x, rc.width, x1);
+            yg1 = yAxis->ToGraphics(dc, rc.y, rc.height, y1);
 
             Draw(dc, rc, xg0, yg0, xg1, yg1);
         }

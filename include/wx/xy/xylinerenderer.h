@@ -48,7 +48,7 @@ public:
      */
     wxPen *GetSeriePen(size_t serie);
 
-  virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+    virtual void Draw(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 
     //
     // Renderer
@@ -56,8 +56,8 @@ public:
     virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
 
 protected:
-  virtual void DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset) = 0;
-  virtual void DrawSymbols(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+  virtual void DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) = 0;
+  virtual void DrawSymbols(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 
     bool m_drawSymbols;
     bool m_drawLines;
@@ -88,7 +88,7 @@ public:
 
 
 protected:
-  virtual void DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+  virtual void DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 };
 
 /**
@@ -105,10 +105,10 @@ public:
 
 
 protected:
-  virtual void DrawLines(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+  virtual void DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 
 private:
-    size_t GetFirstVisibleIndex(Axis *horizAxis, Axis *vertAxis, XYDataset *dataset, size_t serie);
+    size_t GetFirstVisibleIndex(Axis* xAxis, Axis* yAxis, BiDataSet* dataset, size_t series);
 };
 
 #endif /*XYLINERENDERER_H_*/

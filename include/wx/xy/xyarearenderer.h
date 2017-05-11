@@ -19,7 +19,7 @@ public:
     XYAreaRenderer(const wxPen& outlinePen = *wxTRANSPARENT_PEN, const wxBrush& areaBrush = *wxGREY_BRUSH);
     virtual ~XYAreaRenderer();
 
-    virtual void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYDataset *dataset);
+    virtual void Draw(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 
     virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
