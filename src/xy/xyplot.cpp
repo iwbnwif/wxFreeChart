@@ -24,29 +24,30 @@ bool XYPlot::AcceptAxis(Axis *WXUNUSED(axis))
 
 bool XYPlot::AcceptDataset(Dataset *dataset)
 {
-    return (wxDynamicCast(dataset, XYDataset) != NULL);
+    return (wxDynamicCast(dataset, BiDataSet) != NULL);
 }
 
 void XYPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-    for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
-        XYDataset *dataset = (XYDataset *) GetDataset(nData);
+    for (size_t nData = 0; nData < GetDatasetCount(); nData++) 
+    {
+        BiDataSet* dataset = wxDynamicCast(GetDataset(nData), BiDataSet);
+        wxASSERT(dataset);
+
         DrawXYDataset(dc, rc, dataset);
     }
 }
 
-void XYPlot::DrawXYDataset(wxDC &dc, wxRect rc, XYDataset *dataset)
+void XYPlot::DrawXYDataset(wxDC& dc, const wxRect& rc, BiDataSet* dataset)
 {
-    XYRenderer *renderer = dataset->GetRenderer();
-    wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
+    XYRenderer* renderer = dataset->GetRenderer();
+    wxASSERT(renderer);
 
-    Axis *vertAxis = GetDatasetVerticalAxis(dataset);
-    Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
+    Axis* yAxis = GetDatasetVerticalAxis(dataset);
+    Axis* xAxis = GetDatasetHorizontalAxis(dataset);
+    wxASSERT(yAxis && xAxis);
 
-    wxCHECK_RET(vertAxis != NULL, wxT("no axis for data"));
-    wxCHECK_RET(horizAxis != NULL, wxT("no axis for data"));
-
-    renderer->Draw(dc, rc, horizAxis, vertAxis, dataset);
+    renderer->Draw(dc, rc, xAxis, yAxis, dataset);
 }
 
 /*
