@@ -13,6 +13,21 @@
 #include <wx/xy/xyplot.h>
 #include <wx/ohlc/ohlcdataset.h>
 
+struct OHLCItem
+{
+    OHLCItem() {}
+    OHLCItem(double o, double h, double l, double c, size_t v = 0) :
+    open(o), high(h), low(l), close(c), volume(v)
+    { }
+    
+	double open;
+	double high;
+	double low;
+	double close;
+
+	size_t volume;
+};
+
 /**
  * Open-High-Low-Close plot.
  *
@@ -39,7 +54,7 @@ protected:
      * @param rc rectangle where to draw
      * @param dataset OHLC dataset to draw
      */
-    virtual void DrawOHLCDataset(wxDC &dc, wxRect rc, OHLCDataset *dataset);
+    virtual void DrawOHLCData(wxDC &dc, wxRect rc, BiDataSet* dataset);
 };
 
 #endif /*OHLCPLOT_H_*/

@@ -43,7 +43,7 @@ time_t GanttSerie::GetEnd(size_t index)
     return m_taskTimes[index].end;
 }
 
-const wxString &GanttSerie::GetName()
+const wxString &GanttSerie::GetName() const
 {
     return m_name;
 }
@@ -74,28 +74,28 @@ void GanttSimpleDataset::AddSerie(GanttSerie *serie)
     DatasetChanged();
 }
 
-wxString GanttSimpleDataset::GetName(size_t index)
+wxString GanttSimpleDataset::GetName(size_t index) const
 {
     return m_taskNames[index];
 }
 
-double GanttSimpleDataset::GetValue(size_t WXUNUSED(index), size_t WXUNUSED(serie))
+double GanttSimpleDataset::GetValue(size_t WXUNUSED(index), size_t WXUNUSED(serie)) const
 {
     return 0; // dummy
 }
 
-size_t GanttSimpleDataset::GetSerieCount()
+size_t GanttSimpleDataset::GetSerieCount() const
 {
     return m_series.Count();
 }
 
-wxString GanttSimpleDataset::GetSerieName(size_t serie)
+wxString GanttSimpleDataset::GetSerieName(size_t serie) const
 {
     wxCHECK(serie < m_series.Count(), wxEmptyString);
     return m_series[serie]->GetName();
 }
 
-size_t GanttSimpleDataset::GetCount()
+size_t GanttSimpleDataset::GetCount() const
 {
     return m_taskNames.Count();
 }

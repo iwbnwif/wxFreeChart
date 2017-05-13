@@ -26,15 +26,15 @@ public:
     JulianTimeSeriesDataset(const wxVector<TimePair>& data);
     virtual ~JulianTimeSeriesDataset();
 
-    virtual size_t GetSerieCount();
+    virtual size_t GetSerieCount() const;
 
-    virtual wxString GetSerieName(size_t serie);
+    virtual wxString GetSerieName(size_t serie) const;
 
-    virtual size_t GetCount(size_t serie);
+    virtual size_t GetCount(size_t serie) const;
 
-    virtual double GetX(size_t index, size_t serie);
+    virtual double GetX(size_t index, size_t serie) const;
 
-    virtual double GetY(size_t index, size_t serie);
+    virtual double GetY(size_t index, size_t serie) const;
 
     void clear();
     void reserve(size_t length);

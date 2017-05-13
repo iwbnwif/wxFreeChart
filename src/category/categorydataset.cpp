@@ -45,17 +45,17 @@ double CategoryDataset::GetMaxValue(bool WXUNUSED(verticalAxis))
     return 0; // GetRenderer()->GetMaxValue(this);
 }
 
-double CategoryDataset::GetX(size_t index, size_t WXUNUSED(serie))
+double CategoryDataset::GetX(size_t index, size_t WXUNUSED(serie)) const
 {
     return index;
 }
 
-double CategoryDataset::GetY(size_t index, size_t serie)
+double CategoryDataset::GetY(size_t index, size_t serie) const
 {
     return GetValue(index, serie);
 }
 
-size_t CategoryDataset::GetCount(size_t WXUNUSED(serie))
+size_t CategoryDataset::GetCount(size_t WXUNUSED(serie)) const
 {
     return GetCount(); // in category dataset all series has equal count of elements
 }

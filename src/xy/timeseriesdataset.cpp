@@ -31,37 +31,37 @@ TimeSeriesDataset::~TimeSeriesDataset()
     wxDELETEA(m_times);
 }
 
-size_t TimeSeriesDataset::GetSerieCount()
+size_t TimeSeriesDataset::GetSerieCount() const
 {
     return 1;
 }
 
-size_t TimeSeriesDataset::GetCount(size_t WXUNUSED(serie))
+size_t TimeSeriesDataset::GetCount(size_t WXUNUSED(serie)) const
 {
     return m_count;
 }
 
-size_t TimeSeriesDataset::GetCount()
+size_t TimeSeriesDataset::GetCount() const
 {
     return m_count;
 }
 
-wxString TimeSeriesDataset::GetSerieName(size_t WXUNUSED(serie))
+wxString TimeSeriesDataset::GetSerieName(size_t WXUNUSED(serie)) const
 {
     return wxT("Time series");
 }
 
-double TimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie))
+double TimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie)) const
 {
     return index;
 }
 
-double TimeSeriesDataset::GetY(size_t index, size_t WXUNUSED(serie))
+double TimeSeriesDataset::GetY(size_t index, size_t WXUNUSED(serie)) const
 {
     return m_data[index];
 }
 
-time_t TimeSeriesDataset::GetDate(size_t index)
+time_t TimeSeriesDataset::GetDate(size_t index) const
 {
     return m_times[index];
 }

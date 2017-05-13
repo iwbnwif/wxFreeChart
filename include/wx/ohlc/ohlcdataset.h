@@ -13,17 +13,7 @@
 #include <wx/xy/xydataset.h>
 #include <wx/ohlc/ohlcrenderer.h>
 
-struct OHLCItem
-{
-    double open;
-    double high;
-    double low;
-    double close;
-
-    int volume;
-
-    time_t date;
-};
+struct OHLCItem;
 
 /**
  * Open-High-Low-Close datasets base class.

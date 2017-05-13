@@ -72,28 +72,28 @@ void CategorySimpleDataset::AddSerie(CategorySerie *serie)
     DatasetChanged();
 }
 
-double CategorySimpleDataset::GetValue(size_t index, size_t serie)
+double CategorySimpleDataset::GetValue(size_t index, size_t serie) const
 {
     wxCHECK(serie < m_series.Count(), 0);
     return m_series[serie]->GetValue(index);
 }
 
-size_t CategorySimpleDataset::GetSerieCount()
+size_t CategorySimpleDataset::GetSerieCount() const
 {
     return m_series.Count();
 }
 
-wxString CategorySimpleDataset::GetName(size_t index)
+wxString CategorySimpleDataset::GetName(size_t index) const
 {
     return m_names[index];
 }
 
-size_t CategorySimpleDataset::GetCount()
+size_t CategorySimpleDataset::GetCount() const
 {
     return m_names.Count();
 }
 
-wxString CategorySimpleDataset::GetSerieName(size_t serie)
+wxString CategorySimpleDataset::GetSerieName(size_t serie) const
 {
     wxCHECK(serie < m_series.Count(), wxEmptyString);
     return m_series[serie]->GetName();

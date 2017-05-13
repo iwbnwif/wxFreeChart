@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/ohlc/ohlcdataset.h>
+#include <wx/ohlc/ohlcplot.h>
 
 IMPLEMENT_CLASS(OHLCDataset, Dataset)
 
@@ -58,7 +59,7 @@ double OHLCDataset::GetMinValue(bool WXUNUSED(unused))
 
 time_t OHLCDataset::GetDate(size_t index)
 {
-    return GetItem(index)->date;
+    return 0; // GetItem(index)->date;
 }
 
 

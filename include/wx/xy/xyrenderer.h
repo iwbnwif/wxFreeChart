@@ -33,6 +33,8 @@ public:
      * @param dataset The dataset to be drawn by this renderer.
      */
     virtual void Draw(wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) = 0;
+    virtual double GetMax(const Dataset* dataset, size_t dimension) const = 0;
+    virtual double GetMin(const Dataset* dataset, size_t dimension) const = 0;
 };
 
 #endif /*XYRENDERER_H_*/

@@ -8,11 +8,12 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/dateaxis.h>
+#include <wx/dataset1.h>
 
 IMPLEMENT_CLASS(DateAxis, Axis)
 
 DateAxis::DateAxis(AXIS_LOCATION location)
-: LabelAxis(location)
+: NumberAxis(location)
 {
     m_dateFormat = wxT("%d %m");
     m_dateCount = 0;
@@ -24,20 +25,18 @@ DateAxis::~DateAxis()
 
 bool DateAxis::AcceptDataset(Dataset *dataset)
 {
-    // Accepts only date/time dataset
-    // and only one dataset
-    return (dataset->AsDateTimeDataset() != NULL)
-        && (m_datasets.Count() == 0);
+    return true;
 }
 
 bool DateAxis::UpdateBounds()
 {
     size_t dateCount = 0;
 
-    for (size_t n = 0; n < m_datasets.Count(); n++) {
-        DateTimeDataset *dataset = m_datasets[n]->AsDateTimeDataset();
+    for (size_t n = 0; n < m_datasets.Count(); n++) 
+    {
+        Dataset* dataset = m_datasets[n];
 
-        size_t count = dataset->GetCount();
+        size_t count = dataset->GetCount(0);
         dateCount = wxMax(dateCount, count);
     }
 
@@ -70,13 +69,10 @@ wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 
 void DateAxis::GetDataBounds(double &minValue, double &maxValue) const
 {
-    minValue = 0;
-    if (m_dateCount > 1) {
-        maxValue = m_dateCount - 1;
-    }
-    else {
-        maxValue = 0;
-    }
+    const Dataset* const dataset = GetDataset(0);
+    
+    minValue = dataset->GetMinValue(false);
+    maxValue = dataset->GetMaxValue(false);
 }
 
 double DateAxis::GetValue(size_t step)
@@ -86,13 +82,12 @@ double DateAxis::GetValue(size_t step)
 
 void DateAxis::GetLabel(size_t step, wxString &label)
 {
-    DateTimeDataset *dataset = m_datasets[0]->AsDateTimeDataset();
-    if (dataset == NULL) {
-        return ; // BUG
-    }
-
-    wxDateTime dt;
-    dt.Set(dataset->GetDate(step));
+    // Dates must always be in the first dimension of any data point.
+    DataSet* dataset = wxDynamicCast(m_datasets[0], DataSet);
+    wxASSERT(dataset && dataset->GetPointData(0, step, 0).CheckType<wxDateTime>());
+    
+    // Retrieve the wxAny object for this data point and convert to a date string.
+    wxDateTime dt = dataset->GetPointData(0, step, 0).As<wxDateTime>();
     label = dt.Format(m_dateFormat);
 }
 

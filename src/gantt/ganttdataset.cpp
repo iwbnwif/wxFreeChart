@@ -20,12 +20,12 @@ GanttDatasetDateHelper::~GanttDatasetDateHelper()
 {
 }
 
-time_t GanttDatasetDateHelper::GetDate(size_t index)
+time_t GanttDatasetDateHelper::GetDate(size_t index) const
 {
     return m_ganttDataset->GetMinStart() + index * m_ganttDataset->GetDateInterval();
 }
 
-size_t GanttDatasetDateHelper::GetCount()
+size_t GanttDatasetDateHelper::GetCount() const
 {
     return m_ganttDataset->GetDateCount();
 }
@@ -41,7 +41,7 @@ GanttDataset::~GanttDataset()
 {
 }
 
-size_t GanttDataset::GetCount(size_t WXUNUSED(serie))
+size_t GanttDataset::GetCount(size_t WXUNUSED(serie)) const
 {
     // Gannt Dataset has equal number of elements in all series.
     return GetCount();

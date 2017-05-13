@@ -20,7 +20,7 @@
     #include <wx/wx.h>
 #endif
 
-// dll impexp macros. Thanks to Mike Sazonov
+// DLL import / export macros. Thanks to Mike Sazonov.
 #ifdef WXMAKINGDLL_FREECHART
 #define WXDLLIMPEXP_FREECHART WXEXPORT
 #define WXDLLIMPEXP_DATA_FREECHART(type) WXEXPORT type

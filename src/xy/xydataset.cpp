@@ -43,7 +43,7 @@ bool XYDataset::AcceptRenderer(Renderer *renderer)
     return (wxDynamicCast(renderer, XYRenderer) != NULL);
 }
 
-double XYDataset::GetMaxY()
+double XYDataset::GetMaxY() const
 {
     double maxY = 0;
 
@@ -59,7 +59,7 @@ double XYDataset::GetMaxY()
     return maxY;
 }
 
-double XYDataset::GetMinY()
+double XYDataset::GetMinY() const
 {
     double minY = 0;
 
@@ -75,7 +75,7 @@ double XYDataset::GetMinY()
     return minY;
 }
 
-double XYDataset::GetMaxX()
+double XYDataset::GetMaxX() const
 {
     double maxX = 0;
 
@@ -91,7 +91,7 @@ double XYDataset::GetMaxX()
     return maxX;
 }
 
-double XYDataset::GetMinX()
+double XYDataset::GetMinX() const
 {
     double minX = 0;
 
@@ -107,7 +107,7 @@ double XYDataset::GetMinX()
     return minX;
 }
 
-double XYDataset::GetMinValue(bool verticalAxis)
+double XYDataset::GetMinValue(bool verticalAxis) const
 {
     if (verticalAxis) {
         return GetMinY();
@@ -117,7 +117,7 @@ double XYDataset::GetMinValue(bool verticalAxis)
     }
 }
 
-double XYDataset::GetMaxValue(bool verticalAxis)
+double XYDataset::GetMaxValue(bool verticalAxis) const
 {
     if (verticalAxis) {
         return GetMaxY();

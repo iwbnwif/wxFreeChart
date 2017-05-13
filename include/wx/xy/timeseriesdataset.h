@@ -23,24 +23,24 @@ public:
     TimeSeriesDataset(double *data, time_t *times, size_t count);
     virtual ~TimeSeriesDataset();
 
-    virtual size_t GetSerieCount();
+    virtual size_t GetSerieCount() const;
 
-    virtual wxString GetSerieName(size_t serie);
+    virtual wxString GetSerieName(size_t serie) const;
 
-    virtual size_t GetCount(size_t serie);
+    virtual size_t GetCount(size_t serie) const;
 
-    virtual double GetX(size_t index, size_t serie);
+    virtual double GetX(size_t index, size_t serie) const;
 
-    virtual double GetY(size_t index, size_t serie);
+    virtual double GetY(size_t index, size_t serie) const ;
 
     virtual DateTimeDataset *AsDateTimeDataset();
 
     //
     // DateTimeDataset
     //
-    virtual time_t GetDate(size_t index);
+    virtual time_t GetDate(size_t index) const;
 
-    virtual size_t GetCount();
+    virtual size_t GetCount() const;
 
 private:
     double *m_data;

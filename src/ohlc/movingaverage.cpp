@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/ohlc/movingaverage.h>
+#include <wx/ohlc/ohlcplot.h>
 
 IMPLEMENT_CLASS(MovingAverage, XYDataset)
 

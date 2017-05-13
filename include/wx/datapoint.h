@@ -198,13 +198,22 @@ public:
     BiDataPoint();
 
     /**
-     * Default constructor. Instantiates the data point with valid data and an optional comment.
+     * Instantiates the data point with valid data and an optional comment.
      * @param first The 'first' value that is represented by this data point.
      * @param second The 'second' value that is represented by this data point.
      * @param comment A comment about this data point. The comment can be shown during
      * mouse hovering or as a callout on some plots.
      */
-    BiDataPoint (double first,  double second, const wxString& comment = wxEmptyString);
+    BiDataPoint (double first, double second, const wxString& comment = wxEmptyString);
+
+    /**
+     * Instantiates the data point with valid data and an optional comment.
+     * @param first The 'first' object that is represented by this data point.
+     * @param second The 'second' object that is represented by this data point.
+     * @param comment A comment about this data point. The comment can be shown during
+     * mouse hovering or as a callout on some plots.
+     */
+    BiDataPoint (const wxAny& first, const wxAny& second, const wxString& comment = wxEmptyString);
 
     /**
      * Default destructor. Note that this is a virtual destructor to allow vectors to

@@ -23,6 +23,9 @@ public:
 
     virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
 
+    virtual double GetMax(const Dataset* dataset, size_t dimension) const { return 100; };
+    virtual double GetMin(const Dataset* dataset, size_t dimension) const { return 0; };
+
 private:
     wxPen m_outlinePen;
     wxBrush m_areaBrush;

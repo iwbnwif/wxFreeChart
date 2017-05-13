@@ -84,15 +84,15 @@ public:
     //
     // CategoryDataset
     //
-    virtual double GetValue(size_t index, size_t serie);
+    virtual double GetValue(size_t index, size_t serie) const;
 
-    virtual size_t GetSerieCount();
+    virtual size_t GetSerieCount() const;
 
-    virtual wxString GetName(size_t index);
+    virtual wxString GetName(size_t index) const;
 
-    virtual size_t GetCount();
+    virtual size_t GetCount() const;
 
-    virtual wxString GetSerieName(size_t serie);
+    virtual wxString GetSerieName(size_t serie) const;
 
 private:
     wxArrayString m_names;

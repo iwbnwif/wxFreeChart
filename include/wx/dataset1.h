@@ -15,6 +15,9 @@
 #include <wx/dataset.h>
 #include <wx/dataseries.h>
 
+// TODO: Renderers should be assocated with plots and not data sets.
+class XYRenderer;
+
 /***************************************
  * DATA SET
  ***************************************/
@@ -55,27 +58,34 @@ public:
 
     virtual const wxSharedPtr<DataSeries>  GetSeries(size_t index);
 
-    virtual const size_t GetSeriesCount();
+    virtual const size_t GetSeriesCount() const;
 
-    virtual const wxString& GetName();
+    virtual const wxString& GetName() const;
 
     virtual void SetName(const wxString& name);
     
     virtual void SetSeriesRenderer(size_t series, Renderer* renderer);
     
+    virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index, size_t dimension);
+
+    virtual const wxAny& GetPointData(size_t series, size_t index, size_t dimension);
+
+    virtual const double GetPointValue(size_t series, size_t index, size_t dimension);
+
+    
     // Implement or defer all pure virtual methods from original Dataset class.
 
     virtual bool AcceptRenderer (Renderer* r);
 
-    virtual size_t GetCount (size_t serie);
+    virtual size_t GetCount (size_t serie) const;
 
-    virtual double GetMaxValue (bool vertical) = 0;
+    virtual double GetMaxValue(bool vertical) const = 0;
 
-    virtual double GetMinValue (bool vertical) = 0;
+    virtual double GetMinValue(bool vertical) const = 0;
 
-    virtual size_t GetSerieCount();
+    virtual size_t GetSerieCount() const;
 
-    virtual wxString GetSerieName (size_t serie);
+    virtual wxString GetSerieName (size_t serie) const;
 
 protected:
     wxString m_name;
@@ -99,15 +109,16 @@ public:
     virtual size_t GetBaseCount();
     
     virtual const wxVector<wxAny>& GetBaseSeries() const;
-    
-    virtual const wxAny& GetBaseValue(size_t index) const;
 
-    virtual double GetMaxValue(bool vertical);
-    
-    virtual double GetMinValue(bool vertical);
+    virtual const wxAny& GetBaseValue(size_t index) const;
 
     virtual double GetValue(size_t series, size_t index) const;
     
+    // Abstract Data Set method implementations.   
+
+    virtual double GetMaxValue(bool vertical) const;
+    
+    virtual double GetMinValue(bool vertical) const;
 
 private:
     wxVector<wxAny> m_baseSeries;
@@ -123,7 +134,20 @@ public:
     BiDataSet (const wxString& name = wxEmptyString);
 
     virtual ~BiDataSet();
+    
+    virtual double GetFirst(size_t series, size_t index);
+    
+    virtual double GetSecond(size_t series, size_t index);
+    
+    virtual const XYRenderer* GetRenderer() const;
 
+    virtual XYRenderer* GetRenderer();
+    
+    // Abstract Data Set method implementations.   
+
+    virtual double GetMaxValue(bool vertical) const;
+    
+    virtual double GetMinValue(bool vertical) const;
 };
 
 /***************************************

@@ -102,32 +102,32 @@ public:
         DatasetChanged();
     }
 
-    virtual double GetX(size_t index, size_t serie)
+    virtual double GetX(size_t index, size_t serie) const
     {
         return m_series[serie]->GetX(index);
     }
 
-    virtual double GetY(size_t index, size_t serie)
+    virtual double GetY(size_t index, size_t serie) const
     {
         return m_series[serie]->GetY(index);
     }
 
-    virtual double GetZ(size_t index, size_t serie)
+    virtual double GetZ(size_t index, size_t serie) const
     {
         return m_series[serie]->GetZ(index);
     }
 
-    virtual size_t GetSerieCount()
+    virtual size_t GetSerieCount() const
     {
         return m_series.Count();
     }
 
-    virtual size_t GetCount(size_t serie)
+    virtual size_t GetCount(size_t serie) const
     {
         return m_series[serie]->GetCount();
     }
 
-    virtual wxString GetSerieName(size_t serie)
+    virtual wxString GetSerieName(size_t serie) const
     {
         return m_series[serie]->GetName();
     }

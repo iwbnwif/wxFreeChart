@@ -130,29 +130,29 @@ XYSerie* XYSimpleDataset::GetSerie(size_t series)
     return m_series[series];
 }
 
-double XYSimpleDataset::GetX(size_t index, size_t serie)
+double XYSimpleDataset::GetX(size_t index, size_t serie) const
 {
     wxCHECK(serie < m_series.Count(), 0);
     return m_series[serie]->GetX(index);
 }
 
-double XYSimpleDataset::GetY(size_t index, size_t serie)
+double XYSimpleDataset::GetY(size_t index, size_t serie) const
 {
     wxCHECK(serie < m_series.Count(), 0);
     return m_series[serie]->GetY(index);
 }
 
-size_t XYSimpleDataset::GetSerieCount()
+size_t XYSimpleDataset::GetSerieCount() const
 {
     return m_series.Count();
 }
 
-size_t XYSimpleDataset::GetCount(size_t serie)
+size_t XYSimpleDataset::GetCount(size_t serie) const
 {
     return m_series[serie]->GetCount();
 }
 
-wxString XYSimpleDataset::GetSerieName(size_t serie)
+wxString XYSimpleDataset::GetSerieName(size_t serie) const
 {
     wxCHECK(serie < m_series.Count(), wxEmptyString);
     return m_series[serie]->GetName();

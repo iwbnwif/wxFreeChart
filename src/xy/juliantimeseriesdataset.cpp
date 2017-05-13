@@ -24,27 +24,27 @@ JulianTimeSeriesDataset::~JulianTimeSeriesDataset()
     
 }
 
-size_t JulianTimeSeriesDataset::GetSerieCount()
+size_t JulianTimeSeriesDataset::GetSerieCount() const
 {
     return 1;
 }
 
-size_t JulianTimeSeriesDataset::GetCount(size_t WXUNUSED(serie))
+size_t JulianTimeSeriesDataset::GetCount(size_t WXUNUSED(serie)) const
 {
     return m_data.size();
 }
 
-wxString JulianTimeSeriesDataset::GetSerieName(size_t WXUNUSED(serie))
+wxString JulianTimeSeriesDataset::GetSerieName(size_t WXUNUSED(serie)) const
 {
     return wxT("JulianTimeSeriesDataset");
 }
 
-double JulianTimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie))
+double JulianTimeSeriesDataset::GetX(size_t index, size_t WXUNUSED(serie)) const
 {
    return m_data[index].first;
 }
 
-double JulianTimeSeriesDataset::GetY(size_t index, size_t WXUNUSED(serie))
+double JulianTimeSeriesDataset::GetY(size_t index, size_t WXUNUSED(serie)) const
 {
     return m_data[index].second;
 }

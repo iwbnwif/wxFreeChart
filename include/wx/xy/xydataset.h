@@ -35,42 +35,42 @@ public:
      * @param index index
      * @return x value
      */
-    virtual double GetX(size_t index, size_t serie) = 0;
+    virtual double GetX(size_t index, size_t serie) const = 0;
 
     /**
      * Returns y value at index.
      * @param index index
      * @return y value
      */
-    virtual double GetY(size_t index, size_t serie) = 0;
+    virtual double GetY(size_t index, size_t serie) const = 0;
 
     /**
      * Returns maximal y value.
      * @return maximal y value
      */
-    virtual double GetMaxY();
+    virtual double GetMaxY() const;
 
     /**
      * Returns minimal y value.
      * @return minimal y value
      */
-    virtual double GetMinY();
+    virtual double GetMinY() const;
 
     /**
      * Returns maximal x value.
      * @return maximal x value
      */
-    virtual double GetMaxX();
+    virtual double GetMaxX() const;
 
     /**
      * Returns minimal x value.
      * @return minimal x value
      */
-    virtual double GetMinX();
+    virtual double GetMinX() const;
 
-    virtual double GetMinValue(bool verticalAxis);
+    virtual double GetMinValue(bool verticalAxis) const;
 
-    virtual double GetMaxValue(bool verticalAxis);
+    virtual double GetMaxValue(bool verticalAxis) const;
     
     /**
      * Searches for a point that falls within the rectangle described by min and max.

@@ -30,7 +30,7 @@ public:
 
     time_t GetEnd(size_t index);
 
-    const wxString &GetName();
+    const wxString &GetName() const;
 
 private:
     TaskTime *m_taskTimes;
@@ -62,15 +62,15 @@ public:
      */
     void AddSerie(GanttSerie *serie);
 
-    virtual wxString GetName(size_t index);
+    virtual wxString GetName(size_t index) const;
 
-    virtual double GetValue(size_t index, size_t serie);
+    virtual double GetValue(size_t index, size_t serie) const;
 
-    virtual size_t GetSerieCount();
+    virtual size_t GetSerieCount() const;
 
-    virtual wxString GetSerieName(size_t serie);
+    virtual wxString GetSerieName(size_t serie) const;
 
-    virtual size_t GetCount();
+    virtual size_t GetCount() const;
 
     virtual time_t GetStart(size_t index, size_t serie);
 

@@ -30,3 +30,5 @@ void OHLCBarRenderer::DrawItem(wxDC &dc, wxCoord x, wxCoord open, wxCoord high, 
     dc.DrawLine(centerX, low, centerX, high);
     dc.DrawLine(centerX, close, rightX, close);
 }
+
+

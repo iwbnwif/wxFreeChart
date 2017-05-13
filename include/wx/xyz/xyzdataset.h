@@ -28,7 +28,7 @@ public:
         return (XYZRenderer *) m_renderer;
     }
 
-    virtual double GetZ(size_t index, size_t serie) = 0;
+    virtual double GetZ(size_t index, size_t serie) const = 0;
 
     virtual double GetMinZ();
 

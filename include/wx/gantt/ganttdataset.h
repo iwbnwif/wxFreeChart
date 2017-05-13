@@ -26,9 +26,9 @@ public:
     GanttDatasetDateHelper(GanttDataset *ganttDataset);
     virtual ~GanttDatasetDateHelper();
 
-    virtual time_t GetDate(size_t index);
+    virtual time_t GetDate(size_t index) const;
 
-    virtual size_t GetCount();
+    virtual size_t GetCount() const;
 
 private:
     GanttDataset *m_ganttDataset;
@@ -55,7 +55,7 @@ public:
      * Returns task count.
      * @return task count
      */
-    virtual size_t GetCount() = 0;
+    virtual size_t GetCount() const = 0;
 
     /**
      * Returns task start time.
@@ -78,7 +78,7 @@ public:
      * @param serie serie index
      * @return task count
      */
-    virtual size_t GetCount(size_t serie);
+    virtual size_t GetCount(size_t serie) const;
 
     virtual time_t GetMinStart();
 

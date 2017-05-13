@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/ohlc/ohlcsimpledataset.h>
+#include <wx/ohlc/ohlcplot.h>
 
 IMPLEMENT_CLASS(OHLCSimpleDataset, OHLCDataset);
 

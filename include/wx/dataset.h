@@ -143,35 +143,35 @@ public:
      * Returns serie count in this dataset.
      * @return serie count
      */
-    virtual size_t GetSerieCount() = 0;
+    virtual size_t GetSerieCount() const = 0;
 
     /**
      * Returns value count in serie specified by index.
      * @param serie index
      * @return value count
      */
-    virtual size_t GetCount(size_t serie) = 0;
+    virtual size_t GetCount(size_t serie) const = 0;
 
     /**
      * Returns serie name.
      * @param serie index
      * @return serie name
      */
-    virtual wxString GetSerieName(size_t serie) = 0;
+    virtual wxString GetSerieName(size_t serie) const = 0;
 
     /**
      * Returns minimal value.
      * @param vertical for datasets with XY coordinates, specifies direction
      * @return minimal value
      */
-    virtual double GetMinValue(bool vertical) = 0;
+    virtual double GetMinValue(bool vertical) const = 0;
 
     /**
      * Returns maximal value.
      * @param vertical for datasets with XY coordinates, specifies direction
      * @return maximal value
      */
-    virtual double GetMaxValue(bool vertical) = 0;
+    virtual double GetMaxValue(bool vertical) const = 0;
 
     virtual DateTimeDataset *AsDateTimeDataset();
 
@@ -235,13 +235,13 @@ public:
      * @param index index
      * @return date/time for specified index
      */
-    virtual time_t GetDate(size_t index) = 0;
+    virtual time_t GetDate(size_t index) const = 0;
 
     /**
      * Returns date/time count.
      * @return date/time count
      */
-    virtual size_t GetCount() = 0;
+    virtual size_t GetCount() const = 0;
 };
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase, WXDLLIMPEXP_FREECHART);

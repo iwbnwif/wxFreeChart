@@ -10,7 +10,7 @@
 #ifndef DATEAXIS_H_
 #define DATEAXIS_H_
 
-#include <wx/axis/labelaxis.h>
+#include <wx/axis/numberaxis.h>
 
 
 /**
@@ -18,7 +18,7 @@
  * TODO:
  * - works with only one dataset.
  */
-class WXDLLIMPEXP_FREECHART DateAxis : public LabelAxis
+class WXDLLIMPEXP_FREECHART DateAxis : public NumberAxis
 {
     DECLARE_CLASS(DateAxis)
 public:

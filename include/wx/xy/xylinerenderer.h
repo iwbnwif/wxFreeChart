@@ -54,6 +54,9 @@ public:
     // Renderer
     //
     virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
+    virtual double GetMax(const Dataset* dataset, size_t dimension) const;
+    virtual double GetMin(const Dataset* dataset, size_t dimension) const;
+
 
 protected:
   virtual void DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) = 0;

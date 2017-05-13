@@ -103,6 +103,40 @@ void XYLineRendererBase::DrawSymbols(wxDC&dc, const wxRect& rc, Axis* xAxis, Axi
   }
 }
 
+double XYLineRendererBase::GetMax(const Dataset* d, size_t dimension) const
+{
+    BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
+    wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
+    
+    double max = dataset->GetPointValue(0, 0, dimension);
+    
+    for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
+    {
+        for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
+            max = wxMax(max, dataset->GetPointValue(ser, pt, dimension));
+    }
+    
+    return max; 
+}
+
+double XYLineRendererBase::GetMin(const Dataset* d, size_t dimension) const
+{
+    BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
+    wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
+
+    double min = dataset->GetPointValue(0, 0, dimension);
+    
+    for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
+    {
+        for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
+            min = wxMin(min, dataset->GetPointValue(ser, pt, dimension));
+    }
+    
+    return min;
+}
+
+ 
+
 //
 // XYLineRenderer
 //

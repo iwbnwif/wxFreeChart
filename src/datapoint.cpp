@@ -110,9 +110,21 @@ BiDataPoint::BiDataPoint()
 {
 }
 
-BiDataPoint::BiDataPoint (double first, double second, const wxString& comment)
+BiDataPoint::BiDataPoint (double f, double s, const wxString& comment)
     : DataPoint (comment)
 {
+    first = f;
+    second = s;
+    m_comment = comment;
+    m_hasData = true;
+}
+
+BiDataPoint::BiDataPoint(const wxAny& f, const wxAny& s, const wxString& comment)
+{
+    first = f;
+    second = s;
+    m_comment = comment;
+    m_hasData = true;
 }
 
 BiDataPoint::~BiDataPoint()
@@ -139,7 +151,8 @@ const wxAny& BiDataPoint::GetDimensionData(size_t dimension) const
 
 double BiDataPoint::GetDimensionValue (size_t dimension) const
 {
-    wxASSERT (dimension < 2 && first.CheckType<double>());
+    wxASSERT (dimension < 2);
+    wxASSERT (first.CheckType<double>());
     return dimension == 0 ? first.As<double>() : second.As<double>();
 }
 
@@ -175,6 +188,7 @@ void BiDataPoint::SetValues (double f, double s)
     first = f;
     second = s;
 }
+
 
 /***************************************
  * N-ARY DATA POINT
@@ -237,4 +251,3 @@ void NaryDataPoint::SetDimensionValue(size_t dimension, double val)
 {
     data[dimension] = val;
 }
-
