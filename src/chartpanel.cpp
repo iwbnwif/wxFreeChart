@@ -195,7 +195,8 @@ void wxChartPanel::RecalcScrollbars()
         GetAxisScrollParams(vertAxis, noUnitsY, yPos);
 
     wxLogMessage("Scroll position set to %f, %f", xPos, yPos);
-    SetScrollbars(scrollPixelStep, scrollPixelStep, scrollResolution, scrollResolution, (int)(xPos * scrollResolution), (int)(yPos * scrollResolution), true);
+    SetScrollbars(scrollPixelStep, scrollPixelStep, scrollResolution, scrollResolution, 
+                    (int)(xPos * scrollResolution), (int)(yPos * scrollResolution), true);
 }
 
 void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
@@ -270,7 +271,6 @@ void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
     if (m_mode == NULL) {
         return ;
     }
-
 
 #if 0
     // TODO
@@ -400,7 +400,6 @@ void wxChartPanel::OnChartChanged(wxCommandEvent& event)
 
 void wxChartPanel::OnThrottleTimer(wxTimerEvent& event)
 {
-    RecalcScrollbars();
     RedrawBackBitmap();
     Refresh(false);
 }
