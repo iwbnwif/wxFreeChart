@@ -10,7 +10,6 @@
 #include "democollection.h"
 
 #include <wx/ohlc/ohlcplot.h>
-#include <wx/ohlc/ohlcsimpledataset.h>
 
 #include <wx/ohlc/ohlcbarrenderer.h>
 #include <wx/ohlc/ohlccandlestickrenderer.h>
