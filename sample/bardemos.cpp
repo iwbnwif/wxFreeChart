@@ -14,14 +14,12 @@
 #include "democollection.h"
 
 #include <wx/bars/barplot.h>
+#include <wx/bars/barrenderer.h>
 
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/categoryaxis.h>
 
 #include <wx/xy/xyhistorenderer.h>
-
-#include <wx/category/categorysimpledataset.h>
-
 #include <wx/dataset1.h>
 
 /**
@@ -110,6 +108,7 @@ public:
     }
 };
 
+#if 0
 /**
  * Simple demo with one dataset, and left and bottom axes.
  */
@@ -169,6 +168,8 @@ public:
         return new Chart(plot, GetName());
     }
 };
+#endif 
+
 
 /**
  * Simple demo with one dataset having 2 series, and left and bottom axes.
