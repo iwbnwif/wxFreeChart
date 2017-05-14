@@ -11,7 +11,6 @@
 #define OHLCPLOT_H_
 
 #include <wx/xy/xyplot.h>
-#include <wx/ohlc/ohlcdataset.h>
 
 struct OHLCItem
 {

@@ -10,13 +10,12 @@
 #ifndef MOVINGAVERAGE_H_
 #define MOVINGAVERAGE_H_
 
-#include <wx/xy/xydataset.h>
-#include <wx/ohlc/ohlcdataset.h>
+#include <wx/dataset1.h>
 
 /**
  * Simple moving average indicator.
  */
-class WXDLLIMPEXP_FREECHART MovingAverage : public XYDataset
+class WXDLLIMPEXP_FREECHART MovingAverage : public BiDataSet
 {
     DECLARE_CLASS(MovingAverage)
 public:

@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/ohlc/ohlcplot.h>
+#include <wx/ohlc/ohlcrenderer.h>
 
 #include <wx/axis/dateaxis.h>
 #include <wx/axis/numberaxis.h>
