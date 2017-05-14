@@ -60,6 +60,7 @@ public:
         
         // Set the start date and populate the series.
         wxDateTime dt = wxDateTime::Today() - wxDateSpan(0, 0, 0, 15);
+        wxDateTime startDate = dt;
 
         for (size_t i = 0; i < quotes.size(); i++, dt += wxDateSpan(0, 0, 0, 1))
             series->AddPoint(new BiDataPoint(dt, quotes[i]));
@@ -87,26 +88,26 @@ public:
         leftAxis->ZeroOrigin(false);
 
         // Setup window, to show 5 days at once (not entire dataset).
-        // bottomAxis->SetWindow(wxDateTime(8, wxDateTime::Jan, 2016).GetTicks(), 5 * 24 * 60 * 60);
-        // bottomAxis->SetWindow(0, 5);
-        // bottomAxis->SetUseWindow(true);
+        bottomAxis->SetWindow(startDate.GetTicks(), 5 * 24 * 60 * 60);
+        bottomAxis->SetUseWindow(true);
 
+        // Configure bottom axis formatting.
         bottomAxis->SetVerticalLabelText(true);
         bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
 
-        // add axes to plot
+        // Add axes to plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // and finally create chart
+        // Create the chart. 
         Chart *chart = new Chart(plot, GetName());
 
-        // set scrolling axis to chart, so it will be possible to scroll horizontally
-        // chart->SetScrolledAxis(bottomAxis);
+        // Set scrolling axis to chart.
+        chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
 };
@@ -173,27 +174,28 @@ public:
         // Don't start the left axis at zero.
         leftAxis->ZeroOrigin(false);
 
-        // Setup window, to show 5 days at once (not entire dataset).
-        // bottomAxis->SetWindow(wxDateTime(8, wxDateTime::Jan, 2016).GetTicks(), 5 * 24 * 60 * 60);
-        // bottomAxis->SetWindow(0, 5);
-        // bottomAxis->SetUseWindow(true);
+        // Setup window, to show 5 days with starting point at the first data point.
+        bottomAxis->SetWindow(dataset->GetPointData(0, 0, 0).As<wxDateTime>().GetTicks(), 
+                                5 * 24 * 60 * 60);
+        bottomAxis->SetUseWindow(true);
 
+        // Configure bottom axis formatting.
         bottomAxis->SetVerticalLabelText(true);
         bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
 
-        // Add the axes to the plot.
+        // Add axes to plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // Link the axes and dataset.
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // Create a chart.
+        // Create the chart. 
         Chart *chart = new Chart(plot, GetName());
 
-        // set scrolling axis to chart, so it will be possible to scroll horizontally
-        // chart->SetScrolledAxis(bottomAxis);
+        // Set scrolling axis to chart.
+        chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
 };
