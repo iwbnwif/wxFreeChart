@@ -12,6 +12,9 @@
 
 IMPLEMENT_CLASS(LabelAxis, Axis)
 
+/***************************************
+ * DEFAULT LABEL COLOURER
+ ***************************************/
 class DefaultLabelColourer : public LabelColourer
 {
 public:
@@ -40,6 +43,9 @@ wxColor DefaultLabelColourer::GetColour(int step)
     return (step % 2) ? m_oddColour : m_evenColour;
 }
 
+/***************************************
+ * LABEL AXIS
+ ***************************************/
 LabelAxis::LabelAxis(AXIS_LOCATION location)
 : Axis(location)
 {
@@ -118,6 +124,182 @@ int LabelAxis::GetLabelSkip()
     return m_blankLabels;
 }
 
+bool LabelAxis::HasLabels()
+{
+    return true;
+}
+
+void LabelAxis::SetAxisVisible(bool bVisible)
+{
+    m_visible = bVisible;
+}
+
+
+void LabelAxis::Draw(wxDC &dc, wxRect rc)
+{
+    if (!m_visible)
+        return;
+
+    // Calculate the axis' title position and draw the title.
+    if (m_title.Length() != 0) 
+    {
+        wxSize titleExtent = dc.GetTextExtent(m_title);
+
+        dc.SetFont(m_titleFont);
+        dc.SetTextForeground(m_titleColour);
+
+        if (IsVertical()) {
+            wxCoord y;
+            switch (m_titleLocation) {
+                case wxTOP:
+                    y = rc.y + titleExtent.x;
+                    break;
+                case wxCENTER:
+                    y = rc.y + titleExtent.GetWidth() + (rc.GetHeight() - titleExtent.GetWidth()) / 2;
+                    break;
+                case wxBOTTOM:
+                    y = rc.y + rc.height;
+                    break;
+                default:
+                    // fallback to center
+                    y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
+            }
+            if (GetLocation() == AXIS_LEFT) {
+                dc.DrawRotatedText(m_title, rc.x, y, 90);                    
+                rc.x += titleExtent.y;
+            } else {
+                dc.DrawRotatedText(m_title, rc.x + rc.width - titleExtent.y, y, 90);                                    
+            }            
+            rc.width -= titleExtent.y;
+        }
+        else {
+            wxCoord x;
+            switch (m_titleLocation) {
+                case wxLEFT:
+                    x = rc.x;
+                    break;
+                case wxCENTER:
+                    // PBFIX
+                    x = rc.x + (rc.GetWidth() - titleExtent.GetWidth()) / 2;
+                    // x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
+                    break;
+                case wxRIGHT:
+                    x = rc.x + rc.width - titleExtent.x;
+                    break;
+                default:
+                    // fallback to center
+                    x = rc.x + (rc.GetWidth() - titleExtent.GetWidth()) / 2;
+            }
+
+            if (GetLocation() == AXIS_TOP) {
+                dc.DrawText(m_title, x, rc.y);
+            } else {
+                dc.DrawText(m_title, x, rc.y + rc.height - titleExtent.y);
+                rc.SetBottom(rc.GetBottom() - titleExtent.y);                
+            }
+        }
+    } 
+    
+    // Draw the tick marks and labels.
+    DrawLabels(dc, rc);
+    
+    // Draw the border.
+    DrawBorderLine(dc, rc);
+}
+
+void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
+{
+    wxCoord x1, y1;
+    wxCoord x2, y2;
+
+    switch (GetLocation()) {
+    case AXIS_LEFT:
+        x1 = x2 = rc.x + rc.width;
+        y1 = rc.y;
+        y2 = rc.y + rc.height;
+        break;
+    case AXIS_RIGHT:
+        x1 = x2 = rc.x;
+        y1 = rc.y;
+        y2 = rc.y + rc.height;
+        break;
+    case AXIS_TOP:
+        x1 = rc.x;
+        x2 = rc.x + rc.width;
+        y1 = y2 = rc.y + rc.height;
+        break;
+    case AXIS_BOTTOM:
+        x1 = rc.x;
+        x2 = rc.x + rc.width;
+        y1 = y2 = rc.y;
+        break;
+    default:
+        return ; // BUG
+    }
+
+    dc.SetPen(m_labelPen); // TODO: Consider having a different colour option.
+    dc.DrawLine(x1, y1, x2, y2);
+}
+
+
+void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
+{
+    if (!HasLabels()) 
+        return ;
+
+    for (int majorStep = 0; !IsEnd(majorStep); majorStep++) 
+    {
+        double value = GetValue(majorStep);
+        
+        if (!IsVisible(value))
+            continue;
+
+        // Draw the major interval gridline.
+        dc.SetPen(m_majorGridlinePen);
+        DrawGridLine(dc, rc, value);
+
+        for (size_t minorStep = 1; minorStep <= m_minorIntervalCount; minorStep++)
+        {
+            // Calculate the value range between this label and the next (changes for non-linear axis, such as log).
+            double minorInterval = (GetValue(majorStep + 1) - GetValue(majorStep)) / m_minorIntervalCount;
+            
+            double minorValue = GetValue(majorStep) + (minorInterval * minorStep);
+
+            if (!IsVisible(minorValue))
+                continue;
+            
+            // Draw the minor interval gridline.
+            dc.SetPen(m_minorGridlinePen);
+            DrawGridLine(dc, rc, minorValue);
+        }
+    }
+}
+
+void LabelAxis::DrawGridLine(wxDC& dc, const wxRect& rc, double value)
+{
+    if (IsVertical()) 
+    {
+        // Vertical axis, so gridlines are horizontal.
+        wxCoord y = ToGraphics(dc, rc.y, rc.height - 1, value);
+
+        if (y == rc.y || y == (rc.y + rc.height - 1))
+            return;
+
+        dc.DrawLine(rc.x + 1, y, rc.x + rc.width - 1, y);
+    }
+    
+    else 
+    {
+        // Horizontal axis, so gridlines are vertical.
+        wxCoord x = ToGraphics(dc, rc.x, rc.width - 1, value);
+
+        if (x == rc.x || x == (rc.x + rc.width - 1))
+            return;
+
+        dc.DrawLine(x + 1, rc.y + 1, x + 1, rc.y + rc.height - 1);
+    }
+}
+
 void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 {
     if (!HasLabels())
@@ -145,8 +327,12 @@ void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
         // Draw a tick and label at the major interval.
         DrawLabel(dc, rc, label, value, true);
 
+        // Don't calculate minor ticks if this is the last major tick.
+        if (IsEnd(majorStep + 1))
+            continue;
+        
         // Calculate the value range between this label and the next (changes for non-linear axis, such as log).
-        double minorInterval =  (GetValue(majorStep + 1) - GetValue(majorStep)) / m_minorIntervalCount;
+        double minorInterval = (GetValue(majorStep + 1) - GetValue(majorStep)) / m_minorIntervalCount;
         
         for (size_t minorStep = 1; minorStep <= m_minorIntervalCount; minorStep++)
         {
@@ -259,177 +445,5 @@ void LabelAxis::DrawLabel(wxDC &dc, wxRect rc, const wxString &label, double val
     }
 }
 
-void LabelAxis::DrawBorderLine(wxDC &dc, wxRect rc)
-{
-    wxCoord x1, y1;
-    wxCoord x2, y2;
 
-    switch (GetLocation()) {
-    case AXIS_LEFT:
-        x1 = x2 = rc.x + rc.width;
-        y1 = rc.y;
-        y2 = rc.y + rc.height;
-        break;
-    case AXIS_RIGHT:
-        x1 = x2 = rc.x;
-        y1 = rc.y;
-        y2 = rc.y + rc.height;
-        break;
-    case AXIS_TOP:
-        x1 = rc.x;
-        x2 = rc.x + rc.width;
-        y1 = y2 = rc.y + rc.height;
-        break;
-    case AXIS_BOTTOM:
-        x1 = rc.x;
-        x2 = rc.x + rc.width;
-        y1 = y2 = rc.y;
-        break;
-    default:
-        return ; // BUG
-    }
-
-    dc.SetPen(m_labelPen); // TODO: Consider having a different colour option.
-    dc.DrawLine(x1, y1, x2, y2);
-}
-
-void LabelAxis::DrawGridLines(wxDC &dc, wxRect rc)
-{
-    if (!HasLabels()) 
-        return ;
-
-    for (int majorStep = 0; !IsEnd(majorStep); majorStep++) 
-    {
-        double value = GetValue(majorStep);
-        
-        if (!IsVisible(value))
-            continue;
-
-        // Draw the major interval gridline.
-        dc.SetPen(m_majorGridlinePen);
-        DrawGridLine(dc, rc, value);
-
-        for (size_t minorStep = 1; minorStep <= m_minorIntervalCount; minorStep++)
-        {
-            // Calculate the value range between this label and the next (changes for non-linear axis, such as log).
-            double minorInterval = (GetValue(majorStep + 1) - GetValue(majorStep)) / m_minorIntervalCount;
-            
-            double minorValue = GetValue(majorStep) + (minorInterval * minorStep);
-
-            if (!IsVisible(minorValue))
-                continue;
-            
-            // Draw the minor interval gridline.
-            dc.SetPen(m_minorGridlinePen);
-            DrawGridLine(dc, rc, minorValue);
-        }
-    }
-}
-
-void LabelAxis::DrawGridLine(wxDC& dc, const wxRect& rc, double value)
-{
-    if (IsVertical()) 
-    {
-        // Vertical axis, so gridlines are horizontal.
-        wxCoord y = ToGraphics(dc, rc.y, rc.height - 1, value);
-
-        if (y == rc.y || y == (rc.y + rc.height - 1))
-            return;
-
-        dc.DrawLine(rc.x + 1, y, rc.x + rc.width - 1, y);
-    }
-    
-    else 
-    {
-        // Horizontal axis, so gridlines are vertical.
-        wxCoord x = ToGraphics(dc, rc.x, rc.width - 1, value);
-
-        if (x == rc.x || x == (rc.x + rc.width - 1))
-            return;
-
-        dc.DrawLine(x + 1, rc.y + 1, x + 1, rc.y + rc.height - 1);
-    }
-}
-
-void LabelAxis::SetAxisVisible(bool bVisible)
-{
-    m_visible = bVisible;
-}
-
-void LabelAxis::Draw(wxDC &dc, wxRect rc)
-{
-    if (!m_visible)
-        return;
-
-    // Calculate the axis' title position and draw the title.
-    if (m_title.Length() != 0) 
-    {
-        wxSize titleExtent = dc.GetTextExtent(m_title);
-
-        dc.SetFont(m_titleFont);
-        dc.SetTextForeground(m_titleColour);
-
-        if (IsVertical()) {
-            wxCoord y;
-            switch (m_titleLocation) {
-                case wxTOP:
-                    y = rc.y + titleExtent.x;
-                    break;
-                case wxCENTER:
-                    y = rc.y + titleExtent.GetWidth() + (rc.GetHeight() - titleExtent.GetWidth()) / 2;
-                    break;
-                case wxBOTTOM:
-                    y = rc.y + rc.height;
-                    break;
-                default:
-                    // fallback to center
-                    y = (rc.y + rc.height) / 2 + titleExtent.x / 2;
-            }
-            if (GetLocation() == AXIS_LEFT) {
-                dc.DrawRotatedText(m_title, rc.x, y, 90);                    
-                rc.x += titleExtent.y;
-            } else {
-                dc.DrawRotatedText(m_title, rc.x + rc.width - titleExtent.y, y, 90);                                    
-            }            
-            rc.width -= titleExtent.y;
-        }
-        else {
-            wxCoord x;
-            switch (m_titleLocation) {
-                case wxLEFT:
-                    x = rc.x;
-                    break;
-                case wxCENTER:
-                    // PBFIX
-                    x = rc.x + (rc.GetWidth() - titleExtent.GetWidth()) / 2;
-                    // x = (rc.x + rc.width) / 2 - titleExtent.x / 2;
-                    break;
-                case wxRIGHT:
-                    x = rc.x + rc.width - titleExtent.x;
-                    break;
-                default:
-                    // fallback to center
-                    x = rc.x + (rc.GetWidth() - titleExtent.GetWidth()) / 2;
-            }
-
-            if (GetLocation() == AXIS_TOP) {
-                dc.DrawText(m_title, x, rc.y);
-            } else {
-                dc.DrawText(m_title, x, rc.y + rc.height - titleExtent.y);
-                rc.SetBottom(rc.GetBottom() - titleExtent.y);                
-            }
-        }
-    } 
-    
-    // Draw the tick marks and labels.
-    DrawLabels(dc, rc);
-    
-    // Draw the border.
-    DrawBorderLine(dc, rc);
-}
-
-bool LabelAxis::HasLabels()
-{
-    return true;
-}
 
