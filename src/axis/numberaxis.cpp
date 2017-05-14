@@ -70,10 +70,73 @@ NumberAxis::~NumberAxis()
 {
 }
 
+void NumberAxis::GetDataBounds(double &minValue, double &maxValue) const
+{
+    minValue = m_minValue;
+    maxValue = m_maxValue;
+}
+
+void NumberAxis::GetLabel(size_t step, wxString &label)
+{
+    double value = GetValue(step);
+
+    if (value == -0) {
+        value = 0;
+    }
+
+    if (m_intValues) {
+        // orig : label = wxString::Format(wxT("%i"), (int) value);
+        label = wxString::Format(wxT("%i"), int(value * m_multiplier));
+    }
+    else {
+        // orig : label = wxString::Format(m_tickFormat, value);
+        label = wxString::Format(m_tickFormat, value * m_multiplier);
+    }
+}
+
+size_t NumberAxis::GetLabelCount() const
+{
+  return m_labelCount;
+}
+
+wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
+{
+    dc.SetFont(GetLabelTextFont());
+
+    wxSize sizeMinValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_minValue));
+    wxSize sizeMaxValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_maxValue));
+
+    if (sizeMinValue.x > sizeMaxValue.x) {
+        return sizeMinValue;
+    }
+    else {
+        return sizeMaxValue;
+    }
+}
+
+double NumberAxis::GetMultiplier() const
+{
+  return m_multiplier;
+}
+
+double NumberAxis::GetValue(size_t step)
+{
+    return m_minValue + step * m_labelInterval;
+}
 
 bool NumberAxis::AcceptDataset(Dataset *WXUNUSED(dataset))
 {
     return true;
+}
+
+bool NumberAxis::HasLabels()
+{
+    return m_hasLabels;
+}
+
+bool NumberAxis::IsEnd(size_t step)
+{
+    return step >= m_labelCount;
 }
 
 void NumberAxis::SetFixedBounds(double minValue, double maxValue)
@@ -83,6 +146,47 @@ void NumberAxis::SetFixedBounds(double minValue, double maxValue)
     m_fixedBounds = true;
 
     UpdateMajorIntervalValues();
+}
+
+void NumberAxis::SetMultiplier(double multiplier)
+{
+  m_multiplier = multiplier;
+}
+
+double NumberAxis::CalcNiceInterval (double value, bool round)
+{
+    // Get the logarithmic form of the value. 
+    double exp = floor(log10(fabs(value)));
+    double mant = value / pow(10.0, exp);
+    
+    // Find a nice value.
+    double nice;
+    
+    if (round)
+    {
+        if (mant <= 1.5)
+            nice = 1.0;
+        else if (mant <= 3.0)
+            nice = 2.0;
+        else if (mant <= 7.0)
+            nice = 5.0;
+        else
+            nice = 10.0;  
+    }
+    
+    else
+    {
+        if (mant <= 1.0)
+            nice = 1.0;
+        else if (mant <= 2.0)
+            nice = 2.0;
+        else if (mant <= 5.0)
+            nice = 5.0;
+        else
+            nice = 10.0;    
+    }
+    
+    return  nice * pow(10, exp);
 }
 
 bool NumberAxis::UpdateBounds()
@@ -166,109 +270,4 @@ void NumberAxis::UpdateMajorIntervalValues()
         if (m_labelCount)
             m_hasLabels = true;
     }
-}
-
-wxSize NumberAxis::GetLongestLabelExtent(wxDC &dc)
-{
-    dc.SetFont(GetLabelTextFont());
-
-    wxSize sizeMinValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_minValue));
-    wxSize sizeMaxValue = dc.GetTextExtent(wxString::Format(m_tickFormat, m_maxValue));
-
-    if (sizeMinValue.x > sizeMaxValue.x) {
-        return sizeMinValue;
-    }
-    else {
-        return sizeMaxValue;
-    }
-}
-
-void NumberAxis::GetDataBounds(double &minValue, double &maxValue) const
-{
-    minValue = m_minValue;
-    maxValue = m_maxValue;
-}
-
-double NumberAxis::GetValue(size_t step)
-{
-    return m_minValue + step * m_labelInterval;
-}
-
-void NumberAxis::GetLabel(size_t step, wxString &label)
-{
-    double value = GetValue(step);
-
-    if (value == -0) {
-        value = 0;
-    }
-
-    if (m_intValues) {
-        // orig : label = wxString::Format(wxT("%i"), (int) value);
-        label = wxString::Format(wxT("%i"), int(value * m_multiplier));
-    }
-    else {
-        // orig : label = wxString::Format(m_tickFormat, value);
-        label = wxString::Format(m_tickFormat, value * m_multiplier);
-    }
-}
-
-double NumberAxis::CalcNiceInterval (double value, bool round)
-{
-    // Get the logarithmic form of the value. 
-    double exp = floor(log10(fabs(value)));
-    double mant = value / pow(10.0, exp);
-    
-    // Find a nice value.
-    double nice;
-    
-    if (round)
-    {
-        if (mant <= 1.5)
-            nice = 1.0;
-        else if (mant <= 3.0)
-            nice = 2.0;
-        else if (mant <= 7.0)
-            nice = 5.0;
-        else
-            nice = 10.0;  
-    }
-    
-    else
-    {
-        if (mant <= 1.0)
-            nice = 1.0;
-        else if (mant <= 2.0)
-            nice = 2.0;
-        else if (mant <= 5.0)
-            nice = 5.0;
-        else
-            nice = 10.0;    
-    }
-    
-    return  nice * pow(10, exp);
-}
-
-bool NumberAxis::IsEnd(size_t step)
-{
-    return step >= m_labelCount;
-}
-
-bool NumberAxis::HasLabels()
-{
-    return m_hasLabels;
-}
-
-size_t NumberAxis::GetLabelCount() const
-{
-  return m_labelCount;
-}
-
-double NumberAxis::GetMultiplier() const
-{
-  return m_multiplier;
-}
-
-void NumberAxis::SetMultiplier(double multiplier)
-{
-  m_multiplier = multiplier;
 }
