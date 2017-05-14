@@ -30,82 +30,68 @@ public:
 
     virtual Chart *Create()
     {
-        // Data
-        double data[] = 
-        {
-             64.09,
-             63.34,
-             61.41,
-             62.00,
-             61.71,
-             63.39,
-             63.64,
-             63.61,
-             65.11,
-             65.72,
-             66.89,
-             66.68,
-             66.51,
-             66.40,
-             67.27,
-             67.66,
-        };
+        // Create some data for the series.
+        wxVector<double> data;
+        data.push_back(64.09);
+        data.push_back(63.34);
+        data.push_back(61.41);
+        data.push_back(62.00);
+        data.push_back(61.71);
+        data.push_back(63.39);
+        data.push_back(63.64);
+        data.push_back(63.61);
+        data.push_back(65.11);
+        data.push_back(65.72);
+        data.push_back(66.89);
+        data.push_back(66.68);
+        data.push_back(66.51);
+        data.push_back(66.40);
+        data.push_back(67.27);
+        data.push_back(67.66);
+
+        // Create a series.
+        DataSeries* series = new DataSeries("Series 1");
         
-        // Dates
-        const wxChar *strDates[] = 
+        // Populate the series with the data and a generated time of 1 second intervals.
+        wxDateTime dt = wxDateTime::Now();
+        for (size_t i = 0; i < data.size(); i++)
         {
-            wxT("20060317"),
-            wxT("20060320"),
-            wxT("20060321"),
-            wxT("20060322"),
-            wxT("20060323"),
-            wxT("20060324"),
-            wxT("20060327"),
-            wxT("20060328"),
-            wxT("20060329"),
-            wxT("20060330"),
-            wxT("20060331"),
-            wxT("20060403"),
-            wxT("20060404"),
-            wxT("20060405"),
-            wxT("20060406"),
-            wxT("20060407"),
-        };
-
-        time_t times[WXSIZEOF(strDates)];
-
-        wxDateTime dt;
-        for (size_t n = 0; n < WXSIZEOF(strDates); n++) 
-        {
-            dt.ParseFormat(strDates[n], wxT("%Y%m%d"));
-            times[n] = dt.GetTicks();
+            series->AddPoint(new BiDataPoint(dt, data[i]));
+            dt += wxTimeSpan(0, 1);
         }
 
-        // First step: create a plot.
-        XYPlot *plot = new XYPlot();
+        // Create a dataset.
+        BiDataSet* dataset = new BiDataSet("Time Demo 1");
 
-        // Second step: create the dataset.
-        TimeSeriesDataset *dataset = new TimeSeriesDataset(data, times, WXSIZEOF(data));
+        // Add the series to the data set.
+        dataset->AddSeries(series);
 
-        // Third step: define a renderer for the dataset.
+        // Set a XY line renderer for the dataset.
         Renderer* renderer = new XYLineRenderer();
         renderer->SetSerieColour(0, new wxColour(255,0,0));
         dataset->SetRenderer(renderer);
         
+        // Create an XY plot.
+        XYPlot *plot = new XYPlot();
 
-        // Fourth step: add the dataset to the plot.
+        // Add our dataset to plot.
         plot->AddDataset(dataset);
 
-        // Add left number and bottom date axes.
+        // Create left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        leftAxis->SetFixedBounds(61.0, 68.0);
+        DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
+        
+        // Optional: set axis titles.
+        leftAxis->SetTitle(wxT("X Values"));
+        bottomAxis->SetTitle(wxT("Time"));
+
         leftAxis->SetMinorIntervalCount(4);
+        leftAxis->ZeroOrigin(false);
         leftAxis->SetMajorGridlinePen(wxColour(100, 100, 100));
         leftAxis->SetMinorGridlinePen(wxColour(150, 150, 150));
         
-        DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
         bottomAxis->SetVerticalLabelText(true);
-        bottomAxis->SetDateFormat(wxT("%d-%m"));
+        bottomAxis->SetDateFormat("%H:%M");
         bottomAxis->SetMajorGridlinePen(wxColour(100, 100, 100));
 
         // Add axes to plot.
@@ -123,7 +109,6 @@ public:
         // And finally create the chart.
         Chart *chart = new Chart(plot, GetName());
         chart->SetBackground(new GradientAreaDraw(*wxTRANSPARENT_PEN, wxColour(200, 220, 250), *wxWHITE, wxSOUTH));
-        
         //chart->SetScrolledAxis(bottomAxis);
         return chart;
     }

@@ -50,19 +50,19 @@ public:
         // Create an XY plot.
         XYPlot *plot = new XYPlot();
 
-        // create left and bottom number axes
+        // Create left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
         bottomAxis->SetFixedBounds(-10, 200);
         
-        // optional: set axis titles
+        // Optional: set axis titles.
         leftAxis->SetTitle(wxT("X Values"));
         bottomAxis->SetTitle(wxT("Y Values"));
 
-        // add axes and dataset to plot
+        // Add axes and dataset to plot.
         plot->AddObjects(dataset, leftAxis, bottomAxis);
 
-        // and finally create chart
+        // Create the chart.
         return new Chart(plot, GetName());
     }
 };

@@ -14,6 +14,22 @@ IMPLEMENT_CLASS(XYLineRendererBase, XYRenderer)
 IMPLEMENT_CLASS(XYLineRenderer, XYLineRendererBase)
 IMPLEMENT_CLASS(XYLineStepRenderer, XYLineRendererBase)
 
+
+double ValueInterpreter(DataSet* dataset, const size_t series, const size_t index, const size_t dimension)
+{
+    const wxAny& data = dataset->GetPointData(series, index, dimension);
+    
+    if (data.CheckType<double>())
+        return data.As<double>();
+        
+    if (data.CheckType<wxDateTime>())
+        return data.As<wxDateTime>().GetTicks();
+        
+    wxFAIL;
+    
+    return 0;
+}
+
 //
 // XYLineRendererBase
 //
@@ -108,12 +124,12 @@ double XYLineRendererBase::GetMax(const Dataset* d, size_t dimension) const
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
     
-    double max = dataset->GetPointValue(0, 0, dimension);
+    double max = ValueInterpreter(dataset, 0, 0, dimension);
     
     for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            max = wxMax(max, dataset->GetPointValue(ser, pt, dimension));
+            max = wxMax(max, ValueInterpreter(dataset, ser, pt, dimension));
     }
     
     return max; 
@@ -124,18 +140,18 @@ double XYLineRendererBase::GetMin(const Dataset* d, size_t dimension) const
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
 
-    double min = dataset->GetPointValue(0, 0, dimension);
+    double min = ValueInterpreter(dataset, 0, 0, dimension);
     
     for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            min = wxMin(min, dataset->GetPointValue(ser, pt, dimension));
+            min = wxMin(min, ValueInterpreter(dataset, ser, pt, dimension));
     }
     
     return min;
 }
 
- 
+
 
 //
 // XYLineRenderer
@@ -158,11 +174,21 @@ void XYLineRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAx
       continue;
     }
 
-    for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
+    for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) 
+    {
+        /*
       double x0 = dataset->GetFirst(serie, n);
       double y0 = dataset->GetSecond(serie, n);
       double x1 = dataset->GetFirst(serie, n + 1);
       double y1 = dataset->GetSecond(serie, n + 1);
+       */
+      double x0 = ValueInterpreter(dataset, serie, n, 0);
+      double y0 = ValueInterpreter(dataset, serie, n, 1);
+      double x1 = ValueInterpreter(dataset, serie, n + 1, 0);
+      double y1 = ValueInterpreter(dataset, serie, n + 1, 1);
+
+        
+ 
 
       // check whether segment is visible
       if (!xAxis->IntersectsWindow(x0, x1) &&
