@@ -206,6 +206,7 @@ public:
         series1->AddPoint(new BiDataPoint(15.0, 34.0));
         series1->AddPoint(new BiDataPoint(25.0, 4.0));
 
+        // Create a new data set.
         BiDataSet* dataset = new BiDataSet("XY Demo 4");
         
         // Add the series to the data set.
@@ -220,29 +221,28 @@ public:
         // Add the dataset to plot.
         plot->AddDataset(dataset);
 
-        // create left and bottom number axes
+        // Create the left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
-        // look at this code, we setup window, so
-        // only part of data will be shown, not entire dataset as
-        // in XYDemo1.
-        bottomAxis->SetWindowPosition(10);
-        bottomAxis->SetWindowWidth(10);
+        // Setup a window for the bottom axis. This means that only a part of the data
+        // is shown in the plot. The values are relative to the numerical values of the
+        // data space and are therefore always doubles.
+        bottomAxis->SetWindow(10.0, 10.0);
         bottomAxis->SetUseWindow(true);
 
-        // add axes to plot
+        // Add axes to plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // and finally create chart
+        // Create the chart.
         Chart *chart = new Chart(plot, GetName());
 
-        // set axis as scrolled, so chart panel can scroll its window.
+        // Set up the axis to be controlled by the scroll bar(s).
         chart->SetScrolledAxis(bottomAxis);
         return chart;
     }

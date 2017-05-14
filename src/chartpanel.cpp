@@ -74,12 +74,12 @@ BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
 END_EVENT_TABLE()
 
 wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const wxPoint &pos, const wxSize &size)
-: wxScrolledWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
+: wxWindow(parent, id, pos, size, wxHSCROLL | wxVSCROLL | wxFULL_REPAINT_ON_RESIZE)
 {
     // new wxLogWindow(this, "Log Window");
     
     SetBackgroundStyle(wxBG_STYLE_CUSTOM);
-    EnableScrolling(false, false);
+    // EnableScrolling(false, false);
 
     m_chart = NULL;
     m_mode = NULL;
@@ -89,8 +89,11 @@ wxChartPanel::wxChartPanel(wxWindow *parent, wxWindowID id, Chart *chart, const 
     Bind(wxEVT_TIMER, &wxChartPanel::OnThrottleTimer, this);
 
     ResizeBackBitmap(size);
+    
+    SetScrollbar(wxHORIZONTAL, 0, 0, scrollResolution);
+    AlwaysShowScrollbars(true, true);
 
-    SetScrollRate(1, 1);
+    // SetScrollRate(1, 1);
     SetChart(chart);
 }
 
@@ -114,8 +117,6 @@ void wxChartPanel::SetChart(Chart *chart)
         m_chart->Bind(EVT_CHART_CHANGED, &wxChartPanel::OnChartChanged, this);
         m_chart->SetChartPanel(this);
     }
-
-    RecalcScrollbars();
 
     // Update the chart with the current size.
     Resize(GetClientRect());
@@ -166,37 +167,8 @@ void wxChartPanel::ChartChanged(Chart *WXUNUSED(chart))
 
 void wxChartPanel::ChartScrollsChanged(Chart *WXUNUSED(chart))
 {
-    RecalcScrollbars();
-
     RedrawBackBitmap();
     Refresh(false);
-}
-
-void wxChartPanel::RecalcScrollbars()
-{
-    if (m_chart == NULL) 
-    {
-        SetScrollbars(1, 1, 0, 0, 0, 0, true);
-        return ;
-    }
-
-    Axis *horizAxis = m_chart->GetHorizScrolledAxis();
-    Axis *vertAxis = m_chart->GetVertScrolledAxis();
-
-    int noUnitsX = 0;
-    int noUnitsY = 0;
-    double xPos = 0.0;
-    double yPos = 0.0;
-
-    if (horizAxis != NULL)
-        GetAxisScrollParams(horizAxis, noUnitsX, xPos);
-
-    if (vertAxis != NULL)
-        GetAxisScrollParams(vertAxis, noUnitsY, yPos);
-
-    wxLogMessage("Scroll position set to %f, %f", xPos, yPos);
-    SetScrollbars(scrollPixelStep, scrollPixelStep, scrollResolution, scrollResolution, 
-                    (int)(xPos * scrollResolution), (int)(yPos * scrollResolution), true);
 }
 
 void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
@@ -242,7 +214,7 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 
     if (axis != NULL) 
     {
-        // Get the scroll position as a percentage.
+        // Get the scroll bar as a percentage.
         double winPos = (double) ev.GetPosition() / (double) scrollResolution;
         
         // Convert the scroll percentage to a data space value. Note: 100% scroll equates to the data space
@@ -386,6 +358,23 @@ void wxChartPanel::ResizeBackBitmap(wxSize size)
     m_backBitmap.Create(size.GetWidth(), size.GetHeight());
 }
 
+void wxChartPanel::UpdateScrollThumbs(int orientation)
+{
+    if (m_chart == NULL)
+        return;
+
+    Axis *axis = orientation == wxVERTICAL ? m_chart->GetVertScrolledAxis() : m_chart->GetHorizScrolledAxis();
+    
+    if (axis != NULL)
+    {
+        double dMin, dMax;
+        axis->GetDataBounds(dMin, dMax);
+        double sPos = (axis->GetWindowPosition() - dMin) / (dMax - dMin - axis->GetWindowWidth()) * (double)scrollResolution;
+        
+        SetScrollPos(orientation, sPos, false);
+    }
+}
+
 void wxChartPanel::OnChartChanged(wxCommandEvent& event)
 {
     /*
@@ -400,7 +389,7 @@ void wxChartPanel::OnChartChanged(wxCommandEvent& event)
 
 void wxChartPanel::OnThrottleTimer(wxTimerEvent& event)
 {
+    UpdateScrollThumbs(wxHORIZONTAL);
     RedrawBackBitmap();
     Refresh(false);
 }
-

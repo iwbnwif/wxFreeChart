@@ -31,7 +31,7 @@ public:
  * ChartPanel is wxWidgets panel for displaying chart.
  *
  */
-class WXDLLIMPEXP_FREECHART wxChartPanel : public wxScrolledWindow
+class WXDLLIMPEXP_FREECHART wxChartPanel : public wxWindow
 {
 public:
     wxChartPanel(wxWindow *parent, wxWindowID = wxID_ANY, Chart *chart = NULL,
@@ -91,7 +91,7 @@ protected:
 private:
     void RedrawBackBitmap();
     void ResizeBackBitmap(wxSize size);
-    void RecalcScrollbars();
+    void UpdateScrollThumbs(int orientation);
 
     //
     // Event handlers

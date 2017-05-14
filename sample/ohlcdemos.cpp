@@ -174,9 +174,9 @@ public:
         // Don't start the left axis at zero.
         leftAxis->ZeroOrigin(false);
 
-        // Setup window, to show 5 days with starting point at the first data point.
-        bottomAxis->SetWindow(dataset->GetPointData(0, 0, 0).As<wxDateTime>().GetTicks(), 
-                                5 * 24 * 60 * 60);
+        // Setup window, to show 5 days with starting point at the third data point.
+        bottomAxis->SetWindowPosition(dataset->GetPointData(0, 2, 0).As<wxDateTime>().GetTicks()); 
+        bottomAxis->SetWindowWidth(5 * 24 * 60 * 60);
         bottomAxis->SetUseWindow(true);
 
         // Configure bottom axis formatting.
