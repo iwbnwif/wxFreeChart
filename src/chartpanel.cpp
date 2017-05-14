@@ -32,17 +32,33 @@ DEFINE_EVENT_TYPE(wxEVT_FREECHART_RIGHT_UP)
 const int scrollPixelStep = 100;
 const int stepMult = 100;
 
-void GetAxisScrollParams(Axis *axis, int &noUnits, int &pos)
-{
-    double minValue, maxValue;
-    axis->GetDataBounds(minValue, maxValue);
+const int scrollResolution = 1000;
 
-    noUnits = RoundHigh(stepMult * (maxValue - minValue - axis->GetWindowWidth())) + 10/*XXX dirty hack*/;
+/**
+ * Helper function to calculate the position of the window start within the data space as a percentage.
+ * TODO: Rename as GetWindowStart and return a double.
+ * @param axis A pointer to the axis that manages the window.
+ * @param noUnits No longer used (deprecated).
+ * @param pos 
+ */
+void GetAxisScrollParams(Axis *axis, int &noUnits, double &pPos)
+{
+    // Get the min and max values for the data space.
+    double dMin, dMax; 
+    axis->GetDataBounds(dMin, dMax);
+    
+    // Get the current position in the data space.
+    double dPos = axis->GetWindowPosition();
+    
+    pPos = (dPos - dMin) / (dMax - dMin);
+/*
+    noUnits = RoundHigh(stepMult * (maxValue - minValue - axis->GetWindowWidth())) + 10; // XXX dirty hack
     if (noUnits < 0) {
         noUnits = 0;
     }
 
     pos = (int) (stepMult * (axis->GetWindowPosition() - minValue));
+*/
 }
 
 
@@ -158,7 +174,8 @@ void wxChartPanel::ChartScrollsChanged(Chart *WXUNUSED(chart))
 
 void wxChartPanel::RecalcScrollbars()
 {
-    if (m_chart == NULL) {
+    if (m_chart == NULL) 
+    {
         SetScrollbars(1, 1, 0, 0, 0, 0, true);
         return ;
     }
@@ -168,18 +185,16 @@ void wxChartPanel::RecalcScrollbars()
 
     int noUnitsX = 0;
     int noUnitsY = 0;
-    int xPos = 0;
-    int yPos = 0;
+    double xPos = 0.0;
+    double yPos = 0.0;
 
-    if (horizAxis != NULL) {
+    if (horizAxis != NULL)
         GetAxisScrollParams(horizAxis, noUnitsX, xPos);
-    }
 
-    if (vertAxis != NULL) {
+    if (vertAxis != NULL)
         GetAxisScrollParams(vertAxis, noUnitsY, yPos);
-    }
 
-    SetScrollbars(scrollPixelStep, scrollPixelStep, noUnitsX, noUnitsY, xPos, yPos, true);
+    SetScrollbars(scrollPixelStep, scrollPixelStep, scrollResolution, scrollResolution, xPos, yPos, true);
 }
 
 void wxChartPanel::OnPaint(wxPaintEvent &WXUNUSED(ev))
@@ -204,34 +219,43 @@ void wxChartPanel::OnSize(wxSizeEvent &ev)
 
 void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
 {
-    if (m_chart == NULL) {
-        return ;
-    }
+    if (m_chart == NULL)
+        return;
 
     Axis *axis = NULL;
 
-    switch (ev.GetOrientation()) {
-    case wxHORIZONTAL:
-        axis = m_chart->GetHorizScrolledAxis();
-        break;
-    case wxVERTICAL:
-        axis = m_chart->GetVertScrolledAxis();
-        break;
-    default: // BUG
-        return ;
+    switch (ev.GetOrientation()) 
+    {
+        case wxHORIZONTAL:
+            axis = m_chart->GetHorizScrolledAxis();
+            break;
+        
+        case wxVERTICAL:
+            axis = m_chart->GetVertScrolledAxis();
+            break;
+        
+        default:
+            wxFAIL;
     }
 
-    if (axis != NULL) {
-        double winPos = (double) ev.GetPosition() / (double) stepMult;
-        double minValue, maxValue;
-
-        axis->GetDataBounds(minValue, maxValue);
-        winPos += minValue;
-
-        axis->SetWindowPosition(winPos);
+    if (axis != NULL) 
+    {
+        // Get the scroll position as a percentage.
+        double winPos = (double) ev.GetPosition() / (double) scrollResolution;
         
+        // Convert the scroll percentage to a data space value. Note: 100% scroll equates to the data space
+        // range minus the data window size so that the last data point appears at the right of the plot.
+        double minValue, maxValue;
+        axis->GetDataBounds(minValue, maxValue);
+        double dPos = ((maxValue - minValue - axis->GetWindowWidth()) * 1.01 * winPos) + minValue;
+
+        // Update the axis window position (data space).
+        axis->SetWindowPosition(dPos);
+        
+        // Notify any watchers that the scroll position has changed.
         ChartScrollsChanged(m_chart);
     }
+    
     ev.Skip();
 }
 
