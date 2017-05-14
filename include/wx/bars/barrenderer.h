@@ -14,7 +14,6 @@
 #include "wx/areadraw.h"
 #include "wx/dataset1.h"
 
-class CategoryDataset;
 class BarRenderer;
 
 /**

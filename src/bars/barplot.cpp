@@ -10,6 +10,7 @@
 #include <wx/bars/barplot.h>
 
 #include <wx/axis/categoryaxis.h>
+#include <wx/bars/barrenderer.h>
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
 
@@ -55,16 +56,15 @@ bool BarPlot::AcceptAxis(Axis *axis)
 
 bool BarPlot::AcceptDataset(Dataset *dataset)
 {
-    return (wxDynamicCast(dataset, CategoryDataset) != NULL ||
-            wxDynamicCast(dataset, UniDataSet) != NULL);
+    return (wxDynamicCast(dataset, UniDataSet) != NULL);
 }
 
 void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
-    for (size_t nData = 0; nData < GetDatasetCount(); nData++) {
-        // CategoryDataset *dataset = (CategoryDataset *) GetDataset(nData);
+    for (size_t nData = 0; nData < GetDatasetCount(); nData++) 
+    {
         Dataset *dataset = GetDataset(nData);
-        // BarRenderer *renderer = dataset->GetRenderer();
+
         BarRenderer *renderer = wxDynamicCast(dataset->GetBaseRenderer(), BarRenderer);
         wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));
 
@@ -82,6 +82,7 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 // the base class.
 void BarPlot::OnMouseMove(wxMouseEvent& event)
 {
+    /*
     for (size_t set = 0; set < GetDatasetCount(); set++)
     {
         CategoryDataset* dataset = wxDynamicCast(GetDataset(set), CategoryDataset);
@@ -115,5 +116,6 @@ void BarPlot::OnMouseMove(wxMouseEvent& event)
     
     // If no points have been found, clear the tip.
     SetTipData(wxEmptyString);
+    */ 
     return;
 }

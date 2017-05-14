@@ -10,7 +10,6 @@
 #include "democollection.h"
 
 #include <wx/pie/pieplot.h>
-#include <wx/category/categorysimpledataset.h>
 
 class PieplotDemo1 : public ChartDemo
 {
@@ -33,10 +32,10 @@ public:
       PiePlot *plot = new PiePlot();
 
       // create dataset
-      CategorySimpleDataset* dataset = new CategorySimpleDataset(categories, WXSIZEOF(categories));
+      UniDataSet* dataset = new UniDataSet("Pie Example");
 
       // and add serie to it
-      dataset->AddSerie(_("Serie 1"), data, WXSIZEOF(data));
+      // dataset->AddSeries(_("Serie 1"), data, WXSIZEOF(data));
 
       // create category renderer for legend drawing
       dataset->SetRenderer(new CategoryRenderer(*colorScheme));

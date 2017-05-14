@@ -11,9 +11,8 @@
 #define PIEPLOT_H_
 
 #include <wx/plot.h>
-#include <wx/category/categorydataset.h>
-#include <wx/category/categoryrenderer.h>
 #include <wx/legend.h>
+#include <wx/category/categoryrenderer.h>
 #include <wx/xy/xyarearenderer.h>
 
 #include <wx/colorscheme.h>
@@ -30,7 +29,7 @@ public:
     PiePlot();
     virtual ~PiePlot();
 
-    void SetDataset(CategoryDataset *dataset);
+    void SetDataset(UniDataSet *dataset);
 
     void SetUsedSerie(size_t serie)
     {
@@ -73,7 +72,7 @@ private:
     wxFont m_labelsFont;
     wxPen m_outlinePen;
 
-    CategoryDataset *m_dataset;
+    UniDataSet* m_dataset;
 
     ColorScheme m_colorScheme;
 

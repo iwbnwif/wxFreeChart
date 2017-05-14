@@ -11,9 +11,8 @@
 #define LEGEND_H_
 
 #include <wx/wxfreechartdefs.h>
-#include <wx/dataset.h>
+#include <wx/dataset1.h>
 #include <wx/areadraw.h>
-#include <wx/category/categorydataset.h>
 /**
  * Legend.
  * Performs legend drawing.
@@ -46,7 +45,7 @@ public:
      * @param datasets datasets array
      */
     void Draw(wxDC &dc, wxRect rc, DatasetArray &datasets);
-    void Draw(wxDC &dc, wxRect rc, CategoryDataset &dataset);
+    void Draw(wxDC &dc, wxRect rc, UniDataSet &dataset);
 
     /**
      * Returns legend vertical position.
@@ -91,7 +90,7 @@ public:
      * @return size needed for legend area
      */
     wxSize GetExtent(wxDC &dc, DatasetArray &datasets);
-    wxSize GetExtent(wxDC &dc, CategoryDataset &dataset);
+    wxSize GetExtent(wxDC &dc, UniDataSet &dataset);
 
 private:
     int m_vertPosition;

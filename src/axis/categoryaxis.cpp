@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/categoryaxis.h>
-#include <wx/category/categorydataset.h>
 #include <wx/dataset1.h>
 
 IMPLEMENT_CLASS(CategoryAxis, Axis)
@@ -25,13 +24,8 @@ CategoryAxis::~CategoryAxis()
 
 bool CategoryAxis::AcceptDataset(Dataset *dataset)
 {
-    //
-    // It must be CategoryDataset and this class supports only one
-    // dataset
-    //
-    return ((wxDynamicCast(dataset, CategoryDataset) != NULL ||
-            wxDynamicCast(dataset, UniDataSet))
-        && m_datasets.Count() == 0);
+    return (wxDynamicCast(dataset, UniDataSet)
+                && m_datasets.Count() == 0);
 }
 
 wxSize CategoryAxis::GetLongestLabelExtent(wxDC &dc)
@@ -53,7 +47,6 @@ void CategoryAxis::GetDataBounds(double &minValue, double &maxValue) const
 
 bool CategoryAxis::UpdateBounds()
 {
-    // CategoryDataset *dataset = wxDynamicCast(m_datasets[0], CategoryDataset);
     UniDataSet *dataset = wxDynamicCast(m_datasets[0], UniDataSet);
     if (dataset == NULL) {
         wxLogError(wxT("CategoryAxis::UpdateBounds: Dataset is not UniDataSet")); // BUG!

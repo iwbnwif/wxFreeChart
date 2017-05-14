@@ -57,7 +57,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
     }
 }
 
-void Legend::Draw(wxDC &dc, wxRect rc, CategoryDataset &dataset)
+void Legend::Draw(wxDC &dc, wxRect rc, UniDataSet &dataset)
 {
     dc.SetFont(m_font);
 
@@ -66,9 +66,9 @@ void Legend::Draw(wxDC &dc, wxRect rc, CategoryDataset &dataset)
     wxCoord x = rc.x + m_margin;
     wxCoord y = rc.y + m_margin;
 
-    for (size_t n = 0; n < dataset.GetCount(); n++) {
+    for (size_t n = 0; n < dataset.GetCount(0); n++) {
       
-      wxString name = dataset.GetName(n);
+      wxString name = dataset.GetSerieName(n);
       wxSize textExtent = dc.GetTextExtent(name);
 
       Renderer *renderer = dataset.GetBaseRenderer();
@@ -113,7 +113,7 @@ wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
     return extent;
 }
 
-wxSize Legend::GetExtent(wxDC &dc, CategoryDataset &dataset)
+wxSize Legend::GetExtent(wxDC &dc, UniDataSet &dataset)
 {
     wxSize extent(0, 0);
 
@@ -121,8 +121,8 @@ wxSize Legend::GetExtent(wxDC &dc, CategoryDataset &dataset)
 
     extent.y = 2 * m_margin;
 
-    for (size_t n = 0; n < dataset.GetCount(); n++) {
-      wxSize textExtent = dc.GetTextExtent(dataset.GetName(n));
+    for (size_t n = 0; n < dataset.GetCount(0); n++) {
+      wxSize textExtent = dc.GetTextExtent(dataset.GetSerieName(n));
 
       wxCoord symbolSize = textExtent.y; // symbol rectangle width and height
 
@@ -131,7 +131,7 @@ wxSize Legend::GetExtent(wxDC &dc, CategoryDataset &dataset)
       extent.x = wxMax(extent.x, width);
 
       extent.y += textExtent.y;
-      if (n < dataset.GetCount() - 1) {
+      if (n < dataset.GetCount(0) - 1) {
         extent.y += labelsSpacing;
       }
     }

@@ -10,7 +10,6 @@
 #ifndef BARPLOT_H_
 #define BARPLOT_H_
 
-#include <wx/category/categorydataset.h>
 #include <wx/dataset1.h>
 #include <wx/xy/xyplot.h>
 

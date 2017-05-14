@@ -9,7 +9,6 @@
 
 #include <wx/axis/numberaxis.h>
 #include <wx/xy/xydataset.h>
-#include <wx/category/categorydataset.h>
 
 #ifdef WIN32
 #include <float.h>
