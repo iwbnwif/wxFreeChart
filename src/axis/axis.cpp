@@ -119,11 +119,12 @@ wxCoord Axis::ToGraphics(wxDC& WXUNUSED(dc), int minCoord, int gRange, double va
 
     minCoord += m_marginMin;
     gRange -= (m_marginMin + m_marginMax);
-    if (gRange < 0) {
+    if (gRange < 0) 
         gRange = 0;
-    }
 
-    if (m_useWin) {
+    // Scale for a windowed (scrolling) axis.
+    if (m_useWin) 
+    {
         minValue = m_winPos;
         maxValue = m_winPos + m_winWidth;
     }
@@ -237,22 +238,21 @@ bool AxisShare::AcceptDataset(Dataset *dataset)
 
 wxCoord ToGraphics(int minCoord, int gRange, double minValue, double maxValue, wxCoord margin, bool vertical, double value)
 {
-    double k;
+    double k; // Percentage offset within the graphics space.
     double valueRange = maxValue - minValue;
 
     minCoord += margin / 2;
     gRange -= margin;
 
-    if (gRange <= 0) {
+    if (gRange <= 0)
         return minCoord;
-    }
 
-    if (vertical) {
+    // Vertical graphics coords are inverted (Y = 0 at the top).
+    if (vertical)
         k = (maxValue - value) / valueRange;
-    }
-    else {
+
+    else
         k = (value - minValue) / valueRange;
-    }
 
     return (wxCoord) (k * gRange + minCoord);
 }
@@ -264,16 +264,15 @@ double ToData(int minCoord, int gRange, double minValue, double maxValue, wxCoor
     minCoord += margin / 2;
     gRange -= margin;
 
-    if (gRange <= 0) {
+    if (gRange <= 0)
         return 0;
-    }
 
-    if (vertical) {
+    // Vertical graphics coords are inverted (Y = 0 at the top).
+    if (vertical)
         return maxValue - ((g - minCoord) * valueRange / gRange);
-    }
-    else {
+
+    else
         return minValue + ((g - minCoord) * valueRange / gRange);
-    }
 }
 
 WX_DEFINE_EXPORTED_OBJARRAY(AxisArray)
