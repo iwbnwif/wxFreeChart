@@ -37,23 +37,32 @@ public:
 
     virtual Chart *Create()
     {
+        // Generate some quote data.
+        wxVector<OHLCItem> quotes;
+        quotes.push_back(OHLCItem(64.09,64.34,63.17,63.42));
+        quotes.push_back(OHLCItem(63.34,63.52,61.08,61.50));
+        quotes.push_back(OHLCItem(61.41,62.40,60.97,62.09));
+        quotes.push_back(OHLCItem(61.71,63.39,61.41,63.36));
+        quotes.push_back(OHLCItem(63.39,63.89,62.75,63.54));
+        quotes.push_back(OHLCItem(63.64,63.79,62.79,63.66));
+        quotes.push_back(OHLCItem(63.61,65.26,63.49,65.11));
+        quotes.push_back(OHLCItem(65.11,65.86,64.68,65.73));
+        quotes.push_back(OHLCItem(65.72,66.76,65.26,66.75));
+        quotes.push_back(OHLCItem(66.89,66.91,65.51,65.88));
+        quotes.push_back(OHLCItem(66.68,67.92,66.58,66.75));
+        quotes.push_back(OHLCItem(66.51,66.86,65.72,66.38));
+        quotes.push_back(OHLCItem(66.40,67.37,65.83,67.15));
+        quotes.push_back(OHLCItem(67.27,68.23,67.27,67.78));
+        quotes.push_back(OHLCItem(67.66,67.68,66.61,67.24));
+
+        // Create a series.
         DataSeries* series = new DataSeries("Series 1");
         
-        series->AddPoint(new BiDataPoint(wxDateTime(1, wxDateTime::Jan, 2016), OHLCItem(64.09,64.34,63.17,63.42)));
-        series->AddPoint(new BiDataPoint(wxDateTime(2, wxDateTime::Jan, 2016), OHLCItem(63.34,63.52,61.08,61.50)));
-        series->AddPoint(new BiDataPoint(wxDateTime(3, wxDateTime::Jan, 2016), OHLCItem(61.41,62.40,60.97,62.09)));
-        series->AddPoint(new BiDataPoint(wxDateTime(4, wxDateTime::Jan, 2016), OHLCItem(61.71,63.39,61.41,63.36)));
-        series->AddPoint(new BiDataPoint(wxDateTime(5, wxDateTime::Jan, 2016), OHLCItem(63.39,63.89,62.75,63.54)));
-        series->AddPoint(new BiDataPoint(wxDateTime(6, wxDateTime::Jan, 2016), OHLCItem(63.64,63.79,62.79,63.66)));
-        series->AddPoint(new BiDataPoint(wxDateTime(7, wxDateTime::Jan, 2016), OHLCItem(63.61,65.26,63.49,65.11)));
-        series->AddPoint(new BiDataPoint(wxDateTime(8, wxDateTime::Jan, 2016), OHLCItem(65.11,65.86,64.68,65.73)));
-        series->AddPoint(new BiDataPoint(wxDateTime(9, wxDateTime::Jan, 2016), OHLCItem(65.72,66.76,65.26,66.75)));
-        series->AddPoint(new BiDataPoint(wxDateTime(10, wxDateTime::Jan, 2016), OHLCItem(66.89,66.91,65.51,65.88)));
-        series->AddPoint(new BiDataPoint(wxDateTime(11, wxDateTime::Jan, 2016), OHLCItem(66.68,67.92,66.58,66.75)));
-        series->AddPoint(new BiDataPoint(wxDateTime(12, wxDateTime::Jan, 2016), OHLCItem(66.51,66.86,65.72,66.38)));
-        series->AddPoint(new BiDataPoint(wxDateTime(13, wxDateTime::Jan, 2016), OHLCItem(66.40,67.37,65.83,67.15)));
-        series->AddPoint(new BiDataPoint(wxDateTime(14, wxDateTime::Jan, 2016), OHLCItem(67.27,68.23,67.27,67.78)));
-        series->AddPoint(new BiDataPoint(wxDateTime(15, wxDateTime::Jan, 2016), OHLCItem(67.66,67.68,66.61,67.24)));
+        // Set the start date and populate the series.
+        wxDateTime dt = wxDateTime::Today() - wxDateSpan(0, 0, 0, 15);
+
+        for (size_t i = 0; i < quotes.size(); i++, dt += wxDateSpan(0, 0, 0, 1))
+            series->AddPoint(new BiDataPoint(dt, quotes[i]));
 
         // Create the dataset.
         BiDataSet* dataset = new BiDataSet("OHLC Demo 1");
@@ -77,9 +86,10 @@ public:
         // Don't start the left axis at zero.
         leftAxis->ZeroOrigin(false);
 
-        // setup window, so we will see 5 bars at once, not entire dataset
-        bottomAxis->SetWindow(wxDateTime(8, wxDateTime::Jan, 2016).GetTicks(), 5 * 24 * 60 * 60);
-        bottomAxis->SetUseWindow(true);
+        // Setup window, to show 5 days at once (not entire dataset).
+        // bottomAxis->SetWindow(wxDateTime(8, wxDateTime::Jan, 2016).GetTicks(), 5 * 24 * 60 * 60);
+        // bottomAxis->SetWindow(0, 5);
+        // bottomAxis->SetUseWindow(true);
 
         bottomAxis->SetVerticalLabelText(true);
         bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
@@ -96,12 +106,11 @@ public:
         Chart *chart = new Chart(plot, GetName());
 
         // set scrolling axis to chart, so it will be possible to scroll horizontally
-        chart->SetScrolledAxis(bottomAxis);
+        // chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
 };
 
-#ifdef FOO
 /**
  * Simple OHLC demo with candlestick renderer.
  */
@@ -115,89 +124,81 @@ public:
 
     virtual Chart *Create()
     {
-        OHLCItem data[] = {
-            { 64.09,64.34,63.17,63.42,0},
-            { 63.34,63.52,61.08,61.50,0},
-            { 61.41,62.40,60.97,62.09,0},
-            { 62.00,62.79,61.39,61.72,0},
-            { 61.71,63.39,61.41,63.36,0},
-            { 63.39,63.89,62.75,63.54,0},
-            { 63.64,63.79,62.79,63.66,0},
-            { 63.61,65.26,63.49,65.11,0},
-            { 65.11,65.86,64.68,65.73,0},
-            { 65.72,66.76,65.26,66.75,0},
-            { 66.89,66.91,65.51,65.88,0},
-            { 66.68,67.92,66.58,66.75,0},
-            { 66.51,66.86,65.72,66.38,0},
-            { 66.40,67.37,65.83,67.15,0},
-            { 67.27,68.23,67.27,67.78,0},
-            { 67.66,67.68,66.61,67.24,0}
-        };
+        // Generate some quote data.
+        wxVector<OHLCItem> quotes;
+        quotes.push_back(OHLCItem(64.09,64.34,63.17,63.42));
+        quotes.push_back(OHLCItem(63.34,63.52,61.08,61.50));
+        quotes.push_back(OHLCItem(61.41,62.40,60.97,62.09));
+        quotes.push_back(OHLCItem(61.71,63.39,61.41,63.36));
+        quotes.push_back(OHLCItem(63.39,63.89,62.75,63.54));
+        quotes.push_back(OHLCItem(63.64,63.79,62.79,63.66));
+        quotes.push_back(OHLCItem(63.61,65.26,63.49,65.11));
+        quotes.push_back(OHLCItem(65.11,65.86,64.68,65.73));
+        quotes.push_back(OHLCItem(65.72,66.76,65.26,66.75));
+        quotes.push_back(OHLCItem(66.89,66.91,65.51,65.88));
+        quotes.push_back(OHLCItem(66.68,67.92,66.58,66.75));
+        quotes.push_back(OHLCItem(66.51,66.86,65.72,66.38));
+        quotes.push_back(OHLCItem(66.40,67.37,65.83,67.15));
+        quotes.push_back(OHLCItem(67.27,68.23,67.27,67.78));
+        quotes.push_back(OHLCItem(67.66,67.68,66.61,67.24));
 
-        const wxChar *dates[] = {
-            wxT("20060317"),
-            wxT("20060320"),
-            wxT("20060321"),
-            wxT("20060322"),
-            wxT("20060323"),
-            wxT("20060324"),
-            wxT("20060327"),
-            wxT("20060328"),
-            wxT("20060329"),
-            wxT("20060330"),
-            wxT("20060331"),
-            wxT("20060403"),
-            wxT("20060404"),
-            wxT("20060405"),
-            wxT("20060406"),
-            wxT("20060407"),
-        };
+        // Create a series.
+        DataSeries* series = new DataSeries("Series 1");
+        
+        // Set the start date and populate the series.
+        wxDateTime dt = wxDateTime::Today() - wxDateSpan(0, 0, 0, 15);
 
-        wxDateTime dt;
-        for (size_t n = 0; n < WXSIZEOF(data); n++) {
-            dt.ParseFormat(dates[n], wxT("%Y%m%d"));
-            // data[n].date = dt.GetTicks();
-        }
+        for (size_t i = 0; i < quotes.size(); i++, dt += wxDateSpan(0, 0, 0, 1))
+            series->AddPoint(new BiDataPoint(dt, quotes[i]));
 
-        // first step: create plot
-        OHLCPlot *plot = new OHLCPlot();
+        // Create the dataset.
+        BiDataSet* dataset = new BiDataSet("OHLC Demo 2");
+        
+        // Add the series to the dataset.
+        dataset->AddSeries(series);
 
-        // create dataset
-        OHLCSimpleDataset *dataset = new OHLCSimpleDataset(data, WXSIZEOF(data));
-
-        // set renderer to dataset
+        // Create an OHLC bars renderer for the dataset.
         dataset->SetRenderer(new OHLCCandlestickRenderer());
 
-        // add dataset to plot
+        // Create the plot.
+        OHLCPlot* plot = new OHLCPlot();
+
+        // Add the dataset to plot.
         plot->AddDataset(dataset);
 
-        // add left number (for quotes) and bottom date axes
+        // Create the left number (quote) axis and a horizontal date axis.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         DateAxis *bottomAxis = new DateAxis(AXIS_BOTTOM);
         
         // Don't start the left axis at zero.
         leftAxis->ZeroOrigin(false);
-        
-        // setup window
-        bottomAxis->SetWindow(0, 5);
-        bottomAxis->SetUseWindow(true);
+
+        // Setup window, to show 5 days at once (not entire dataset).
+        // bottomAxis->SetWindow(wxDateTime(8, wxDateTime::Jan, 2016).GetTicks(), 5 * 24 * 60 * 60);
+        // bottomAxis->SetWindow(0, 5);
+        // bottomAxis->SetUseWindow(true);
 
         bottomAxis->SetVerticalLabelText(true);
         bottomAxis->SetDateFormat(wxT("%d-%m-%y"));
+
+        // Add the axes to the plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
 
-        // link axes and dataset
+        // Link the axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // and finally create chart
+        // Create a chart.
         Chart *chart = new Chart(plot, GetName());
 
-        chart->SetScrolledAxis(bottomAxis);
+        // set scrolling axis to chart, so it will be possible to scroll horizontally
+        // chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
 };
+
+#ifdef FOO
 
 /**
  * Simple OHLC demo with candlestick renderer, and composite date axis.
@@ -524,9 +525,9 @@ public:
 #endif
 
 ChartDemo *ohlcDemos[] = {
-    new OHLCDemo1()
+    new OHLCDemo1(),
+    new OHLCDemo2()
     /*
-    new OHLCDemo2(),
     new OHLCDemo3(),
     new OHLCDemo4(),
     new OHLCDemo5(),
