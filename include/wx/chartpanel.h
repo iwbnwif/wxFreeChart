@@ -85,13 +85,11 @@ public:
 
     virtual void ChartScrollsChanged(Chart *chart);
 
-    // TODO: Quick hack to allow axis plot to call to cause refresh from event - set back to private.
-    void RedrawBackBitmap();
-
 protected:
     void OnChartChanged(wxCommandEvent& event);
 
 private:
+    void RedrawBackBitmap();
     void ResizeBackBitmap(wxSize size);
     void RecalcScrollbars();
 
