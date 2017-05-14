@@ -159,6 +159,8 @@ void AxisPlot::AddAxis(Axis *axis)
         wxLogError(wxT("AxisPlot::AddAxis: invalid location value %i"), axis->GetLocation());
         return ;
     }
+    
+    axis->Bind(EVT_AXIS_CHANGED, &AxisPlot::OnAxisChanged, this);
 }
 
 void AxisPlot::AddDataset(Dataset *dataset)
@@ -501,6 +503,11 @@ void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
 }
 
 void AxisPlot::DatasetChanged(Dataset *dataset)
+{
+    PlotChanged();
+}
+
+void AxisPlot::OnAxisChanged(wxCommandEvent& event)
 {
     PlotChanged();
 }

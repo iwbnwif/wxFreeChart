@@ -248,8 +248,10 @@ public:
      */
     void SetUseWindow(bool useWin)
     {
-        if (m_useWin != useWin) {
+        if (m_useWin != useWin) 
+        {
             m_useWin = useWin;
+            AxisChanged();
         }
     }
 
@@ -260,9 +262,11 @@ public:
      */
     void SetWindow(double winPos, double winWidth)
     {
-        if (m_winPos != winPos || m_winWidth != winWidth) {
+        if (m_winPos != winPos || m_winWidth != winWidth) 
+        {
             m_winPos = winPos;
             m_winWidth = winWidth;
+            AxisChanged();
         }
     }
 

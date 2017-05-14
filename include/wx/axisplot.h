@@ -219,6 +219,13 @@ public:
      */
     virtual void OnDataChanged(wxCommandEvent& event);
 
+
+    /**
+     * Event handler called when a linked axis is changed.
+     * @param event Details of the change event.
+     */
+    virtual void OnAxisChanged(wxCommandEvent& event);
+
     //
     // DatasetObserver
     //
