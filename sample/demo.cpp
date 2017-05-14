@@ -103,44 +103,44 @@ END_EVENT_TABLE()
 MainFrame::MainFrame()
 : wxFrame(NULL, wxID_ANY, wxString::Format(wxT("wxFreeChart demo %s"), version.c_str()), wxDefaultPosition, wxSize(800, 445))
 {   
-   wxLog::SetActiveTarget(new wxLogStream(&std::cout));
+    wxLog::SetActiveTarget(new wxLogStream(&std::cout));
 
     m_mgr.SetManagedWindow(this);
     
     m_chartPanel = new wxChartPanel(this);
     m_mgr.AddPane(m_chartPanel,
-            wxAuiPaneInfo().Center().BestSize(400, 400).CloseButton(false).Caption(wxT("chart")));
+            wxAuiPaneInfo().Center().BestSize(400, 400).CloseButton(false).Caption(wxT("Chart Panel")));
 
     ChartSelector *chartSelector = new ChartSelector(this, m_chartPanel, DemoCollection::Get());
     m_mgr.AddPane(chartSelector,
-            wxAuiPaneInfo().Left().Caption(wxT("chart types")).MinSize(350, 400).BestSize(350, 400).CloseButton(false));
+            wxAuiPaneInfo().Left().Caption(wxT("Chart Types")).MinSize(350, 400).BestSize(350, 400).CloseButton(false));
 
     m_mgr.Update();
 
-    // Create main menu
+    // Create main menu bar.
     wxMenuBar *menuBar = new wxMenuBar();
 
+    // Create File submenu.
     wxMenu *menuFile = new wxMenu();
-
     menuFile->Append(MENU_FILE_SAVE_AS_PNG, wxT("Save as PNG"));
     menuFile->AppendSeparator();
-
 #ifdef wxUSE_GRAPHICS_CONTEXT
     menuFile->AppendCheckItem(MENU_FILE_ENABLE_ANTIALIAS, wxT("Enable antialiasing"));
     menuFile->Check(MENU_FILE_ENABLE_ANTIALIAS, true);
     m_chartPanel->SetAntialias(true);
     menuFile->AppendSeparator();
 #endif
-
     menuFile->Append(wxID_EXIT, wxT("E&xit"));
 
-
+    // Create Help submenu.
     wxMenu *menuHelp = new wxMenu();
     menuHelp->Append(wxID_ABOUT, wxT("&About"));
 
+    // Add submenus to menu bar.
     menuBar->Append(menuFile, wxT("&File"));
     menuBar->Append(menuHelp, wxT("&Help"));
 
+    // Set the menu bar for this application.
     SetMenuBar(menuBar);
 
     Centre();   

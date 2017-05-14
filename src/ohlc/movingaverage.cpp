@@ -12,54 +12,56 @@
 
 IMPLEMENT_CLASS(MovingAverage, XYDataset)
 
-MovingAverage::MovingAverage(OHLCDataset *ohlcDataset, int period)
+MovingAverage::MovingAverage(BiDataSet* dataset, int period)
 {
-    m_ohlcDataset = ohlcDataset;
+    m_SourceDataset = dataset;
     m_period = period;
 
-    m_ohlcDataset->AddRef();
+    m_SourceDataset->AddRef();
 }
 
 MovingAverage::~MovingAverage()
 {
-    SAFE_UNREF(m_ohlcDataset);
+    SAFE_UNREF(m_SourceDataset);
 }
 
-size_t MovingAverage::GetSerieCount()
+size_t MovingAverage::GetSerieCount() const
 {
     return 1;
 }
 
-size_t MovingAverage::GetCount(size_t WXUNUSED(serie))
+size_t MovingAverage::GetCount(size_t WXUNUSED(serie)) const
 {
-    int count = m_ohlcDataset->GetCount() - m_period + 1;
+    int count = m_SourceDataset->GetCount(0) - m_period + 1;
     if (count < 0) {
         count = 0; // period is larger than OHLC data
     }
     return count;
 }
 
-wxString MovingAverage::GetSerieName(size_t WXUNUSED(serie))
+wxString MovingAverage::GetSerieName(size_t WXUNUSED(serie)) const
 {
     return wxT("Moving average");
 }
 
-double MovingAverage::GetX(size_t index, size_t WXUNUSED(serie))
+double MovingAverage::GetX(size_t index, size_t WXUNUSED(serie)) const
 {
     return index + m_period - 1;
 }
 
-double MovingAverage::GetY(size_t index, size_t WXUNUSED(serie))
+double MovingAverage::GetY(size_t index, size_t WXUNUSED(serie)) const
 {
     wxCHECK_MSG(m_period != 0, 0, wxT("MovingAverage::GetX"));
 
     double sum = 0;
 
-    for (size_t n = index; n < index + m_period; n++) {
-        OHLCItem *item = m_ohlcDataset->GetItem(n);
+    for (size_t n = index; n < index + m_period; n++) 
+    {
+        const OHLCItem& item = m_SourceDataset->GetPointData(0, n, 1).As<OHLCItem>();
 
-        sum += item->close;
+        sum += item.close;
     }
+    
     return sum / m_period;
 }
 
