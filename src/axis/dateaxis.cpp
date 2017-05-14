@@ -43,6 +43,10 @@ bool DateAxis::UpdateBounds()
     if (dateCount != m_dateCount) 
     {
         m_dateCount = dateCount;
+        if (dateCount)
+            m_hasLabels = true;
+        else
+            m_hasLabels = false;
         return true;
     }
     else
@@ -77,7 +81,14 @@ void DateAxis::GetDataBounds(double &minValue, double &maxValue) const
 
 double DateAxis::GetValue(size_t step)
 {
-    return step;
+    // Dates must always be in the first dimension of any data point.
+    DataSet* dataset = wxDynamicCast(m_datasets[0], DataSet);
+    wxASSERT(dataset && dataset->GetPointData(0, step, 0).CheckType<wxDateTime>());
+    
+    // Retrieve the wxAny object for this data point and convert to a date string.
+    const wxDateTime& dt = dataset->GetPointData(0, step, 0).As<wxDateTime>();
+
+    return dt.GetTicks();
 }
 
 void DateAxis::GetLabel(size_t step, wxString &label)
