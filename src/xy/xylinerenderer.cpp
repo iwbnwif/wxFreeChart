@@ -14,22 +14,6 @@ IMPLEMENT_CLASS(XYLineRendererBase, XYRenderer)
 IMPLEMENT_CLASS(XYLineRenderer, XYLineRendererBase)
 IMPLEMENT_CLASS(XYLineStepRenderer, XYLineRendererBase)
 
-
-double ValueInterpreter(DataSet* dataset, const size_t series, const size_t index, const size_t dimension)
-{
-    const wxAny& data = dataset->GetPointData(series, index, dimension);
-    
-    if (data.CheckType<double>())
-        return data.As<double>();
-        
-    if (data.CheckType<wxDateTime>())
-        return data.As<wxDateTime>().GetTicks();
-        
-    wxFAIL;
-    
-    return 0;
-}
-
 //
 // XYLineRendererBase
 //
@@ -124,12 +108,12 @@ double XYLineRendererBase::GetMax(const Dataset* d, size_t dimension) const
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
     
-    double max = ValueInterpreter(dataset, 0, 0, dimension);
+    double max = dataset->InterpretDataAsValue(0, 0, dimension);
     
     for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            max = wxMax(max, ValueInterpreter(dataset, ser, pt, dimension));
+            max = wxMax(max, dataset->InterpretDataAsValue(ser, pt, dimension));
     }
     
     return max; 
@@ -140,15 +124,15 @@ double XYLineRendererBase::GetMin(const Dataset* d, size_t dimension) const
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
 
-    double min = ValueInterpreter(dataset, 0, 0, dimension);
+    double min = dataset->InterpretDataAsValue(0, 0, dimension);
     
     for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            min = wxMin(min, ValueInterpreter(dataset, ser, pt, dimension));
+            min = wxMin(min, dataset->InterpretDataAsValue(ser, pt, dimension));
     }
     
-    return min;
+    return dataset->GetInterpreter()->AsValue(min, dimension);
 }
 
 
@@ -169,52 +153,42 @@ XYLineRenderer::~XYLineRenderer()
 
 void XYLineRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset)
 {
-  FOREACH_SERIE(serie, dataset) {
-    if (dataset->GetCount(serie) < 2) {
-      continue;
-    }
-
-    for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) 
+    FOREACH_SERIE(serie, dataset) 
     {
-        /*
-      double x0 = dataset->GetFirst(serie, n);
-      double y0 = dataset->GetSecond(serie, n);
-      double x1 = dataset->GetFirst(serie, n + 1);
-      double y1 = dataset->GetSecond(serie, n + 1);
-       */
-      double x0 = ValueInterpreter(dataset, serie, n, 0);
-      double y0 = ValueInterpreter(dataset, serie, n, 1);
-      double x1 = ValueInterpreter(dataset, serie, n + 1, 0);
-      double y1 = ValueInterpreter(dataset, serie, n + 1, 1);
+        if (dataset->GetCount(serie) < 2)
+            continue;
 
-        
- 
+        for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) 
+        {
+            double x0 = dataset->InterpretDataAsValue(serie, n, 0);
+            double y0 = dataset->InterpretDataAsValue(serie, n, 1);
+            double x1 = dataset->InterpretDataAsValue(serie, n + 1, 0);
+            double y1 = dataset->InterpretDataAsValue(serie, n + 1, 1);
 
-      // check whether segment is visible
-      if (!xAxis->IntersectsWindow(x0, x1) &&
-          !yAxis->IntersectsWindow(y0, y1)) {
-        continue;
-      }
+            // Check whether segment is visible.
+            if (!xAxis->IntersectsWindow(x0, x1) &&
+                !yAxis->IntersectsWindow(y0, y1)) 
+                continue;
 
-      ClipHoriz(xAxis, x0, y0, x1, y1);
-      ClipHoriz(xAxis, x1, y1, x0, y0);
-      ClipVert(yAxis, x0, y0, x1, y1);
-      ClipVert(yAxis, x1, y1, x0, y0);
+            ClipHoriz(xAxis, x0, y0, x1, y1);
+            ClipHoriz(xAxis, x1, y1, x0, y0);
+            ClipVert(yAxis, x0, y0, x1, y1);
+            ClipVert(yAxis, x1, y1, x0, y0);
 
-      // translate to graphics coordinates.
-      wxCoord xg0, yg0;
-      wxCoord xg1, yg1;
+            // translate to graphics coordinates.
+            wxCoord xg0, yg0;
+            wxCoord xg1, yg1;
 
-      xg0 = xAxis->ToGraphics(dc, rc.x, rc.width, x0);
-      yg0 = yAxis->ToGraphics(dc, rc.y, rc.height, y0);
-      xg1 = xAxis->ToGraphics(dc, rc.x, rc.width, x1);
-      yg1 = yAxis->ToGraphics(dc, rc.y, rc.height, y1);
+            xg0 = xAxis->ToGraphics(dc, rc.x, rc.width, x0);
+            yg0 = yAxis->ToGraphics(dc, rc.y, rc.height, y0);
+            xg1 = xAxis->ToGraphics(dc, rc.x, rc.width, x1);
+            yg1 = yAxis->ToGraphics(dc, rc.y, rc.height, y1);
 
-      wxPen *pen = GetSeriePen(serie);
-      dc.SetPen(*pen);
-      dc.DrawLine(xg0, yg0, xg1, yg1);
+            wxPen *pen = GetSeriePen(serie);
+            dc.SetPen(*pen);
+            dc.DrawLine(xg0, yg0, xg1, yg1);
+        }
     }
-  }
 }
 
 //

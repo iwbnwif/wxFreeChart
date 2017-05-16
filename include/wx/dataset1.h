@@ -18,6 +18,86 @@
 // TODO: Renderers should be assocated with plots and not data sets.
 class XYRenderer;
 
+enum DataTypeTrait
+{
+    TypeUndefined,
+    TypeTraitNominal,
+    TypeTraitOrdinal,
+    TypeTraitInterval,
+    TypeTraitRatio
+};
+
+
+/**
+ * Helper class to assist clients of data sets in interpreting the content of
+ * the dataset.
+ * This class is designed to be overidden in order to extend the list of types that
+ * are able to be stored in a data set and plotted on a chart. The default version
+ * of this class provides interpretation of int, float, double and wxDateTime types.
+ */
+class WXDLLIMPEXP_FREECHART DataInterpreter
+{
+public:
+
+    DataInterpreter();
+    virtual ~DataInterpreter();
+    
+    /**
+     * Re-interprets a value representation of the data back to its wxAny format. This is of limited
+     * use for complex data types, but is useful for data types that are able to be represented by a 
+     * rational value.
+     * @param value The internal representation of the wxAny object.
+     * @param dimension The dimension of the object to be interpreted. This is necessary because
+     * two or more dimensions may use the same data type, but it is necessary to differentiate 
+     * them because they may have different interpretations (see Julian date axis example).
+     * @param options Possible options to modify how a particular data object is re-interpreted.
+     * This is not used in the default class, but can be used by subclasses along with
+     * specialised Axis and Renderer classes to fine tune the part of the data that is
+     * treated as being ordinal.
+     * @return The typed data.
+     */
+    virtual wxAny AsAny(double value, size_t dimension, int options = 0) const;
+
+    /**
+     * Re-interprets an object representation to a different wxAny format.
+     * @param data The internal representation of the wxAny object.
+     * @param dimension The dimension of the object to be interpreted. This is necessary because
+     * two or more dimensions may use the same data type, but it is necessary to differentiate 
+     * them because they may have different interpretations (see Julian date axis example).
+     * @param options Possible options to modify how a particular data object is re-interpreted.
+     * This is not used in the default class, but can be used by subclasses along with
+     * specialised Axis and Renderer classes to fine tune the part of the data that is
+     * treated as being ordinal.
+     * @return The typed data.
+     */
+    virtual wxAny AsAny(const wxAny& data, size_t dimension, int options = 0) const;
+
+    /**
+     * Interprets the content of the data contained within the wxAny container in an
+     * ordinal way and returns the coresponding value.
+     * @param data The wxAny object to be interpreted. The object must contain one of
+     * the known types otherwise an error (assert) will be raised.
+     * @param dimension The dimension of the object to be interpreted. This is necessary because
+     * two or more dimensions may use the same data type, but it is necessary to differentiate 
+     * them because they may have different interpretations (see Julian date axis example).
+     * @param options Possible options to modify how a particular data object is interpreted.
+     * This is not used in the default class, but can be used by subclasses along with
+     * specialised Axis and Renderer classes to fine tune the part of the data that is
+     * treated as being ordinal.
+     * @return The interpreted value of the data.
+     */
+    virtual double AsValue(const wxAny& data, size_t dimension, int options = 0) const;
+    
+    /**
+     * Get the trait for the data type that is being interpreted.
+     * @param data
+     * @return The type trait for this object. If the object is not recognised by this
+     * class then TypeUndefined is returned. This provides an application with an opportunity
+     * to gracefully manage the situation rather than an assert being raised later.
+     */
+    virtual DataTypeTrait GetTrait(const wxAny& data, size_t dimension) const;
+};
+
 /***************************************
  * DATA SET
  ***************************************/
@@ -55,23 +135,31 @@ public:
      * @param series
      */
     virtual void AddSeries(DataSeries* series);
-
-    virtual const wxSharedPtr<DataSeries>  GetSeries(size_t index);
-
-    virtual const size_t GetSeriesCount() const;
+    
+    virtual DataInterpreter* GetInterpreter() const;
 
     virtual const wxString& GetName() const;
 
+    virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index, size_t dimension) const;
+
+    virtual const wxAny& GetPointData(size_t series, size_t index, size_t dimension) const;
+
+    virtual const double GetPointValue(size_t series, size_t index, size_t dimension) const;
+
+    virtual const wxSharedPtr<DataSeries> GetSeries(size_t index) const;
+
+    virtual const size_t GetSeriesCount() const;
+
+    virtual void SetInterpreter(DataInterpreter* interpreter);
+
     virtual void SetName(const wxString& name);
     
-    virtual void SetSeriesRenderer(size_t series, Renderer* renderer);
+    virtual const wxAny InterpretDataAsAny(size_t series, size_t index, size_t dimension) const;
     
-    virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index, size_t dimension);
-
-    virtual const wxAny& GetPointData(size_t series, size_t index, size_t dimension);
-
-    virtual const double GetPointValue(size_t series, size_t index, size_t dimension);
-
+    virtual const wxAny InterpretValueAsAny(size_t series, size_t index, size_t dimension) const;
+    
+    virtual double InterpretDataAsValue(size_t series, size_t index, size_t dimension) const;
+    
     
     // Implement or defer all pure virtual methods from original Dataset class.
 
@@ -89,8 +177,8 @@ public:
 
 protected:
     wxString m_name;
+    DataInterpreter* m_interpreter;
     wxVector<wxSharedPtr<DataSeries> > m_series;
-    wxVector<wxSharedPtr<Renderer> > m_renderers;
 };
 
 /***************************************

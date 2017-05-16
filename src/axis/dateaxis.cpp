@@ -30,27 +30,21 @@ bool DateAxis::AcceptDataset(Dataset *dataset)
 
 bool DateAxis::UpdateBounds()
 {
-    size_t dateCount = 0;
+    wxASSERT(m_datasets[0]);
 
-    for (size_t n = 0; n < m_datasets.Count(); n++) 
+    m_dateCount = m_datasets[0]->GetCount(0);
+    
+    if (m_dateCount > 0)
     {
-        Dataset* dataset = m_datasets[n];
+        m_minValue = m_datasets[0]->GetMinValue(false);
+        m_maxValue = m_datasets[0]->GetMaxValue(false);
 
-        size_t count = dataset->GetCount(0);
-        dateCount = wxMax(dateCount, count);
-    }
-
-    if (dateCount != m_dateCount) 
-    {
-        m_dateCount = dateCount;
-        if (dateCount)
-            m_hasLabels = true;
-        else
-            m_hasLabels = false;
-        return true;
+        m_hasLabels = true;
     }
     else
-        return false;
+        m_hasLabels = false;
+
+    return m_hasLabels;
 }
 
 wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
@@ -59,7 +53,7 @@ wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 
     wxSize maxExtent(0, 0);
 
-    for (int step = 0; !IsEnd(step); step++) {
+    for (size_t step = 0; !IsEnd(step); step++) {
         wxString label;
         GetLabel(step, label);
 
@@ -73,32 +67,27 @@ wxSize DateAxis::GetLongestLabelExtent(wxDC &dc)
 
 void DateAxis::GetDataBounds(double &minValue, double &maxValue) const
 {
-    const Dataset* const dataset = GetDataset(0);
-    
-    minValue = dataset->GetMinValue(false);
-    maxValue = dataset->GetMaxValue(false);
+    minValue = m_minValue; 
+    maxValue = m_maxValue; 
 }
 
 double DateAxis::GetValue(size_t step)
 {
     // Dates must always be in the first dimension of any data point.
     DataSet* dataset = wxDynamicCast(m_datasets[0], DataSet);
-    wxASSERT(dataset && dataset->GetPointData(0, step, 0).CheckType<wxDateTime>());
+    wxASSERT(dataset);
     
-    // Retrieve the wxAny object for this data point and convert to a date string.
-    const wxDateTime& dt = dataset->GetPointData(0, step, 0).As<wxDateTime>();
-
-    return dt.GetTicks();
+    return dataset->InterpretDataAsValue(0, step, 0);
 }
 
 void DateAxis::GetLabel(size_t step, wxString &label)
 {
     // Dates must always be in the first dimension of any data point.
     DataSet* dataset = wxDynamicCast(m_datasets[0], DataSet);
-    wxASSERT(dataset && dataset->GetPointData(0, step, 0).CheckType<wxDateTime>());
+    wxASSERT(dataset);
     
     // Retrieve the wxAny object for this data point and convert to a date string.
-    wxDateTime dt = dataset->GetPointData(0, step, 0).As<wxDateTime>();
+    wxDateTime dt = dataset->InterpretDataAsAny(0, step, 0).As<wxDateTime>();
     label = dt.Format(m_dateFormat);
 }
 

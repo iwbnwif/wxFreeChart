@@ -12,48 +12,120 @@
 #include <wx/xy/xylinerenderer.h>
 
 /***************************************
+ * DATA INTERPRETER
+ ***************************************/
+DataInterpreter::DataInterpreter()
+{
+}
+
+DataInterpreter::~DataInterpreter()
+{
+}
+
+wxAny DataInterpreter::AsAny(double value, size_t dimension, int options) const
+{
+    return wxAny(value);
+}
+
+wxAny DataInterpreter::AsAny(const wxAny& data, size_t dimension, int options) const
+{
+    return data;
+}
+
+double DataInterpreter::AsValue(const wxAny& data, size_t dimension, int options) const
+{
+    if (data.CheckType<int>())
+        return data.As<int>();
+        
+    if (data.CheckType<long>())
+        return data.As<long>();
+        
+    if (data.CheckType<float>())
+        return data.As<float>();
+        
+    if (data.CheckType<double>())
+        return data.As<double>();
+        
+    if (data.CheckType<wxDateTime>())
+        return data.As<wxDateTime>().GetTicks();
+        
+    wxFAIL_MSG("Unsupported wxAny type.");
+    return 0.0;
+}
+
+DataTypeTrait DataInterpreter::GetTrait(const wxAny& data, size_t dimension) const
+{
+    if (data.CheckType<int>())
+        return TypeTraitRatio;
+        
+    if (data.CheckType<long>())
+        return TypeTraitRatio;
+        
+    if (data.CheckType<float>())
+        return TypeTraitRatio;
+        
+    if (data.CheckType<double>())
+        return TypeTraitRatio;
+        
+    if (data.CheckType<wxDateTime>())
+        return TypeTraitRatio;
+
+    return TypeUndefined;
+}
+
+
+/***************************************
  * DATA SET
  ***************************************/
 DataSet::DataSet (const wxString& name)
 {
+    m_interpreter = new DataInterpreter();
 }
 
 DataSet::~DataSet()
 {
-
+    delete m_interpreter;
 }
 
-const wxString& DataSet::GetName() const
+inline size_t DataSet::GetCount(size_t serie) const
+{
+    return m_series.at(serie)->GetCount();
+}
+
+inline const wxString& DataSet::GetName() const
 {
     return m_name;
 }
 
+inline DataInterpreter* DataSet::GetInterpreter() const
+{
+    return m_interpreter;
+}
 
-const wxSharedPtr<DataPoint> DataSet::GetPoint(size_t series, size_t index, size_t dimension)
+inline const wxSharedPtr<DataPoint> DataSet::GetPoint(size_t series, size_t index, size_t dimension) const
 {
     return GetSeries(series)->GetPoint(index);
 }
 
-const double DataSet::GetPointValue(size_t series, size_t index, size_t dimension)
-{
-    return GetSeries(series)->GetPoint(index)->GetDimensionData(dimension).As<double>();
-}
-
-const wxAny& DataSet::GetPointData(size_t series, size_t index, size_t dimension)
+inline const wxAny& DataSet::GetPointData(size_t series, size_t index, size_t dimension) const
 {
     return GetSeries(series)->GetPoint(index)->GetDimensionData(dimension);
 }
 
-void DataSet::SetName (const wxString& name)
+inline const double DataSet::GetPointValue(size_t series, size_t index, size_t dimension) const
 {
+    const wxAny& data = GetPointData(series, index, dimension);
+    wxASSERT(GetInterpreter()->GetTrait(data, dimension) != TypeUndefined);
+    
+    return GetInterpreter()->AsValue(data, dimension);
 }
 
-const wxSharedPtr<DataSeries> DataSet::GetSeries(size_t index)
+inline const wxSharedPtr<DataSeries> DataSet::GetSeries(size_t index) const
 {
     return m_series.at(index);
 }
 
-const size_t DataSet::GetSeriesCount() const
+inline const size_t DataSet::GetSeriesCount() const
 {
     return m_series.size();
 }
@@ -63,9 +135,9 @@ bool DataSet::AcceptRenderer(Renderer* r)
     return true;
 }
 
-size_t DataSet::GetCount(size_t serie) const
+void DataSet::AddSeries(DataSeries* series)
 {
-    return m_series.at(serie)->GetCount();
+    m_series.push_back(wxSharedPtr<DataSeries>(series));
 }
 
 size_t DataSet::GetSerieCount() const
@@ -78,20 +150,29 @@ wxString DataSet::GetSerieName (size_t serie) const
     return m_series.at(serie)->GetName();
 }
 
-void DataSet::AddSeries(DataSeries* series)
+void DataSet::SetInterpreter(DataInterpreter* interpreter)
 {
-    m_series.push_back(wxSharedPtr<DataSeries>(series));
-    
-    // Each series added must have a corresponding renderer.
-    // TODO: Create a NullRenderer class that does nothing.
-    m_renderers.push_back(wxSharedPtr<Renderer>(new XYLineRenderer(true, false)));
+    wxREPLACE(m_interpreter, interpreter);
 }
 
-void DataSet::SetSeriesRenderer(size_t series, Renderer* renderer)
+void DataSet::SetName (const wxString& name)
 {
-    m_renderers[series] = (wxSharedPtr<Renderer>(renderer));
 }
 
+inline const wxAny DataSet::InterpretDataAsAny(size_t series, size_t index, size_t dimension) const
+{
+    return m_interpreter->AsAny(GetPointData(series, index, dimension), dimension);
+}
+
+inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, size_t dimension) const
+{
+   return m_interpreter->AsAny(GetPointValue(series, index, dimension), dimension);
+}
+
+inline double DataSet::InterpretDataAsValue(size_t series, size_t index, size_t dimension) const
+{
+    return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension);
+}
 
 /***************************************
  * UNI DATA SET
