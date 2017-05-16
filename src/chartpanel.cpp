@@ -221,7 +221,7 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
         // range minus the data window size so that the last data point appears at the right of the plot.
         double minValue, maxValue;
         axis->GetDataBounds(minValue, maxValue);
-        double dPos = ((maxValue - minValue - axis->GetWindowWidth()) * 1.01 * winPos) + minValue;
+        double dPos = ((maxValue - minValue - axis->GetWindowWidth()) * winPos) + minValue;
 
         // Update the axis window position (data space).
         axis->SetWindowPosition(dPos);
