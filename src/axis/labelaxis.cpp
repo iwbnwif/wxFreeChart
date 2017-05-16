@@ -312,7 +312,7 @@ void LabelAxis::DrawLabels(wxDC &dc, wxRect rc)
 
     wxString label;
     
-    for (int majorStep = 0; !IsEnd(majorStep); majorStep++) 
+    for (size_t majorStep = 0; !IsEnd(majorStep); majorStep++) 
     {
         double value = GetValue(majorStep);
         
