@@ -26,10 +26,10 @@ XYZRenderer::~XYZRenderer()
 {
 }
 
-void XYZRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYZDataset *dataset)
+void XYZRenderer::Draw(wxDC &dc, const wxRect& rc, Axis* horizAxis, Axis* vertAxis, NaryDataSet* dataset)
 {
-    double minZ = dataset->GetMinZ();
-    double maxZ = dataset->GetMaxZ();
+    double minZ = dataset->GetMinValue1((size_t)0, (size_t)2);
+    double maxZ = dataset->GetMaxValue1((size_t)0, (size_t)2);
 
     double k = (m_maxRad - m_minRad) / (maxZ - minZ);
 
@@ -43,9 +43,9 @@ void XYZRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYZ
             double yVal;
             double zVal;
 
-            xVal = dataset->GetX(n, serie);
-            yVal = dataset->GetY(n, serie);
-            zVal = dataset->GetZ(n, serie);
+            xVal = dataset->InterpretDataAsValue(serie, n, 0);
+            yVal = dataset->InterpretDataAsValue(serie, n, 1);
+            zVal = dataset->InterpretDataAsValue(serie, n, 2);
 
             wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
             wxCoord y = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);

@@ -278,6 +278,15 @@ public:
     NaryDataPoint (const wxVector<double>& data, const wxString& comment = wxEmptyString);
 
     /**
+     * Default constructor. Instantiates the data point with valid data and an optional comment.
+     * @param first The 'first' value that is represented by this data point.
+     * @param second The 'second' value that is represented by this data point.
+     * @param comment A comment about this data point. The comment can be shown during
+     * mouse hovering or as a callout on some plots.
+     */
+    NaryDataPoint (const wxVector<wxAny>& data, const wxString& comment = wxEmptyString);
+
+    /**
      * Default destructor. Note that this is a virtual destructor to allow vectors to
      * be formed of subclasses.
      */

@@ -193,10 +193,21 @@ void BiDataPoint::SetValues (double f, double s)
 /***************************************
  * N-ARY DATA POINT
  ***************************************/
-NaryDataPoint::NaryDataPoint (const wxVector<double>& dat, const wxString& comment)
+NaryDataPoint::NaryDataPoint(const wxVector<double>& dat, const wxString& comment)
     : DataPoint (comment)
 {
+    for (size_t i = 0; i < dat.size(); i++)
+        data.push_back(wxAny(dat[i]));
+}
 
+NaryDataPoint::NaryDataPoint(const wxVector<wxAny>& dat, const wxString& comment)
+    : DataPoint (comment)
+{
+    data = dat;
+    /*
+    for (size_t i = 0; i < dat.size(); i++)
+        data.push_back(dat[i]);
+    */
 }
 
 NaryDataPoint::~NaryDataPoint()

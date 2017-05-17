@@ -92,6 +92,34 @@ inline size_t DataSet::GetCount(size_t serie) const
     return m_series.at(serie)->GetCount();
 }
 
+double DataSet::GetMaxValue1(size_t series, size_t dimension) const
+{
+    wxASSERT(series < GetSerieCount() && GetCount(series) > 0);
+    
+    double max = InterpretDataAsValue(series, 0, dimension);
+    
+    for (size_t pt = 0; pt < GetCount(series); pt++)
+    {
+        max = wxMax(max, InterpretDataAsValue(series, pt, dimension));
+    }
+    
+    return max;
+}
+
+double DataSet::GetMinValue1(size_t series, size_t dimension) const
+{
+    wxASSERT(series < GetSerieCount() && GetCount(series) > 0);
+    
+    double min = InterpretDataAsValue(series, 0, dimension);
+    
+    for (size_t pt = 0; pt < GetCount(series); pt++)
+    {
+        min = wxMin(min, InterpretDataAsValue(series, pt, dimension));
+    }
+    
+    return min;
+}
+
 inline const wxString& DataSet::GetName() const
 {
     return m_name;
@@ -173,6 +201,8 @@ inline double DataSet::InterpretDataAsValue(size_t series, size_t index, size_t 
 {
     return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension);
 }
+
+
 
 /***************************************
  * UNI DATA SET
@@ -294,4 +324,34 @@ NaryDataSet::NaryDataSet (const wxString& name)
 
 NaryDataSet::~NaryDataSet()
 {
+}
+
+Renderer* NaryDataSet::GetRenderer()
+{
+    return m_renderer;
+}
+
+const Renderer* NaryDataSet::GetRenderer() const
+{
+    return m_renderer;
+}
+
+double NaryDataSet::GetMaxValue(bool vertical) const
+{
+    double max = GetMaxValue1(0, vertical ? 1 : 0);
+
+    for (size_t ser = 0; ser < GetSerieCount(); ser++)
+        max = wxMax(max, GetMaxValue1(ser, vertical ? 1 : 0));
+        
+    return max;
+}
+
+double NaryDataSet::GetMinValue(bool vertical) const
+{
+    double min = GetMaxValue1(0, vertical ? 1 : 0);
+
+    for (size_t ser = 0; ser < GetSerieCount(); ser++)
+        min = wxMin(min, GetMinValue1(ser, vertical ? 1 : 0));
+        
+    return min;
 }

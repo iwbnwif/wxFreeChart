@@ -12,7 +12,7 @@
 
 #include <wx/chartrenderer.h>
 #include <wx/axis/axis.h>
-#include <wx/xyz/xyzdataset.h>
+#include <wx/dataset1.h>
 
 /**
  * xyz renderer class.
@@ -24,9 +24,9 @@ public:
     XYZRenderer(int minRad, int maxRad);
     virtual ~XYZRenderer();
 
-    void Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, XYZDataset *dataset);
+    void Draw(wxDC& dc, const wxRect& rc, Axis* horizAxis, Axis* vertAxis, NaryDataSet* dataset);
 
-    virtual void SetSerieColor(size_t serie, wxColour *color);
+    virtual void SetSerieColor(size_t serie, wxColour* color);
 
     virtual wxColour GetSerieColor(size_t serie);
 
@@ -35,28 +35,28 @@ public:
      * @param serie serie index
      * @param pen pen for serie
      */
-    void SetSeriePen(size_t serie, wxPen *pen);
+    void SetSeriePen(size_t serie, wxPen* pen);
 
     /**
      * Returns pen, used to draw specified serie lines.
      * @param serie serie index
      * @return pen
      */
-    wxPen *GetSeriePen(size_t serie);
+    wxPen* GetSeriePen(size_t serie);
 
     /**
      * Sets brush to fill serie circles.
      * @param serie serie index
      * @param brush brush for serie
      */
-    void SetSerieBrush(size_t serie, wxBrush *brush);
+    void SetSerieBrush(size_t serie, wxBrush* brush);
 
     /**
      * Returns brush, used to fill specified serie circles.
      * @param serie serie index
      * @return brush
      */
-    wxBrush *GetSerieBrush(size_t serie);
+    wxBrush* GetSerieBrush(size_t serie);
 
 
 private:

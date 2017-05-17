@@ -131,13 +131,17 @@ public:
     /**
      * Add a data series to this data set. All series must contain data points with the same
      * number of dimensions and with data that is essentially the same type (i.e. that can 
-     * be plotted against a common axis).
+     * be plotted against common axes).
      * @param series
      */
     virtual void AddSeries(DataSeries* series);
     
     virtual DataInterpreter* GetInterpreter() const;
-
+    
+    virtual double GetMaxValue1(size_t series, size_t dimension) const;
+    
+    virtual double GetMinValue1(size_t series, size_t dimension) const;
+    
     virtual const wxString& GetName() const;
 
     virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index, size_t dimension) const;
@@ -160,12 +164,11 @@ public:
     
     virtual double InterpretDataAsValue(size_t series, size_t index, size_t dimension) const;
     
-    
     // Implement or defer all pure virtual methods from original Dataset class.
 
-    virtual bool AcceptRenderer (Renderer* r);
+    virtual bool AcceptRenderer(Renderer* r);
 
-    virtual size_t GetCount (size_t serie) const;
+    virtual size_t GetCount(size_t serie) const;
 
     virtual double GetMaxValue(bool vertical) const = 0;
 
@@ -249,6 +252,15 @@ public:
 
     virtual ~NaryDataSet();
 
+    virtual const Renderer* GetRenderer() const;
+
+    virtual Renderer* GetRenderer();
+    
+    // Abstract Data Set method implementations.   
+
+    virtual double GetMaxValue(bool vertical) const;
+    
+    virtual double GetMinValue(bool vertical) const;
 };
 
 
