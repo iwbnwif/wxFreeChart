@@ -30,36 +30,36 @@ public:
 
     virtual Chart *Create()
     {
-        // First dataset values.
-        wxVector<wxRealPoint> values1;
-        values1.push_back(wxRealPoint(1, 1));
-        values1.push_back(wxRealPoint(2, 3));
-        values1.push_back(wxRealPoint(5, 4));
-        values1.push_back(wxRealPoint(6, 3));
-        values1.push_back(wxRealPoint(7, 6));
-        values1.push_back(wxRealPoint(8, 6));
-        values1.push_back(wxRealPoint(9, 4));
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(1, 1));
+        series1->AddPoint(new BiDataPoint(2, 3));
+        series1->AddPoint(new BiDataPoint(5, 4));
+        series1->AddPoint(new BiDataPoint(6, 3));
+        series1->AddPoint(new BiDataPoint(7, 6));
+        series1->AddPoint(new BiDataPoint(8, 6));
+        series1->AddPoint(new BiDataPoint(9, 4));
 
-        // Second dataset values.
-        wxVector<wxRealPoint> values2;
-        values2.push_back(wxRealPoint(0, 0));
-        values2.push_back(wxRealPoint(2, -1));
-        values2.push_back(wxRealPoint(4, 6));
-        values2.push_back(wxRealPoint(5, 2));
-        values2.push_back(wxRealPoint(7, 8));
-        values2.push_back(wxRealPoint(8, 4));
-        values2.push_back(wxRealPoint(9, -2));
-
-        // Create xy plot.
-        XYPlot *plot = new XYPlot();
+        // XY data for first series.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new BiDataPoint(9, 0));
+        series2->AddPoint(new BiDataPoint(2, -1));
+        series2->AddPoint(new BiDataPoint(4, 6));
+        series2->AddPoint(new BiDataPoint(5, 2));
+        series2->AddPoint(new BiDataPoint(7, 8));
+        series2->AddPoint(new BiDataPoint(8, 4));
+        series2->AddPoint(new BiDataPoint(9, -1));
         
         // Create first dataset and add series 1 to it.
-        XYSimpleDataset *dataset1 = new XYSimpleDataset();
-        dataset1->AddSerie(new XYSerie(values1));
-
+        BiDataSet* dataset1 = new BiDataSet("Dataset 1");
+        dataset1->AddSeries(series1);  
+        
         // Create second dataset and add series 2 to it.
-        XYSimpleDataset *dataset2 = new XYSimpleDataset();
-        dataset2->AddSerie(new XYSerie(values2));
+        BiDataSet* dataset2 = new BiDataSet("Dataset 2");
+        dataset2->AddSeries(series2);  
+        
+        // Create the plot.
+        XYPlot *plot = new XYPlot();
 
         // Create colours for the series.
         wxColour colour1 = DEFAULT_LINE_COLOUR_0;
@@ -120,36 +120,36 @@ public:
 
     virtual Chart *Create()
     {
-        // First dataset values.
-        wxVector<wxRealPoint> values1;
-        values1.push_back(wxRealPoint(1, 1));
-        values1.push_back(wxRealPoint(2, 3));
-        values1.push_back(wxRealPoint(5, 4));
-        values1.push_back(wxRealPoint(6, 3));
-        values1.push_back(wxRealPoint(7, 6));
-        values1.push_back(wxRealPoint(8, 6));
-        values1.push_back(wxRealPoint(9, 4));
+        // XY data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+        series1->AddPoint(new BiDataPoint(1, 1));
+        series1->AddPoint(new BiDataPoint(2, 3));
+        series1->AddPoint(new BiDataPoint(5, 4));
+        series1->AddPoint(new BiDataPoint(6, 3));
+        series1->AddPoint(new BiDataPoint(7, 6));
+        series1->AddPoint(new BiDataPoint(8, 6));
+        series1->AddPoint(new BiDataPoint(9, 4));
 
-        // Second dataset values.
-        wxVector<wxRealPoint> values2;
-        values2.push_back(wxRealPoint(0, 0));
-        values2.push_back(wxRealPoint(2, -1));
-        values2.push_back(wxRealPoint(4, 6));
-        values2.push_back(wxRealPoint(5, 2));
-        values2.push_back(wxRealPoint(7, 8));
-        values2.push_back(wxRealPoint(8, 4));
-        values2.push_back(wxRealPoint(90, -2));
-
-        // Create xy plot.
-        XYPlot *plot = new XYPlot();
+        // XY data for first series.
+        DataSeries* series2 = new DataSeries("Series 2");
+        series2->AddPoint(new BiDataPoint(9, 0));
+        series2->AddPoint(new BiDataPoint(2, -1));
+        series2->AddPoint(new BiDataPoint(4, 6));
+        series2->AddPoint(new BiDataPoint(5, 2));
+        series2->AddPoint(new BiDataPoint(7, 8));
+        series2->AddPoint(new BiDataPoint(8, 4));
+        series2->AddPoint(new BiDataPoint(9, -1));
         
         // Create first dataset and add series 1 to it.
-        XYSimpleDataset *dataset1 = new XYSimpleDataset();
-        dataset1->AddSerie(new XYSerie(values1));
-
+        BiDataSet* dataset1 = new BiDataSet("Dataset 1");
+        dataset1->AddSeries(series1);  
+        
         // Create second dataset and add series 2 to it.
-        XYSimpleDataset *dataset2 = new XYSimpleDataset();
-        dataset2->AddSerie(new XYSerie(values2));
+        BiDataSet* dataset2 = new BiDataSet("Dataset 2");
+        dataset2->AddSeries(series2);  
+        
+        // Create the plot.
+        XYPlot *plot = new XYPlot();
 
         // Create colours for the series.
         wxColour colour1 = DEFAULT_LINE_COLOUR_0;
