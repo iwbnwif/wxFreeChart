@@ -66,7 +66,7 @@ void GetAxisScrollParams(Axis *axis, int &noUnits, double &pPos)
 // wxChartPanel
 //
 
-BEGIN_EVENT_TABLE(wxChartPanel, wxScrolledWindow)
+BEGIN_EVENT_TABLE(wxChartPanel, wxWindow)
     EVT_PAINT(wxChartPanel::OnPaint)
     EVT_SIZE(wxChartPanel::OnSize)
     EVT_SCROLLWIN(wxChartPanel::OnScrollWin)
