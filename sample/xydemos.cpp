@@ -53,7 +53,6 @@ public:
         // Create left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-        bottomAxis->SetFixedBounds(-10, 200);
         
         // Optional: set axis titles.
         leftAxis->SetTitle(wxT("X Values"));

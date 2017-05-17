@@ -12,135 +12,16 @@
 
 #include <wx/xyz/bubbleplot.h>
 #include <wx/xyz/xyzrenderer.h>
-#include <wx/xyz/xyzdataset.h>
-
 #include <wx/axis/numberaxis.h>
 
-#include <wx/dynarray.h>
-#include <wx/arrimpl.cpp>
-
-/**
- * XYZ serie data.
- */
-class XYZSerie
-{
-public:
-    XYZSerie(double *data, size_t count)
-    {
-        m_data = new double[3 * count];
-        memcpy(m_data, data, 3 * count * sizeof(double));
-        m_count = count;
-    }
-
-    virtual ~XYZSerie()
-    {
-        wxDELETEA(m_data);
-    }
-
-    double GetX(size_t index)
-    {
-        wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetX"));
-        return m_data[index * 3];
-    }
-
-    double GetY(size_t index)
-    {
-        wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetY"));
-        return m_data[index * 3 + 1];
-    }
-
-    double GetZ(size_t index)
-    {
-        wxCHECK_MSG(index < m_count, 0, wxT("XYSerie::GetZ"));
-        return m_data[index * 3 + 2];
-    }
-
-    size_t GetCount()
-    {
-        return m_count;
-    }
-
-    const wxString &GetName()
-    {
-        return m_name;
-    }
-
-    void SetName(const wxString &name)
-    {
-        m_name = name;;
-    }
-
-private:
-    double *m_data;
-    size_t m_count;
-    wxString m_name;
-};
-
-WX_DECLARE_OBJARRAY(XYZSerie *, XYZSerieArray);
-WX_DEFINE_OBJARRAY(XYZSerieArray);
-
-/**
- * XYZ demo dataset.
- */
-class XYZDemoDataset : public XYZDataset
-{
-public:
-    XYZDemoDataset()
-    {
-    }
-
-    virtual ~XYZDemoDataset()
-    {
-        for (size_t n = 0; n < m_series.Count(); n++) {
-            wxDELETE(m_series[n]);
-        }
-    }
-
-    void AddSerie(double *data, size_t count)
-    {
-        m_series.Add(new XYZSerie(data, count));
-        DatasetChanged();
-    }
-
-    virtual double GetX(size_t index, size_t serie) const
-    {
-        return m_series[serie]->GetX(index);
-    }
-
-    virtual double GetY(size_t index, size_t serie) const
-    {
-        return m_series[serie]->GetY(index);
-    }
-
-    virtual double GetZ(size_t index, size_t serie) const
-    {
-        return m_series[serie]->GetZ(index);
-    }
-
-    virtual size_t GetSerieCount() const
-    {
-        return m_series.Count();
-    }
-
-    virtual size_t GetCount(size_t serie) const
-    {
-        return m_series[serie]->GetCount();
-    }
-
-    virtual wxString GetSerieName(size_t serie) const
-    {
-        return m_series[serie]->GetName();
-    }
-
-    void SetSerieName(size_t serie, const wxString &name)
-    {
-        m_series[serie]->SetName(name);
-        DatasetChanged();
-    }
-
-private:
-    XYZSerieArray m_series;
-};
+#define SERIES_ADD_TRIPLE_POINT(S, X, Y, Z) \
+{ \
+    wxVector<double> pt; \
+    pt.push_back(X); \
+    pt.push_back(Y); \
+    pt.push_back(Z); \
+    S->AddPoint(new NaryDataPoint(pt)); \
+}
 
 /**
  * Bubble demo with one xyz serie.
@@ -149,57 +30,57 @@ class BubbleDemo1 : public ChartDemo
 {
 public:
     BubbleDemo1()
-    : ChartDemo(wxT("Bubble Demo 1 - simple"))
+    : ChartDemo(wxT("Bubble Demo 1 - Simple"))
     {
     }
 
     virtual Chart *Create()
     {
-        // serie 1 values
-        double data1[][3] = {
-                { 10, 20, 10, },
-                { 13, 16, 40, },
-                { 15, 26, 30, },
-                { 7, 30, 11, },
-                { 25, 14, 15, },
-                { 15, 34, 35, },
-                { 25, 4, 20, },
-        };
-        // serie 2 values
-        double data2[][3] = {
-                { 13, 18, 40, },
-                { 53, 36, 20, },
-                { 25, 23, 10, },
-                { 76, 40, 41, },
-                { 30, 15, 25, },
-                { 45, 24, 45, },
-                { 15, 4, 10, },
-        };
+        // XYZ data for first series.
+        DataSeries* series1 = new DataSeries("Series 1");
+     
+        SERIES_ADD_TRIPLE_POINT(series1, 10, 20, 10);
+        SERIES_ADD_TRIPLE_POINT(series1, 13, 16, 40);
+        SERIES_ADD_TRIPLE_POINT(series1, 15, 26, 30);
+        SERIES_ADD_TRIPLE_POINT(series1, 7, 30, 11);
+        SERIES_ADD_TRIPLE_POINT(series1, 25, 14, 15);
+        SERIES_ADD_TRIPLE_POINT(series1, 15, 34, 35);
+        SERIES_ADD_TRIPLE_POINT(series1, 25, 4, 20);
+   
+        // XYZ data for first series.
+        DataSeries* series2 = new DataSeries("Series 2");
 
-        // first step: create plot
+        SERIES_ADD_TRIPLE_POINT(series2, 13, 18, 40);
+        SERIES_ADD_TRIPLE_POINT(series2, 53, 36, 20);
+        SERIES_ADD_TRIPLE_POINT(series2, 25, 23, 10);
+        SERIES_ADD_TRIPLE_POINT(series2, 76, 40, 41);
+        SERIES_ADD_TRIPLE_POINT(series2, 30, 15, 25);
+        SERIES_ADD_TRIPLE_POINT(series2, 45, 24, 45);
+        SERIES_ADD_TRIPLE_POINT(series2, 15, 4, 10);
+   
+        // Create an n-ary dataset.
+        NaryDataSet* dataset = new NaryDataSet("Bubble Demo 1");
+
+        // Add the two series to the dataset.
+        dataset->AddSeries(series1);
+        dataset->AddSeries(series2);
+
+        // Create a xyz renderer with minimal and maximal radius values.
+        dataset->SetRenderer(new XYZRenderer(5, 15));
+
+        // Create a plot.
         BubblePlot *plot = new BubblePlot();
 
-        // create xyz dataset and add serie to it
-        XYZDemoDataset *dataset = new XYZDemoDataset();
-        dataset->AddSerie((double *) data1, WXSIZEOF(data1));
-        dataset->AddSerie((double *) data2, WXSIZEOF(data2));
-
-        // minimal/maximal radius for bubbles
-        const int minRad = 5;
-        const int maxRad = 15;
-
-        // set xyz renderer with minimal and maximal radius values
-        dataset->SetRenderer(new XYZRenderer(minRad, maxRad));
-
+        // Add the dataset to the plot.
         plot->AddDataset(dataset);
 
         // create left number axis
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        leftAxis->SetMargins(maxRad, maxRad);
+        leftAxis->SetMargins(15, 15);
 
         // create bottom number axis
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
-        bottomAxis->SetMargins(maxRad, maxRad);
+        bottomAxis->SetMargins(15, 15);
 
         // add axes to plot
         plot->AddAxis(leftAxis);
