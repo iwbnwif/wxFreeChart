@@ -10,7 +10,7 @@
 #include <wx/ohlc/movingaverage.h>
 #include <wx/ohlc/ohlcplot.h>
 
-IMPLEMENT_CLASS(MovingAverage, XYDataset)
+IMPLEMENT_CLASS(MovingAverage, BiDataSet)
 
 MovingAverage::MovingAverage(BiDataSet* dataset, int period)
 {
