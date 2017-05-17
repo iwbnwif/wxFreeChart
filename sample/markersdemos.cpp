@@ -1,134 +1,125 @@
 /////////////////////////////////////////////////////////////////////////////
-// Name:    markersdemos.cpp
-// Purpose: markers usage demos
-// Author:    Moskvichev Andrey V.
-// Created:    2010/02/15
-// Copyright:    (c) 2010 Moskvichev Andrey V.
-// Licence:    wxWidgets licence
+// Name:        markersdemos.cpp
+// Purpose:     markers usage demos
+// Author:      Moskvichev Andrey V.
+// Created:     2010/02/15
+// Copyright:   (c) 2010 Moskvichev Andrey V.
+// Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
 #include "democollection.h"
 
+#include <wx/marker.h>
 #include <wx/xy/xyplot.h>
 #include <wx/xy/xylinerenderer.h>
-#include <wx/xy/xysimpledataset.h>
-
-#include <wx/marker.h>
-
-#include <math.h>
 
 
 class MarkersDemo1 : public ChartDemo
 {
 public:
     MarkersDemo1()
-    : ChartDemo(wxT("Markers Demo 1 - line"))
+    : ChartDemo(wxT("Markers Demo 1 - Line Marker"))
     {
     }
 
     virtual Chart *Create()
     {
-        // serie xy data
-        double data[][2] = {
-                { 10, 20, },
-                { 13, 16, },
-                { 7, 30, },
-                { 15, 34, },
-                { 25, 4, },
-        };
+        // XY data for series.
+        DataSeries* series = new DataSeries("Series 1");
+        series->AddPoint(new BiDataPoint(10.0, 20.0));
+        series->AddPoint(new BiDataPoint(13.0, 16.0));
+        series->AddPoint(new BiDataPoint(7.0, 30.0));
+        series->AddPoint(new BiDataPoint(15.0, 34.0));
+        series->AddPoint(new BiDataPoint(25.0, 4.0));
 
-        // first step: create plot
-        XYPlot *plot = new XYPlot();
+        BiDataSet* dataset = new BiDataSet("Markers Demo 1");
 
-        // create dataset
-        XYSimpleDataset *dataset = new XYSimpleDataset();
+        // Add the series to the data set.
+        dataset->AddSeries(series);
 
-        // and add serie to it
-        dataset->AddSerie((double *) data, WXSIZEOF(data));
-
-        // set line renderer to dataset
+        // Set a XY line renderer for the dataset.
         dataset->SetRenderer(new XYLineRenderer());
-
-        // create line marker
+        
+        // Create a line marker and set the value to be marked (20 on the x-axis).
         LineMarker *lineMarker = new LineMarker(wxPen(*wxBLUE, 2, wxPENSTYLE_SOLID));
-
-        // set value to be marked, in our case vertical line with x=20
         lineMarker->SetVerticalLine(20);
 
-        // and add marker to dataset
+        // Add the marker to dataset.
         dataset->AddMarker(lineMarker);
 
-        // create left and bottom number axes
+        // Create an XY plot.
+        XYPlot *plot = new XYPlot();
+
+        // Create left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        
+        // Optional: set axis titles.
+        leftAxis->SetTitle(wxT("X Values"));
+        bottomAxis->SetTitle(wxT("Y Values"));
 
-        // add axes and dataset to plot
+        // Add axes and dataset to plot.
         plot->AddObjects(dataset, leftAxis, bottomAxis);
 
-        // and finally create chart
-        return new Chart(plot, GetName());
+        // Create the chart.
+        return new Chart(plot, GetName());    
     }
 };
-
 
 class MarkersDemo2 : public ChartDemo
 {
 public:
     MarkersDemo2()
-    : ChartDemo(wxT("Markers Demo 2 - range and line"))
+    : ChartDemo(wxT("Markers Demo 2 - Range and Line"))
     {
     }
 
     virtual Chart *Create()
     {
-        // serie xy data
-        double data[][2] = {
-                { 10, 20, },
-                { 13, 16, },
-                { 14, 30, },
-                { 15, 34, },
-                { 25, 4, },
-        };
+        // XY data for series.
+        DataSeries* series = new DataSeries("Series 1");
+        series->AddPoint(new BiDataPoint(10.0, 20.0));
+        series->AddPoint(new BiDataPoint(13.0, 16.0));
+        series->AddPoint(new BiDataPoint(7.0, 30.0));
+        series->AddPoint(new BiDataPoint(15.0, 34.0));
+        series->AddPoint(new BiDataPoint(25.0, 4.0));
 
-        // first step: create plot
-        XYPlot *plot = new XYPlot();
+        BiDataSet* dataset = new BiDataSet("Markers Demo 2");
 
-        // create dataset
-        XYSimpleDataset *dataset = new XYSimpleDataset();
+        // Add the series to the data set.
+        dataset->AddSeries(series);
 
-        // and add serie to it
-        dataset->AddSerie((double *) data, WXSIZEOF(data));
-
-        // set line renderer to dataset
+        // Set a XY line renderer for the dataset.
         dataset->SetRenderer(new XYLineRenderer());
+        
+        // Create a range marker and set the range to be marked (range 15 - 20 on the x-axis).
+        RangeMarker *rangeMarker = new RangeMarker(new FillAreaDraw(wxColour(80, 80, 255), wxColour(200, 200, 250)));
+        rangeMarker->SetVerticalRange(15, 20);
 
-        // create first range marker
-        RangeMarker *rangeMarker1 = new RangeMarker(new FillAreaDraw(wxColour(80, 80, 255), wxColour(200, 200, 250)));
+        // Create a line marker and set the value to be marked (20 on the x-axis).
+        LineMarker *lineMarker = new LineMarker(wxPen(*wxRED, 2, wxPENSTYLE_DOT_DASH));
+        lineMarker->SetVerticalLine(20);
 
-        // set value to be marked, in our case vertical range [15; 20]
-        rangeMarker1->SetVerticalRange(15, 20);
-
-        // and add marker to dataset
-        dataset->AddMarker(rangeMarker1);
-
-        // create line marker
-        LineMarker *lineMarker = new LineMarker(wxColour(80, 80, 255), 2);
-
-        // set value to be marked, in our case horizontal value 15
-        lineMarker->SetHorizontalLine(25);
-
-        // and add marker to dataset
+        // Add the markers to dataset
+        dataset->AddMarker(rangeMarker);
         dataset->AddMarker(lineMarker);
 
-        // create left and bottom number axes
+        // Create an XY plot.
+        XYPlot *plot = new XYPlot();
+
+        // Create left and bottom number axes.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        
+        // Optional: set axis titles.
+        leftAxis->SetTitle(wxT("X Values"));
+        bottomAxis->SetTitle(wxT("Y Values"));
 
-        // add axes and dataset to plot
+        // Add axes and dataset to plot.
         plot->AddObjects(dataset, leftAxis, bottomAxis);
 
-        // and finally create chart
-        return new Chart(plot, GetName());
+        // Create the chart.
+        return new Chart(plot, GetName());    
     }
 };
 
