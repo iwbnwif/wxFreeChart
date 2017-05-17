@@ -12,7 +12,6 @@
 
 #include <wx/axis/dateaxis.h>
 #include <wx/axis/numberaxis.h>
-#include <wx/axis/compdateaxis.h>
 
 OHLCPlot::OHLCPlot()
 {
@@ -25,8 +24,8 @@ OHLCPlot::~OHLCPlot()
 bool OHLCPlot::AcceptAxis(Axis *axis)
 {
     return axis->IsVertical() ?
-        wxDynamicCast(axis, NumberAxis) != NULL :
-        (wxDynamicCast(axis, DateAxis) != NULL) || (wxDynamicCast(axis, CompDateAxis) != NULL);
+                    wxDynamicCast(axis, NumberAxis) != NULL :
+                    wxDynamicCast(axis, DateAxis) != NULL;
 }
 
 bool OHLCPlot::AcceptDataset(Dataset *dataset)

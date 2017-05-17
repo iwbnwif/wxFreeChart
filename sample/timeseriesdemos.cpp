@@ -11,8 +11,6 @@
 
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
-#include <wx/axis/juliandateaxis.h>
-#include <wx/xy/juliantimeseriesdataset.h>
 #include <wx/xy/timeseriesdataset.h>
 #include <wx/xy/xylinerenderer.h>
 #include <wx/xy/xyplot.h>

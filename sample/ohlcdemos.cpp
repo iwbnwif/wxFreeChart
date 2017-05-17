@@ -21,7 +21,6 @@
 
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
-#include <wx/axis/compdateaxis.h>
 
 /**
  * Simple OHLC demo with bar renderer.
@@ -256,12 +255,13 @@ public:
 
         // Create the left number (quote) axis and a horizontal composite date axis.
         NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
-        CompDateAxis *bottomAxis = new CompDateAxis(AXIS_BOTTOM);
+        // CompDateAxis *bottomAxis = new CompDateAxis(AXIS_BOTTOM);
         
         // Don't start the left axis at zero.
         leftAxis->ZeroOrigin(false);
 
         // Setup window, to show 5 days with starting point at the third data point.
+        /*
         bottomAxis->SetWindowPosition(dataset->GetPointData(0, 2, 0).As<wxDateTime>().GetTicks()); 
         bottomAxis->SetWindowWidth(5 * 24 * 60 * 60);
         bottomAxis->SetUseWindow(true);
@@ -275,7 +275,7 @@ public:
         // Add axes to plot.
         plot->AddAxis(leftAxis);
         plot->AddAxis(bottomAxis);
-
+        */
         // Link axes and dataset.
         plot->LinkDataVerticalAxis(0, 0);
         plot->LinkDataHorizontalAxis(0, 0);
@@ -284,7 +284,7 @@ public:
         Chart *chart = new Chart(plot, GetName());
 
         // Set scrolling axis to chart.
-        chart->SetScrolledAxis(bottomAxis);
+        // chart->SetScrolledAxis(bottomAxis);
         return chart;
     }
 };
