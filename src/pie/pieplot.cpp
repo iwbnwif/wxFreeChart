@@ -89,11 +89,9 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
     
     wxDC& dc = cdc.GetDC();
 
-    for (size_t n = 0; n < m_dataset->GetCount(0); n++) {
-        sum += m_dataset->GetValue(n, m_serie);
-    }
+    for (size_t pt = 0; pt < m_dataset->GetCount(0); pt++)
+        sum += m_dataset->GetValue(m_serie, pt);
 
-    /*
     wxRect rcLegend;
     if (m_legend != NULL) {
         wxSize legendExtent = m_legend->GetExtent(dc, *m_dataset);
@@ -145,7 +143,7 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
 
         m_legend->Draw(dc, rcLegend, *m_dataset);
     }
-    */
+
     int radHoriz = (int) (0.8 * wxMin(rc.width, rc.height));
     int radVert  = (int) (radHoriz * m_ellipticAspect);
 
@@ -160,7 +158,7 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
         dc.DrawLine(x0 + radHoriz, y0 + radVert / 2, x0 + radHoriz, y0 + radVert / 2 + shift3D + 1);
 
         double part = 0;
-        for (size_t n = 0; ; n++) {
+        for (size_t pt = 0; ; pt++) {
             double angle = 360 * part;
 
             wxCoord x1, y1, x2, y2;
@@ -174,10 +172,10 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
                 dc.DrawLine(x1, y1, x2, y2);
             }
 
-            if (n >= m_dataset->GetCount(0))
+            if (pt >= m_dataset->GetCount(0))
                 break;
 
-            double v = m_dataset->GetValue(n, m_serie);
+            double v = m_dataset->GetValue(m_serie, pt);
             part += v / sum;
         }
     }
@@ -185,8 +183,8 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
     dc.SetPen(m_outlinePen);
     //dc.SetFont(labelsFont);
     double part = 0;
-    for (size_t n = 0; n < m_dataset->GetCount(0); n++) {
-        double v = m_dataset->GetValue(n, m_serie);
+    for (size_t pt = 0; pt < m_dataset->GetCount(0); pt++) {
+        double v = m_dataset->GetValue(m_serie, pt);
 
         double angle1 = 360 * part;
 
@@ -194,7 +192,7 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
 
         double angle2 = 360 * part;
 
-        dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(n)));
+        dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(pt)));
 
         dc.DrawEllipticArc(x0, y0, radHoriz, radVert, angle1, angle2);
     }
@@ -203,8 +201,8 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
     dc.SetPen(m_outlinePen);
     dc.SetBrush(wxNoBrush);
     part = 0;
-    for (size_t n = 0; n < m_dataset->GetCount(0); n++) {
-        double v = m_dataset->GetValue(n, m_serie);
+    for (size_t pt = 0; pt < m_dataset->GetCount(0); pt++) {
+        double v = m_dataset->GetValue(m_serie, pt);
 
         double angle = 360 * part;
 
@@ -218,9 +216,9 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
     // fill areas
     if (m_use3DView) {
         double part = 0;
-        for (size_t n = 0; n < m_dataset->GetCount(0); n++) {
+        for (size_t pt = 0; pt < m_dataset->GetCount(0); pt++) {
             double angle = 360 * part;
-            double v = m_dataset->GetValue(n, m_serie);
+            double v = m_dataset->GetValue(m_serie, pt);
             part += v / sum;
 
             double angle2 = 360 * part;
@@ -238,7 +236,7 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
 
                 EllipticEgde(x0, y0, radHoriz, radVert, a, x1, y1);
 
-                dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(n)));
+                dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(pt)));
                 dc.FloodFill(x1, y1 + shift3D / 2, m_outlinePen.GetColour(), wxFLOOD_BORDER);
             }
         }

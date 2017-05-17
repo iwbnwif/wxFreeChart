@@ -15,41 +15,49 @@ class PieplotDemo1 : public ChartDemo
 {
 public:
     PieplotDemo1()
-    : ChartDemo(wxT("Pieplot Demo 1"))
+    : ChartDemo(wxT("Pie Demo 1"))
     {
     }
 
     virtual Chart *Create()
     {
-      // serie pieplot data
-      double data[] = {1.0, 2.0, 3.0} ;
-      wxString categories[] = {_("cat 1"), _("cat 2"), _("cat 3")};
-      wxColour colours[] = {wxColour(0x99, 0xCC, 0xFF), wxColour(0xFF, 0xFF, 0x99), wxColour(0x3D, 0xEB, 0x3D)} ;
+        // Create the category dataset and add the categories.
+        // Each category represents a segment in the pie plot.
+        UniDataSet* dataset = new UniDataSet("Pie Demo 1");
+        dataset->AddCategory("Cat 1");
+        dataset->AddCategory("Cat 2");
+        dataset->AddCategory("Cat 3");
 
-      ColorScheme* colorScheme = new ColorScheme(colours, WXSIZEOF(colours));
+        // Create the series data.
+        DataSeries* series = new DataSeries("Series 1");
+        series->AddPoint(new UniDataPoint(1.0));
+        series->AddPoint(new UniDataPoint(2.0));
+        series->AddPoint(new UniDataPoint(3.0));
+        
+        // Add the series to the data set.
+        dataset->AddSeries(series);
+        
+        // Create a colour scheme.
+        // TODO: This should be changed to a vector.
+        wxColour colours[] = {wxColour(0x99, 0xCC, 0xFF), wxColour(0xFF, 0xFF, 0x99), wxColour(0x3D, 0xEB, 0x3D)} ;
+        ColorScheme* colorScheme = new ColorScheme(colours, WXSIZEOF(colours));
 
-      // first step: create plot
-      PiePlot *plot = new PiePlot();
+        // Create a category renderer for legend drawing.
+        dataset->SetRenderer(new CategoryRenderer(*colorScheme));
 
-      // create dataset
-      UniDataSet* dataset = new UniDataSet("Pie Example");
+        // Create the plot and add the dataset.
+        // Note: Currently pie plots can only have a single dataset.
+        PiePlot *plot = new PiePlot();
+        plot->SetDataset(dataset);
 
-      // and add serie to it
-      // dataset->AddSeries(_("Serie 1"), data, WXSIZEOF(data));
+        // Set the color scheme.
+        plot->SetColorScheme(colorScheme);
 
-      // create category renderer for legend drawing
-      dataset->SetRenderer(new CategoryRenderer(*colorScheme));
+        // Set the plot's legend.
+        plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
 
-      // set color scheme
-      plot->SetColorScheme(colorScheme);
-
-      plot->SetDataset(dataset);
-
-      // set legend to plot
-      plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
-
-      // and finally create chart
-      return new Chart(plot, GetName());
+        // Create the chart.
+        return new Chart(plot, GetName());
     }
 };
 
