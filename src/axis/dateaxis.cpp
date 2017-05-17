@@ -77,7 +77,7 @@ double DateAxis::GetValue(size_t step)
     DataSet* dataset = wxDynamicCast(m_datasets[0], DataSet);
     wxASSERT(dataset);
     
-    return dataset->InterpretDataAsValue(0, step, 0);
+    return dataset->InterpretAsValue(0, step, 0);
 }
 
 void DateAxis::GetLabel(size_t step, wxString &label)
@@ -87,7 +87,7 @@ void DateAxis::GetLabel(size_t step, wxString &label)
     wxASSERT(dataset);
     
     // Retrieve the wxAny object for this data point and convert to a date string.
-    wxDateTime dt = dataset->InterpretDataAsAny(0, step, 0).As<wxDateTime>();
+    wxDateTime dt = dataset->InterpretAsAny(0, step, 0).As<wxDateTime>();
     label = dt.Format(m_dateFormat);
 }
 

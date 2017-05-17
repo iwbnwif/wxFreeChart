@@ -113,12 +113,12 @@ double DataSet::GetMaxValue1(size_t dimension) const
 {
     wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
     
-    double max = InterpretDataAsValue(0, 0, dimension);
+    double max = InterpretAsValue(0, 0, dimension);
     
     for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
         for (size_t pt = 0; pt < GetCount(ser); pt++)
-            max = wxMax(max, InterpretDataAsValue(ser, pt, dimension));
+            max = wxMax(max, InterpretAsValue(ser, pt, dimension));
     }
     
     return max;
@@ -128,12 +128,12 @@ double DataSet::GetMinValue1(size_t dimension) const
 {
     wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
     
-    double min = InterpretDataAsValue(0, 0, dimension);
+    double min = InterpretAsValue(0, 0, dimension);
     
     for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
         for (size_t pt = 0; pt < GetCount(ser); pt++)
-            min = wxMin(min, InterpretDataAsValue(ser, pt, dimension));
+            min = wxMin(min, InterpretAsValue(ser, pt, dimension));
     }
     
     return min;
@@ -206,7 +206,7 @@ void DataSet::SetName (const wxString& name)
 {
 }
 
-inline const wxAny DataSet::InterpretDataAsAny(size_t series, size_t index, size_t dimension) const
+inline const wxAny DataSet::InterpretAsAny(size_t series, size_t index, size_t dimension) const
 {
     return m_interpreter->AsAny(GetPointData(series, index, dimension), dimension);
 }
@@ -216,7 +216,7 @@ inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, siz
    return m_interpreter->AsAny(GetPointValue(series, index, dimension), dimension);
 }
 
-inline double DataSet::InterpretDataAsValue(size_t series, size_t index, size_t dimension) const
+inline double DataSet::InterpretAsValue(size_t series, size_t index, size_t dimension) const
 {
     return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension);
 }

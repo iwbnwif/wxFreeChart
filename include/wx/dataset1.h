@@ -178,11 +178,11 @@ public:
 
     virtual void SetName(const wxString& name);
     
-    virtual const wxAny InterpretDataAsAny(size_t series, size_t index, size_t dimension) const;
+    virtual const wxAny InterpretAsAny(size_t series, size_t index, size_t dimension) const;
     
     virtual const wxAny InterpretValueAsAny(size_t series, size_t index, size_t dimension) const;
     
-    virtual double InterpretDataAsValue(size_t series, size_t index, size_t dimension) const;
+    virtual double InterpretAsValue(size_t series, size_t index, size_t dimension) const;
     
     // Implement or defer all pure virtual methods from original Dataset class.
 

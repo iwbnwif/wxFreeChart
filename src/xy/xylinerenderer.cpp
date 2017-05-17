@@ -107,12 +107,12 @@ double XYLineRendererBase::GetMax(const Dataset* d, size_t dimension) const
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
     
-    double max = dataset->InterpretDataAsValue(0, 0, dimension);
+    double max = dataset->InterpretAsValue(0, 0, dimension);
     
     for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            max = wxMax(max, dataset->InterpretDataAsValue(ser, pt, dimension));
+            max = wxMax(max, dataset->InterpretAsValue(ser, pt, dimension));
     }
     
     return max; 
@@ -123,12 +123,12 @@ double XYLineRendererBase::GetMin(const Dataset* d, size_t dimension) const
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
 
-    double min = dataset->InterpretDataAsValue(0, 0, dimension);
+    double min = dataset->InterpretAsValue(0, 0, dimension);
     
     for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            min = wxMin(min, dataset->InterpretDataAsValue(ser, pt, dimension));
+            min = wxMin(min, dataset->InterpretAsValue(ser, pt, dimension));
     }
     
     return dataset->GetInterpreter()->AsValue(min, dimension);
@@ -159,10 +159,10 @@ void XYLineRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAx
 
         for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) 
         {
-            double x0 = dataset->InterpretDataAsValue(serie, n, 0);
-            double y0 = dataset->InterpretDataAsValue(serie, n, 1);
-            double x1 = dataset->InterpretDataAsValue(serie, n + 1, 0);
-            double y1 = dataset->InterpretDataAsValue(serie, n + 1, 1);
+            double x0 = dataset->InterpretAsValue(serie, n, 0);
+            double y0 = dataset->InterpretAsValue(serie, n, 1);
+            double x1 = dataset->InterpretAsValue(serie, n + 1, 0);
+            double y1 = dataset->InterpretAsValue(serie, n + 1, 1);
 
             // Check whether segment is visible.
             if (!xAxis->IntersectsWindow(x0, x1) &&

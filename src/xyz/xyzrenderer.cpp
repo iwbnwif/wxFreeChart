@@ -43,9 +43,9 @@ void XYZRenderer::Draw(wxDC &dc, const wxRect& rc, Axis* horizAxis, Axis* vertAx
             double yVal;
             double zVal;
 
-            xVal = dataset->InterpretDataAsValue(serie, n, 0);
-            yVal = dataset->InterpretDataAsValue(serie, n, 1);
-            zVal = dataset->InterpretDataAsValue(serie, n, 2);
+            xVal = dataset->InterpretAsValue(serie, n, 0);
+            yVal = dataset->InterpretAsValue(serie, n, 1);
+            zVal = dataset->InterpretAsValue(serie, n, 2);
 
             wxCoord x = horizAxis->ToGraphics(dc, rc.x, rc.width, xVal);
             wxCoord y = vertAxis->ToGraphics(dc, rc.y, rc.height, yVal);
