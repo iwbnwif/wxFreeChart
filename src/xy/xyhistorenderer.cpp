@@ -53,12 +53,12 @@ void XYHistoRenderer::Draw(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, 
             double yVal;
 
             if (m_vertical) {
-                xVal = dataset->GetFirst(n, serie);
+                xVal = dataset->GetFirst(serie, n);
                 yVal = dataset->GetSecond(serie, n);
             }
             else {
                 xVal = dataset->GetSecond(serie, n);
-                yVal = dataset->GetFirst(n, serie);
+                yVal = dataset->GetFirst(serie, n);
             }
 
             if (!xAxis->IsVisible(xVal) ||
