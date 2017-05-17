@@ -73,6 +73,23 @@ DataTypeTrait DataInterpreter::GetTrait(const wxAny& data, size_t dimension) con
     return TypeUndefined;
 }
 
+void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1)
+{
+    if (!axis->IsVisible(x)) {
+        double p = axis->BoundValue(x);
+        y = (y1 - y) * (p - x) / (x1 - x) + y;
+        x = p;
+    }
+}
+
+void ClipVert(Axis *axis, double &x, double &y, double x1, double y1)
+{
+    if (!axis->IsVisible(y)) {
+        double p = axis->BoundValue(y);
+    x = (p - y) * (x1 - x) / (y1 - y) + x;
+        y = p;
+    }
+}
 
 /***************************************
  * DATA SET

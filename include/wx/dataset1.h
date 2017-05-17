@@ -98,6 +98,14 @@ public:
     virtual DataTypeTrait GetTrait(const wxAny& data, size_t dimension) const;
 };
 
+
+//
+// Helper functions.
+//
+void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1);
+
+void ClipVert(Axis *axis, double &x, double &y, double x1, double y1);
+
 /***************************************
  * DATA SET
  ***************************************/
