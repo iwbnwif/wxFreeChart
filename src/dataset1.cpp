@@ -109,29 +109,31 @@ inline size_t DataSet::GetCount(size_t serie) const
     return m_series.at(serie)->GetCount();
 }
 
-double DataSet::GetMaxValue1(size_t series, size_t dimension) const
+double DataSet::GetMaxValue1(size_t dimension) const
 {
-    wxASSERT(series < GetSerieCount() && GetCount(series) > 0);
+    wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
     
-    double max = InterpretDataAsValue(series, 0, dimension);
+    double max = InterpretDataAsValue(0, 0, dimension);
     
-    for (size_t pt = 0; pt < GetCount(series); pt++)
+    for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
-        max = wxMax(max, InterpretDataAsValue(series, pt, dimension));
+        for (size_t pt = 0; pt < GetCount(ser); pt++)
+            max = wxMax(max, InterpretDataAsValue(ser, pt, dimension));
     }
     
     return max;
 }
 
-double DataSet::GetMinValue1(size_t series, size_t dimension) const
+double DataSet::GetMinValue1(size_t dimension) const
 {
-    wxASSERT(series < GetSerieCount() && GetCount(series) > 0);
+    wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
     
-    double min = InterpretDataAsValue(series, 0, dimension);
+    double min = InterpretDataAsValue(0, 0, dimension);
     
-    for (size_t pt = 0; pt < GetCount(series); pt++)
+    for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
-        min = wxMin(min, InterpretDataAsValue(series, pt, dimension));
+        for (size_t pt = 0; pt < GetCount(ser); pt++)
+            min = wxMin(min, InterpretDataAsValue(ser, pt, dimension));
     }
     
     return min;
@@ -355,20 +357,10 @@ const Renderer* NaryDataSet::GetRenderer() const
 
 double NaryDataSet::GetMaxValue(bool vertical) const
 {
-    double max = GetMaxValue1(0, vertical ? 1 : 0);
-
-    for (size_t ser = 0; ser < GetSerieCount(); ser++)
-        max = wxMax(max, GetMaxValue1(ser, vertical ? 1 : 0));
-        
-    return max;
+    return GetMaxValue1(vertical ? 1 : 0);
 }
 
 double NaryDataSet::GetMinValue(bool vertical) const
 {
-    double min = GetMaxValue1(0, vertical ? 1 : 0);
-
-    for (size_t ser = 0; ser < GetSerieCount(); ser++)
-        min = wxMin(min, GetMinValue1(ser, vertical ? 1 : 0));
-        
-    return min;
+    return GetMinValue1(vertical ? 1 : 0);
 }

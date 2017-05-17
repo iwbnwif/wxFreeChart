@@ -28,8 +28,8 @@ XYZRenderer::~XYZRenderer()
 
 void XYZRenderer::Draw(wxDC &dc, const wxRect& rc, Axis* horizAxis, Axis* vertAxis, NaryDataSet* dataset)
 {
-    double minZ = dataset->GetMinValue1((size_t)0, (size_t)2);
-    double maxZ = dataset->GetMaxValue1((size_t)0, (size_t)2);
+    double minZ = dataset->GetMinValue1(2);
+    double maxZ = dataset->GetMaxValue1(2);
 
     double k = (m_maxRad - m_minRad) / (maxZ - minZ);
 

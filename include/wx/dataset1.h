@@ -146,9 +146,21 @@ public:
     
     virtual DataInterpreter* GetInterpreter() const;
     
-    virtual double GetMaxValue1(size_t series, size_t dimension) const;
+    /**
+     * Retrieves the maximum value for a given dimension in all of the series that belong to
+     * this data set.
+     * @param dimension The dimension to obtain the maximum value for.
+     * @return The maximum value for the given data dimension in all series within this dataset.
+     */
+    virtual double GetMaxValue1(size_t dimension) const;
     
-    virtual double GetMinValue1(size_t series, size_t dimension) const;
+    /**
+     * Retrieves the minimum value for a given dimension in all of the series that belong to
+     * this data set.
+     * @param dimension The dimension to obtain the minimum value for.
+     * @return The minimum value for the given data dimension in all series within this dataset.
+     */
+    virtual double GetMinValue1(size_t dimension) const;
     
     virtual const wxString& GetName() const;
 
