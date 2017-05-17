@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/xy/xylinerenderer.h>
-#include <wx/xy/xydataset.h>
 
 IMPLEMENT_CLASS(XYLineRendererBase, XYRenderer)
 IMPLEMENT_CLASS(XYLineRenderer, XYLineRendererBase)

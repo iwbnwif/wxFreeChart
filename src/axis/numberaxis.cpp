@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/numberaxis.h>
-#include <wx/xy/xydataset.h>
 
 #ifdef WIN32
 #include <float.h>

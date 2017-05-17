@@ -12,8 +12,6 @@
 
 #include <wx/axisplot.h>
 #include <wx/axis/numberaxis.h>
-
-#include <wx/xy/xydataset.h>
 #include <wx/xy/xyrenderer.h>
 
 /**

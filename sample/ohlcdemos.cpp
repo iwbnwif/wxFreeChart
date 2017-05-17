@@ -9,18 +9,16 @@
 
 #include "democollection.h"
 
-#include <wx/ohlc/ohlcplot.h>
 
+#include <wx/axis/dateaxis.h>
+#include <wx/axis/numberaxis.h>
+
+#include <wx/ohlc/movingaverage.h>
 #include <wx/ohlc/ohlcbarrenderer.h>
 #include <wx/ohlc/ohlccandlestickrenderer.h>
+#include <wx/ohlc/ohlcplot.h>
 
-// for moving average indicator
-#include <wx/ohlc/movingaverage.h>
-#include <wx/xy/xydataset.h>
 #include <wx/xy/xylinerenderer.h>
-
-#include <wx/axis/numberaxis.h>
-#include <wx/axis/dateaxis.h>
 
 /**
  * Simple OHLC demo with bar renderer.

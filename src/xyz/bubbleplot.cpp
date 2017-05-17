@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/xyz/bubbleplot.h>
-#include <wx/xyz/xyzdataset.h>
 #include <wx/xyz/xyzrenderer.h>
 
 BubblePlot::BubblePlot()

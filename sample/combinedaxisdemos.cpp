@@ -10,12 +10,10 @@
 
 #include "democollection.h"
 
-#include <wx/xy/xyplot.h>
-#include <wx/xy/xylinerenderer.h>
-#include <wx/xy/xyhistorenderer.h>
-#include <wx/xy/xysimpledataset.h>
-
 #include <wx/multiplot.h>
+#include <wx/xy/xyhistorenderer.h>
+#include <wx/xy/xylinerenderer.h>
+#include <wx/xy/xyplot.h>
 
 /**
  * Combined axis demo.

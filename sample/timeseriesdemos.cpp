@@ -9,9 +9,8 @@
 
 #include "democollection.h"
 
-#include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
-#include <wx/xy/timeseriesdataset.h>
+#include <wx/axis/numberaxis.h>
 #include <wx/xy/xylinerenderer.h>
 #include <wx/xy/xyplot.h>
 

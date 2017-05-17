@@ -9,15 +9,8 @@
 
 #include "democollection.h"
 
-#include <wx/xy/xyplot.h>
-#include <wx/xy/xylinerenderer.h>
-#include <wx/xy/xysimpledataset.h>
-#include <wx/axis/logarithmicnumberaxis.h>
-
 #include <wx/title.h>
-
-#include <wx/datetime.h>
-
+#include <wx/xy/xyplot.h>
 
 class TitleDemo1 : public ChartDemo
 {

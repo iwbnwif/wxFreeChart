@@ -8,7 +8,6 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/logarithmicnumberaxis.h>
-#include <wx/xy/xydataset.h>
 #include <wx/dataset1.h>
 #include <math.h>
 

@@ -12,7 +12,6 @@
 
 #include <wx/chartrenderer.h>
 #include <wx/xy/xyrenderer.h>
-#include <wx/xy/xydataset.h>
 
 /**
  * Class that controls bars/candlesticks colour.
@@ -47,7 +46,6 @@ public:
     virtual void DrawItem (wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close) = 0;
 
     virtual void Draw (wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) {}
-    virtual void Draw (wxDC& dc, wxRect rc, Axis* horizAxis, Axis* vertAxis, XYDataset* dataset) {}
     virtual double GetMax(const Dataset* dataset, size_t dimension) const;
     virtual double GetMin(const Dataset* dataset, size_t dimension) const;
 

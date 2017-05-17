@@ -12,7 +12,6 @@
 #include "democollection.h"
 
 #include <wx/xy/xyplot.h>
-#include <wx/xy/xysimpledataset.h>
 #include <wx/xy/xylinerenderer.h>
 
 #include <wx/axis/numberaxis.h>
