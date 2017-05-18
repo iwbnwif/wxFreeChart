@@ -10,7 +10,7 @@
 #include "democollection.h"
 
 #include <wx/title.h>
-#include <wx/xy/xyplot.h>
+#include <wx/plot/xyplot.h>
 
 class TitleDemo1 : public ChartDemo
 {

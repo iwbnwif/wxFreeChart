@@ -13,12 +13,12 @@
 #include <wx/axis/dateaxis.h>
 #include <wx/axis/numberaxis.h>
 
-#include <wx/ohlc/movingaverage.h>
-#include <wx/ohlc/ohlcbarrenderer.h>
-#include <wx/ohlc/ohlccandlestickrenderer.h>
-#include <wx/ohlc/ohlcplot.h>
+#include <wx/plot/ohlcplot.h>
 
-#include <wx/xy/xylinerenderer.h>
+#include <wx/render/movingaverage.h>
+#include <wx/render/ohlcbarrenderer.h>
+#include <wx/render/ohlccandlestickrenderer.h>
+#include <wx/render/xylinerenderer.h>
 
 /**
  * Simple OHLC demo with bar renderer.

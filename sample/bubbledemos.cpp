@@ -10,9 +10,9 @@
 
 #include "democollection.h"
 
-#include <wx/xyz/bubbleplot.h>
-#include <wx/xyz/xyzrenderer.h>
 #include <wx/axis/numberaxis.h>
+#include <wx/plot/bubbleplot.h>
+#include <wx/render/xyzrenderer.h>
 
 #define SERIES_ADD_TRIPLE_POINT(S, X, Y, Z) \
 { \

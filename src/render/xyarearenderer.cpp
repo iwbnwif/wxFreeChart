@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/xy/xyarearenderer.h>
+#include <wx/render/xyarearenderer.h>
 //
 // TODO: need cleanup!
 //

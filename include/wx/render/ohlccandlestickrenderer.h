@@ -10,7 +10,7 @@
 #ifndef OHLCCANDDLESTICKRENDERER_H_
 #define OHLCCANDDLESTICKRENDERER_H_
 
-#include <wx/ohlc/ohlcrenderer.h>
+#include <wx/render/ohlcrenderer.h>
 
 /**
  * OHLC renderer for displaying japanese candles.

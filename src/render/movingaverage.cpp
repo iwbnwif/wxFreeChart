@@ -7,8 +7,8 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/ohlc/movingaverage.h>
-#include <wx/ohlc/ohlcplot.h>
+#include <wx/render/movingaverage.h>
+#include <wx/plot/ohlcplot.h>
 
 IMPLEMENT_CLASS(MovingAverage, BiDataSet)
 

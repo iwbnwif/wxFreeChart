@@ -9,7 +9,7 @@
 
 #include "democollection.h"
 
-#include <wx/pie/pieplot.h>
+#include <wx/plot/pieplot.h>
 
 class PieplotDemo1 : public ChartDemo
 {

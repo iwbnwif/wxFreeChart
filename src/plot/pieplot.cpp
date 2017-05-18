@@ -7,9 +7,9 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/pie/pieplot.h>
-#include <wx/drawutils.h>
+#include <wx/plot/pieplot.h>
 #include <wx/drawobject.h>
+#include <wx/drawutils.h>
 
 #include <math.h>
 

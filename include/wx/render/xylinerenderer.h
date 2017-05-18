@@ -10,7 +10,7 @@
 #ifndef XYLINERENDERER_H_
 #define XYLINERENDERER_H_
 
-#include <wx/xy/xyrenderer.h>
+#include <wx/render/xyrenderer.h>
 #include <wx/art.h>
 
 class WXDLLIMPEXP_FREECHART XYLineRendererBase : public XYRenderer
@@ -54,9 +54,6 @@ public:
     // Renderer
     //
     virtual void DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie);
-    virtual double GetMax(const Dataset* dataset, size_t dimension) const;
-    virtual double GetMin(const Dataset* dataset, size_t dimension) const;
-
 
 protected:
   virtual void DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) = 0;

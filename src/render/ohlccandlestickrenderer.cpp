@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/ohlc/ohlccandlestickrenderer.h>
+#include <wx/render/ohlccandlestickrenderer.h>
 
 OHLCCandlestickRenderer::OHLCCandlestickRenderer()
 {

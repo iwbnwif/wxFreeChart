@@ -7,8 +7,8 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/xyz/bubbleplot.h>
-#include <wx/xyz/xyzrenderer.h>
+#include <wx/plot/bubbleplot.h>
+#include <wx/render/xyzrenderer.h>
 
 BubblePlot::BubblePlot()
 {

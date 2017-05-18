@@ -11,8 +11,8 @@
 
 #include "democollection.h"
 
-#include <wx/xy/xyplot.h>
-#include <wx/xy/xylinerenderer.h>
+#include <wx/plot/xyplot.h>
+#include <wx/render/xylinerenderer.h>
 
 #include <wx/axis/numberaxis.h>
 

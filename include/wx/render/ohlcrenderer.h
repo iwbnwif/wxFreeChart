@@ -10,8 +10,8 @@
 #ifndef OHLCRENDERER_H_
 #define OHLCRENDERER_H_
 
-#include <wx/chartrenderer.h>
-#include <wx/xy/xyrenderer.h>
+#include <wx/render/chartrenderer.h>
+#include <wx/render/xyrenderer.h>
 
 /**
  * Class that controls bars/candlesticks colour.
@@ -46,8 +46,6 @@ public:
     virtual void DrawItem (wxDC &dc, wxCoord x, wxCoord open, wxCoord high, wxCoord low, wxCoord close) = 0;
 
     virtual void Draw (wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) {}
-    virtual double GetMax(const Dataset* dataset, size_t dimension) const;
-    virtual double GetMin(const Dataset* dataset, size_t dimension) const;
 
     void SetColourer (OHLCColourer *colourer);
     OHLCColourer *GetColourer();

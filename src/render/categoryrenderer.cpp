@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/category/categoryrenderer.h>
+#include <wx/render/categoryrenderer.h>
 
 IMPLEMENT_CLASS(CategoryRenderer, Renderer)
 

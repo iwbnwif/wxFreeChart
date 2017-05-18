@@ -11,8 +11,8 @@
 
 #include <wx/axis/dateaxis.h>
 #include <wx/axis/numberaxis.h>
-#include <wx/xy/xylinerenderer.h>
-#include <wx/xy/xyplot.h>
+#include <wx/plot/xyplot.h>
+#include <wx/render/xylinerenderer.h>
 
 /**
  *

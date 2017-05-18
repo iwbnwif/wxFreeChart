@@ -10,9 +10,9 @@
 #ifndef XYPLOT_H_
 #define XYPLOT_H_
 
-#include <wx/axisplot.h>
+#include <wx/plot/axisplot.h>
 #include <wx/axis/numberaxis.h>
-#include <wx/xy/xyrenderer.h>
+#include <wx/render/xyrenderer.h>
 
 /**
  * An plot for displaying XY data values.

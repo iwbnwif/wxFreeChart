@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 
-#include "wx/xyz/xyzrenderer.h"
+#include "wx/render/xyzrenderer.h"
 
 IMPLEMENT_CLASS(XYZRenderer, Renderer)
 

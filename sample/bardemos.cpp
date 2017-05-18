@@ -13,13 +13,12 @@
 
 #include "democollection.h"
 
-#include <wx/bars/barplot.h>
-#include <wx/bars/barrenderer.h>
+#include <wx/plot/barplot.h>
+#include <wx/render/barrenderer.h>
 
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/categoryaxis.h>
 
-#include <wx/xy/xyhistorenderer.h>
 #include <wx/dataset1.h>
 
 /**

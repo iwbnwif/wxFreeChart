@@ -10,13 +10,14 @@
 #include "democollection.h"
 
 #include <wx/axis/logarithmicnumberaxis.h>
-#include <wx/xy/xyarearenderer.h>
-#include <wx/xy/xyhistorenderer.h>
-#include <wx/xy/xylinerenderer.h>
-#include <wx/xy/xyplot.h>
+
+#include <wx/plot/xyplot.h>
+
+#include <wx/render/xyarearenderer.h>
+#include <wx/render/xyhistorenderer.h>
+#include <wx/render/xylinerenderer.h>
 
 #include <cmath>
-
 
 class XYDemo1 : public ChartDemo
 {

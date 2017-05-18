@@ -7,8 +7,8 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/xy/xyhistorenderer.h>
 #include <wx/art.h>
+#include <wx/render/xyhistorenderer.h>
 
 IMPLEMENT_CLASS(XYHistoRenderer, XYRenderer)
 

@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/ohlc/ohlcbarrenderer.h>
+#include <wx/render/ohlcbarrenderer.h>
 
 OHLCBarRenderer::OHLCBarRenderer()
 {

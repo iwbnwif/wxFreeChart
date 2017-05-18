@@ -7,12 +7,13 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/bars/barplot.h>
-
 #include <wx/axis/categoryaxis.h>
-#include <wx/bars/barrenderer.h>
-#include <wx/axis/numberaxis.h>
 #include <wx/axis/dateaxis.h>
+#include <wx/axis/numberaxis.h>
+
+#include <wx/plot/barplot.h>
+
+#include <wx/render/barrenderer.h>
 
 BarPlot::BarPlot(BarPlotOrientation orientation)
 {

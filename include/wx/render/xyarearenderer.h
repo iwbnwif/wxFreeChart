@@ -10,7 +10,7 @@
 #ifndef XYAREARENDERER_H_
 #define XYAREARENDERER_H_
 
-#include <wx/xy/xyrenderer.h>
+#include <wx/render/xyrenderer.h>
 
 class WXDLLIMPEXP_FREECHART XYAreaRenderer : public XYRenderer
 {
@@ -19,12 +19,9 @@ public:
     XYAreaRenderer(const wxPen& outlinePen = *wxTRANSPARENT_PEN, const wxBrush& areaBrush = *wxGREY_BRUSH);
     virtual ~XYAreaRenderer();
 
-    virtual void Draw(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
+    virtual void Draw(wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset);
 
     virtual void Draw(wxDC &dc, wxRect rcData, wxCoord x0, wxCoord y0, wxCoord x1, wxCoord y1);
-
-    virtual double GetMax(const Dataset* dataset, size_t dimension) const { return 100; };
-    virtual double GetMin(const Dataset* dataset, size_t dimension) const { return 0; };
 
 private:
     wxPen m_outlinePen;

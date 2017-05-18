@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/xy/xyplot.h>
+#include <wx/plot/xyplot.h>
 
 XYPlot::XYPlot()
 {
@@ -40,7 +40,7 @@ void XYPlot::DrawDatasets(wxDC &dc, wxRect rc)
 
 void XYPlot::DrawXYDataset(wxDC& dc, const wxRect& rc, BiDataSet* dataset)
 {
-    XYRenderer* renderer = dataset->GetRenderer();
+    XYRenderer* renderer = wxDynamicCast(dataset->GetRenderer(), XYRenderer);
     wxASSERT(renderer);
 
     Axis* yAxis = GetDatasetVerticalAxis(dataset);

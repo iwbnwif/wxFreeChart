@@ -7,7 +7,7 @@
 // Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/plot.h>
+#include <wx/plot/plot.h>
 #include <wx/drawutils.h>
 
 wxDEFINE_EVENT(EVT_PLOT_CHANGED, wxCommandEvent);

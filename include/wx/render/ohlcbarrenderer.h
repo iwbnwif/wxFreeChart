@@ -10,7 +10,7 @@
 #ifndef OHLCBARRENDERER_H_
 #define OHLCBARRENDERER_H_
 
-#include <wx/ohlc/ohlcrenderer.h>
+#include <wx/render/ohlcrenderer.h>
 
 /**
  * OHLC renderer for displaying bars.

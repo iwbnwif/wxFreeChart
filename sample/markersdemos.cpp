@@ -10,8 +10,8 @@
 #include "democollection.h"
 
 #include <wx/marker.h>
-#include <wx/xy/xyplot.h>
-#include <wx/xy/xylinerenderer.h>
+#include <wx/plot/xyplot.h>
+#include <wx/render/xylinerenderer.h>
 
 
 class MarkersDemo1 : public ChartDemo

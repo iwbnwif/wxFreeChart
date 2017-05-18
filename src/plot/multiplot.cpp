@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/multiplot.h>
+#include <wx/plot/multiplot.h>
 
 #include "wx/arrimpl.cpp"
 

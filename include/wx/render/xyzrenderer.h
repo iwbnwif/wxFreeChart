@@ -10,9 +10,9 @@
 #ifndef XYZRENDERER_H_
 #define XYZRENDERER_H_
 
-#include <wx/chartrenderer.h>
 #include <wx/axis/axis.h>
 #include <wx/dataset1.h>
+#include <wx/render/chartrenderer.h>
 
 /**
  * xyz renderer class.

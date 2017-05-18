@@ -10,8 +10,8 @@
 #ifndef CATEGORYRENDERER_H_
 #define CATEGORYRENDERER_H_
 
-#include <wx/chartrenderer.h>
 #include <wx/colorscheme.h>
+#include <wx/render/chartrenderer.h>
 
 class WXDLLIMPEXP_FREECHART CategoryRenderer : public Renderer
 {

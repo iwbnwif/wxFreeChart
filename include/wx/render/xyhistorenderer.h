@@ -10,7 +10,7 @@
 #ifndef XYHISTORENDERER_H_
 #define XYHISTORENDERER_H_
 
-#include <wx/xy/xyrenderer.h>
+#include <wx/render/xyrenderer.h>
 #include <wx/areadraw.h>
 
 /**
@@ -44,9 +44,6 @@ public:
      * @return area draw for specified serie
      */
     AreaDraw *GetBarArea(size_t serie);
-
-    virtual double GetMax(const Dataset* dataset, size_t dimension) const { return 100; };
-    virtual double GetMin(const Dataset* dataset, size_t dimension) const { return 0; };
 
     //
     // DrawObserver

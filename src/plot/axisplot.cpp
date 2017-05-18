@@ -7,10 +7,11 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/axisplot.h>
-#include <wx/drawutils.h>
 
-#include "wx/arrimpl.cpp"
+
+#include <wx/plot/axisplot.h>
+#include <wx/drawutils.h>
+#include <wx/arrimpl.cpp>
 
 #if wxUSE_GRAPHICS_CONTEXT
 #include <wx/dcgraph.h>
