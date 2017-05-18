@@ -64,6 +64,7 @@ public:
 
         // Create an axis share for first plot to share leftAxis between plots.
         AxisShare *leftAxis1 = new AxisShare(sharedLeftAxis);
+        
         // And make it visible for first plot.
         leftAxis1->SetShareVisible(true);
 

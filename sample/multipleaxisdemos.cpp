@@ -29,7 +29,7 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for first series.
+        // XY data for the first series.
         DataSeries* series1 = new DataSeries("Series 1");
         series1->AddPoint(new BiDataPoint(1, 1));
         series1->AddPoint(new BiDataPoint(2, 3));
@@ -39,9 +39,9 @@ public:
         series1->AddPoint(new BiDataPoint(8, 6));
         series1->AddPoint(new BiDataPoint(9, 4));
 
-        // XY data for first series.
+        // XY data for the second series.
         DataSeries* series2 = new DataSeries("Series 2");
-        series2->AddPoint(new BiDataPoint(9, 0));
+        series2->AddPoint(new BiDataPoint(0, 0));
         series2->AddPoint(new BiDataPoint(2, -1));
         series2->AddPoint(new BiDataPoint(4, 6));
         series2->AddPoint(new BiDataPoint(5, 2));
@@ -82,20 +82,29 @@ public:
         NumberAxis *leftAxis1 = new NumberAxis(AXIS_LEFT);
         leftAxis1->SetLabelTextColour(colour1);
         leftAxis1->SetLabelPen(wxPen(colour1));
+        
+        // Show 5 minor gridlines for each major gridline.
+        leftAxis1->SetMinorIntervalCount(5);
+        
         plot->AddAxis(leftAxis1);
 
         // Create left axis for second dataset also with the same colours as the line.
         NumberAxis *leftAxis2 = new NumberAxis(AXIS_LEFT);
         leftAxis2->SetLabelTextColour(colour2);
         leftAxis2->SetLabelPen(wxPen(colour2));
+
+        // Hide the gridlines on the second axis. TODO: 
+        leftAxis2->SetMajorGridlinePen(*wxTRANSPARENT_PEN);
+
         plot->AddAxis(leftAxis2);
 
         // Create bottom axis.
         plot->AddAxis(new NumberAxis(AXIS_BOTTOM));
 
-        // Link the first dataset with the first left axis.
+        // Link the first dataset with the first vertical axis.
         plot->LinkDataVerticalAxis(0, 0);
-        // Link the second dataset with the second left axis.
+        
+        // Link the second dataset with the second vertical axis.
         plot->LinkDataVerticalAxis(1, 1);
 
         // Link both datasets with the bottom axis.
@@ -119,7 +128,7 @@ public:
 
     virtual Chart *Create()
     {
-        // XY data for first series.
+        // XY data for the first series.
         DataSeries* series1 = new DataSeries("Series 1");
         series1->AddPoint(new BiDataPoint(1, 1));
         series1->AddPoint(new BiDataPoint(2, 3));
@@ -129,9 +138,9 @@ public:
         series1->AddPoint(new BiDataPoint(8, 6));
         series1->AddPoint(new BiDataPoint(9, 4));
 
-        // XY data for first series.
+        // XY data for the second series.
         DataSeries* series2 = new DataSeries("Series 2");
-        series2->AddPoint(new BiDataPoint(9, 0));
+        series2->AddPoint(new BiDataPoint(0, 0));
         series2->AddPoint(new BiDataPoint(2, -1));
         series2->AddPoint(new BiDataPoint(4, 6));
         series2->AddPoint(new BiDataPoint(5, 2));
@@ -177,6 +186,7 @@ public:
         // Create right axis for second dataset also with the same colours as the line.
         NumberAxis *rightAxis = new NumberAxis(AXIS_RIGHT);
         rightAxis->SetLabelTextColour(colour2);
+        rightAxis->SetMajorGridlinePen(*wxTRANSPARENT_PEN);
         rightAxis->SetTitle("Right Axis");
         plot->AddAxis(rightAxis);
 
@@ -192,16 +202,16 @@ public:
         bottomAxis->SetTitle("Bottom Axis");
         plot->AddAxis(bottomAxis);
 
-        // Link the first dataset with left axis.
+        // Link the first dataset with the first vertical (left) axis.
         plot->LinkDataVerticalAxis(0, 0);
         
-        // Link the second dataset with right axis.
+        // Link the second dataset with the second vertical (right) axis.
         plot->LinkDataVerticalAxis(1, 1);
 
-        // Link first dataset with top axis.
+        // Link first dataset with first horizontal (top) axis.
         plot->LinkDataHorizontalAxis(0, 0);
 
-        // Link second dataset with bottom axis.
+        // Link second dataset with second horizontal (bottom) axis.
         plot->LinkDataHorizontalAxis(1, 1);
 
         return new Chart(plot, GetName());
