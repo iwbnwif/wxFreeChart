@@ -10,7 +10,7 @@
 #ifndef AXISPLOT_H_
 #define AXISPLOT_H_
 
-#include <wx/plot.h>
+#include <wx/plot/plot.h>
 #include <wx/axis/axis.h>
 
 #include <wx/areadraw.h>
