@@ -10,9 +10,9 @@
 #ifndef XYRENDERER_H_
 #define XYRENDERER_H_
 
-#include <wx/chartrenderer.h>
 #include <wx/axis/axis.h>
 #include <wx/dataset1.h>
+#include <wx/render/chartrenderer.h>
 
 /**
  * Base class for all XYDataset renderers.
@@ -33,8 +33,8 @@ public:
      * @param dataset The dataset to be drawn by this renderer.
      */
     virtual void Draw(wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset) = 0;
-    virtual double GetMax(const Dataset* dataset, size_t dimension) const = 0;
-    virtual double GetMin(const Dataset* dataset, size_t dimension) const = 0;
+    virtual double GetMax(const BiDataSet* dataset, size_t dimension) const;
+    virtual double GetMin(const BiDataSet* dataset, size_t dimension) const;
 };
 
 #endif /*XYRENDERER_H_*/

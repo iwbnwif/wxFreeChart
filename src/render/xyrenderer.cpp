@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/xy/xyrenderer.h>
+#include <wx/render/xyrenderer.h>
 
 IMPLEMENT_CLASS(XYRenderer, Renderer)
 
@@ -17,4 +17,18 @@ XYRenderer::XYRenderer()
 
 XYRenderer::~XYRenderer()
 {
+}
+
+double XYRenderer::GetMax(const BiDataSet* dataset, size_t dimension) const
+{
+    wxASSERT(dataset);
+    
+    return dataset->GetMaxValue1(dimension);
+}
+
+double XYRenderer::GetMin(const BiDataSet* dataset, size_t dimension) const
+{
+    wxASSERT(dataset);
+    
+    return dataset->GetMinValue1(dimension);
 }

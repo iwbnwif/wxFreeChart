@@ -15,6 +15,8 @@
 #include <wx/refobject.h>
 #include <wx/art.h>
 
+class DataSet;
+
 /**
  * Base class for all renderers.
  */
@@ -51,6 +53,10 @@ public:
      * @return symbol for specified serie
      */
     virtual Symbol *GetSerieSymbol(size_t serie);
+
+    virtual double GetMaxValue(DataSet* dataset, size_t dimension) const;
+    
+    virtual double GetMinValue(DataSet* dataset, size_t dimension) const;
 
     /**
      * Draws legend symbol.

@@ -10,9 +10,9 @@
 #ifndef BARRENDERER_H_
 #define BARRENDERER_H_
 
-#include "wx/xy/xyrenderer.h"
 #include "wx/areadraw.h"
 #include "wx/dataset1.h"
+#include "wx/render/xyrenderer.h"
 
 class BarRenderer;
 
@@ -44,8 +44,8 @@ public:
     //
     // Called from BarRenderer. Don't call from programs.
     //
-    virtual double GetMinValue(UniDataSet* dataset) const;
-    virtual double GetMaxValue(UniDataSet* dataset) const;
+    virtual double GetMinValue(DataSet* dataset) const;
+    virtual double GetMaxValue(DataSet* dataset) const;
 
 protected:
     /**
@@ -103,8 +103,8 @@ public:
     StackedBarType(int barWidth, double base);
     virtual ~StackedBarType();
 
-    virtual double GetMinValue(UniDataSet* dataset) const;
-    virtual double GetMaxValue(UniDataSet* dataset) const;
+    virtual double GetMinValue(DataSet* dataset) const;
+    virtual double GetMaxValue(DataSet* dataset) const;
 
 protected:
     virtual void GetBarGeometry(UniDataSet *dataset, size_t item, size_t serie,
@@ -194,8 +194,9 @@ public:
      */
     AreaDraw *GetBarDraw(size_t serie);
 
-    double GetMinValue(UniDataSet* dataset) const;
-    double GetMaxValue(UniDataSet* dataset) const;
+    virtual double GetMaxValue(DataSet* dataset, size_t dimension) const wxOVERRIDE;
+    
+    virtual double GetMinValue(DataSet* dataset, size_t dimension) const wxOVERRIDE;
 
 private:
     BarType *m_barType;

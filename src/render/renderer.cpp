@@ -7,7 +7,8 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/chartrenderer.h>
+#include <wx/render/chartrenderer.h>
+#include <wx/dataset1.h>
 
 IMPLEMENT_CLASS(Renderer, wxObject)
 
@@ -43,6 +44,20 @@ Symbol *Renderer::GetSerieSymbol(size_t serie)
         return GetDefaultSymbol(serie);
     }
     return m_serieSymbols[serie];
+}
+
+double Renderer::GetMaxValue(DataSet* dataset, size_t dimension) const
+{
+    wxASSERT(dataset);
+    
+    return dataset->GetMaxValue1(dimension);
+}
+
+double Renderer::GetMinValue(DataSet* dataset, size_t dimension) const
+{
+    wxASSERT(dataset);
+    
+    return dataset->GetMinValue1(dimension);  
 }
 
 void Renderer::DrawLegendSymbol(wxDC &dc, wxRect rcSymbol, size_t serie)

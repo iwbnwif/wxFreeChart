@@ -7,8 +7,8 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/ohlc/ohlcrenderer.h>
-#include <wx/ohlc/ohlcplot.h>
+#include <wx/plot/ohlcplot.h>
+#include <wx/render/ohlcrenderer.h>
 
 class DefaultOHLCColourer : public OHLCColourer
 {
@@ -55,67 +55,3 @@ OHLCColourer *OHLCRenderer::GetColourer()
 {
     return m_colourer;
 }
-
-double OHLCRenderer::GetMax(const Dataset* d, size_t dimension) const
-{
-    BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
-    wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
- 
-    if (dimension == 1)
-    {
-        double max = dataset->GetPointData(0, 0, dimension).As<OHLCItem>().high;
-        
-        for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-        {
-            for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-                max = wxMax(max, dataset->GetPointData(ser, pt, dimension).As<OHLCItem>().high);
-        }
-        
-        return max; 
-    }
-    else
-    {
-        double max = dataset->GetPointData(0, 0, dimension).As<wxDateTime>().GetTicks();
-        
-        for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-        {
-            for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-                max = wxMax(max, dataset->GetPointData(ser, pt, dimension).As<wxDateTime>().GetTicks());
-        }
-        
-        return max; 
-    }
-}
-
-
-double OHLCRenderer::GetMin(const Dataset* d, size_t dimension) const
-{
-    BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
-    wxASSERT(dataset && dataset->GetSeriesCount() && dataset->GetCount(0));
- 
-    if (dimension == 1)
-    {
-        double min = dataset->GetPointData(0, 0, dimension).As<OHLCItem>().low;
-        
-        for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-        {
-            for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-                min = wxMin(min, dataset->GetPointData(ser, pt, dimension).As<OHLCItem>().low);
-        }
-        
-        return min; 
-    }
-    else
-    {
-        double min = dataset->GetPointData(0, 0, dimension).As<wxDateTime>().GetTicks();
-        
-        for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-        {
-            for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-                min = wxMin(min, dataset->GetPointData(ser, pt, dimension).As<wxDateTime>().GetTicks());
-        }
-        
-        return min; 
-    }
-}
-

@@ -8,8 +8,8 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/dataset1.h>
-
-#include <wx/xy/xylinerenderer.h>
+#include <wx/plot/ohlcplot.h> // For OHLCItem.
+#include <wx/render/xylinerenderer.h> // For clip axis helpers.
 
 /***************************************
  * DATA INTERPRETER
@@ -49,6 +49,14 @@ double DataInterpreter::AsValue(const wxAny& data, size_t dimension, int options
     if (data.CheckType<wxDateTime>())
         return data.As<wxDateTime>().GetTicks();
         
+    if (data.CheckType<OHLCItem>())
+    {
+        if (options == 0)
+            return data.As<OHLCItem>().high;
+        else
+            return data.As<OHLCItem>().low;
+    }
+        
     wxFAIL_MSG("Unsupported wxAny type.");
     return 0.0;
 }
@@ -68,6 +76,9 @@ DataTypeTrait DataInterpreter::GetTrait(const wxAny& data, size_t dimension) con
         return TypeTraitRatio;
         
     if (data.CheckType<wxDateTime>())
+        return TypeTraitRatio;
+        
+    if (data.CheckType<OHLCItem>())
         return TypeTraitRatio;
 
     return TypeUndefined;
@@ -109,16 +120,21 @@ inline size_t DataSet::GetCount(size_t serie) const
     return m_series.at(serie)->GetCount();
 }
 
+inline DataInterpreter* DataSet::GetInterpreter() const
+{
+    return m_interpreter;
+}
+
 double DataSet::GetMaxValue1(size_t dimension) const
 {
     wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
     
-    double max = InterpretAsValue(0, 0, dimension);
+    double max = InterpretAsValue(0, 0, dimension, 0);
     
     for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
         for (size_t pt = 0; pt < GetCount(ser); pt++)
-            max = wxMax(max, InterpretAsValue(ser, pt, dimension));
+            max = wxMax(max, InterpretAsValue(ser, pt, dimension, 0));
     }
     
     return max;
@@ -128,12 +144,12 @@ double DataSet::GetMinValue1(size_t dimension) const
 {
     wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
     
-    double min = InterpretAsValue(0, 0, dimension);
+    double min = InterpretAsValue(0, 0, dimension, 1);
     
     for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
         for (size_t pt = 0; pt < GetCount(ser); pt++)
-            min = wxMin(min, InterpretAsValue(ser, pt, dimension));
+            min = wxMin(min, InterpretAsValue(ser, pt, dimension, 1));
     }
     
     return min;
@@ -142,11 +158,6 @@ double DataSet::GetMinValue1(size_t dimension) const
 inline const wxString& DataSet::GetName() const
 {
     return m_name;
-}
-
-inline DataInterpreter* DataSet::GetInterpreter() const
-{
-    return m_interpreter;
 }
 
 inline const wxSharedPtr<DataPoint> DataSet::GetPoint(size_t series, size_t index, size_t dimension) const
@@ -165,6 +176,16 @@ inline const double DataSet::GetPointValue(size_t series, size_t index, size_t d
     wxASSERT(GetInterpreter()->GetTrait(data, dimension) != TypeUndefined);
     
     return GetInterpreter()->AsValue(data, dimension);
+}
+
+Renderer* DataSet::GetRenderer()
+{
+    return m_renderer;
+}
+
+const Renderer* DataSet::GetRenderer() const
+{
+    return m_renderer;
 }
 
 inline const wxSharedPtr<DataSeries> DataSet::GetSeries(size_t index) const
@@ -206,22 +227,20 @@ void DataSet::SetName (const wxString& name)
 {
 }
 
-inline const wxAny DataSet::InterpretAsAny(size_t series, size_t index, size_t dimension) const
+inline const wxAny DataSet::InterpretAsAny(size_t series, size_t index, size_t dimension, int options) const
 {
-    return m_interpreter->AsAny(GetPointData(series, index, dimension), dimension);
+    return m_interpreter->AsAny(GetPointData(series, index, dimension), dimension, options);
 }
 
-inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, size_t dimension) const
+inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, size_t dimension, int options) const
 {
-   return m_interpreter->AsAny(GetPointValue(series, index, dimension), dimension);
+   return m_interpreter->AsAny(GetPointValue(series, index, dimension), dimension, options);
 }
 
-inline double DataSet::InterpretAsValue(size_t series, size_t index, size_t dimension) const
+inline double DataSet::InterpretAsValue(size_t series, size_t index, size_t dimension, int options) const
 {
-    return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension);
+    return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension, options);
 }
-
-
 
 /***************************************
  * UNI DATA SET
@@ -256,28 +275,12 @@ const wxAny& UniDataSet::GetBaseValue(size_t index) const
 
 double UniDataSet::GetMaxValue(bool vertical) const
 {
-    double max = GetValue(0, 0);
-    
-    for (size_t ser = 0; ser < GetSerieCount(); ser++)
-    {
-        for (size_t pt = 0; pt < GetCount(ser); pt++)
-            max = wxMax(max, GetValue(ser, pt));
-    }
-    
-    return max;       
+    return GetMaxValue1(0);
 }
 
 double UniDataSet::GetMinValue(bool vertical) const
 {
-    double min = GetValue(0, 0);
-    
-    for (size_t ser = 0; ser < GetSerieCount(); ser++)
-    {
-        for (size_t pt = 0; pt < GetCount(ser); pt++)
-            min = wxMin(min, GetValue(ser, pt));
-    }
-    
-    return min;       
+    return GetMinValue1(0);
 }
 
 double UniDataSet::GetValue(size_t series, size_t index) const
@@ -308,30 +311,14 @@ double BiDataSet::GetSecond(size_t series, size_t index)
     return m_series[series]->GetPoint(index).get()->GetDimensionValue(1);
 }
 
-const XYRenderer* BiDataSet::GetRenderer() const
-{
-    return wxDynamicCast(m_renderer, XYRenderer);
-}
-
-XYRenderer* BiDataSet::GetRenderer()
-{
-    return wxDynamicCast(m_renderer, XYRenderer);
-}
-
 double BiDataSet::GetMaxValue(bool vertical) const
 {
-    wxASSERT_MSG(GetRenderer(), "Attempting to plot data without an associated renderer");
-    
-    const XYRenderer* renderer = GetRenderer();
-    
-    return renderer->GetMax(this, vertical ? 1 : 0);
+    return GetMaxValue1(vertical ? 1 : 0);
 }
 
 double BiDataSet::GetMinValue(bool vertical) const
 {
-    wxASSERT_MSG(GetRenderer(), "Attempting to plot data without an associated renderer");
-    
-    return GetRenderer()->GetMin(this, vertical ? 1 : 0);
+    return GetMinValue1(vertical ? 1 : 0);
 }
 
 /***************************************
@@ -343,16 +330,6 @@ NaryDataSet::NaryDataSet (const wxString& name)
 
 NaryDataSet::~NaryDataSet()
 {
-}
-
-Renderer* NaryDataSet::GetRenderer()
-{
-    return m_renderer;
-}
-
-const Renderer* NaryDataSet::GetRenderer() const
-{
-    return m_renderer;
 }
 
 double NaryDataSet::GetMaxValue(bool vertical) const

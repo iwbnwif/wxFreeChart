@@ -7,6 +7,7 @@
 // Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
+#include <wx/dataset1.h>
 #include <wx/axis/numberaxis.h>
 
 #ifdef WIN32
@@ -202,10 +203,11 @@ bool NumberAxis::UpdateBounds()
 
     for (size_t n = 0; n < m_datasets.Count(); n++) 
     {
-        bool verticalAxis = IsVertical();
+        DataSet* dataset = wxDynamicCast(m_datasets[n], DataSet);
+        wxASSERT(dataset);
 
-        double minValue = m_datasets[n]->GetMinValue(verticalAxis);
-        double maxValue = m_datasets[n]->GetMaxValue(verticalAxis);
+        double maxValue = dataset->GetRenderer()->GetMaxValue(dataset, IsVertical() ? 1 : 0);
+        double minValue = dataset->GetRenderer()->GetMinValue(dataset, IsVertical() ? 1 : 0);
 
         if (n == 0) 
         {

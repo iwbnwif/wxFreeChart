@@ -15,8 +15,7 @@
 #include <wx/dataset.h>
 #include <wx/dataseries.h>
 
-// TODO: Renderers should be assocated with plots and not data sets.
-class XYRenderer;
+class Renderer;
 
 enum DataTypeTrait
 {
@@ -170,6 +169,10 @@ public:
 
     virtual const double GetPointValue(size_t series, size_t index, size_t dimension) const;
 
+    virtual const Renderer* GetRenderer() const;
+
+    virtual Renderer* GetRenderer();
+    
     virtual const wxSharedPtr<DataSeries> GetSeries(size_t index) const;
 
     virtual const size_t GetSeriesCount() const;
@@ -178,11 +181,11 @@ public:
 
     virtual void SetName(const wxString& name);
     
-    virtual const wxAny InterpretAsAny(size_t series, size_t index, size_t dimension) const;
+    virtual const wxAny InterpretAsAny(size_t series, size_t index, size_t dimension, int options = 0) const;
     
-    virtual const wxAny InterpretValueAsAny(size_t series, size_t index, size_t dimension) const;
+    virtual const wxAny InterpretValueAsAny(size_t series, size_t index, size_t dimension, int options = 0) const;
     
-    virtual double InterpretAsValue(size_t series, size_t index, size_t dimension) const;
+    virtual double InterpretAsValue(size_t series, size_t index, size_t dimension, int options = 0) const;
     
     // Implement or defer all pure virtual methods from original Dataset class.
 
@@ -222,7 +225,7 @@ public:
     virtual const wxVector<wxAny>& GetBaseSeries() const;
 
     virtual const wxAny& GetBaseValue(size_t index) const;
-
+    
     virtual double GetValue(size_t series, size_t index) const;
     
     // Abstract Data Set method implementations.   
@@ -249,11 +252,7 @@ public:
     virtual double GetFirst(size_t series, size_t index);
     
     virtual double GetSecond(size_t series, size_t index);
-    
-    virtual const XYRenderer* GetRenderer() const;
-
-    virtual XYRenderer* GetRenderer();
-    
+        
     // Abstract Data Set method implementations.   
 
     virtual double GetMaxValue(bool vertical) const;
@@ -271,10 +270,6 @@ public:
     NaryDataSet (const wxString& name = wxEmptyString);
 
     virtual ~NaryDataSet();
-
-    virtual const Renderer* GetRenderer() const;
-
-    virtual Renderer* GetRenderer();
     
     // Abstract Data Set method implementations.   
 

@@ -7,7 +7,7 @@
 // Licence:    wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include "wx/bars/barrenderer.h"
+#include "wx/render/barrenderer.h"
 
 //
 // bar types
@@ -82,30 +82,18 @@ void BarType::Draw(BarRenderer* barRenderer, wxDC& dc, wxRect rc,
     }
 }
 
-double BarType::GetMinValue(UniDataSet* dataset) const
+double BarType::GetMinValue(DataSet* dataset) const
 {
-    double min = dataset->GetValue(0, 0);
-
-    for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-    {
-        for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            min = wxMin(min, dataset->GetValue(ser, pt));
-    }
+    double min = dataset->GetMinValue1(0);
 
     return wxMin(min, m_base);
 }
 
-double BarType::GetMaxValue(UniDataSet* dataset) const
+double BarType::GetMaxValue(DataSet* dataset) const
 {
-    double max = dataset->GetValue(0, 0);
+    double max = dataset->GetMaxValue1(0);
 
-    for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-    {
-        for (size_t pt = 0; pt < dataset->GetCount(ser); pt++)
-            max = wxMin(max, dataset->GetValue(ser, pt));
-    }
-
-    return wxMin(max, m_base);
+    return wxMax(max, m_base);
 }
 
 //
@@ -166,22 +154,28 @@ void StackedBarType::GetBarGeometry(UniDataSet* dataset, size_t item, size_t ser
         value += base;
 }
 
-double StackedBarType::GetMinValue(UniDataSet* dataset) const
+double StackedBarType::GetMinValue(DataSet* dataset) const
 {
     return m_base;
 }
 
-double StackedBarType::GetMaxValue(UniDataSet* dataset) const
+double StackedBarType::GetMaxValue(DataSet* dataset) const
 {
-    double max;
+    double max = 0;
 
+    // Implement a special version of GetMaxValue to take into account that the bars are stacked
+    // and therefore the maximum value is the sum or all series for a given category.
+    
+    // For each category ...
     for (size_t pt = 0; pt < dataset->GetCount(0); pt++) 
     {
         double sum = m_base;
 
+        // Accumulate all series values for this category.
         for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-            sum += dataset->GetValue(ser, pt);
+            sum += dataset->InterpretAsValue(ser, pt, 0);
 
+        // Build the maximum accumulated value across all categories.
         max = wxMax(max, sum);
     }
 
@@ -268,12 +262,12 @@ void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, boo
     }
 }
 
-double BarRenderer::GetMinValue(UniDataSet* dataset) const
+double BarRenderer::GetMinValue(DataSet* dataset, size_t dimension) const
 {
     return m_barType->GetMinValue(dataset);
 }
 
-double BarRenderer::GetMaxValue(UniDataSet* dataset) const
+double BarRenderer::GetMaxValue(DataSet* dataset, size_t dimension) const
 {
     return m_barType->GetMaxValue(dataset);
 }
