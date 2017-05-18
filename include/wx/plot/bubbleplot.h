@@ -10,7 +10,7 @@
 #ifndef BUBBLEPLOT_H_
 #define BUBBLEPLOT_H_
 
-#include <wx/axisplot.h>
+#include <wx/plot/axisplot.h>
 
 /**
  * Used to draw bubble charts.

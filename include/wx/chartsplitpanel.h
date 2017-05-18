@@ -14,8 +14,8 @@
 #include <wx/aui/aui.h>
 
 #include "wx/wxfreechartdefs.h"
-#include "wx/plot.h"
-#include "wx/multiplot.h" // for PlotArray
+#include "wx/plot/plot.h"
+#include "wx/plot/multiplot.h" // for PlotArray
 
 /**
  * wxChartSplitPanel is wxWidgets panel, that displays multiple plots.

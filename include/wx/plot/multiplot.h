@@ -11,7 +11,7 @@
 #define MULTIPLOT_H_
 
 #include <wx/dynarray.h>
-#include <wx/plot.h>
+#include <wx/plot/plot.h>
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(Plot *, PlotArray, WXDLLIMPEXP_FREECHART);
 

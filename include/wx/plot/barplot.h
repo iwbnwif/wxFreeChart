@@ -11,7 +11,7 @@
 #define BARPLOT_H_
 
 #include <wx/dataset1.h>
-#include <wx/xy/xyplot.h>
+#include <wx/plot/xyplot.h>
 
 enum BarPlotOrientation
 {

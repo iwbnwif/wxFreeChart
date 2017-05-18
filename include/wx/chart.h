@@ -13,7 +13,7 @@
 #include <wx/wxfreechartdefs.h>
 
 #include <wx/refobject.h>
-#include <wx/plot.h>
+#include <wx/plot/plot.h>
 
 #include <wx/areadraw.h>
 

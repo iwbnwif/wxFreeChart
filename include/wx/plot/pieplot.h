@@ -10,10 +10,10 @@
 #ifndef PIEPLOT_H_
 #define PIEPLOT_H_
 
-#include <wx/plot.h>
+#include <wx/plot/plot.h>
 #include <wx/legend.h>
-#include <wx/category/categoryrenderer.h>
-#include <wx/xy/xyarearenderer.h>
+#include <wx/render/categoryrenderer.h>
+#include <wx/render/xyarearenderer.h>
 
 #include <wx/colorscheme.h>
 

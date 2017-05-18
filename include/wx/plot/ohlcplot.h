@@ -10,7 +10,7 @@
 #ifndef OHLCPLOT_H_
 #define OHLCPLOT_H_
 
-#include <wx/xy/xyplot.h>
+#include <wx/plot/xyplot.h>
 
 struct OHLCItem
 {

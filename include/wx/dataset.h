@@ -12,14 +12,13 @@
 
 #include <wx/wxfreechartdefs.h>
 
-#include <time.h>
-
+#include <wx/dynarray.h>
 #include <wx/refobject.h>
 
-#include <wx/chartrenderer.h>
 #include <wx/marker.h>
+#include <wx/render/chartrenderer.h>
 
-#include <wx/dynarray.h>
+#include <time.h>
 
 class Dataset;
 class DateTimeDataset;
