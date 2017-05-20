@@ -102,7 +102,7 @@ public:
      * @param index index of dataset
      * @return dataset or NULL if index is out of bounds
      */
-    Dataset *GetDataset(size_t index);
+    DataSet *GetDataset(size_t index);
 
     /**
      * Links dataset with horizontal axis

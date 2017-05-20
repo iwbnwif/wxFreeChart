@@ -142,10 +142,22 @@ void ClipVert(Axis *axis, double &x, double &y, double x1, double y1)
 DataSet::DataSet (const wxString& name)
 {
     m_interpreter = new DataInterpreter();
+    
+    m_renderer = NULL;
+    m_updating = false;
+    m_changed = false;
 }
 
 DataSet::~DataSet()
 {
+     for (size_t n = 0; n < m_markers.Count(); n++) 
+    {
+        Marker *marker = m_markers[n];
+        wxDELETE(marker);
+    }
+
+    SAFE_UNREF(m_renderer);   
+    
     delete m_interpreter;
 }
 
@@ -271,6 +283,65 @@ inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, siz
 inline double DataSet::InterpretAsValue(size_t series, size_t index, size_t dimension, int options) const
 {
     return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension, options);
+}
+
+void DataSet::SetRenderer(Renderer *renderer)
+{
+    SAFE_REPLACE_UNREF(m_renderer, renderer);
+    DatasetChanged();
+}
+
+Renderer *DataSet::GetBaseRenderer()
+{
+    return m_renderer;
+}
+
+void DataSet::NeedRedraw(DrawObject *WXUNUSED(obj))
+{
+    DatasetChanged();
+}
+
+void DataSet::BeginUpdate()
+{
+    m_updating = true;
+}
+
+void DataSet::EndUpdate()
+{
+    if (m_updating) {
+        m_updating = false;
+        if (m_changed) 
+        {
+            DatasetChanged();
+        }
+    }
+}
+
+void DataSet::DatasetChanged()
+{
+    if (m_updating)
+        m_changed = true;
+
+    else 
+    {
+        wxQueueEvent(this, new wxCommandEvent(EVT_DATASET_CHANGED));
+        m_changed = false;
+    }
+}
+
+void DataSet::AddMarker(Marker *marker)
+{
+    m_markers.Add(marker);
+}
+
+size_t DataSet::GetMarkersCount()
+{
+    return m_markers.Count();
+}
+
+Marker *DataSet::GetMarker(size_t index)
+{
+    return m_markers[index];
 }
 
 /***************************************

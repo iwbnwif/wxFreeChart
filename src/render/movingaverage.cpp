@@ -67,5 +67,5 @@ double MovingAverage::GetY(size_t index, size_t WXUNUSED(serie)) const
 
 void MovingAverage::DatasetChanged(Dataset *WXUNUSED(dataset))
 {
-    Dataset::DatasetChanged();
+    DataSet::DatasetChanged();
 }

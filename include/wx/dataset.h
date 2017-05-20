@@ -34,71 +34,12 @@ public:
     Dataset();
     virtual ~Dataset();
 
-    /**
-     * Sets renderer for this dataset.
-     * @param renderer new renderer
-     */
-    void SetRenderer(Renderer *renderer);
 
-    Renderer *GetBaseRenderer();
-
-    /**
-     * Called to begin dataset update.
-     * Each call must have corresponding EndUpdate call.
-     * Increment dataset update counter.
-     */
-    void BeginUpdate();
-
-    /**
-     * Called to end dataset update.
-     * Decrement dataset update counter, and fires
-     * DatasetChanged event when counter equal zero.
-     */
-    void EndUpdate();
-
-    /**
-     * Adds marker to plot. Plot takes ownership of marker.
-     * @param marker marker to be added
-     */
-    void AddMarker(Marker *marker);
-
-    /**
-     * Returns marker count.
-     * @return marker count
-     */
-    size_t GetMarkersCount();
-
-    /**
-     * Returns marker at specified index.
-     * @param index index of marker
-     * @return marker at specified index
-     */
-    Marker *GetMarker(size_t index);
-
-    //
-    // DrawObjectObserver
-    //
-    // Received from renderer, or marker
-    virtual void NeedRedraw(DrawObject *obj);
-
-    /**
-     * Called to indicate, that dataset is changed.
-     * For call by derivate classes.
-     */
-    void DatasetChanged();
 
 protected:
-    /**
-     * Checks whether renderer is acceptable by this dataset.
-     */
-    virtual bool AcceptRenderer(Renderer *r) = 0;
 
-    Renderer *m_renderer;
 private:
-    bool m_updating;
-    bool m_changed;
 
-    MarkerArray m_markers;
 };
 
 #endif /*DATASET_H_*/

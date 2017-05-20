@@ -64,7 +64,7 @@ void BarPlot::DrawDatasets(wxDC &dc, wxRect rc)
 {
     for (size_t nData = 0; nData < GetDatasetCount(); nData++) 
     {
-        Dataset *dataset = GetDataset(nData);
+        DataSet *dataset = GetDataset(nData);
 
         BarRenderer *renderer = wxDynamicCast(dataset->GetBaseRenderer(), BarRenderer);
         wxCHECK_RET(renderer != NULL, wxT("no renderer for data"));

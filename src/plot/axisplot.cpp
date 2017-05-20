@@ -71,7 +71,7 @@ wxCoord AxisPlot::GetAxesExtent(wxDC &dc, AxisArray *axes)
     return ext;
 }
 
-Dataset *AxisPlot::GetDataset(size_t index)
+DataSet *AxisPlot::GetDataset(size_t index)
 {
     return m_datasets[index];
 }
@@ -432,7 +432,7 @@ void AxisPlot::DrawLegend(wxDC &dc, wxRect rcLegend)
 void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
 {
     for (size_t n = 0; n < m_datasets.Count(); n++) {
-        Dataset *dataset = m_datasets[n];
+        DataSet *dataset = m_datasets[n];
 
         if (dataset->GetMarkersCount() == 0) {
             continue;
