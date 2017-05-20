@@ -66,7 +66,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, UniDataSet &dataset)
     wxCoord x = rc.x + m_margin;
     wxCoord y = rc.y + m_margin;
 
-    for (size_t n = 0; n < dataset.GetSerieCount(); n++) {
+    for (size_t n = 0; n < dataset.GetSeriesCount(); n++) {
       
       wxString name = dataset.GetSerieName(n);
       wxSize textExtent = dc.GetTextExtent(name);
@@ -105,7 +105,7 @@ wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
             extent.x = wxMax(extent.x, width);
 
             extent.y += textExtent.y;
-            if (serie < dataset->GetSerieCount() - 1) {
+            if (serie < dataset->GetSeriesCount() - 1) {
                 extent.y += labelsSpacing;
             }
         }
@@ -121,7 +121,7 @@ wxSize Legend::GetExtent(wxDC &dc, UniDataSet &dataset)
 
     extent.y = 2 * m_margin;
 
-    for (size_t n = 0; n < dataset.GetSerieCount(); n++) {
+    for (size_t n = 0; n < dataset.GetSeriesCount(); n++) {
       wxSize textExtent = dc.GetTextExtent(dataset.GetSerieName(n));
 
       wxCoord symbolSize = textExtent.y; // symbol rectangle width and height

@@ -36,8 +36,8 @@ bool DateAxis::UpdateBounds()
     
     if (m_dateCount > 0)
     {
-        m_minValue = m_datasets[0]->GetMinValue(false);
-        m_maxValue = m_datasets[0]->GetMaxValue(false);
+        m_minValue = m_datasets[0]->GetMinValue1(0);
+        m_maxValue = m_datasets[0]->GetMaxValue1(0);
 
         m_hasLabels = true;
     }

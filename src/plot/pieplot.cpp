@@ -73,7 +73,7 @@ void PiePlot::SetLegend(Legend *legend)
 
 bool PiePlot::HasData()
 {
-    return m_dataset != NULL && (m_dataset->GetSerieCount() >= m_serie);
+    return m_dataset != NULL && (m_dataset->GetSeriesCount() >= m_serie);
 }
 
 void PiePlot::DatasetChanged(Dataset *WXUNUSED(dataset))

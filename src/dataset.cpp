@@ -97,23 +97,6 @@ Marker *Dataset::GetMarker(size_t index)
     return m_markers[index];
 }
 
-DateTimeDataset *Dataset::AsDateTimeDataset()
-{
-    return NULL; // dataset not supports date/times by default.
-}
-
-//
-// DateTimeDataset
-//
-
-DateTimeDataset::DateTimeDataset()
-{
-}
-
-DateTimeDataset::~DateTimeDataset()
-{
-}
-
 //
 // DatasetArray
 //

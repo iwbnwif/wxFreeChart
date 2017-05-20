@@ -258,12 +258,6 @@ public:
 
     virtual size_t GetSeriesSize(size_t serie) const;
 
-    virtual double GetMaxValue(bool vertical) const = 0;
-
-    virtual double GetMinValue(bool vertical) const = 0;
-
-    virtual size_t GetSerieCount() const;
-
     virtual wxString GetSerieName (size_t serie) const;
 
 protected:
