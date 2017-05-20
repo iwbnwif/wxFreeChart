@@ -40,7 +40,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
         DataSet *dataset = datasets[n];
 
         FOREACH_SERIE(serie, dataset) {
-            wxString serieName = dataset->GetSerieName(serie);
+            wxString serieName = dataset->GetSeriesName(serie);
             wxSize textExtent = dc.GetTextExtent(serieName);
 
             Renderer *renderer = dataset->GetBaseRenderer();
@@ -68,7 +68,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, UniDataSet &dataset)
 
     for (size_t n = 0; n < dataset.GetSeriesCount(); n++) {
       
-      wxString name = dataset.GetSerieName(n);
+      wxString name = dataset.GetSeriesName(n);
       wxSize textExtent = dc.GetTextExtent(name);
 
       Renderer *renderer = dataset.GetBaseRenderer();
@@ -96,7 +96,7 @@ wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
         DataSet* dataset = datasets[n];
 
         FOREACH_SERIE(serie, dataset) {
-            wxSize textExtent = dc.GetTextExtent(dataset->GetSerieName(serie));
+            wxSize textExtent = dc.GetTextExtent(dataset->GetSeriesName(serie));
 
             wxCoord symbolSize = textExtent.y; // symbol rectangle width and height
 
@@ -122,7 +122,7 @@ wxSize Legend::GetExtent(wxDC &dc, UniDataSet &dataset)
     extent.y = 2 * m_margin;
 
     for (size_t n = 0; n < dataset.GetSeriesCount(); n++) {
-      wxSize textExtent = dc.GetTextExtent(dataset.GetSerieName(n));
+      wxSize textExtent = dc.GetTextExtent(dataset.GetSeriesName(n));
 
       wxCoord symbolSize = textExtent.y; // symbol rectangle width and height
 

@@ -39,7 +39,7 @@ size_t MovingAverage::GetSeriesSize(size_t WXUNUSED(serie)) const
     return count;
 }
 
-wxString MovingAverage::GetSerieName(size_t WXUNUSED(serie)) const
+wxString MovingAverage::GetSeriesName(size_t WXUNUSED(serie)) const
 {
     return wxT("Moving average");
 }

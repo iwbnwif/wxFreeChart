@@ -29,7 +29,7 @@ public:
 
     virtual size_t GetSerieCount() const;
 
-    virtual wxString GetSerieName(size_t serie) const;
+    virtual wxString GetSeriesName(size_t serie) const;
 
     virtual size_t GetSeriesSize(size_t serie) const;
 

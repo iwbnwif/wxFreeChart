@@ -242,7 +242,7 @@ DataSeries* DataSet::AddSeries(DataSeries* series)
     return series;
 }
 
-wxString DataSet::GetSerieName (size_t serie) const
+wxString DataSet::GetSeriesName (size_t serie) const
 {
     return m_series.at(serie)->GetName();
 }
