@@ -13,6 +13,8 @@
 
 #include "wx/arrimpl.cpp" // For DatasetArray.
 
+wxDEFINE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);
+
 /***************************************
  * DATA INTERPRETER
  ***************************************/

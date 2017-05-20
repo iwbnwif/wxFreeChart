@@ -153,6 +153,8 @@ void ClipVert(Axis *axis, double &x, double &y, double x1, double y1);
 #define FOREACH_DATAITEM(index, serie, dataset) \
     for (size_t index = 0; index < dataset->GetSeriesSize(serie); index++)
 
+wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);        
+        
 /***************************************
  * DATA SET
  ***************************************/

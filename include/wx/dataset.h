@@ -21,8 +21,6 @@
 class Dataset;
 class DateTimeDataset;
 
-wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);        
-
 /**
  * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
  *
