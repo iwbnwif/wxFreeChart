@@ -10,7 +10,7 @@
 #ifndef BARPLOT_H_
 #define BARPLOT_H_
 
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 #include <wx/plot/xyplot.h>
 
 enum BarPlotOrientation

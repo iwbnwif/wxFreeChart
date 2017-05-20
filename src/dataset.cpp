@@ -7,7 +7,7 @@
 // Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 #include <wx/plot/ohlcplot.h> // For OHLCItem.
 #include <wx/render/xylinerenderer.h> // For clip axis helpers.
 
@@ -293,7 +293,7 @@ void DataSet::SetRenderer(Renderer *renderer)
     DatasetChanged();
 }
 
-Renderer *DataSet::GetBaseRenderer()
+Renderer* DataSet::GetBaseRenderer()
 {
     return m_renderer;
 }

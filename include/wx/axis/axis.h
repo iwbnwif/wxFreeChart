@@ -12,7 +12,6 @@
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/dataset.h>
-#include <wx/dataset1.h>
 #include <wx/drawobject.h>
 #include <wx/dynarray.h>
 

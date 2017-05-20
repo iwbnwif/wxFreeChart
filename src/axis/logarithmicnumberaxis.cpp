@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/logarithmicnumberaxis.h>
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 #include <math.h>
 
 IMPLEMENT_CLASS(LogarithmicNumberAxis, NumberAxis);

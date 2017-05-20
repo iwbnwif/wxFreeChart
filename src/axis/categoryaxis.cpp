@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/categoryaxis.h>
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 
 IMPLEMENT_CLASS(CategoryAxis, Axis)
 

@@ -11,7 +11,7 @@
 #define XYRENDERER_H_
 
 #include <wx/axis/axis.h>
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 #include <wx/render/chartrenderer.h>
 
 /**

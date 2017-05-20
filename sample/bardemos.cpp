@@ -19,7 +19,7 @@
 #include <wx/axis/numberaxis.h>
 #include <wx/axis/categoryaxis.h>
 
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 
 /**
  * Simple demo with one dataset, and left and bottom axes.

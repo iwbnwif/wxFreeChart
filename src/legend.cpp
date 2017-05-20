@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/legend.h>
+#include <wx/render/chartrenderer.h>
 
 const wxCoord Legend::labelsSpacing = 2;
 

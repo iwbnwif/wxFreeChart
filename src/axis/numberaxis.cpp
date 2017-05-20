@@ -7,8 +7,9 @@
 // Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 #include <wx/axis/numberaxis.h>
+#include <wx/render/chartrenderer.h>
 
 #ifdef WIN32
 #include <float.h>

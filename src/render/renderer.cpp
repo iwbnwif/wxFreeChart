@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/render/chartrenderer.h>
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 
 IMPLEMENT_CLASS(Renderer, wxObject)
 

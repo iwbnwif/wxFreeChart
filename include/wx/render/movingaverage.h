@@ -10,7 +10,7 @@
 #ifndef MOVINGAVERAGE_H_
 #define MOVINGAVERAGE_H_
 
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 
 /**
  * Simple moving average indicator.

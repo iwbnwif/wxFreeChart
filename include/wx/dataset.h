@@ -7,14 +7,18 @@
 // Licence:     wxWidgets licence
 /////////////////////////////////////////////////////////////////////////////
 
-#ifndef DATASET1_H_
-#define DATASET1_H_
+#ifndef DATASET_H_
+#define DATASET_H_
 
 #include <wx/wxfreechartdefs.h>
 
 #include <wx/dataset.h>
 #include <wx/dataseries.h>
+#include <wx/marker.h>
+#include <wx/refobject.h>
 
+
+class Axis;
 class Renderer;
 
 enum DataTypeTrait
@@ -268,7 +272,7 @@ public:
      */
     void SetRenderer(Renderer *renderer);
 
-    Renderer *GetBaseRenderer();
+    Renderer* GetBaseRenderer();
 
     /**
      * Called to begin dataset update.
@@ -420,4 +424,4 @@ public:
 };
 
 
-#endif // DATASET1_H_
+#endif // DATASET_H_

@@ -8,7 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/axis/dateaxis.h>
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 
 IMPLEMENT_CLASS(DateAxis, Axis)
 

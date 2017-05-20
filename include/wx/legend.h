@@ -11,7 +11,7 @@
 #define LEGEND_H_
 
 #include <wx/wxfreechartdefs.h>
-#include <wx/dataset1.h>
+#include <wx/dataset.h>
 #include <wx/areadraw.h>
 /**
  * Legend.

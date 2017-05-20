@@ -11,7 +11,7 @@
 #define BARRENDERER_H_
 
 #include "wx/areadraw.h"
-#include "wx/dataset1.h"
+#include "wx/dataset.h"
 #include "wx/render/xyrenderer.h"
 
 class BarRenderer;
