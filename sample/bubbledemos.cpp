@@ -75,11 +75,11 @@ public:
         plot->AddDataset(dataset);
 
         // create left number axis
-        NumberAxis *leftAxis = new NumberAxis(AXIS_LEFT);
+        NumberAxis* leftAxis = new NumberAxis(AXIS_LEFT);
         leftAxis->SetMargins(15, 15);
 
         // create bottom number axis
-        NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
+        NumberAxis* bottomAxis = new NumberAxis(AXIS_BOTTOM);
         bottomAxis->SetMargins(15, 15);
 
         // add axes to plot

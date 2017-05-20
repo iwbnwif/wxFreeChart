@@ -123,7 +123,7 @@ double NumberAxis::GetValue(size_t step)
     return m_minValue + step * m_labelInterval;
 }
 
-bool NumberAxis::AcceptDataset(Dataset *WXUNUSED(dataset))
+bool NumberAxis::AcceptDataset(DataSet *WXUNUSED(dataset))
 {
     return true;
 }

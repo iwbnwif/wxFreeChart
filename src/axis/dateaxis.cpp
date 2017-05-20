@@ -23,7 +23,7 @@ DateAxis::~DateAxis()
 {
 }
 
-bool DateAxis::AcceptDataset(Dataset *dataset)
+bool DateAxis::AcceptDataset(DataSet *dataset)
 {
     return true;
 }

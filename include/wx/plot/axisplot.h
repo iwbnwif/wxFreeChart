@@ -27,7 +27,7 @@
 class WXDLLIMPEXP_FREECHART DataAxisLink
 {
 public:
-    DataAxisLink(Dataset *dataset, Axis *axis)
+    DataAxisLink(DataSet *dataset, Axis *axis)
     {
         m_dataset = dataset;
         m_axis = axis;
@@ -43,7 +43,7 @@ public:
     {
     }
 
-    Dataset *m_dataset;
+    DataSet *m_dataset;
     Axis *m_axis;
 };
 
@@ -62,19 +62,19 @@ public:
      * Adds an axis to the plot.
      * @param axis The axis to be added.
      */
-    void AddAxis(Axis *axis);
+    void AddAxis(Axis* axis);
 
     /**
      * Adds a dataset to the plot.
      * @param dataset The dataset to be added.
      */
-    void AddDataset(Dataset *dataset);
+    void AddDataset(DataSet* dataset);
 
     /**
      * Removes a dataset from the plot.
      * @param dataset The dataset to be removed.
      */
-    void RemoveDataset(Dataset *dataset);
+    void RemoveDataset(DataSet* dataset);
 
     /**
      * Removes a dataset from the plot.
@@ -89,7 +89,7 @@ public:
      * @param verticalAxis vertical axis to be added
      * @param horizontalAxis horizontal axis to be added
      */
-    void AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis);
+    void AddObjects(DataSet *dataset, Axis *verticalAxis, Axis *horizontalAxis);
 
     /**
      * Returns dataset count.

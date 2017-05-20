@@ -23,87 +23,7 @@
 class Dataset;
 class DateTimeDataset;
 
-/**
- * Simple class to help locate a data point in a specific dataset and series.
- */
-class WXDLLIMPEXP_FREECHART DataItemLocator
-{
-public:
-    /**
-     * Constructor to fully specify a data point.
-     */
-    DataItemLocator (size_t dataset, size_t series, size_t index, bool valid);
-    
-    /**
-     * Gets the dataset index where this data point is stored.
-     * @return The dataset holding this data point.
-     */
-    size_t GetDataset();
-    
-    /**
-     * Gets the series index where this data point is stored.
-     * @return The series holding this data point.
-     */
-    size_t GetSeries();
-    
-    /**
-     * Gets the index of this data point within the data series.
-     * @return The index of this data point.
-     */
-    size_t GetIndex();
-    
-    /**
-     * Gets the validity of this data point locator.
-     * @return True if the locator contains valid information to locate a data point.
-     */
-    bool IsValid();
-
-private:    
-    size_t m_dataset;
-    size_t m_series;
-    size_t m_index;
-    bool m_valid;
-};
-
-#define FOREACH_SERIE(index, dataset) \
-    for (size_t index = 0; index < dataset->GetSerieCount(); index++)
-
-#define FOREACH_DATAITEM(index, serie, dataset) \
-    for (size_t index = 0; index < dataset->GetSeriesSize(serie); index++)
-
 wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);        
-
-inline const wxAny wxAnyMax(const wxAny& a, const wxAny& b)
-{
-    wxASSERT(a.HasSameType(b));
-    
-    if (a.CheckType<double>())
-        return a.As<double>() > b.As<double>() ? a : b;
-        
-    if (a.CheckType<wxDateTime>())
-        return a.As<wxDateTime>() > b.As<wxDateTime>() ? a : b;
-        
-    // Error: Unsupported any type.
-    wxFAIL;
-    
-    return wxAny(0);
-}
-
-inline const wxAny wxAnyMin(const wxAny& a, const wxAny& b)
-{
-    wxASSERT(a.HasSameType(b));
-    
-    if (a.CheckType<double>())
-        return a.As<double>() < b.As<double>() ? a : b;
-        
-    if (a.CheckType<wxDateTime>())
-        return a.As<wxDateTime>() < b.As<wxDateTime>() ? a : b;
-        
-    // Error: Unsupported any type.
-    wxFAIL;
-    
-    return wxAny(0);
-}
 
 /**
  * Base class for all datasets (XYDatasets, XYZDatasets, CategoryDatasets, OHLCDatasets, etc).
@@ -137,12 +57,6 @@ public:
      * DatasetChanged event when counter equal zero.
      */
     void EndUpdate();
-
-    /**
-     * Returns serie count in this dataset.
-     * @return serie count
-     */
-    virtual size_t GetSerieCount() const = 0;
 
     /**
      * Returns value count in serie specified by index.
@@ -242,7 +156,7 @@ public:
     virtual size_t GetSeriesSize() const = 0;
 };
 
-WX_DECLARE_USER_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase, WXDLLIMPEXP_FREECHART);
+WX_DECLARE_USER_EXPORTED_OBJARRAY(DataSet*, DatasetArrayBase, WXDLLIMPEXP_FREECHART);
 
 class WXDLLIMPEXP_FREECHART DatasetArray : public DatasetArrayBase
 {
@@ -250,9 +164,9 @@ public:
     DatasetArray();
     virtual ~DatasetArray();
 
-    void Add(Dataset *dataset);
+    void Add(DataSet* dataset);
 
-    void Remove(Dataset *dataset);
+    void Remove(DataSet* dataset);
 
     void RemoveAt(size_t index, size_t count = 1);
 };

@@ -98,12 +98,60 @@ public:
 };
 
 
+/**
+ * Simple class to help locate a data point in a specific dataset and series.
+ */
+class WXDLLIMPEXP_FREECHART DataItemLocator
+{
+public:
+    /**
+     * Constructor to fully identify a data point.
+     */
+    DataItemLocator (size_t dataset, size_t series, size_t index, bool valid);
+    
+    /**
+     * Gets the dataset index where this data point is stored.
+     * @return The dataset holding this data point.
+     */
+    size_t GetDataset();
+    
+    /**
+     * Gets the series index where this data point is stored.
+     * @return The series holding this data point.
+     */
+    size_t GetSeries();
+    
+    /**
+     * Gets the index of this data point within the data series.
+     * @return The index of this data point.
+     */
+    size_t GetIndex();
+    
+    /**
+     * Gets the validity of this data point locator.
+     * @return True if the locator contains valid information to locate a data point.
+     */
+    bool IsValid();
+
+private:    
+    size_t m_dataset;
+    size_t m_series;
+    size_t m_index;
+    bool m_valid;
+};
+
 //
-// Helper functions.
+// Helper functions and macros.
 //
 void ClipHoriz(Axis *axis, double &x, double &y, double x1, double y1);
 
 void ClipVert(Axis *axis, double &x, double &y, double x1, double y1);
+
+#define FOREACH_SERIE(index, dataset) \
+    for (size_t index = 0; index < dataset->GetSeriesCount(); index++)
+
+#define FOREACH_DATAITEM(index, serie, dataset) \
+    for (size_t index = 0; index < dataset->GetSeriesSize(serie); index++)
 
 /***************************************
  * DATA SET
@@ -188,6 +236,10 @@ public:
     
     virtual const wxSharedPtr<DataSeries> GetSeries(size_t index) const;
 
+    /**
+     * Returns serie count in this dataset.
+     * @return serie count
+     */
     virtual const size_t GetSeriesCount() const;
 
     virtual void SetInterpreter(DataInterpreter* interpreter);

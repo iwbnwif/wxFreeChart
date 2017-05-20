@@ -164,7 +164,7 @@ void AxisPlot::AddAxis(Axis *axis)
     axis->Bind(EVT_AXIS_CHANGED, &AxisPlot::OnAxisChanged, this);
 }
 
-void AxisPlot::AddDataset(Dataset *dataset)
+void AxisPlot::AddDataset(DataSet* dataset)
 {
     if (!AcceptDataset(dataset)) {
         wxLogError(wxT("AxisPlot::AddAxis: dataset unacceptable"));
@@ -178,7 +178,7 @@ void AxisPlot::AddDataset(Dataset *dataset)
     m_datasets.Add(dataset);
 }
 
-void AxisPlot::AddObjects(Dataset *dataset, Axis *verticalAxis, Axis *horizontalAxis)
+void AxisPlot::AddObjects(DataSet *dataset, Axis *verticalAxis, Axis *horizontalAxis)
 {
     AddDataset(dataset);
     AddAxis(verticalAxis);

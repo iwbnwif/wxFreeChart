@@ -37,7 +37,7 @@ void Legend::Draw(wxDC &dc, wxRect rc, DatasetArray &datasets)
     wxCoord y = rc.y + m_margin;
 
     for (size_t n = 0; n < datasets.Count(); n++) {
-        Dataset *dataset = datasets[n];
+        DataSet *dataset = datasets[n];
 
         FOREACH_SERIE(serie, dataset) {
             wxString serieName = dataset->GetSerieName(serie);
@@ -93,7 +93,7 @@ wxSize Legend::GetExtent(wxDC &dc, DatasetArray &datasets)
     extent.y = 2 * m_margin;
 
     for (size_t n = 0; n < datasets.Count(); n++) {
-        Dataset *dataset = datasets[n];
+        DataSet* dataset = datasets[n];
 
         FOREACH_SERIE(serie, dataset) {
             wxSize textExtent = dc.GetTextExtent(dataset->GetSerieName(serie));

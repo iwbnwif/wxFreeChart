@@ -39,7 +39,7 @@ public:
     virtual void GetDataBounds(double &minValue, double &maxValue) const;
 
 protected:
-    virtual bool AcceptDataset(Dataset *dataset);
+    virtual bool AcceptDataset(DataSet *dataset);
 
     //
     // LabelAxis

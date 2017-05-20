@@ -8,6 +8,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 #include <wx/dataset.h>
+#include <wx/dataset1.h>
 
 #include "wx/arrimpl.cpp"
 
@@ -18,34 +19,6 @@
 IMPLEMENT_CLASS(Dataset, wxObject)
 
 wxDEFINE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);
-
-DataItemLocator::DataItemLocator(size_t dataset, size_t series, size_t index, bool valid)
-{
-    m_dataset = dataset;
-    m_series = series;
-    m_index = index;
-    m_valid = valid;
-}
-
-size_t DataItemLocator::GetDataset()
-{
-    return m_dataset;
-}
-
-size_t DataItemLocator::GetSeries()
-{
-    return m_series;
-}
-
-size_t DataItemLocator::GetIndex()
-{
-    return m_index;
-}
-
-bool DataItemLocator::IsValid()
-{
-    return m_valid;
-}
 
 Dataset::Dataset()
 {
@@ -154,18 +127,18 @@ DatasetArray::DatasetArray()
 DatasetArray::~DatasetArray()
 {
     for (size_t n = 0; n < Count(); n++) {
-        Dataset *dataset = Item(n);
+        DataSet* dataset = Item(n);
         SAFE_UNREF(dataset);
     }
 }
 
-void DatasetArray::Add(Dataset *dataset)
+void DatasetArray::Add(DataSet* dataset)
 {
     dataset->AddRef();
     DatasetArrayBase::Add(dataset);
 }
 
-void DatasetArray::Remove(Dataset *dataset)
+void DatasetArray::Remove(DataSet *dataset)
 {
     SAFE_UNREF(dataset);
     DatasetArrayBase::Remove(dataset);
@@ -174,7 +147,7 @@ void DatasetArray::Remove(Dataset *dataset)
 void DatasetArray::RemoveAt(size_t index, size_t count)
 {
     for (size_t n = index; n < index + count; n++) {
-        Dataset *dataset = Item(n);
+        DataSet* dataset = Item(n);
         SAFE_UNREF(dataset);
     }
 

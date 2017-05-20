@@ -230,7 +230,7 @@ void AxisShare::DrawGridLines(wxDC &dc, wxRect rcData)
     m_axis->DrawGridLines(dc, rcData);
 }
 
-bool AxisShare::AcceptDataset(Dataset *dataset)
+bool AxisShare::AcceptDataset(DataSet *dataset)
 {
     return m_axis->AcceptDataset(dataset);
 }

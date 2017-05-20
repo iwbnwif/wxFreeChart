@@ -107,7 +107,7 @@ public:
     size_t GetLabelCount() const;
 
 protected:
-    virtual bool AcceptDataset(Dataset *dataset);
+    virtual bool AcceptDataset(DataSet *dataset);
     
     /**
     * Helper function to calculate a 'nice' label interval for the given dataset. Label intervals are considered

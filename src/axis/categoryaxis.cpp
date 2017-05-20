@@ -22,7 +22,7 @@ CategoryAxis::~CategoryAxis()
 {
 }
 
-bool CategoryAxis::AcceptDataset(Dataset *dataset)
+bool CategoryAxis::AcceptDataset(DataSet* dataset)
 {
     return (wxDynamicCast(dataset, UniDataSet)
                 && m_datasets.Count() == 0);

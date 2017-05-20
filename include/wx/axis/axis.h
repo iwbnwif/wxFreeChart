@@ -12,6 +12,7 @@
 
 #include <wx/wxfreechartdefs.h>
 #include <wx/dataset.h>
+#include <wx/dataset1.h>
 #include <wx/drawobject.h>
 #include <wx/dynarray.h>
 
@@ -273,7 +274,7 @@ public:
     /**
      * internal. Don't use from programs.
      */
-    void AddDataset(Dataset *dataset)
+    void AddDataset(DataSet* dataset)
     {
         if (AcceptDataset(dataset)) {
             m_datasets.Add(dataset);
@@ -333,7 +334,7 @@ protected:
      * @param dataset dataset to be checked
      * @return true - if dataset can be accepted, false overwise
      */
-    virtual bool AcceptDataset(Dataset *dataset) = 0;
+    virtual bool AcceptDataset(DataSet* dataset) = 0;
 
     /**
      * Notifies any subscribers to this axis that something about the axis has changed 
@@ -400,7 +401,7 @@ public:
     virtual void DrawGridLines(wxDC &dc, wxRect rcData);
 
 protected:
-    virtual bool AcceptDataset(Dataset *dataset);
+    virtual bool AcceptDataset(DataSet *dataset);
 
 private:
     bool m_shareVisible;
