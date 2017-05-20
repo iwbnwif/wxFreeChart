@@ -11,6 +11,8 @@
 #include <wx/plot/ohlcplot.h> // For OHLCItem.
 #include <wx/render/xylinerenderer.h> // For clip axis helpers.
 
+#include "wx/arrimpl.cpp" // For DatasetArray.
+
 /***************************************
  * DATA INTERPRETER
  ***************************************/
@@ -269,6 +271,46 @@ inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, siz
 inline double DataSet::InterpretAsValue(size_t series, size_t index, size_t dimension, int options) const
 {
     return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension, options);
+}
+
+/***************************************
+ * DATA SET ARRAY
+ ***************************************/
+
+WX_DEFINE_EXPORTED_OBJARRAY(DatasetArrayBase)
+
+DatasetArray::DatasetArray()
+{
+}
+
+DatasetArray::~DatasetArray()
+{
+    for (size_t n = 0; n < Count(); n++) {
+        DataSet* dataset = Item(n);
+        SAFE_UNREF(dataset);
+    }
+}
+
+void DatasetArray::Add(DataSet* dataset)
+{
+    dataset->AddRef();
+    DatasetArrayBase::Add(dataset);
+}
+
+void DatasetArray::Remove(DataSet *dataset)
+{
+    SAFE_UNREF(dataset);
+    DatasetArrayBase::Remove(dataset);
+}
+
+void DatasetArray::RemoveAt(size_t index, size_t count)
+{
+    for (size_t n = index; n < index + count; n++) {
+        DataSet* dataset = Item(n);
+        SAFE_UNREF(dataset);
+    }
+
+    DatasetArrayBase::RemoveAt(index, count);
 }
 
 /***************************************

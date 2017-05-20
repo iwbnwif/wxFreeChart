@@ -10,8 +10,6 @@
 #include <wx/dataset.h>
 #include <wx/dataset1.h>
 
-#include "wx/arrimpl.cpp"
-
 //
 // Dataset
 //
@@ -65,7 +63,7 @@ void Dataset::EndUpdate()
         m_updating = false;
         if (m_changed) 
         {
-            // FireDatasetChanged();
+            DatasetChanged();
         }
     }
 }
@@ -97,43 +95,4 @@ Marker *Dataset::GetMarker(size_t index)
     return m_markers[index];
 }
 
-//
-// DatasetArray
-//
-
-WX_DEFINE_EXPORTED_OBJARRAY(DatasetArrayBase)
-
-DatasetArray::DatasetArray()
-{
-}
-
-DatasetArray::~DatasetArray()
-{
-    for (size_t n = 0; n < Count(); n++) {
-        DataSet* dataset = Item(n);
-        SAFE_UNREF(dataset);
-    }
-}
-
-void DatasetArray::Add(DataSet* dataset)
-{
-    dataset->AddRef();
-    DatasetArrayBase::Add(dataset);
-}
-
-void DatasetArray::Remove(DataSet *dataset)
-{
-    SAFE_UNREF(dataset);
-    DatasetArrayBase::Remove(dataset);
-}
-
-void DatasetArray::RemoveAt(size_t index, size_t count)
-{
-    for (size_t n = index; n < index + count; n++) {
-        DataSet* dataset = Item(n);
-        SAFE_UNREF(dataset);
-    }
-
-    DatasetArrayBase::RemoveAt(index, count);
-}
 

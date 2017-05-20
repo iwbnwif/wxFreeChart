@@ -267,6 +267,25 @@ protected:
 };
 
 /***************************************
+ * DATA SET ARRAY
+ ***************************************/
+
+WX_DECLARE_USER_EXPORTED_OBJARRAY(DataSet*, DatasetArrayBase, WXDLLIMPEXP_FREECHART);
+
+class WXDLLIMPEXP_FREECHART DatasetArray : public DatasetArrayBase
+{
+public:
+    DatasetArray();
+    virtual ~DatasetArray();
+
+    void Add(DataSet* dataset);
+
+    void Remove(DataSet* dataset);
+
+    void RemoveAt(size_t index, size_t count = 1);
+};
+
+/***************************************
  * UNI DATA SET
  ***************************************/
 
