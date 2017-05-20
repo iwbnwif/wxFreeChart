@@ -125,7 +125,7 @@ public:
      * @param vertical true if you want to get vertical axis, false - horizontal
      * @return main axis for dataset or NULL if dataset has no main axis
      */
-    Axis *GetDatasetAxis(Dataset *dataset, size_t index, bool vertical);
+    Axis *GetDatasetAxis(DataSet *dataset, size_t index, bool vertical);
 
     /**
      * Returns main dataset axis.
@@ -136,7 +136,7 @@ public:
      * @param vertical true if you want to get vertical axis, false - horizontal
      * @return main axis for dataset or NULL if dataset has no main axis
      */
-    Axis *GetDatasetAxis(Dataset *dataset, bool vertical);
+    Axis *GetDatasetAxis(DataSet *dataset, bool vertical);
 
     /**
      * Returns main vertical dataset axis.
@@ -145,7 +145,7 @@ public:
      * @param dataset dataset
      * @return main axis for dataset or NULL if dataset has no main axis
      */
-    Axis *GetDatasetVerticalAxis(Dataset *dataset)
+    Axis *GetDatasetVerticalAxis(DataSet *dataset)
     {
         return GetDatasetAxis(dataset, true);
     }
@@ -157,7 +157,7 @@ public:
      * @param dataset dataset
      * @return main axis for dataset or NULL if dataset has no main axis
      */
-    Axis *GetDatasetHorizontalAxis(Dataset *dataset)
+    Axis *GetDatasetHorizontalAxis(DataSet *dataset)
     {
         return GetDatasetAxis(dataset, false);
     }
@@ -168,7 +168,7 @@ public:
      * @param index dataset index
      * @return dataset at index
      */
-    Dataset *GetAxisDataset(Axis *axis, size_t index)
+    DataSet *GetAxisDataset(Axis *axis, size_t index)
     {
         return axis->GetDataset(index);
     }
@@ -229,7 +229,7 @@ public:
     //
     // DatasetObserver
     //
-    virtual void DatasetChanged(Dataset *dataset);
+    virtual void DatasetChanged(DataSet *dataset);
 
     //
     // AxisObserver
@@ -260,7 +260,7 @@ protected:
      * @param dataset dataset to be checked
      * @return true if dataset can be accepted, false overwise
      */
-    virtual bool AcceptDataset(Dataset *dataset) = 0;
+    virtual bool AcceptDataset(DataSet *dataset) = 0;
 
     /**
      * Called to draw all datasets.
@@ -290,7 +290,7 @@ private:
 
     virtual void ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel);
 
-    bool UpdateAxis(Dataset *dataset = NULL);
+    bool UpdateAxis(DataSet *dataset = NULL);
 
     //
     // Draw functions

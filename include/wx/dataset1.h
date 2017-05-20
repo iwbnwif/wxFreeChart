@@ -164,7 +164,7 @@ void ClipVert(Axis *axis, double &x, double &y, double x1, double y1);
  * Therefore, all data points within all series of a data set must be of a common data type (e.g. a double or a complex
  * data type such as wxDateTime).
  */
-class WXDLLIMPEXP_FREECHART DataSet : public Dataset
+class WXDLLIMPEXP_FREECHART DataSet : public wxEvtHandler, public RefObject
 {
 public:
 

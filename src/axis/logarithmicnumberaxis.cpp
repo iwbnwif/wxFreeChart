@@ -67,7 +67,7 @@ bool LogarithmicNumberAxis::UpdateBounds()
     return true;
 }
 
-double LogarithmicNumberAxis::GetMinValue(Dataset* d)
+double LogarithmicNumberAxis::GetMinValue(DataSet* d)
 {
   BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
   
@@ -108,7 +108,7 @@ double LogarithmicNumberAxis::GetMinValue(Dataset* d)
   */ 
 }
 
-double LogarithmicNumberAxis::GetMaxValue(Dataset* d)
+double LogarithmicNumberAxis::GetMaxValue(DataSet* d)
 {
     BiDataSet* dataset = wxDynamicCast(d, BiDataSet);
     

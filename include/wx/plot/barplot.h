@@ -32,7 +32,7 @@ public:
 protected:
     virtual bool AcceptAxis(Axis *axis);
 
-    virtual bool AcceptDataset(Dataset *dataset);
+    virtual bool AcceptDataset(DataSet *dataset);
 
     virtual void DrawDatasets(wxDC &dc, wxRect rc);
     

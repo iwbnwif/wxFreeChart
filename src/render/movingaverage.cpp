@@ -65,7 +65,7 @@ double MovingAverage::GetY(size_t index, size_t WXUNUSED(serie)) const
     return sum / m_period;
 }
 
-void MovingAverage::DatasetChanged(Dataset *WXUNUSED(dataset))
+void MovingAverage::DatasetChanged(DataSet* WXUNUSED(dataset))
 {
     DataSet::DatasetChanged();
 }

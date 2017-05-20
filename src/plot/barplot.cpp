@@ -55,7 +55,7 @@ bool BarPlot::AcceptAxis(Axis *axis)
     return false;
 }
 
-bool BarPlot::AcceptDataset(Dataset *dataset)
+bool BarPlot::AcceptDataset(DataSet *dataset)
 {
     return (wxDynamicCast(dataset, UniDataSet) != NULL);
 }

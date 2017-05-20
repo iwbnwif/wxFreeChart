@@ -51,8 +51,8 @@ protected:
     virtual void GetLabel(size_t step, wxString& label);
     virtual double GetValue(size_t step);
 
-  double GetMinValue(Dataset* dataset);
-  double GetMaxValue(Dataset* dataset);
+  double GetMinValue(DataSet* dataset);
+  double GetMaxValue(DataSet* dataset);
 
 private:
     bool m_longExponent;

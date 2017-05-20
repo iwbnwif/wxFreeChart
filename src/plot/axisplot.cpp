@@ -76,7 +76,7 @@ DataSet *AxisPlot::GetDataset(size_t index)
     return m_datasets[index];
 }
 
-Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, size_t index, bool vertical)
+Axis *AxisPlot::GetDatasetAxis(DataSet *dataset, size_t index, bool vertical)
 {
     size_t axisIndex = 0;
 
@@ -95,7 +95,7 @@ Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, size_t index, bool vertical)
     return NULL; // not found
 }
 
-Axis *AxisPlot::GetDatasetAxis(Dataset *dataset, bool vertical)
+Axis *AxisPlot::GetDatasetAxis(DataSet *dataset, bool vertical)
 {
     return GetDatasetAxis(dataset, 0, vertical);
 }
@@ -213,7 +213,7 @@ void AxisPlot::LinkDataVerticalAxis(size_t nData, size_t nAxis)
 // Inspects the passed dataset and if axes are set to automatically update
 // then their dimensions are recalculated. The return value indicates if
 // the axis bounds have changed or not.
-bool AxisPlot::UpdateAxis(Dataset *dataset)
+bool AxisPlot::UpdateAxis(DataSet *dataset)
 {
     int updated = 0;
     
@@ -232,7 +232,7 @@ bool AxisPlot::UpdateAxis(Dataset *dataset)
 
 bool AxisPlot::ToDataCoords(size_t nData, wxDC &dc, wxRect rc, wxCoord gx, wxCoord gy, double *x, double *y)
 {
-    Dataset *dataset = GetDataset(nData);
+    DataSet *dataset = GetDataset(nData);
     wxCHECK_MSG(dataset != NULL, false, wxT("AxisPlot::ToDataCoords: Invalid dataset index"));
 
     Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
@@ -503,7 +503,7 @@ void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
     PlotChanged();
 }
 
-void AxisPlot::DatasetChanged(Dataset *dataset)
+void AxisPlot::DatasetChanged(DataSet *dataset)
 {
     PlotChanged();
 }

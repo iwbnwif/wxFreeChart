@@ -30,7 +30,7 @@ bool OHLCPlot::AcceptAxis(Axis *axis)
                     wxDynamicCast(axis, DateAxis) != NULL;
 }
 
-bool OHLCPlot::AcceptDataset(Dataset *dataset)
+bool OHLCPlot::AcceptDataset(DataSet *dataset)
 {
     return wxDynamicCast(dataset, BiDataSet) != NULL;
 }

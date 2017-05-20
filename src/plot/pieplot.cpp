@@ -76,7 +76,7 @@ bool PiePlot::HasData()
     return m_dataset != NULL && (m_dataset->GetSeriesCount() >= m_serie);
 }
 
-void PiePlot::DatasetChanged(Dataset *WXUNUSED(dataset))
+void PiePlot::DatasetChanged(DataSet *WXUNUSED(dataset))
 {
     // TODO.
 }

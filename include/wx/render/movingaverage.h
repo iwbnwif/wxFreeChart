@@ -40,7 +40,7 @@ public:
     //
     // DatasetObserver
     //
-    virtual void DatasetChanged(Dataset *dataset);
+    virtual void DatasetChanged(DataSet *dataset);
 
 private:
     BiDataSet* m_SourceDataset;

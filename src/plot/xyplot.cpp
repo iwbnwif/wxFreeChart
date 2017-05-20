@@ -17,12 +17,12 @@ XYPlot::~XYPlot()
 {
 }
 
-bool XYPlot::AcceptAxis(Axis *WXUNUSED(axis))
+bool XYPlot::AcceptAxis(Axis* WXUNUSED(axis))
 {
     return true;
 }
 
-bool XYPlot::AcceptDataset(Dataset *dataset)
+bool XYPlot::AcceptDataset(DataSet* dataset)
 {
     return (wxDynamicCast(dataset, BiDataSet) != NULL);
 }

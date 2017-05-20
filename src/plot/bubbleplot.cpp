@@ -24,7 +24,7 @@ bool BubblePlot::AcceptAxis(Axis *WXUNUSED(axis))
     return true;
 }
 
-bool BubblePlot::AcceptDataset(Dataset *dataset)
+bool BubblePlot::AcceptDataset(DataSet *dataset)
 {
     return (wxDynamicCast(dataset, NaryDataSet) != NULL);
 }

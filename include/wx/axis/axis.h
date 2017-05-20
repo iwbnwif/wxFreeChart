@@ -71,14 +71,14 @@ public:
      * @param index dataset index
      * @return dataset at index
      */
-    Dataset *GetDataset(size_t index);
+    DataSet* GetDataset(size_t index);
 
     /**
      * Returns dataset, linked with this axis at specified index.
      * @param index dataset index
      * @return dataset at index
      */
-    const Dataset* GetDataset(size_t index) const;
+    const DataSet* GetDataset(size_t index) const;
 
 
     /**

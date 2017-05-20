@@ -37,12 +37,12 @@ Axis::~Axis()
 {
 }
 
-Dataset *Axis::GetDataset(size_t index)
+DataSet* Axis::GetDataset(size_t index)
 {
     return m_datasets[index];
 }
 
-const Dataset* Axis::GetDataset(size_t index) const
+const DataSet* Axis::GetDataset(size_t index) const
 {
     return m_datasets[index];
 }
