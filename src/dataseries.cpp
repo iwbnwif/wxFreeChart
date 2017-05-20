@@ -39,7 +39,7 @@ void DataSeries::Clear()
     m_points.clear();
 }
 
-const size_t DataSeries::GetCount()
+const size_t DataSeries::GetSize()
 {
     return m_points.size();
 }

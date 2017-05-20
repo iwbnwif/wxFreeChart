@@ -115,9 +115,9 @@ DataSet::~DataSet()
     delete m_interpreter;
 }
 
-inline size_t DataSet::GetCount(size_t serie) const
+inline size_t DataSet::GetSeriesSize(size_t series) const
 {
-    return m_series.at(serie)->GetCount();
+    return m_series.at(series)->GetSize();
 }
 
 inline DataInterpreter* DataSet::GetInterpreter() const
@@ -127,13 +127,13 @@ inline DataInterpreter* DataSet::GetInterpreter() const
 
 double DataSet::GetMaxValue1(size_t dimension) const
 {
-    wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
+    wxASSERT(GetSerieCount() > 0 && GetSeriesSize(0) > 0);
     
     double max = InterpretAsValue(0, 0, dimension, 0);
     
     for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
-        for (size_t pt = 0; pt < GetCount(ser); pt++)
+        for (size_t pt = 0; pt < GetSeriesSize(ser); pt++)
             max = wxMax(max, InterpretAsValue(ser, pt, dimension, 0));
     }
     
@@ -142,13 +142,13 @@ double DataSet::GetMaxValue1(size_t dimension) const
 
 double DataSet::GetMinValue1(size_t dimension) const
 {
-    wxASSERT(GetSerieCount() > 0 && GetCount(0) > 0);
+    wxASSERT(GetSerieCount() > 0 && GetSeriesSize(0) > 0);
     
     double min = InterpretAsValue(0, 0, dimension, 1);
     
     for (size_t ser = 0; ser < GetSerieCount(); ser++)
     {
-        for (size_t pt = 0; pt < GetCount(ser); pt++)
+        for (size_t pt = 0; pt < GetSeriesSize(ser); pt++)
             min = wxMin(min, InterpretAsValue(ser, pt, dimension, 1));
     }
     
@@ -203,9 +203,11 @@ bool DataSet::AcceptRenderer(Renderer* r)
     return true;
 }
 
-void DataSet::AddSeries(DataSeries* series)
+DataSeries* DataSet::AddSeries(DataSeries* series)
 {
     m_series.push_back(wxSharedPtr<DataSeries>(series));
+    
+    return series;
 }
 
 size_t DataSet::GetSerieCount() const

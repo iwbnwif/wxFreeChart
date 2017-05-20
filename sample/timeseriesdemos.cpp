@@ -200,7 +200,7 @@ public:
 
         // Set the bounds to match exactly the date range for which we have data.
         // TODO: THis should probably be the default on all time axis.
-        bottomAxis->SetFixedBounds(dataset->GetPointValue(0, 0, 0), dataset->GetPointValue(0, dataset->GetCount(0) - 1, 0));
+        bottomAxis->SetFixedBounds(dataset->GetPointValue(0, 0, 0), dataset->GetPointValue(0, dataset->GetSeriesSize(0) - 1, 0));
 
         // Add axes to plot.
         plot->AddAxis (leftAxis);

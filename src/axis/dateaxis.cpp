@@ -32,7 +32,7 @@ bool DateAxis::UpdateBounds()
 {
     wxASSERT(m_datasets[0]);
 
-    m_dateCount = m_datasets[0]->GetCount(0);
+    m_dateCount = m_datasets[0]->GetSeriesSize(0);
     
     if (m_dateCount > 0)
     {

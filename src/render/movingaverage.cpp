@@ -30,9 +30,9 @@ size_t MovingAverage::GetSerieCount() const
     return 1;
 }
 
-size_t MovingAverage::GetCount(size_t WXUNUSED(serie)) const
+size_t MovingAverage::GetSeriesSize(size_t WXUNUSED(serie)) const
 {
-    int count = m_SourceDataset->GetCount(0) - m_period + 1;
+    int count = m_SourceDataset->GetSeriesSize(0) - m_period + 1;
     if (count < 0) {
         count = 0; // period is larger than OHLC data
     }

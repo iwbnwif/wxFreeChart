@@ -58,7 +58,7 @@ void OHLCPlot::DrawOHLCData(wxDC &dc, wxRect rc, BiDataSet* dataset)
     wxASSERT_MSG(hAxis != NULL, wxT("No horizontal axis for data"));
 
     // draw OHLC items
-    for (size_t n = 0; n < dataset->GetCount(0); n++) 
+    for (size_t n = 0; n < dataset->GetSeriesSize(0); n++) 
     {
         const OHLCItem& item = dataset->GetPointData(0, n, 1).As<OHLCItem>();
         wxCoord open = vAxis->ToGraphics(dc, rc.y, rc.height, item.open);

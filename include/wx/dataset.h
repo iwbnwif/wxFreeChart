@@ -69,7 +69,7 @@ private:
     for (size_t index = 0; index < dataset->GetSerieCount(); index++)
 
 #define FOREACH_DATAITEM(index, serie, dataset) \
-    for (size_t index = 0; index < dataset->GetCount(serie); index++)
+    for (size_t index = 0; index < dataset->GetSeriesSize(serie); index++)
 
 wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);        
 
@@ -149,7 +149,7 @@ public:
      * @param serie index
      * @return value count
      */
-    virtual size_t GetCount(size_t serie) const = 0;
+    virtual size_t GetSeriesSize(size_t serie) const = 0;
 
     /**
      * Returns serie name.
@@ -208,7 +208,6 @@ public:
 protected:
     /**
      * Checks whether renderer is acceptable by this dataset.
-     * TODO: this method must be removed, because acceptable renderer type depends on plot type.
      */
     virtual bool AcceptRenderer(Renderer *r) = 0;
 
@@ -240,7 +239,7 @@ public:
      * Returns date/time count.
      * @return date/time count
      */
-    virtual size_t GetCount() const = 0;
+    virtual size_t GetSeriesSize() const = 0;
 };
 
 WX_DECLARE_USER_EXPORTED_OBJARRAY(Dataset *, DatasetArrayBase, WXDLLIMPEXP_FREECHART);

@@ -31,7 +31,7 @@ public:
 
     virtual wxString GetSerieName(size_t serie) const;
 
-    virtual size_t GetCount(size_t serie) const;
+    virtual size_t GetSeriesSize(size_t serie) const;
 
     virtual double GetX(size_t index, size_t serie) const;
 

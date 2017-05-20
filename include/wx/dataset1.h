@@ -112,11 +112,9 @@ void ClipVert(Axis *axis, double &x, double &y, double x1, double y1);
 /**
  * Base class for all objects representing a data set.
  *
- * A data set is a collection of data series that can be plotted against a
- * common set of axis. Therefore, all data points within all series of a data
- * set must be of a common type.
- * 
- * 
+ * A DataSet is a collection of DataSeries that can be plotted against a common set of axis using a common Renderer.
+ * Therefore, all data points within all series of a data set must be of a common data type (e.g. a double or a complex
+ * data type such as wxDateTime).
  */
 class WXDLLIMPEXP_FREECHART DataSet : public Dataset
 {
@@ -125,8 +123,10 @@ public:
     /**
      * Default constructor that creates an empty data set with the option to provide a
      * name.
-     * Currently dataset names are not used.
+     * @todo Currently dataset names are not used.
      * @param name The name that can be used to describe this data set.
+     * @par Example
+     * @code DataSet* dataset = new DataSet("Example dataset"); @endcode
      */
     DataSet (const wxString& name = wxEmptyString);
 
@@ -136,12 +136,24 @@ public:
     virtual ~DataSet();
     
     /**
-     * Add a data series to this data set. All series must contain data points with the same
-     * number of dimensions and with data that is essentially the same type (i.e. that can 
-     * be plotted against common axes).
-     * @param series
+     * Add a DataSeries to this %DataSet. All DataSeries must contain DataPoint with the same
+     * number of dimensions and with data that is essentially the same type (e.g. that can 
+     * be plotted against common Axis and with a common Renderer).
+     * @param series A pointer to the DataSeries to add to this DataSet. The DataSet will take
+     * ownership of the pointer and automatically delete the DataSeries object when the DataSet is destroyed.
+     * @return A pointer to the added series or NULL if an error occurred. This is provided so that it is possible
+     * to generate a new data series inline by passing `new xDataSeries("Name")` as a parameter and receiving
+     * a pointer to the added series.
+     * @par Example
+     * @code 
+     * DataSet* dataset = new DataSet("Example dataset");
+     * BiDataSeries* series = dataset->AddSeries(new BiDataSeries("Example series");
+     * 
+     * if (series)
+     *      ...
+     * @endcode
      */
-    virtual void AddSeries(DataSeries* series);
+    virtual DataSeries* AddSeries(DataSeries* series);
     
     virtual DataInterpreter* GetInterpreter() const;
     
@@ -150,6 +162,7 @@ public:
      * this data set.
      * @param dimension The dimension to obtain the maximum value for.
      * @return The maximum value for the given data dimension in all series within this dataset.
+     * 
      */
     virtual double GetMaxValue1(size_t dimension) const;
     
@@ -191,7 +204,7 @@ public:
 
     virtual bool AcceptRenderer(Renderer* r);
 
-    virtual size_t GetCount(size_t serie) const;
+    virtual size_t GetSeriesSize(size_t serie) const;
 
     virtual double GetMaxValue(bool vertical) const = 0;
 

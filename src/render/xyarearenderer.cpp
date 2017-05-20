@@ -56,7 +56,7 @@ void XYAreaRenderer::Draw(wxDC& dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, 
     {
         dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(GetSerieColour(serie)));
 
-        for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
+        for (size_t n = 0; n < dataset->GetSeriesSize(serie) - 1; n++) {
             double x0 = dataset->GetFirst(serie, n);
             double y0 = dataset->GetSecond(serie, n);
             double x1 = dataset->GetFirst(serie, n + 1);

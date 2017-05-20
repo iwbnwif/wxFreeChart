@@ -67,7 +67,7 @@ public:
      * Returns the number of data points within this series.
      * @return The number of data points within this series.
      */
-    virtual const size_t GetCount();
+    virtual const size_t GetSize();
 
     /**
      * Returns the name assigned to this series.

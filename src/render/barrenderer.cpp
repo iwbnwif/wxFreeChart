@@ -167,7 +167,7 @@ double StackedBarType::GetMaxValue(DataSet* dataset) const
     // and therefore the maximum value is the sum or all series for a given category.
     
     // For each category ...
-    for (size_t pt = 0; pt < dataset->GetCount(0); pt++) 
+    for (size_t pt = 0; pt < dataset->GetSeriesSize(0); pt++) 
     {
         double sum = m_base;
 
@@ -257,7 +257,7 @@ AreaDraw *BarRenderer::GetBarDraw(size_t serie)
 
 void BarRenderer::Draw(wxDC &dc, wxRect rc, Axis *horizAxis, Axis *vertAxis, bool vertical, UniDataSet* dataset)
 {
-    for (size_t n = 0; n < dataset->GetSeries(0)->GetCount(); n++) {
+    for (size_t n = 0; n < dataset->GetSeriesSize(0); n++) {
         m_barType->Draw(this, dc, rc, horizAxis, vertAxis, vertical, n, dataset);
     }
 }

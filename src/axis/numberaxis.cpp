@@ -206,6 +206,8 @@ bool NumberAxis::UpdateBounds()
         DataSet* dataset = wxDynamicCast(m_datasets[n], DataSet);
         wxASSERT(dataset);
 
+        // TODO: This will cause a problem for line renderers on UniDataSets which only
+        // have a single dimension on the vertical axis (should assert in GetDimensionData).
         double maxValue = dataset->GetRenderer()->GetMaxValue(dataset, IsVertical() ? 1 : 0);
         double minValue = dataset->GetRenderer()->GetMinValue(dataset, IsVertical() ? 1 : 0);
 

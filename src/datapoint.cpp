@@ -67,7 +67,7 @@ size_t UniDataPoint::GetDimensionCount() const
     return 1;
 }
 
-const wxAny& UniDataPoint::GetDimensionData (size_t dimension) const
+const wxAny& UniDataPoint::GetDimensionData(size_t dimension) const
 {
     wxASSERT (dimension == 0);
     return data;

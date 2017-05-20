@@ -88,7 +88,7 @@ void XYLineRendererBase::DrawSymbols(wxDC&dc, const wxRect& rc, Axis* xAxis, Axi
     Symbol *symbol = GetSerieSymbol(serie);
     wxColour color = GetSerieColour(serie);
 
-    for(size_t n = 0; n < dataset->GetCount(serie); ++n) {
+    for(size_t n = 0; n < dataset->GetSeriesSize(serie); ++n) {
       double x = dataset->GetFirst(serie, n);
       double y = dataset->GetSecond(serie, n);
 
@@ -120,10 +120,10 @@ void XYLineRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAx
 {
     FOREACH_SERIE(serie, dataset) 
     {
-        if (dataset->GetCount(serie) < 2)
+        if (dataset->GetSeriesSize(serie) < 2)
             continue;
 
-        for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) 
+        for (size_t n = 0; n < dataset->GetSeriesSize(serie) - 1; n++) 
         {
             double x0 = dataset->InterpretAsValue(serie, n, 0);
             double y0 = dataset->InterpretAsValue(serie, n, 1);
@@ -172,7 +172,7 @@ XYLineStepRenderer::~XYLineStepRenderer()
 void XYLineStepRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAxis, BiDataSet* dataset)
 {
     FOREACH_SERIE(serie, dataset) {
-        if (dataset->GetCount(serie) < 2) {
+        if (dataset->GetSeriesSize(serie) < 2) {
             continue;
         }
 
@@ -187,7 +187,7 @@ void XYLineStepRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis*
         dc.SetPen(*pen);
 
         // iterate until two points will be invisible
-        for (size_t n = first; n < dataset->GetCount(serie) - 1; n++) {
+        for (size_t n = first; n < dataset->GetSeriesSize(serie) - 1; n++) {
             double x0 = dataset->GetFirst(serie, n);
             double y0 = dataset->GetSecond(serie, n);
             double x1 = dataset->GetFirst(serie, n + 1);
@@ -219,7 +219,7 @@ void XYLineStepRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis*
 
 size_t XYLineStepRenderer::GetFirstVisibleIndex(Axis* xAxis, Axis* yAxis, BiDataSet* dataset, size_t serie)
 {
-    for (size_t n = 0; n < dataset->GetCount(serie) - 1; n++) {
+    for (size_t n = 0; n < dataset->GetSeriesSize(serie) - 1; n++) {
         double x0 = dataset->GetFirst(serie, n);
         double y0 = dataset->GetSecond(serie, n);
         double x1 = dataset->GetFirst(serie, n + 1);

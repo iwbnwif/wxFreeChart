@@ -131,7 +131,7 @@ wxSize Legend::GetExtent(wxDC &dc, UniDataSet &dataset)
       extent.x = wxMax(extent.x, width);
 
       extent.y += textExtent.y;
-      if (n < dataset.GetCount(0) - 1) {
+      if (n < dataset.GetSeriesSize(0) - 1) {
         extent.y += labelsSpacing;
       }
     }
