@@ -434,14 +434,14 @@ void AxisPlot::DrawMarkers(wxDC &dc, wxRect rcData)
     for (size_t n = 0; n < m_datasets.Count(); n++) {
         DataSet *dataset = m_datasets[n];
 
-        if (dataset->GetMarkersCount() == 0) {
+        if (dataset->GetMarkerCount() == 0) {
             continue;
         }
 
         Axis *horizAxis = GetDatasetHorizontalAxis(dataset);
         Axis *vertAxis = GetDatasetVerticalAxis(dataset);
 
-        for (size_t nMarker = 0; nMarker < dataset->GetMarkersCount(); nMarker++) {
+        for (size_t nMarker = 0; nMarker < dataset->GetMarkerCount(); nMarker++) {
             Marker *marker = dataset->GetMarker(nMarker);
 
             marker->Draw(dc, rcData, horizAxis, vertAxis);

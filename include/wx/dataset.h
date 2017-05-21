@@ -341,7 +341,9 @@ public:
      * 
      * @param series The series that contains the data point of interest.
      * @param index The index of the data point within its data series.
-     * @return A constant pointer to the data point. The actual type of DataPoint will be that stored in the DataSeries.
+     * @param dimension The dimension that that holds the data of interest.
+     * @param options An integer representing an options set to be passed to the DataInterpreter.
+     * @return The interpreted data for the given data point wrapped in another wxAny object.
      * 
      * @par Example
      * @code
@@ -359,14 +361,145 @@ public:
      *                      item.low,
      *                      item.close);
      * @endcode
+     * @see DataInterpreter
      */
     virtual const wxAny GetPointData(size_t series, size_t index, size_t dimension, int interpreterOptions = 0) const;
 
+    /**
+     * Gets the _interpreted_ value for the specified point within this data set. Data points are stored in data series, 
+     * so this method requires both the series and an index within that series in order to locate the data point. This is a 
+     * convenience method to access the interpreted value for a data point directly without first dereferencing the series 
+     * containing the data point.
+     * 
+     * This method relies on a correctly set up DataInterpreter to convert the underlying wxAny object (which can be almost any
+     * data type) into a representative `double` value. The conversion is intuitive for any numerical data and reasonably 
+     * straightforward for ordinal data too. However, complex data types may not have an obvious conversion so the use of this 
+     * method requires an understanding of the interpretation schema. Refer to the documentation for DataInterpreter for more
+     * details.
+     * 
+     * @param series The series that contains the data point of interest.
+     * @param index The index of the data point within its data series.
+     * @param dimension The dimension that that holds the data of interest.
+     * @param options An integer representing an options set to be passed to the DataInterpreter.
+     * @return The interpreted data for the given data point wrapped in another wxAny object.     
+     * 
+     * @par Example
+     * @code
+     * #define INTERPRET_OHLC_HIGH 1
+     * 
+     * // Get the `high` and `low` values stored in a OHLC data point.
+     * double high = dataset->GetPointValue(0, 52, 1, INTERPRET_MAX);
+     * double low = dataset->GetPointValue(0, 52, 1, INTERPRET_MIN);
+     * 
+     * // Which is equivalent to the following:
+     * wxAny ohlcPoint = dataset->GetPointData(0, 52, 1);
+     * OHLCItem item = ohlcPoint.As<OHLCItem>();
+     * 
+     * double high = item.high;
+     * double low = item.low;
+     * @endcode
+     *
+     * @see DataIntepreter, GetPointData().
+     */
     virtual const double GetPointValue(size_t series, size_t index, size_t dimension, int interpreterOptions = 0) const;
 
+    /**
+     * Retrieves the actual stored wxAny object for the given location. Data points are stored in data series, 
+     * so this method requires both the series and an index within that series in order to locate the data point. The dimension
+     * parameter identifies which dimension the data of interest resides in.
+     * 
+     * This method is somewhat faster than the two interpreted methods described above. This is because there is no copy required
+     * and there is no search for the correct data type of the data. The disadvantage is that the data must be stored in a form
+     * that is suitable for direct plotting - which is normally not a problem for numerical data. Also, to fully realise the 
+     * advantages, the GetMaxValue and GetMinValue methods should be overridden to use _raw_ access instead of _interpreted_
+     * access.
+     * 
+     * @todo Include GetMaxRawValue and GetMinRawValue methods by default?
+     * 
+     * @param series The series that contains the data point of interest.
+     * @param index The index of the data point within its data series.
+     * @param dimension The dimension that that holds the data of interest.
+     * @return A constant reference to the data object at the given point and dimension.  
+     */
     virtual const wxAny& GetRawPointData(size_t series, size_t index, size_t dimension) const;
 
+    /**
+     * Installs a new interpreter for this data set.
+     * 
+     * All data sets are created with a default interpreter which provides direct interpretation of all C++ numeric data types
+     * plus wxDateTime. This method allows a new interpreter to be installed which performs specialised interpretation.
+     * 
+     * @param interpreter A pointer to the data interpreter to be installed. The DataSet takes ownership of the pointer and will
+     * destroy the interpreter object in its destructor.
+     * 
+     * @par Example
+     * @code
+     * class JDNInterpreter : public DataInterpreter
+     * {
+     * 
+     * public:
+     *   
+     *     virtual wxAny AsAny(const wxAny& data, size_t dimension, int options = 0) const
+     *     {
+     *         if (dimension == 0)
+     *             return wxAny(wxDateTime(data.As<double>()));
+     *         else
+     *             return data;
+     *     }
+     * };
+     * 
+     * ...
+     * 
+     * // Install the JDN interpreter.
+     * dataset->SetInterpreter(new JDNInterpreter());
+     * @endcode
+     *
+     * @see DataInterpreter, GetInterpreter().
+     */
     virtual void SetInterpreter(DataInterpreter* interpreter);
+
+    /**
+     * @{
+     * @name Visualisation Methods
+     * Methods that affect or support the visualisation of the data set's data.
+     */
+
+    /**
+     * ????
+     * @return 
+     */
+    Renderer* GetBaseRenderer();
+
+    virtual const Renderer* GetRenderer() const;
+
+    virtual Renderer* GetRenderer();
+
+    /**
+     * Sets renderer for this dataset.
+     * @param renderer new renderer
+     */
+    void SetRenderer(Renderer *renderer);
+    
+        virtual bool AcceptRenderer(Renderer* r);
+
+    /**
+     * Adds marker to plot. Plot takes ownership of marker.
+     * @param marker marker to be added
+     */
+    void AddMarker(Marker *marker);
+
+    /**
+     * Returns marker at specified index.
+     * @param index index of marker
+     * @return marker at specified index
+     */
+    Marker *GetMarker(size_t index);
+
+    /**
+     * Returns marker count.
+     * @return marker count
+     */
+    size_t GetMarkerCount();
 
     /**
     *@}
@@ -384,25 +517,8 @@ public:
      */
     virtual const wxString& GetName() const;
 
-    virtual const Renderer* GetRenderer() const;
-
-    virtual Renderer* GetRenderer();
-    
-
     virtual void SetName(const wxString& name);
     
-    // Implement or defer all pure virtual methods from original Dataset class.
-
-    virtual bool AcceptRenderer(Renderer* r);
-
-    /**
-     * Sets renderer for this dataset.
-     * @param renderer new renderer
-     */
-    void SetRenderer(Renderer *renderer);
-
-    Renderer* GetBaseRenderer();
-
     /**
      * Called to begin dataset update.
      * Each call must have corresponding EndUpdate call.
@@ -416,31 +532,6 @@ public:
      * DatasetChanged event when counter equal zero.
      */
     void EndUpdate();
-
-    /**
-     * Adds marker to plot. Plot takes ownership of marker.
-     * @param marker marker to be added
-     */
-    void AddMarker(Marker *marker);
-
-    /**
-     * Returns marker count.
-     * @return marker count
-     */
-    size_t GetMarkersCount();
-
-    /**
-     * Returns marker at specified index.
-     * @param index index of marker
-     * @return marker at specified index
-     */
-    Marker *GetMarker(size_t index);
-
-    //
-    // DrawObjectObserver
-    //
-    // Received from renderer, or marker
-    virtual void NeedRedraw(DrawObject *obj);
 
     /**
      * Called to indicate, that dataset is changed.

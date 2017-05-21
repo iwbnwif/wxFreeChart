@@ -292,11 +292,6 @@ Renderer* DataSet::GetBaseRenderer()
     return m_renderer;
 }
 
-void DataSet::NeedRedraw(DrawObject *WXUNUSED(obj))
-{
-    DatasetChanged();
-}
-
 void DataSet::BeginUpdate()
 {
     m_updating = true;
@@ -330,7 +325,7 @@ void DataSet::AddMarker(Marker *marker)
     m_markers.Add(marker);
 }
 
-size_t DataSet::GetMarkersCount()
+size_t DataSet::GetMarkerCount()
 {
     return m_markers.Count();
 }
