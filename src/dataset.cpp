@@ -429,9 +429,8 @@ double UniDataSet::GetMinValue(bool vertical) const
 
 double UniDataSet::GetValue(size_t series, size_t index) const
 {
-    return m_series[series]->GetPoint(index).get()->GetDimensionValue(0);
+    return InterpretAsValue(series, index, 0);
 }
-
 
 /***************************************
  * BI DATA SET
@@ -447,12 +446,12 @@ BiDataSet::~BiDataSet()
 
 double BiDataSet::GetFirst(size_t series, size_t index)
 {
-    return m_series[series]->GetPoint(index).get()->GetDimensionValue(0);
+    return InterpretAsValue(series, index, 0);
 }
 
 double BiDataSet::GetSecond(size_t series, size_t index)
 {
-    return m_series[series]->GetPoint(index).get()->GetDimensionValue(1);
+    return InterpretAsValue(series, index, 1);
 }
 
 double BiDataSet::GetMaxValue(bool vertical) const

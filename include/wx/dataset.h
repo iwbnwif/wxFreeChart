@@ -228,6 +228,17 @@ public:
      */
     virtual double GetMinValue1(size_t dimension) const;
     
+    /**
+     * @{
+     * @name Grouped methods testing
+     * Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla 
+     * bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla 
+     */
+    
+    /**
+     * Gets a name
+     * 
+     */
     virtual const wxString& GetName() const;
 
     virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index, size_t dimension) const;
@@ -241,6 +252,9 @@ public:
     virtual Renderer* GetRenderer();
     
     virtual const wxSharedPtr<DataSeries> GetSeries(size_t index) const;
+     /**
+      *@} 
+      */
 
     /**
      * Returns serie count in this dataset.
