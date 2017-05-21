@@ -39,11 +39,6 @@ size_t MovingAverage::GetSeriesSize(size_t WXUNUSED(serie)) const
     return count;
 }
 
-wxString MovingAverage::GetSeriesName(size_t WXUNUSED(serie)) const
-{
-    return wxT("Moving average");
-}
-
 double MovingAverage::GetX(size_t index, size_t WXUNUSED(serie)) const
 {
     return index + m_period - 1;

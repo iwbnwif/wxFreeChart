@@ -173,7 +173,7 @@ double StackedBarType::GetMaxValue(DataSet* dataset) const
 
         // Accumulate all series values for this category.
         for (size_t ser = 0; ser < dataset->GetSeriesCount(); ser++)
-            sum += dataset->InterpretAsValue(ser, pt, 0);
+            sum += dataset->GetPointValue(ser, pt, 0);
 
         // Build the maximum accumulated value across all categories.
         max = wxMax(max, sum);

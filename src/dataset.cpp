@@ -177,12 +177,12 @@ double DataSet::GetMaxValue1(size_t dimension) const
 {
     wxASSERT(GetSeriesCount() > 0 && GetSeriesSize(0) > 0);
     
-    double max = InterpretAsValue(0, 0, dimension, 0);
+    double max = GetPointValue(0, 0, dimension, 0);
     
     for (size_t ser = 0; ser < GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < GetSeriesSize(ser); pt++)
-            max = wxMax(max, InterpretAsValue(ser, pt, dimension, 0));
+            max = wxMax(max, GetPointValue(ser, pt, dimension, 0));
     }
     
     return max;
@@ -192,12 +192,12 @@ double DataSet::GetMinValue1(size_t dimension) const
 {
     wxASSERT(GetSeriesCount() > 0 && GetSeriesSize(0) > 0);
     
-    double min = InterpretAsValue(0, 0, dimension, 1);
+    double min = GetPointValue(0, 0, dimension, 1);
     
     for (size_t ser = 0; ser < GetSeriesCount(); ser++)
     {
         for (size_t pt = 0; pt < GetSeriesSize(ser); pt++)
-            min = wxMin(min, InterpretAsValue(ser, pt, dimension, 1));
+            min = wxMin(min, GetPointValue(ser, pt, dimension, 1));
     }
     
     return min;
@@ -208,22 +208,30 @@ inline const wxString& DataSet::GetName() const
     return m_name;
 }
 
-inline const wxSharedPtr<DataPoint> DataSet::GetPoint(size_t series, size_t index, size_t dimension) const
+inline const wxSharedPtr<DataPoint> DataSet::GetPoint(size_t series, size_t index) const
 {
     return GetSeries(series)->GetPoint(index);
 }
 
-inline const wxAny& DataSet::GetPointData(size_t series, size_t index, size_t dimension) const
+inline const wxAny DataSet::GetPointData(size_t series, size_t index, size_t dimension, int options) const
 {
-    return GetSeries(series)->GetPoint(index)->GetDimensionData(dimension);
+    const wxAny& data = GetRawPointData(series, index, dimension);
+    wxASSERT(GetInterpreter()->GetTrait(data, dimension) != TypeUndefined);
+
+    return GetInterpreter()->AsAny(data, dimension, options);
 }
 
-inline const double DataSet::GetPointValue(size_t series, size_t index, size_t dimension) const
+inline const double DataSet::GetPointValue(size_t series, size_t index, size_t dimension, int options) const
 {
-    const wxAny& data = GetPointData(series, index, dimension);
+    const wxAny& data = GetRawPointData(series, index, dimension);
     wxASSERT(GetInterpreter()->GetTrait(data, dimension) != TypeUndefined);
     
-    return GetInterpreter()->AsValue(data, dimension);
+    return GetInterpreter()->AsValue(data, dimension, options);
+}
+
+inline const wxAny& DataSet::GetRawPointData(size_t series, size_t index, size_t dimension) const
+{
+    return GetSeries(series)->GetPoint(index)->GetDimensionData(dimension);
 }
 
 Renderer* DataSet::GetRenderer()
@@ -258,9 +266,9 @@ DataSeries* DataSet::AddSeries(DataSeries* series)
     return series;
 }
 
-wxString DataSet::GetSeriesName (size_t serie) const
+const wxString& DataSet::GetSeriesName (size_t series) const
 {
-    return m_series.at(serie)->GetName();
+    return m_series[series]->GetName();
 }
 
 void DataSet::SetInterpreter(DataInterpreter* interpreter)
@@ -270,21 +278,7 @@ void DataSet::SetInterpreter(DataInterpreter* interpreter)
 
 void DataSet::SetName (const wxString& name)
 {
-}
-
-inline const wxAny DataSet::InterpretAsAny(size_t series, size_t index, size_t dimension, int options) const
-{
-    return m_interpreter->AsAny(GetPointData(series, index, dimension), dimension, options);
-}
-
-inline const wxAny DataSet::InterpretValueAsAny(size_t series, size_t index, size_t dimension, int options) const
-{
-   return m_interpreter->AsAny(GetPointValue(series, index, dimension), dimension, options);
-}
-
-inline double DataSet::InterpretAsValue(size_t series, size_t index, size_t dimension, int options) const
-{
-    return m_interpreter->AsValue(GetPointData(series, index, dimension), dimension, options);
+    m_name = name;
 }
 
 void DataSet::SetRenderer(Renderer *renderer)
@@ -429,15 +423,16 @@ double UniDataSet::GetMinValue(bool vertical) const
 
 double UniDataSet::GetValue(size_t series, size_t index) const
 {
-    return InterpretAsValue(series, index, 0);
+    return GetPointValue(series, index, 0);
 }
 
 /***************************************
  * BI DATA SET
  ***************************************/
 BiDataSet::BiDataSet (const wxString& name)
+: DataSet(name)
 {
-    m_name = name;
+
 }
 
 BiDataSet::~BiDataSet()
@@ -446,12 +441,12 @@ BiDataSet::~BiDataSet()
 
 double BiDataSet::GetFirst(size_t series, size_t index)
 {
-    return InterpretAsValue(series, index, 0);
+    return GetPointValue(series, index, 0);
 }
 
 double BiDataSet::GetSecond(size_t series, size_t index)
 {
-    return InterpretAsValue(series, index, 1);
+    return GetPointValue(series, index, 1);
 }
 
 double BiDataSet::GetMaxValue(bool vertical) const

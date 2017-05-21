@@ -125,10 +125,10 @@ void XYLineRenderer::DrawLines(wxDC&dc, const wxRect& rc, Axis* xAxis, Axis* yAx
 
         for (size_t n = 0; n < dataset->GetSeriesSize(serie) - 1; n++) 
         {
-            double x0 = dataset->InterpretAsValue(serie, n, 0);
-            double y0 = dataset->InterpretAsValue(serie, n, 1);
-            double x1 = dataset->InterpretAsValue(serie, n + 1, 0);
-            double y1 = dataset->InterpretAsValue(serie, n + 1, 1);
+            double x0 = dataset->GetPointValue(serie, n, 0);
+            double y0 = dataset->GetPointValue(serie, n, 1);
+            double x1 = dataset->GetPointValue(serie, n + 1, 0);
+            double y1 = dataset->GetPointValue(serie, n + 1, 1);
 
             // Check whether segment is visible.
             if (!xAxis->IntersectsWindow(x0, x1) &&

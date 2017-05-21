@@ -166,21 +166,21 @@ wxDECLARE_EVENT(EVT_DATASET_CHANGED, wxCommandEvent);
 /**
  * Base class for all objects representing a data set.
  *
- * A DataSet is a collection of DataSeries that can be plotted against a common set of axis using a common Renderer.
- * Therefore, all data points within all series of a data set must be of a common data type (e.g. a double or a complex
- * data type such as wxDateTime).
+ * A DataSet is a collection of DataSeries that can be plotted against a common set of Axis using a common Renderer.
+ * Therefore, *all* DataPoint objects within *all* DataSeries of a DataSet must be of a common data type (e.g. a `double` or 
+ * a complex data type such as `wxDateTime`).
  */
 class WXDLLIMPEXP_FREECHART DataSet : public wxEvtHandler, public RefObject
 {
 public:
 
     /**
-     * Default constructor that creates an empty data set with the option to provide a
-     * name.
-     * @todo Currently dataset names are not used.
-     * @param name The name that can be used to describe this data set.
+     * Default constructor that creates an empty data set with the option to provide a name for the dataset.
+     * @todo Currently dataset names are not used. In future it may be possible to access a dataset by its name rather than
+     * by an index.
+     * @param name The name that can be used to describe (and possibly access in future) this data set.
      * @par Example
-     * @code DataSet* dataset = new DataSet("Example dataset"); @endcode
+     * @code BiDataSet* dataset = new BiDataSet("AvgTemp"); @endcode
      */
     DataSet (const wxString& name = wxEmptyString);
 
@@ -190,11 +190,16 @@ public:
     virtual ~DataSet();
     
     /**
-     * Add a DataSeries to this %DataSet. All DataSeries must contain DataPoint with the same
-     * number of dimensions and with data that is essentially the same type (e.g. that can 
-     * be plotted against common Axis and with a common Renderer).
-     * @param series A pointer to the DataSeries to add to this DataSet. The DataSet will take
-     * ownership of the pointer and automatically delete the DataSeries object when the DataSet is destroyed.
+     * @{
+     * @name Data Series Methods
+     * The following methods manage the DataSeries within this DataSet.
+     */
+
+    /**
+     * Add a DataSeries to this %DataSet. All DataSeries must contain DataPoint with the same number of dimensions and with 
+     * data that is essentially the same type (e.g. that can be plotted against common Axis and with a common Renderer).
+     * @param series A pointer to the DataSeries to add to this DataSet. The DataSet will take ownership of the pointer 
+     * and automatically delete the DataSeries object when the DataSet is destroyed.
      * @return A pointer to the added series or NULL if an error occurred. This is provided so that it is possible
      * to generate a new data series inline by passing `new xDataSeries("Name")` as a parameter and receiving
      * a pointer to the added series.
@@ -208,12 +213,69 @@ public:
      * @endcode
      */
     virtual DataSeries* AddSeries(DataSeries* series);
-    
+
+    /**
+     * Gets a smart pointer to a series within the data set.
+     * @param index The index of the DataSeries within the DataSet.
+     * @return A smart pointer to the required DataSeries.
+     */
+    virtual const wxSharedPtr<DataSeries> GetSeries(size_t index) const;
+
+    /**
+     * Gets the number of series held by this data set.
+     * @note This should not be confused with GetSeriesSize() which retrieves the number of data points within a specified series.
+     * @return The number of series held by the data set.
+     * @see GetSeriesSize()
+     */
+    virtual const size_t GetSeriesCount() const;
+
+    /**
+     * Gets the name associated with this data set.
+     * This is a convenience function to access the DataSeries::GetName() method.
+     * @note DataSet names are not currently used within the library, but may still be used by an application if desired. In
+     * future, a data set may be accessed by its name.
+     * @param series The index of the series whose name is required.
+     * @return The name associated with the given series.
+     */
+    virtual const wxString& GetSeriesName (size_t series) const;
+
+    /**
+     * Gets the number of data points held by the given series within this data set.
+     * This is a convenience function to access the DataSeries::GetSize() method. 
+     * @note This should not be confused with GetSeriesCount() which retrieves the number of series held by this data set.
+     * @param series The index of the series whose size is required.
+     * @return The number of data points held by the give series.
+     * @see GetSeriesCount()
+     */
+    virtual size_t GetSeriesSize(size_t serie) const;
+   
+    /**
+    *@}
+    */
+   
+    /**
+     * @{
+     * @name Data Point Access Methods
+     * The following methods manage individual DataPoint with this DataSet.
+     */
+
+    /**
+     * Gets the data interpreter that is used to interpret the contents of data points in this data set.
+     * A data interpreter is used to convert the data in a DataPoint to a form that can be plotted on a chart. Only one
+     * data interpreter can be assigned to each data set and therefore all data points must be of a consistent formation.
+     * See the detailed description in the DataInterpreter class for more details.
+     * @return A pointer to the DataInterpreter associated with this data set.
+     */
     virtual DataInterpreter* GetInterpreter() const;
     
     /**
-     * Retrieves the maximum value for a given dimension in all of the series that belong to
+     * Retrieves the maximum numeric (interpreted) value for a given dimension in *all* of the series that belong to
      * this data set.
+     * @par Important
+     * This method is used by all ordinal, interval and rational axis types (e.g. NumberAxis, DateAxis, etc.).
+     * The DataInterpreter *must* therefore include a function to convert the DataPoint data to a representative `double`
+     * so that a 'maximum' data point can be identified *or* this method can be overridden to provide an alternative way 
+     * of establishing a max value.
      * @param dimension The dimension to obtain the maximum value for.
      * @return The maximum value for the given data dimension in all series within this dataset.
      * 
@@ -221,18 +283,99 @@ public:
     virtual double GetMaxValue1(size_t dimension) const;
     
     /**
-     * Retrieves the minimum value for a given dimension in all of the series that belong to
+     * Retrieves the minimum numeric (interpreted) value for a given dimension in *all* of the series that belong to
      * this data set.
+     * @par Important
+     * This method is used by all ordinal, interval and rational axis types (e.g. NumberAxis, DateAxis, etc.).
+     * The DataInterpreter *must* therefore include a function to convert the DataPoint data to a representative `double`
+     * so that a 'minimum' data point can be identified *or* this method can be overridden to provide an alternative way 
+     * of establishing a min value.
      * @param dimension The dimension to obtain the minimum value for.
      * @return The minimum value for the given data dimension in all series within this dataset.
      */
     virtual double GetMinValue1(size_t dimension) const;
-    
+
+    /**
+     * Retrieves a specified data point within this data set. Data points are stored in data series, so this method requires
+     * both the series and an index within that series in order to locate the data point. This is a convenience method
+     * to access a data point directly without first dereferencing the series containing the data point.
+     * 
+     * The intended purpose of this method is to allow external access to the data held by the data set, for example 
+     * it could be used to display the stored data in a table or grid.
+     * 
+     * @note This method bypasses the DataInterpreter layer, so the returned data point will be in the originally stored
+     * data type.
+     * @param series The series that contains the data point of interest.
+     * @param index The index of the data point within its data series.
+     * @return A constant pointer to the data point. The actual type of DataPoint will be that stored in the DataSeries.
+     * 
+     * @par Example
+     * @code
+     * // Retrieve a BiDataPoint from a BiDataSet and check its type.
+     * BiDataSet* dataset = wxDynamicCast(myPlot->GetDataset(0), BiDataSet);
+     * 
+     * BiDataPoint* point = wxDynamicCast(dataset->GetPoint(0, 52), BiDataPoint);
+     * if(point)
+     * {
+     *      wxLogMessage("Point data is (X,Y): %f, %f",
+     *                      point->GetFirst(),
+     *                      point->GetSecond());
+     * }
+     * @endcode
+     */
+    virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index) const;
+
+    /**
+     * Gets the _interpreted_ data object for the specified point within this data set. Data points are stored in data series, 
+     * so this method requires both the series and an index within that series in order to locate the data point. This is a 
+     * convenience method to access a data point's data directly without first dereferencing the series containing the data point.
+     * 
+     * @note The DataInterpreter causes an additional lookup and an additional copy to occur during the wxAny to wxAny process.
+     * This is because the returned wxAny can contain completely different object from the input wxAny.
+     * 
+     * @note Therefore, GetRawPointData should be used for speed sensitive implementations that do not require a wxAny to wxAny 
+     * interpretation. This will also require the implementation of new Axis classes because the built-in Axis will always
+     * attempt to interpret the data.
+     * 
+     * @todo See note above. Could a NULL DataInterpreter be used to force non-interpreted versions of the Axis methods to be used?
+     * 
+     * @param series The series that contains the data point of interest.
+     * @param index The index of the data point within its data series.
+     * @return A constant pointer to the data point. The actual type of DataPoint will be that stored in the DataSeries.
+     * 
+     * @par Example
+     * @code
+     * // Checks for validity of dataset if appropriate.
+     * 
+     * ...
+     * 
+     * // Note: cannot take a reference here as it is a copy of the temporary value created by the interpreter.
+     * wxAny ohlcPoint = dataset->GetPointData(0, 52, 1);
+     * OHLCItem item = ohlcPoint.As<OHLCItem>();
+     * 
+     * wxLogMessage("OHLC values are: %f, %f, %f, %f",
+     *                      item.open,
+     *                      item..high,
+     *                      item.low,
+     *                      item.close);
+     * @endcode
+     */
+    virtual const wxAny GetPointData(size_t series, size_t index, size_t dimension, int interpreterOptions = 0) const;
+
+    virtual const double GetPointValue(size_t series, size_t index, size_t dimension, int interpreterOptions = 0) const;
+
+    virtual const wxAny& GetRawPointData(size_t series, size_t index, size_t dimension) const;
+
+    virtual void SetInterpreter(DataInterpreter* interpreter);
+
+    /**
+    *@}
+    */
+
     /**
      * @{
-     * @name Grouped methods testing
-     * Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla 
-     * bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla Bla bla bla 
+     * @name Miscellaneous Methods
+     * Miscellaneous dataset methods.
      */
     
     /**
@@ -241,46 +384,18 @@ public:
      */
     virtual const wxString& GetName() const;
 
-    virtual const wxSharedPtr<DataPoint> GetPoint(size_t series, size_t index, size_t dimension) const;
-
-    virtual const wxAny& GetPointData(size_t series, size_t index, size_t dimension) const;
-
-    virtual const double GetPointValue(size_t series, size_t index, size_t dimension) const;
-
     virtual const Renderer* GetRenderer() const;
 
     virtual Renderer* GetRenderer();
     
-    virtual const wxSharedPtr<DataSeries> GetSeries(size_t index) const;
-     /**
-      *@} 
-      */
-
-    /**
-     * Returns serie count in this dataset.
-     * @return serie count
-     */
-    virtual const size_t GetSeriesCount() const;
-
-    virtual void SetInterpreter(DataInterpreter* interpreter);
 
     virtual void SetName(const wxString& name);
-    
-    virtual const wxAny InterpretAsAny(size_t series, size_t index, size_t dimension, int options = 0) const;
-    
-    virtual const wxAny InterpretValueAsAny(size_t series, size_t index, size_t dimension, int options = 0) const;
-    
-    virtual double InterpretAsValue(size_t series, size_t index, size_t dimension, int options = 0) const;
     
     // Implement or defer all pure virtual methods from original Dataset class.
 
     virtual bool AcceptRenderer(Renderer* r);
 
-    virtual size_t GetSeriesSize(size_t serie) const;
-
-    virtual wxString GetSeriesName (size_t serie) const;
-    
-        /**
+    /**
      * Sets renderer for this dataset.
      * @param renderer new renderer
      */
@@ -333,13 +448,18 @@ public:
      */
     void DatasetChanged();
 
+    /**
+    *@}
+    */
+    
 protected:
-    wxString m_name;
     DataInterpreter* m_interpreter;
     wxVector<wxSharedPtr<DataSeries> > m_series;
-
     Renderer *m_renderer;    
+
 private:
+    wxString m_name;
+
     bool m_updating;
     bool m_changed;
     
