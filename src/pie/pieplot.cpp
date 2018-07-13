@@ -223,7 +223,7 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
 
     // fill areas
     if (m_use3DView) {
-        double part = 0;
+        part = 0;
         for (size_t n = 0; n < m_dataset->GetCount(); n++) {
             double angle = 360 * part;
             double v = m_dataset->GetValue(n, m_serie);
