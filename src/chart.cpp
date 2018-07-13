@@ -135,7 +135,7 @@ void Chart::SetChartPanel(wxChartPanel *chartPanel)
 //    return rc;
 //}
 
-void Chart::Draw(ChartDC &cdc, wxRect &rc, bool antialias)
+void Chart::Draw(ChartDC &cdc, wxRect &rc, bool WXUNUSED(antialias))
 {
     // draw chart background
     m_background->Draw(cdc.GetDC(), rc);

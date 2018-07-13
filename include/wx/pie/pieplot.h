@@ -68,7 +68,16 @@ protected:
 
     virtual void DrawData(ChartDC& cdc, wxRect rc);
     
-    virtual void DrawBackground(ChartDC& cdc, wxRect rc) {}; // Does nothing in a pie plot?
+    virtual void DrawBackground(ChartDC& WXUNUSED(cdc), wxRect WXUNUSED(rc)) {}; // Does nothing in a pie plot?
+
+    CategoryDataset* GetDataSet() const { return m_dataset; }
+    bool GetUse3DView() const { return m_use3DView; }
+    float GetElipticAspect() const { return m_ellipticAspect; }
+    wxFont GetLabeFont() const { return m_labelsFont; }
+    wxPen GetOutlinePen() const { return m_outlinePen; }
+    size_t GetCurrentSerie() const { return m_serie; }
+    wxCoord GetLegendPlotGap() const { return m_legendPlotGap; }
+    Legend* GetLengend() const { return m_legend; }
 
 private:
 
