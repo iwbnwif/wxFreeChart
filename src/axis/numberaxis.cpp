@@ -33,7 +33,7 @@ bool IsNormalValue(double v)
 {
 #ifdef __WXOSX_COCOA__
     switch (fpclassify(v)) {
-#else
+#else //All Other Ports
     switch (std::fpclassify(v)) {
 #endif //__WXOSX_COCOA__
         case FP_NAN:
