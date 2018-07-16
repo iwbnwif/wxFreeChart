@@ -31,7 +31,11 @@ bool IsNormalValue(double v)
 
 bool IsNormalValue(double v)
 {
+#ifdef __WXOSX_COCOA__
+    switch (fpclassify(v)) {
+#else
     switch (std::fpclassify(v)) {
+#endif //__WXOSX_COCOA__
         case FP_NAN:
         case FP_INFINITE:
         case FP_SUBNORMAL:
