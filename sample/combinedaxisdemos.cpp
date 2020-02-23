@@ -59,7 +59,10 @@ public:
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset1->AddSerie((double *) data1, WXSIZEOF(data1));
+        wxVector<wxRealPoint> datapoints1;
+        for (size_t i = 0; i < WXSIZEOF(data1); i++)
+            datapoints1.push_back(wxRealPoint(data1[i][0], data1[i][1]));
+        dataset1->AddSerie(new XYSerie(datapoints1));
 
         // set line renderer to dataset
         dataset1->SetRenderer(new XYLineRenderer());
@@ -94,7 +97,10 @@ public:
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset2->AddSerie((double *) data2, WXSIZEOF(data2));
+        wxVector<wxRealPoint> datapoints2;
+        for (size_t i = 0; i < WXSIZEOF(data2); i++)
+            datapoints2.push_back(wxRealPoint(data2[i][0], data2[i][1]));
+        dataset2->AddSerie(new XYSerie(datapoints2));
 
         // set line renderer to dataset
         dataset2->SetRenderer(new XYLineRenderer());
@@ -170,7 +176,10 @@ public:
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset1->AddSerie((double *) data1, WXSIZEOF(data1));
+        wxVector<wxRealPoint> datapoints1;
+        for (size_t i = 0; i < WXSIZEOF(data1); i++)
+            datapoints1.push_back(wxRealPoint(data1[i][0], data1[i][1]));
+        dataset1->AddSerie(new XYSerie(datapoints1));
 
         // set line renderer to dataset
         dataset1->SetRenderer(new XYLineRenderer());
@@ -202,7 +211,10 @@ public:
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset2->AddSerie((double *) data2, WXSIZEOF(data2));
+        wxVector<wxRealPoint> datapoints2;
+        for (size_t i = 0; i < WXSIZEOF(data2); i++)
+            datapoints2.push_back(wxRealPoint(data2[i][0], data2[i][1]));
+        dataset2->AddSerie(new XYSerie(datapoints2));
 
         // set histogram renderer to dataset
         XYHistoRenderer *renderer2 = new XYHistoRenderer();

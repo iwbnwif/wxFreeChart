@@ -52,12 +52,12 @@ void wxChartSplitPanel::AddPlot(Plot *plot, int pos, bool allowRemove)
     m_auiManager->Update();
 }
 
-void wxChartSplitPanel::RemovePlot(Plot *plot)
+void wxChartSplitPanel::RemovePlot(Plot *WXUNUSED(plot))
 {
     // TODO
 }
 
-void wxChartSplitPanel::RemovePlot(size_t nPlot)
+void wxChartSplitPanel::RemovePlot(size_t WXUNUSED(nPlot))
 {
     // TODO
 }

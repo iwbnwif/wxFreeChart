@@ -129,8 +129,8 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
 
         // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("Serie 0"));
-        dataset->SetSerieName(1, wxT("Serie 1"));
+        dataset->GetSerie(0)->SetName(wxT("Serie 0"));
+        dataset->GetSerie(1)->SetName(wxT("Serie 1"));
 
         // set legend
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
@@ -195,8 +195,8 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
 
         // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("First"));
-        dataset->SetSerieName(1, wxT("Second"));
+        dataset->GetSerie(0)->SetName(wxT("First"));
+        dataset->GetSerie(1)->SetName(wxT("Second"));
 
         // set legend to plot
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
@@ -300,7 +300,7 @@ private:
     NumberAxis* m_axis;
     wxTimer m_timer;
     
-    void OnTimer(wxTimerEvent &ev)
+    void OnTimer(wxTimerEvent &WXUNUSED(ev))
     {
         double first_x = m_dataset->GetSerie(0)->GetX(0);
         
@@ -725,9 +725,9 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
 
         // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("First"));
-        dataset->SetSerieName(1, wxT("Second"));
-        dataset->SetSerieName(2, wxT("Third"));
+        dataset->GetSerie(0)->SetName(wxT("First"));
+        dataset->GetSerie(1)->SetName(wxT("Second"));
+        dataset->GetSerie(2)->SetName(wxT("Third"));
 
         // set legend
         plot->SetLegend(new Legend(wxBOTTOM, wxCENTER));
@@ -805,8 +805,8 @@ public:
         plot->LinkDataHorizontalAxis(0, 0);
 
         // set serie names to be displayed on legend
-        dataset->SetSerieName(0, wxT("Serie 0"));
-        dataset->SetSerieName(1, wxT("Serie 1"));
+        dataset->GetSerie(0)->SetName(wxT("Serie 0"));
+        dataset->GetSerie(1)->SetName(wxT("Serie 1"));
 
         // set legend
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));

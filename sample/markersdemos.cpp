@@ -44,7 +44,10 @@ public:
         XYSimpleDataset *dataset = new XYSimpleDataset();
 
         // and add serie to it
-        dataset->AddSerie((double *) data, WXSIZEOF(data));
+        wxVector<wxRealPoint> datapoints;
+        for (size_t i = 0; i < WXSIZEOF(data); i++)
+            datapoints.push_back(wxRealPoint(data[i][0], data[i][1]));
+        dataset->AddSerie(new XYSerie(datapoints));
 
         // set line renderer to dataset
         dataset->SetRenderer(new XYLineRenderer());
@@ -97,7 +100,10 @@ public:
         XYSimpleDataset *dataset = new XYSimpleDataset();
 
         // and add serie to it
-        dataset->AddSerie((double *) data, WXSIZEOF(data));
+        wxVector<wxRealPoint> datapoints;
+        for (size_t i = 0; i < WXSIZEOF(data); i++)
+            datapoints.push_back(wxRealPoint(data[i][0], data[i][1]));
+        dataset->AddSerie(new XYSerie(datapoints));
 
         // set line renderer to dataset
         dataset->SetRenderer(new XYLineRenderer());

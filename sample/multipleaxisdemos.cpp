@@ -62,12 +62,18 @@ public:
         // create first dataset
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
         // add serie to it
-        dataset1->AddSerie((double *) values1, WXSIZEOF(values1));
+        wxVector<wxRealPoint> datapoints1;
+        for (size_t i = 0; i < WXSIZEOF(values1); i++)
+            datapoints1.push_back(wxRealPoint(values1[i][0], values1[i][1]));
+        dataset1->AddSerie(new XYSerie(datapoints1));
 
         // create second dataset
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
         // add serie to it
-        dataset2->AddSerie((double *) values2, WXSIZEOF(values2));
+        wxVector<wxRealPoint> datapoints2;
+        for (size_t i = 0; i < WXSIZEOF(values2); i++)
+            datapoints2.push_back(wxRealPoint(values2[i][0], values2[i][1]));
+        dataset2->AddSerie(new XYSerie(datapoints2));
 
         // create renderer for first dataset
         XYLineRenderer *renderer1 = new XYLineRenderer();
@@ -167,12 +173,18 @@ public:
         // create first dataset
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
         // add serie to it
-        dataset1->AddSerie((double *) values1, WXSIZEOF(values1));
+        wxVector<wxRealPoint> datapoints1;
+        for (size_t i = 0; i < WXSIZEOF(values1); i++)
+            datapoints1.push_back(wxRealPoint(values1[i][0], values1[i][1]));
+        dataset1->AddSerie(new XYSerie(datapoints1));
 
         // create second dataset
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
         // add serie to it
-        dataset2->AddSerie((double *) values2, WXSIZEOF(values2));
+        wxVector<wxRealPoint> datapoints2;
+        for (size_t i = 0; i < WXSIZEOF(values2); i++)
+            datapoints2.push_back(wxRealPoint(values2[i][0], values2[i][1]));
+        dataset2->AddSerie(new XYSerie(datapoints2));
 
         // create renderer for first dataset
         XYLineRenderer *renderer1 = new XYLineRenderer();

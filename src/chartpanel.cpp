@@ -53,23 +53,23 @@ void ChartPanelObserver::ChartEnterWindow()
 {
 }
 
-void ChartPanelObserver::ChartMouseDown(wxPoint &pt, int key)
+void ChartPanelObserver::ChartMouseDown(wxPoint &WXUNUSED(pt), int WXUNUSED(key))
 {
 }
 
-void ChartPanelObserver::ChartMouseUp(wxPoint &pt, int key)
+void ChartPanelObserver::ChartMouseUp(wxPoint &WXUNUSED(pt), int WXUNUSED(key))
 {
 }
 
-void ChartPanelObserver::ChartMouseMove(wxPoint &pt)
+void ChartPanelObserver::ChartMouseMove(wxPoint &WXUNUSED(pt))
 {
 }
 
-void ChartPanelObserver::ChartMouseDrag(wxPoint &pt)
+void ChartPanelObserver::ChartMouseDrag(wxPoint &WXUNUSED(pt))
 {
 }
 
-void ChartPanelObserver::ChartMouseWheel(int rotation)
+void ChartPanelObserver::ChartMouseWheel(int WXUNUSED(rotation))
 {
 }
 
@@ -264,7 +264,7 @@ void wxChartPanel::OnScrollWin(wxScrollWinEvent &ev)
     ev.Skip();
 }
 
-void wxChartPanel::OnMouseEvents(wxMouseEvent &ev)
+void wxChartPanel::OnMouseEvents(wxMouseEvent &WXUNUSED(ev))
 {
     if (m_mode == NULL) {
         return ;
