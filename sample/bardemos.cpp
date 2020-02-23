@@ -300,12 +300,21 @@ public:
                 45,
         };
 
+        // serie 3 values
+        double values3[] = {
+                14,
+                20,
+                10,
+                20,
+                10,
+        };
         // Create dataset
         CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
 
         // add two series to it
         dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
+        dataset->AddSerie(wxT("Serie 3"), values3, WXSIZEOF(values3));
 
         // Create stacked bar type
         BarType *barType = new StackedBarType(40, 0);
@@ -525,7 +534,7 @@ public:
         plot->SetDrawGrid(true, false);
         
         plot->SetBackground(new FillAreaDraw(*wxGREEN_PEN, *wxBLUE_BRUSH));
-        plot->SetDataBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
+        plot->SetBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
         // and finally construct and return chart
         return new Chart(plot, wxT("USA Export Goods / Services"));;
