@@ -315,7 +315,7 @@ public:
         // add three series to it
         dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
-        dataset->AddSerie(wxT("Serie 3"), values3, WXSIZEOF(values2));
+        dataset->AddSerie(wxT("Serie 3"), values3, WXSIZEOF(values3));
 
         // Create stacked bar type
         BarType *barType = new StackedBarType(40, 0);
