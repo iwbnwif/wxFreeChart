@@ -29,7 +29,7 @@ class BarDemo1 : public ChartDemo
 {
 public:
     BarDemo1()
-    : ChartDemo(wxT("Bar demo 1 - Single Series"))
+    : ChartDemo(wxT("Bar demo 1 - Single Series (with marker)"))
     {
     }
 
@@ -62,6 +62,15 @@ public:
 
         // Set bar renderer for it
         dataset->SetRenderer(new BarRenderer(barType));
+
+        // create line marker
+        LineMarker *lineMarker = new LineMarker(wxPen(wxColour("#DDF4FF"), 1, wxPENSTYLE_SHORT_DASH));
+
+        // set value to be marked, in our case horizontal line with x=25
+        lineMarker->SetHorizontalLine(25);
+
+        // and add marker to dataset
+        dataset->AddMarker(lineMarker);
 
         // Create bar plot
         BarPlot *plot = new BarPlot();
@@ -315,7 +324,7 @@ public:
         // add three series to it
         dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
-        dataset->AddSerie(wxT("Serie 3"), values3, WXSIZEOF(values3));
+        dataset->AddSerie(wxT("Serie 3"), values3, WXSIZEOF(values2));
 
         // Create stacked bar type
         BarType *barType = new StackedBarType(40, 0);
