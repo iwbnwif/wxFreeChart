@@ -23,9 +23,9 @@ public:
     virtual Chart *Create()
     {
       // serie pieplot data
-      double data[] = {1.0, 2.0, 3.0} ;
-      wxString categories[] = {_("cat 1"), _("cat 2"), _("cat 3")};
-      wxColour colours[] = {wxColour(0x99, 0xCC, 0xFF), wxColour(0xFF, 0xFF, 0x99), wxColour(0x3D, 0xEB, 0x3D)} ;
+      double data[] = {1.0, 2.0, 3.0, 0.0000175};
+      wxString categories[] = {_("cat 1"), _("cat 2"), _("cat 3"), _("cat 4")};
+      wxColour colours[] = {wxColour(0x99, 0xCC, 0xFF), wxColour(0xFF, 0xFF, 0x99), wxColour(0x3D, 0xEB, 0x3D), wxColour(0xFF, 0x00, 0x00)} ;
 
       ColorScheme* colorScheme = new ColorScheme(colours, WXSIZEOF(colours));
 
