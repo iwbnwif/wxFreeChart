@@ -201,8 +201,9 @@ void PiePlot::DrawData(ChartDC& cdc, wxRect rc)
         double angle2 = 360 * part;
 
         dc.SetBrush(*wxTheBrushList->FindOrCreateBrush(m_colorScheme.GetColor(n)));
-
-        dc.DrawEllipticArc(x0, y0, radHoriz, radVert, angle1, angle2);
+        if(abs(angle2 - angle1) > 0.003) {
+          dc.DrawEllipticArc(x0, y0, radHoriz, radVert, angle1, angle2);
+        }
     }
 
     // draw edges
