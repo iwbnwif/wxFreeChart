@@ -111,7 +111,7 @@ bool AxisPlot::HasData()
     return m_datasets.Count() != 0;
 }
 
-void AxisPlot::ChartPanelChanged(wxChartPanel *oldPanel, wxChartPanel *newPanel)
+void AxisPlot::ChartPanelChanged(wxChartPanel *WXUNUSED(oldPanel), wxChartPanel *WXUNUSED(newPanel))
 {
     m_redrawDataArea = true;
     FirePlotNeedRedraw();
@@ -184,7 +184,7 @@ void AxisPlot::SetLegend(Legend *legend)
     FirePlotNeedRedraw();
 }
 
-void AxisPlot::SetCrosshair(Crosshair *crosshair)
+void AxisPlot::SetCrosshair(Crosshair *WXUNUSED(crosshair))
 {
     /*// TODO
     if (m_crosshair != NULL && GetChartPanel() != NULL) {
@@ -553,7 +553,7 @@ void AxisPlot::ChartEnterWindow()
 }
 */
 
-void AxisPlot::ChartMouseDown(wxPoint &pt, int key)
+void AxisPlot::ChartMouseDown(wxPoint& WXUNUSED(pt), int WXUNUSED(key))
 {
     
 }

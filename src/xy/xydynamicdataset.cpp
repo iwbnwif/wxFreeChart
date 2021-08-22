@@ -96,7 +96,7 @@ void XYDynamicSerie::AddXY(const wxRealPoint& xy)
 
 void XYDynamicSerie::AddXY(const wxRealPointArray& data)
 {
-    WX_APPEND_ARRAY(m_data, data)
+    WX_APPEND_ARRAY(m_data, data);
 
     if (m_dataset != NULL) {
         m_dataset->DatasetChanged();

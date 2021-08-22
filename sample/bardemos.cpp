@@ -308,10 +308,11 @@ public:
                 20,
                 10,
         };
+
         // Create dataset
         CategorySimpleDataset *dataset = new CategorySimpleDataset(names, WXSIZEOF(names));
 
-        // add two series to it
+        // add three series to it
         dataset->AddSerie(wxT("Serie 1"), values1, WXSIZEOF(values1));
         dataset->AddSerie(wxT("Serie 2"), values2, WXSIZEOF(values2));
         dataset->AddSerie(wxT("Serie 3"), values3, WXSIZEOF(values3));
@@ -529,12 +530,6 @@ public:
 
         // Set legend
         plot->SetLegend(new Legend(wxCENTER, wxRIGHT));
-        
-        // Experiments.
-        plot->SetDrawGrid(true, false);
-        
-        plot->SetBackground(new FillAreaDraw(*wxGREEN_PEN, *wxBLUE_BRUSH));
-        plot->SetBackground(new FillAreaDraw(*wxTRANSPARENT_PEN, *wxTRANSPARENT_BRUSH));
 
         // and finally construct and return chart
         return new Chart(plot, wxT("USA Export Goods / Services"));;

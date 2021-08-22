@@ -108,7 +108,11 @@ XYSimpleDataset::~XYSimpleDataset()
 
 void XYSimpleDataset::AddSerie(double *data, size_t count)
 {
-    AddSerie(new XYSerie(data, count));
+    wxVector<wxRealPoint> newdata;
+    for (size_t i = 0; i < count; i++)
+        newdata.push_back(wxRealPoint(data[i * 2], data[(i * 2) + 1]));
+
+    AddSerie(new XYSerie(newdata));
 }
 
 void XYSimpleDataset::AddSerie(XYSerie *serie)
