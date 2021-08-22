@@ -31,30 +31,28 @@ public:
     virtual Chart *Create()
     {
         // first dataset values
-        double values1[][2] = {
-                { 1, 1 },
-                { 2, 3 },
-                { 5, 4 },
-                { 6, 3 },
-                { 7, 6 },
-                { 8, 6 },
-                { 9, 4 },
-        };
+        wxVector<wxRealPoint> values1;
+        values1.push_back(wxRealPoint(1, 1));
+        values1.push_back(wxRealPoint(2, 3));
+        values1.push_back(wxRealPoint(5, 4));
+        values1.push_back(wxRealPoint(6, 3));
+        values1.push_back(wxRealPoint(7, 6));
+        values1.push_back(wxRealPoint(8, 6));
+        values1.push_back(wxRealPoint(9, 4));
 
         // second dataset values
-        double values2[][2] = {
-                { 0, 0 },
-                { 2, -1 },
-                { 4, 6 },
-                { 5, 2 },
-                { 7, 8 },
-                { 8, 4 },
-                { 9, -2 },
-        };
+        wxVector<wxRealPoint> values2;
+        values2.push_back(wxRealPoint(0, 0));
+        values2.push_back(wxRealPoint(2, -1));
+        values2.push_back(wxRealPoint(4, 6));
+        values2.push_back(wxRealPoint(5, 2));
+        values2.push_back(wxRealPoint(7, 8));
+        values2.push_back(wxRealPoint(8, 4));
+        values2.push_back(wxRealPoint(9, -2));
 
         // colors for first and second datasets
-        wxColour color1 = wxColour(255, 0, 0);
-        wxColour color2 = wxColour(0, 0, 255);
+        wxColour color1 = wxColour("#5B9BD5");
+        wxColour color2 = wxColour("#ED7D31");
 
         // create xy plot
         XYPlot *plot = new XYPlot();
@@ -62,18 +60,12 @@ public:
         // create first dataset
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
         // add serie to it
-        wxVector<wxRealPoint> datapoints1;
-        for (size_t i = 0; i < WXSIZEOF(values1); i++)
-            datapoints1.push_back(wxRealPoint(values1[i][0], values1[i][1]));
-        dataset1->AddSerie(new XYSerie(datapoints1));
+        dataset1->AddSerie(new XYSerie(values1));
 
         // create second dataset
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
         // add serie to it
-        wxVector<wxRealPoint> datapoints2;
-        for (size_t i = 0; i < WXSIZEOF(values2); i++)
-            datapoints2.push_back(wxRealPoint(values2[i][0], values2[i][1]));
-        dataset2->AddSerie(new XYSerie(datapoints2));
+        dataset2->AddSerie(new XYSerie(values2));
 
         // create renderer for first dataset
         XYLineRenderer *renderer1 = new XYLineRenderer();
@@ -142,30 +134,28 @@ public:
     virtual Chart *Create()
     {
         // first dataset values
-        double values1[][2] = {
-                { 1, 1 },
-                { 2, 3 },
-                { 5, 4 },
-                { 6, 3 },
-                { 7, 6 },
-                { 8, 6 },
-                { 9, 4 },
-        };
+        wxVector<wxRealPoint> values1;
+        values1.push_back(wxRealPoint(1, 1));
+        values1.push_back(wxRealPoint(2, 3));
+        values1.push_back(wxRealPoint(5, 4));
+        values1.push_back(wxRealPoint(6, 3));
+        values1.push_back(wxRealPoint(7, 6));
+        values1.push_back(wxRealPoint(8, 6));
+        values1.push_back(wxRealPoint(9, 4));
 
         // second dataset values
-        double values2[][2] = {
-                { 0, 0 },
-                { 2, -1 },
-                { 4, 6 },
-                { 5, 2 },
-                { 7, 8 },
-                { 8, 4 },
-                { 9, -2 },
-        };
+        wxVector<wxRealPoint> values2;
+        values2.push_back(wxRealPoint(0, 0));
+        values2.push_back(wxRealPoint(2, -1));
+        values2.push_back(wxRealPoint(4, 6));
+        values2.push_back(wxRealPoint(5, 2));
+        values2.push_back(wxRealPoint(7, 8));
+        values2.push_back(wxRealPoint(8, 4));
+        values2.push_back(wxRealPoint(9, -2));
 
         // colors for first and second datasets
-        wxColour color1 = wxColour(255, 0, 0);
-        wxColour color2 = wxColour(0, 0, 255);
+        wxColour color1 = wxColour("#5B9BD5");
+        wxColour color2 = wxColour("#ED7D31");
 
         // create xy plot
         XYPlot *plot = new XYPlot();
@@ -173,18 +163,12 @@ public:
         // create first dataset
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
         // add serie to it
-        wxVector<wxRealPoint> datapoints1;
-        for (size_t i = 0; i < WXSIZEOF(values1); i++)
-            datapoints1.push_back(wxRealPoint(values1[i][0], values1[i][1]));
-        dataset1->AddSerie(new XYSerie(datapoints1));
+        dataset1->AddSerie(new XYSerie(values1));
 
         // create second dataset
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
         // add serie to it
-        wxVector<wxRealPoint> datapoints2;
-        for (size_t i = 0; i < WXSIZEOF(values2); i++)
-            datapoints2.push_back(wxRealPoint(values2[i][0], values2[i][1]));
-        dataset2->AddSerie(new XYSerie(datapoints2));
+        dataset2->AddSerie(new XYSerie(values2));
 
         // create renderer for first dataset
         XYLineRenderer *renderer1 = new XYLineRenderer();

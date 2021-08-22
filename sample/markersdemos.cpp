@@ -28,14 +28,12 @@ public:
 
     virtual Chart *Create()
     {
-        // serie xy data
-        double data[][2] = {
-                { 10, 20, },
-                { 13, 16, },
-                { 7, 30, },
-                { 15, 34, },
-                { 25, 4, },
-        };
+        wxVector<wxRealPoint> datapoints;
+        datapoints.push_back(wxRealPoint(10, 20));
+        datapoints.push_back(wxRealPoint(13, 16));
+        datapoints.push_back(wxRealPoint(7, 30));
+        datapoints.push_back(wxRealPoint(15, 34));
+        datapoints.push_back(wxRealPoint(25, 4));
 
         // first step: create plot
         XYPlot *plot = new XYPlot();
@@ -44,9 +42,6 @@ public:
         XYSimpleDataset *dataset = new XYSimpleDataset();
 
         // and add serie to it
-        wxVector<wxRealPoint> datapoints;
-        for (size_t i = 0; i < WXSIZEOF(data); i++)
-            datapoints.push_back(wxRealPoint(data[i][0], data[i][1]));
         dataset->AddSerie(new XYSerie(datapoints));
 
         // set line renderer to dataset
@@ -85,13 +80,12 @@ public:
     virtual Chart *Create()
     {
         // serie xy data
-        double data[][2] = {
-                { 10, 20, },
-                { 13, 16, },
-                { 14, 30, },
-                { 15, 34, },
-                { 25, 4, },
-        };
+        wxVector<wxRealPoint> datapoints;
+        datapoints.push_back(wxRealPoint(10, 20));
+        datapoints.push_back(wxRealPoint(13, 16));
+        datapoints.push_back(wxRealPoint(14, 30));
+        datapoints.push_back(wxRealPoint(15, 34));
+        datapoints.push_back(wxRealPoint(25, 4));
 
         // first step: create plot
         XYPlot *plot = new XYPlot();
@@ -100,9 +94,6 @@ public:
         XYSimpleDataset *dataset = new XYSimpleDataset();
 
         // and add serie to it
-        wxVector<wxRealPoint> datapoints;
-        for (size_t i = 0; i < WXSIZEOF(data); i++)
-            datapoints.push_back(wxRealPoint(data[i][0], data[i][1]));
         dataset->AddSerie(new XYSerie(datapoints));
 
         // set line renderer to dataset
