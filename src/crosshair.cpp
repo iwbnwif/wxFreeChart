@@ -9,7 +9,7 @@
 
 #include "wx/crosshair.h"
 
-Crosshair::Crosshair(int style, wxPen *pen)
+Crosshair::Crosshair(int WXUNUSED(style), wxPen *WXUNUSED(pen))
 {
 
 }
@@ -19,7 +19,7 @@ Crosshair::~Crosshair()
 
 }
 
-void Crosshair::Draw(wxDC &dc, wxRect rcData)//, wxCoord x, wxCoord y)
+void Crosshair::Draw(wxDC& WXUNUSED(dc), wxRect WXUNUSED(rcData))//, wxCoord x, wxCoord y)
 {
     // TODO
     /*
@@ -30,14 +30,14 @@ void Crosshair::Draw(wxDC &dc, wxRect rcData)//, wxCoord x, wxCoord y)
     */
 }
 
-void Crosshair::ChartMouseDown(wxPoint &pt, int key)
+void Crosshair::ChartMouseDown(wxPoint& WXUNUSED(pt), int WXUNUSED(key))
 {
 }
 
-void Crosshair::ChartMouseUp(wxPoint &pt, int key)
+void Crosshair::ChartMouseUp(wxPoint& WXUNUSED(pt), int WXUNUSED(key))
 {
 }
 
-void Crosshair::ChartMouseMove(wxPoint &pt)
+void Crosshair::ChartMouseMove(wxPoint& WXUNUSED(pt))
 {
 }

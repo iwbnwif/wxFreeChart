@@ -36,23 +36,23 @@ void ZoomMode::ChartEnterWindow()
 {
 }
 
-void ZoomMode::ChartMouseDown(wxPoint &pt, int key)
+void ZoomMode::ChartMouseDown(wxPoint& WXUNUSED(pt), int WXUNUSED(key))
 {
 }
 
-void ZoomMode::ChartMouseUp(wxPoint &pt, int key)
+void ZoomMode::ChartMouseUp(wxPoint& WXUNUSED(pt), int WXUNUSED(key))
 {
 }
 
-void ZoomMode::ChartMouseMove(wxPoint &pt)
+void ZoomMode::ChartMouseMove(wxPoint& WXUNUSED(pt))
 {
 }
 
-void ZoomMode::ChartMouseDrag(wxPoint &pt)
+void ZoomMode::ChartMouseDrag(wxPoint& WXUNUSED(pt))
 {
 }
 
-void ZoomMode::ChartMouseWheel(int rotation)
+void ZoomMode::ChartMouseWheel(int WXUNUSED(rotation))
 {
 }
 
@@ -70,17 +70,17 @@ PanMode::~PanMode()
 
 }
 
-void PanMode::ChartMouseDown(wxPoint &pt)
+void PanMode::ChartMouseDown(wxPoint& WXUNUSED(pt))
 {
 
 }
 
-void PanMode::ChartMouseUp(wxPoint &pt)
+void PanMode::ChartMouseUp(wxPoint& WXUNUSED(pt))
 {
 
 }
 
-void PanMode::ChartMouseMove(wxPoint &pt)
+void PanMode::ChartMouseMove(wxPoint& WXUNUSED(pt))
 {
 
 }

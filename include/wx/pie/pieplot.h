@@ -68,7 +68,7 @@ protected:
 
     virtual void DrawData(ChartDC& cdc, wxRect rc);
     
-    virtual void DrawBackground(ChartDC& cdc, wxRect rc) {}; // Does nothing in a pie plot?
+    virtual void DrawBackground(ChartDC& WXUNUSED(cdc), wxRect WXUNUSED(rc)) {}; // Does nothing in a pie plot?
 
 private:
 

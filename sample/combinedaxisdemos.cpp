@@ -142,6 +142,7 @@ public:
 
     virtual Chart *Create()
     {
+
         // first plot data
         wxVector<wxRealPoint> datapoints1;
         datapoints1.push_back(wxRealPoint(10, 20));
