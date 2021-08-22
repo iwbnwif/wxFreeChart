@@ -70,7 +70,7 @@ void LineMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
     wxCoord x1, y1;
 
     if (m_horizontal) {
-        if (!horizAxis->IsVisible(m_value)) {
+        if (!vertAxis->IsVisible(m_value)) {
             return ;
         }
 
@@ -79,7 +79,7 @@ void LineMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
         y0 = y1 = vertAxis->ToGraphics(dc, rcData.y, rcData.height, m_value);
     }
     else {
-        if (!vertAxis->IsVisible(m_value)) {
+        if (!horizAxis->IsVisible(m_value)) {
             return ;
         }
 
@@ -130,9 +130,9 @@ void RangeMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
     wxRect rcRange;
 
     if (m_horizontal) {
-        //if (!horizAxis->IsVisible(m_minValue)) {
-        //    return ;
-        //}
+        if (!vertAxis->IsVisible(m_minValue) && !vertAxis->IsVisible(m_maxValue)) {
+            return ;
+        }
 
         wxCoord y0, y1;
 
@@ -145,9 +145,9 @@ void RangeMarker::Draw(wxDC &dc, wxRect rcData, Axis *horizAxis, Axis *vertAxis)
         rcRange.height = wxMax(y0, y1) - rcRange.y;
     }
     else {
-        //if (!vertAxis->IsVisible(m_value)) {
-        //    return ;
-        //}
+        if (!horizAxis->IsVisible(m_minValue) && !horizAxis->IsVisible(m_maxValue)) {
+            return ;
+        }
         wxCoord x0, x1;
 
         x0 = horizAxis->ToGraphics(dc, rcData.x, rcData.width, m_minValue);
