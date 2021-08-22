@@ -35,7 +35,7 @@ public:
     }
 
     wxDEPRECATED_MSG("Do not use this function, instead use SetMajorInterval.")
-    void SetLabelCount(size_t labelCount) {}
+    void SetLabelCount(size_t WXUNUSED(labelCount)) {}
 
     /**
      * Set whether to use integer values instead of doubles.

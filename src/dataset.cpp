@@ -145,8 +145,13 @@ void DatasetArray::Add(Dataset *dataset)
 
 void DatasetArray::Remove(Dataset *dataset)
 {
-    SAFE_UNREF(dataset);
-    DatasetArrayBase::Remove(dataset);
+    for (size_t n = 0; n < Count(); n++) {
+        if (dataset == Item(n)) {
+            SAFE_UNREF(dataset);
+            DatasetArrayBase::RemoveAt(n);
+            break;
+        }
+    }
 }
 
 void DatasetArray::RemoveAt(size_t index, size_t count)

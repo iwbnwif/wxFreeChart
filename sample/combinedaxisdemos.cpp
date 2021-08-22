@@ -31,35 +31,37 @@ public:
     virtual Chart *Create()
     {
         // first plot data
-        double data1[][2] = {
-                { 10, 20, },
-                { 13, 16, },
-                { 7, 30, },
-                { 15, 34, },
-                { 25, 4, },
-        };
-        // second plot data
-        double data2[][2] = {
-                { 45, 40, },
-                { 23, 16, },
-                { 43, 60, },
-                { 25, 7, },
-                { 66, 4, },
-        };
+        wxVector<wxRealPoint> datapoints1;
+        datapoints1.push_back(wxRealPoint(10, 20));
+        datapoints1.push_back(wxRealPoint(13, 16));
+        datapoints1.push_back(wxRealPoint(7, 30));
+        datapoints1.push_back(wxRealPoint(15, 34));
+        datapoints1.push_back(wxRealPoint(25, 4));
 
+        // second plot data
+        wxVector<wxRealPoint> datapoints2;
+        datapoints2.push_back(wxRealPoint(45, 40));
+        datapoints2.push_back(wxRealPoint(23, 16));
+        datapoints2.push_back(wxRealPoint(43, 60));
+        datapoints2.push_back(wxRealPoint(25, 7));
+        datapoints2.push_back(wxRealPoint(66, 4));
+
+        //
+        // create the multiplot
+        //
         MultiPlot *multiPlot = new MultiPlot(1, 0, 5, 5);
 
         // create left axis, that will be shared between two plots
         NumberAxis *sharedLeftAxis = new NumberAxis(AXIS_LEFT);
 
+        //
         // create first plot
+        //
         XYPlot *plot1 = new XYPlot();
 
         // create dataset
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
-
-        // and add serie to it
-        dataset1->AddSerie((double *) data1, WXSIZEOF(data1));
+        dataset1->AddSerie(new XYSerie(datapoints1));
 
         // set line renderer to dataset
         dataset1->SetRenderer(new XYLineRenderer());
@@ -94,12 +96,12 @@ public:
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset2->AddSerie((double *) data2, WXSIZEOF(data2));
+        dataset2->AddSerie(new XYSerie(datapoints2));
 
         // set line renderer to dataset
         dataset2->SetRenderer(new XYLineRenderer());
 
-        // add our dataset to plot
+        // add dataset to plot
         plot2->AddDataset(dataset2);
 
         // create axis share for second plot to share leftAxis between plots
@@ -140,42 +142,47 @@ public:
 
     virtual Chart *Create()
     {
-        // first plot data
-        double data1[][2] = {
-                { 10, 20, },
-                { 43, 16, },
-                { 17, 30, },
-                { 65, 34, },
-                { 25, 4, },
-        };
-        // second plot data
-        double data2[][2] = {
-                { 45, 40, },
-                { 23, 16, },
-                { 35, 60, },
-                { 15, 7, },
-                { 5, 20 },
-                { 66, 4, },
-        };
 
+        // first plot data
+        wxVector<wxRealPoint> datapoints1;
+        datapoints1.push_back(wxRealPoint(10, 20));
+        datapoints1.push_back(wxRealPoint(13, 16));
+        datapoints1.push_back(wxRealPoint(17, 30));
+        datapoints1.push_back(wxRealPoint(65, 34));
+        datapoints1.push_back(wxRealPoint(25, 4));
+
+        // second plot data
+        wxVector<wxRealPoint> datapoints2;
+        datapoints2.push_back(wxRealPoint(45, 40));
+        datapoints2.push_back(wxRealPoint(23, 16));
+        datapoints2.push_back(wxRealPoint(35, 60));
+        datapoints2.push_back(wxRealPoint(15, 7));
+        datapoints2.push_back(wxRealPoint(5, 20));
+        datapoints2.push_back(wxRealPoint(66, 4));
+
+        //
+        // create the multiplot
+        //
         MultiPlot *multiPlot = new MultiPlot(0, 1, 5, 5);
 
         // create left axis, that will be shared between two plots
         NumberAxis *bottomAxis = new NumberAxis(AXIS_BOTTOM);
 
+        //
         // create first plot
+        //
         XYPlot *plot1 = new XYPlot();
 
         // create dataset
         XYSimpleDataset *dataset1 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset1->AddSerie((double *) data1, WXSIZEOF(data1));
+        dataset1->AddSerie(new XYSerie(datapoints1));
 
         // set line renderer to dataset
         dataset1->SetRenderer(new XYLineRenderer());
 
-        // add our dataset to plot
+        // add dataset to plot
         plot1->AddDataset(dataset1);
 
         // create left number axes
@@ -202,7 +209,7 @@ public:
         XYSimpleDataset *dataset2 = new XYSimpleDataset();
 
         // and add serie to it
-        dataset2->AddSerie((double *) data2, WXSIZEOF(data2));
+        dataset2->AddSerie(new XYSerie(datapoints2));
 
         // set histogram renderer to dataset
         XYHistoRenderer *renderer2 = new XYHistoRenderer();
