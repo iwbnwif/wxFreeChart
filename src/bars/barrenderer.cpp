@@ -161,7 +161,7 @@ void StackedBarType::GetBarGeometry(CategoryDataset *dataset, size_t item, size_
 {
     width = m_barWidth;
     shift = -m_barWidth / 2;
-    base = (serie >= 1) ? dataset->GetValue(item, serie - 1) : m_base;
+    base = (serie >= 1) ? base + dataset->GetValue(item, serie - 1) : m_base;
     value = dataset->GetValue(item, serie);
     if (serie >= 1) {
         value += base;
