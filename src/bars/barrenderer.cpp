@@ -257,7 +257,8 @@ AreaDraw *BarRenderer::GetBarDraw(size_t serie)
     if (barDraw == NULL) 
     {
         // barDraw = new FillAreaDraw(GetDefaultColour(serie), GetDefaultColour(serie));
-        barDraw = new FillAreaDraw(*wxTRANSPARENT_PEN, GetDefaultColour(serie));
+        // barDraw = new FillAreaDraw(*wxTRANSPARENT_PEN, GetDefaultColour(serie));
+        barDraw = new FillAreaDraw(*wxTRANSPARENT_PEN, GetSerieColour(serie));
 
         m_barDraws.SetAreaDraw(serie, barDraw);
     }
