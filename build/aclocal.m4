@@ -1263,6 +1263,7 @@ AC_DEFUN([AC_BAKEFILE_SHARED_LD],
       *-*-osf* | \
       *-*-dgux5* | \
       *-*-sysv5* | \
+      *-*-haiku* | \ 
       *-pc-msdosdjgpp )
         dnl defaults are ok
       ;;
